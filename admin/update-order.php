@@ -161,7 +161,7 @@ $(document).ready(function(){
 
                 <button type="button" id="addProd" class="btn btn-lg btn-info" aria-expanded="false">Add</button>
                 <button type="button" id="hideProd" class="btn btn-lg btn-info" aria-expanded="false">Hide</button>
-
+                <br><br>
                 <div id="products">
                  <div class="row">
                   <div class="col-md-3">
@@ -214,14 +214,24 @@ $(document).ready(function(){
             <div class="col-md-2">
               <div class="form-group">
                 <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
+
+                   <a class="mytooltip pull-right" href="javascript:void(0)"> <span class="tooltip-item"><i class="fa fa-info"></i></span>
+                     <span class="tooltip-content5">
+                       <span class="tooltip-text3">
+                         <span class="tooltip-inner2">Product Name
+                         <br><br> 
+                         Product description here...
+                         </span>
+                       </span>
+                     </span>
+                   </a>
+
                 <input type="text" class="form-control" name="quan" id="quan" placeholder="500" style="text-align: right" />
               </div>
             </div>
             <div class="col-md-1">
               <div class="form-group pull-right">
-                <button id="infoBtn" type="button" class="btn btn-info" style="margin-top: 27px;">i</button>
-                <!--tooltip here tas display a brief info about sa product or pede ring pop-over or modal ulit? your choice haha-->
-                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;">+</button>
+                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
               </div>
             </div>
           </div>
@@ -280,7 +290,7 @@ $(document).ready(function(){
           <div class="col-md-1 pull-right">
             <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="fa fa-check"></i> Save</button>
           </div>
-          <div class="col-md-1 pull-right">
+          <div class="col-md-1">
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false">Cancel Order</button>
           </div>
         </div>

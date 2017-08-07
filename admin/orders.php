@@ -156,10 +156,10 @@
                               <th>Release Date</th>
                               <th>Total Price</th>
                               <th>Production Status</th>
-                              <th style="text-align:center;">Actions</th>
+                              <th class="removeSort" style="text-align: center;">Actions</th>
                             </tr>
                           </thead>
-                          <tbody style="text-align:left;">
+                          <tbody>
                             <?php
                             include "dbconnect.php";
                             $sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' order by orderID;";
@@ -180,11 +180,11 @@
               <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
               <td>'.$production_stat.'</td>
               <td>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i></button> 
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
 
-              <a class="btn btn-success" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span></a> 
+              <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span> Update</a> 
 
-              <a class="btn btn-warning" style="color:white;" href="receipt.php?id='. $row['orderID'].'"> Bill </a>
+              <a class="btn btn-success" style="color:white;" href="receipt.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
 
               </td>
               </tr>
@@ -240,7 +240,7 @@ $(document).ready(function () {
                     <th>Request Date</th>
                     <th>Total Quantity</th>
                     <th>Price</th>
-                    <th>Actions</th>
+                    <th class="removeSort">Actions</th>
                   </tr>
                 </thead>
                 <tbody style="text-align:left;">
@@ -332,7 +332,7 @@ $(document).ready(function () {
                     <th>Request Date</th>
                     <th>Total Quantity</th>
                     <th>Total Price</th>
-                    <th>Actions</th>
+                    <th class="removeSort">Actions</th>
                   </tr>
                 </thead>
                 <tbody style="text-align:center;">

@@ -70,10 +70,10 @@ echo '</script>';
                               <th>Order Price</th>
                               <th>Remaining Balance</th>
                               <th>Payment Status</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
-                          <tbody style="text-align:left;">
+                          <tbody>
                             <?php
                             include "dbconnect.php";
                             $sql = "SELECT * FROM tblorders WHERE orderStatus != 'Archived' order by orderID ;";
@@ -95,11 +95,11 @@ echo '</script>';
                                   <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
                                   <td>&#8369;'.number_format($bal,2).'</td>
                                   <td>'.$paymentStat.'</td>
-                                  <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i></button>  
+                                  <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="glyphicon glyphicon-eye-open"></span> View</button>  
 
-              <a class="btn btn-warning" style="color:white;" href="receipt.php?id='. $row['orderID'].'"> Bill </a>
+                                   <a class="btn btn-info" style="color:white;" href="receipt.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span>  Bill </a>
 
-                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Payment</button></td>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">&#8369; Payment</button></td>
                                   </tr>
                                   ');
                               }     

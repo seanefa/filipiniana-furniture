@@ -47,7 +47,7 @@ include "menu.php";
                               <th>Furniture Name</th>
                               <th>Date Release</th>
                               <th>Status</th>
-                              <th>Action</th>
+                              <th class="removeSort">Action</th>
                             </tr>
                           </thead>
                           <tbody>

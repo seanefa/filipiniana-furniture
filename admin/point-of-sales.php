@@ -141,12 +141,12 @@ $('#selectType').on("change",function() {
                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                     <div class="panel-body">  
                                         <div class="row" style="margin: 0 auto; margin-top: -100px;">
-                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect pull-right"><i class="fa fa fa-shopping-cart"></i> My Cart</button>
+                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart</button>
                                           <!--button class="fcbtn btn-lg btn-default btn-outline btn-1e wave effect" data-toggle="modal" href="#chout1">Update Products</button-->
                                         </div>
                                         <div class="row">
                                     <div style="margin: 0 auto;">
-                                      <input type="text" id="my-input-field" class="form-control navbar-form navbar-right" placeholder="&#128269; Search..." size="30" style="margin-top: 35px;">
+                                      <input type="text" id="my-input-field" class="form-control navbar-form navbar-right" placeholder="&#128269; Search..." size="30" style="margin-top: -40px;">
                                     </div>
                                   </div>
 
@@ -416,17 +416,14 @@ $('#selectType').on("change",function() {
                         <div class="form-group">
                         <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
                         <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <input type="text" id="da" class="form-control" name="deladd[]" placeholder="Street Address" disabled required/>
-                        </div>
-                        <div class="col-md-6">
-                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="City" disabled required/>
                         </div>
                         </div>
                         <br>
                         <div class="row">
                         <div class="col-md-6">
-                        <input type="text" id="state" class="form-control" name="deladd[]" placeholder="State" disabled required/>
+                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="City" disabled required/>
                         </div>
                         <div class="col-md-6">
                         <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Zip Code" disabled required/>
@@ -511,7 +508,7 @@ $('#selectType').on("change",function() {
 
                   <div class="row">
                     <div class="col-md-5 pull-right">
-                      <input role="button" type="button" class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()" value="Save & Print">
+                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()">Save & Print</button>
                     </div>
                   </div>
                   </div>

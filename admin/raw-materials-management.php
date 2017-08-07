@@ -208,7 +208,7 @@ $("#backArch").click(function(){
                                     <th>Variant Description</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="removeSort">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -279,7 +279,7 @@ $("#backArch").click(function(){
                                     <th>Item Description</th>
                                     <th>Item Cost</th>
                                     <th>Total</th>
-                                    <th>Action</th>
+                                    <th class="removeSort">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -378,7 +378,7 @@ $("#backArch").click(function(){
                                     <th>Quantity</th>
                                     <th>Item Cost</th>
                                     <th>Remarks</th>
-                                    <th>Actions</th>
+                                    <th class="removeSort">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>

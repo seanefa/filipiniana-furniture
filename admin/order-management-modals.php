@@ -93,7 +93,7 @@ $_SESSION['varname'] = $jsID;
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -198,7 +198,7 @@ $_SESSION['varname'] = $jsID;
 
           <div class="modal-footer">
             <button type="submit" role="button" class="btn btn-danger waves-effect text-left">Accept Order</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </form>
         </div>
 
@@ -380,7 +380,7 @@ $_SESSION['varname'] = $jsID;
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -397,12 +397,16 @@ $_SESSION['varname'] = $jsID;
         <form action="order-cancel.php" method="post">
           <input type="hidden" name="id" value="<?php echo $jsID?>">
           <div class="modal-body">
+          <div class="row">
             <div class="col-md-12">
               <h5>Note: The production of the ordered furniture will continue, however you can still stop the production on the Production Tracking Tab. The finished product will be received by the management and will be available for sale.</h5>
             </div>
+            </div>
+            <div class="row">
             <div class="col-md-12">
               <h4>Any reasons?</h4>
               <textarea class="form-control" name="reason"></textarea>
+            </div>
             </div>
           </div>
           <div class="modal-footer">

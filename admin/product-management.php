@@ -205,7 +205,7 @@ echo '</script>';
                                     <th>Furniture Type</th>
                                     <th>Furniture Name</th>
                                     <th>Quantity</th>
-                                    <th>Actions</th>
+                                    <th class="removeSort">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -253,7 +253,7 @@ echo '</script>';
                                       <th>Furniture Type</th>
                                       <th>Furniture Name</th>
                                       <th>Promo</th>
-                                      <th>Actions</th>
+                                      <th class="removeSort">Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -297,7 +297,7 @@ echo '</script>';
     </div>
 
     <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <!-- Modal content-->
           <div class="modal-content clearable-content">
