@@ -81,29 +81,31 @@
         </li>
       </ul>
       <ul class="nav navbar-top-links navbar-right pull-right">
-        <li class="dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
-          <!--              <div class="notify"><span class="heartbit"></span><span class="point"></span></div>-->
+        <!--li class="dropdown"> <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
+          <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
         </a>
         <ul class="dropdown-menu mailbox animated bounceInDown">
           <li>
             <div class="drop-title">You have no messages</div>
           </li>
         </ul>
-        <!-- /.dropdown-messages -->
-      </li>
+      </li-->
 
       <!-- /.dropdown -->
       <!-- .Megamenu -->
-      <li class="mega-dropdown">
-        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><div><img src="plugins/images/users/user-male-icon.png" alt="user-img" class="img-circle" style="height: 55px;"></div> <i class="icon-options-vertical"></i></a>
-        <ul class="dropdown-menu animated flipInY">
-          <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="login.html"><i class="fa fa-power-off"></i> Logout</a></li>
-        </ul>
+    <li class="mega-dropdown">
+      <a href="javascript:void(0)" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false"> Admin <span class="caret"></span></a>
+      <!--a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><div><img src="../plugins/images/users/user-male-icon.png" alt="user-img" class="img-circle" style="height: 55px;"></div> <i class="icon-options-vertical"></i></a-->
+      <ul class="dropdown-menu animated flipInY">
+      <!--li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+      <li role="separator" class="divider"></li-->
+      <li>
+      <a href="javascript:void(0)" class="dropdown-toggle waves-effect waves-light"><i class="fa fa-power-off"></i> Logout</a>
       </li>
+      </ul>
+    </li>
       <!-- /.Megamenu -->
     </ul>
   </div>

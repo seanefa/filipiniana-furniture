@@ -233,7 +233,7 @@ var error = 0;
                             <tr>
                               <th>Name</th>
                               <th>Unit</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

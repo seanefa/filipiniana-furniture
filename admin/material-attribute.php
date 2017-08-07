@@ -334,7 +334,7 @@ $(document).ready(function(){
                           <thead>
                             <tr>
                               <th>Name</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
