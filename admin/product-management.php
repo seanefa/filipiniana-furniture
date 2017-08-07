@@ -44,120 +44,135 @@ echo '</script>';
 <html lang="en">
 <head>
   <script>
-  $(document).ready(function(){
 
-    $('body').on('keyup','#username',function(){
-      var user = $(this).val();
-      var flag = true;
-      $.post('furn-type-check.php',{username : user}, function(data){
-
-
-        if(data != "Already Exist!"){
-          flag = false;
-          $('#message').html("");
-
-        }
-        else if(data == "Already Exist!"){
-          $('#message').html(data);
-          flag = true;
-        }
-        if(flag){
-          $('#addFab').prop('disabled',true);
-
-          $('#username').css('border-color','red');
-        }
-        else if(!flag){
-          $('#addFab').prop('disabled', false);
-
-          $('#username').css('border-color','limegreen');
-        }
-      });
-
-
-
-    });
-
-
-  });
-  $(document).ready(function(){
-    var temprem;
-    var tempname;
-    var error = 0;
-    $('body').on('keyup','#editname',function(){
-      var user = $(this).val();
-
-      tempname = $('#editname').val();
-      temprem = $('#rem').val();
-      $.post('furn-type-Ucheck.php',{username : user}, function(data){
-
-
-        if(data != "Already Exist!" && data !="unchanged"){
-          flag = false;
-          error = 0;
-          $('#message').html("");
-          $('#updateBtn').prop('disabled', false);
-          $('#editname').css('border-color','limegreen');
-
-        }
-        if(data == "unchanged"){
-          error = 0;
-          $('#message').html("");
-          $('#editname').css('border-color','black')
-        }
-        else if(data == "Already Exist!"){
-          flag = true;
-          error++;
-          $('#message').html(data);
-          $('#updateBtn').prop('disabled',true);
-
-          $('#editname').css('border-color','red');
-        }
-
-      });
-
-
-
-    });
-    $('body').on('change','#rem',function(){
-      if(error == 0){
-        $('#updateBtn').prop('disabled',false);
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#promo").on('change',function(){
+      var val = $("#promo").val();
+      if($(this).prop("checked")){
+        $("#selection").hide();
       }
-
-    });
-    $('body').on('keyup','#remText',function(){
-      var tem = $(this).val();
-      if(error == 0){
-        flag = false;
-        if(!flag){
-          $('#updateBtn').prop('disabled',false);
-        }
+      else{
+        $("#selection").show();
       }
     });
-
   });
+});
 
-  /*  $(document).ready(function(){
-      $("#archiveTable").hide();
-      $("#backArch").hide();
-    $("#showArch").click(function(){
-        $("#tblFurnitureType").hide();
-        $("#archiveTable").show();
-        $("#temptitle").text("");
-        $("#temptitle").text("Archived");
-        $("#tempbtn").hide();
-        $("#showArch").hide();
-        $("#backArch").show();
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#selection").hide();
+    $("#allProd").on('change',function(){
+      if($(this).prop("checked")){
+        $("#selection").hide();
+      }
+      else{
+        $("#selection").show();
+      }
     });
-    $("#backArch").click(function(){
-      $("#tblFurnitureType").show();
-        $("#archiveTable").hide();
-        $("#temptitle").text("");
-        $("#temptitle").text("Furniture Type");
-        $("#tempbtn").show();
-        $("#showArch").show();
-        $("#backArch").hide();
+  });
+});
+
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#onPromoProd").select2({
+      tags: true
     });
-}); */
+});
+});
+
+
+$(document).ready(function(){
+ $('#myModal1').on('shown.bs.modal',function(){
+  $('#cat').change(function() {
+    var value = $("#cat").val();
+    var drop = 1;
+    $.ajax({
+      type: 'post',
+      url: 'load-drop-downs.php',
+      data: {
+        id: value, type : drop,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#type' ).html(response);    
+       $("#type").removeAttr('disabled');
+      }
+      });
+    });
+
+    $('#type').change(function() {
+    var value = $("#type").val();
+    var drop = 2;
+    $.ajax({
+      type: 'post',
+      url: 'load-drop-downs.php',
+      data: {
+        id: value, type : drop,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#products' ).html(response);
+       $("#products").removeAttr('disabled');
+      }
+      });
+    });
+
+    $('#mat').change(function() {
+    var value = $("#mat").val();
+    var drop = 3;
+    $.ajax({
+      type: 'post',
+      url: 'load-drop-downs.php',
+      data: {
+        id: value, type : drop,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#var' ).html(response);
+       $("#var").removeAttr('disabled');
+      }
+      });
+    });
+
+    $('#products').change(function() {
+    var value = $("#products").val();
+    var drop = 4;
+    $.ajax({
+      type: 'post',
+      url: 'load-drop-downs.php',
+      data: {
+        id: value, type : drop,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#phasetab' ).html(response);
+       $("#var").removeAttr('disabled');
+      }
+      });
+    });
+});
+});
+
+
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $('#promo').change(function() {
+    var value = $("#promo").val();
+    $.ajax({
+      type: 'post',
+      url: 'prod-promo-form.php',
+      data: {
+        id: value, 
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#promoForm' ).html(response);
+      }
+      });
+    });
+});
+});
 </script>
 </head>
 <body>
@@ -191,10 +206,10 @@ echo '</script>';
               </nav>
               <div class="content-wrap text-center">
                 <section id="onhand">
-                  <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="product-management-form.php" data-remote="product-management-form.php #newOnHand" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                  <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal1" href="product-management-form.php" data-remote="product-management-form.php #newOnHand" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                   <div class="tab-content">
                     <!-- CATEGORY -->
-                    <div role="tabpanel" class="tab-pane fade active in" id="type">
+                    <div role="tabpanel" class="tab-pane fade active in">
                       <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
                           <div class="row">
@@ -204,24 +219,26 @@ echo '</script>';
                                   <tr>
                                     <th>Furniture Type</th>
                                     <th>Furniture Name</th>
-                                    <th>Quantity</th>
-                                    <th class="removeSort">Actions</th>
+                                    <th>Furniture Description</th>
+                                    <th style="text-align:center">Quantity</th>
+                                    <th>Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <?php
-                                  $sql = "SELECT * FROM tblproduct a, tblfurn_type b WHERE a.prodTypeID = b.typeID;";
+                                  $sql = "SELECT * FROM tblproduct a, tblfurn_type b WHERE a.prodTypeID = b.typeID and a.prodQuantity > 0;";
                                   $result = mysqli_query($conn, $sql);
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
                                     if($row['prodQuantity']>0){
                                       echo('<tr><td  style="text-align: left;">'. $row['typeName'] .'</td>
                                         <td  style="text-align: left;">'.$row['productName'].'</td>
-                                        <td  style="text-align: left;">'.$row['prodQuantity'].'</td>');
+                                        <td  style="text-align: left;">'.$row['productDescription'].'</td>
+                                        <td  style="text-align: center;">'.$row['prodQuantity'].'</td>');
                                         ?>
-                                        <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #addOnHand" data-target="#myModal">Add</button>
+                                        <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1">Add</button>
 
-                                          <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnHand" data-target="#myModal">Deduct</button>
+                                          <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #deductOnHand" data-target="#myModal1">Deduct</button>
                                         </td>
 
                                         <?php echo('</tr>');} }
@@ -242,7 +259,7 @@ echo '</script>';
                     <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="product-management-form.php" data-remote="product-management-form.php #newOnPromo" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                     <div class="tab-content">
                       <!-- CATEGORY -->
-                      <div role="tabpanel" class="tab-pane fade active in" id="type">
+                      <div role="tabpanel" class="tab-pane fade active in">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
                           <div class="panel-body">
                             <div class="row">
@@ -253,12 +270,12 @@ echo '</script>';
                                       <th>Furniture Type</th>
                                       <th>Furniture Name</th>
                                       <th>Promo</th>
-                                      <th class="removeSort">Actions</th>
+                                      <th>Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
-                                    $sql = "SELECT * from tblprodsonpromo a inner join tblproduct b on a.prodPromoID = b.productID inner join tblfurn_type c on b.prodTypeID = c.typeID inner join tblpackages d on a.packPromoID = d.packageID;";
+                                    $sql = "SELECT * from tblprodsonpromo";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result))
                                     {
@@ -297,7 +314,20 @@ echo '</script>';
     </div>
 
     <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <!-- Modal content-->
+          <div class="modal-content clearable-content">
+            <div class="modal-body">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+      <div class="modal-dialog modal-md">
         <div class="modal-content">
           <!-- Modal content-->
           <div class="modal-content clearable-content">
