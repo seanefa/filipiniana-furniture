@@ -1,0 +1,75 @@
+html,body
+{
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.logo
+{
+    background: linear-gradient(to right, #105170, lightsteelblue, #105170);
+}
+.btn-inverse
+{
+	color: white;
+	background-color: dimgray;
+}
+.btn-inverse:hover
+{
+	animation: darker 0.5s;
+	animation-fill-mode: forwards;
+}
+.size-20prcnt
+{
+	height: 20%;
+	width: 20%;
+}
+
+.footer
+{
+	padding: 1em;
+	background-color: #105170;
+	color:white;
+}
+
+.border-animate:hover
+{
+	animation: border .5s;
+	animation-fill-mode: forwards;
+}
+
+/*ANIMATIONS*/
+@-webkit-keyframes border
+{
+	from
+	{
+		border: ;
+	}
+	to
+	{
+		border: solid 2px #105170;
+	}
+}
+@-webkit-keyframes darker
+{
+	form
+	{
+		background-color: ;
+	}
+	to
+	{
+		background-color: black;
+		color:white;
+	}
+}
+
+a,p,h1,h2,h3,h4,h5,h6,div{font-family: robotolight;}
+
+/*fonts*/
+@font-face
+{
+	font-family: robotolight;
+	src: local("Helvetice Neue Bold"),
+	url('Roboto-Light.ttf');
+}
