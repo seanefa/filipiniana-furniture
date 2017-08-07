@@ -15,4 +15,6 @@ Coming Soon!
 5. Lozano, Mariano III
 6. Publico, Mark Joseph
 
+Bachelor of Science in Information Technology at Polytechnic University of the Philippines
+
 
