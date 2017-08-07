@@ -43,7 +43,7 @@ echo '</script>';
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-  <script>
+  <script>    
 
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
@@ -249,7 +249,7 @@ $(document).ready(function(){
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> 
                       <!-- New Framework Mo
                       <!-- /.modal -->
                     </div>
