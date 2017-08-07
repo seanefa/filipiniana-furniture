@@ -249,7 +249,7 @@ var flag = true;
                               <th>Location(To:)</th>
                               <th>Rate Type</th>
                               <th>Rate</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

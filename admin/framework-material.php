@@ -233,7 +233,7 @@ var flag = true;
                             <tr>
                               <th>Name</th>
                               <th>Remarks</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -248,9 +248,9 @@ var flag = true;
                                   <td>'.$row['materialRemarks'].'</td>'); ?>
                                   <td>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href="frame-mat-form.php" data-remote="frame-mat-form.php?id=<?php echo $row['materialID']?> #update" data-target="#myModal">Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href="frame-mat-form.php" data-remote="frame-mat-form.php?id=<?php echo $row['materialID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
                                     <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="frame-mat-form.php" data-remote="frame-mat-form.php?id=<?php echo $row['materialID']?> #delete" data-target="#myModal">Deactivate</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="frame-mat-form.php" data-remote="frame-mat-form.php?id=<?php echo $row['materialID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
                                   </td>
                                   <?php echo('</tr>');} }
                                   ?>

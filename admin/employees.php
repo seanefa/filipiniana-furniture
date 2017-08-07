@@ -285,7 +285,7 @@ var error = 0;
                               <th>Name</th>
                               <th>Job</th>
                               <th>Remarks</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

@@ -232,7 +232,7 @@ var flag = true;
                             <tr>
                               <th>Name</th>
                               <th>Description</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

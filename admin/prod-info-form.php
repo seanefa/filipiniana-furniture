@@ -162,7 +162,7 @@ function deleteRow(row){
 
             <div class="col-md-1">
               <div class="form-group pull-right">
-                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;">+</button>
+                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
               </div>
             </div>
 
@@ -400,7 +400,7 @@ function deleteRow(row){
 
             <div class="col-md-1">
               <div class="form-group pull-right">
-                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;">+</button>
+                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
               </div>
             </div>
 

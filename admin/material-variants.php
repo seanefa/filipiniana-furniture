@@ -197,7 +197,7 @@ $(document).ready(function(){
                             <tr>
                               <th>Variants</th>
                               <th>Remarks</th>
-                              <th>Action</th>
+                              <th class="removeSort">Action</th>
                             </tr>
                           </thead>
                           <tbody>

@@ -513,7 +513,7 @@ $(document).ready(function(){
                               <th>Name</th>
                               <th>Description</th>
                               <th>Start Date</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -535,7 +535,7 @@ $(document).ready(function(){
                                     <td >'.$date.'</td>
                                     <td>
                                     <!-- VIEW -->
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #view"><span class="glyphicon glyphicon-edit"></span> View</button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #view"><span class="glyphicon glyphicon-eye-open"></span> View</button>
                                     <!-- UPDATE -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #update"><span class="glyphicon glyphicon-edit"></span> Update</button>
                                     <!-- DELETE -->

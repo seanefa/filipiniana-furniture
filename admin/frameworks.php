@@ -289,7 +289,7 @@ var flag = true;
                               <th>Material</th>
                               <th>Design</th>
                               <th>Remarks</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

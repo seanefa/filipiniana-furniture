@@ -246,7 +246,7 @@ var flag = true;
                               <th>Name</th>
                               <th>Texture</th>
                               <th>Weaves</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

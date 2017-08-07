@@ -375,7 +375,7 @@ var flag = true;
                               <th>Pattern</th>
                               <th>Color</th>
                               <th>Remarks</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -404,11 +404,11 @@ var flag = true;
                                   echo '<td>'. $row['fabricRemarks'] .'</td>';
                                   ; ?>
                                   <td>
-                                    <button type="button" class="btn btn-warning" href="fabric-forms.php" data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #viewFab" data-toggle="modal" data-target="#myModal">View</button>
+                                    <button type="button" class="btn btn-warning" href="fabric-forms.php" data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #viewFab" data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-eye-open'></span> View</button>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href='fabric-forms.php' data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #updateFab" data-target="#myModal">Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href='fabric-forms.php' data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #updateFab" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
                                     <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" href="fabric-forms.php" data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #delFab" data-target="#myModal" data-toggle="modal">Deactivate</button>
+                                    <button type="button" class="btn btn-danger" href="fabric-forms.php" data-remote="fabric-forms.php?id=<?php echo $row['fabricID'];?> #delFab" data-target="#myModal" data-toggle="modal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
                                   </td>
                                   <?php echo ('</tr>'); }}
                                   function ftype($id){

@@ -84,7 +84,7 @@ if (!$conn) {
                     <input type="color" id="colorPick" class="form-control" name="color[]" required/>
                     <div id="addHere"></div>
                     <input type="hidden" id="delPicker" class="btn btn-default" value="-"/>
-                    <button type="button" id="addPicker" class="btn btn-default">+</button> 
+                    <button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button> 
                   </div>
                 </div>
                 </div>
@@ -194,7 +194,7 @@ if (!$conn) {
                       ?>
                       </div>
                       <div id="addHere"></div>
-                      <input type="hidden" id="delPicker" class="btn btn-default" value="-"/><button type="button" id="addPicker" class="btn btn-default">+</button>
+                      <input type="hidden" id="delPicker" class="btn btn-default" value="-"/><button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button>
 
                 </div>
 

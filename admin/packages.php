@@ -254,7 +254,7 @@ $('body').on('keyup','#remText',function(event) {
                               <th>Package Description</th>
                               <th>Package Price</th>
                               <th>No. of Products</th>
-                              <th>Actions</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>

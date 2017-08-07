@@ -631,7 +631,7 @@ $(document).ready(function(){
 </div>
 </div>
 <!-- /.container-fluid -->
-<footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer>
+<!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
 </div>
 <!-- /#page-wrapper -->
 </div>
