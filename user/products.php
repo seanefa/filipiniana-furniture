@@ -1,9 +1,38 @@
 <!DOCTYPE html>
 <?php
+include "userconnect.php";
+
 session_start();
 if(!isset($_SESSION['userID']))
 {
 	header("Location: error.html");
+}
+
+$cartrow=0;
+if(isset($_POST["addtocart"]))
+{
+	$cartrow=0;
+	$quantity=$_POST["quantity"];
+	$cookie_name="cart";
+	if($quantity==0||$quantity<0)
+	{
+		echo "<script>alert('qaqo bawal yan');</script>";
+	}
+	else
+	{
+		setcookie($cookie_name[$cartrow], $quantity, time() + 1800, "/");
+		$cartrow=$cartrow+1;
+	}
+}
+
+if(isset($_POST["deletecart"]))
+{
+	setcookie($cookie_name[$cartrow], "");
+}
+
+if(isset($_POST["updatecart"]))
+{
+	setcookie($cookie_name[$cartrow], $quantity);
 }
 ?>
 <html>
@@ -83,7 +112,7 @@ if(!isset($_SESSION['userID']))
 									<button class="btn btn-outline-success" data-toggle="collapse" data-target="#carttable" title="Cart"><i class="fa fa-shopping-cart"></i></button>
 								</li>
 		        			</ul>
-					  </div>
+					  	</div>
 					</nav>
 				</div>
 			</div>
@@ -94,14 +123,6 @@ if(!isset($_SESSION['userID']))
 			<h1 class="text-center"><b>PRODUCTS</b></h1>
 			<hr>
 			<div class="container">
-				<?php
-				include "userconnect.php";
-				$cookie_name="";
-				$cookie_value="";
-				setcookie($cookie_name, $cookie_value, time(), "/");
-				
-				
-				?>
 				<div class="row justify-content-center">
 					<div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 collapse" id="carttable">
 						<h3 class="text-center"><span class="fa fa-shopping-cart 2x"></span>&nbsp;<b>Cart</b>&nbsp;<span class="fa fa-shopping-cart 2x"></span></h3>
@@ -118,11 +139,28 @@ if(!isset($_SESSION['userID']))
 								</thead>
 								<tbody>
 									<tr>
+										<?php
+										if(isset($_COOKIE[$cookie_name]))
+										{
+										
+										?>
 										<td></td>
 										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td><?php echo $quantity;?></td>
+										<td><?php echo $price;?></td>
+										<?php	
+										}
+										?>
+										<td>
+											
+											<form>
+												<button class="btn btn-success" name="updatecart"><span class="fa fa-cart-plus"></span></button>&nbsp;
+												<button class="btn btn-danger" name="deletecart"><span class="fa fa-times"></span></button>
+											</form>
+										</td>
+									</tr>
+									<tr>
+										
 									</tr>
 								</tbody>
 							</table>
@@ -159,24 +197,25 @@ if(!isset($_SESSION['userID']))
 						{
 							while($row=$result->fetch_assoc())
 							{
+								
 						?>
 							<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-								<div class="card text-center">
-									<img type="image" class="card-img-top img-fluid img-thumbnail" src="/admin/plugins/images/<?php echo "" .$row['prodMainPic'];?>">
-									<div class="card-block">
-										<div class="card-text">
-											<p class="text-danger">
-												<b class="text-primary"><?php echo "" . $row['productName'];?></b><br>
-												Php <?php echo "" . $row['productPrice'];?>
-											</p>
-										</div>
-										<form class="form-group" method="post" action="">
-											<input type="number" class="form-control"><br>
-											<button id="" type="button" class="btn btn-primary"><i class="fa fa-cart-plus"></i></button>
+								<form action="" method="post">
+									<div class="card text-center">
+										<img type="image" class="card-img-top img-fluid img-thumbnail" src="/admin/plugins/images/<?php echo "" .$row['prodMainPic'];?>">
+										<div class="card-block">
+											<div class="card-text">
+												<p class="text-danger">
+													<b class="text-primary"><?php echo "" . $row['productName'];?></b><br>
+													Php <?php echo "" . $row['productPrice'];?>
+												</p>
+											</div>
+											<input type="number" class="form-control" name="quantity" value="0"><br>
+											<button name="addtocart" type="submit" class="btn btn-primary" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
 											<button class="btn btn-success" data-toggle="modal" data-target="#viewmodal"><i class="fa fa-search"></i></button>
-										</form>
+										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						<?php
 							}
