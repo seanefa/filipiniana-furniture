@@ -45,7 +45,7 @@ if (!$conn) {
                   <div class="form-group">
                     <!--<input type="text" class="form-control" id="tags" name="name"/>-->
                     <div class="col-md-12" id="tags">
-                    <input type="text" class="form-control" id="tags" class="col-md-12" placeholder="Separate by comma"/>
+                    <input type="text" class="form-control" id="tags" class="col-md-12" placeholder="Separated by comma"/>
                     <input type="hidden" name="intags" id="intags">
                     </div>
                   </div>
@@ -128,7 +128,7 @@ if (!$conn) {
                         echo "<span>". $a ."</span>";
                       }
                       ?>
-                    <input type="text" class="form-control" id="tags" class="col-md-12" placeholder="Separate by comma"/>
+                    <input type="text" class="form-control" id="tags" class="col-md-12" placeholder="Separatd by comma"/>
                     <input type="hidden" name="intags" id="intags">
                     </div>
                   </div>

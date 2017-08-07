@@ -17,6 +17,8 @@ if (!$conn) {
 <!DOCTYPE html>  
 <html lang="en">
 <head>
+  <title>Check-Out</title>
+      <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
   $(document).ready(function(){
 
@@ -32,8 +34,6 @@ if (!$conn) {
   });
 
   </script>
-  <title>Check-Out</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 <body class ="fix-header fix-sidebar">
   <!-- Preloader -->
@@ -72,6 +72,7 @@ if (!$conn) {
                                 Existing Customer Information?
                               </div>
                             </div>
+                            <br>
                             <div class="row">
                               <div class="col-md-4" id="selectCust">
                                 <input type="hidden" id="isBool" name="isBool" value="new">
@@ -235,11 +236,11 @@ if (!$conn) {
                 <thead>
                   <tr>
                     <h4>
-                      <th style="text-align: center;">Furniture Name</th>
-                      <th style="text-align: center;">Furniture Description</th>
-                      <th style="text-align: center;">Unit Price</th>
-                      <th style="text-align: center;">Quantity</th>
-                      <th style="text-align: center;">Total Price</th></h4>
+                      <th>Furniture Name</th>
+                      <th>Furniture Description</th>
+                      <th style="text-align: right;">Unit Price</th>
+                      <th style="text-align: right;">Quantity</th>
+                      <th style="text-align: right;">Total Price</th></h4>
                     </tr>
                   </thead>
                   <tbody>
@@ -302,10 +303,10 @@ if (!$conn) {
                             echo ('
                               <tr>
                               <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
-                              <td style="text-align: center;">'.$row['productDescription'].'</td>
-                              <td style="text-align: center;">'.number_format($row['productPrice'],2).'</td>
-                              <td style="text-align: center;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
-                              <td id="price'.$ctr.'"  style="text-align: center;">&#8369;'.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td></tr>');?>
+                              <td>'.$row['productDescription'].'</td>
+                              <td style="text-align: right;">'.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
+                              <td id="price'.$ctr.'"  style="text-align: right;">&#8369;'.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td></tr>');?>
                             <?php    
                           }
                         }
@@ -315,8 +316,8 @@ if (!$conn) {
 
                     <tfoot>
                       <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                      <td style="text-align: center;">&#8369; <?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></td>
-                      <td id="totalPrice" style="text-align: center;">&#8369; <?php echo number_format($totPrice,2); ?></td>
+                      <td style="text-align: right;">&#8369; <?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></td>
+                      <td id="totalPrice" style="text-align: right;">&#8369; <?php echo number_format($totPrice,2); ?></td>
                       <input type="hidden" name="totalPrice" value="<?php echo $totPrice; ?>">
                     </tfoot>
                   </tbody>
@@ -449,11 +450,14 @@ else if(flag == 1){
                         </select>
                       </div>
                     </div>
+                    <br>
+                      <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="control-label">Delivery Rate</label>
                             <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
                           </div>
+                        </div>
                         </div>
                   </div>
                 </div>
@@ -570,44 +574,39 @@ $(document).ready(function(){
     </h4>
   </div>
   <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-    <div class="panel-body pull-right">
-      <div class="col-md-6">
+    <div class="panel-body">
+      <div class="col-md-12">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">Order Price</label>
               <input style="text-align:right;" id="oPrice" class="form-control" value="Php <?php echo number_format($totPrice,2)?>" disabled/>
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">Delivery Rate</label>
               <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">Amount Due</label>
               <input type="number" style="text-align:right;" id="" class="form-control" name="a" disabled/></div>
             </div>
           </div>
+              </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-3" style="text-align: center;">
               <div class="form-group">
                 <label class="control-label">Downpayment <span id="x" style="color:red"> *</span>
                   <h6><em>Note: Downpayment must be 50% of the total amount</em></h6></label>
                   <h6><em style="color:red">50% of Amount Due= </em>
                     <?php echo "Php " . number_format($totPrice * .5,2);?></h6>
-                    <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" required/></div>
+                    <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" required/>
+                    </div>
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-5 pull-right">
-                    <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -632,7 +631,7 @@ $(document).ready(function(){
         '</li>' +
         '<li class="next">'+
         '<a href="#'+this.id+'" data-wizard="next" role="button">'+options.buttonLabels.next+'</a>' +
-        '<button href="#'+this.id+'" data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print Receipt</button>' +
+        '<button href="#'+this.id+'" data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>' +
         '</li>'+
         '</ul></div>';
       }
