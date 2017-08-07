@@ -1,6 +1,6 @@
 # Filipiniana Furniture Shop System
 
-Filipiniana Furniture Shop System is a web application system
+Filipiniana Furniture Shop System is a web-based application system and capstone project. 
 
 ## Official Documentation
 
@@ -15,6 +15,6 @@ Coming Soon!
 5. Lozano, Mariano III
 6. Publico, Mark Joseph
 
-Bachelor of Science in Information Technology at Polytechnic University of the Philippines
+Bachelor of Science in Information Technology at Polytechnic University of the Philippines.
 
 
