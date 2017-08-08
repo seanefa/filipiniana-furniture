@@ -105,7 +105,7 @@ if (!$conn) {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct">New On-Promo Product</h3>
         </div>
-        <form action="" method="post">
+        <form action="products-promo-add.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
@@ -115,7 +115,7 @@ if (!$conn) {
                     <div class="form-group">
                       <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="promo" id="promo">
-                        <option value="">Select a Promo</option>
+                        <option value="a">Select a Promo</option>
                         <?php
                         include "dbconnect.php";
                         $sql = "SELECT * FROM tblpromos ORDER BY promoName ASC;";
@@ -134,37 +134,41 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" id="promoDesc">
-
+                      <h3 style="text-align:center">[Select a Promo]</h3>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-12" style="border:1px solid">
                     <div class="form-group">
                       <div class="row" id="checkbox">
                         <div class="col-md-6">
-                          <h4><input type="checkbox" id="allProd" name="allProd" checked/>Apply to all Products?</h4>
+                          <h4><input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?</h4>
                         </div>
                       </div>
-                      <div id="selection" class="col-md-12">
+                      <div id="selection">
                         <h4>Select Products</h4>
-                        <div class="row">
+                        <!--<div class="row">
                           <div class="col-md-6">
                             <label class="radio-inline"><input type="radio" name="from" value="Category"/>Product Category</label>
                             <label class="radio-inline"><input type="radio" name="from" value="Type"/>Product Type</label>
                             <label class="radio-inline"><input type="radio" name="from" value="Name"/>Product Name</label>
                           </div>
-                        </div>
+                        </div>-->
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
                               <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd">
-                                <option>Lalalala</option>
-                                <option>Lalalala</option>
-                                <option>Lalalala</option>
-                                <option>Lalalala</option>
-                                <option>Lalalala</option>
+                                <?php
+                                $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                                $res = mysqli_query($conn,$sql);
+                                while($row = mysqli_fetch_assoc($res)){
+                                  if($row['prodStat']!='Archived'){
+                                    echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
+                                  }
+                                }
+                                ?>
                               </select>
                             </div>
                           </div>
@@ -178,7 +182,7 @@ if (!$conn) {
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
+            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
           </div>
         </form>

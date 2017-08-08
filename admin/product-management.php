@@ -8,11 +8,6 @@ $jsID = $_GET['id'];
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 
 if (isset($_GET['newSuccess']))
 {
@@ -45,22 +40,9 @@ echo '</script>';
 <head>
   <script>    
 
-$(document).ready(function(){
- $('#myModal').on('shown.bs.modal',function(){
-    $("#promo").on('change',function(){
-      var val = $("#promo").val();
-      if($(this).prop("checked")){
-        $("#selection").hide();
-      }
-      else{
-        $("#selection").show();
-      }
-    });
-  });
-});
 
-$(document).ready(function(){
- $('#myModal').on('shown.bs.modal',function(){
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
     $("#selection").hide();
     $("#allProd").on('change',function(){
       if($(this).prop("checked")){
@@ -71,87 +53,86 @@ $(document).ready(function(){
       }
     });
   });
-});
+ });
 
-$(document).ready(function(){
- $('#myModal').on('shown.bs.modal',function(){
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
     $("#onPromoProd").select2({
-      tags: true
     });
-});
-});
+  });
+ });
 
 
-$(document).ready(function(){
- $('#myModal1').on('shown.bs.modal',function(){
-  $('#cat').change(function() {
-    var value = $("#cat").val();
-    var drop = 1;
-    $.ajax({
-      type: 'post',
-      url: 'load-drop-downs.php',
-      data: {
-        id: value, type : drop,
-      },
-      success: function (response) {
+  $(document).ready(function(){
+   $('#myModal1').on('shown.bs.modal',function(){
+    $('#cat').change(function() {
+      var value = $("#cat").val();
+      var drop = 1;
+      $.ajax({
+        type: 'post',
+        url: 'load-drop-downs.php',
+        data: {
+          id: value, type : drop,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#type' ).html(response);    
        $("#type").removeAttr('disabled');
-      }
-      });
+     }
+   });
     });
 
     $('#type').change(function() {
-    var value = $("#type").val();
-    var drop = 2;
-    $.ajax({
-      type: 'post',
-      url: 'load-drop-downs.php',
-      data: {
-        id: value, type : drop,
-      },
-      success: function (response) {
+      var value = $("#type").val();
+      var drop = 2;
+      $.ajax({
+        type: 'post',
+        url: 'load-drop-downs.php',
+        data: {
+          id: value, type : drop,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#products' ).html(response);
        $("#products").removeAttr('disabled');
-      }
-      });
+     }
+   });
     });
 
     $('#mat').change(function() {
-    var value = $("#mat").val();
-    var drop = 3;
-    $.ajax({
-      type: 'post',
-      url: 'load-drop-downs.php',
-      data: {
-        id: value, type : drop,
-      },
-      success: function (response) {
+      var value = $("#mat").val();
+      var drop = 3;
+      $.ajax({
+        type: 'post',
+        url: 'load-drop-downs.php',
+        data: {
+          id: value, type : drop,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#var' ).html(response);
        $("#var").removeAttr('disabled');
-      }
-      });
+     }
+   });
     });
 
     $('#products').change(function() {
-    var value = $("#products").val();
-    var drop = 4;
-    $.ajax({
-      type: 'post',
-      url: 'load-drop-downs.php',
-      data: {
-        id: value, type : drop,
-      },
-      success: function (response) {
+      var value = $("#products").val();
+      var drop = 4;
+      $.ajax({
+        type: 'post',
+        url: 'load-drop-downs.php',
+        data: {
+          id: value, type : drop,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#phasetab' ).html(response);
        $("#var").removeAttr('disabled');
-      }
-      });
+     }
+   });
     });
-});
+  });
 });
 
 
@@ -159,18 +140,24 @@ $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
   $('#promo').change(function() {
     var value = $("#promo").val();
-    $.ajax({
-      type: 'post',
-      url: 'prod-promo-form.php',
-      data: {
-        id: value, 
-      },
-      success: function (response) {
+    if(isNaN(value)){
+      var res = '<h3 style="text-align:center">[Select a Promo]</h3>';
+      $( '#promoDesc' ).html(res);
+    }
+    else{
+      $.ajax({
+        type: 'post',
+        url: 'promo-display.php',
+        data: {
+          id: value, 
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
-       $( '#promoForm' ).html(response);
-      }
-      });
-    });
+       $( '#promoDesc' ).html(response);
+     }
+   });
+    }
+  });
 });
 });
 </script>
@@ -267,26 +254,33 @@ $(document).ready(function(){
                                 <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="myTable">
                                   <thead>
                                     <tr>
-                                      <th>Furniture Type</th>
-                                      <th>Furniture Name</th>
-                                      <th>Promo</th>
+                                      <th>Promo Name</th>
+                                      <th>Description</th>
+                                      <th>Start Date</th>
+                                      <th>End</th>
+                                      <th>No. of Products</th>
                                       <th>Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
-                                    $sql = "SELECT * from tblprodsonpromo";
+                                    $sql = "SELECT *, COUNT(b.promoID) as bilang from tblprodsonpromo a, tblpromos b, tblproduct c WHERE a.promoDescID = b.promoID and a.prodPromoID = c.productID";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result))
                                     {
-                                      if($row['saleStatus']=="Active"){
-                                        echo('<tr><td>'. $type .'</td>
-                                          <td>'.$name.'</td>
-                                          <td>'.$row['prodQuantity'].'</td>');
+                                      $date = date_create($row['promoStartDate']);
+                                      $date = date_format($date,"F/d/Y");
+                                      if($row['onPromoStatus']=="Active"){
+                                        echo('<tr><td>'. $row['promoName'] .'</td>
+                                          <td>'.$row['promoDescription'].'</td>
+                                          <td>'. $date.'</td>
+                                          <td>'. $row['promoEnd'].'</td>
+                                          <td>'. $row['bilang'].'</td>
+                                          ');
                                           ?>
-                                          <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #addOnPromo" data-target="#myModal">Add</button>
+                                          <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #updatePromo" data-target="#myModal">Update</button>
 
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnPromo" data-target="#myModal">Deduct</button>
+                                            <!--<button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnPromo" data-target="#myModal">Deduct</button>-->
                                           </td>
 
                                           <?php echo('</tr>');} }

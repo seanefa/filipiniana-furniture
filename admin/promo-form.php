@@ -59,7 +59,7 @@ if (!$conn) {
                             <span style="font-size: 15px;">
                               <label class="radio-inline" style="margin-left: 10px"><input type="radio" name="cat" value="Amount" checked> Amount</label>
                               <label class="radio-inline"><input type="radio" id="cat" name="cat" value="Pieces">Quantity</label>
-                              <label class="radio-inline"><input type="radio" name="cat" value="Others"> Others</label>
+                              <!--<label class="radio-inline"><input type="radio" name="cat" value="Others"> Others</label>-->
                             </span> 
                           </div>            
                         </div>
@@ -182,7 +182,7 @@ if (!$conn) {
                             <div class="col-md-9 pull-right">
                               <div class="form-group">
                                 <div class="input-group">
-                                  <input class="form-control" name="pro_quan" placeholder="0.00" style="text-align: right;"/> 
+                                  <input class="form-control" name="pro_quan" style="text-align: right;"/> 
                                 </div>
                               </div>
                             </div>
