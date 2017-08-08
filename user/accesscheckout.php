@@ -158,7 +158,6 @@ if(!isset($_SESSION["userID"]))
 						</div>
 					</div>
 				</div>
-				<br>
 				<div class="text-center">
 					<input type="submit" class="text-center btn btn-web" value="Save and Print">
 				</div>

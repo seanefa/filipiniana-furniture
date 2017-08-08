@@ -49,7 +49,7 @@ if (!$conn) {
                     <label class="control-label">Unit Category</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" multiple="multiple" id="unit" data-placeholder="Select Category" tabindex="1" name="attribs[]" id="attribs">
                       <?php
-                      $sql = "SELECT * FROM tblunitofmeasurement_category;";
+                      $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

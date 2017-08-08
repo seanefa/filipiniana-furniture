@@ -44,7 +44,7 @@ if (!$conn) {
                     <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
                       <option value='0'>Description only</option>
                       <?php
-                      $sql = "SELECT * FROM tblunitofmeasurement_category;";
+                      $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

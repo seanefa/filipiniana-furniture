@@ -16,6 +16,7 @@ $insert=$conn->query($sql);
 if($insert)
 {
 	echo "Okay na, nasa database na.";
+	header("Location: receipt.php");
 }
 else
 {

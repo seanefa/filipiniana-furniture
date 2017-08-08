@@ -37,7 +37,7 @@ if (!$conn) {
                       <option value="" selected disabled>Select Material Type</option>
 
                       <?php
-                      $sql = "SELECT * FROM tblmat_type;";
+                      $sql = "SELECT * FROM tblmat_type order by matTypeName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -66,7 +66,7 @@ if (!$conn) {
                 <div class="col-md-12 ">
                   <div class="form-group">
                     <div id="form">
-
+						
                     </div>
                   </div>
                 </div>

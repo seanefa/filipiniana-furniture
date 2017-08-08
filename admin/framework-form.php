@@ -33,7 +33,7 @@ if (!$conn) {
                   <select class="form-control" tabindex="1" id="type" name="type" id="type" required>
                     <option value="" selected disabled>Choose Furniture Type</option>
                     <?php
-                    $sql = "SELECT * FROM tblfurn_type;";
+                    $sql = "SELECT * FROM tblfurn_type order by typeName;";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result))
                     {
@@ -61,7 +61,7 @@ if (!$conn) {
                         <option value="" selected disabled>Choose Frame Material</option>
                         <?php
                         include "dbconnect.php";
-                        $sql = "SELECT * FROM tblframe_material;";
+                        $sql = "SELECT * FROM tblframe_material order by materialName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {
@@ -80,7 +80,7 @@ if (!$conn) {
                         <option value="" selected disabled>Choose Frame Design</option>
                         <?php
                         include "dbconnect.php";
-                        $sql = "SELECT * FROM tblframe_design;";
+                        $sql = "SELECT * FROM tblframe_design order by designName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {

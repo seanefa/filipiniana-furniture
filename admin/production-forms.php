@@ -52,7 +52,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat">
                       <option value="0">Choose Category</option>
                       <?php
-                      $sql = "SELECT * FROM tblfurn_category;";
+                      $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -70,7 +70,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
                     <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category">
                       <?php
-                      $sql = "SELECT * FROM tblfurn_type;";
+                      $sql = "SELECT * FROM tblfurn_type order by typeNames;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

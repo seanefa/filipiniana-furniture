@@ -64,7 +64,7 @@ if (!$conn) {
                           <label class="control-label">Job</label><span id="x" style="color:red"> *</span>
                           <select class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job">
                             <?php
-                            $sql = "SELECT * FROM tbljobs;";
+                            $sql = "SELECT * FROM tbljobs order by jobName;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {

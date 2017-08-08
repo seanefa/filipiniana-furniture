@@ -47,7 +47,7 @@ if (!$conn) {
                       <option value="" selected disabled>Select Fabric Texture</option>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblfabric_texture;";
+                            $sql = "SELECT * FROM tblfabric_texture order by textureName;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {

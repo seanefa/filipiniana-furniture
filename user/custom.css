@@ -14,6 +14,7 @@ a.navbar-brand:focus,
 .text-web{color:#105170;}
 .carousel-item.active, .carousel-item-next, .carousel-item-prev{display: block;}
 .card{margin-bottom: 10%;}
+.bond-paper{height: 887px; width: 1037px; padding: 40px;}
 /*animations*/
 @-webkit-keyframes webdarker
 {

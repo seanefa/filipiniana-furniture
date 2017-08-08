@@ -41,7 +41,7 @@ if (!$conn) {
                       <option value="" selected disabled>Select Material</option>
                       <?php
                       include "dbconnect.php";
-                      $sql = "SELECT * FROM tblmaterials a, tblmat_type b WHERE a.materialType = b.matTypeID;";
+                      $sql = "SELECT * FROM tblmaterials a, tblmat_type b WHERE a.materialType = b.matTypeID order by materialName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

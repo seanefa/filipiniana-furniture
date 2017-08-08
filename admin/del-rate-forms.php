@@ -35,7 +35,7 @@ if (!$conn) {
                     <label class="control-label">Branch</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="branch">
                       <?php
-                      $sql = "SELECT * FROM tblbranches;";
+                      $sql = "SELECT * FROM tblbranches order by branchLocation;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

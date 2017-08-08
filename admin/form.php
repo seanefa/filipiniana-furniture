@@ -35,7 +35,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Downpayment</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" class="form-control" placeholder="50" name="name" value=""<span id="message"></span>
+                        <input type="text" id="editname" class="form-control" placeholder="50" name="name" value=""><span id="message"></span>
                       </div>
                     </div>
                   </div>
