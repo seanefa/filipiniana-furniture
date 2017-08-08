@@ -44,6 +44,13 @@ if($id=="All"){
 				</div>
 				</div>
 				</form>
+
+				<script>
+				    $(document).ready(function () {
+				      $("#my-input-field").instaFilta();
+				    });
+			    </script>
+
 				'); 
 				}
 				$ctr++;
@@ -92,6 +99,13 @@ else if($id=="On-Hand"){
 				</div>
 				</div>
 				</form>
+
+				<script>
+				    $(document).ready(function () {
+				      $("#my-input-field").instaFilta();
+				    });
+			    </script>
+
 				'); 
 				}
 				$ctr++;
@@ -140,6 +154,14 @@ else if($id=="Packages"){
 				</div>
 				</div>
 				</form>
+
+				<script>
+				    $(document).ready(function () {
+				      $("#my-input-field").instaFilta();
+				    });
+			    </script>
+
+
 				'); 
 				}
 				$ctr++;
@@ -186,6 +208,13 @@ else{ //category
 				</div>
 				</div>
 				</form>
+
+				<script>
+				    $(document).ready(function () {
+				      $("#my-input-field").instaFilta();
+				    });
+			    </script>
+
 				'); 
 				$ctr++;
 				}
@@ -234,6 +263,14 @@ if(isset($_POST['type'])){
 				</div>
 				</div>
 				</form>
+
+				<script>
+				    $(document).ready(function () {
+				      $("#my-input-field").instaFilta();
+				    });
+			    </script>
+
+			    
 				'); 
 				$ctr++;
 				}

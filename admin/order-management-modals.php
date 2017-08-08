@@ -295,7 +295,7 @@ $_SESSION['varname'] = $jsID;
           <div class="descriptions">
 
             <div class="row">
-              <div class="col-md-12" style="text-align:left;">
+              <div class="col-md-6" style="text-align:left;">
                 <h3><label class="control-label">Customer Information</label></h3>
                 <h5><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
                   <p><b>Address: </b><?php echo $row['customerAddress']?></p>
@@ -304,10 +304,8 @@ $_SESSION['varname'] = $jsID;
                   <p><b>Remarks: </b><?php echo $row['orderRemarks']?></p>
                 </h5>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12" style="text-align:left;">
+              
+              <div class="col-md-6" style="text-align:left;">
                 <h3><label class="control-label">Payment Information</label></h3>
                 <h5><p><b>Total Amount Due: </b>&#8369; <?php echo number_format($row['orderPrice'])?></p>
                   <?php
@@ -332,6 +330,7 @@ $_SESSION['varname'] = $jsID;
               <div class="col-md-12">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
+            <div class="row">
                     <div class="table-responsive">
                       <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
                       <table class="table product-overview" id="cartTbl">
@@ -372,10 +371,31 @@ $_SESSION['varname'] = $jsID;
                         </tfoot>
                       </table>
                     </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="payment">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+        </div>
+      
+        <div class="modal-body">
+          <div class="descriptions">
 
           </div>
         </div>
@@ -418,7 +438,49 @@ $_SESSION['varname'] = $jsID;
     </div>
   </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="viewCustRequest">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+        </div>
+        
+        <div class="modal-body">
+          <div class="descriptions">
 
+           <p>asdas</p>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="acceptCustRequest">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+        </div>
+        
+        <div class="modal-body">
+          <div class="descriptions">
+
+           <p>asdas</p>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -154,7 +154,8 @@ $(this).show();
                           <div class="row" style="margin: 0 auto; margin-top: -120px;">
                             <div class="col-md-6" style="margin-top: 10px;">
                               <div class="row">
-                                <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart</button>
+                                <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart <span id="totalCart" style="font-family: inherit; font-weight: bolder; color: black; font-size: 20px;">0</span></button>
+                                   
                               </div>
                             </div>
                             <div class="col-md-6" style="margin-top: -20px;">
@@ -326,12 +327,6 @@ $(this).show();
         </div>
       </div>
     </section>
-
-    <script>
-    $(document).ready(function () {
-      $('#my-input-field').instaFilta();
-    });
-    </script>
 
     <script type="text/javascript">
 //global variables
@@ -596,6 +591,7 @@ $('#cartTbl').append(
 
 $('#totalPrice').html(String(tempPrice));
 $('#totalQ').html(String(totalQuant));
+$('#totalCart').html(String(totalQuant));
 }
 else if(quant == 0){
   alert('please input the quantity');

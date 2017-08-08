@@ -99,7 +99,7 @@ echo '</script>';
 
                                    <a class="btn btn-info" style="color:white;" href="receipt.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span>  Bill </a>
 
-                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">&#8369; Payment</button></td>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #payment">&#8369; Payment</button></td>
                                   </tr>
                                   ');
                               }     

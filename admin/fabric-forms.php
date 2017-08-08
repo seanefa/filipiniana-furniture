@@ -262,11 +262,10 @@ if (!$conn) {
       </div>
 
       <!-- View Fabric Modal -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="viewFabricModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content" id="viewFab">
-            <div class="modal-header">
-              <?php
+      <div class="modal fade" tabindex="-1" role="dialog" id="viewFabricModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" id="viewFab">
+         <?php
 
               $tsql = "SELECT * FROM tblfabrics WHERE fabricID = '$jsID';";
               $tresult = mysqli_query($conn,$tsql);
@@ -283,33 +282,63 @@ if (!$conn) {
               $brow = mysqli_fetch_assoc($bresult);
 
               ?>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="descriptions">
+            <div class="">
+              <h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $trow['fabricName'];?></h2>
+              <hr>
+              <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-6">
+                  <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['fabricPic']?>" alt="Unavailable"> </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
 
-            <div class="modal-body">
-              <div class="product-img">
-                <img src="plugins/images/<?php echo $trow['fabricPic']?>" alt="Unavailable">
-              </div>
-              <div class="descriptions">
-              <?php
+
+
+                  <h4 class="box-title m-t-40">Remarks</h4>
+                  <p><?php echo $trow['fabricRemarks'];?></p>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+<?php
                       $colorArray = explode(",",$trow['fabricColor']);
                         $colorCtr = count($colorArray);
               ?>
-                <h4>Name: <?php echo $trow['fabricName'];?></h4>
-                <h4>Type:<?php echo $arow['f_typeName'];?></h4>
-                <h4>Pattern: <?php echo $brow['f_patternName'];?></h4>
-                <h4>Color: <?php while($colorCtr != 0){ 
+                  <h3 class="box-title">General Info</h3>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td width="390">Type</td>
+                          <td> <?php echo $arow['f_typeName'];?> </td>
+                        </tr>
+                        <tr>
+                          <td>Pattern</td>
+                          <td> <?php echo $brow['f_patternName'];?> </td>
+                        </tr>
+                        <tr>
+                          <td>Color</td>
+                          <td> <?php while($colorCtr != 0){ 
                                       echo'<input type="img" style="background-color:'.$colorArray[$colorCtr-1].'; width:75pt" />'; 
                                       $colorCtr--;
-                                    }?></h4>
-                <h4>Remarks: <?php echo $trow['fabricRemarks'];?></h4>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+                                    }?> </td>
+                        </tr>
+                                                
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
     </body>
     </html>
