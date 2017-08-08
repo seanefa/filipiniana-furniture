@@ -1,0 +1,52 @@
+StartFontMetrics 4.1
+Notice Converted by PHP-font-lib
+Comment https://github.com/PhenX/php-font-lib
+EncodingScheme FontSpecific
+FontName linea-music-10
+FontSubfamily music-10
+UniqueID FontForge 2.0 : linea-music-10 : 12-5-2014
+FullName linea-music-10
+Version Version 1.0
+PostScriptName linea-music-10
+Weight Medium
+ItalicAngle 0
+IsFixedPitch true
+UnderlineThickness 0
+UnderlinePosition 0
+FontHeightOffset 90
+Ascender 1006
+Descender -6
+FontBBox 0 -6 1000 1006
+StartCharMetrics 33
+U 65 ; WX 1000 ; N A ; G 29
+U 66 ; WX 1000 ; N B ; G 30
+U 67 ; WX 1000 ; N C ; G 31
+U 68 ; WX 1000 ; N D ; G 32
+U 97 ; WX 1000 ; N a ; G 3
+U 98 ; WX 1000 ; N b ; G 4
+U 99 ; WX 1000 ; N c ; G 5
+U 100 ; WX 1000 ; N d ; G 6
+U 101 ; WX 1000 ; N e ; G 7
+U 102 ; WX 1000 ; N f ; G 8
+U 103 ; WX 1000 ; N g ; G 9
+U 104 ; WX 1000 ; N h ; G 10
+U 105 ; WX 1000 ; N i ; G 11
+U 106 ; WX 1000 ; N j ; G 12
+U 107 ; WX 1000 ; N k ; G 13
+U 108 ; WX 1000 ; N l ; G 14
+U 109 ; WX 1000 ; N m ; G 15
+U 110 ; WX 1000 ; N n ; G 16
+U 111 ; WX 1000 ; N o ; G 17
+U 112 ; WX 1000 ; N p ; G 18
+U 113 ; WX 1000 ; N q ; G 19
+U 114 ; WX 1000 ; N r ; G 20
+U 115 ; WX 1000 ; N s ; G 21
+U 116 ; WX 1000 ; N t ; G 22
+U 117 ; WX 1000 ; N u ; G 23
+U 118 ; WX 1000 ; N v ; G 24
+U 119 ; WX 1000 ; N w ; G 25
+U 120 ; WX 1000 ; N x ; G 26
+U 121 ; WX 1000 ; N y ; G 27
+U 122 ; WX 1000 ; N z ; G 28
+EndCharMetrics
+EndFontMetrics

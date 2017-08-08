@@ -6,14 +6,8 @@ if(isset($GET['id'])){
   $jsID = $_GET['id']; 
 }
 $jsID=$_GET['id'];
-
 $_SESSION['varname'] = $jsID;
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 ?>
 <!DOCTYPE>
 <html>
@@ -95,103 +89,6 @@ if (!$conn) {
       </div>
     </div>
   </div>
-  <!-- /.modal -->
-
-  <!-- New On-Promo Modal -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="newOnPromoModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="newOnPromo">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">New On-Promo Product</h3>
-        </div>
-        <form action="products-promo-add.php" method="post">
-          <div class="modal-body">
-            <div class="descriptions">
-              <div class="form-body">
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="promo" id="promo">
-                        <option value="a">Select a Promo</option>
-                        <?php
-                        include "dbconnect.php";
-                        $sql = "SELECT * FROM tblpromos ORDER BY promoName ASC;";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-                          if($row['promoStatus']!='Archived'){
-                            echo('<option value='.$row['promoID'].'>'.$row['promoName'].'</option>');
-                          }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group" id="promoDesc">
-                      <h3 style="text-align:center">[Select a Promo]</h3>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-md-12" style="border:1px solid">
-                    <div class="form-group">
-                      <div class="row" id="checkbox">
-                        <div class="col-md-6">
-                          <h4><input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?</h4>
-                        </div>
-                      </div>
-                      <div id="selection">
-                        <h4>Select Products</h4>
-                        <!--<div class="row">
-                          <div class="col-md-6">
-                            <label class="radio-inline"><input type="radio" name="from" value="Category"/>Product Category</label>
-                            <label class="radio-inline"><input type="radio" name="from" value="Type"/>Product Type</label>
-                            <label class="radio-inline"><input type="radio" name="from" value="Name"/>Product Name</label>
-                          </div>
-                        </div>-->
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd">
-                                <?php
-                                $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
-                                $res = mysqli_query($conn,$sql);
-                                while($row = mysqli_fetch_assoc($res)){
-                                  if($row['prodStat']!='Archived'){
-                                    echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
-                                  }
-                                }
-                                ?>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- /.modal -->
-
-
 
   <!-- Add On-Hand Modal -->
   <div class="modal fade" tabindex="-1" role="dialog" id="addOnHandModal" aria-hidden="true" style="display: none;">
@@ -215,13 +112,63 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                     <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
-                     <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
-                   </div>
-                 </div>
-               </div>
+                      <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
+                      <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
+                    </div>
+                  </div>
+                </div>
 
-               <div class="row">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
+                      <input type="number" id="quan" class="form-control" name="quan" style="text-align:right">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success waves-effect text-left" id="addBtn"><i class="fa fa-check"></i> Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Deduct On-Hand Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="deductOnHandModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="deductOnHand">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct">Deduct Quantity</h3>
+      </div>
+      <form action="on-hand.php" method="post">
+        <div class="modal-body">
+          <div class="descriptions">
+            <div class="form-body">
+              <input type="hidden" name="func" value="deduct">
+              <?php
+              include "dbconnect.php";
+              $sql = "SELECT * FROM tblproduct WHERE productID ='$jsID'";
+              $res = mysqli_query($conn,$sql);
+              $pRow = mysqli_fetch_assoc($res);
+              ?>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
+                    <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
@@ -230,11 +177,20 @@ if (!$conn) {
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Remarks</label>
+                    <textarea id="remText" class="form-control" placeholder="Pull-Out" name="remarks"></textarea>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left" id="addBtn"><i class="fa fa-check"></i> Save</button>
+          <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
         </div>
       </div>
@@ -242,15 +198,107 @@ if (!$conn) {
   </div>
 </div>
 </div>
-<!-- /.modal -->
+
+<!-- New On-Promo Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="newOnPromoModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="newOnPromo">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct">New Products on Promo</h3>
+      </div>
+      <form action="products-promo-add.php" method="post">
+        <div class="modal-body">
+          <div class="descriptions">
+            <div class="form-body">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="promo" id="promo">
+                      <option value="a">Select a Promo</option>
+                      <?php
+                      include "dbconnect.php";
+                      $sql = "SELECT * FROM tblpromos ORDER BY promoName ASC;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['promoStatus']!='Archived'){
+                          echo('<option value='.$row['promoID'].'>'.$row['promoName'].'</option>');
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" id="promoDesc">
+                    <h3 style="text-align:center">[Select a Promo]</h3>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12" style="border:1px solid">
+                  <div class="form-group">
+                    <div class="row" id="checkbox">
+                      <div class="col-md-6">
+                        <h4><input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?</h4>
+                      </div>
+                    </div>
+                    <div id="selection">
+                      <h4>Select Products</h4>
+<!--<div class="row">
+<div class="col-md-6">
+<label class="radio-inline"><input type="radio" name="from" value="Category"/>Product Category</label>
+<label class="radio-inline"><input type="radio" name="from" value="Type"/>Product Type</label>
+<label class="radio-inline"><input type="radio" name="from" value="Name"/>Product Name</label>
+</div>
+</div>-->
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd">
+        <?php
+        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+        $res = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_assoc($res)){
+          if($row['prodStat']!='Archived'){
+            echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
+          }
+        }
+        ?>
+      </select>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+</div>
+</form>
+</div>
+</div>
+</div>
 
 <!-- Add On-Promo Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addOnPromoModal" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="addOnPromo">
+    <div class="modal-content" id="update">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct">Add On-Promo Quantity</h3>
+        <h3 class="modal-title" id="modalProduct">Update Products on Promo</h3>
       </div>
       <form action="" method="post">
         <div class="modal-body">
@@ -277,67 +325,6 @@ if (!$conn) {
   </div>
 </div>
 </div>
-<!-- /.modal -->
-
-<!-- Deduct On-Hand Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="deductOnHandModal" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="deductOnHand">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct">Deduct Quantity</h3>
-      </div>
-      <form action="on-hand.php" method="post">
-        <div class="modal-body">
-          <div class="descriptions">
-            <div class="form-body">
-              <input type="hidden" name="func" value="deduct">
-              <?php
-              include "dbconnect.php";
-              $sql = "SELECT * FROM tblproduct WHERE productID ='$jsID'";
-              $res = mysqli_query($conn,$sql);
-              $pRow = mysqli_fetch_assoc($res);
-              ?>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                   <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
-                   <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
-                 </div>
-               </div>
-             </div>
-
-             <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
-                  <input type="number" id="quan" class="form-control" name="quan" style="text-align:right">
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="control-label">Remarks</label>
-                  <textarea id="remText" class="form-control" placeholder="Pull-Out" name="remarks"></textarea>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-      </div>
-    </div>
-  </form>
-</div>
-</div>
-</div>
-<!-- /.modal -->
 
 <!-- Deduct On-Promo Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="deductOnPromoModal" aria-hidden="true" style="display: none;">
@@ -382,8 +369,275 @@ if (!$conn) {
   </div>
 </div>
 </div>
-<!-- /.modal -->
 
+
+
+
+<!-- Update Framework Material Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="updateFrameworkMaterialModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="updatePromo">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct">Update Production Material</h3>
+      </div>
+      <form action="prod-info-update.php" method = "post">
+        <div class="modal-body">
+          <div class="descriptions">
+            <?php
+            $sql1 = "SELECT * FROM tblprod_info a, tblproduct b, tblfurn_type c, tblfurn_category d WHERE a.prodInfoProduct = b.productID and b.prodTypeID = c.typeID and d.categoryID = b.prodCatID and prodInfoID = '$jsID';";
+            $res = mysqli_query($conn,$sql1);
+            $srow = mysqli_fetch_assoc($res);
+            ?>
+            <div class="form-body">
+              <input type="hidden" name="recID" value="<?php echo $jsID?>"/>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="cat">
+
+                      <?php
+                      $sql = "SELECT * FROM tblfurn_category;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['categoryStatus']=='Listed'){
+                          if ($srow["prodCatID"] == $row['categoryID'])
+                          {
+                            echo('<option value="'.$row['categoryID'].'" selected="selected">'.$row['categoryName'].'</option>');
+                          }
+                          else
+                          {
+                            echo('<option value="'.$row['categoryID'].'">'.$row['categoryName'].'</option>');
+                          }
+
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="type">
+                      <?php
+                      $sql = "SELECT * FROM tblfurn_type;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['typeStatus']=='Listed'){
+                          if ($srow["prodTypeID"] == $row['typeID'])
+                          {
+                            echo('<option value="'.$row['typeID'].'" selected="selected">'.$row['typeName'].'</option>');
+                          }
+                          else
+                          {
+                            echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
+                          }
+
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+
+               <!--<div class="row">
+              <div class="col-md-12 ">
+                <div class="form-group">
+                  <div id="type">
+
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="control-label">Furniture Name</label><span id="x" style="color:red"> *</span>
+                <select class="form-control" tabindex="1" name="prod" id="products">
+                  <?php
+                  $sql = "SELECT * FROM tblproduct;";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result))
+                  {
+                    if($row['prodStat']!='Archived'){
+                      if ($srow["productID"]==$row['productID'])
+                      {
+                        echo('<option value="'.$row['productID'].'" selected="selected">'.$row['productName'].'</option>');
+                      }
+                      else
+                      {
+                        echo('<option value='.$row['productID'].'>'.$row['productName'] .'</option>');
+                      }
+
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Phase</label><span id="x" style="color:red"> *</span>
+                <select class="form-control" tabindex="1" name="phase">
+                  <?php
+                  include "dbconnect.php";
+                  $sql = "SELECT * FROM tblphases;";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result))
+                  {
+                    if($row['phaseStatus']!='Archived'){
+                      if ($srow["prodInfoPhase"] == $row['phaseID'])
+                      {
+                        echo('<option value="'.$row['phaseID']. '" selected="selected">'.$row['phaseName'].'</option>');
+                      }
+                      else
+                      {
+                        echo('<option value="'.$row['phaseID'].'">'.$row['phaseName'].'</option>');
+                      }
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
+          </div>
+          <h4><label class="control-label">Materials Needed</label></h4>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
+                <select class="form-control" tabindex="1" name="material" id="mat">
+                  <?php
+                  include "dbconnect.php";
+                  $sql = "SELECT * FROM tblmat_type;";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result))
+                  {
+                    if($row['matTypeStatus']=='Listed'){
+                      echo('<option value='.$row['matTypeID'].' data-name="'.$row['matTypeName'].'">'.$row['matTypeName'].'</option>');
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
+                <select class="form-control" tabindex="1" name="var" id="var" disabled>
+
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="form-group">
+                <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
+                <input type="text" class="form-control" name="quan" id="quan" placeholder="500" style="text-align: right" />
+              </div>
+            </div>
+
+            <div class="col-md-2">
+                    <label class="control-label">Unit</label><span id="x" style="color:red">
+                    <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
+                      <?php
+                      $sql = "SELECT * FROM tblunitofmeasure;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['unStatus']!='Archived'){
+                          echo('<option value='.$row['unID'].'>'.$row['unUnit'].'</option>');
+                        }
+                      }
+                      ?>
+                    </select> 
+                </div>
+
+            <div class="col-md-1">
+              <div class="form-group pull-right">
+                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div role="tabpanel" class="tab-pane fade active in" id="job">
+              <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="table-responsive">
+                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="selectedMaterials">
+                        <thead>
+                          <tr>
+                            <th style="text-align: left;">Type</th>
+                            <th style="text-align: left;">Material</th>
+                            <th style="text-align: left;">Quantity</th>
+                            <th style="text-align: left;">Unit</th>
+                            <th style="text-align: left;">Action</th>                          
+                          </thead>
+                          <tbody  id="tblMat" style="text-align: left;">
+                            <?php
+                            $sql = "SELECT * FROM tblprod_materials a, tblmaterials b, tblmat_var c, tblmat_type d, tblunitofmeasure e WHERE a.p_matMaterialID = b.materialID and a.p_matUnit = e.unID and d.matTypeID = b.materialType and a.p_matDescID = c.variantID and p_prodInfoID = '$jsID'";
+                            $res = mysqli_query($conn,$sql);
+                            while($row = mysqli_fetch_assoc($res)){
+                              if($row['p_matStatus']!="Archived"){
+                                $descName = desc($row['variantID']);
+
+                                echo "<tr id='trowID".$row['p_matID']."'>
+                                <td>".$row['matTypeName']."</td>
+                                <td><input type='hidden' class='form-control' id='exist".$row['p_matID']."' name='existRec[]' value='". $row['materialID'] ."'/>". $descName.'-'.$row['materialName']."</td>"."
+                                <input type='hidden' class='form-control' name='mat_var[]' value='". $row['variantID'] ."' />
+                                </td>
+                                <td><input type='text' class='col-lg-4' name='quan[]' value='". $row['p_matQuantity'] ."'/>
+                                </td>
+                                <td>".$row['unUnit']."<input type='hidden' class='form-control' id='quan' style='text-align:right;' name='unit[]' value='". $row['unID'] ."'/></td>";
+                                echo '<td><input id="remove" type="button" onclick="deleteExisting('.$row['p_matID'].')" class="btn btn-danger" value="X"/></td></tr>';
+
+                              //<input type='hidden' class='form-control' name='quan[]' value='". $row['p_matQuantity']  ."'/>
+                              }}
+
+                              function desc($iid){
+                                include "dbconnect.php";
+                                $sql = "SELECT * FROM tblvariant_desc a, tblmat_var b WHERE b.variantID = a.varMatvarID AND a.varMatvarID = '$iid'";
+                                $result = mysqli_query($conn,$sql);
+                                $desc = "";
+                                while($row = mysqli_fetch_assoc($result)){
+                                  $desc = $desc . $row['varVariantDesc'] . "-";
+                                }
+                                $temp = substr(trim($desc), 0, -1);
+                                return $temp;
+                              }
+                              ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>                
+      </form>
+    </div>
+  </div>
 
 </body>
 </html>

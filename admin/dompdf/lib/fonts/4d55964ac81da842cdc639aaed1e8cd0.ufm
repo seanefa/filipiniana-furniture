@@ -1,0 +1,107 @@
+StartFontMetrics 4.1
+Notice Converted by PHP-font-lib
+Comment https://github.com/PhenX/php-font-lib
+EncodingScheme FontSpecific
+FontName linea-weather-10
+FontSubfamily weather-10
+UniqueID FontForge 2.0 : linea-weather-10 : 1-6-2014
+FullName linea-weather-10
+Version Version 1.0
+PostScriptName linea-weather-10
+Weight Medium
+ItalicAngle 0
+IsFixedPitch true
+UnderlineThickness 0
+UnderlinePosition 0
+FontHeightOffset 90
+Ascender 1031
+Descender -12
+FontBBox -14 -12 1014 1031
+StartCharMetrics 88
+U 57344 ; WX 1000 ; N uniE000 ; G 3
+U 57345 ; WX 1000 ; N uniE001 ; G 4
+U 57346 ; WX 1000 ; N uniE002 ; G 5
+U 57347 ; WX 1000 ; N uniE003 ; G 6
+U 57348 ; WX 1000 ; N uniE004 ; G 7
+U 57349 ; WX 1000 ; N uniE005 ; G 8
+U 57350 ; WX 1000 ; N uniE006 ; G 9
+U 57351 ; WX 1000 ; N uniE007 ; G 10
+U 57352 ; WX 1000 ; N uniE008 ; G 11
+U 57353 ; WX 1000 ; N uniE009 ; G 12
+U 57354 ; WX 1000 ; N uniE00A ; G 13
+U 57355 ; WX 1000 ; N uniE00B ; G 14
+U 57356 ; WX 1000 ; N uniE00C ; G 15
+U 57357 ; WX 1000 ; N uniE00D ; G 16
+U 57358 ; WX 1000 ; N uniE00E ; G 17
+U 57359 ; WX 1000 ; N uniE00F ; G 18
+U 57360 ; WX 1000 ; N uniE010 ; G 19
+U 57361 ; WX 1000 ; N uniE011 ; G 20
+U 57362 ; WX 1000 ; N uniE012 ; G 21
+U 57363 ; WX 1000 ; N uniE013 ; G 22
+U 57364 ; WX 1000 ; N uniE014 ; G 23
+U 57365 ; WX 1000 ; N uniE015 ; G 24
+U 57366 ; WX 1000 ; N uniE016 ; G 25
+U 57367 ; WX 1000 ; N uniE017 ; G 26
+U 57368 ; WX 1000 ; N uniE018 ; G 27
+U 57369 ; WX 1000 ; N uniE019 ; G 28
+U 57370 ; WX 1000 ; N uniE01A ; G 29
+U 57371 ; WX 1000 ; N uniE01B ; G 30
+U 57372 ; WX 1000 ; N uniE01C ; G 31
+U 57373 ; WX 1000 ; N uniE01D ; G 32
+U 57374 ; WX 1000 ; N uniE01E ; G 33
+U 57375 ; WX 1000 ; N uniE01F ; G 34
+U 57376 ; WX 1000 ; N uniE020 ; G 35
+U 57377 ; WX 1000 ; N uniE021 ; G 36
+U 57378 ; WX 1000 ; N uniE022 ; G 37
+U 57379 ; WX 1000 ; N uniE023 ; G 38
+U 57380 ; WX 1000 ; N uniE024 ; G 39
+U 57381 ; WX 1000 ; N uniE025 ; G 40
+U 57382 ; WX 1000 ; N uniE026 ; G 41
+U 57383 ; WX 1000 ; N uniE027 ; G 42
+U 57384 ; WX 1000 ; N uniE028 ; G 43
+U 57385 ; WX 1000 ; N uniE029 ; G 44
+U 57386 ; WX 1000 ; N uniE02A ; G 45
+U 57387 ; WX 1000 ; N uniE02B ; G 46
+U 57388 ; WX 1000 ; N uniE02C ; G 47
+U 57389 ; WX 1000 ; N uniE02D ; G 48
+U 57390 ; WX 1000 ; N uniE02E ; G 49
+U 57391 ; WX 1000 ; N uniE02F ; G 50
+U 57392 ; WX 1000 ; N uniE030 ; G 51
+U 57393 ; WX 1000 ; N uniE031 ; G 52
+U 57394 ; WX 1000 ; N uniE032 ; G 53
+U 57395 ; WX 1000 ; N uniE033 ; G 54
+U 57396 ; WX 1000 ; N uniE034 ; G 55
+U 57397 ; WX 1000 ; N uniE035 ; G 56
+U 57398 ; WX 1000 ; N uniE036 ; G 57
+U 57399 ; WX 1000 ; N uniE037 ; G 58
+U 57400 ; WX 1000 ; N uniE038 ; G 59
+U 57401 ; WX 1000 ; N uniE039 ; G 60
+U 57402 ; WX 1000 ; N uniE03A ; G 61
+U 57403 ; WX 1000 ; N uniE03B ; G 62
+U 57404 ; WX 1000 ; N uniE03C ; G 63
+U 57405 ; WX 1000 ; N uniE03D ; G 64
+U 57406 ; WX 1000 ; N uniE03E ; G 65
+U 57407 ; WX 1000 ; N uniE03F ; G 66
+U 57408 ; WX 1000 ; N uniE040 ; G 67
+U 57409 ; WX 1000 ; N uniE041 ; G 68
+U 57410 ; WX 1000 ; N uniE042 ; G 69
+U 57411 ; WX 1000 ; N uniE043 ; G 70
+U 57412 ; WX 1000 ; N uniE044 ; G 71
+U 57413 ; WX 1000 ; N uniE045 ; G 72
+U 57414 ; WX 1000 ; N uniE046 ; G 73
+U 57415 ; WX 1000 ; N uniE047 ; G 74
+U 57416 ; WX 1000 ; N uniE048 ; G 75
+U 57417 ; WX 1000 ; N uniE049 ; G 76
+U 57418 ; WX 1000 ; N uniE04A ; G 77
+U 57419 ; WX 1000 ; N uniE04B ; G 78
+U 57420 ; WX 1000 ; N uniE04C ; G 79
+U 57421 ; WX 1000 ; N uniE04D ; G 80
+U 57422 ; WX 1000 ; N uniE04E ; G 81
+U 57423 ; WX 1000 ; N uniE04F ; G 82
+U 57424 ; WX 1000 ; N uniE050 ; G 83
+U 57425 ; WX 1000 ; N uniE051 ; G 84
+U 57426 ; WX 1000 ; N uniE052 ; G 85
+U 57427 ; WX 1000 ; N uniE053 ; G 86
+U 57428 ; WX 1000 ; N uniE054 ; G 87
+EndCharMetrics
+EndFontMetrics
