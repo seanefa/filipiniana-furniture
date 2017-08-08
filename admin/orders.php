@@ -219,11 +219,6 @@
 
 </section>
 
-<script>
-$(document).ready(function () {
-  $('#my-input-field').instaFilta();
-});
-</script>
 <!-- ORDER REQUEST TAB -->
 <section id="orderrequest">
   <div class="tab-content">
@@ -343,8 +338,8 @@ $(document).ready(function () {
                     <td>3</td>
                     <td>&#8369; 33,000</td>
                     <td>
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
                     </tr>
                     <tr>
                       <td>5</td>
@@ -353,8 +348,8 @@ $(document).ready(function () {
                       <td>1</td>
                       <td>&#8369; 25,000</td>
                       <td>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal4"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal5"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -380,6 +375,18 @@ $(document).ready(function () {
 
 
 <div id="viewOrder" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="custRequest" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-content clearable-content">

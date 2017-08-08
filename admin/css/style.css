@@ -5279,7 +5279,7 @@ table.dataTable tfoot th {
 }
 .sidebar .nav-third-level li a {
   padding-left: 70px;
-  background: rgba(0, 0, 0, 0.04);
+  background: #F4F8FB;
 }
 .sidebar .nav-fourth-level li a {
   padding-left: 90px;
