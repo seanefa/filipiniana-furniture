@@ -304,9 +304,9 @@ if (!$conn) {
                               <tr>
                               <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
                               <td>'.$row['productDescription'].'</td>
-                              <td style="text-align: right;">'.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
                               <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
-                              <td id="price'.$ctr.'"  style="text-align: right;">&#8369;'.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td></tr>');?>
+                              <td id="price'.$ctr.'"  style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td></tr>');?>
                             <?php    
                           }
                         }
@@ -316,7 +316,7 @@ if (!$conn) {
 
                     <tfoot>
                       <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                      <td style="text-align: right;">&#8369; <?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></td>
+                      <td style="text-align: right;"><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></td>
                       <td id="totalPrice" style="text-align: right;">&#8369; <?php echo number_format($totPrice,2); ?></td>
                       <input type="hidden" name="totalPrice" value="<?php echo $totPrice; ?>">
                     </tfoot>
@@ -452,7 +452,7 @@ else if(flag == 1){
                     </div>
                     <br>
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-3 pull-right">
                           <div class="form-group">
                             <label class="control-label">Delivery Rate</label>
                             <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
