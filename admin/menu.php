@@ -70,12 +70,43 @@
   <div class="cssload-speeding-wheel"></div>
 </div-->
 <div id="wrapper">
+
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-static-top m-b-0">
     <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-      <div class="top-left-part"><a class="logo" href="index.php"><b><!--This is light logo icon--><img src="plugins/images/filipiniana-furniture-logo.png" alt="home" class="light-logo" /></b><span class="hidden-xs"><!--This is light logo text--><img src="plugins/images/filipiniana-furniture-v2-text-dark.png" alt="home" class="light-logo" /></span></a></div>
+      <div class="top-left-part"><a class="logo" href="dashboard.php"><b><!--This is light logo icon--><?php
+        include "dbconnect.php";
+        $sql="SELECT * from tblcompany_info";
+        $result=$conn->query($sql);
+        if($result->num_rows>0)
+        {
+          while($row=$result->fetch_assoc())
+          {
+        ?>
+          <img width="60" height="62" class="mx-auto d-block img-fluid animated tada" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">
+        
+        <?php
+          }
+        }
+        ?>
+        </b>
+        <span class="hidden-xs"><!--This is light logo text--><?php
+          include "dbconnect.php";
+          $sql="SELECT * from tblcompany_info";
+          $result=$conn->query($sql);
+          if($result->num_rows>0)
+          {
+            while($row=$result->fetch_assoc())
+            {
+          ?>
+          <span class="light-logo" style="font-weight: bolder; letter-spacing: 3px; float:right; color: #4A4A4A; margin-left: 75px; margin-top: -55px; font-family: Helvetica;"><?php echo "" . $row['comp_name'];?></span>
+          <?php
+            }
+          }
+          $conn->close();
+          ?></span></a></div>
       <ul class="nav navbar-top-links navbar-left hidden-xs">
-        <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+        <li><a href="javascript:void(0)" class="hideMenuOnLoad open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
         <li>
 
         </li>
@@ -456,6 +487,24 @@ jQuery(function($) { 'use strict';
 <!-- FormValidation plugin and the class supports validating Bootstrap form -->
 <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
 <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  $("document").ready(function() {
+    setTimeout(function() {
+       $(".hideMenuOnLoad").trigger('click');
+    },0);
+});
+
+  $("document").ready(function() {
+    setTimeout(function() {
+       $(".sidebar").hover(function () {
+    
+       $(".hideMenuOnLoad").trigger('click');
+});
+    },0);
+});
+
+</script>
 
 </body>
 </html>

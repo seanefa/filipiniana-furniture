@@ -5180,6 +5180,7 @@ table.dataTable tfoot th {
 }
 .sidebar {
   overflow-y: auto;
+  margin-top: -12px;
 }
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
