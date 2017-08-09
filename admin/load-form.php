@@ -62,7 +62,24 @@ $query = mysqli_query($conn,$selectdata);
 
 while($row = mysqli_fetch_array($query))
 {
- echo '<div class="col-md-6">
+ /*$id1=$row['attributeID'];
+ $selectdata1 = "SELECT * FROM tblattribute_measure a,  tblunit_cat c WHERE a.attributeID='$id1' AND a.uncategoryID=c.uncategoryID;"; 
+ $query1 = mysqli_query($conn,$selectdata1);
+ $row1 = mysqli_fetch_assoc($query1);
+ 
+ $id1=$row['attributeID'];
+ $selectdata1 = "SELECT * FROM tblattribute_measure a, tblunitofmeasurement_category b WHERE a.attributeID='$id1' AND a.uncategoryID=b.uncategoryID;";
+ $query1 = mysqli_query($conn,$selectdata1);
+ $row1 = mysqli_fetch_assoc($query1);
+	
+ if($row1['uncategoryID']==0){
+ */
+	$id1=$row['attributeID'];
+ $selectdata1 = "SELECT * FROM tblattribute_measure a, tblunitofmeasurement_category b WHERE a.attributeID='$id1' AND a.uncategoryID=b.uncategoryID;";
+ $query1 = mysqli_query($conn,$selectdata1);
+while($row1=mysqli_fetch_assoc($query1)){
+	if($row1['uncategoryID']==0){
+	 echo '<div class="col-md-6">
         <div class="row">
         <label class="box-title">'. $row['attributeName'] .'</label><span id="x" style="color:red"> *</span>
                 <div class="col-md-12">
@@ -73,8 +90,63 @@ while($row = mysqli_fetch_array($query))
                 </div>
                 </div>
               </div>';
-            }
+    }
+	else{
+		
+			echo '<div class="col-md-12">
+        <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+				  <label class="box-title">'. $row1['uncategoryName'] .'</label><span id="x" style="color:red"> *</span>
+                    <input type="number" id="attribb" class="form-control" name="desc[]" required>
+                    <input type="hidden" class="form-control" name="label[]" value="'.$row['attributeName'].'"/><br><select class="form-control" tabindex="1" required>';
+		$units=$row1['uncategoryID'];
+		$sql1="SELECT * FROM tblunit_cat a, tblunitofmeasure b WHERE a.uncategoryID='$units' AND a.unitID=b.unID;";
+		$result1 = mysqli_query($conn, $sql1);
+		while($row2 = mysqli_fetch_assoc($result1)){
+			echo (
+					'<option value='.$row2[unUnit].'>'.$row2[unUnit].'  ('.$row2[unType].')</option>'
+					);
+		}
+					echo '</select>
+                  </div>
+                </div>
+                </div>
+              </div>';
+		
+	
+	}
 }
+ 
+ 	}
+	
+	/*
+	else{
+		while($row1){
+			if($row1['uncategoryStatus']=="Active"){
+				echo '<div class="col-md-6">
+        <div class="row">
+        <label class="box-title">'. $row['attributeName'] .'</label><span id="x" style="color:red"> *</span>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" id="attribb" class="form-control" name="desc[]" required>
+					<select>
+					
+					<option></option>
+					</select>
+                    <input type="hidden" class="form-control" name="label[]" value="'.$row['attributeName'].'"/>
+                  </div>
+                </div>
+                </div>
+              </div>';
+			}
+			
+		}
+		
+	}
+	*/
+   }
+
 
 else{ //update
 

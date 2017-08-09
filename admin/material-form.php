@@ -54,20 +54,8 @@ if (!$conn) {
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
+                    <label class="control-label">Name/Brand</label><span id="x" style="color:red"> *</span>
                     <input type="text" id="materialName" class="form-control" name="name" required><span id="materialNameValidate"></span> 
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="control-label" style="font-size:18px;">Measurement(s):</label>
-                <br><br>
-                <div class="col-md-12 ">
-                  <div class="form-group">
-                    <div id="form">
-						
-                    </div>
                   </div>
                 </div>
               </div>
@@ -131,7 +119,7 @@ if (!$conn) {
                     <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
                     <select class="form-control"  data-placeholder="Select Material Type" tabindex="1" name="type">
                       <?php
-                      $sql = "SELECT * FROM tblmat_type;";
+                      $sql = "SELECT * FROM tblmat_type order by matTypeName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

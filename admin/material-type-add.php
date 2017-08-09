@@ -3,7 +3,7 @@ include 'dbconnect.php';
 
 $name = $_POST['name'];
 $desc = $_POST['desc'];
-$measures = $_POST['intags'];
+$measures = "measuring is on materials.";
 $status = "Listed";
 
 $measures = substr(trim($measures), 0, -1);

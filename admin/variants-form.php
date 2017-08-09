@@ -31,6 +31,7 @@ if (!$conn) {
         <div class="modal-body">
           <div class="descriptions">
             <div class="form-body">
+			  
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -46,7 +47,7 @@ if (!$conn) {
                       while ($row = mysqli_fetch_assoc($result))
                       {
                         if($row['materialStatus']=='Listed'){
-                          echo('<option value='.$row['materialID'].'>'.$row['materialName'].'-'.$row['matTypeName'].'</option>');
+                          echo('<option value='.$row['materialID'].'>'.$row['materialName'].'</option>');
                         }
                       }
                       ?>
