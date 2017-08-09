@@ -395,6 +395,7 @@ $_SESSION['varname'] = $jsID;
         </div>
         <div class="modal-body">
           <div class="descriptions">
+        <form action="category-update.php" method="post">
             <div class="row">
               <div class="col-md-12">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
@@ -461,7 +462,7 @@ $_SESSION['varname'] = $jsID;
               ?>
 
               <div class="row col-md-6 center">
-                <label class="form-control">Payment Information</label>
+                <label class="form-control" style="text-align:center; border:0px;">Payment Information</label>
                 <div class="table">
                   <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
                     <tr>
@@ -472,9 +473,24 @@ $_SESSION['varname'] = $jsID;
                       <td>Initial Payment:</td>
                       <td>Php <?php echo number_format($down,2)?></td>
                     </tr>
+                  </table>
+                </div>
+              </div>  
+              <div class="row col-md-6 center" style="border:1px;">
+                <label class="form-control" style="text-align:center;">Payment</label>
+                <div class="table">
+                  <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
                     <tr>
                       <td>Remaining Balance:</td>
                       <td>Php <?php echo number_format($bal,2)?></td>
+                    </tr>
+                    <tr>
+                      <td>Amount Paid</td>
+                      <td>Php <input type="number" id="amount" name="amount" style="text-align:right"/></td>
+                    </tr>
+                    <tr>
+                      <td>Change</td>
+                      <td>Php <input type="number" id="change" name="change" style="text-align:right"/></td>
                     </tr>
                   </table>
                 </div>
@@ -484,8 +500,10 @@ $_SESSION['varname'] = $jsID;
           </div>
         </div>
         <div class="modal-footer">
+            <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" ><i class="fa fa-check"></i> Save</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
