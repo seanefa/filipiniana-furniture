@@ -409,7 +409,7 @@ include "dbconnect.php";
                       <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="category">
                         <?php
-                        $sql = "SELECT * FROM tblfurn_category;";
+                        $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {
@@ -435,7 +435,7 @@ include "dbconnect.php";
                     <label class="control-label">Type</label><span id="x" style="color:red">*</span>
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="type">
                       <?php
-                      $sql = "SELECT * FROM tblfurn_type;";
+                      $sql = "SELECT * FROM tblfurn_type order by typeName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -517,7 +517,7 @@ include "dbconnect.php";
                       if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                       }
-                      $sql = "SELECT * FROM tblfabrics;";
+                      $sql = "SELECT * FROM tblfabrics order by fabricName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -536,7 +536,7 @@ include "dbconnect.php";
                     <label class="control-label">Framework</label><span id="x" style="color:red">*</span>
                     <select id="framework" class="form-control" data-placeholder="Choose a Framework" tabindex="1" name="_framework">
                       <?php
-                      $sql = "SELECT * FROM tblframeworks;";
+                      $sql = "SELECT * FROM tblframeworks order by frameworkName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

@@ -147,7 +147,7 @@ if (!$conn) {
                         <select id="select" class="form-control" tabindex="1" name="type" required="">
                       <option value="" disabled>Select Fabric Type</option>
                           <?php
-                          $sql = "SELECT * FROM tblfabric_type;";
+                          $sql = "SELECT * FROM tblfabric_type order by f_typeName;";
                           $result = mysqli_query($conn, $sql);
                           while ($row = mysqli_fetch_assoc($result))
                           {
@@ -170,7 +170,7 @@ if (!$conn) {
                         <?php
                         $colorArray = explode(",",$trow['fabricColor']);
                         $colorCtr = count($colorArray);
-                        $sql = "SELECT * FROM tblfabric_pattern;";
+                        $sql = "SELECT * FROM tblfabric_pattern order by f_patternName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {

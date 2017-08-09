@@ -125,7 +125,7 @@ if (!$conn) {
                       <select id='material' class="form-control" data-placeholder="Choose a Fabric" tabindex="1">
                         <?php
                         include "dbconnect.php";
-                        $sql = "SELECT * FROM tblmaterials;";
+                        $sql = "SELECT * FROM tblmaterials order by materialName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {

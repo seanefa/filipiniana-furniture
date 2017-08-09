@@ -107,7 +107,7 @@ if (!$conn) {
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="select">
                         <option value="--">Choose Category</option>
                         <?php
-                        $sql = "SELECT * FROM tblfurn_category;";
+                        $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {

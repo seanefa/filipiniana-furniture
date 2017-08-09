@@ -234,7 +234,7 @@ function deleteRow(row){
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="cat">
 
                       <?php
-                      $sql = "SELECT * FROM tblfurn_category;";
+                      $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -260,7 +260,7 @@ function deleteRow(row){
                     <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="type">
                       <?php
-                      $sql = "SELECT * FROM tblfurn_type;";
+                      $sql = "SELECT * FROM tblfurn_type order by typeName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
@@ -296,7 +296,7 @@ function deleteRow(row){
                 <label class="control-label">Furniture Name</label><span id="x" style="color:red"> *</span>
                 <select class="form-control" tabindex="1" name="prod" id="products">
                   <?php
-                  $sql = "SELECT * FROM tblproduct;";
+                  $sql = "SELECT * FROM tblproduct order by productName;";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result))
                   {
@@ -325,7 +325,7 @@ function deleteRow(row){
                 <select class="form-control" tabindex="1" name="phase">
                   <?php
                   include "dbconnect.php";
-                  $sql = "SELECT * FROM tblphases;";
+                  $sql = "SELECT * FROM tblphases order by phaseName;";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result))
                   {
@@ -353,7 +353,7 @@ function deleteRow(row){
                 <select class="form-control" tabindex="1" name="material" id="mat">
                   <?php
                   include "dbconnect.php";
-                  $sql = "SELECT * FROM tblmat_type;";
+                  $sql = "SELECT * FROM tblmat_type order by matTypeName;";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result))
                   {
@@ -386,7 +386,7 @@ function deleteRow(row){
                     <label class="control-label">Unit</label><span id="x" style="color:red">
                     <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
                       <?php
-                      $sql = "SELECT * FROM tblunitofmeasure;";
+                      $sql = "SELECT * FROM tblunitofmeasure order by unUnit;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {

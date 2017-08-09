@@ -143,7 +143,7 @@ if (!$conn) {
                                 <select id="select" class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job">
                                   <?php
                                   include "dbconnect.php";
-                                  $sql = "SELECT * FROM tbljobs;";
+                                  $sql = "SELECT * FROM tbljobs order by jobName;";
                                   $result = mysqli_query($conn, $sql);
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
