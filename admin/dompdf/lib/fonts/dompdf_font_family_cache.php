@@ -116,4 +116,10 @@
   'linea-weather-10' => array(
     'normal' => $fontDir . '\4d55964ac81da842cdc639aaed1e8cd0',
   ),
+  'material icons' => array(
+    'normal' => $fontDir . '\4e54d11e5ca89615fc0923d117a37966',
+  ),
+  'robotolight' => array(
+    'normal' => $fontDir . '\25216e4a581a36e7164195d1ec221e4f',
+  ),
 ) ?>

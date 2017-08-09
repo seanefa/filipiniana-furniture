@@ -74,11 +74,12 @@ if($isBool == "new"){
    $invID = mysqli_insert_id($conn);
    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '1', 'Paid');";
    mysqli_query($conn,$paysql);
-
+   $paymentID = mysqli_insert_id($conn);
   echo "<br>inv: " . $paysql;
 
      echo '<script type="text/javascript">';
-           header( "Location: receipt.php?id=".$orderid."" );
+          $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
+          header($loc); 
      echo '</script>';
    }
    else {
@@ -117,6 +118,7 @@ else if($isBool=="existing"){ //EXISTING
    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '1', 'Paid');";
    mysqli_query($conn,$paysql);
 
+   $paymentID = mysqli_insert_id($conn);
   echo "<br>inv: " . $paysql;
 
    //$updateinv = "UPDATE tblinvoicedetails SET invoiceStatus = 'Paid' WHERE invoiceID = '$invID'";
@@ -125,7 +127,8 @@ else if($isBool=="existing"){ //EXISTING
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$balance', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//after payment invoice
    mysqli_query($conn,$inv);*/
    echo '<script type="text/javascript">';
-          header( "Location: receipt.php?id=".$orderid."" );
+          $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
+          header($loc); 
    echo '</script>';
 
  }
