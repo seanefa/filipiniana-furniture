@@ -5,7 +5,7 @@ $id = $_POST["id"];
 $type = $_POST["type"];	
 
 if($type==1){
-  $sql = "SELECT * FROM tblfurn_type WHERE typeCategoryID = '$id'";
+  $sql = "SELECT * FROM tblfurn_type WHERE typeCategoryID = '$id' ORDER BY typeName ASC";
   $res = mysqli_query($conn,$sql);
   echo '<option>Choose a Type</option>';
   while($row = mysqli_fetch_assoc($res)){
@@ -15,7 +15,7 @@ if($type==1){
   }
 }
 else if($type==2){
-  $sql = "SELECT * FROM tblproduct WHERE prodTypeID = '$id'";
+  $sql = "SELECT * FROM tblproduct WHERE prodTypeID = '$id' ORDER BY productName ASC";
   $res = mysqli_query($conn,$sql);
   while($row = mysqli_fetch_assoc($res)){
 
