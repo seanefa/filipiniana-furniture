@@ -106,7 +106,7 @@
           $conn->close();
           ?></span></a></div>
       <ul class="nav navbar-top-links navbar-left hidden-xs">
-        <li><a href="javascript:void(0)" class="hideMenuOnLoad open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
+        <li><a href="javascript:void(0)" class="hideMenu open-close hidden-xs waves-effect waves-light hidden"><i class="icon-arrow-left-circle ti-menu" hidden></i></a></li>
         <li>
 
         </li>
@@ -373,9 +373,12 @@ $(document).ready(function () {
 <script>
 $(document).ready(function () {
   $('#side-menu').slimScroll({
-    height: 'auto',
+    height: '800px',
+    size: '8px',
     color: '#105db2',
-    wheelStep: 3
+    wheelStep: 3,
+    railVisible: true,
+    alwaysVisible: true
   });
 });
 </script>
@@ -491,20 +494,31 @@ jQuery(function($) { 'use strict';
 <script type="text/javascript">
   $("document").ready(function() {
     setTimeout(function() {
-       $(".hideMenuOnLoad").trigger('click');
-    },0);
+       $(".hideMenu").trigger('click');
+    },2000);
 });
-
   $("document").ready(function() {
     setTimeout(function() {
        $(".sidebar").hover(function () {
-    
-       $(".hideMenuOnLoad").trigger('click');
+        $(".hideMenu").trigger('click');
+      });
+    },2000);
 });
-    },0);
-});
-
 </script>
+
+<!--script type="text/javascript">
+  $("document").ready(function() {
+    function menuHover() {
+      //Hover
+      $('#page-wrapper, .navbar-header').hover(function(){
+         $(".hideMenu").trigger('click');
+      }).mouseout(function(){
+
+      });
+    }
+    menuHover();
+});
+</script-->
 
 </body>
 </html>
