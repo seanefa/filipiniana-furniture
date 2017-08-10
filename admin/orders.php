@@ -184,7 +184,7 @@
 
               <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span> Update</a> 
 
-              <a class="btn btn-success" style="color:white;" href="receipt.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
+              <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
 
               </td>
               </tr>

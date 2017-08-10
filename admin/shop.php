@@ -73,7 +73,6 @@ $('#selectCat').on("change",function() {
 
 $('#selectType').on("change",function() {
   var value = $("#selectType").val();
-  alert(value);
   $.ajax({
     type: 'post',
     url: 'display-furnitures.php',
@@ -115,220 +114,209 @@ $(this).show();
           <!-- nav start -->
           <h3>
             <ul class="nav customtab2 nav-tabs" role="tablist">
-<!--li role="presentation" class="active">
-<a aria-controls="ordermanagement.php" role="tab" aria-expanded="false" href="ordermanagement.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> <?php echo $titlePage?></a>
-</li>
-<li role="presentation" class >
-<a aria-controls="order-request.php" role="tab" aria-expanded="false" href="order-request.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> Order Request</a>
-</li>
-<li role="presentation" class >
-<a aria-controls="customizationrequest.php" role="tab" aria-expanded="false" href="customization-request.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> Customization Request</a>
-</li-->
-</ul>
-</h3>
-<!-- nav end -->
+            </ul>
+          </h3>
+          <!-- nav end -->
 
-<div class="sttabs tabs-style-flip" style="margin-top: -40px;">
-  <nav>
-    <ul>
-      <li><h3><a href="#orders" class="ti-shopping-cart"><span>Shop</span></a></h3></li>
-    </ul>
-  </nav>
-  <div class="content-wrap text-center" style="margin-top: -10px;">
+          <div class="sttabs tabs-style-flip" style="margin-top: -40px;">
+            <nav>
+              <ul>
+                <li><h3><a href="#orders" class="ti-shopping-cart"><span>Shop</span></a></h3></li>
+              </ul>
+            </nav>
+            <div class="content-wrap text-center" style="margin-top: -10px;">
+              <section id="orders">
+                <div class="tab-content">
+                  <!-- CATEGORY -->
+                  <div role="tabpanel" class="tab-pane fade active in" id="type">
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                      <div class="panel-body">
+                        <form id="myForm" method="post">
+                          <div class="col-md-12">
 
-    <!-- ORDER MANAGEMENT TAB -->
-    <section id="orders">
-      <div class="tab-content">
-        <!-- CATEGORY -->
-        <div role="tabpanel" class="tab-pane fade active in" id="type">
-          <div class="panel-wrapper collapse in" aria-expanded="true">
-            <div class="panel-body">
-              <form id="myForm" method="post">
-                <div class="col-md-12">
+                            <div class="tab-content">
+                              <!-- brochure -->
+                              <div role="tabpanel" class="tab-pane fade active in" id="allprod">
+                                <div class="panel-wrapper collapse in" aria-expanded="true">
+                                  <div class="panel-body">  
+                                    <div class="row" style="margin: 0 auto; margin-top: -120px;">
+                                      <div class="col-md-6" style="margin-top: 10px;">
+                                        <div class="row">
+                                          <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart <span id="totalCart" style="font-family: inherit; font-weight: bolder; color: black; font-size: 20px;">0</span></button>
+                                          
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6" style="margin-top: -20px;">
+                                        <div class="row">
+                                          <input type="text" id="my-input-field" class="form-control navbar-form pull-right" placeholder="&#128269; Search..." size="30" style="margin-top: 35px;">
 
-                  <div class="tab-content">
-                    <!-- brochure -->
-                    <div role="tabpanel" class="tab-pane fade active in" id="allprod">
-                      <div class="panel-wrapper collapse in" aria-expanded="true">
-                        <div class="panel-body">  
-                          <div class="row" style="margin: 0 auto; margin-top: -120px;">
-                            <div class="col-md-6" style="margin-top: 10px;">
-                              <div class="row">
-                                <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart <span id="totalCart" style="font-family: inherit; font-weight: bolder; color: black; font-size: 20px;">0</span></button>
-                                   
-                              </div>
-                            </div>
-                            <div class="col-md-6" style="margin-top: -20px;">
-                              <div class="row">
-                                <input type="text" id="my-input-field" class="form-control navbar-form pull-right" placeholder="&#128269; Search..." size="30" style="margin-top: 35px;">
-
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-
-                            <div class="categories">
-                              <ul class="nav customtab2 nav-tabs col-md-12" role="tablist" id="myTab" style="margin-bottom: 20px;">
-
-                                <div class="col-md-6" style="padding: 0px 20px;">
-                                  <div class="row">
-                                    <label class="control-label">CATEGORY</label>
-                                    <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
-                                      <option value="All">All Furnitures</option>
-                                      <option value="On-Hand">All On-hand Furnitures</option>
-                                      <option value="Packages">All Packages</option>
-                                      <?php
-                                      include 'ew.php';
-                                      $delsql = "SELECT * FROM tblfurn_category;";
-                                      $delresult = mysqli_query($conn,$delsql);
-                                      while($delrow = mysqli_fetch_assoc($delresult)){
-                                        if($delrow['categoryStatus']!="Archived"){
-                                          echo('<option value="'.$delrow['categoryID'].'">'.$delrow['categoryName'].'</option>');
-                                        }
-                                      }
-                                      ?>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="col-md-6" style="padding: 0px 20px;">
-                                  <div class="row">
-                                    <label class="control-label">TYPE</label>
-                                    <select id="selectType" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectType" disabled>
-
-                                    </select>
-                                  </div>
-                                </div>
-                              </ul>
-                            </div>
-                            <!-- categories -->
-                          </div>
-
-                          <div class="row" id="allprod">
-                            <div id="thisIsCart">
-                            </div>
-
-                            <div class="row" id="tblProd">
-
-                            </div>
-                          </div>
-
-                          <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                  <div class="modal-body">
-                                    <h2 style="text-align:center;"> Successfully added to cart!<br>
-                                    </h2>
-                                    <div class="orderconfirm">
-                                      <div class="descriptions">
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
 
-                          <div id="myPackages" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                <!-- Modal content-->
-                                <div class="modal-content clearable-content">
-                                  <div class="modal-body">
+                                    <div class="row">
 
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                                      <div class="categories">
+                                        <ul class="nav customtab2 nav-tabs col-md-12" role="tablist" id="myTab" style="margin-bottom: 20px;">
 
-                          <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <div class="panel-heading"> My Cart </div>
-                                </div>
-                                <div class="orderconfirm">
-                                  <div class="descriptions">
-                                    <div class="form-body">
-                                      <div class="row">
-                                        <div class="col-md-12">
-                                          <div class="panel-wrapper collapse in" aria-expanded="true">
-                                            <div class="panel-body">
-                                              <div class="table-responsive">
-                                                <table class="table product-overview" id="cartTbl">
-                                                  <thead>
-                                                    <tr>
-                                                      <!--th>Image</th-->
-                                                      <th style="text-align:center">Furniture Name</th>
-                                                      <th style="text-align:center">Furniture Description</th>
-                                                      <th style="text-align:center">Unit Price</th>
-                                                      <th style="text-align:center">Quantity</th>
-                                                      <th style="text-align:center">Total Price</th>
-                                                      <th style="text-align:center">Action</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <tr>
-                                                      <!--td width="150"><img src="../plugins/images/chair.jpg" alt="No Image Available" width="80"></td-->
-                                                    </tr>
-                                                  </tbody>
-                                                  <tfoot>
-                                                    <td colspan="3" style="text-align:right"> GRAND TOTAL </td>
-                                                    <td id="totalQ" style="text-align:center">0</td>
-                                                    <td id="totalPrice" style="text-align:center">0</td>
-                                                    <td></td>
-                                                  </tfoot>
-                                                </table>
-                                              </div>
+                                          <div class="col-md-6" style="padding: 0px 20px;">
+                                            <div class="row">
+                                              <label class="control-label">CATEGORY</label>
+                                              <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
+                                                <option value="All">All Furnitures</option>
+                                                <option value="On-Hand">All On-hand Furnitures</option>
+                                                <option value="Packages">All Packages</option>
+                                                <?php
+                                                include "dbconnect.php";
+                                                $delsql = "SELECT * FROM tblfurn_category ORDER BY categoryName ASC;";
+                                                $delresult = mysqli_query($conn,$delsql);
+                                                while($delrow = mysqli_fetch_assoc($delresult)){
+                                                  if($delrow['categoryStatus']!="Archived"){
+                                                    echo('<option value="'.$delrow['categoryID'].'">'.$delrow['categoryName'].'</option>');
+                                                  }
+                                                }
+                                                ?>
+                                              </select>
                                             </div>
                                           </div>
-                                          <div class="modal-footer">
-                                            <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
-                                            <button type="button" id="check-out" class="fcbtn btn btn-success btn-outline btn-1b wave effect" onclick="checkout()"><i class="fa fa fa-shopping-cart"></i> Proceed to Check-Out</button>
+                                          <div class="col-md-6" style="padding: 0px 20px;">
+                                            <div class="row">
+                                              <label class="control-label">TYPE</label>
+                                              <select id="selectType" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectType" disabled>
+
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </ul>
+                                      </div>
+                                      <!-- categories -->
+                                    </div>
+
+                                    <div class="row" id="allprod">
+                                      <div id="thisIsCart">
+                                        
+                                      </div>
+
+                                      <div class="row" id="tblProd">
+
+                                      </div>
+                                    </div>
+
+                                    <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                              <h2 style="text-align:center;"> Successfully added to cart!<br>
+                                              </h2>
+                                              <div class="orderconfirm">
+                                                <div class="descriptions">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
 
-                          <div id="myProduct" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                  <div class="modal-body">
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                                    <div id="myPackages" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-content clearable-content">
+                                            <div class="modal-body">
 
-                        </div> <!-- panel body -->
-                      </div> <!-- panel wrapper -->
-                    </div> <!-- tab panel -->
-                  </div> <!-- tab-content -->
-                </div> <!-- col inside -->
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
 
-    <script type="text/javascript">
+                                    <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <div class="panel-heading"> My Cart </div>
+                                          </div>
+                                          <div class="orderconfirm">
+                                            <div class="descriptions">
+                                              <div class="form-body">
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                                                      <div class="panel-body">
+                                                        <div class="table-responsive">
+                                                          <table class="table product-overview" id="cartTbl">
+                                                            <thead>
+                                                              <tr>
+                                                                <!--th>Image</th-->
+                                                                <th style="text-align:center">Furniture Name</th>
+                                                                <th style="text-align:center">Furniture Description</th>
+                                                                <th style="text-align:center">Unit Price</th>
+                                                                <th style="text-align:center">Quantity</th>
+                                                                <th style="text-align:center">Total Price</th>
+                                                                <th style="text-align:center">Action</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr>
+                                                                <!--td width="150"><img src="../plugins/images/chair.jpg" alt="No Image Available" width="80"></td-->
+                                                              </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                              <td colspan="3" style="text-align:right"> GRAND TOTAL </td>
+                                                              <td id="totalQ" style="text-align:center">0</td>
+                                                              <td id="totalPrice" style="text-align:center">0</td>
+                                                              <td></td>
+                                                            </tfoot>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
+                                                      <button type="button" id="check-out" class="fcbtn btn btn-success btn-outline btn-1b wave effect" onclick="checkout()"><i class="fa fa fa-shopping-cart"></i> Proceed to Check-Out</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div id="myProduct" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </div> <!-- panel body -->
+                                </div> <!-- panel wrapper -->
+                              </div> <!-- tab panel -->
+                            </div> <!-- tab-content -->
+                          </div> <!-- col inside -->
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <script type="text/javascript">
 //global variables
 var prv_id = 0;
 var idArray = [];
@@ -504,12 +492,12 @@ function isInArray(value, array) {
 }
 
 function btnClick(id){
-  tempPrice = parseInt($('#totalPrice').text().slice());
+  tempPrice = parseFloat($('#totalPrice').text().slice());
   var quant =parseInt($('#quant'+id).val());
 
   totalQuant = parseInt($('#totalQ').text());
   var tP = $('#price'+id).val().toString();
-  var price =parseInt(tP.replace(',',''));
+  var price =parseFloat(tP.replace(',',''));
   price = price * quant;
   tempPrice = tempPrice+price;
   totalQuant = totalQuant+quant;
@@ -566,7 +554,7 @@ $('#totalQ').html(String(totalQ + q));
 
 }
 else{
-  alert('please input the quantity');
+  alert('Please input quantity');
   $('#'+id).attr('data-toggle','');
   $('#'+id).attr('href','');
 }

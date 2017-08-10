@@ -1,7 +1,7 @@
 <?php
+session_start();
 include "menu.php";
 include 'dbconnect.php';
-session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id']; 
 }
@@ -346,7 +346,6 @@ $_SESSION['varname'] = $jsID;
                             include "dbconnect.php";
                             $tQuan = 0;
                             $tPrice = 0;
-
                             $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
                             $res = mysqli_query($conn,$sql1);
                             while($row = mysqli_fetch_assoc($res)){

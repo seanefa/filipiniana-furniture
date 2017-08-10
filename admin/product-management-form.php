@@ -245,7 +245,7 @@ $_SESSION['varname'] = $jsID;
                 <div class="col-md-12" style="border:1px solid">
                   <div class="form-group">
                     <div class="row" id="checkbox">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <h4><input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?</h4>
                       </div>
                     </div>

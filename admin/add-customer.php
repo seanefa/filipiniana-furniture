@@ -15,8 +15,8 @@ $isBool = $_POST['isBool'];
 echo "<br>isBool " . $isBool;
 
 $ln = $_POST['lastn'];
-$mn = $_POST['firstn'];
-$fn = $_POST['midn'];
+$fn = $_POST['firstn'];
+$mn = $_POST['midn'];
 $addrss = $_POST['custoadd'];
 $cont = $_POST['custocont'];
 $emailadd = $_POST['custoemail'];
@@ -121,11 +121,6 @@ else if($isBool=="existing"){ //EXISTING
    $paymentID = mysqli_insert_id($conn);
   echo "<br>inv: " . $paysql;
 
-   //$updateinv = "UPDATE tblinvoicedetails SET invoiceStatus = 'Paid' WHERE invoiceID = '$invID'";
-
-   /*$balance = $totalPrice - $aTendered;
-   $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$balance', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//after payment invoice
-   mysqli_query($conn,$inv);*/
    echo '<script type="text/javascript">';
           $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
           header($loc); 

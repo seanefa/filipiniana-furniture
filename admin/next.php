@@ -33,6 +33,54 @@ if (!$conn) {
     });
   });
 
+  $(document).ready(function(){
+    $("#custcont").on('keyup',function(){
+      var val = $("#custcont").val(); 
+      var t = 0;
+    $.ajax({
+      type: 'post',
+      url: 'next-validation.php',
+      data: {
+        id: val, t : t,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#erCon').html(response);
+       if(response!=""){
+      $('#custcont').css('border-color','red');
+       }
+       else{
+      $('#custcont').css('border-color','black');
+       }
+      }
+      });
+    });
+  });
+
+    $(document).ready(function(){
+    $("#custemail").on('keyup',function(){
+      var val = $("#custemail").val(); 
+      var t = 1;
+    $.ajax({
+      type: 'post',
+      url: 'next-validation.php',
+      data: {
+        id: val, t : t,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#erEmail').html(response);
+       if(response!=""){
+      $('#custemail').css('border-color','red');
+       }
+       else{
+      $('#custemail').css('border-color','black');
+       }
+      }
+      });
+    });
+  });
+
   </script>
 </head>
 <body class ="fix-header fix-sidebar">
@@ -84,7 +132,7 @@ if (!$conn) {
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
                                     if($row['customerStatus'] != "Archived"){
-                                      echo('<option value='.$row['customerID'].'>'.$row['customerLastName'].', '.$row['customerFirstName'].', '.$row['customerMiddleName'].'</option>
+                                      echo('<option value='.$row['customerID'].'>'.$row['customerLastName'].' '.$row['customerFirstName'].'</option>
                                         ');
                                     }
                                   }
@@ -114,9 +162,6 @@ if (!$conn) {
                               $(document).ready(function(){
                                 $('#thisBtnSucks').removeAttr('href');
 
-
-
-
                                 $('#savedCustomer').change(function(){
 
                                   var id = $('#savedCustomer').val();
@@ -132,7 +177,7 @@ if (!$conn) {
                                     $('#fn').attr('readonly',false);
                                     $('#mn').attr('value',"");
                                     $('#mn').attr('readonly',false);
-                                    $('#custadd').attr('value',"");
+                                    $('#custadd').val("");
                                     $('#custadd').attr('readonly',false);
                                     $('#custcont').attr('value',"");
                                     $('#custcont').attr('readonly',false);
@@ -143,7 +188,6 @@ if (!$conn) {
                                     $('#isBool').attr('value','existing');
                                     $('#submitBtn').attr('type',"button");
                                     $('#submitBtn').attr('onclick',"location.href='receipt.php';");
-
                                     $('#customerIds').attr('value',id);
                                     $('#ln').attr('value',$('#lstName'+id+'').val());
                                     $('#ln').html($('#lstName'+id+'').val());
@@ -152,7 +196,7 @@ if (!$conn) {
                                     $('#fn').attr('readonly',true);
                                     $('#mn').attr('value',$('#midName'+id+'').val());
                                     $('#mn').attr('readonly',true);
-                                    $('#custadd').attr('value',$('#address'+id+'').val());
+                                    $('#custadd').val($('#address'+id+'').val());
                                     $('#custadd').attr('readonly',true);
                                     $('#custcont').attr('value',$('#contact'+id+'').val());
                                     $('#custcont').attr('readonly',true);
@@ -172,21 +216,21 @@ if (!$conn) {
 <div class="row">
   <div class="col-md-4">
     <div class="form-group">
-      <label class="control-label">First Name:</label><span id="x" style="color:red"> *</span>
-      <input type="text" id="fn" class="form-control" name="firstn" required/> 
+      <label class="control-label">First Name</label><span id="x" style="color:red"> *</span>
+      <input type="text" id="fn" class="form-control" name="firstn" placeholder="Juan" required/> 
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
-      <label class="control-label">Middle Name:</label>
-      <input type="text" id="mn" class="form-control" name="midn"/> 
+      <label class="control-label">Middle Name</label>
+      <input type="text" id="mn" class="form-control" name="midn" placeholder="Vito"/> 
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="hidden" name="customerIds" id="customerIds">
-      <label class="control-label">Last Name:</label><span id="x" style="color:red"> *</span>
-      <input type="text" id="ln" class="form-control" name="lastn" value="" required/>
+      <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
+      <input type="text" id="ln" class="form-control" name="lastn" value="" placeholder="de la Cruz" required/>
     </div>
   </div>
 </div>
@@ -194,21 +238,23 @@ if (!$conn) {
   <div class="col-md-12">
     <div class="form-group">
       <label class="control-label">Address</label><span id="x" style="color:red"> *</span>
-      <textarea id="custadd" class="form-control" name="custadd" required></textarea>
+      <textarea id="custadd" class="form-control" name="custadd" placeholder="#123 Brgy. Batasan Hills Quezon City" required></textarea>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <label class="control-label">Contact number</label><span id="x" style="color:red"> *</span>
-      <input type="number" id="custcont" class="form-control" name="custocont" style="text-align:right" required/>
+      <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
+      <input type="number" id="custcont" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
+      <p style="color:red" id="erCon"></p>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label class="control-label">Email</label><span id="x" style="color:red"> *</span>
-      <input type="email" id="custemail" class="form-control" name="custoemail" required/> 
+      <input type="email" id="custemail" class="form-control" name="custoemail" placeholder="monkeydluffy@gmail.com" required/> 
+      <p style="color:red" id="erEmail"></p>
     </div>
   </div>
 </div>
