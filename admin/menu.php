@@ -495,14 +495,14 @@ jQuery(function($) { 'use strict';
   $("document").ready(function() {
     setTimeout(function() {
        $(".hideMenu").trigger('click');
-    },2000);
+    },3000);
 });
   $("document").ready(function() {
     setTimeout(function() {
        $(".sidebar").hover(function () {
         $(".hideMenu").trigger('click');
       });
-    },2000);
+    },3000);
 });
 </script>
 
