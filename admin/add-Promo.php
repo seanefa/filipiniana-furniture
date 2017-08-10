@@ -16,9 +16,13 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/promo" . $_FILES["image"]["name"]);
+	$tmp_name = $_FILES["image"]["tmp_name"];
+	$date = date("Y-m-d");
+	$time = time();
+ move_uploaded_file($tmp_name, "plugins/images/" . $date . $time . ".png");
  echo "SAVED" ;
- $pic = $_FILES["image"]["name"];
+
+ $pic = $date . $time . ".png";
 }
 
 $sql = "INSERT INTO `tblpromos` (`promoName`, `promoDescription`, `promoStartDate`, `promoImage`, `promoEnd`, `promoStatus`) VALUES('$name','$desc','$start','$pic','$end','$status')";
