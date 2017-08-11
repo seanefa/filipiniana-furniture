@@ -491,18 +491,41 @@ jQuery(function($) { 'use strict';
 <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
 <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-  $("document").ready(function() {
+<!--script type="text/javascript">
+$(window).on('load',function() {
     setTimeout(function() {
+       $("#page-wrapper:not(.sidebar), .navbar-header").hover(function () {
+        $( '.hideMenu' ).trigger('click', function() {
+            return false;
+        });
+      });
+    },1000);
+});
+</script-->
+
+
+<script type="text/javascript">
+  $("document").ready(function(e) {
+    setTimeout(function() {
+
+      if( $('.sidebar').is(":hover") ){
+        e.preventDefault();
+    } 
+    else{
        $(".hideMenu").trigger('click');
-    },3000);
+     }
+    },2000);
 });
   $("document").ready(function() {
     setTimeout(function() {
-       $(".sidebar").hover(function () {
+       $(".sidebar").mouseenter(function () {
         $(".hideMenu").trigger('click');
       });
-    },3000);
+
+       $(".sidebar").mouseleave(function () {
+        $(".hideMenu").trigger('click');
+      });
+    },2000);
 });
 </script>
 
