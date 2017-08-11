@@ -33,9 +33,11 @@ if($id=="All"){
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
 				<br><br>
 				<label>Quantity</label>
+				<input type="hidden" id="package'.$row['productID'].'" value="0"/>
 				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
 				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['prodSizeSpecs'].'"/>
+				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
@@ -90,7 +92,8 @@ else if($id=="On-Hand"){
 				<label>Quantity</label>
 				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
 				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['prodSizeSpecs'].'"/>
+				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
@@ -143,9 +146,11 @@ else if($id=="Packages"){
 				<br><br>
 				<h3 class="box-title m-b-0">'.substr($row['packageDescription'], 0,20).'</h3>
 				<label>Quantity</label>
+				<input type="hidden" id="package'.$row['packageID'].'" value="'.$row['packageID'].'"/>
 				<input type="hidden" id="product'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
 				<input type="hidden" id="price'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
 				<input type="hidden" id="size'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
+				<input type="hidden" id="uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
 				<input value="0" id="quant'.$row['packageID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
@@ -199,7 +204,8 @@ else{ //category
 				<label>Quantity</label>
 				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
 				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['prodSizeSpecs'].'"/>
+				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
@@ -254,7 +260,8 @@ if(isset($_POST['type'])){
 				<label>Quantity</label>
 				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
 				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['prodSizeSpecs'].'"/>
+				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->

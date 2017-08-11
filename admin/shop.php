@@ -125,6 +125,8 @@ $(this).show();
               </ul>
             </nav>
             <div class="content-wrap text-center" style="margin-top: -10px;">
+
+              <!-- ORDER MANAGEMENT TAB -->
               <section id="orders">
                 <div class="tab-content">
                   <!-- CATEGORY -->
@@ -143,7 +145,7 @@ $(this).show();
                                       <div class="col-md-6" style="margin-top: 10px;">
                                         <div class="row">
                                           <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart <span id="totalCart" style="font-family: inherit; font-weight: bolder; color: black; font-size: 20px;">0</span></button>
-                                          
+
                                         </div>
                                       </div>
                                       <div class="col-md-6" style="margin-top: -20px;">
@@ -194,7 +196,6 @@ $(this).show();
 
                                     <div class="row" id="allprod">
                                       <div id="thisIsCart">
-                                        
                                       </div>
 
                                       <div class="row" id="tblProd">
@@ -292,7 +293,6 @@ $(this).show();
                                     <div id="myProduct" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
                                       <div class="modal-dialog">
                                         <div class="modal-content">
-                                          <!-- Modal content -->
                                           <div class="modal-content">
                                             <div class="modal-body">
                                             </div>
@@ -509,80 +509,98 @@ function btnClick(id){
       $('#'+id).attr('data-toggle','modal');
       $('#'+id).attr('href','#myModal1');
 
-//price parser
-var priced= $('#prices'+id+'').val();
-priced=priced.replace(/\,/g,''); //deletes comma
-priced=parseInt(priced,10);
+      //price parser
+      var priced= $('#prices'+id+'').val();
+      priced=priced.replace(/\,/g,''); //deletes comma
+      priced=parseInt(priced,10);
 
-var tPriced= tP;
-tPriced=tPriced.replace(/\,/g,''); //deletes comma
-tPriced=parseInt(tPriced,10);
+      var tPriced= tP;
+      tPriced=tPriced.replace(/\,/g,''); //deletes comma
+      tPriced=parseInt(tPriced,10);
 
-//quantity parser
-var quantd= $('#quants'+id+'').val();
-quantd=quantd.replace(/\,/g,''); //deletes comma
-quantd=parseInt(quantd,10);
+      //quantity parser
+      var quantd= $('#quants'+id+'').val();
+      quantd=quantd.replace(/\,/g,''); //deletes comma
+      quantd=parseInt(quantd,10);
 
-var q = parseInt(quant);
+      var q = parseInt(quant);
 
-//total price parser
+      //total price parser
+      var totalP= $('#totalPrice').html();
+      totalP=totalP.replace(/\,/g,''); //deletes comma
+      totalP=parseInt(totalP,10);
 
-var totalP= $('#totalPrice').html();
-totalP=totalP.replace(/\,/g,''); //deletes comma
-totalP=parseInt(totalP,10);
+      var totalQ= $('#totalQ').html();
+      totalQ=totalQ.replace(/\,/g,''); //deletes comma
+      totalQ=parseInt(totalQ,10);
 
-var totalQ= $('#totalQ').html();
-totalQ=totalQ.replace(/\,/g,''); //deletes comma
-totalQ=parseInt(totalQ,10);
+      var newPrice = priced + tPriced;
+      var newQuant = quantd + q;
 
-var newPrice = priced + tPriced;
-var newQuant = quantd + q;
+      $('#quants'+id+'').val(newQuant);
+      $('#qt'+id+'').html(''+newQuant);
 
-$('#quants'+id+'').val(newQuant);
-$('#qt'+id+'').html(''+newQuant);
+      $('#prices'+id+'').val(newPrice);
+      $('#pr'+id+'').html(''+newPrice);
 
-$('#prices'+id+'').val(newPrice);
-$('#pr'+id+'').html(''+newPrice);
+      $('#ttq').val(0);
+      $('#ttp').val(0); 
+      $('#ttp').val(totalP + tPriced);
+      $('#ttq').val(totalQ + q);
 
-$('#ttq').val(0);
-$('#ttp').val(0); 
-$('#ttp').val(totalP + tPriced);
-$('#ttq').val(totalQ + q);
+      $('#totalPrice').html(String(totalP + tPriced));
+      $('#totalQ').html(String(totalQ + q));
 
-$('#totalPrice').html(String(totalP + tPriced));
-$('#totalQ').html(String(totalQ + q));
+      }
+      else{
+      alert('Please input the quantity');
+      $('#'+id).attr('data-toggle','');
+      $('#'+id).attr('href','');
+      }
 
 }
 else{
-  alert('Please input quantity');
-  $('#'+id).attr('data-toggle','');
-  $('#'+id).attr('href','');
-}
-
-}
-else{
-
-  if(quant > 0){
+    if(quant > 0){
     prv_id = id;
     qCtr++;
-    var name = $('#product'+id).val();
+    var pack = $('#package'+id).val(); //packages
+    if(pack!=0){
+      var size =$('#size'+id).val();
+      var name = $('#product'+id).val();
+      var uprice =$('#uprice'+id).val();
+      $('#'+id).attr('data-toggle','modal');
+      $('#'+id).attr('href','#myModal1');
+      $('#quant'+id).val(0);
+        idArray.push(id);
+        $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+        $('#cartTbl').append(
+          '<tr><td><h5 class="font-500">[Package]'+name+'</h5></td><td>'+size+'</td><td>'+uprice+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
+
+        $('#totalPrice').html(String(tempPrice));
+        $('#totalQ').html(String(totalQuant));
+        $('#totalCart').html(String(totalQuant));
+        }
+
+    else{
     var size =$('#size'+id).val();
+    var name = $('#product'+id).val();
+    var uprice =$('#uprice'+id).val();
     $('#'+id).attr('data-toggle','modal');
     $('#'+id).attr('href','#myModal1');
     $('#quant'+id).val(0);
-//push id to array
-idArray.push(id);
+    //push id to array
+    idArray.push(id);
+    $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+    $('#cartTbl').append(
+    '<tr><td><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td>'+uprice+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
 
-$('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
-$('#cartTbl').append(
-  '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'">Add</button></td><td><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">Remove</button></td></tr>');
-
-$('#totalPrice').html(String(tempPrice));
-$('#totalQ').html(String(totalQuant));
-$('#totalCart').html(String(totalQuant));
+    $('#totalPrice').html(String(tempPrice));
+    $('#totalQ').html(String(totalQuant));
+    $('#totalCart').html(String(totalQuant));
+    }
 }
 else if(quant == 0){
-  alert('please input the quantity');
+  alert('Please input the quantity');
   $('#'+id).attr('data-toggle','');
   $('#'+id).attr('href','');
 }
@@ -602,7 +620,7 @@ function checkout(){
       $('#check-out').attr('type','submit');
       $('#myForm').attr('action','next.php');
     }
-    else{
+    else{ 
 
     }
   }
