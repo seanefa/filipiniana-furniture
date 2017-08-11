@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2017 at 01:36 PM
+-- Generation Time: Aug 11, 2017 at 02:54 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -170,7 +170,8 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (5, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Active'),
 (6, '', 'Daniel', 'Padilla', '#1234 Street Name, Brgy. Anuna QC', '09994145004', 'hongkaira@gmail.com', 'Active'),
 (7, '', 'Kathryn', 'Bernardo', '#123 Street Brgy Anuna QC', '0921458475', 'eyembisi@yahoo.com', 'Active'),
-(8, 'A', 'A', 'A', 'a', '989872', 'hongkaira@gmail.com', 'Active');
+(8, 'A', 'A', 'A', 'a', '989872', 'hongkaira@gmail.com', 'Active'),
+(9, '', 'Lauro', 'Pabalan', '', '09998563123178', 'lala@lala.com', '');
 
 -- --------------------------------------------------------
 
@@ -634,7 +635,15 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (14, 32, 120000, '2017-08-03', 'Pending', 'Initial Invoice', 1, 1),
 (15, 33, 120000, '2017-08-03', 'Pending', 'Initial Invoice', 1, 1),
 (16, 34, 60000, '2017-08-03', 'Pending', 'Initial Invoice', 1, 1),
-(17, 35, 180000, '2017-08-04', 'Pending', 'Initial Invoice', 1, 1);
+(17, 35, 180000, '2017-08-04', 'Pending', 'Initial Invoice', 1, 1),
+(18, 41, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(19, 42, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(20, 43, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(21, 44, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(22, 45, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(23, 46, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(24, 47, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(25, 48, 60000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -793,7 +802,7 @@ CREATE TABLE `tblorders` (
   `dateOfReceived` date NOT NULL,
   `dateOfRelease` date NOT NULL,
   `custOrderID` int(11) NOT NULL,
-  `orderPrice` varchar(45) NOT NULL,
+  `orderPrice` double NOT NULL,
   `orderStatus` varchar(45) NOT NULL,
   `shippingAddress` varchar(45) DEFAULT NULL,
   `orderType` varchar(45) NOT NULL,
@@ -805,35 +814,43 @@ CREATE TABLE `tblorders` (
 --
 
 INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateOfRelease`, `custOrderID`, `orderPrice`, `orderStatus`, `shippingAddress`, `orderType`, `orderRemarks`) VALUES
-(8, NULL, '2017-07-31', '2017-08-05', 1, '330000', 'Archived', '', 'Pre-Order', 'This is a remark'),
-(9, NULL, '2017-07-31', '2017-08-17', 1, '290000', 'Archived', '', 'Pre-Order', 'Remark'),
-(10, NULL, '2017-07-31', '2017-08-17', 1, '290000', 'Archived', '', 'Pre-Order', 'Remark'),
-(11, NULL, '2017-07-31', '2017-08-17', 1, '290000', 'Archived', '', 'Pre-Order', 'Remark'),
-(12, NULL, '2017-07-31', '2017-08-17', 1, '290000', 'Archived', '', 'Pre-Order', 'Remark'),
-(13, NULL, '2017-07-31', '2017-08-17', 1, '290000', 'Archived', '', 'Pre-Order', 'Remark'),
-(14, NULL, '2017-07-31', '2017-07-20', 2, '290000', 'Archived', '', 'Pre-Order', 'Anu'),
-(15, NULL, '2017-07-31', '2017-07-20', 3, '290000', 'Archived', '', 'Pre-Order', 'Anu'),
-(16, NULL, '2017-07-31', '2017-07-20', 4, '290000', 'Archived', '', 'Pre-Order', 'Anu'),
-(17, NULL, '2017-07-31', '2017-07-20', 5, '290000', 'Archived', '', 'Pre-Order', 'Anu'),
-(18, NULL, '2017-07-31', '2017-08-24', 1, '380000', 'Archived', '', 'Pre-Order', 'A remark'),
-(19, NULL, '2017-07-31', '2017-08-31', 1, '240000', 'Archived', '', 'Pre-Order', 'A remark'),
-(20, NULL, '2017-07-31', '2017-08-31', 1, '240000', 'Archived', '', 'Pre-Order', 'A remark'),
-(21, NULL, '2017-07-31', '2017-08-31', 1, '240000', 'Archived', '', 'Pre-Order', 'A remark'),
-(22, NULL, '2017-07-31', '2017-08-31', 1, '240000', 'Cancelled', '', 'Pre-Order', ''),
-(23, NULL, '2017-07-31', '2017-08-31', 1, '240000', 'Pending', '', 'Pre-Order', 'A remark'),
-(24, NULL, '2017-08-01', '2017-08-17', 2, '480000', 'Pending', '', 'Pre-Order', NULL),
-(25, NULL, '2017-08-01', '2017-08-24', 6, '190000', 'Pending', '', 'Pre-Order', 'A remark'),
-(26, NULL, '2017-08-01', '2017-08-17', 7, '260000', 'Pending', '', 'Pre-Order', 'A remark'),
-(27, NULL, '2017-08-02', '2017-08-31', 2, '50000', 'Pending', '', 'Pre-Order', 'A remark'),
-(28, NULL, '2017-08-03', '2017-08-23', 3, '120000', 'Pending', '', 'Pre-Order', 'Remark'),
-(29, NULL, '2017-08-03', '2017-08-25', 8, '180000', 'Cancelled', '', 'Pre-Order', 'No reason.'),
-(30, NULL, '2017-08-03', '2017-08-17', 8, '180000', 'Cancelled', '', 'Pre-Order', ''),
-(31, NULL, '2017-08-03', '2017-08-17', 8, '180000', 'Pending', '', 'Pre-Order', 'A remark'),
-(32, NULL, '2017-08-03', '2017-08-24', 8, '120000', 'Pending', '', 'Pre-Order', 'A remark'),
-(33, NULL, '2017-08-03', '2017-08-24', 8, '120000', 'Pending', '', 'Pre-Order', 'A remark'),
-(34, NULL, '2017-08-03', '2017-08-24', 1, '60000', 'Pending', '', 'Pre-Order', 'Somebody let me know'),
-(35, NULL, '2017-08-04', '2017-08-18', 1, '180000', 'Rejected', '', 'Pre-Order', 'No reason.'),
-(36, NULL, '2017-08-04', '2017-08-31', 1, '25000', 'Pending', ', , ', 'Pre-order', '');
+(8, NULL, '2017-07-31', '2017-08-05', 1, 330000, 'Archived', '', 'Pre-Order', 'This is a remark'),
+(9, NULL, '2017-07-31', '2017-08-17', 1, 290000, 'Archived', '', 'Pre-Order', 'Remark'),
+(10, NULL, '2017-07-31', '2017-08-17', 1, 290000, 'Archived', '', 'Pre-Order', 'Remark'),
+(11, NULL, '2017-07-31', '2017-08-17', 1, 290000, 'Archived', '', 'Pre-Order', 'Remark'),
+(12, NULL, '2017-07-31', '2017-08-17', 1, 290000, 'Archived', '', 'Pre-Order', 'Remark'),
+(13, NULL, '2017-07-31', '2017-08-17', 1, 290000, 'Archived', '', 'Pre-Order', 'Remark'),
+(14, NULL, '2017-07-31', '2017-07-20', 2, 290000, 'Archived', '', 'Pre-Order', 'Anu'),
+(15, NULL, '2017-07-31', '2017-07-20', 3, 290000, 'Archived', '', 'Pre-Order', 'Anu'),
+(16, NULL, '2017-07-31', '2017-07-20', 4, 290000, 'Archived', '', 'Pre-Order', 'Anu'),
+(17, NULL, '2017-07-31', '2017-07-20', 5, 290000, 'Archived', '', 'Pre-Order', 'Anu'),
+(18, NULL, '2017-07-31', '2017-08-24', 1, 380000, 'Archived', '', 'Pre-Order', 'A remark'),
+(19, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
+(20, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
+(21, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
+(22, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Cancelled', '', 'Pre-Order', ''),
+(23, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Pending', '', 'Pre-Order', 'A remark'),
+(24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Pending', '', 'Pre-Order', NULL),
+(25, NULL, '2017-08-01', '2017-08-24', 6, 190000, 'Pending', '', 'Pre-Order', 'A remark'),
+(26, NULL, '2017-08-01', '2017-08-17', 7, 260000, 'Pending', '', 'Pre-Order', 'A remark'),
+(27, NULL, '2017-08-02', '2017-08-31', 2, 50000, 'Pending', '', 'Pre-Order', 'A remark'),
+(28, NULL, '2017-08-03', '2017-08-23', 3, 120000, 'Pending', '', 'Pre-Order', 'Remark'),
+(29, NULL, '2017-08-03', '2017-08-25', 8, 180000, 'Cancelled', '', 'Pre-Order', 'No reason.'),
+(30, NULL, '2017-08-03', '2017-08-17', 8, 180000, 'Cancelled', '', 'Pre-Order', ''),
+(31, NULL, '2017-08-03', '2017-08-17', 8, 180000, 'Pending', '', 'Pre-Order', 'A remark'),
+(32, NULL, '2017-08-03', '2017-08-24', 8, 120000, 'Pending', '', 'Pre-Order', 'A remark'),
+(33, NULL, '2017-08-03', '2017-08-24', 8, 120000, 'Pending', '', 'Pre-Order', 'A remark'),
+(34, NULL, '2017-08-03', '2017-08-24', 1, 60000, 'Pending', '', 'Pre-Order', 'Somebody let me know'),
+(35, NULL, '2017-08-04', '2017-08-18', 1, 180000, 'Rejected', '', 'Pre-Order', 'No reason.'),
+(36, NULL, '2017-08-04', '2017-08-31', 1, 25000, 'Pending', ', , ', 'Pre-order', ''),
+(41, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(42, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(43, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(44, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(45, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(46, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(47, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
+(48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks');
 
 -- --------------------------------------------------------
 
@@ -922,7 +939,15 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (50, 11, 32, 0, 2, ''),
 (51, 11, 33, 0, 2, ''),
 (52, 11, 34, 0, 1, ''),
-(53, 11, 35, 0, 3, '');
+(53, 11, 35, 0, 3, ''),
+(54, 11, 41, 0, 2, 'Active'),
+(55, 11, 42, 0, 2, 'Active'),
+(56, 11, 43, 0, 2, 'Active'),
+(57, 11, 44, 0, 2, 'Active'),
+(58, 11, 45, 0, 2, 'Active'),
+(59, 11, 46, 0, 2, 'Active'),
+(60, 11, 47, 0, 2, 'Active'),
+(61, 11, 48, 0, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1052,7 +1077,15 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (14, 14, '2017-08-03 17:09:23', 6000, 1, 'Paid'),
 (15, 15, '2017-08-03 17:10:11', 6000, 1, 'Paid'),
 (16, 16, '2017-08-03 17:29:14', 50000, 1, 'Paid'),
-(17, 17, '2017-08-04 08:28:15', 50000, 1, 'Paid');
+(17, 17, '2017-08-04 08:28:15', 50000, 1, 'Paid'),
+(18, 18, '2017-08-09 06:33:03', 70000, 1, 'Paid'),
+(19, 19, '2017-08-09 07:10:40', 70000, 1, 'Paid'),
+(20, 20, '2017-08-09 07:15:55', 70000, 1, 'Paid'),
+(21, 21, '2017-08-09 07:20:09', 70000, 1, 'Paid'),
+(22, 22, '2017-08-09 07:58:33', 70000, 1, 'Paid'),
+(23, 23, '2017-08-09 07:59:56', 70000, 1, 'Paid'),
+(24, 24, '2017-08-09 08:02:38', 70000, 1, 'Paid'),
+(25, 25, '2017-08-09 13:24:34', 50000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1100,11 +1133,24 @@ INSERT INTO `tblphases` (`phaseID`, `phaseName`, `phaseStatus`) VALUES
 
 CREATE TABLE `tblprodsonpromo` (
   `onpromoID` int(11) NOT NULL,
-  `saleStatus` varchar(45) NOT NULL,
-  `prodPromoID` int(11) DEFAULT NULL,
+  `prodPromoID` int(11) NOT NULL,
   `promoDescID` int(11) NOT NULL,
-  `packPromoID` int(11) DEFAULT NULL
+  `onPromoStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblprodsonpromo`
+--
+
+INSERT INTO `tblprodsonpromo` (`onpromoID`, `prodPromoID`, `promoDescID`, `onPromoStatus`) VALUES
+(1, 11, 4, 'Active'),
+(2, 10, 4, 'Active'),
+(3, 2, 3, 'Active'),
+(4, 3, 3, 'Active'),
+(5, 4, 3, 'Active'),
+(6, 5, 3, 'Active'),
+(7, 8, 3, 'Active'),
+(8, 9, 3, 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -1141,8 +1187,8 @@ INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFramework
 (5, 1, 1, 2, '', 0, 'White', ' ', '70000.00', '', '23,23,23', 3, 0, 'Pre-Order'),
 (6, 0, 2, 2, '', 0, 'Manillenia', ' Lul', '70000.00', 'KnittedSet.jpg', 'H-34,W-36,D-5', 5, 0, 'Archived'),
 (7, 0, 2, 2, '', 0, 'Laguna', ' ', '70000.00', 'chair2.png', '12,32,12', 5, 0, 'Archived'),
-(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', '70000.00', '', '5,6,7', 8, 0, 'Pre-Order'),
-(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', '70000.00', '', '4,4,4', 5, 0, 'Pre-Order'),
+(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', '70000.00', '', '5,6,7', 8, 4, 'On-Hand'),
+(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', '70000.00', '', '4,4,4', 5, 5, 'On-Hand'),
 (10, 3, 5, 6, '3', 1, 'Jollibee', 'Hi-chair for jolly kids', '50000.00', '', '5,3,4', 1, 0, 'Pre-Order'),
 (11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', '60000.00', '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 0, 0, 'Pre-Order');
 
@@ -1447,7 +1493,8 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `userType`, `userCustID`, `userEmpID`, `dateCreated`) VALUES
-(1, 'admin', 'admin', 'active', 'customer', 8, NULL, '2017-08-02');
+(1, 'admin', 'admin', 'active', 'customer', 8, NULL, '2017-08-02'),
+(2, 'admin1', 'admin', 'active', 'admin', NULL, 2, '2017-08-08');
 
 -- --------------------------------------------------------
 
@@ -1746,7 +1793,7 @@ ALTER TABLE `tblphases`
 ALTER TABLE `tblprodsonpromo`
   ADD PRIMARY KEY (`onpromoID`),
   ADD KEY `prodsOnSale_idx` (`prodPromoID`),
-  ADD KEY `pack_idx` (`packPromoID`);
+  ADD KEY `promodescid_idx` (`promoDescID`);
 
 --
 -- Indexes for table `tblproduct`
@@ -1881,7 +1928,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -1976,7 +2023,7 @@ ALTER TABLE `tblinventory_logs`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2011,7 +2058,7 @@ ALTER TABLE `tblmodeofpayment`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
 --
@@ -2021,7 +2068,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
@@ -2031,7 +2078,7 @@ ALTER TABLE `tblpackage_inclusions`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2046,7 +2093,7 @@ ALTER TABLE `tblphases`
 -- AUTO_INCREMENT for table `tblprodsonpromo`
 --
 ALTER TABLE `tblprodsonpromo`
-  MODIFY `onpromoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `onpromoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblproduct`
 --
@@ -2111,7 +2158,7 @@ ALTER TABLE `tblunit_cat`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblvariant_desc`
 --
@@ -2204,8 +2251,8 @@ ALTER TABLE `tblpackage_inclusions`
 -- Constraints for table `tblprodsonpromo`
 --
 ALTER TABLE `tblprodsonpromo`
-  ADD CONSTRAINT `pack` FOREIGN KEY (`packPromoID`) REFERENCES `tblpackages` (`packageID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `prodc` FOREIGN KEY (`prodPromoID`) REFERENCES `tblproduct` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `prodc` FOREIGN KEY (`prodPromoID`) REFERENCES `tblproduct` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `promodescid` FOREIGN KEY (`promoDescID`) REFERENCES `tblpromos` (`promoID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tblproduct`
