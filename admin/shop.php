@@ -224,7 +224,7 @@ $(this).show();
                                       <div id="thisIsCart">
                                       </div>
 
-                                      <div class="row" id="tblProd">
+                                      <div class="row formScroll" id="tblProd">
 
                                       </div>
                                     </div>
@@ -701,5 +701,17 @@ $(document).ready(function(){
   $('#editable-datatable').DataTable();
 });
 </script>
+
+<script>
+$(document).ready(function () {
+  $('.formScroll').slimScroll({
+    height: '950px',
+    size: '8px',
+    wheelStep: 3,
+    railVisible: true
+  });
+});
+</script>
+
 </body> 
 </html>
