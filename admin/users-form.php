@@ -46,8 +46,9 @@ if (!$conn) {
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                              if($row['empStatus']=='Active'){
-                                echo('<option value='.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
+                              if($row['empStatus']=='Active')
+							  {
+                                echo('<option name="_employee" value='.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
                               }
                             }
                             ?>
@@ -59,19 +60,19 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Username</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                    <input type="text" id="first" class="form-control" name="_username" required/><span id="messagefirst"></span></div>
                   </div>
                 </div>
                   <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Password</label><span id="x" style="color:red"> *</span>
-                      <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                      <input type="password" id="first" class="form-control" name="_password" required/><span id="messagefirst"></span></div>
                     </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Confirm Password</label><span id="x" style="color:red"> *</span>
-                      <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                      <input type="password" id="first" class="form-control" name="_confirm" required/><span id="messagefirst"></span></div>
                     </div>
                   </div>
                     </div>

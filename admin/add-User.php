@@ -1,36 +1,35 @@
 <?php
+session_start();
 
-$firstName = $_POST['fName'];
-$middleName =$_POST['mName'];
-$lastName = $_POST['lName'];
-$userName = $_POST['uName'];
-$passWord = $_POST['passW'];
-$status = "active";
-
-        // Create connection
+// Create connection
 include 'dbconnect.php';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+$username=$_POST["_username"];
+$password=$_POST["_password"];
+$confirm=$_POST["_confirm"];
+$employee=$_POST["_employee"];
+if($password==$confirm)
+{
+	$last_id=insert_id;
+	$sql = "INSERT INTO tbluser (userName, userPassword, userStatus, userType, userEmpID, dateCreated) VALUES('$username', '$password', 'active', 'admin', '', '', " . date("Y-m-d") . ")";
+	
+	if($sql)
+	{
+		$_SESSION["userID"] = $row["userID"];
+		
+		echo '<script type="text/javascript">';
+		echo 'alert("RECORD SUCCESFULLY SAVED!")';
+		header( "Location: users.php" );
+		echo '</script>';
+	}
+	else 
+	{
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
 }
-$sql = "INSERT INTO tbluser (userName, userPassword, userFirstName, userMiddleName, userLastName,userStatus ) VALUES('$userName','$passWord','$firstName','$middleName','$lastName','$status')";
-if($sql){
-  if (mysqli_query($conn, $sql)) {
-
-
-    echo '<script type="text/javascript">';
-    echo 'alert("RECORD SUCCESFULLY SAVED!")';
-    header( "Location: users.php" );
-    echo '</script>';
-
-  } 
-  else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-  }
-
-  mysqli_close($conn);
+else
+{
+	echo "Passwords does not match";
 }
+mysqli_close($conn);
 ?>
