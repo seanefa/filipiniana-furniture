@@ -124,7 +124,7 @@ $('#selectType').on("change",function() {
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a aria-controls="ordermanagement.php" role="tab" aria-expanded="false" href="ordermanagement.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> <?php echo $titlePage?></a>
+                  <a aria-controls="ordermanagement.php" role="tab" aria-expanded="false" href="point-of-sales.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> <?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
@@ -141,7 +141,7 @@ $('#selectType').on("change",function() {
                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                     <div class="panel-body">  
                                         <div class="row" style="margin: 0 auto; margin-top: -100px;">
-                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> My Cart</button>
+                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge">0</span></button>
                                           <!--button class="fcbtn btn-lg btn-default btn-outline btn-1e wave effect" data-toggle="modal" href="#chout1">Update Products</button-->
                                         </div>
                                         <div class="row">
@@ -253,63 +253,60 @@ $('#selectType').on("change",function() {
 
 
         <div class="col-md-4">
-          
-                  <form id="myForm" method="post">
-                  <div id="thisIsCart">
-                                        </div>
-          <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                                  <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                     <div class="panel-heading"> My Cart </div>
-                                    </div>
-                                      <div class="orderconfirm">
-                                        <div class="descriptions">
-                                          <div class="form-body">
-                                            <div class="row">
-                                              <div class="col-md-12">
-                                                        <div class="panel-wrapper collapse in" aria-expanded="true">
-                                                            <div class="panel-body">
-                                                                <div class="table-responsive">
-                                                                    <table class="table product-overview" id="cartTbl">
-                                                                        <thead>
-                                                          <tr>
-                                                            <!--th>Image</th-->
-                                                            <th style="text-align:center">Furniture Name</th>
-                                                            <th style="text-align:center">Furniture Description</th>
-                                                            <th style="text-align:center">Unit Price</th>
-                                                            <th style="text-align:center">Quantity</th>
-                                                            <th style="text-align:center">Total Price</th>
-                                                            <th style="text-align:center">Action</th>
-                                                          </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                          <tr>
-                                                            <!--td width="150"><img src="../plugins/images/chair.jpg" alt="No Image Available" width="80"></td-->
-                                                          </tr>
-                                                        </tbody>
-                                                        <tfoot>
-                                                          <td colspan="3" style="text-align:right"> GRAND TOTAL </td>
-                                                          <td id="totalQ" style="text-align:center">0</td>
-                                                          <td id="totalPrice" style="text-align:center">0</td>
-                                                          <td></td>
-                                                        </tfoot>
-                                                                    </table>
-                                                                </div>
-                                                              </div>
-                                                          </div>
-                                                <div class="modal-footer">
-                                                <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
-                                                <!--button type="button" id="check-out" class="fcbtn btn btn-success btn-outline btn-1b wave effect" onclick="checkout()"><i class="fa fa fa-shopping-cart"></i> Proceed to Check-Out</button-->
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                   </div>
+          <form id="myForm" method="post">
+            <div id="thisIsCart">
+            </div>
+              <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="panel-heading"> My Cart </div>
+                    </div>
+                    <div class="orderconfirm">
+                      <div class="descriptions">
+                        <div class="form-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
+                                  <div class="table-responsive">
+                                    <table class="table product-overview" id="cartTbl">
+                                      <thead>
+                                        <tr>
+                                          <!--th>Image</th-->
+                                          <th>Furniture Name</th>
+                                          <th>Furniture Description</th>
+                                          <th>Quantity</th>
+                                          <th>Total Price</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <!--td width="150"><img src="../plugins/images/chair.jpg" alt="No Image Available" width="80"></td-->
+                                        </tr>
+                                      </tbody>
+                                      <tfoot>
+                                        <td colspan="2" style="text-align:right"> GRAND TOTAL </td>
+                                        <td id="totalQ">0</td>
+                                        <td id="totalPrice">0</td>
+                                        <td></td>
+                                      </tfoot>
+                                    </table>
                                   </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <div class="panel panel-info" style="margin-top: -20px;">
                 <div class="tab-content thumbnail">
               <!-- CATEGORY -->
@@ -611,6 +608,7 @@ $('#selectType').on("change",function() {
 
                       $('#totalPrice').html(String(totalP - (realPrice * result) ));
                       $('#totalQ').html(String(totalQ - result));
+                      $('#totalBadge').html(String(totalQ - result));
 
 
                        $('#sideItemsInCart').html(
@@ -727,6 +725,7 @@ $('#selectType').on("change",function() {
 
                       $('#totalPrice').html(String(totalP + (realPrice * result) ));
                       $('#totalQ').html(String(totalQ + result));
+                      $('#totalBadge').html(String(totalQ + result));
                        $('#sideItemsInCart').html(
                 ''+String(totalQ + result)+'');
                  $('#sideSubtotal').html(
@@ -856,12 +855,13 @@ $('#selectType').on("change",function() {
 
                   $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="Pcart[]" value="'+id+'"/><input type="hidden" name="Pquant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="Pprice[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="PtotalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
                  $('#cartTbl').append(
-                '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'">Add</button></td><td><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">Remove</button></td></tr>');
+                '<tr><td><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'"class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
 
                 
 
                  $('#totalPrice').html(String(tempPrice));
                  $('#totalQ').html(String(totalQuant));
+                 $('#totalBadge').html(String(totalQuant));
                   $('#sideItemsInCart').html(
                 ''+totalQuant+'');
 

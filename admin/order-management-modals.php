@@ -296,8 +296,8 @@ $_SESSION['varname'] = $jsID;
 
             <div class="row">
               <div class="col-md-6" style="text-align:left;">
-                <h3><label class="control-label">Customer Information</label></h3>
-                <h5><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
+                <h3 style="text-align:center;"><label class="control-label">Customer Information</label></h3>
+                <h5 style="margin-left: 95px;"><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
                   <p><b>Address: </b><?php echo $row['customerAddress']?></p>
                   <p><b>Contact Number: </b><?php echo $row['customerContactNum']?></p>
                   <p><b>Email Address: </b><?php echo $row['customerEmail']?></p>
@@ -306,8 +306,8 @@ $_SESSION['varname'] = $jsID;
               </div>
               
               <div class="col-md-6" style="text-align:left;">
-                <h3><label class="control-label">Payment Information</label></h3>
-                <h5><p><b>Total Amount Due: </b>&#8369; <?php echo number_format($row['orderPrice'])?></p>
+                <h3 style="text-align:center;"> <label class="control-label">Payment Information</label></h3>
+                <h5 style="margin-left: 100px;"><p><b>Total Amount Due: </b>&#8369; <?php echo number_format($row['orderPrice'])?></p>
                   <?php
                   $down = 0;
                   $bal = 0;
@@ -332,7 +332,7 @@ $_SESSION['varname'] = $jsID;
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
+                        <h3 style="text-align:center;"><label class="control-label">Orders</label></h3>
                         <table class="table product-overview" id="cartTbl">
                           <thead>
                             <th style="text-align:center">Furniture Name</th>

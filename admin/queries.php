@@ -120,7 +120,7 @@ $.ajax({
                       <div class="panel-body">
                         <div class="row">
                           <div class="table-responsive">
-                            <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblQuery">
+                            <table class="table color-bordered-table muted-bordered-table display nowrap" id="tblQuery">
 
                             </table>
                           </div>

@@ -467,7 +467,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
       <div class="row">
         <div class="descriptions">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-3" style="text-align: center;">
               <div class="form-group">
                 <h4><b>For:</b> 
                   <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up" checked/> Pick-up</label>
@@ -477,37 +477,36 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
             </div>
 
             <div class="deliveryDetails">
-
-              <div class="row">
-                <div class="col-md-3">
-                  <label class="control-label">Delivery Location</label>
-                  <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
-                    <option value="">Choose a Location</option>
-                    <?php
-                    $delsql = "SELECT * FROM tbldelivery_rates;";
-                    $delresult = mysqli_query($conn,$delsql);
-                    while($delrow = mysqli_fetch_assoc($delresult)){
-                      echo('<option value="'.$delrow['delRate'].'">'.$delrow['delLocation'].'</option>');
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label class="control-label">Delivery Rate</label>
-                    <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
-                  </div>
-                </div>
-              </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <label class="control-label">Delivery Location</label>
+                        <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
+                          <option value="">Choose a Location</option>
+                          <?php
+                          $delsql = "SELECT * FROM tbldelivery_rates;";
+                          $delresult = mysqli_query($conn,$delsql);
+                          while($delrow = mysqli_fetch_assoc($delresult)){
+                            echo('<option value="'.$delrow['delRate'].'">'.$delrow['delLocation'].'</option>');
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label">Delivery Rate</label>
+                          <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
+                        </div>
+                      </div>
+                    </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Delivery Address</label>
                     <div class="row">
-                      <div class="col-md-3">
+                      <div class="col-md-5">
                         <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
                       </div>
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                         <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Batasan Hills" disabled required/>
                       </div>
                       <div class="col-md-3">

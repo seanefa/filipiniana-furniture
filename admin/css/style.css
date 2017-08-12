@@ -393,7 +393,7 @@ hr {
   text-transform: uppercase;
   font-weight: 600;
   padding: 3px 5px;
-  font-size: 12px;
+  font-size: 20px;
   margin-top: 1px;
   background-color: #FF9E50;
 }
@@ -3598,7 +3598,7 @@ Basic List
 .table > tfoot > tr > td,
 .table > thead > tr > th,
 .table-bordered {
-  border-top: 1px solid #798DB8;
+  border-top: 1px solid #E4E7EA;
 }
 .table > tbody > tr > td,
 .table > tbody > tr > th,
