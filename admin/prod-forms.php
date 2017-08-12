@@ -407,7 +407,7 @@ include "dbconnect.php";
                 <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="category">
+                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="category">
                         <?php
                         $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);
@@ -433,7 +433,7 @@ include "dbconnect.php";
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label">Type</label><span id="x" style="color:red">*</span>
-                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="type">
+                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_type" id="type">
                       <?php
                       $sql = "SELECT * FROM tblfurn_type order by typeName;";
                       $result = mysqli_query($conn, $sql);
@@ -467,7 +467,7 @@ include "dbconnect.php";
                 <div class="col-md-6">
                     <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                    <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_prodName" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span> 
+                    <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span> 
                   </div>
                 </div>
                 <!--/span-->
@@ -491,10 +491,10 @@ include "dbconnect.php";
                         {
                           if($row['designStatus']!='Archived'){
                             if($trow['prodDesign']==$row['designID']){
-                              echo '<label class="radio-inline"><input type="radio" name="design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
+                              echo '<label class="radio-inline"><input type="radio" name="_design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
                             }
                             else{
-                            echo '<label class="radio-inline"><input type="radio" name="design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
+                            echo '<label class="radio-inline"><input type="radio" name="_design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
                           }
                           }
                         }
@@ -571,22 +571,22 @@ include "dbconnect.php";
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">Dimensions (ft)</label><span id="x" style="color:red">*</span>
-                    <input type="hidden" id="checkDime" value="<?php echo $trow['prodSizeSpecs'];?>"/>
-                    <input type="text" id="updime" name ="dimensions" class="form-control" placeholder="Height, Width, Length" style="text-align:right" readonly="true" value="<?php echo $trow['prodSizeSpecs'];?>" required />
+                    <input type="hidden" id="checkDime" name="_dimensions" value="<?php echo $trow['prodSizeSpecs'];?>"/>
+                    <input type="text" id="updime" name ="_dimensions" class="form-control" placeholder="Height, Width, Length" style="text-align:right" readonly="true" value="<?php echo $trow['prodSizeSpecs'];?>" required />
                       <?php 
                       $dimeArr = array();
                       $dimeArr = explode(',',$trow['prodSizeSpecs']);
                       ?>
-                      <input role="number" max="3" type="hidden" id="upLength" name ="Length" class="form-control" placeholder="Length" style="text-align:right" value="<?php echo $dimeArr[2]?>"  required />
-                      <input role="number" max="3" type="hidden" id="upwidth" name ="width" class="form-control" placeholder="Width" style="text-align:right" value="<?php echo $dimeArr[1]?>"  required />
-                      <input role="number" type="hidden" id="upheight" name ="height" class="form-control" placeholder="Height" max="3" style="text-align:right" value="<?php echo $dimeArr[0]?>" required />
+                      <input role="number" max="3" type="hidden" id="uplength" name ="_length" class="form-control" placeholder="Length" style="text-align:right" value="<?php echo $dimeArr[2]?>"  required />
+                      <input role="number" max="3" type="hidden" id="upwidth" name ="_width" class="form-control" placeholder="Width" style="text-align:right" value="<?php echo $dimeArr[1]?>"  required />
+                      <input role="number" type="hidden" id="upheight" name ="_height" class="form-control" placeholder="Height" max="3" style="text-align:right" value="<?php echo $dimeArr[0]?>" required />
                       <input id="upsaveDime" type="hidden" class="form-control" value="Done">
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                     <label class="control-label">Description</label>
-                    <textarea type="text" id="descText" class="form-control" rows="4" name="_prodDesc"><?php echo $trow['productDescription'];?></textarea>
+                    <textarea type="text" id="descText" class="form-control" rows="4" name="_description"><?php echo $trow['productDescription'];?></textarea>
                   </div>
                 </div>
               </div>
@@ -614,7 +614,8 @@ include "dbconnect.php";
    <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3><span id="x" style="color:red">*</span>
-                    <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="file" name="_image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="hidden" name="_exist_image" value="<?php echo $trow['prodMainPic']?>">
                     </div>
                   </div>
                   

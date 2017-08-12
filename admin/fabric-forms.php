@@ -214,6 +214,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3>
                     <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['fabricPic']?>">
+                    <input type="hidden" name="exist_image" value="<?php echo $trow['fabricPic']?>">
                     </div>
                   </div>
                   </div>
