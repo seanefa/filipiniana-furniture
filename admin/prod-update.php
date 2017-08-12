@@ -15,19 +15,6 @@ $price=$_POST["_price"];
 $pic="";
 $dimension=$_POST["_dimensions"];
 
-//$editName = $_POST['_name'];
-//$editFrame = $_POST['_framework'];
-//$editFabric = $_POST['_fabric'];
-//
-//$typeCat = $_POST['_category'];
-//$editCategory = $_POST['_category'];
-//$editCapacity = $_POST['capacity'];
-//$editSize = $_POST['dimensions'];
-//$editPrice = $_POST['_price'];
-//$editDesc = $_POST['_prodDesc'];
-//$editQuantity = $_POST['quan'];
-
-
 $exist_image=$_POST["exist_image"];
 
 if($_FILES["image"]["error"] > 0)
@@ -48,7 +35,7 @@ if($pic=="")
 }
 
 // Create connection
-$updateSql = "UPDATE tblproduct SET productName='$editName', productDescription='$editDesc', productPrice='$editPrice', prodFrameworkID='$editFrame', prodFabricID='$editFabric', prodCatID='$typeCat',prodTypeID='$editCategory',prodSizeSpecs='$editSize',prodMainPic='$pic', prodCapacity='$editCapacity', prodQuantity='$editQuantity' WHERE productID=$id";
+$updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', prodName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
 
 if(mysqli_query($conn,$updateSql))
 {
