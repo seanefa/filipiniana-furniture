@@ -23,11 +23,10 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/" . $_FILES["image"]["name"]);
+ move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/" . date("Y-m-d") . time() . ".png");
  echo "SAVED" ;
 
- $pic = $_FILES["image"]["name"];
-
+ $pic = date("Y-m-d") . time() . ".png";
 }
 
 if($pic==""){
@@ -40,10 +39,10 @@ $row = mysqli_num_rows($result);
 $exec = "";
 
 if($row == 0){
-	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_address`, `comp_about`) VALUES ('1', '$pic', '$name', '$num', '$address', '$abt')";
+	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_address`, `comp_about`, `comp_email`) VALUES ('1', '$pic', '$name', '$num', '$address', '$abt', '$email')";
 }
 else{
-	$exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_address`='$address', `comp_about`='$abt' WHERE `comp_recID`='1'";
+	$exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_address`='$address', `comp_about`='$abt', `comp_email`='$email' WHERE `comp_recID`='1'";
 
 }
 
