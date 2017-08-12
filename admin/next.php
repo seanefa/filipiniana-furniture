@@ -8,11 +8,6 @@ $jsID = $_GET['customId'];
 }*/
 //$_SESSION['varname'] = 3;
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 ?>
 <!DOCTYPE html>  
 <html lang="en">
@@ -37,47 +32,47 @@ if (!$conn) {
     $("#custcont").on('keyup',function(){
       var val = $("#custcont").val(); 
       var t = 0;
-    $.ajax({
-      type: 'post',
-      url: 'next-validation.php',
-      data: {
-        id: val, t : t,
-      },
-      success: function (response) {
+      $.ajax({
+        type: 'post',
+        url: 'next-validation.php',
+        data: {
+          id: val, t : t,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#erCon').html(response);
        if(response!=""){
-      $('#custcont').css('border-color','red');
-       }
-       else{
-      $('#custcont').css('border-color','black');
-       }
+        $('#custcont').css('border-color','red');
       }
-      });
+      else{
+        $('#custcont').css('border-color','black');
+      }
+    }
+  });
     });
   });
 
-    $(document).ready(function(){
+  $(document).ready(function(){
     $("#custemail").on('keyup',function(){
       var val = $("#custemail").val(); 
       var t = 1;
-    $.ajax({
-      type: 'post',
-      url: 'next-validation.php',
-      data: {
-        id: val, t : t,
-      },
-      success: function (response) {
+      $.ajax({
+        type: 'post',
+        url: 'next-validation.php',
+        data: {
+          id: val, t : t,
+        },
+        success: function (response) {
        // We get the element having id of display_info and put the response inside it
        $( '#erEmail').html(response);
        if(response!=""){
-      $('#custemail').css('border-color','red');
-       }
-       else{
-      $('#custemail').css('border-color','black');
-       }
+        $('#custemail').css('border-color','red');
       }
-      });
+      else{
+        $('#custemail').css('border-color','black');
+      }
+    }
+  });
     });
   });
 
@@ -287,6 +282,8 @@ if (!$conn) {
                       <th style="text-align: right;">Unit Price</th>
                       <th style="text-align: right;">Quantity</th>
                       <th style="text-align: right;">Total Price</th></h4>
+                      <!--<th style="text-align: center;">Customizations</th>-->
+                      </h4>
                     </tr>
                   </thead>
                   <tbody>
@@ -352,7 +349,17 @@ if (!$conn) {
                               <td>'.$row['productDescription'].'</td>
                               <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
                               <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
-                              <td id="price'.$ctr.'"  style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td></tr>');?>
+                              <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
+                        /*<td><div class="col-md-12">
+                        <div  class="col-md-10">
+                        <input type="text" class="form-control" id="cstmztn'.$ctr.'" value="None">
+                        </div>
+                        <div class="col-md-2>
+                        <button type="button" href="#customization" data-toggle="modal" id="cart" class="btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+                      </div>
+                    </div>
+                  </td>*/
+                  echo'</tr>';?>
                             <?php    
                           }
                         }
@@ -471,27 +478,27 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
 
             <div class="deliveryDetails">
 
-                    <div class="row">
-                      <div class="col-md-3">
-                          <label class="control-label">Delivery Location</label>
-                        <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
-                          <option value="">Choose a Location</option>
-                          <?php
-                          $delsql = "SELECT * FROM tbldelivery_rates;";
-                          $delresult = mysqli_query($conn,$delsql);
-                          while($delrow = mysqli_fetch_assoc($delresult)){
-                            echo('<option value="'.$delrow['delRate'].'">'.$delrow['delLocation'].'</option>');
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="control-label">Delivery Rate</label>
-                          <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
-                        </div>
-                      </div>
-                    </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label class="control-label">Delivery Location</label>
+                  <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
+                    <option value="">Choose a Location</option>
+                    <?php
+                    $delsql = "SELECT * FROM tbldelivery_rates;";
+                    $delresult = mysqli_query($conn,$delsql);
+                    while($delrow = mysqli_fetch_assoc($delresult)){
+                      echo('<option value="'.$delrow['delRate'].'">'.$delrow['delLocation'].'</option>');
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="control-label">Delivery Rate</label>
+                    <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -661,13 +668,65 @@ $(document).ready(function(){
             <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>
           </div>-->
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+<div id="customization" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="panel-heading"> Customizations </div>
+      </div>
+      <div class="orderconfirm">
+        <div class="descriptions">
+          <div class="form-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input type="hidden" id="isBool" name="isBool" value="new">
+                        <select id="savedCustomer" style="height:40px;" class="form-control" data-placeholder="Choose Customer Name" tabindex="1" name="customer"> 
+                          <option value="">Select Product</option>
+                          <?php
+                          foreach ($selected as $items) {
+                            if(!in_array($items, $removearray)){
+                              $sql = "SELECT * FROM tblproduct where productID = '$items';";
+                              $result = mysqli_query($conn, $sql);
+                              if($result){
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                  $ctr++; 
+                                  $pCtr++;                            
+                                  echo ('<option value="'.$row['productID'].'">'.$row['productName'].'</option>');?>
+                                  <?php    
+                                }
+                              }
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Done</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </form>
-</div>
-</div>
+  </div>
 </div>
 </body> 
 

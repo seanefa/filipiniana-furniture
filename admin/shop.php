@@ -512,7 +512,7 @@ function btnClick(id){
       //price parser
       var priced= $('#prices'+id+'').val();
       priced=priced.replace(/\,/g,''); //deletes comma
-      priced=parseInt(priced,10);
+      priced=parseFloat(priced,10);
 
       var tPriced= tP;
       tPriced=tPriced.replace(/\,/g,''); //deletes comma
@@ -528,7 +528,7 @@ function btnClick(id){
       //total price parser
       var totalP= $('#totalPrice').html();
       totalP=totalP.replace(/\,/g,''); //deletes comma
-      totalP=parseInt(totalP,10);
+      totalP=parseFloat(totalP,10);
 
       var totalQ= $('#totalQ').html();
       totalQ=totalQ.replace(/\,/g,''); //deletes comma

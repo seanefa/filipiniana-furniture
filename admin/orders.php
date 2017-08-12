@@ -182,7 +182,7 @@
               <td>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
 
-              <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span> Update</a> 
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderUpdate"><span class="glyphicon glyphicon-edit"></span> Update</button>
 
               <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
 
