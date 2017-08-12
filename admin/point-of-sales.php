@@ -160,6 +160,7 @@ $('#selectType').on("change",function() {
                                             <label class="control-label">CATEGORY</label>
                                             <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
                                               <option value="All">All Furnitures</option>
+                                              <option value="On-Promo">All On-Promo Furnitures</option>
                                               <option value="On-Hand">All On-hand Furnitures</option>
                                               <option value="Packages">All Packages</option>
                                               <?php
@@ -192,7 +193,7 @@ $('#selectType').on("change",function() {
                                     <div id="thisIsCart">
                                     </div>
 
-                                    <div class="row" id="tblProd">
+                                    <div class="row formScroll" id="tblProd">
 
                                     </div>
                                   </div>
@@ -1059,6 +1060,18 @@ $('#selectType').on("change",function() {
                               $('#editable-datatable').DataTable();
                             });
                           </script>
+
+                          <script>
+$(document).ready(function () {
+  $('.formScroll').slimScroll({
+    height: '1120px',
+    size: '8px',
+    wheelStep: 3,
+    railVisible: true
+  });
+});
+</script>
+
       </div>
     </div>
     </div>

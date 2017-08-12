@@ -507,7 +507,6 @@ $(window).on('load',function() {
 <script type="text/javascript">
   $("document").ready(function(e) {
     setTimeout(function() {
-
       if( $('.sidebar').is(":hover") ){
         e.preventDefault();
     } 
