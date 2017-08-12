@@ -34,24 +34,12 @@ include 'dbconnect.php';
               <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <h3>Customer Information</h3>
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <h3>Order Additions</h3>
                     </a>
                   </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <h3>Order Additions </h3>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <form action="save-order-update.php" method = "post">
                     <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $_POST['updateOrder']?>">
                     <div class="panel-body">
@@ -188,43 +176,11 @@ include 'dbconnect.php';
                                 </script>
 
                               </table>
-                              <div class="row">
-                                <div class="col-md-4 pull-right">
-                                  <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>
-                                </div>
-                              </div>
                             </form>
                           </div>
                         </div>
                       </div>
                     </div>  
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      <h3>Delivery Information</h3>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-
-                </div>
-              </div>
-
-
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      <h3>Payment</h3>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                  <div class="panel-body">
                   </div>
                 </div>
               </div>
@@ -242,21 +198,9 @@ include 'dbconnect.php';
             buttons: function(){
               var options = this.options;
               return '<div class="panel-footer"><ul class="pager">' +
-              '<li class="previous">'+
-              '<a href="#'+this.id+'" data-wizard="back" role="button">'+options.buttonLabels.back+'</a>' +
-              '</li>' +
-              '<li class="next">'+
-              '<a href="#'+this.id+'" data-wizard="next" role="button">'+options.buttonLabels.next+'</a>' +
-              '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>' +
-              '</li>'+
-              '</ul></div>';
+              '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>' +
+              '</div>';
             }
-          },
-          onBeforeShow: function(step){
-            step.$pane.collapse('show');
-          },
-          onBeforeHide: function(step){
-            step.$pane.collapse('hide');
           },
           onFinish: function(){
             window.location.href = 'receipt.php?id='+id;

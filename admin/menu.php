@@ -125,7 +125,20 @@
       <!-- /.dropdown -->
       <!-- .Megamenu -->
     <li class="mega-dropdown">
-      <a href="javascript:void(0)" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false"> Admin <span class="caret"></span></a>
+      <a href="javascript:void(0)" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" role="button" aria-expanded="false"> 
+      <?php
+          include "dbconnect.php";
+          $sql = "SELECT * FROM tblemployee a inner join tbluser b on a.empID = b.userEmpID order by b.userID desc";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result))
+          {
+            if($row['userStatus']=="active" && $row['userType']=="admin"){
+              echo('<span>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</span>');
+            }
+          }
+      ?> 
+      <span class="caret"></span>
+      </a>
       <!--a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><div><img src="../plugins/images/users/user-male-icon.png" alt="user-img" class="img-circle" style="height: 55px;"></div> <i class="icon-options-vertical"></i></a-->
       <ul class="dropdown-menu animated flipInY">
       <!--li><a href="#"><i class="ti-user"></i> My Profile</a></li>
