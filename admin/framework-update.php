@@ -10,10 +10,12 @@ if (!$conn) {
 }
 
 $id = $_SESSION['varname'];
+
 $name = $_POST['name'];
 $material = $_POST['material'];
 $design = $_POST['design'];
 $type = $_POST['type'];
+
 $remarks = $_POST['remarks'];
 $pic = "";
 $exist_image = $_POST["exist_image"];
