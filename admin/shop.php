@@ -652,7 +652,7 @@ function checkout(){
       }
       else{
         $('#check-out').attr('type','submit');
-        $('#myForm').attr('action','confirm-update.php');
+        $('#myForm').attr('action','next.php');
       }
     }
     else{ 

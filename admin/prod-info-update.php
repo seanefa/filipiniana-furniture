@@ -30,7 +30,7 @@ if(isset($_POST['deleted'])){
 
 $sql = "UPDATE tblprod_info SET prodInfoProduct='$prod', prodInfoPhase='$phase' WHERE prodInfoID = '$id'";
 mysqli_query($conn,$sql);
-//echo $sql . "<br>";
+echo $sql . "<br>";
 
 $prodInfoID = mysqli_insert_id($conn);
 
@@ -45,7 +45,7 @@ foreach($mats as $a){
 $x = 0;
 foreach($deleted as $a){
 	$dsql = "UPDATE tblprod_materials SET p_matStatus= 'Archived' WHERE p_matID = '$a'";
-	//echo $dsql .", x = ".$x.  '   DELETED <br>';
+	echo $dsql .", x = ".$x.  '   DELETED <br>';
 	mysqli_query($conn,$dsql);
 	$x++;
 }
@@ -53,7 +53,7 @@ foreach($deleted as $a){
 $x = 0;
 foreach($exist as $a){
 	$esql = "UPDATE tblprod_materials SET p_matQuantity= ".$quan[$x]." WHERE p_matID = '$a'";
-	//echo $esql .", x = ".$x.  '   exisit <br>';
+	echo $esql .", x = ".$x.  '   exisit <br>';
 	mysqli_query($conn,$esql);
 	$x++;
 }
@@ -79,7 +79,7 @@ for($x=0;$x<$ctr;$x++){
 }*/
 
 if($x>1){
-header( "Location: production-information.php?newSuccess" );
+//header( "Location: production-information.php?newSuccess" );
 }
 mysqli_close($conn);
 ?>

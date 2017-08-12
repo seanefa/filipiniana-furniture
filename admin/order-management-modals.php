@@ -2,7 +2,7 @@
 session_start();
 include "menu.php";
 include 'dbconnect.php';
-if(isset($GET['id'])){
+if(isset($_GET['id'])){
   $jsID = $_GET['id']; 
 }
 $jsID=$_GET['id'];
@@ -304,7 +304,7 @@ $_SESSION['varname'] = $jsID;
                   <p><b>Remarks: </b><?php echo $row['orderRemarks']?></p>
                 </h5>
               </div>
-              
+
               <div class="col-md-6" style="text-align:left;">
                 <h3 style="text-align:center;"> <label class="control-label">Payment Information</label></h3>
                 <h5 style="margin-left: 100px;"><p><b>Total Amount Due: </b>&#8369; <?php echo number_format($row['orderPrice'])?></p>
@@ -397,215 +397,216 @@ $_SESSION['varname'] = $jsID;
           <div class="modal-body">
             <div class="col-md-12">
               <h2>
-              <a href="shop.php?id=<?php echo $jsID;?>">Add products to order?</a><br>
-              <a href="update-order.php?id=<?php echo $jsID;?>">Update order information?</a></h2>
+                <a href="shop.php?id=<?php echo $jsID;?>">Add products to order?</a><br>
+                <a href="update-order.php?id=<?php echo $jsID;?>">Update order information?</a></h2>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
-          </div>
-        </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="payment">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct" style="text-align:center;">Payment</h3>
-        </div>
-        <div class="modal-body">
-          <div class="descriptions">
-        <form action="category-update.php" method="post">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="panel-wrapper collapse in" aria-expanded="true">
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="table-responsive">
-                        <h4><label class="control-label" style="text-align:left;">Orders</label></h4>
-                        <table class="table product-overview" id="cartTbl">
-                          <thead>
-                            <th style="text-align:left">Furniture Name</th>
-                            <th style="text-align:left">Furniture Description</th>
-                            <th style="text-align:right;">Unit Price</th>
-                            <th style="text-align:right;">Quantity</th>
-                            <th style="text-align:right;">Total Price</th>
-                          </thead>
-                          <tbody>
-                            <?php
-                            include "dbconnect.php";
-                            $tQuan = 0;
-                            $tPrice = 0;
+    <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="payment">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title" id="modalProduct" style="text-align:center;">Payment</h3>
+          </div>
+          <form action="payments.php" method="post">
+            <input type="hidden" name="orderID" value="<?php echo $jsID;?>"/>
+            <div class="modal-body">
+              <div class="descriptions">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="table-responsive">
+                            <h4><label class="control-label" style="text-align:left;">Orders</label></h4>
+                            <table class="table product-overview" id="cartTbl">
+                              <thead>
+                                <th style="text-align:left">Furniture Name</th>
+                                <th style="text-align:left">Furniture Description</th>
+                                <th style="text-align:right;">Unit Price</th>
+                                <th style="text-align:right;">Quantity</th>
+                                <th style="text-align:right;">Total Price</th>
+                              </thead>
+                              <tbody>
+                                <?php
+                                include "dbconnect.php";
+                                $tQuan = 0;
+                                $tPrice = 0;
 
-                            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
-                            $res = mysqli_query($conn,$sql1);
-                            while($row = mysqli_fetch_assoc($res)){
-                              echo '<tr>
-                              <td>'.$row['productName'].'</td>
-                              <td>'.$row['productDescription'].'</td>
-                              <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
-                              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                              $tPrice = $row['orderQuantity'] * $row['productPrice'];
-                              $tPrice =  number_format($tPrice,2);
-                              echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
-                              $tPrice = $row['orderPrice'];
-                              $tQuan = $tQuan + $row['orderQuantity'];
-                            }
-                            ?>
-                          </tbody>
-                          <tfoot style="text-align:right;">
-                            <td></td>
-                            <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                            <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-                            <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
-                          </tfoot>
-                        </table>
+                                $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
+                                $res = mysqli_query($conn,$sql1);
+                                while($row = mysqli_fetch_assoc($res)){
+                                  echo '<tr>
+                                  <td>'.$row['productName'].'</td>
+                                  <td>'.$row['productDescription'].'</td>
+                                  <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                  <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+                                  $tPrice = $row['orderQuantity'] * $row['productPrice'];
+                                  $tPrice =  number_format($tPrice,2);
+                                  echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
+                                  $tPrice = $row['orderPrice'];
+                                  $tQuan = $tQuan + $row['orderQuantity'];
+                                }
+                                ?>
+                              </tbody>
+                              <tfoot style="text-align:right;">
+                                <td></td>
+                                <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                                <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
+                                <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                <?php
+                $down = 0;
+                $bal = 0;
+                $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$jsID  '";
+                $res = mysqli_query($conn,$sql);
+                $tpay = 0;
+                while($trow = mysqli_fetch_assoc($res)){
+                  $tpay = $tpay + $trow['amountPaid'];
+                }
+                $down = $tpay;
+                $bal = $tPrice - $down;
+                ?>
+
+                
+                <div class="row">
+                  <div class="row col-md-6 center">
+                    <label class="form-control" style="text-align:center; border:0px;">Payment Information</label>
+                    <div class="table">
+                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+                        <tr>
+                          <td>Total Amount Due:</td>
+                          <td>Php <?php echo number_format($tPrice,2)?></td>
+                        </tr>
+                        <tr>
+                          <td>Initial Payment:</td>
+                          <td>Php <?php echo number_format($down,2)?></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>  
+                  <div class="row col-md-6 center" style="border:1px;">
+                    <label class="form-control" style="text-align:center;">Payment</label>
+                    <div class="table">
+                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+                        <tr>
+                          <td>Remaining Balance:</td>
+                          <td>Php <?php echo number_format($bal,2)?></td>
+                        </tr>
+                        <tr>
+                          <td>Amount Paid</td>
+                          <td>Php <input type="number" id="amount" name="amount" style="text-align:right"/></td>
+                        </tr>
+                        <tr>
+                          <td>Change</td>
+                          <td>Php <input type="number" id="change" name="change" style="text-align:right"/></td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <?php
-              $down = 0;
-              $bal = 0;
-              $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$jsID  '";
-              $res = mysqli_query($conn,$sql);
-              $tpay = 0;
-              while($trow = mysqli_fetch_assoc($res)){
-                $tpay = $tpay + $trow['amountPaid'];
-              }
-              $down = $tpay;
-              $bal = $tPrice - $down;
-              ?>
-
-              <div class="row col-md-6 center">
-                <label class="form-control" style="text-align:center; border:0px;">Payment Information</label>
-                <div class="table">
-                  <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
-                    <tr>
-                      <td>Total Amount Due:</td>
-                      <td>Php <?php echo number_format($tPrice,2)?></td>
-                    </tr>
-                    <tr>
-                      <td>Initial Payment:</td>
-                      <td>Php <?php echo number_format($down,2)?></td>
-                    </tr>
-                  </table>
-                </div>
-              </div>  
-              <div class="row col-md-6 center" style="border:1px;">
-                <label class="form-control" style="text-align:center;">Payment</label>
-                <div class="table">
-                  <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
-                    <tr>
-                      <td>Remaining Balance:</td>
-                      <td>Php <?php echo number_format($bal,2)?></td>
-                    </tr>
-                    <tr>
-                      <td>Amount Paid</td>
-                      <td>Php <input type="number" id="amount" name="amount" style="text-align:right"/></td>
-                    </tr>
-                    <tr>
-                      <td>Change</td>
-                      <td>Php <input type="number" id="change" name="change" style="text-align:right"/></td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-
-          </div>
+          </form>
         </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" ><i class="fa fa-check"></i> Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </form>
       </div>
     </div>
-  </div>
 
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="deleteFrameworkMaterialModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-content" id="cancelOrder">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title">Cancel Order</h3>
-        </div>
-        <form action="order-cancel.php" method="post">
-          <input type="hidden" name="id" value="<?php echo $jsID?>">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-12">
-                <h5>Note: The production of the ordered furniture will continue, however you can still stop the production on the Production Tracking Tab. The finished product will be received by the management and will be available for sale.</h5>
+    <div class="modal fade" tabindex="-1" role="dialog" id="deleteFrameworkMaterialModal" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content" id="cancelOrder">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title">Cancel Order</h3>
+          </div>
+          <form action="order-cancel.php" method="post">
+            <input type="hidden" name="id" value="<?php echo $jsID?>">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h5>Note: The production of the ordered furniture will continue, however you can still stop the production on the Production Tracking Tab. The finished product will be received by the management and will be available for sale.</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Any reasons?</h4>
+                  <textarea class="form-control" name="reason"></textarea>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <h4>Any reasons?</h4>
-                <textarea class="form-control" name="reason"></textarea>
-              </div>
+            <div class="modal-footer">
+              <button type="submit" role="button" class="btn btn-danger waves-effect text-left">Cancel Order</button>
+              <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="viewCustRequest">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+          </div>
+
+          <div class="modal-body">
+            <div class="descriptions">
+
+              <p>asdas</p>
+
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" role="button" class="btn btn-danger waves-effect text-left">Cancel Order</button>
-            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="viewCustRequest">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
         </div>
-        
-        <div class="modal-body">
-          <div class="descriptions">
-
-           <p>asdas</p>
-
-         </div>
-       </div>
-       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="acceptCustRequest">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+    <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="acceptCustRequest">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+          </div>
+
+          <div class="modal-body">
+            <div class="descriptions">
+
+              <p>asdas</p>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
-
-      <div class="modal-body">
-        <div class="descriptions">
-
-         <p>asdas</p>
-
-       </div>
-     </div>
-     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
-  </div>
-</div>
-</div>
 
-</body>
-</html>
+  </body>
+  </html>
