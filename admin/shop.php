@@ -7,11 +7,36 @@ $jsID = $_GET['id'];
 }
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
+$existingOrder = 0;
+if(isset($_GET['id'])){
+  $existingOrder = $_GET['id']; 
+}
+?>
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
   <script>
+
+
+  $(document).ready(function(){ //wala lang
+    $('#quant').on('keyup',function(){
+      var quan = $("input[name='quan']").val();
+      if(quan!=""){
+        $("#addBtn").prop("disabled",false);
+        $('#quant').css('border-color','grey');
+      }
+      if(isNaN(quan)){
+        $("#addBtn").prop("disabled",true);
+        $('#quant').css('border-color','red');
+      }
+      if(quan==""){
+        $("#addBtn").prop("disabled",true);
+        $('#quant').css('border-color','grey');
+      }
+    });
+
+  });
   $(document).ready(function(){
 
 var value = $("#selectCat").val(); // on load
@@ -134,6 +159,7 @@ $(this).show();
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                       <div class="panel-body">
                         <form id="myForm" method="post">
+                          <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
                           <div class="col-md-12">
 
                             <div class="tab-content">
@@ -619,8 +645,15 @@ function checkout(){
   else if(qCtr > 0){
     var result = confirm("This action cannot be undone. Do you want to proceed?");
     if(result){
-      $('#check-out').attr('type','submit');
-      $('#myForm').attr('action','next.php');
+      var value = $("#updateOrder").val();
+      if(value!=0){
+        $('#check-out').attr('type','submit');
+        $('#myForm').attr('action','confirm-update.php');
+      }
+      else{
+        $('#check-out').attr('type','submit');
+        $('#myForm').attr('action','confirm-update.php');
+      }
     }
     else{ 
 

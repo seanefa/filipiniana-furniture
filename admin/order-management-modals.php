@@ -385,6 +385,30 @@ $_SESSION['varname'] = $jsID;
     </div>
   </div>
 
+  <div class="modal fade" tabindex="-1" role="dialog" id="deleteFrameworkMaterialModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content" id="orderUpdate">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title">Update Order</h3>
+        </div>
+        <form action="reject-orderReq.php" method="post">
+          <input type="hidden" name="id" value="<?php echo $jsID?>">
+          <div class="modal-body">
+            <div class="col-md-12">
+              <h2>
+              <a href="shop.php?id=<?php echo $jsID;?>">Add products to order?</a><br>
+              <a href="update-order.php?id=<?php echo $jsID;?>">Update order information?</a></h2>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="payment">
