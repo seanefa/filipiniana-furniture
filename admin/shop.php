@@ -12,7 +12,6 @@ if(isset($_GET['id'])){
   $existingOrder = $_GET['id']; 
 }
 ?>
-?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
@@ -193,6 +192,7 @@ $(this).show();
                                               <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
                                                 <option value="All">All Furnitures</option>
                                                 <option value="On-Hand">All On-hand Furnitures</option>
+                                              <option value="On-Promo">All On-Promo Furnitures</option>
                                                 <option value="Packages">All Packages</option>
                                                 <?php
                                                 include "dbconnect.php";

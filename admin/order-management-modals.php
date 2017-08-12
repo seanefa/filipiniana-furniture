@@ -395,11 +395,18 @@ $_SESSION['varname'] = $jsID;
         <form action="reject-orderReq.php" method="post">
           <input type="hidden" name="id" value="<?php echo $jsID?>">
           <div class="modal-body">
-            <div class="col-md-12">
-              <h2>
-                <a href="shop.php?id=<?php echo $jsID;?>">Add products to order?</a><br>
-                <a href="update-order.php?id=<?php echo $jsID;?>">Update order information?</a></h2>
+          <div class="row">
+              <div class="col-md-6">
+                <p class="fcbtn btn-sm btn-outline btn-info btn-1d" style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">
+                  <a href="shop.php?id=<?php echo $jsID;?>" style="color: inherit;">ADD PRODUCTS TO ORDER?</a>
+                </p>
               </div>
+              <div class="col-md-6" style="border-left: 1px solid black;">
+                <p class="fcbtn btn-sm btn-outline btn-info btn-1d" style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">
+                  <a href="update-order.php?id=<?php echo $jsID;?>" style="color: inherit;">UPDATE ORDER INFORMATION?</a>
+                </p>
+              </div>
+            </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
@@ -414,7 +421,7 @@ $_SESSION['varname'] = $jsID;
         <div class="modal-content" id="payment">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 class="modal-title" id="modalProduct" style="text-align:center;">Payment</h3>
+            <h3 class="modal-title" id="modalProduct">Payment</h3>
           </div>
           <form action="payments.php" method="post">
             <input type="hidden" name="orderID" value="<?php echo $jsID;?>"/>
@@ -426,7 +433,7 @@ $_SESSION['varname'] = $jsID;
                       <div class="panel-body">
                         <div class="row">
                           <div class="table-responsive">
-                            <h4><label class="control-label" style="text-align:left;">Orders</label></h4>
+                            <p style="text-align:center; font-family: inherit; font-weight: bolder; font-size: 20px;"><label class="control-label">Orders</label></p>
                             <table class="table product-overview" id="cartTbl">
                               <thead>
                                 <th style="text-align:left">Furniture Name</th>
@@ -486,25 +493,28 @@ $_SESSION['varname'] = $jsID;
 
                 
                 <div class="row">
-                  <div class="row col-md-6 center">
-                    <label class="form-control" style="text-align:center; border:0px;">Payment Information</label>
-                    <div class="table">
-                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
-                        <tr>
-                          <td>Total Amount Due:</td>
-                          <td>Php <?php echo number_format($tPrice,2)?></td>
-                        </tr>
-                        <tr>
-                          <td>Initial Payment:</td>
-                          <td>Php <?php echo number_format($down,2)?></td>
-                        </tr>
-                      </table>
+                    <div class="col-md-6">
+                  <div class="row">
+                      <h3 style="text-align:center;"><label class="form-control" style="border:0px;">Payment Information</label></h3>
+                      <div class="table" style="padding-right: 15px;">
+                        <table class="table color-bordered-table">
+                          <tr>
+                            <td>Total Amount Due:</td>
+                            <td>Php <?php echo number_format($tPrice,2)?></td>
+                          </tr>
+                          <tr>
+                            <td>Initial Payment:</td>
+                            <td>Php <?php echo number_format($down,2)?></td>
+                          </tr>
+                        </table>
+                      </div>
                     </div>
-                  </div>  
-                  <div class="row col-md-6 center" style="border:1px;">
-                    <label class="form-control" style="text-align:center;">Payment</label>
-                    <div class="table">
-                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+                  </div> 
+                  <div class="col-md-6">
+                  <div class="row">
+                    <h3 style="text-align:center;"><label class="form-control" style="border:0px;">Payment</label></h3>
+                    <div class="table" style="padding-left: 15px;">
+                      <table class="table color-bordered-table">
                         <tr>
                           <td>Remaining Balance:</td>
                           <td>Php <?php echo number_format($bal,2)?></td>
@@ -523,9 +533,10 @@ $_SESSION['varname'] = $jsID;
                 </div>
               </div>
             </div>
+            </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
             </div>
           </form>
         </div>

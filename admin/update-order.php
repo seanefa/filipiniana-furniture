@@ -95,6 +95,9 @@ $(document).ready(function(){ //wala lang
       <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
           <div class="panel panel-info">
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
             <div class="panel-body">
               <div class="orderconfirm">
                   <div class="descriptions">
@@ -178,10 +181,10 @@ $(document).ready(function(){ //wala lang
                     <div class="row">
                       <div class="col-md-12">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
-                          <div class="panel-body">
-                            <div class="table-responsive">
                             <form action="save-order-update1.php" method = "post">
                           <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
+                          <div class="panel-body">
+                            <div class="table-responsive">
                               <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
                               <table class="table product-overview" id="tblOrders">
                                 <thead>
@@ -227,16 +230,13 @@ $(document).ready(function(){ //wala lang
                                 </tfoot>
                               </table>
                             </div>
-                          </div>
                         </div>
-                      </div>
-                    </div>
                     <div class="row">
-                      <div class="col-md-1 pull-right">
-                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="fa fa-check"></i> Save</button>
-                      </div>
-                      <div class="col-md-1 pull-right">
+                      <div class="col-md-6">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false">Cancel Order</button>
+                      </div>
+                      <div class="col-md-6 pull-right">
+                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="fa fa-check"></i> Save</button>
                       </div>
                     </div>
                   </form>
@@ -246,9 +246,13 @@ $(document).ready(function(){ //wala lang
           </div>
         </div>
       </div>
+      </div>
+      </div>
+      </div>
     </div>
   </div>
-</daiv>
+</div>
+</div>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">

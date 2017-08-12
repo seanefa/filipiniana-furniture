@@ -59,7 +59,7 @@ if($id=="All"){
 			}
 
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		}
 
@@ -88,7 +88,7 @@ else if($id=="On-Promo"){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">
-				<h4 class="btn-sm btn-default" style="color:green; font-weight:600;">ON-PROMO</h4>
+				<h4 class="fcbtn btn-sm btn-outline btn-warning btn-1c" style="font-weight:600; font-family:inherit;">ON-PROMO</h4>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -124,7 +124,7 @@ else if($id=="On-Promo"){
 		}
 
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 
@@ -151,7 +151,7 @@ else if($id=="On-Hand"){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">
-				<h4 class="btn-sm btn-default" style="color:green; font-weight:600;">ON-HAND</h4>
+				<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -182,7 +182,7 @@ else if($id=="On-Hand"){
 			}
 
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 else if($id=="Packages"){
@@ -240,7 +240,7 @@ else if($id=="Packages"){
 				$ctr++;
 			}
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		}
 else{ //category
@@ -294,7 +294,7 @@ else{ //category
 				}
 			}
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 
@@ -351,7 +351,7 @@ if(isset($_POST['type'])){
 				}
 			}
 		if($ctr==0){
-			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 ?> 
