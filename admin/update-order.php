@@ -13,35 +13,152 @@ $jsID = $_GET['customId'];
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-<title>Update Order</title>
-<link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <title>Update Order</title>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 
-<script>
-function deleteExisting(row){
-          var result = confirm("Remove Product?");
-          if(result){
-            $('#trowID'+row).hide();
-            $('#exist'+row).attr('name','deleted[]');
-          }
+  <script>
+
+function btnClick(id){
+  tempPrice = parseFloat($('#totalPrice').text().slice());
+  var quant =parseInt($('#quant'+id).val());
+
+  totalQuant = parseInt($('#totalQ').text());
+  var tP = $('#price'+id).val().toString();
+  var price =parseFloat(tP.replace(',',''));
+  price = price * quant;
+  tempPrice = tempPrice+price;
+  totalQuant = totalQuant+quant;
+
+  if(isInArray(id,idArray)){
+
+    if(quant > 0){
+      $('#quant'+id).val(0);
+      $('#'+id).attr('data-toggle','modal');
+      $('#'+id).attr('href','#myModal1');
+
+      //price parser
+      var priced= $('#prices'+id+'').val();
+      priced=priced.replace(/\,/g,''); //deletes comma
+      priced=parseFloat(priced,10);
+
+      var tPriced= tP;
+      tPriced=tPriced.replace(/\,/g,''); //deletes comma
+      tPriced=parseInt(tPriced,10);
+
+      //quantity parser
+      var quantd= $('#quants'+id+'').val();
+      quantd=quantd.replace(/\,/g,''); //deletes comma
+      quantd=parseInt(quantd,10);
+
+      var q = parseInt(quant);
+
+      //total price parser
+      var totalP= $('#totalPrice').html();
+      totalP=totalP.replace(/\,/g,''); //deletes comma
+      totalP=parseFloat(totalP,10);
+
+      var totalQ= $('#totalQ').html();
+      totalQ=totalQ.replace(/\,/g,''); //deletes comma
+      totalQ=parseInt(totalQ,10);
+
+      var newPrice = priced + tPriced;
+      var newQuant = quantd + q;
+
+      $('#quants'+id+'').val(newQuant);
+      $('#qt'+id+'').html(''+newQuant);
+
+      $('#prices'+id+'').val(newPrice);
+      $('#pr'+id+'').html(''+newPrice);
+
+      $('#ttq').val(0);
+      $('#ttp').val(0); 
+      $('#ttp').val(totalP + tPriced);
+      $('#ttq').val(totalQ + q);
+
+      $('#totalPrice').html(String(totalP + tPriced));
+      $('#totalQ').html(String(totalQ + q));
+
+      }
+      else{
+      alert('Please input the quantity');
+      $('#'+id).attr('data-toggle','');
+      $('#'+id).attr('href','');
+      }
+
+}
+else{
+    if(quant > 0){
+    prv_id = id;
+    qCtr++;
+    var pack = $('#package'+id).val(); //packages
+    if(pack!=0){
+      var size =$('#size'+id).val();
+      var name = $('#product'+id).val();
+      var uprice =$('#uprice'+id).val();
+      $('#'+id).attr('data-toggle','modal');
+      $('#'+id).attr('href','#myModal1');
+      $('#quant'+id).val(0);
+        idArray.push(id);
+        $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+        $('#cartTbl').append(
+          '<tr><td><h5 class="font-500">[Package]'+name+'</h5></td><td>'+size+'</td><td>'+uprice+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
+
+        $('#totalPrice').html(String(tempPrice));
+        $('#totalQ').html(String(totalQuant));
+        $('#totalBadge').html(String(totalQuant));
+        }
+
+    else{
+    var size =$('#size'+id).val();
+    var name = $('#product'+id).val();
+    var uprice =$('#uprice'+id).val();
+    $('#'+id).attr('data-toggle','modal');
+    $('#'+id).attr('href','#myModal1');
+    $('#quant'+id).val(0);
+    //push id to array
+    idArray.push(id);
+    $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+    $('#cartTbl').append(
+    '<tr><td><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td>'+uprice+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
+
+    $('#totalPrice').html(String(tempPrice));
+    $('#totalQ').html(String(totalQuant));
+    $('#totalBadge').html(String(totalQuant));
     }
+}
+else if(quant == 0){
+  alert('Please input the quantity');
+  $('#'+id).attr('data-toggle','');
+  $('#'+id).attr('href','');
+}
+}
+}
+
+  function deleteExisting(row){
+    var result = confirm("Remove Product?");
+    if(result){
+      $('#trowID'+row).hide();
+      $('#exist'+row).attr('name','deleted[]');
+    }
+  }
 
 $(document).ready(function(){ //wala lang
-    $('#quan').on('keyup',function(){
-      var quan = $("input[name='quan']").val();
-      if(quan!=""){
-        $("#addBtn").prop("disabled",false);
-        $('#quant').css('border-color','grey');
-      }
-      if(isNaN(quan)){
-        $("#addBtn").prop("disabled",true);
-        $('#quant').css('border-color','red');
-      }
-      if(quan==""){
-        $("#addBtn").prop("disabled",true);
-        $('#quant').css('border-color','grey');
-      }
-    });
+  $('#quan').on('keyup',function(){
+    var quan = $("input[name='quan']").val();
+    if(quan!=""){
+      $("#addBtn").prop("disabled",false);
+      $('#quant').css('border-color','grey');
+    }
+    if(isNaN(quan)){
+      $("#addBtn").prop("disabled",true);
+      $('#quant').css('border-color','red');
+    }
+    if(quan==""){
+      $("#addBtn").prop("disabled",true);
+      $('#quant').css('border-color','grey');
+    }
   });
+});
 
 </script>
 </head>
@@ -160,11 +277,11 @@ $(document).ready(function(){ //wala lang
                                     <td>'.$row['productName'].'</td>
                                     <td>'.$row['productDescription'].'<input type="hidden" name="existRec[] id="exist'.$row['order_requestID'].'" value="'.$row['order_requestID'].'"></td>
                                     <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
-                                    <td style="text-align:right;">
+                                    <td style="text-align:right; class="quantity">
                                     <input type="number" size="1" style="text-align:right" id="quan" name="quan[]" value="'.$row['orderQuantity'].'" /></td>';
                                     $tPrice = $row['orderQuantity'] * $row['productPrice'];
                                     $tPrice =  number_format($tPrice,2);
-                                    echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td>';
+                                    echo '<td style="text-align:right;" class="prices">&#8369; '.$tPrice.'</td>';
                                     $tPrice = $row['orderPrice'];
                                     $tQuan = $tQuan + $row['orderQuantity'];
                                     echo '<td style="text-align:center"><button type="button" class="btn btn-danger" onclick="deleteExisting('.$row['order_requestID'].')">X</button></td>
@@ -174,7 +291,7 @@ $(document).ready(function(){ //wala lang
                                 </tbody>
                                 <tfoot style="text-align:right;">
                                   <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                                  <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
+                                  <td id="totalQ" style="text-align:right;"></td>
                                   <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
                                   <td></td>
                                 </tfoot>

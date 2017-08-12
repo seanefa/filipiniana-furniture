@@ -255,6 +255,27 @@ if (!$conn) {
                                           ?>
 
                                           <div class="form-body">
+                                            
+              <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
+                  <select class="form-control" tabindex="1" id="type" name="type" id="type" required>
+                    <option value="" selected disabled>Choose Furniture Type</option>
+                    <?php
+                    $sql = "SELECT * FROM tblfurn_type order by typeName;";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                      if($row['typeStatus']=='Listed'){
+                        echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
                                             <div class="row">
                                               <div class="col-md-12">
                                                 <div class="form-group">
