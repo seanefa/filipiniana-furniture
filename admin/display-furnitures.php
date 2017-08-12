@@ -59,7 +59,7 @@ if($id=="All"){
 			}
 
 		if($ctr==0){
-			echo "<h2>Nothing to show.</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		}
 
@@ -124,7 +124,7 @@ else if($id=="On-Promo"){
 		}
 
 		if($ctr==0){
-			echo "<h2>Nothing to show.</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 
@@ -182,7 +182,7 @@ else if($id=="On-Hand"){
 			}
 
 		if($ctr==0){
-			echo "<h2>Nothing to show.</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 else if($id=="Packages"){
@@ -240,7 +240,7 @@ else if($id=="Packages"){
 				$ctr++;
 			}
 		if($ctr==0){
-			echo "<h2>Nothing to show</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		}
 else{ //category
@@ -294,7 +294,7 @@ else{ //category
 				}
 			}
 		if($ctr==0){
-			echo "<h2>Nothing to show.</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 
@@ -351,7 +351,7 @@ if(isset($_POST['type'])){
 				}
 			}
 		if($ctr==0){
-			echo "<h2>Nothing to show.</h2>";
+			echo "<p style='text-align:center; font-family:Helvetica; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
 ?> 
