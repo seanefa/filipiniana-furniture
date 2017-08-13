@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2017 at 02:54 PM
+-- Generation Time: Aug 13, 2017 at 05:10 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -447,7 +447,7 @@ CREATE TABLE `tblframeworks` (
 INSERT INTO `tblframeworks` (`frameworkID`, `frameworkFurnType`, `frameworkName`, `frameworkPic`, `framedesignID`, `materialUsedID`, `frameworkRemarks`, `frameworkStatus`) VALUES
 (1, 0, 'Classical Victorian Frame', '', 3, 1, ' Bru', 'Archived'),
 (2, 0, 'Classical Victorian Frame', '', 1, 1, ' Bru', 'Archived'),
-(4, 0, 'Checkered', 'chair6.png', 3, 1, 'Checkered Victorian Classic', 'Listed'),
+(4, 1, 'Diamond', 'chair6.png', 3, 5, 'Checkered Victorian Classic', 'Listed'),
 (5, 0, 'Floral Frame', 'chair2.png', 3, 4, 'A victorian classic floral frame', 'Listed'),
 (6, 0, 'Frame2', 'DD-NGPiUwAE6ANZ.jpg', 1, 4, ' Lol', 'Archived'),
 (7, 0, 'Lol', '', 1, 1, ' Anuna', 'Archived');
@@ -672,6 +672,21 @@ INSERT INTO `tbljobs` (`jobID`, `jobName`, `jobDescription`, `jobStatus`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbllogs`
+--
+
+CREATE TABLE `tbllogs` (
+  `logID` int(11) NOT NULL,
+  `category` varchar(250) NOT NULL,
+  `action` varchar(150) NOT NULL,
+  `date` date NOT NULL,
+  `description` varchar(450) NOT NULL,
+  `userID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblmaterials`
 --
 
@@ -793,6 +808,26 @@ INSERT INTO `tblmodeofpayment` (`modeofpaymentID`, `modeofpaymentDesc`, `modeofp
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblonhand`
+--
+
+CREATE TABLE `tblonhand` (
+  `onHandID` int(11) NOT NULL,
+  `ohProdID` int(11) NOT NULL,
+  `ohQuantity` int(11) NOT NULL,
+  `ohRemarks` varchar(450) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblonhand`
+--
+
+INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
+(1, 9, 6, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblorders`
 --
 
@@ -829,7 +864,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (20, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
 (21, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
 (22, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Cancelled', '', 'Pre-Order', ''),
-(23, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Pending', '', 'Pre-Order', 'A remark'),
+(23, NULL, '2017-07-31', '2017-08-31', 1, 360000, 'Pending', '', 'Pre-Order', 'A remark'),
 (24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Pending', '', 'Pre-Order', NULL),
 (25, NULL, '2017-08-01', '2017-08-24', 6, 190000, 'Pending', '', 'Pre-Order', 'A remark'),
 (26, NULL, '2017-08-01', '2017-08-17', 7, 260000, 'Pending', '', 'Pre-Order', 'A remark'),
@@ -851,6 +886,19 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (46, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (47, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorder_actions`
+--
+
+CREATE TABLE `tblorder_actions` (
+  `orActionID` int(11) NOT NULL,
+  `orOrderID` int(11) NOT NULL,
+  `orAction` varchar(450) NOT NULL,
+  `orDescription` varchar(450) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -887,59 +935,59 @@ CREATE TABLE `tblorder_request` (
 --
 
 INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersID`, `orderRemarks`, `orderQuantity`, `orderRequestStatus`) VALUES
-(1, 11, 8, 0, 3, ''),
-(2, 11, 8, 0, 3, ''),
-(3, 10, 8, 0, 3, ''),
-(4, 10, 8, 0, 3, ''),
-(5, 11, 9, 0, 4, ''),
-(6, 11, 9, 0, 1, ''),
-(7, 10, 9, 0, 4, ''),
-(8, 10, 9, 0, 1, ''),
-(9, 11, 10, 0, 4, ''),
-(10, 11, 10, 0, 1, ''),
-(11, 10, 10, 0, 4, ''),
-(12, 10, 10, 0, 1, ''),
-(13, 11, 11, 0, 4, ''),
-(14, 11, 11, 0, 1, ''),
-(15, 10, 11, 0, 4, ''),
-(16, 10, 11, 0, 1, ''),
-(17, 11, 12, 0, 4, ''),
-(18, 10, 12, 0, 1, ''),
-(19, 11, 13, 0, 4, ''),
-(20, 10, 13, 0, 1, ''),
-(21, 8, 14, 0, 2, ''),
-(22, 10, 15, 0, 2, ''),
-(23, 10, 16, 0, 3, ''),
-(24, 8, 16, 0, 2, ''),
-(25, 10, 17, 0, 3, ''),
-(26, 8, 17, 0, 2, ''),
-(27, 10, 18, 0, 2, ''),
-(28, 2, 18, 0, 3, ''),
-(29, 9, 18, 0, 2, ''),
-(30, 10, 19, 0, 2, ''),
-(31, 9, 19, 0, 2, ''),
-(32, 10, 20, 0, 2, ''),
-(33, 9, 20, 0, 2, ''),
-(34, 10, 21, 0, 2, ''),
-(35, 9, 21, 0, 2, ''),
-(36, 10, 22, 0, 2, ''),
-(37, 9, 22, 0, 2, ''),
-(38, 10, 23, 0, 2, ''),
-(39, 9, 23, 0, 2, ''),
-(40, 11, 2, 0, 8, ''),
-(41, 11, 25, 0, 2, ''),
-(42, 8, 25, 0, 1, ''),
-(43, 11, 26, 0, 2, ''),
-(44, 9, 26, 0, 2, ''),
-(45, 10, 27, 0, 1, ''),
-(46, 11, 28, 0, 2, ''),
-(47, 11, 29, 0, 3, ''),
-(48, 11, 30, 0, 3, ''),
-(49, 11, 31, 0, 3, ''),
-(50, 11, 32, 0, 2, ''),
-(51, 11, 33, 0, 2, ''),
-(52, 11, 34, 0, 1, ''),
-(53, 11, 35, 0, 3, ''),
+(1, 11, 8, 0, 3, 'Active'),
+(2, 11, 8, 0, 3, 'Active'),
+(3, 10, 8, 0, 3, 'Active'),
+(4, 10, 8, 0, 3, 'Active'),
+(5, 11, 9, 0, 4, 'Active'),
+(6, 11, 9, 0, 1, 'Active'),
+(7, 10, 9, 0, 4, 'Active'),
+(8, 10, 9, 0, 1, 'Active'),
+(9, 11, 10, 0, 4, 'Active'),
+(10, 11, 10, 0, 1, 'Active'),
+(11, 10, 10, 0, 4, 'Active'),
+(12, 10, 10, 0, 1, 'Active'),
+(13, 11, 11, 0, 4, 'Active'),
+(14, 11, 11, 0, 1, 'Active'),
+(15, 10, 11, 0, 4, 'Active'),
+(16, 10, 11, 0, 1, 'Active'),
+(17, 11, 12, 0, 4, 'Active'),
+(18, 10, 12, 0, 1, 'Active'),
+(19, 11, 13, 0, 4, 'Active'),
+(20, 10, 13, 0, 1, 'Active'),
+(21, 8, 14, 0, 2, 'Active'),
+(22, 10, 15, 0, 2, 'Active'),
+(23, 10, 16, 0, 3, 'Active'),
+(24, 8, 16, 0, 2, 'Active'),
+(25, 10, 17, 0, 3, 'Active'),
+(26, 8, 17, 0, 2, 'Active'),
+(27, 10, 18, 0, 2, 'Active'),
+(28, 2, 18, 0, 3, 'Active'),
+(29, 9, 18, 0, 2, 'Active'),
+(30, 10, 19, 0, 2, 'Active'),
+(31, 9, 19, 0, 2, 'Active'),
+(32, 10, 20, 0, 2, 'Active'),
+(33, 9, 20, 0, 2, 'Active'),
+(34, 10, 21, 0, 2, 'Active'),
+(35, 9, 21, 0, 2, 'Active'),
+(36, 10, 22, 0, 2, 'Active'),
+(37, 9, 22, 0, 2, 'Active'),
+(38, 10, 23, 0, 2, 'Active'),
+(39, 9, 23, 0, 2, 'Active'),
+(40, 11, 2, 0, 8, 'Active'),
+(41, 11, 25, 0, 2, 'Active'),
+(42, 8, 25, 0, 1, 'Active'),
+(43, 11, 26, 0, 2, 'Active'),
+(44, 9, 26, 0, 2, 'Active'),
+(45, 10, 27, 0, 1, 'Active'),
+(46, 11, 28, 0, 2, 'Active'),
+(47, 11, 29, 0, 3, 'Active'),
+(48, 11, 30, 0, 3, 'Active'),
+(49, 11, 31, 0, 3, 'Active'),
+(50, 11, 32, 0, 2, 'Active'),
+(51, 11, 33, 0, 2, 'Active'),
+(52, 11, 34, 0, 1, 'Active'),
+(53, 11, 35, 0, 3, 'Active'),
 (54, 11, 41, 0, 2, 'Active'),
 (55, 11, 42, 0, 2, 'Active'),
 (56, 11, 43, 0, 2, 'Active'),
@@ -947,7 +995,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (58, 11, 45, 0, 2, 'Active'),
 (59, 11, 46, 0, 2, 'Active'),
 (60, 11, 47, 0, 2, 'Active'),
-(61, 11, 48, 0, 1, 'Active');
+(61, 11, 48, 0, 1, 'Active'),
+(62, 11, 23, 0, 2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -971,7 +1020,7 @@ INSERT INTO `tblpackages` (`packageID`, `packagePrice`, `packageDescription`, `p
 (1, 6, 'Christmas Packages', 'Archived'),
 (2, 990, 'Bessy', 'Archived'),
 (3, 25, 'Good For 2', 'Listed'),
-(4, 5, 'Christmas Package', 'Listed'),
+(4, 50, 'Christmas Package', 'Listed'),
 (5, 10, 'Birthday Package', 'Listed'),
 (6, 306, 'Bday1', 'Archived'),
 (7, 306, 'Bday1', 'Archived'),
@@ -1006,7 +1055,7 @@ INSERT INTO `tblpackage_inclusions` (`package_inclusionID`, `product_incID`, `pa
 (6, 2, 2, 'Listed'),
 (7, 2, 3, 'Listed'),
 (8, 3, 3, 'Listed'),
-(9, 4, 4, 'Listed'),
+(9, 4, 4, 'Archived'),
 (10, 5, 4, 'Listed'),
 (11, 4, 4, 'Listed'),
 (12, 5, 4, 'Listed'),
@@ -1043,7 +1092,8 @@ INSERT INTO `tblpackage_inclusions` (`package_inclusionID`, `product_incID`, `pa
 (43, 5, 10, 'Listed'),
 (44, 8, 10, 'Listed'),
 (45, 5, 11, 'Listed'),
-(46, 8, 11, 'Listed');
+(46, 8, 11, 'Listed'),
+(47, 3, 4, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1085,7 +1135,10 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (22, 22, '2017-08-09 07:58:33', 70000, 1, 'Paid'),
 (23, 23, '2017-08-09 07:59:56', 70000, 1, 'Paid'),
 (24, 24, '2017-08-09 08:02:38', 70000, 1, 'Paid'),
-(25, 25, '2017-08-09 13:24:34', 50000, 1, 'Paid');
+(25, 25, '2017-08-09 13:24:34', 50000, 1, 'Paid'),
+(26, 5, '2017-08-12 17:14:34', 0, 1, 'Paid'),
+(27, 5, '2017-08-12 17:14:54', 50000, 1, 'Paid'),
+(28, 0, '2017-08-12 17:32:15', 250000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1111,6 +1164,7 @@ CREATE TABLE `tblpenalty` (
 CREATE TABLE `tblphases` (
   `phaseID` int(11) NOT NULL,
   `phaseName` varchar(250) NOT NULL,
+  `phaseIcon` varchar(450) NOT NULL,
   `phaseStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1118,12 +1172,12 @@ CREATE TABLE `tblphases` (
 -- Dumping data for table `tblphases`
 --
 
-INSERT INTO `tblphases` (`phaseID`, `phaseName`, `phaseStatus`) VALUES
-(1, 'Carpentry', 'Active'),
-(2, 'Carving', 'Active'),
-(3, 'Filling', 'Active'),
-(4, 'Upholstery', 'Active'),
-(5, 'Finishing', 'Active');
+INSERT INTO `tblphases` (`phaseID`, `phaseName`, `phaseIcon`, `phaseStatus`) VALUES
+(1, 'Carpentry', 'brush.png', 'Active'),
+(2, 'Carving', 'brush.png', 'Active'),
+(3, 'Filling', 'brush.png', 'Active'),
+(4, 'Upholstery', 'brush.png', 'Active'),
+(5, 'Finishing', 'brush.png', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1167,11 +1221,9 @@ CREATE TABLE `tblproduct` (
   `prodFabricID` int(11) DEFAULT NULL,
   `productName` varchar(45) NOT NULL,
   `productDescription` varchar(450) DEFAULT NULL,
-  `productPrice` decimal(8,2) NOT NULL,
+  `productPrice` double NOT NULL,
   `prodMainPic` varchar(100) NOT NULL,
   `prodSizeSpecs` varchar(100) NOT NULL,
-  `prodCapacity` int(11) DEFAULT NULL,
-  `prodQuantity` int(11) NOT NULL DEFAULT '0',
   `prodStat` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1179,18 +1231,18 @@ CREATE TABLE `tblproduct` (
 -- Dumping data for table `tblproduct`
 --
 
-INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodCapacity`, `prodQuantity`, `prodStat`) VALUES
-(1, 1, 1, 2, '2', 0, 'Mani gidalreo', ' ', '70000.00', '', 'Height-34 inch, Width-34 inch, Depth 45 inch', 5, 0, 'Archived'),
-(2, 1, 1, 4, '1', 0, 'Never', ' A description', '70000.00', 'DEmGhv4WsAEntLU.jpg', '32,12,32', 5, 0, 'On-Hand'),
-(3, 1, 1, 2, '1', 0, 'Rocky', ' ', '70000.00', 'DDsSANoUAAAs2ed.jpg', 'LALAL66', 5, 0, 'Pre-Order'),
-(4, 1, 1, 2, '3', 1, 'Manille', ' ', '70000.00', '', '322', 3, 0, 'Pre-Order'),
-(5, 1, 1, 2, '', 0, 'White', ' ', '70000.00', '', '23,23,23', 3, 0, 'Pre-Order'),
-(6, 0, 2, 2, '', 0, 'Manillenia', ' Lul', '70000.00', 'KnittedSet.jpg', 'H-34,W-36,D-5', 5, 0, 'Archived'),
-(7, 0, 2, 2, '', 0, 'Laguna', ' ', '70000.00', 'chair2.png', '12,32,12', 5, 0, 'Archived'),
-(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', '70000.00', '', '5,6,7', 8, 4, 'On-Hand'),
-(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', '70000.00', '', '4,4,4', 5, 5, 'On-Hand'),
-(10, 3, 5, 6, '3', 1, 'Jollibee', 'Hi-chair for jolly kids', '50000.00', '', '5,3,4', 1, 0, 'Pre-Order'),
-(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', '60000.00', '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 0, 0, 'Pre-Order');
+INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
+(1, 1, 1, 2, '2', 0, 'Mani gidalreo', ' ', 70000, '', 'Height-34 inch, Width-34 inch, Depth 45 inch', 'Archived'),
+(2, 1, 1, 4, '1', 0, 'Never', ' A description', 70000, 'DEmGhv4WsAEntLU.jpg', '32,12,32', 'On-Hand'),
+(3, 1, 1, 2, '1', 0, 'Rocky', ' ', 70000, 'DDsSANoUAAAs2ed.jpg', 'LALAL66', 'Pre-Order'),
+(4, 1, 1, 2, '3', 1, 'Manille', ' ', 70000, '', '322', 'Pre-Order'),
+(5, 1, 1, 2, '', 0, 'White', ' ', 70000, '', '23,23,23', 'Pre-Order'),
+(6, 0, 2, 2, '', 0, 'Manillenia', ' Lul', 70000, 'KnittedSet.jpg', 'H-34,W-36,D-5', 'Archived'),
+(7, 0, 2, 2, '', 0, 'Laguna', ' ', 70000, 'chair2.png', '12,32,12', 'Archived'),
+(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', 70000, '', '5,6,7', 'On-Hand'),
+(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', 70000, '', '4,4,4', 'On-Hand'),
+(10, 3, 5, 6, '3', 1, 'Jollibee', 'Hi-chair for jolly kids', 50000, '', '5,3,4', 'Pre-Order'),
+(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', 60000, '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -1215,7 +1267,25 @@ CREATE TABLE `tblproduction` (
 --
 
 INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `productionEmp`, `prodPhase`, `productionStatus`, `prodRecordStatus`, `prodDateStart`, `prodDateEnd`, `productionRemarks`) VALUES
-(1, 10, 1, '1', 'Pending', 'Active', '2017-07-07', NULL, 'Prod');
+(1, 10, 1, '1', 'Pending', 'Active', '2017-07-07', NULL, 'Prod'),
+(2, 38, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'Production'),
+(3, 39, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'Lala'),
+(4, 62, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'haha');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblproduction_history`
+--
+
+CREATE TABLE `tblproduction_history` (
+  `prodHistID` int(11) NOT NULL,
+  `prodID` int(11) NOT NULL,
+  `prodPhase` int(11) NOT NULL,
+  `prodDateStart` date NOT NULL,
+  `prodDateEnd` date NOT NULL,
+  `prodRemarks` varchar(450) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1276,7 +1346,7 @@ CREATE TABLE `tblprod_materials` (
 
 INSERT INTO `tblprod_materials` (`p_matID`, `p_prodInfoID`, `p_matMaterialID`, `p_matDescID`, `p_matQuantity`, `p_matUnit`, `p_matStatus`) VALUES
 (1, 1, 2, 3, '500', '1', 'Archived'),
-(2, 1, 2, 1, '506', '1', 'Active'),
+(2, 1, 2, 1, '50', '1', 'Archived'),
 (3, 2, 2, 3, '5', '1', 'Active'),
 (4, 2, 2, 1, '50', '1', 'Active'),
 (5, 3, 4, 5, '5', '1', 'Active'),
@@ -1703,6 +1773,13 @@ ALTER TABLE `tbljobs`
   ADD PRIMARY KEY (`jobID`);
 
 --
+-- Indexes for table `tbllogs`
+--
+ALTER TABLE `tbllogs`
+  ADD PRIMARY KEY (`logID`),
+  ADD KEY `user_idx` (`userID`);
+
+--
 -- Indexes for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
@@ -1733,12 +1810,26 @@ ALTER TABLE `tblmodeofpayment`
   ADD PRIMARY KEY (`modeofpaymentID`);
 
 --
+-- Indexes for table `tblonhand`
+--
+ALTER TABLE `tblonhand`
+  ADD PRIMARY KEY (`onHandID`),
+  ADD KEY `product_idx` (`ohProdID`);
+
+--
 -- Indexes for table `tblorders`
 --
 ALTER TABLE `tblorders`
   ADD PRIMARY KEY (`orderID`),
   ADD KEY `tlbuserID_idx` (`receivedbyUserID`),
   ADD KEY `tblcustID_idx` (`custOrderID`);
+
+--
+-- Indexes for table `tblorder_actions`
+--
+ALTER TABLE `tblorder_actions`
+  ADD PRIMARY KEY (`orActionID`),
+  ADD KEY `ordertbl_idx` (`orOrderID`);
 
 --
 -- Indexes for table `tblorder_customization`
@@ -1812,6 +1903,14 @@ ALTER TABLE `tblproduction`
   ADD PRIMARY KEY (`productionID`),
   ADD KEY `orReq_idx` (`productionOrderReq`),
   ADD KEY `empAssigned_idx` (`productionEmp`);
+
+--
+-- Indexes for table `tblproduction_history`
+--
+ALTER TABLE `tblproduction_history`
+  ADD PRIMARY KEY (`prodHistID`),
+  ADD KEY `production_idx` (`prodID`),
+  ADD KEY `phase_idx` (`prodPhase`);
 
 --
 -- Indexes for table `tblprod_images`
@@ -2030,6 +2129,11 @@ ALTER TABLE `tblinvoicedetails`
 ALTER TABLE `tbljobs`
   MODIFY `jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `tbllogs`
+--
+ALTER TABLE `tbllogs`
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
@@ -2055,10 +2159,20 @@ ALTER TABLE `tblmat_var`
 ALTER TABLE `tblmodeofpayment`
   MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `tblonhand`
+--
+ALTER TABLE `tblonhand`
+  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
   MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `tblorder_actions`
+--
+ALTER TABLE `tblorder_actions`
+  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
 --
@@ -2068,17 +2182,17 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
 ALTER TABLE `tblpackage_inclusions`
-  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2103,7 +2217,12 @@ ALTER TABLE `tblproduct`
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `tblproduction_history`
+--
+ALTER TABLE `tblproduction_history`
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2226,11 +2345,29 @@ ALTER TABLE `tblinvoicedetails`
   ADD CONSTRAINT `orderinv` FOREIGN KEY (`invorderID`) REFERENCES `tblorders` (`orderID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `tbllogs`
+--
+ALTER TABLE `tbllogs`
+  ADD CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tblonhand`
+--
+ALTER TABLE `tblonhand`
+  ADD CONSTRAINT `product` FOREIGN KEY (`ohProdID`) REFERENCES `tblproduct` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `tblorders`
 --
 ALTER TABLE `tblorders`
   ADD CONSTRAINT `tblcustID` FOREIGN KEY (`custOrderID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tlbuserID` FOREIGN KEY (`receivedbyUserID`) REFERENCES `tbluser` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tblorder_actions`
+--
+ALTER TABLE `tblorder_actions`
+  ADD CONSTRAINT `ordertbl` FOREIGN KEY (`orOrderID`) REFERENCES `tblorders` (`orderID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tblorder_customization`
@@ -2267,6 +2404,13 @@ ALTER TABLE `tblproduct`
 ALTER TABLE `tblproduction`
   ADD CONSTRAINT `empAssigned` FOREIGN KEY (`productionEmp`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `orReq` FOREIGN KEY (`productionOrderReq`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tblproduction_history`
+--
+ALTER TABLE `tblproduction_history`
+  ADD CONSTRAINT `phase` FOREIGN KEY (`prodPhase`) REFERENCES `tblphases` (`phaseID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `production` FOREIGN KEY (`prodID`) REFERENCES `tblproduction` (`productionID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tblprod_images`

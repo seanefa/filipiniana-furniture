@@ -213,15 +213,15 @@ $(document).ready(function(){
                                 </thead>
                                 <tbody>
                                   <?php
-                                  $sql = "SELECT * FROM tblproduct a, tblfurn_type b WHERE a.prodTypeID = b.typeID and a.prodQuantity > 0;";
+                                  $sql = "SELECT * FROM tblproduct a, tblfurn_type b, tblonhand c WHERE a.productID = c.ohProdID and  a.prodTypeID = b.typeID and c.ohQuantity > 0;";
                                   $result = mysqli_query($conn, $sql);
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
-                                    if($row['prodQuantity']>0){
+                                    if($row['prodStat']!="Archived"){
                                       echo('<tr><td  style="text-align: left;">'. $row['typeName'] .'</td>
                                         <td  style="text-align: left;">'.$row['productName'].'</td>
                                         <td  style="text-align: left;">'.$row['productDescription'].'</td>
-                                        <td  style="text-align: center;">'.$row['prodQuantity'].'</td>');
+                                        <td  style="text-align: center;">'.$row['ohQuantity'].'</td>');
                                         ?>
                                         <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1">Add</button>
 

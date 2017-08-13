@@ -8,7 +8,7 @@ if($category=="new"){
 $quan = $_POST['quan'];
 $prodID = $_POST['prod'];
 
-$updateSql = "UPDATE tblproduct SET prodQuantity='$quan', prodStat = 'On-Hand' WHERE productID='$prodID'";
+$updateSql = "INSERT INTO `tblonhand` (`ohProdID`, `ohQuantity`) VALUES ('$prodID', '$quan')";
 
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
@@ -26,12 +26,12 @@ $quan = $_POST['quan'];
 $prodID = $_POST['name'];
 $eQuan = 0;
 
-$sql = "SELECT * FROM tblproduct WHERE productID ='$prodID'";
+$sql = "SELECT * FROM tblonhand WHERE ohProdID ='$prodID'";
 $res = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($res);
-$eQuan = $quan + $row['prodQuantity'];
+$eQuan = $quan + $row['ohQuantity'];
 
-$updateSql = "UPDATE tblproduct SET prodQuantity='$eQuan', prodStat = 'On-Hand' WHERE productID='$prodID'";
+$updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
 
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
@@ -49,12 +49,12 @@ $quan = $_POST['quan'];
 $prodID = $_POST['name'];
 $eQuan = 0;
 
-$sql = "SELECT * FROM tblproduct WHERE productID ='$prodID'";
+$sql = "SELECT * FROM tblonhand WHERE ohProdID ='$prodID'";
 $res = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($res);
-$eQuan = $row['prodQuantity'] - $quan;
+$eQuan = $row['ohQuantity'] - $quan;
 
-$updateSql = "UPDATE tblproduct SET prodQuantity='$eQuan', prodStat = 'On-Hand' WHERE productID='$prodID'";
+$updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
 
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
