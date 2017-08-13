@@ -79,6 +79,7 @@ $.ajax({
                   <div class="panel-body">
                     <div class="row">
                       <div class="col-md-4">
+                     <p style='margin-top:-15px; text-align:center; font-family:inherit; font-size:20px;'>CURRENTLY SHOWING</p>
                         <select class="form-control" tabindex="1" id="query" name="query">
                          <option value="1">Most Ordered Furniture</option>
                          <option value="3">Most Loyal Customer</option>
@@ -113,7 +114,7 @@ $.ajax({
                      </div>-->
 
                    </div>
-                   <br><br>
+                   <br>
                    <div role="tabpanel" class="tab-pane fade active in" id="job">
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                       <div class="panel-body">

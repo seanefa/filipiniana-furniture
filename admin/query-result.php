@@ -33,7 +33,7 @@ if($id=="1"){ // most ordered furniture
 	$ctr++;
 	}
 	if($ctr==0){
-		echo "<td colspan='6' style='text-align:center'><p>Nothing to show.</p></td>";
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
 		echo "</tbody>";
 	}
 	else{
@@ -88,7 +88,7 @@ else if($id=="2"){ // customer info
 	$ctr++;
 	}
 	if($ctr==0){
-		echo "<td colspan='6' style='text-align:center'><p>Nothing to show.</p></td>";
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
 		echo "</tbody>";
 	}
 	else{
@@ -143,7 +143,7 @@ else if($id=="3"){ // loyal customer
 	$ctr++;
 	}
 	if($ctr==0){
-		echo "<td colspan='6' style='text-align:center'><p>Nothing to show.</p></td>";
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
 		echo "</tbody>";
 	}
 	else{
@@ -202,7 +202,7 @@ else if($id=="4"){ // loyal customer
 		}
 	}
 	if($ctr==0){
-		echo "<td colspan='6' style='text-align:center'><p>Nothing to show.</p></td>";
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
 		echo "</tbody>";
 	}
 	else{
@@ -257,7 +257,7 @@ else if($id=="5"){ // loyal customer
 			</tr>'); 
 	}
 	if($ctr==0){
-		echo "<td colspan='6' style='text-align:center'><p>Nothing to show.</p></td>";
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
 		echo "</tbody>";
 	}
 	else{
