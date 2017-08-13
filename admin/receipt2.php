@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 ob_start();
 ?>
 <!DOCTYPE html>
+<html>
 <head>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -17,20 +18,32 @@ $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($res);
 ?>
-<body style="margin:20px;" class="center">
-  <div style="text-align:center">
-    <header>
-      <div class="pull-left">
-        <img height="115pt" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
+<body>
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div style="text-align: center;">
+        <img height="55px" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
       </div>
-      <div class="pull-left">
-        <h2 style="text-align:left"> <?php echo $row['comp_name'];?> </h2>
-        <h5 style="text-align:left"><?php echo $row['comp_address'];?></h5>
-        <h5 style="text-align:left"><?php echo $row['comp_num'];?></h5>
       </div>
-      <div class="pull-right">
-        <label>OR#<?php $orderID = str_pad($pID, 6, '0', STR_PAD_LEFT); echo $orderID;
-        $orID = "OR". $pID;?></label>
+      </div>
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div style="text-align: center;">
+        <p style='font-family:inherit; font-size:28px;'><?php echo $row['comp_name'];?></p>
+        <h5><?php echo $row['comp_address'];?></h5>
+        <h5>Phone: <?php echo $row['comp_num'];?></h5>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div style="text-align: center;">
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- R  E  C  E  I  P  T -</p>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-xs-6">
         <?php
         include "dbconnect.php";
         $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
@@ -38,23 +51,20 @@ $row = mysqli_fetch_assoc($res);
         $custRow = mysqli_fetch_assoc($res);
         $date=date("Y/m/d");
         ?>
-        <h1 class="text-right">Date:&nbsp;<b><?php echo "" . $date;?></b></h1>
+        <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">Date:&nbsp;<b><?php echo "" . $date;?></b></p>
+        </div>
+      <div class="col-xs-6">
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">OR # <?php $orderID = str_pad($pID, 6, '0', STR_PAD_LEFT); echo $orderID;
+        $orID = "OR". $pID;?></span>
+        </div>
       </div>
-    </header>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="row col-md-6 center">
-    <label class="form-control">Customer Information</label>
-    <div class="table">
-      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+      <br>
+  <div class="row">
+      <div class="col-xs-12">
+     <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">CUSTOMER INFORMATION</span>
+     <br>
+    <div class="table-responsive">
+      <table class="table color-bordered-table muted-bordered-table">
         <tr>
           <td>Name</td>
           <td><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
@@ -74,14 +84,18 @@ $row = mysqli_fetch_assoc($res);
       </table>
     </div>
   </div>
-  <div class="row col-md-6 center">
-    <label class="form-control">Particulars</label>
-    <div class="table">
-      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+  </div>
+      <br>
+  <div class="row">
+    <div class="col-xs-12">
+    <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PARTICULARS</span>
+     <br>
+    <div class="table-responsive">
+      <table class="table color-bordered-table muted-bordered-table">
         <thead>
           <tr>
-            <th style="text-align:center">Furniture Name</th>
-            <th style="text-align:center">Furniture Description</th>
+            <th>Furniture Name</th>
+            <th>Furniture Description</th>
             <th style="text-align:right;">Unit Price</th>
             <th style="text-align:right;">Quantity</th>
             <th style="text-align:right;">Total Price</th>
@@ -108,16 +122,20 @@ $row = mysqli_fetch_assoc($res);
             $tQuan = $tQuan + $row['orderQuantity'];
           }
           ?>
+          <tr style="text-align:right;">
+            <td></td>
+            <td colspan="2" style="text-align:right;"><b>GRAND TOTAL:</b></td>
+            <td id="totalQ"><?php echo $tQuan?></td>
+            <td id="totalPrice"><?php echo "Php  ". number_format($tPrice,2)?></td>
+          </tr>
         </tbody>
-        <tfoot style="text-align:right;">
-          <td></td>
-          <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
-          <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-          <td id="totalPrice" style="text-align:right;"><?php echo "Php  ". number_format($tPrice,2)?></td>
-        </tfoot>
       </table>
     </div>
-    </div> <?php
+    </div> 
+    </div>
+      <br>
+
+    <?php
     $down = 0;
     $bal = 0;
     $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
@@ -130,10 +148,12 @@ $row = mysqli_fetch_assoc($res);
     $bal = $tPrice - $down;
     ?>
 
-    <div class="row col-md-6 center">
-      <label class="form-control">Payment Information</label>
-      <div class="table">
-        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+    <div class="row">
+      <div class="col-xs-12">
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
+     <br>
+      <div class="table-responsive">
+        <table class="table color-bordered-table muted-bordered-table">
           <tr>
             <td>Total Amount Due:</td>
             <td>Php <?php echo number_format($tPrice,2)?></td>
@@ -149,22 +169,25 @@ $row = mysqli_fetch_assoc($res);
         </table>
       </div>
     </div>
-
-
-    <div class="col-md-6 pull-right">
-      <b><i>Issued By:</i></b><br>
-      <span >_____________________________________</span><br>
-      <h5><b>Authorized Signature</b></h5>
     </div>
-  </div>
-  <br><br><br><br><br>
+      <br>
+    <div class="col-md-6 pull-right">
+      <b><i>Issued By:</i></b>
+      <br>
+      <br>
+      <span >_____________________________________</span>
+      <br>
+      <h4><b>Authorized Signature</b></h4>
+    </div>
+  <br><br>
   <div class="row">
     <div class="col-md-12">
       <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
     </div>
   </div>
-
-</body> 
+</body>
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 
 <?php
