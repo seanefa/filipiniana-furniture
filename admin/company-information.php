@@ -81,13 +81,13 @@ $(document).ready(function(){
                 <div class="form-body">
                 <div class="row">
                       <div class="col-md-3">
-						  <h3 class="box-title m-t-20">Logo</h3>
-						  <div class="product-img"><br>
-							  <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $row['comp_logo']?>">
-							  <input type="hidden" name="exist_image" value="<?php echo $trow['comp_logo']?>">
-						  </div>
+                      <h3 class="box-title m-t-20">Logo</h3>
+                      <div class="product-img"><br>
+                      <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $row['comp_logo']?>">
+                      <input type="hidden" name="exist_image" value="<?php echo $trow['comp_logo']?>">
                       </div>
-                </div>
+                      </div>
+                    </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -131,10 +131,10 @@ $(document).ready(function(){
               </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <button type="submit" class="btn btn-success pull-right"></span> Update</button>
+                    <button type="submit" class="btn btn-success pull-right">Update</button>
                   </div>
                 </div>
-              </forms>
+              </form>
                 </div>
               </div>
             </div>

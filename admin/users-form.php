@@ -3,7 +3,7 @@ include "menu.php";
 include 'dbconnect.php';
 session_start();
 if(isset($GET['id'])){
-  $jsID = $_GET['id']; 
+  $jsID = $_GET['id'];
 }
 $jsID=$_GET['id'];
 
@@ -39,16 +39,16 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Employee Name</label><span id="x" style="color:red"> *</span>
-                          <select class="form-control" tabindex="1" name="job">
-                          <option value="" selected disabled>Select an Employee</option>
+                          <select class="form-control" tabindex="1" name="_employee">
+                          <option selected disabled>Select an Employee</option>
                             <?php
                             $sql = "SELECT * FROM tblemployee order by empID;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
                               if($row['empStatus']=='Active')
-							  {
-                                echo('<option name="_employee" value='.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
+							                {
+                                echo('<option value=' . $row['empID'] . '>' . $row['empLastName'] . ', ' . $row['empMidName'] . ' ' . $row['empFirstName'] . '</option>');
                               }
                             }
                             ?>
@@ -79,9 +79,9 @@ if (!$conn) {
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
+                  <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                </div> 
+                </div>
               </form>
             </div>
           </div>
@@ -155,7 +155,7 @@ if (!$conn) {
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" disabled=""><i class="fa fa-check"></i> Save</button>
+                        <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                       </div>
                     </form>
@@ -180,7 +180,6 @@ if (!$conn) {
                     </div>
                   </div>
                 </div>
-              </div>       
+              </div>
             </body>
             </html>
-

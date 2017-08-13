@@ -4,7 +4,7 @@ include "menu.php";
 include "dbconnect.php";
 //session_start();
 /*if(isset($GET['id'])){
-   $jsID = $_GET['id']; 
+   $jsID = $_GET['id'];
  }
  $jsID=$_GET['id'];
  $_SESSION['varname'] = $jsID;*/
@@ -14,7 +14,7 @@ include "dbconnect.php";
   die("Connection failed: " . mysqli_connect_error());
 }
 ?>
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
 </head>
@@ -36,7 +36,7 @@ include "dbconnect.php";
               <!-- PACKAGES -->
               <div role="tabpanel" class="tab-pane fade active in" id=frameworks>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
-                  <div class="panel-body">                  
+                  <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
                         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblUsers">
@@ -50,7 +50,7 @@ include "dbconnect.php";
                             </tr>
                           </thead>
                           <tbody>
-                            
+
                               <?php
                               $sql = "SELECT * FROM tblemployee a inner join tbluser b on a.empID = b.userID order by a.empID desc";
                               $result = mysqli_query($conn, $sql);
@@ -91,7 +91,7 @@ include "dbconnect.php";
                           <!-- /.modal -->
                         </div>
                       </div>
-                    </div>  
+                    </div>
                   </div>
                 </div>
                 <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
