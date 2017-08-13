@@ -2,7 +2,6 @@
 session_start();
 if(!isset($_SESSION["userEmpID"]))
 {
-	
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +13,6 @@ if(!isset($_SESSION["userEmpID"]))
   <meta name="description" content="">
   <meta name="author" content="">
   <?php
-  session_start();
   include 'dbconnect.php';
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   // Check connection

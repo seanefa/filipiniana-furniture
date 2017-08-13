@@ -37,7 +37,6 @@ $.ajax({
   $(document).ready(function(){
   $('#query').change(function() {
     var value = $("#query").val();
-    alert(value);
     $.ajax({
       type: 'post',
       url: 'query-result.php',
@@ -119,10 +118,7 @@ $.ajax({
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                       <div class="panel-body">
                         <div class="row">
-                          <div class="table-responsive">
-                            <table class="table color-bordered-table muted-bordered-table display nowrap" id="tblQuery">
-
-                            </table>
+                          <div id="tblQuery">
                           </div>
                         </div>
                       </div>

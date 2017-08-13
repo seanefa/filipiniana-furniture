@@ -1,9 +1,7 @@
 <?php
 include "dbconnect.php";
 
-
 $id = $_POST["id"];
-
 
 if($id=="1"){ // most ordered furniture
 	$tempSQL = '';
@@ -11,7 +9,10 @@ if($id=="1"){ // most ordered furniture
 	$ctr = 0;
 	$sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b WHERE a.productID = b.orderProductID GROUP BY b.orderProductID order by quan DESC;";
 	$result = mysqli_query($conn, $sql);
-	echo "<thead>
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <thead>
 	<tr>
 	<th>Product ID</th>
 	<th>Product Name</th>
@@ -36,16 +37,35 @@ if($id=="1"){ // most ordered furniture
 		echo "</tbody>";
 	}
 	else{
-		echo "</tbody>";
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
 	}
-
 } 
 
 else if($id=="2"){ // customer info
 	$ctr = 0;
 	$sql = "SELECT * FROM tblcustomer;";
 	$result = mysqli_query($conn, $sql);
-	echo "<thead>
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+	<thead>
 	<tr>
 	<th>ID</th>
 	<th>Name</th>
@@ -72,7 +92,24 @@ else if($id=="2"){ // customer info
 		echo "</tbody>";
 	}
 	else{
-		echo "</tbody>";
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
 	}
 } 
 
@@ -80,7 +117,10 @@ else if($id=="3"){ // loyal customer
 	$ctr = 0;
 	$sql = $sql = "SELECT *, SUM(b.orderQuantity) as quan, SUM(c.orderPrice) as tprice FROM tblcustomer d, tblorder_request b, tblorders c WHERE d.customerID = c.custOrderID and c.orderID = b.tblOrdersID GROUP BY c.custOrderID order by quan DESC;";
 	$result = mysqli_query($conn, $sql);
-	echo "<thead>
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+	<thead>
 	<tr>
 	<th>ID</th>
 	<th>Name</th>
@@ -107,7 +147,24 @@ else if($id=="3"){ // loyal customer
 		echo "</tbody>";
 	}
 	else{
-		echo "</tbody>";
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
 	}
 } 
 
@@ -116,7 +173,10 @@ else if($id=="4"){ // loyal customer
 	$ctr = 0;
 	$sql = $sql = "SELECT * FROM tblcustomer";
 	$result = mysqli_query($conn, $sql);
-	echo "<thead>
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+	<thead>
 	<tr>
 	<th>Customer ID</th>
 	<th>Customer Name</th>
@@ -146,7 +206,24 @@ else if($id=="4"){ // loyal customer
 		echo "</tbody>";
 	}
 	else{
-		echo "</tbody>";
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
 	}
 	} 
 
@@ -154,7 +231,10 @@ else if($id=="5"){ // loyal customer
 	$ctr = 0;
 	$sql = "SELECT * FROM tblorders a, tblcustomer b WHERE a.custOrderID = b.customerID and a.orderStatus = 'Cancelled'";
 	$result = mysqli_query($conn, $sql);
-	echo "<thead>
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+	<thead>
 	<tr>
 	<th>Order ID</th>
 	<th>Customer Name</th>
@@ -181,7 +261,24 @@ else if($id=="5"){ // loyal customer
 		echo "</tbody>";
 	}
 	else{
-		echo "</tbody>";
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
 	}
 
 } 
@@ -202,7 +299,4 @@ function getBal($id){
 	$bal = $price - $down;
 	return $bal;
 }
-
-
-
 ?> 
