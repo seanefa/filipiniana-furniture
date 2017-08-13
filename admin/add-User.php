@@ -31,5 +31,5 @@ else
 {
 	echo "Passwords does not match";
 }
-mysqli_close($conn);
+$conn->close();
 ?>

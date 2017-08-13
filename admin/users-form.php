@@ -2,8 +2,9 @@
 include "menu.php";
 include 'dbconnect.php';
 session_start();
-if(isset($GET['id'])){
-  $jsID = $_GET['id']; 
+if(isset($GET['id']))
+{
+  $jsID = $_GET['id'];
 }
 $jsID=$_GET['id'];
 
@@ -48,9 +49,12 @@ if (!$conn) {
                             {
                               if($row['empStatus']=='Active')
 							  {
-                                echo('<option name="_employee" value='.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
+							?>
+							  	<option name="_employee" value="<?php "" . $row["empID"];?>"><?php "" . $row["empLastName"] . ", " . $row["empMidName"] . $row["empFirstName"]?></option>
+							<?
                               }
                             }
+							  $conn->close();
                             ?>
                           </select>
                         </div>
@@ -81,7 +85,7 @@ if (!$conn) {
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                </div> 
+                </div>
               </form>
             </div>
           </div>
@@ -180,7 +184,6 @@ if (!$conn) {
                     </div>
                   </div>
                 </div>
-              </div>       
+              </div>
             </body>
             </html>
-
