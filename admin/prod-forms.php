@@ -464,7 +464,7 @@ include "dbconnect.php";
               <!--/row-->
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red">*</span>
                     <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span> 
@@ -508,15 +508,9 @@ include "dbconnect.php";
                   <div class="form-group">
                     <label class="control-label">Fabric</label><span id="x" style="color:red">*</span>
                     <select id="_fabric" class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="_fabric" disabled>
-                      <option>Choose a Fabric</option>
+                      <option value="">Choose a Fabric</option>
                       <?php
                       include "dbconnect.php";
-            // Create connection
-                      $conn = mysqli_connect($servername, $username, $password, $dbname);
-            // Check connection
-                      if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                      }
                       $sql = "SELECT * FROM tblfabrics order by fabricName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
@@ -614,8 +608,8 @@ include "dbconnect.php";
    <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3><span id="x" style="color:red">*</span>
-                    <input type="file" name="_image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
-                    <input type="hidden" name="_exist_image" value="<?php echo $trow['prodMainPic']?>">
+                    <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="hidden" name="exist_image" value="<?php echo $trow['prodMainPic']?>">
                     </div>
                   </div>
                   

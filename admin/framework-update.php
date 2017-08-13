@@ -36,10 +36,10 @@ $updateSql = "UPDATE tblframeworks SET frameworkName='$name', frameworkFurnType=
 
 if(mysqli_query($conn,$updateSql))
 {
-	header( "Location: frameworks.php?updateSuccess" );
+	//header( "Location: frameworks.php?updateSuccess" );
 }
 else 
 {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	//echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
 }
 ?>

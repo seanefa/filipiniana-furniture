@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2017 at 05:10 PM
+-- Generation Time: Aug 13, 2017 at 06:21 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -130,6 +130,7 @@ CREATE TABLE `tblcompany_info` (
   `comp_logo` varchar(450) NOT NULL,
   `comp_name` varchar(150) NOT NULL,
   `comp_num` int(11) NOT NULL,
+  `comp_email` varchar(45) NOT NULL,
   `comp_address` varchar(150) NOT NULL,
   `comp_about` varchar(450) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -138,8 +139,8 @@ CREATE TABLE `tblcompany_info` (
 -- Dumping data for table `tblcompany_info`
 --
 
-INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_address`, `comp_about`) VALUES
-(1, 'filipiniana-furniture-logo.png', 'Filipiniana Furnitures', 2147483647, '#123 Bacoor Cavite', 'A furniture shop');
+INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES
+(1, 'filipiniana-furniture-logo.png', 'Filipiniana Furnitures', 2147483647, '', '#123 Bacoor Cavite', 'A furniture shop');
 
 -- --------------------------------------------------------
 
@@ -447,7 +448,7 @@ CREATE TABLE `tblframeworks` (
 INSERT INTO `tblframeworks` (`frameworkID`, `frameworkFurnType`, `frameworkName`, `frameworkPic`, `framedesignID`, `materialUsedID`, `frameworkRemarks`, `frameworkStatus`) VALUES
 (1, 0, 'Classical Victorian Frame', '', 3, 1, ' Bru', 'Archived'),
 (2, 0, 'Classical Victorian Frame', '', 1, 1, ' Bru', 'Archived'),
-(4, 1, 'Diamond', 'chair6.png', 3, 5, 'Checkered Victorian Classic', 'Listed'),
+(4, 4, 'Diamo', 'chair6.png', 3, 5, 'Checkered Victorian Classic', 'Listed'),
 (5, 0, 'Floral Frame', 'chair2.png', 3, 4, 'A victorian classic floral frame', 'Listed'),
 (6, 0, 'Frame2', 'DD-NGPiUwAE6ANZ.jpg', 1, 4, ' Lol', 'Archived'),
 (7, 0, 'Lol', '', 1, 1, ' Anuna', 'Archived');
@@ -643,7 +644,8 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (22, 45, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
 (23, 46, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
 (24, 47, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
-(25, 48, 60000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1);
+(25, 48, 60000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
+(26, 49, 120000, '2017-08-13', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -885,7 +887,8 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (45, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (46, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (47, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
-(48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks');
+(48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks'),
+(49, NULL, '2017-08-13', '2017-08-18', 8, 120000, 'Pending', '', 'Pre-Order', 'jj');
 
 -- --------------------------------------------------------
 
@@ -996,7 +999,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (59, 11, 46, 0, 2, 'Active'),
 (60, 11, 47, 0, 2, 'Active'),
 (61, 11, 48, 0, 1, 'Active'),
-(62, 11, 23, 0, 2, 'Active');
+(62, 11, 23, 0, 2, 'Active'),
+(63, 11, 49, 0, 2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1138,7 +1142,8 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (25, 25, '2017-08-09 13:24:34', 50000, 1, 'Paid'),
 (26, 5, '2017-08-12 17:14:34', 0, 1, 'Paid'),
 (27, 5, '2017-08-12 17:14:54', 50000, 1, 'Paid'),
-(28, 0, '2017-08-12 17:32:15', 250000, 1, 'Paid');
+(28, 0, '2017-08-12 17:32:15', 250000, 1, 'Paid'),
+(29, 26, '2017-08-13 17:21:48', 60000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1238,7 @@ CREATE TABLE `tblproduct` (
 
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
 (1, 1, 1, 2, '2', 0, 'Mani gidalreo', ' ', 70000, '', 'Height-34 inch, Width-34 inch, Depth 45 inch', 'Archived'),
-(2, 1, 1, 4, '1', 0, 'Never', ' A description', 70000, 'DEmGhv4WsAEntLU.jpg', '32,12,32', 'On-Hand'),
+(2, 1, 1, 4, '1', 0, 'Never', ' A description', 70, '2017-08-131502640722.png', '32,12,32', 'On-Hand'),
 (3, 1, 1, 2, '1', 0, 'Rocky', ' ', 70000, 'DDsSANoUAAAs2ed.jpg', 'LALAL66', 'Pre-Order'),
 (4, 1, 1, 2, '3', 1, 'Manille', ' ', 70000, '', '322', 'Pre-Order'),
 (5, 1, 1, 2, '', 0, 'White', ' ', 70000, '', '23,23,23', 'Pre-Order'),
@@ -1241,8 +1246,10 @@ INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFramework
 (7, 0, 2, 2, '', 0, 'Laguna', ' ', 70000, 'chair2.png', '12,32,12', 'Archived'),
 (8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', 70000, '', '5,6,7', 'On-Hand'),
 (9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', 70000, '', '4,4,4', 'On-Hand'),
-(10, 3, 5, 6, '3', 1, 'Jollibee', 'Hi-chair for jolly kids', 50000, '', '5,3,4', 'Pre-Order'),
-(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', 60000, '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 'Pre-Order');
+(10, 3, 5, 4, '3', 0, 'Jollibee', 'Hi-chair for jolly kids', 50, '2017-08-131502640312.png', '5,3,4', 'Pre-Order'),
+(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', 60000, '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 'Pre-Order'),
+(12, 3, 4, 5, '1', 0, 'Bessy mo to', '', 70, '2017-08-131502639920.png', '4,4,4', 'Pre-Order'),
+(13, 4, 6, 4, '1', 0, 'Umay', '', 50000, '2017-08-131502640817.png', '4,3,2', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -2122,7 +2129,7 @@ ALTER TABLE `tblinventory_logs`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2167,7 +2174,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -2182,7 +2189,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
@@ -2192,7 +2199,7 @@ ALTER TABLE `tblpackage_inclusions`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2212,7 +2219,7 @@ ALTER TABLE `tblprodsonpromo`
 -- AUTO_INCREMENT for table `tblproduct`
 --
 ALTER TABLE `tblproduct`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tblproduction`
 --

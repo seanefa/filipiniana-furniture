@@ -3,46 +3,55 @@ session_start();
 include 'dbconnect.php';
 
 
-$id = $_SESSION['varname'];
-$category=$_POST["_category"];
-$type=$_POST["_type"];
-$framework=$_POST["_framework"];
-$design=$_POST["_design"];
-$fabric=$_POST["_fabric"];
-$name=$_POST["_name"];
-$decription=$_POST["_description"];
-$price=$_POST["_price"];
-$pic="";
-$dimension=$_POST["_dimensions"];
+$fabric="";
 
-$exist_image=$_POST["exist_image"];
+
+if(isset($_POST['_fabric'])){
+	$fabric = $_POST['_fabric'];
+}
+
+$id = $_SESSION['varname'];
+$category = $_POST["_category"];
+$type = $_POST["_type"];
+$framework = $_POST["_framework"];
+$design = $_POST["_design"];
+$name = $_POST["_name"];
+$description = $_POST["_description"];
+$price = $_POST["_price"];
+$pic = "";
+$dimension = $_POST["_dimensions"];
+
+$exist_image = $_POST["exist_image"];
+echo "sdjdgs".$exist_image;
 
 if($_FILES["image"]["error"] > 0)
 {
-	echo "Error: NO CHOSEN FILE";
-	echo"INSERT TO DATABASE FAILED";
+	echo "Error: NO CHOSEN FILE<br>";
+	echo "INSERT TO DATABASE FAILED";
 }
 else
 {
  move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
- echo "SAVED";
+ echo "<br>SAVED";
  $pic = date("Y-m-d") . time() . ".png";
+ echo $pic;
 }
 
 if($pic=="")
 {
-	$pic=$exist_image;
+	$pic = $exist_image;
 }
-
+echo $pic;
 // Create connection
-$updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', prodName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
+$updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', productName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
+echo $updateSql;
 
-if(mysqli_query($conn,$updateSql))
-{
+if(true)//mysqli_query($conn,$updateSql))
+{/*
 	echo '<script type="text/javascript">';
 	echo 'alert("RECORD SUCCESFULLY SAVED!")';
 	header( "Location: products.php?updateSuccess" );
-	echo '</script>';
+	echo '</script>';*/
 }
 else 
 {

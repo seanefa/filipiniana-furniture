@@ -14,7 +14,6 @@ if(isset($_POST['_fabric'])){
 $prPrice = $_POST['_price'];
 $prFramework = $_POST['_framework'];
 $prDesc = $_POST['_prodDesc'];
-$capacity = $_POST['capacity'];
 $dimension = $_POST['dimensions'];
 $prodStat = "Pre-Order";
 $pic = "";
@@ -53,7 +52,7 @@ else
 
 }
 
-$sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodCapacity`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$capacity', '$prodStat','$design')";
+$sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$prodStat','$design')";
 
 if (mysqli_query($conn, $sql)) {
   header( "Location: products.php?newSuccess" );
