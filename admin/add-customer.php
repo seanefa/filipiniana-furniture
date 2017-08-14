@@ -62,15 +62,6 @@ if($isBool == "new"){
       foreach($selected as $str) {
        $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
        mysqli_query($conn,$sql1);
-       
-      $orderReqID = mysqli_insert_id($conn);
-      $prodSQL = "INSERT INTO tblproduction(productionOrderReq,productionStatus) VALUES ('$orderReqID','Pending')";
-      mysqli_query($conn,$prodSQL);
-      $prID = mysqli_insert_id($conn);
-      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','0','0','Pending')";
-      mysqli_query($conn,$phSQL);
-      echo "Error: " . $phSQL . "<br>" . mysqli_error($conn);
-       echo "<br>sql1: " . $sql1;
        $ctr++;
    }
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
@@ -115,14 +106,6 @@ else if($isBool=="existing"){ //EXISTING
        mysqli_query($conn,$sql1);
        echo "<br>sql1: " . $sql1;
        $ctr++;
-
-      $orderReqID = mysqli_insert_id($conn);
-      $prodSQL = "INSERT INTO tblproduction(productionOrderReq,productionStatus) VALUES ('$orderReqID','Pending')";
-      mysqli_query($conn,$prodSQL);
-      $prID = mysqli_insert_id($conn);
-      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','1','1','Pending')";
-      mysqli_query($conn,$phSQL);
-      echo "Error: " . $phSQL . "<br>" . mysqli_error($conn);
    }
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
 
