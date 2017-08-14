@@ -365,7 +365,7 @@ $('#searchJob').on('keyup',function(){
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="supplier-form.php" data-remote="supplier-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                <button id="tempbtn sa-success" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="supplier-form.php" data-remote="supplier-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active">
                   <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="fa fa-truck"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
