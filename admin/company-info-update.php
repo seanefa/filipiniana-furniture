@@ -19,25 +19,23 @@ else
  move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/" . date("Y-m-d") . time() . ".png");
  echo "SAVED" ;
  $pic = date("Y-m-d") . time() . ".png";
-
-}
-
-if($pic=="")
-{
-	$pic = $exist_image;
 }
 
 $sql = "SELECT * from tblcompany_info;";
-$result = mysqli_query($conn,$sql);
-$row = mysqli_num_rows($result);
-$exec = "";
+$result = $conn->query($sql);
+$row = $result->num_rows;
 
-if($row == 0){
+if($row == 0)
+{
 	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES ('1', '$pic', '$name', '$num', '$address', '$abt')";
 }
-else{
-	$exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_email`='$email', `comp_address`='$address', `comp_about`='$abt' WHERE `comp_recID`='1'";
-
+else
+{
+  if($pic=="")
+  {
+  	$pic = $exist_image;
+  }
+  $exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_email`='$email', `comp_address`='$address', `comp_about`='$abt' WHERE `comp_recID`=1";
 }
 
 if(mysqli_query($conn,$exec))
@@ -51,5 +49,5 @@ else
 {
 	echo "Error: " . $exec . "<br>" . mysqli_error($conn);
 }
-
+$conn->close();
 ?>

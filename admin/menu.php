@@ -46,30 +46,27 @@ if(!isset($_SESSION["userEmpID"]))
   <link href="css/literallycanvas.css" rel="stylesheet">
   <!-- color CSS -->
   <link href="css/colors/default.css" id="theme"  rel="stylesheet">
-
   <link href="css/select2.min.css" rel="stylesheet">
-
   <!-- Wizard CSS -->
   <link href="plugins/bower_components/jquery-wizard-master/css/wizard.css" rel="stylesheet">
-
   <!-- FormValidation -->
   <link rel="stylesheet" href="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css">
-
+  <!-- SweetAlerts CSS -->
+  <link href="plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <script>
+  <!--script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-19175540-9', 'auto');
   ga('send', 'pageview');
-  </script>
+  </script-->
 </head>
 <body class ="fix-header fix-sidebar">
   <!-- Preloader -->
@@ -77,7 +74,6 @@ if(!isset($_SESSION["userEmpID"]))
   <div class="cssload-speeding-wheel"></div>
 </div-->
 <div id="wrapper">
-
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-static-top m-b-0">
     <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
@@ -174,7 +170,7 @@ if(!isset($_SESSION["userEmpID"]))
       </div>
     </div>
 
-    <ul class="nav" id="side-menu">
+    <ul class="nav animated fadeIn" id="side-menu">
 
       <li class="sidebar-search hidden-sm hidden-md hidden-lg">
         <div class="input-group custom-search-form">
@@ -189,10 +185,10 @@ if(!isset($_SESSION["userEmpID"]))
       </li>
 
       <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-settings"></i> <span class="hide-menu">Maintenance<span class="fa arrow"></span></span></a>
-        <ul class="nav nav-second-level">
+        <ul class="nav nav-second-level animated fadeIn">
 
           <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="supplier.php">Supplier</a></li>
               <li><a href="unit-of-measurement-category.php">Unit of Measurement Category</a></li>
               <li><a href="unit-of-measurement.php">Unit of Measurement</a></li>
@@ -204,15 +200,15 @@ if(!isset($_SESSION["userEmpID"]))
           </li>
 
           <li><a href="javascript:void(0)" class="waves-effect">Furniture<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
 
               <li><a href="category.php">Categories</a></li>
               <li><a href="furniture-type.php">Types</a></li>
               
               <li><a href="javascript:void(0)" class="waves-effect">Design<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)" class="waves-effect">Fabric<span class="fa arrow"></span></a>
-                    <ul class="nav nav-fifth-level">
+                    <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="fabric-texture.php">Textures</a></li>
                       <li><a href="fabric-type.php">Types</a></li>
                       <li><a href="fabric-pattern.php">Patterns</a></li>
@@ -220,9 +216,9 @@ if(!isset($_SESSION["userEmpID"]))
                     </ul>
                   </li>
                 </ul>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)" class="waves-effect">Frame<span class="fa arrow"></span></a>
-                    <ul class="nav nav-fifth-level">
+                    <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="frame-design.php">Designs</a></li>
                       <li><a href="framework-material.php">Materials</a></li>
                       <li><a href="frameworks.php">Frameworks</a></li>
@@ -238,14 +234,14 @@ if(!isset($_SESSION["userEmpID"]))
           <li><a href="production-information.php">Production Information</a></li>
 
           <li><a href="javascript:void(0)" class="waves-effect">Manpower<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="jobs.php">Jobs</a></li>
               <li><a href="employees.php">Employees</a></li>
             </ul>
           </li>
 
           <li><a href="javascript:void(0)" class="waves-effect">Promos & Delivery Rates<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="promo.php">Promos</a></li>
               <li><a href="delivery-rates.php">Delivery Rates</a></li>
             </ul>
@@ -254,12 +250,12 @@ if(!isset($_SESSION["userEmpID"]))
       </li>
 
       <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-server"></i> <span class="hide-menu">Transaction<span class="fa arrow"></span></span></a>
-        <ul class="nav nav-second-level">
+        <ul class="nav nav-second-level animated fadeIn">
           <li><a href="point-of-sales.php">Point of Sales</a></li>
           <li><a href="raw-materials-management.php">Raw Materials Management</a></li>
           <li><a href="product-management.php">Product Management</a></li>
           <li><a href="javascript:void(0)" class="waves-effect">Order Management<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="shop.php">Shop</a></li>
               <li><a href="orders.php">Orders</a></li>
               <li><a href="collections.php">Collections</a></li>
@@ -274,39 +270,39 @@ if(!isset($_SESSION["userEmpID"]))
       </li>
 
       <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-bar-chart"></i><span class="hide-menu">Reports<span class="fa arrow"></span></span></a>
-        <ul class="nav nav-second-level">
+        <ul class="nav nav-second-level animated fadeIn">
           <li><a href="sales-reports.php">Sales Report</a></li>
         </ul>
       </li>
 
       <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-wand"></i> <span class="hide-menu">Utilities<span class="fa arrow"></span></span></a>
-        <ul class="nav nav-second-level">
+        <ul class="nav nav-second-level animated fadeIn">
           <li><a href="javascript:void(0)" class="waves-effect">Company<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
 
               <li><a href="company-information.php">Company Information</a></li>
               <li><a href="branches.php">Branches</a></li>
             </ul>
           </li>
           <li><a href="javascript:void(0)" class="waves-effect">Archives<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="javascript:void(0)">Supplier</a></li>
 
               <li><a href="javascript:void(0)">Unit of Measurement</a></li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)">Materials</a></li>
                   <li><a href="javascript:void(0)">Material Variants</a></li>
                 </ul>
               </li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Furniture<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)" class="waves-effect">Design<span class="fa arrow"></span></a>
-                    <ul class="nav nav-fifth-level">
+                    <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="javascript:void(0)" class="waves-effect">Fabric<span class="fa arrow"></span></a>
-                        <ul class="nav nav-sixth-level">
+                        <ul class="nav nav-sixth-level animated fadeIn">
                           <li><a href="javascript:void(0)">Textures</a></li>
                           <li><a href="javascript:void(0)">Types</a></li>
                           <li><a href="javascript:void(0)">Patterns</a></li>
@@ -314,9 +310,9 @@ if(!isset($_SESSION["userEmpID"]))
                         </ul>
                       </li>
                     </ul>
-                    <ul class="nav nav-fifth-level">
+                    <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="javascript:void(0)" class="waves-effect">Frame<span class="fa arrow"></span></a>
-                        <ul class="nav nav-sixth-level">
+                        <ul class="nav nav-sixth-level animated fadeIn">
                           <li><a href="javascript:void(0)">Designs</a></li>
                           <li><a href="javascript:void(0)">Materials</a></li>
                           <li><a href="javascript:void(0)">Frameworks</a></li>
@@ -334,14 +330,14 @@ if(!isset($_SESSION["userEmpID"]))
               <li><a href="javascript:void(0)">Production Information</a></li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Manpower<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)">Jobs</a></li>
                   <li><a href="javascript:void(0)">Employees</a></li>
                 </ul>
               </li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Promos & Delivery Rates<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level">
+                <ul class="nav nav-fourth-level animated fadeIn">
                   <li><a href="javascript:void(0)">Promos</a></li>
                   <li><a href="javascript:void(0)">Delivery Rates</a></li>
                 </ul>
@@ -354,7 +350,7 @@ if(!isset($_SESSION["userEmpID"]))
           <li><a href="penalties.php">Penalties</a></li>
 
           <li><a href="javascript:void(0)" class="waves-effect">Defaults<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
+            <ul class="nav nav-third-level animated fadeIn">
               <li><a href="default-downpayment.php">Default Downpayment</a></li>
               <li><a href="phases.php">Production Phases</a></li>
               <li><a href="javascript:void(0)">Variant Attributes</a></li>
@@ -371,47 +367,25 @@ if(!isset($_SESSION["userEmpID"]))
 <!-- Left navbar-header end -->
 <!-- Page Content -->
 <!-- /#wrapper -->
-<!-- jQuery -->
-<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Menu Plugin JavaScript -->
-<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-<script>
-$(document).ready(function () {
-  var url = window.location;
-  var element = $('ul.nav a').filter(function () {
-    return this.href == url;
-  });
-  if(element){
-    element.addClass('active').parents('#side-menu ul').addClass('in');
-    element.parents('#side-menu li').addClass('active');
-  } 
-});
-</script>
-<!--slimscroll JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
-<script>
-$(document).ready(function () {
-  $('#side-menu').slimScroll({
-    height: '800px',
-    size: '8px',
-    color: '#105db2',
-    wheelStep: 3,
-    railVisible: true,
-    alwaysVisible: true
-  });
-});
-</script>
-<!--Wave Effects -->
-<script src="js/waves.js"></script>
-<!--Counter js -->
-<script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-<script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
-<!--Morris JavaScript -->
-<!--script src="../plugins/bower_components/raphael/raphael-min.js"></script>
-<script src="../plugins/bower_components/morrisjs/morris.js"></script>
-<script src="js/dashboard1.js"></script-->
+  <!-- jQuery -->
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- Menu Plugin JavaScript -->
+  <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+  <script src="js/admin/menu/active-menu.js"></script>
+  <!--slimscroll JavaScript -->
+  <script src="js/jquery.slimscroll.js"></script>
+  <script src="js/admin/menu/slimscroll-custom.js"></script>
+  <!--Wave Effects -->
+  <script src="js/waves.js"></script>
+  <!--Counter js -->
+  <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+  <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+  <!--Morris JavaScript -->
+  <!--script src="../plugins/bower_components/raphael/raphael-min.js"></script>
+  <script src="../plugins/bower_components/morrisjs/morris.js"></script>
+  <script src="js/dashboard1.js"></script-->
   <script src="plugins/bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
   <script src="plugins/bower_components/bootstrap-table/dist/bootstrap-table.ints.js"></script>
   <!-- Custom Theme JavaScript -->
@@ -423,16 +397,7 @@ $(document).ready(function () {
   <script src="plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
   <!-- File Export -->
   <script src="js/cbpFWTabs.js"></script>
-  <script type="text/javascript">
-
-  $(document).ready(function () {
-
-    [].slice.call( document.querySelectorAll( '.sttabs' ) ).forEach( function( el ) {
-      new CBPFWTabs( el );
-    });
-
-  });
-  </script>
+  <script src="js/admin/menu/stylish-tabs.js"></script>
   <!-- Sparkline chart JavaScript -->
   <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
   <script src="plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
@@ -441,6 +406,9 @@ $(document).ready(function () {
   <!-- Toastr -->
   <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
   <script src="js/toastr.js"></script>
+  <!-- Sweet-Alert  -->
+  <script src="plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+  <script src="plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
   <!-- Color Picker -->
   <script src="js/jscolor.js"></script>
   <script src="js/colorpicker-color.js"></script>
@@ -462,8 +430,9 @@ $(document).ready(function () {
   <!-- Horizontal-timeline JavaScript -->
   <!--script src="../plugins/bower_components/horizontal-timeline/js/horizontal-timeline.js"></script-->
   <!-- Vertical-timeline JavaScript -->
-<!--script src="../plugins/bower_components/timeliner/src/js/jquery-timeliner.js"></script>
+  <!--script src="../plugins/bower_components/timeliner/src/js/jquery-timeliner.js"></script>
   <script src="../plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script-->
+<<<<<<< HEAD
     <!-- Table Search -->
     <script>
     $(document).ready(function () {
@@ -566,5 +535,19 @@ $(window).on('load',function() {
 });
 </script-->
 
+=======
+  <!-- DataTable Custom -->
+  <script src="js/admin/menu/dataTable-custom.js"></script>
+  <!-- InstaFilta -->
+  <script src="plugins/bower_components/instaFilta/instafilta.min.js" type="text/javascript"></script>
+  <script src="js/mask.js"></script>
+  <!-- Form Wizard JavaScript -->
+  <script src="plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>
+  <!-- FormValidation plugin and the class supports validating Bootstrap form -->
+  <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
+  <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
+  <!-- Auto Hide Menu -->
+  <script src="js/admin/menu/auto-hide-menu.js"></script>
+>>>>>>> 75479f7808cbb1f941cdd6b02d69505afe36d776
 </body>
 </html>
