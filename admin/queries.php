@@ -81,8 +81,8 @@ $.ajax({
                       <div class="col-md-4">
                      <p style='margin-top:-15px; text-align:center; font-family:inherit; font-size:20px;'>CURRENTLY SHOWING</p>
                         <select class="form-control" tabindex="1" id="query" name="query">
-                         <option value="1">Most Ordered Furniture</option>
-                         <option value="3">Most Loyal Customer</option>
+                         <option value="1">List of Most Ordered Furniture</option>
+                         <option value="3">Loyal Customers</option>
                          <option value="2">Customer Information</option>
                          <option value="4">Customer with Balances</option>
                          <option value="5">List of Cancelled Orders</option>

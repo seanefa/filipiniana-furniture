@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2017 at 06:21 PM
+-- Generation Time: Aug 14, 2017 at 09:31 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -645,7 +645,14 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (23, 46, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
 (24, 47, 120000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
 (25, 48, 60000, '2017-08-09', 'Pending', 'Initial Invoice', 1, 1),
-(26, 49, 120000, '2017-08-13', 'Pending', 'Initial Invoice', 1, 1);
+(26, 49, 120000, '2017-08-13', 'Pending', 'Initial Invoice', 1, 1),
+(27, 50, 200070, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(28, 51, 110000, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(29, 52, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(30, 53, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(31, 54, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(32, 55, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(33, 56, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -866,9 +873,9 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (20, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
 (21, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
 (22, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Cancelled', '', 'Pre-Order', ''),
-(23, NULL, '2017-07-31', '2017-08-31', 1, 360000, 'Pending', '', 'Pre-Order', 'A remark'),
-(24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Pending', '', 'Pre-Order', NULL),
-(25, NULL, '2017-08-01', '2017-08-24', 6, 190000, 'Pending', '', 'Pre-Order', 'A remark'),
+(23, NULL, '2017-07-31', '2017-08-31', 1, 360000, 'Ongoing', '', 'Pre-Order', 'A remark'),
+(24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Ongoing', '', 'Pre-Order', NULL),
+(25, NULL, '2017-08-01', '2017-08-24', 6, 190000, 'Ongoing', '', 'Pre-Order', 'A remark'),
 (26, NULL, '2017-08-01', '2017-08-17', 7, 260000, 'Pending', '', 'Pre-Order', 'A remark'),
 (27, NULL, '2017-08-02', '2017-08-31', 2, 50000, 'Pending', '', 'Pre-Order', 'A remark'),
 (28, NULL, '2017-08-03', '2017-08-23', 3, 120000, 'Pending', '', 'Pre-Order', 'Remark'),
@@ -888,7 +895,14 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (46, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (47, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks'),
-(49, NULL, '2017-08-13', '2017-08-18', 8, 120000, 'Pending', '', 'Pre-Order', 'jj');
+(49, NULL, '2017-08-13', '2017-08-18', 8, 120000, 'Pending', '', 'Pre-Order', 'jj'),
+(50, NULL, '2017-08-14', '2017-08-24', 7, 200070, 'Pending', '', 'Pre-Order', 'Remark'),
+(51, NULL, '2017-08-14', '2017-08-23', 7, 110000, 'Pending', '', 'Pre-Order', 'hAHA'),
+(52, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
+(53, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
+(54, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
+(55, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
+(56, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes');
 
 -- --------------------------------------------------------
 
@@ -1000,7 +1014,21 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (60, 11, 47, 0, 2, 'Active'),
 (61, 11, 48, 0, 1, 'Active'),
 (62, 11, 23, 0, 2, 'Active'),
-(63, 11, 49, 0, 2, 'Active');
+(63, 11, 49, 0, 2, 'Active'),
+(64, 13, 50, 0, 4, 'Active'),
+(65, 12, 50, 0, 1, 'Active'),
+(66, 13, 51, 0, 1, 'Active'),
+(67, 11, 51, 0, 1, 'Active'),
+(68, 13, 52, 0, 1, 'Active'),
+(69, 12, 52, 0, 2, 'Active'),
+(70, 13, 53, 0, 1, 'Active'),
+(71, 12, 53, 0, 2, 'Active'),
+(72, 13, 54, 0, 1, 'Active'),
+(73, 12, 54, 0, 2, 'Active'),
+(74, 13, 55, 0, 1, 'Active'),
+(75, 12, 55, 0, 2, 'Active'),
+(76, 13, 56, 0, 1, 'Active'),
+(77, 12, 56, 0, 2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1171,14 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (26, 5, '2017-08-12 17:14:34', 0, 1, 'Paid'),
 (27, 5, '2017-08-12 17:14:54', 50000, 1, 'Paid'),
 (28, 0, '2017-08-12 17:32:15', 250000, 1, 'Paid'),
-(29, 26, '2017-08-13 17:21:48', 60000, 1, 'Paid');
+(29, 26, '2017-08-13 17:21:48', 60000, 1, 'Paid'),
+(30, 27, '2017-08-14 05:50:46', 50000, 1, 'Paid'),
+(31, 28, '2017-08-14 06:17:58', 70000, 1, 'Paid'),
+(32, 29, '2017-08-14 06:20:08', 30000, 1, 'Paid'),
+(33, 30, '2017-08-14 06:21:33', 30000, 1, 'Paid'),
+(34, 31, '2017-08-14 06:21:57', 30000, 1, 'Paid'),
+(35, 32, '2017-08-14 06:22:20', 30000, 1, 'Paid'),
+(36, 33, '2017-08-14 06:22:49', 30000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1178,10 +1213,10 @@ CREATE TABLE `tblphases` (
 --
 
 INSERT INTO `tblphases` (`phaseID`, `phaseName`, `phaseIcon`, `phaseStatus`) VALUES
-(1, 'Carpentry', 'brush.png', 'Active'),
-(2, 'Carving', 'brush.png', 'Active'),
+(1, 'Carpentry', 'hammer.png', 'Active'),
+(2, 'Carving', 'chisel.jpeg', 'Active'),
 (3, 'Filling', 'brush.png', 'Active'),
-(4, 'Upholstery', 'brush.png', 'Active'),
+(4, 'Upholstery', 'needlethread.jpg', 'Active'),
 (5, 'Finishing', 'brush.png', 'Active');
 
 -- --------------------------------------------------------
@@ -1260,39 +1295,122 @@ INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFramework
 CREATE TABLE `tblproduction` (
   `productionID` int(11) NOT NULL,
   `productionOrderReq` int(11) NOT NULL,
-  `productionEmp` int(11) DEFAULT NULL,
-  `prodPhase` varchar(45) DEFAULT NULL,
-  `productionStatus` varchar(45) NOT NULL,
-  `prodRecordStatus` varchar(45) NOT NULL,
-  `prodDateStart` date NOT NULL,
+  `prodDateStart` date DEFAULT NULL,
   `prodDateEnd` date DEFAULT NULL,
-  `productionRemarks` varchar(100) DEFAULT NULL
+  `productionRemarks` varchar(100) DEFAULT NULL,
+  `productionStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblproduction`
 --
 
-INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `productionEmp`, `prodPhase`, `productionStatus`, `prodRecordStatus`, `prodDateStart`, `prodDateEnd`, `productionRemarks`) VALUES
-(1, 10, 1, '1', 'Pending', 'Active', '2017-07-07', NULL, 'Prod'),
-(2, 38, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'Production'),
-(3, 39, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'Lala'),
-(4, 62, 1, '1', 'Pending', 'Active', '2017-08-13', NULL, 'haha');
+INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `prodDateStart`, `prodDateEnd`, `productionRemarks`, `productionStatus`) VALUES
+(1, 10, '2017-07-07', NULL, 'Prod', 'Pending'),
+(2, 38, '2017-08-13', NULL, 'Production', 'Pending'),
+(3, 39, '2017-08-13', NULL, 'Lala', 'Pending'),
+(4, 62, '2017-08-13', NULL, 'haha', 'Pending'),
+(5, 68, NULL, NULL, NULL, 'Pending'),
+(6, 69, NULL, NULL, NULL, 'Pending'),
+(7, 70, NULL, NULL, NULL, 'Pending'),
+(8, 71, NULL, NULL, NULL, 'Pending'),
+(9, 72, NULL, NULL, NULL, 'Pending'),
+(10, 73, NULL, NULL, NULL, 'Pending'),
+(11, 74, NULL, NULL, NULL, 'Pending'),
+(12, 75, NULL, NULL, NULL, 'Pending'),
+(13, 76, NULL, NULL, NULL, 'Pending'),
+(14, 77, NULL, NULL, NULL, 'Pending'),
+(15, 38, NULL, NULL, NULL, 'Ongoing'),
+(16, 39, NULL, NULL, NULL, 'Ongoing'),
+(17, 62, NULL, NULL, NULL, 'Ongoing'),
+(18, 38, NULL, NULL, NULL, 'Ongoing'),
+(19, 39, NULL, NULL, NULL, 'Ongoing'),
+(20, 62, NULL, NULL, NULL, 'Ongoing'),
+(21, 38, NULL, NULL, NULL, 'Ongoing'),
+(22, 39, NULL, NULL, NULL, 'Ongoing'),
+(23, 62, NULL, NULL, NULL, 'Ongoing'),
+(24, 41, NULL, NULL, NULL, 'Ongoing'),
+(25, 42, NULL, NULL, NULL, 'Ongoing');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblproduction_history`
+-- Table structure for table `tblproduction_phase`
 --
 
-CREATE TABLE `tblproduction_history` (
+CREATE TABLE `tblproduction_phase` (
   `prodHistID` int(11) NOT NULL,
   `prodID` int(11) NOT NULL,
   `prodPhase` int(11) NOT NULL,
-  `prodDateStart` date NOT NULL,
-  `prodDateEnd` date NOT NULL,
-  `prodRemarks` varchar(450) DEFAULT NULL
+  `prodEmp` int(11) NOT NULL,
+  `prodDateStart` date DEFAULT NULL,
+  `prodDateEnd` date DEFAULT NULL,
+  `prodRemarks` varchar(450) DEFAULT NULL,
+  `prodStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblproduction_phase`
+--
+
+INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp`, `prodDateStart`, `prodDateEnd`, `prodRemarks`, `prodStatus`) VALUES
+(9, 13, 1, 1, NULL, NULL, NULL, 'Pending'),
+(10, 14, 1, 1, NULL, NULL, NULL, 'Pending'),
+(11, 15, 1, 1, NULL, NULL, NULL, 'Pending'),
+(12, 15, 2, 1, NULL, NULL, NULL, 'Pending'),
+(13, 15, 3, 1, NULL, NULL, NULL, 'Pending'),
+(14, 15, 4, 1, NULL, NULL, NULL, 'Pending'),
+(15, 15, 5, 1, NULL, NULL, NULL, 'Pending'),
+(16, 16, 1, 1, NULL, NULL, NULL, 'Pending'),
+(17, 16, 2, 1, NULL, NULL, NULL, 'Pending'),
+(18, 16, 3, 1, NULL, NULL, NULL, 'Pending'),
+(19, 16, 4, 1, NULL, NULL, NULL, 'Pending'),
+(20, 16, 5, 1, NULL, NULL, NULL, 'Pending'),
+(21, 17, 1, 1, NULL, NULL, NULL, 'Pending'),
+(22, 17, 2, 1, NULL, NULL, NULL, 'Pending'),
+(23, 17, 3, 1, NULL, NULL, NULL, 'Pending'),
+(24, 17, 4, 1, NULL, NULL, NULL, 'Pending'),
+(25, 17, 5, 1, NULL, NULL, NULL, 'Pending'),
+(26, 18, 1, 1, NULL, NULL, NULL, 'Pending'),
+(27, 18, 2, 1, NULL, NULL, NULL, 'Pending'),
+(28, 18, 3, 1, NULL, NULL, NULL, 'Pending'),
+(29, 18, 4, 1, NULL, NULL, NULL, 'Pending'),
+(30, 18, 5, 1, NULL, NULL, NULL, 'Pending'),
+(31, 19, 1, 1, NULL, NULL, NULL, 'Pending'),
+(32, 19, 2, 1, NULL, NULL, NULL, 'Pending'),
+(33, 19, 3, 1, NULL, NULL, NULL, 'Pending'),
+(34, 19, 4, 1, NULL, NULL, NULL, 'Pending'),
+(35, 19, 5, 1, NULL, NULL, NULL, 'Pending'),
+(36, 20, 1, 1, NULL, NULL, NULL, 'Pending'),
+(37, 20, 2, 1, NULL, NULL, NULL, 'Pending'),
+(38, 20, 3, 1, NULL, NULL, NULL, 'Pending'),
+(39, 20, 4, 1, NULL, NULL, NULL, 'Pending'),
+(40, 20, 5, 1, NULL, NULL, NULL, 'Pending'),
+(41, 21, 1, 1, NULL, NULL, NULL, 'Pending'),
+(42, 21, 2, 1, NULL, NULL, NULL, 'Pending'),
+(43, 21, 3, 1, NULL, NULL, NULL, 'Pending'),
+(44, 21, 4, 1, NULL, NULL, NULL, 'Pending'),
+(45, 21, 5, 1, NULL, NULL, NULL, 'Pending'),
+(46, 22, 1, 1, NULL, NULL, NULL, 'Pending'),
+(47, 22, 2, 1, NULL, NULL, NULL, 'Pending'),
+(48, 22, 3, 1, NULL, NULL, NULL, 'Pending'),
+(49, 22, 4, 1, NULL, NULL, NULL, 'Pending'),
+(50, 22, 5, 1, NULL, NULL, NULL, 'Pending'),
+(51, 23, 1, 1, NULL, NULL, NULL, 'Pending'),
+(52, 23, 2, 1, NULL, NULL, NULL, 'Pending'),
+(53, 23, 3, 1, NULL, NULL, NULL, 'Pending'),
+(54, 23, 4, 1, NULL, NULL, NULL, 'Pending'),
+(55, 23, 5, 1, NULL, NULL, NULL, 'Pending'),
+(56, 24, 1, 1, NULL, NULL, NULL, 'Pending'),
+(57, 24, 2, 1, NULL, NULL, NULL, 'Pending'),
+(58, 24, 3, 1, NULL, NULL, NULL, 'Pending'),
+(59, 24, 4, 1, NULL, NULL, NULL, 'Pending'),
+(60, 24, 5, 1, NULL, NULL, NULL, 'Pending'),
+(61, 25, 1, 1, '2017-08-13', '2017-08-14', 'Remarks', 'Finished'),
+(62, 25, 2, 1, '2017-08-14', NULL, 'Remarks', 'Ongoing'),
+(63, 25, 3, 1, NULL, NULL, NULL, 'Pending'),
+(64, 25, 4, 1, NULL, NULL, NULL, 'Pending'),
+(65, 25, 5, 1, NULL, NULL, NULL, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1680,7 +1798,10 @@ ALTER TABLE `tbldelivery_rates`
 -- Indexes for table `tbldesign_phase`
 --
 ALTER TABLE `tbldesign_phase`
-  ADD PRIMARY KEY (`d_phaseID`);
+  ADD PRIMARY KEY (`d_phaseID`),
+  ADD KEY `design_idx` (`p_design`),
+  ADD KEY `phase_idx` (`d_phase`),
+  ADD KEY `d_idx` (`p_design`);
 
 --
 -- Indexes for table `tbldownpayment`
@@ -1908,16 +2029,16 @@ ALTER TABLE `tblproduct`
 --
 ALTER TABLE `tblproduction`
   ADD PRIMARY KEY (`productionID`),
-  ADD KEY `orReq_idx` (`productionOrderReq`),
-  ADD KEY `empAssigned_idx` (`productionEmp`);
+  ADD KEY `orReq_idx` (`productionOrderReq`);
 
 --
--- Indexes for table `tblproduction_history`
+-- Indexes for table `tblproduction_phase`
 --
-ALTER TABLE `tblproduction_history`
+ALTER TABLE `tblproduction_phase`
   ADD PRIMARY KEY (`prodHistID`),
   ADD KEY `production_idx` (`prodID`),
-  ADD KEY `phase_idx` (`prodPhase`);
+  ADD KEY `phase_idx` (`prodPhase`),
+  ADD KEY `employee_idx` (`prodEmp`);
 
 --
 -- Indexes for table `tblprod_images`
@@ -2129,7 +2250,7 @@ ALTER TABLE `tblinventory_logs`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2174,7 +2295,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -2189,7 +2310,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
@@ -2199,7 +2320,7 @@ ALTER TABLE `tblpackage_inclusions`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2224,12 +2345,12 @@ ALTER TABLE `tblproduct`
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
--- AUTO_INCREMENT for table `tblproduction_history`
+-- AUTO_INCREMENT for table `tblproduction_phase`
 --
-ALTER TABLE `tblproduction_history`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tblproduction_phase`
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2321,6 +2442,12 @@ ALTER TABLE `tbldelivery_rates`
   ADD CONSTRAINT `fromBranch` FOREIGN KEY (`delBranchID`) REFERENCES `tblbranches` (`branchID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `tbldesign_phase`
+--
+ALTER TABLE `tbldesign_phase`
+  ADD CONSTRAINT `d` FOREIGN KEY (`p_design`) REFERENCES `tblfurn_design` (`designID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `tblemployee`
 --
 ALTER TABLE `tblemployee`
@@ -2409,13 +2536,13 @@ ALTER TABLE `tblproduct`
 -- Constraints for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  ADD CONSTRAINT `empAssigned` FOREIGN KEY (`productionEmp`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `orReq` FOREIGN KEY (`productionOrderReq`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tblproduction_history`
+-- Constraints for table `tblproduction_phase`
 --
-ALTER TABLE `tblproduction_history`
+ALTER TABLE `tblproduction_phase`
+  ADD CONSTRAINT `employee` FOREIGN KEY (`prodEmp`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `phase` FOREIGN KEY (`prodPhase`) REFERENCES `tblphases` (`phaseID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `production` FOREIGN KEY (`prodID`) REFERENCES `tblproduction` (`productionID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

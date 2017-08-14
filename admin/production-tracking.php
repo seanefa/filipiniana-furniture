@@ -74,11 +74,19 @@ include "menu.php";
                                                     <h4 style="text-align:center;">'.$orderID .'</h4>
                                                     <hr>
                                                       <div class="product-img">
-                                                      <img height="115px" src="plugins/images/2017-08-121502529333.png" alt="Unavailable">
-                                                        <div class="pro-img-overlay">
+                                                      <img height="115px" src="plugins/images/furnitureicon.png" alt="Unavailable">');
+                                                  if($row['orderStatus']=='Pending'){
+                                                    echo ('<div class="pro-img-overlay">
+                                                          <a class="btn btn-info" href="production-start.php?id='.$row['orderID'].'" style="margin-top:20px;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
+                                                        </div>
+                                                      </div>');
+                                                  }
+                                                  else{
+                                                        echo ('<div class="pro-img-overlay">
                                                           <a class="btn btn-info" href="production-tracking-details.php?id='.$row['orderID'].'" style="margin-top:20px;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
                                                         </div>
                                                       </div>');
+                                                      }
                                                       if($row['orderStatus']=="Ongoing"){
                                                         echo '<h4 style="text-align:center; background-color:green; color:white">'.$row['orderStatus'].'</h4>';
                                                       }

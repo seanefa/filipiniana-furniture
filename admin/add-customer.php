@@ -62,8 +62,14 @@ if($isBool == "new"){
       foreach($selected as $str) {
        $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
        mysqli_query($conn,$sql1);
-       $orReqID = mysqli_insert_id($conn);
        
+      $orderReqID = mysqli_insert_id($conn);
+      $prodSQL = "INSERT INTO tblproduction(productionOrderReq,productionStatus) VALUES ('$orderReqID','Pending')";
+      mysqli_query($conn,$prodSQL);
+      $prID = mysqli_insert_id($conn);
+      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','0','0','Pending')";
+      mysqli_query($conn,$phSQL);
+      echo "Error: " . $phSQL . "<br>" . mysqli_error($conn);
        echo "<br>sql1: " . $sql1;
        $ctr++;
    }
@@ -77,7 +83,7 @@ if($isBool == "new"){
    $paymentID = mysqli_insert_id($conn);
   echo "<br>inv: " . $paysql;
 
-     echo '<script type="text/javascript">';
+    echo '<script type="text/javascript">';
           $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
           header($loc); 
      echo '</script>';
@@ -109,6 +115,14 @@ else if($isBool=="existing"){ //EXISTING
        mysqli_query($conn,$sql1);
        echo "<br>sql1: " . $sql1;
        $ctr++;
+
+      $orderReqID = mysqli_insert_id($conn);
+      $prodSQL = "INSERT INTO tblproduction(productionOrderReq,productionStatus) VALUES ('$orderReqID','Pending')";
+      mysqli_query($conn,$prodSQL);
+      $prID = mysqli_insert_id($conn);
+      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','1','1','Pending')";
+      mysqli_query($conn,$phSQL);
+      echo "Error: " . $phSQL . "<br>" . mysqli_error($conn);
    }
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
 
@@ -120,6 +134,7 @@ else if($isBool=="existing"){ //EXISTING
 
    $paymentID = mysqli_insert_id($conn);
   echo "<br>inv: " . $paysql;
+
 
    echo '<script type="text/javascript">';
           $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
