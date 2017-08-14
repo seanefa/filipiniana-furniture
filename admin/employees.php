@@ -9,7 +9,7 @@ if (!$conn) {
 
   session_start();
   if(isset($GET['id'])){
-    $jsID = $_GET['id']; 
+    $jsID = $_GET['id'];
   }
   $jsID=$_GET['id'];
   $_SESSION['varname'] = $jsID;
@@ -41,7 +41,7 @@ else if (isset($_GET['deactivateSuccess']))
 }
 
 ?>
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <script>
@@ -67,14 +67,14 @@ else if (isset($_GET['deactivateSuccess']))
         $("#backArch").hide();
     });
 });
-    
-    }); 
+
+    });
     $(document).ready(function(){
      $('body').on('keyup','#username',function(){
     var user = $(this).val();
     var flag = true;
     $.post('employee-check.php',{username : user}, function(data){
-     
+
       $('#message').html(data);
       if(data != "Already Exist!"){
 
@@ -108,10 +108,10 @@ else if (isset($_GET['deactivateSuccess']))
       $('#addFab').prop('disabled', false);
       $('#username').css('border-color','limegreen');
     }
-    
+
     });
 
-    
+
 
     });
 
@@ -126,21 +126,21 @@ var error = 0;
       var user = $('#'+id).val();
       var flag = true;
     $.post('employee-check.php',{username : user}, function(data){
-     
+
      if(data == 'Already Exist!'){
-       
+
           $('#addFab').prop('disabled',true);
       $('#message'+id).html(data);
       $('#'+id).css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
-       
+
           $('#addFab').prop('disabled',true);
       $('#message'+id).html(data);
       $('#'+id).css('border-color','red');
      }
      else if(data == 'No white Space'){
-  
+
 
           $('#addFab').prop('disabled',true);
       $('#message'+id).html(data);
@@ -153,25 +153,25 @@ var error = 0;
       $('#'+id).css('border-color','black');
      }
 
-     
+
      else if(data == 'Good!'){
       error = 0;
        $('#message'+id).html('');
      $('#addFab').prop('disabled',false);
       $('#'+id).css('border-color','limegreen');
      }
-      
-    
+
+
     });
     }
-      
+
       function validateUpdate(id){
         var user = $('#edit'+id).val();
-      
+
       tempname = $('#edit'+id).val();
       temprem = $('#rem').val();
     $.post('employee-Ucheck.php',{username : user}, function(data){
-     
+
      if(data == 'unchanged'){
       error = 0;
        $('#message'+id).html('');
@@ -198,7 +198,7 @@ var error = 0;
       $('#edit'+id).css('border-color','black');
      }
 
-     
+
      else if(data == 'Good!'){
       error = 0;
        $('#message'+id).html('');
@@ -212,7 +212,7 @@ var error = 0;
 
 
       }
-      
+
 
 
  $(document).ready(function(){
@@ -276,7 +276,7 @@ var error = 0;
               <!-- PACKAGES -->
               <div role="tabpanel" class="tab-pane fade active in" id=frameworks>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
-                  <div class="panel-body">                 
+                  <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
                         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblEmployees">
@@ -289,14 +289,14 @@ var error = 0;
                             </tr>
                           </thead>
                           <tbody>
-                            
+
                               <?php
                               $sql = "SELECT * FROM tblemployee";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
                                 if($row['empStatus']=="Active"){
-                                  echo('<tr><td>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</td>');
+                                  echo('<tr><td>'.$row['empLastName'].', '.$row['empFirstName'].' '.$row['empMidName'].'</td>');
                                   $job = jName($row['empJobID']);
                                   echo ('<td>'.$job.'</td>
                                   <td>'.$row['empRemarks'].'</td>'); ?>
@@ -318,7 +318,7 @@ var error = 0;
                                     return $cat;
                                   }
                                   ?>
-                                
+
                               </tbody>
                             </table>
                           </div>
@@ -329,7 +329,7 @@ var error = 0;
                   <!-- /.modal -->
                 </div>
               </div>
-            </div>  
+            </div>
           </div>
         </div>
         <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
@@ -354,4 +354,4 @@ var error = 0;
       });
     </script>
   </body>
-  </html> 
+  </html>

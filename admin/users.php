@@ -52,7 +52,7 @@ include "dbconnect.php";
                           <tbody>
 
                               <?php
-                              $sql = "SELECT * FROM tblemployee a inner join tbluser b on a.empID = b.userID order by a.empID desc";
+                              $sql = "SELECT * FROM tblemployee a join tbluser b on a.empID = b.userEmpID order by empLastName";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {

@@ -3,10 +3,11 @@ session_start();
 include 'dbconnect.php';
 
 
-$fabric="";
+$fabric=0;
 
 
-if(isset($_POST['_fabric'])){
+if(isset($_POST['_fabric']))
+{
 	$fabric = $_POST['_fabric'];
 }
 
@@ -20,31 +21,26 @@ $description = $_POST["_description"];
 $price = $_POST["_price"];
 $pic = "";
 $dimension = $_POST["_dimensions"];
-
 $exist_image = $_POST["exist_image"];
-echo "sdjdgs".$exist_image;
 
-if($_FILES["image"]["error"] > 0)
+if($_FILES["pic"]["error"] > 0)
 {
 	echo "Error: NO CHOSEN FILE<br>";
 	echo "INSERT TO DATABASE FAILED";
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
- echo "<br>SAVED";
+ move_uploaded_file($_FILES["pic"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
+ echo "SAVED";
  $pic = date("Y-m-d") . time() . ".png";
- echo $pic;
 }
 
 if($pic=="")
 {
 	$pic = $exist_image;
 }
-echo $pic;
 // Create connection
 $updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', productName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
-echo $updateSql;
 
 if(true)//mysqli_query($conn,$updateSql))
 {/*
@@ -53,7 +49,7 @@ if(true)//mysqli_query($conn,$updateSql))
 	header( "Location: products.php?updateSuccess" );
 	echo '</script>';*/
 }
-else 
+else
 {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
 }
