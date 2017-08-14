@@ -23,14 +23,14 @@ $pic = "";
 $dimension = $_POST["_dimensions"];
 $exist_image = $_POST["exist_image"];
 
-if($_FILES["pic"]["error"] > 0)
+if($_FILES["image"]["error"] > 0)
 {
 	echo "Error: NO CHOSEN FILE<br>";
 	echo "INSERT TO DATABASE FAILED";
 }
 else
 {
- move_uploaded_file($_FILES["pic"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
+ move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
  echo "SAVED";
  $pic = date("Y-m-d") . time() . ".png";
 }

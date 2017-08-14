@@ -608,7 +608,7 @@ include "dbconnect.php";
    <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3><span id="x" style="color:red">*</span>
-                    <input type="file" name="" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
                     <input type="hidden" name="exist_image" value="<?php echo $trow['prodMainPic']?>">
                     </div>
                   </div>
