@@ -42,6 +42,8 @@ if(!isset($_SESSION["userEmpID"]))
   <link href="css/animate.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="css/style.css" rel="stylesheet">
+
+  <link href="css/literallycanvas.css" rel="stylesheet">
   <!-- color CSS -->
   <link href="css/colors/default.css" id="theme"  rel="stylesheet">
 
@@ -503,6 +505,9 @@ jQuery(function($) { 'use strict';
 <!-- InstaFilta -->
 <script src="plugins/bower_components/instaFilta/instafilta.min.js" type="text/javascript"></script>
 <script src="js/mask.js"></script>
+<script src="js/literallycanvas.js"></script>
+<script src="js/literallycanvas-core.js"></script>
+<script src="js/literallycanvas-core.min.js"></script>
 
 <!-- Form Wizard JavaScript -->
 <script src="plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>

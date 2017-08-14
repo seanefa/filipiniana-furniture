@@ -103,8 +103,8 @@ if (!$conn) {
                 </div>
                 <!--/row-->
                 <div class="row">
-                  <div class="col-md-12">
-                    <h3 class="box-title m-t-20">Upload Image<span id="x" style="color:red"> *</span></h3>
+                  <div id="toUpload" class="col-md-12">
+                    <h3 class="box-title m-t-20">Upload Image<span id="x" style="color:red"> * </span></h3>
                     <div class="product-img"><br>
                       <input type="file" name="image" class="dropify" required>
                     </div>

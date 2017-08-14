@@ -87,20 +87,57 @@ if(!isset($_SESSION["userID"]))
 					<div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
 						<div class="card">
 							<div class="card-header text-center">
-								<h1 class="card-title">Frameworks</h1>
+								<h1 class="card-title">Design Information</h1>
+								<h4>Size specification</h4>
+								<input type="number" name="" class="form-control" placeholder="Height">
+								<input type="number" name="" class="form-control" placeholder="Width">
+								<input type="number" name="" class="form-control" placeholder="Length">
+								<br>
+								<h4>Fabric</h4>
+
+								<select class="form-control" data-placeholder="Choose a Fabric"">
+                        <option value="0">Choose a Fabric</option>
+                        <?php
+                        include "dbconnect.php";
+            // Create connection
+                        $conn = mysqli_connect($servername, $username, $password, $dbname);
+            // Check connection
+                        if (!$conn) {
+                          die("Connection failed: " . mysqli_connect_error());
+                        }
+                        $sql = "SELECT * FROM tblfabrics order by fabricName;";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                          if($row['fabricStatus']=='Listed'){
+                            echo('<option value='.$row['fabricID'].'>'.$row['fabricName'].'</option>');
+                          }
+                        }
+                        ?>
+                      </select>
+                      			<br>
+								<h4>Remarks</h4>
+								<textarea class="form-control" rows="4" cols="10"></textarea>
+								
 							</div>
 							<div class="card-block"></div>
 						</div>
 					</div>
+
 					<div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
 						<div class="card">
 							<div class="card-block text-center">
-								<img class="img-fluid table-responsive"><h1><canvas id="canvas" width="720" height="500" style="background-color: gray; border: 1px solid #000000;"></canvas></h1>
+								<img class="img-fluid table-responsive">
+									<div class="literCanvas"></div>
+									<img src='' style="display: none,width:360px;height:360px;" id="savedImage">
+
+									
 							</div>
 							<div class="card-footer text-center">
-								<button role="button" class="btn btn-success"><i class="fa fa-sitemap"></i>&nbsp;Convert to Image</button>
-								<button role="button" class="btn btn-warning"><i class="fa fa-cart-plus"></i>&nbsp;Estimate Furniture</button>
-								<button role="button" class="btn btn-primary" onclick="clearCanvas()"><i class="fa fa-history"></i>&nbsp;Reset</button>
+								<div id="anotherDesign" style="display: none">
+									<button type="button" class='form-group' id="newDesign">New Design</button>
+								</div>
+								<button type="button" class='form-group' id="saveDesign">Save Design</button>
 							</div>
 						</div>
 					</div>
@@ -112,152 +149,10 @@ if(!isset($_SESSION["userID"]))
 						<!--upload image-->
 							
 							<!--Framework-->
-							<div class="card" id="framework">
-								<div class="card-header text-center">
-									<h1 class="card-title">Framework</h1>
-								</div>
-								<div class="card-block">
-									<div class="form-group">
 
-									<script type="text/javascript">
-									/*window.onload = function(){
-									var canvas = document.getElementById("canvas");
-									var img = document.getElementById('frame2');
-									var ctx = canvas.getContext("2d");
 									
-									ctx.drawImage(img,10,10);
-									}*/
-									var canvas = document.getElementById("canvas");
-									var frameimg,fabimg;
-									var ctx = canvas.getContext("2d");
-
-									function clearCanvas(){
-										var result = confirm('Canvas will be cleared. Are you sure?');
-										if(result){
-										$('#framework').toggle();
-										$('#fabric').toggle();
-										var ctx = canvas.getContext("2d");
-										ctx.clearRect(0, 0, canvas.width, canvas.height);
-										}
-									}
-
-										function addFrameImage(id){
-											
-									var temp = 'frame'+id;
-									
-									frameimg = document.getElementById(temp);
-									
-									$('#framework').toggle();
-									$('#fabric').toggle();
-									ctx.drawImage(frameimg,10,10,500,500);
-									
-	
-										}
-
-										function addFabricImage(id){
-											
-									var temp = 'fabric'+id;
-									fabimg = document.getElementById(temp);
-									ctx.globalCompositeOperation = 'source-in';
-									ctx.drawImage(fabimg,10,10,500,500);
-	
-										}
-
-										function tryKo(){
-											alert('oke');
-										}
-									</script>
-
-									<?php 
-									include "userconnect.php";
-									$sql = "SELECT * FROM tblframeworks;";
-	                              $result = mysqli_query($conn,$sql);
-										
-								if($result){
-	                              while ($row = mysqli_fetch_assoc($result))
-	                              {
-	                                if($row['frameworkStatus']=="Listed"){
-	                                	
-	                                	echo '
-	                                		<input type="image" src="/admin/plugins/images/'.$row['frameworkPic'].'" alt="Unavailable" class="img-responsive border-animate" height="150" width="145" onclick="addFrameImage('.$row['frameworkID'].')" />
-
-	                                		<img style="display:none" id="frame'.$row['frameworkID'].'" src="/admin/plugins/images/'.$row['frameworkPic'].'" alt="Unavailable" class="img-responsive" height="150" width="145">';
-
-	                                }
-	                            }
-									}
-
-
-									?>
-									
-										<div class="dropdown">
-
-
-
-										</div>
-										
-									</div>
-								</div>
-							</div>
 							<!--fabric-->
-							<div id="fabric" class="card" style="display: none">
-								<div class="card-header text-center">
-									<h1 class="card-title">Fabric</h1>
-								</div>
-								<div class="card-block">
-									
-									<div class="dropdown">
-									<?php 
-
-									$sql = "SELECT * FROM tblfabrics;";
-                              $result = mysqli_query($conn, $sql);
-                              while ($row = mysqli_fetch_assoc($result))
-                              {
-                                if($row['fabricStatus']=="Listed"){
-                                	echo '
-
-                                	<input type="image" src="/admin/plugins/images/'.$row['fabricPic'].'" alt="Unavailable" class="img-responsive" height="150" width="145" onclick="addFabricImage('.$row['fabricID'].')" />
-
-                                	<img style="display:none" id="fabric'.$row['fabricID'].'" src="/admin/plugins/images/'.$row['fabricPic'].'" alt="Unavailable" class="img-responsive" height="150" width="145">';
-                                }
-                            }
-
-									?>
-										
-									</div>
-									<!--
-									<div class="dropdown">
-										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Fabric Pattern</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										  <a class="dropdown-item" href="#">Polkadots</a>
-											<a class="dropdown-item" href="#">Stripes</a>
-										</div>
-									</div>
-									<div class="dropdown">
-										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Primary Color</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										  <a class="dropdown-item" href="#">Blue</a>
-											<a class="dropdown-item" href="#">Red</a>
-											<a class="dropdown-item" href="#">Green</a>
-											<a class="dropdown-item" href="#">Go</a>
-											<a class="dropdown-item" href="#">ZAIDO!!!</a>
-										</div>
-
-									</div>
-
-									<div class="dropdown">
-										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Secondary Color</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										  <a class="dropdown-item" href="#">Roses</a>
-											<a class="dropdown-item" href="#">Red</a>
-											<a class="dropdown-item" href="#">Violets</a>
-											<a class="dropdown-item" href="#">Blue</a>
-										</div>
-									</div>
-									!-->
-									
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -331,5 +226,91 @@ if(!isset($_SESSION["userID"]))
 				</div>
 			</div>
 -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+    							<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+
+    <!-- Literally Canvas -->
+										    <script src="js/literallycanvas.js"></script>
+										  <script type="text/javascript"></script>
+										  <link href="css/literallycanvas.css" rel="stylesheet">
+										  <script>
+
+  										var lc;
+									  $(document).ready(function(){
+									    lc = LC.init(
+									            document.getElementsByClassName('literCanvas')[0],
+									            {
+									              imageURLPrefix: 'img'
+									            }
+									        );
+									    $('#saveDesign').on('click',function(){
+									    	var d =lc.getImage().toDataURL();
+									    	$('.literCanvas').hide();
+									    	$('#saveDesign').hide();
+
+									    	$('#newDesign').show();
+									    	$('#savedImage').prop('src',d);
+
+									    	$('#anotherDesign').show();
+									    });
+									    $('#newDesign').on('click', function(){
+									    	$('.literCanvas').show();
+
+									    	$('#savedImage').hide();
+									    	$('#newDesign').hide();
+									    	$('#saveDesign').show();
+
+									    	$('#anotherDesign').hide();
+									    	lc.clear();
+									    });
+									  });
+									/*window.onload = function(){
+									var canvas = document.getElementById("canvas");
+									var img = document.getElementById('frame2');
+									var ctx = canvas.getContext("2d");
+									
+									ctx.drawImage(img,10,10);
+									}*/
+
+									
+									var canvas;
+									canvas = document.getElementById('canvas');
+
+									function clearCanvas(){
+										var result = confirm('Canvas will be cleared. Are you sure?');
+										if(result){
+										$('#framework').toggle();
+										$('#fabric').toggle();
+										var ctx = canvas.getContext("2d");
+										ctx.clearRect(0, 0, canvas.width, canvas.height);
+										}
+									}
+
+										function addFrameImage(id){
+											
+									var temp = 'frame'+id;
+									
+									frameimg = document.getElementById(temp);
+									
+									$('#framework').toggle();
+									$('#fabric').toggle();
+									ctx.drawImage(frameimg,10,10,300,300);
+									
+	
+										}
+
+										function addFabricImage(id){
+											
+									var temp = 'fabric'+id;
+									fabimg = document.getElementById(temp);
+									ctx.globalCompositeOperation = 'source-in';
+									ctx.drawImage(fabimg,10,10,300,300);
+	
+										}
+
+										function tryKo(){
+											alert('oke');
+										}
+									</script>
 	</body>
 </html>

@@ -43,6 +43,13 @@ else if (isset($_GET['deactivateSuccess']))
 <!DOCTYPE html>  
 <html lang="en">
 <head>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+
+    <!-- Literally Canvas -->
+    <script src="js/literallycanvas.js"></script>
+  <script type="text/javascript"></script>
+  <link href="css/literallycanvas.css" rel="stylesheet">
   <script>
   $(document).ready(function(){
     // Unit Name
@@ -282,6 +289,7 @@ var flag = true;
                   <div class="panel-body">                
                     <div class="row">
                       <div class="table-responsive">
+
                         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblframeworks">
                           <thead>
                             <tr>
