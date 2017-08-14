@@ -5,8 +5,7 @@ $prCtg = $_POST['_category'];
 $type = $_POST['_type'];
 $design = $_POST['design'];
 
-$prFabric = "";
-$prFabric = "N/A";
+$prFabric = 0;
 if(isset($_POST['_fabric'])){
 	$prFabric = $_POST['_fabric'];
 }

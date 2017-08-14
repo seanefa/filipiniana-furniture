@@ -44,7 +44,7 @@ if(!isset($_SESSION["userID"]))
 				  	</button>
 					<?php
 					include "userconnect.php";
-					$sql="SELECT * from tblcustomer where customerID='" . $_SESSION["userID"] . "'";
+					$sql="SELECT * from tblcompany_info";
 					$result=$conn->query($sql);
 					if($result->num_rows>0)
 					{

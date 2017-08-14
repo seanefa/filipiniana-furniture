@@ -11,7 +11,7 @@ include "dbconnect.php";
 
   session_start();
   if(isset($GET['id'])){
-    $jsID = $_GET['id']; 
+    $jsID = $_GET['id'];
   }
   $jsID=$_GET['id'];
 
@@ -83,7 +83,7 @@ include "dbconnect.php";
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username" class="form-control" placeholder="Elizabeth" name="_prodName" required/><span id="message"></span> 
+                      <input type="text" id="username" class="form-control" placeholder="Elizabeth" name="_prodName" required/><span id="message"></span>
                     </div>
                   </div>
                   <!--/span-->
@@ -162,7 +162,7 @@ include "dbconnect.php";
                   <!--<div class="col-md-2">
                     <div class="form-group">
                       <label class="control-label">Capacity</label><span id="x" style="color:red">*</span>
-                       
+
                     </div>
                   </div>
                 </div>-->
@@ -192,7 +192,7 @@ include "dbconnect.php";
                         }
                       }
                       ?>
-                    </select> 
+                    </select>
                 </div>
                     <div class="col-md-8">
                       <div class="form-group">
@@ -224,7 +224,7 @@ include "dbconnect.php";
                       <div class="col-md-12">
                       <h3 class="box-title m-t-20">Upload Image</h3>
                       <div class="product-img"><br>
-                      <input type="file" name="image" class="dropify">
+                      <input type="file" name="image" class="dropify" value="<?php "" . $row["prodMainPic"];?>">
                       </div>
                       </div>
                     </div>
@@ -456,7 +456,7 @@ include "dbconnect.php";
                   </div>
                 </div>
 
-                
+
                 <!--/span-->
               </div>
               <!--/row-->
@@ -467,7 +467,7 @@ include "dbconnect.php";
                 <div class="col-md-12">
                     <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                    <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span> 
+                    <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span>
                   </div>
                 </div>
                 <!--/span-->
@@ -553,7 +553,7 @@ include "dbconnect.php";
                 <!--<div class="col-md-2">
                   <div class="form-group">
                     <label class="control-label">Capacity</label><span id="x" style="color:red">*</span>
-                    <input type="number" id="remText" name ="capacity" class="form-control" placeholder="No. of Seaters" style="text-align:right" value="<?php echo $trow['prodCapacity'];?>" required /> 
+                    <input type="number" id="remText" name ="capacity" class="form-control" placeholder="No. of Seaters" style="text-align:right" value="<?php echo $trow['prodCapacity'];?>" required />
                   </div>-->
                 </div>
               </div>
@@ -567,7 +567,7 @@ include "dbconnect.php";
                     <label class="control-label">Dimensions (ft)</label><span id="x" style="color:red">*</span>
                     <input type="hidden" id="checkDime" name="_dimensions" value="<?php echo $trow['prodSizeSpecs'];?>"/>
                     <input type="text" id="updime" name ="_dimensions" class="form-control" placeholder="Height, Width, Length" style="text-align:right" readonly="true" value="<?php echo $trow['prodSizeSpecs'];?>" required />
-                      <?php 
+                      <?php
                       $dimeArr = array();
                       $dimeArr = explode(',',$trow['prodSizeSpecs']);
                       ?>
@@ -608,11 +608,11 @@ include "dbconnect.php";
    <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3><span id="x" style="color:red">*</span>
-                    <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="file" name="" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
                     <input type="hidden" name="exist_image" value="<?php echo $trow['prodMainPic']?>">
                     </div>
                   </div>
-                  
+
 <div class="modal-footer">
   <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" disabled=""><i class="fa fa-check"></i> Save</button>
   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
@@ -649,7 +649,7 @@ include "dbconnect.php";
 
 </div>
 </div>
-</div>  
+</div>
 </div>
 </body>
 </html>
