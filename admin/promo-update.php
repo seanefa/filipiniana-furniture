@@ -1,14 +1,16 @@
 <?php
-
+session_start();
 include 'dbconnect.php';
 
 $id = $_POST['recID'];
+
 $name = $_POST['name'];
 $desc = $_POST['desc'];
 $pic = "";
 $start = $_POST['start'];
 $end = $_POST['end'];
 $status = "Active";
+$exist_image=$_POST["exist_image"];
 
 if ($_FILES["image"]["error"] > 0)
 {
@@ -17,9 +19,14 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/promo" . $_FILES["image"]["name"]);
- echo "SAVED" ;
- $pic = $_FILES["image"]["name"];
+ move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/promo" . date("Y-m-d") . time() . ".png");
+ echo "SAVED";
+ $pic = date("Y-m-d") . time() . ".png";
+}
+
+if($pic=="")
+{
+	$pic=$exist_image;
 }
 
 $sql = "UPDATE `tblpromos` SET `promoName`='$name', `promoDescription`='$desc', `promoStartDate`='$start', `promoEnd`='$end', `promoImage`='$pic' WHERE `promoID`='$id';";
@@ -40,7 +47,7 @@ if($condition=="Amount"){
 }
 else if($condition=="Pieces"){
 	$data = $_POST['con_quan'];
-	$con_sql = "UPDATE `tblpromo_condition` SET `conCategory`='$condition', `conData`='$ata' WHERE `conditionID`='$id';";
+	$con_sql = "UPDATE `tblpromo_condition` SET `conCategory`='$condition', `conData`='$data' WHERE `conditionID`='$id';";
 	//mysqli_query($conn,$con_sql);
 	echo $con_sql . "<br>";
 }

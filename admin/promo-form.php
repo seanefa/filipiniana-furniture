@@ -482,7 +482,8 @@ if (!$conn) {
                       <div class="col-md-12">
                         <h3 class="box-title m-t-20">Promo Image</h3>
                         <div class="product-img"><br>
-                          <input type="file" name="image" class="dropify">
+                    		<input type="file" name="image" enctype="multipart/form-data" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
+                    		<input type="hidden" name="exist_image" value="<?php echo $row['promoImage']?>">
                         </div>
                       </div>
                     </div>
@@ -506,7 +507,7 @@ if (!$conn) {
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" disabled=""><i class="fa fa-check"></i> Save</button>
+                  <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>
               </form>

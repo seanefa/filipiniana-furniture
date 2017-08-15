@@ -182,10 +182,14 @@
 						while($row = mysqli_fetch_assoc($result))
 						{
 				?>
-				<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-					<button role="button" type="image" class="btn img-rounded img-fluid" src="/admin/plugins/images/<?php echo "" . $row['promoImage'];?>" data-toggle="modal" data-target="#promomodal"></button>
-				</div>
-				<?php }} mysqli_close($conn);?>
+							<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+								<image role="button" type="image" class="btn img-fluid hover-lighten" src="/admin/plugins/images/<?php echo "" . $row['promoImage'];?>" data-toggle="modal" data-target="#promomodal">
+							</div>
+				<?php
+						}
+					}
+					mysqli_close($conn);
+				?>
 			</div>
 		</div>
 		<br>

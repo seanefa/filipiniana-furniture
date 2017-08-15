@@ -2,16 +2,15 @@
 session_start();
 include 'dbconnect.php';
 
+$id = $_SESSION['varname'];
 
-$fabric=0;
-
+$fabric = 0;
 
 if(isset($_POST['_fabric']))
 {
 	$fabric = $_POST['_fabric'];
 }
 
-$id = $_SESSION['varname'];
 $category = $_POST["_category"];
 $type = $_POST["_type"];
 $framework = $_POST["_framework"];
@@ -22,6 +21,8 @@ $price = $_POST["_price"];
 $pic = "";
 $dimension = $_POST["_dimensions"];
 $exist_image = $_POST["exist_image"];
+$file= date("Y-m-d") . time() . ".png";
+$tmp_name=$_FILES["image"]["tmp_name"];
 
 if($_FILES["image"]["error"] > 0)
 {
@@ -30,9 +31,9 @@ if($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");
- echo "SAVED";
- $pic = date("Y-m-d") . time() . ".png";
+	move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");	 
+	echo "SAVED";
+	$pic = date("Y-m-d") . time() . ".png";
 }
 
 if($pic=="")
@@ -42,12 +43,12 @@ if($pic=="")
 // Create connection
 $updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', productName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
 
-if(true)//mysqli_query($conn,$updateSql))
-{/*
+if(mysqli_query($conn,$updateSql))
+{
 	echo '<script type="text/javascript">';
 	echo 'alert("RECORD SUCCESFULLY SAVED!")';
 	header( "Location: products.php?updateSuccess" );
-	echo '</script>';*/
+	echo '</script>';
 }
 else
 {
