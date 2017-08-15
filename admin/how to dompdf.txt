@@ -1,3 +1,0 @@
--copy lang sa admin lahat ng nandito.
--go to localhost:8000/admin/receipt.php?id=(any number muna since sample lang. para lang makita mo)
--nasa receipt.php kung pano mag pdf thing. basta ginagawa kase ng dompdf is ina-output yung buong html. pano kinukuha yung html? yung ob_something na function dyan haha.

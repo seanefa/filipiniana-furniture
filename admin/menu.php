@@ -27,7 +27,7 @@ if(!isset($_SESSION["userEmpID"]))
   <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
   <!-- Dropify CSS -->
   <link href="plugins/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet">
-  <!-- toast CSS -->
+  <!-- Toast CSS -->
   <link href="plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
   <!-- DataTable CSS -->
   <link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -36,15 +36,13 @@ if(!isset($_SESSION["userEmpID"]))
   <!--link href="../plugins/bower_components/horizontal-timeline/css/horizontal-timeline.css" rel="stylesheet">
   <link href="../plugins/bower_components/timeliner/src/css/jquery-timeliner.css" rel="stylesheet">
   <link href="../plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet"-->
-  <!-- morris CSS -->
+  <!-- Morris CSS -->
   <!--link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet"-->
-  <!-- animation CSS -->
+  <!-- Animation CSS -->
   <link href="css/animate.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="css/style.css" rel="stylesheet">
-
-  <link href="css/literallycanvas.css" rel="stylesheet">
-  <!-- color CSS -->
+  <!-- Color CSS -->
   <link href="css/colors/default.css" id="theme"  rel="stylesheet">
   <link href="css/select2.min.css" rel="stylesheet">
   <!-- Wizard CSS -->
@@ -53,6 +51,8 @@ if(!isset($_SESSION["userEmpID"]))
   <link rel="stylesheet" href="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css">
   <!-- SweetAlerts CSS -->
   <link href="plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+  <!-- LiterallyCanvas CSS -->
+  <link href="css/literallycanvas.css" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -374,15 +374,15 @@ if(!isset($_SESSION["userEmpID"]))
   <!-- Menu Plugin JavaScript -->
   <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
   <script src="js/admin/menu/active-menu.js"></script>
-  <!--slimscroll JavaScript -->
+  <!-- SlimScroll JavaScript -->
   <script src="js/jquery.slimscroll.js"></script>
   <script src="js/admin/menu/slimscroll-custom.js"></script>
-  <!--Wave Effects -->
+  <!-- Wave Effects -->
   <script src="js/waves.js"></script>
-  <!--Counter js -->
+  <!-- Counter js -->
   <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
   <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
-  <!--Morris JavaScript -->
+  <!-- Morris JavaScript -->
   <!--script src="../plugins/bower_components/raphael/raphael-min.js"></script>
   <script src="../plugins/bower_components/morrisjs/morris.js"></script>
   <script src="js/dashboard1.js"></script-->
@@ -432,110 +432,6 @@ if(!isset($_SESSION["userEmpID"]))
   <!-- Vertical-timeline JavaScript -->
   <!--script src="../plugins/bower_components/timeliner/src/js/jquery-timeliner.js"></script>
   <script src="../plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script-->
-<<<<<<< HEAD
-    <!-- Table Search -->
-    <script>
-    $(document).ready(function () {
-      var table = $('.dataTable').DataTable({
-        "order": [],
-        "pageLength": 5,
-        "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
-        "aoColumnDefs" : [
-        {
-         'bSortable' : false,
-         'aTargets' : [ 'removeSort' ]
-       }]
-     });
-    });
-    </script>
-
-    <script>
-    $(document).ready(function () {
-      $('#reportsTable').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-      });
-    });
-    </script>
-
-    <script type='text/javascript'>
-//<![CDATA[
-jQuery(function($) { 'use strict';
-  $("#printReceipt").find('.print-link').on('click', function() {
-      //Print ele2 with default options
-      $.print("#printReceipt");
-    });
-});
-//]]>
-</script>
-
-<!-- InstaFilta -->
-<script src="plugins/bower_components/instaFilta/instafilta.min.js" type="text/javascript"></script>
-<script src="js/mask.js"></script>
-<script src="js/literallycanvas.js"></script>
-<script src="js/literallycanvas-core.js"></script>
-<script src="js/literallycanvas-core.min.js"></script>
-
-<!-- Form Wizard JavaScript -->
-<script src="plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>
-<!-- FormValidation plugin and the class supports validating Bootstrap form -->
-<script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
-<script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
-
-<!--script type="text/javascript">
-$(window).on('load',function() {
-    setTimeout(function() {
-       $("#page-wrapper:not(.sidebar), .navbar-header").hover(function () {
-        $( '.hideMenu' ).trigger('click', function() {
-            return false;
-        });
-      });
-    },1000);
-});
-</script-->
-
-
-<script type="text/javascript">
-  $("document").ready(function(e) {
-    setTimeout(function() {
-      if( $('.sidebar').is(":hover") ){
-        e.preventDefault();
-    } 
-    else{
-       $(".hideMenu").trigger('click');
-     }
-    },2000);
-});
-  $("document").ready(function() {
-    setTimeout(function() {
-       $(".sidebar").mouseenter(function () {
-        $(".hideMenu").trigger('click');
-      });
-
-       $(".sidebar").mouseleave(function () {
-        $(".hideMenu").trigger('click');
-      });
-    },2000);
-});
-</script>
-
-<!--script type="text/javascript">
-  $("document").ready(function() {
-    function menuHover() {
-      //Hover
-      $('#page-wrapper, .navbar-header').hover(function(){
-         $(".hideMenu").trigger('click');
-      }).mouseout(function(){
-
-      });
-    }
-    menuHover();
-});
-</script-->
-
-=======
   <!-- DataTable Custom -->
   <script src="js/admin/menu/dataTable-custom.js"></script>
   <!-- InstaFilta -->
@@ -543,11 +439,14 @@ $(window).on('load',function() {
   <script src="js/mask.js"></script>
   <!-- Form Wizard JavaScript -->
   <script src="plugins/bower_components/jquery-wizard-master/dist/jquery-wizard.min.js"></script>
-  <!-- FormValidation plugin and the class supports validating Bootstrap form -->
+  <!-- Form Validation plugin and the class supports validating Bootstrap form -->
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
   <!-- Auto Hide Menu -->
   <script src="js/admin/menu/auto-hide-menu.js"></script>
->>>>>>> 75479f7808cbb1f941cdd6b02d69505afe36d776
+  <!-- Literally Canvas -->
+  <script src="js/literallycanvas.js"></script>
+  <script src="js/literallycanvas-core.js"></script>
+  <script src="js/literallycanvas-core.min.js"></script>
 </body>
 </html>
