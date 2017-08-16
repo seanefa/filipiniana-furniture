@@ -258,6 +258,61 @@ var flag = true;
         $("#backArch").hide();
     });
 }); */
+
+                    var lc,d;
+                    $('body').on('focus','.modal',function(){
+                      lc = LC.init(
+                              document.getElementsByClassName('literCanvas')[0],
+                              {
+                                imageURLPrefix: 'img',
+                               tools: [LC.tools.Line,LC.tools.Eraser,
+                              LC.tools.Rectangle, LC.tools.Ellipse, LC.tools.Eyedropper, LC.tools.Polygon, LC.tools.Pan],
+                              toolbarPosition : 'bottom'
+                              }
+                          );
+                      $('#saveDesign').on('click',function(){
+                        
+                        d =lc.getImage().toDataURL();
+                        
+                        $('.literCanvas').hide();
+                        $('#saveDesign').hide();
+
+                        $('#newDesign').show();
+
+                        $('#savedImage').show();
+                        $('#savedImage').prop('src',d);
+
+                        $('#anotherDesign').show();
+                        $('#productDesc').show();
+                        $('#closeCanvas').hide();
+                      });
+                      $('#newDesign').on('click', function(){
+                        $('.literCanvas').show();
+                        $('#closeCanvas').show()
+                        $('#savedImage').hide();
+                        $('#newDesign').hide();
+                        $('#saveDesign').show();
+
+                        $('#anotherDesign').hide();
+                        $('#productDesc').hide();
+                        lc.clear();
+                      });
+
+                      //open and close
+                      $('#openCanvas').on('click',function(){
+                        $('#toUpload').hide();
+                        $('#toCustomize').show();
+                      });
+                      $('#closeCanvas').on('click',function(){
+                        $('#toUpload').show();
+                        $('#toCustomize').hide();
+                      });
+                      //
+
+                    });
+
+
+
   </script>
 </head>
 <body>

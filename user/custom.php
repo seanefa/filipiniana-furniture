@@ -4,6 +4,9 @@ if(!isset($_SESSION["userID"]))
 {
 	header("Location: error.html");
 }
+$userid = $_SESSION["userID"];
+$_SESSION['passId'] = $userid;
+
 ?>
 <!DOCTYPE html>
 
@@ -83,19 +86,22 @@ if(!isset($_SESSION["userID"]))
 			<h1 class="text-center"><b>CUSTOMIZATION</b></h1>
 			<hr>
 			<div class="container">
+			<form action="add-Custom_prod.php" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+
+						<div id="productDesc" style="display: none">
 						<div class="card">
 							<div class="card-header text-center">
 								<h1 class="card-title">Design Information</h1>
 								<h4>Size specification</h4>
-								<input type="number" name="" class="form-control" placeholder="Height">
-								<input type="number" name="" class="form-control" placeholder="Width">
-								<input type="number" name="" class="form-control" placeholder="Length">
+								<input type="number" name="cust_height" class="form-control" placeholder="Height" required>
+								<input type="number" name="cust_width" class="form-control" placeholder="Width" required>
+								<input type="number" name="cust_length" class="form-control" placeholder="Length" required>
 								<br>
 								<h4>Fabric</h4>
 
-								<select class="form-control" data-placeholder="Choose a Fabric"">
+								<select name="cust_fabric" class="form-control" data-placeholder="Choose a Fabric" id="chooseFabric">
                         <option value="0">Choose a Fabric</option>
                         <?php
                         include "dbconnect.php";
@@ -117,31 +123,43 @@ if(!isset($_SESSION["userID"]))
                       </select>
                       			<br>
 								<h4>Remarks</h4>
-								<textarea class="form-control" rows="4" cols="10"></textarea>
+								<textarea name="cust_remarks" class="form-control" rows="4" cols="10"></textarea>
 								
 							</div>
 							<div class="card-block"></div>
 						</div>
 					</div>
+					</div>
 
-					<div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+					<div id="changeSize" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<!-- col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 !-->
 						<div class="card">
 							<div class="card-block text-center">
 								<img class="img-fluid table-responsive">
 									<div class="literCanvas"></div>
-									<img src='' style="display: none,width:360px;height:360px;" id="savedImage">
-
+									<div id="thisCanvas" style="display: none">
+									<canvas id="canvas" height="550" width="700" style="border:1px solid #000000; background-color: gray"></canvas>
+									</div>
+									<img name="cust_image" src='' style="display: none,width:260px;height:260px;" id="savedImage">
+									<input type="hidden" name="cust_img_data" id="cust_img_data" value=""/>
+									
+										<img src='' id="tempImage">
 									
 							</div>
 							<div class="card-footer text-center">
-								<div id="anotherDesign" style="display: none">
-									<button type="button" class='form-group' id="newDesign">New Design</button>
+								<div class="card-footer text-center" id="anotherDesign" style="display: none">
+									<button type="button" class='btn btn-primary' id="newDesign">New Design</button>
+									<button type="submit" class='btn btn-success' id="submitThis">Submit Design</button>
+
 								</div>
-								<button type="button" class='form-group' id="saveDesign">Save Design</button>
+								<button type="button" class='btn btn-primary' id="saveDesign">Save Design</button>
+
+								<button type="button" class='btn btn-primary' id="chooseExist">Choose existing framework</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				</form>
 				<br>
 				<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -237,30 +255,81 @@ if(!isset($_SESSION["userID"]))
 
   										var lc;
 									  $(document).ready(function(){
+									  	var canvas = document.getElementById('canvas');
+									  	var ctx = canvas.getContext('2d');
+
 									    lc = LC.init(
 									            document.getElementsByClassName('literCanvas')[0],
 									            {
-									              imageURLPrefix: 'img'
+									              imageURLPrefix: 'img',
+									              imageSize: {width: 950, height: null},
+									             tools: [LC.tools.Line,LC.tools.Eraser,
+      												LC.tools.Rectangle, LC.tools.Ellipse, LC.tools.Eyedropper, LC.tools.Polygon, LC.tools.Pan],
+      												toolbarPosition : 'top'
 									            }
 									        );
+
+									    $('#chooseFabric').on('change',function(){
+									    	var fabimg = 'fabrics/patterns/'+ $(this).val();
+									    	$('#tempImage').prop('src',fabimg);
+
+									    	var img = document.getElementById('savedImage');
+									    	ctx.drawImage(img,40,40);
+
+									    	ctx.globalCompositeOperation = 'source-in';
+
+									    	fabimg = document.getElementById('tempImage');
+											ctx.drawImage(fabimg,40,40);
+
+									    	$('#thisCanvas').show();
+									    	$('#savedImage').hide();
+
+
+
+
+									    });
+
+
 									    $('#saveDesign').on('click',function(){
+
 									    	var d =lc.getImage().toDataURL();
+
+									    	$('#cust_img_data').val(d);
 									    	$('.literCanvas').hide();
 									    	$('#saveDesign').hide();
 
 									    	$('#newDesign').show();
+
+									    	$('#savedImage').show();
 									    	$('#savedImage').prop('src',d);
+									    	
+
+									    	$('#submitThis').show();
+									    	$('#chooseExist').hide();
 
 									    	$('#anotherDesign').show();
+									    	$('#productDesc').show();
+
+									    	$('#changeSize').prop('class','col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9');
+
+
+									    	
+
 									    });
 									    $('#newDesign').on('click', function(){
 									    	$('.literCanvas').show();
+
+									    	$('#changeSize').prop('class','col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12');
+
+									    	$('#submitThis').hide();
+									    	$('#chooseExist').show();
 
 									    	$('#savedImage').hide();
 									    	$('#newDesign').hide();
 									    	$('#saveDesign').show();
 
 									    	$('#anotherDesign').hide();
+									    	$('#productDesc').hide();
 									    	lc.clear();
 									    });
 									  });
@@ -272,7 +341,7 @@ if(!isset($_SESSION["userID"]))
 									ctx.drawImage(img,10,10);
 									}*/
 
-									
+									/*
 									var canvas;
 									canvas = document.getElementById('canvas');
 
@@ -311,6 +380,7 @@ if(!isset($_SESSION["userID"]))
 										function tryKo(){
 											alert('oke');
 										}
+										*/
 									</script>
 	</body>
 </html>
