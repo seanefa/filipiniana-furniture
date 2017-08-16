@@ -102,7 +102,7 @@ $_SESSION['passId'] = $userid;
 								<h4>Fabric</h4>
 
 								<select name="cust_fabric" class="form-control" data-placeholder="Choose a Fabric" id="chooseFabric">
-                        <option value="0">Choose a Fabric</option>
+                        <option value="0" selected disabled>Choose a Fabric</option>
                         <?php
                         include "dbconnect.php";
             // Create connection
@@ -116,11 +116,36 @@ $_SESSION['passId'] = $userid;
                         while ($row = mysqli_fetch_assoc($result))
                         {
                           if($row['fabricStatus']=='Listed'){
-                            echo('<option value='.$row['fabricID'].'>'.$row['fabricName'].'</option>');
+                            echo('<option value='.$row['fabricID'].'>'.$row['fabricName'].'</option>
+                            	
+                            	');
                           }
                         }
                         ?>
                       </select>
+                      <?php
+                        include "dbconnect.php";
+            // Create connection
+                        $conn = mysqli_connect($servername, $username, $password, $dbname);
+            // Check connection
+                        if (!$conn) {
+                          die("Connection failed: " . mysqli_connect_error());
+                        }
+                        $sql = "SELECT * FROM tblfabrics order by fabricName;";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                          if($row['fabricStatus']=='Listed'){
+                            echo('<input value="'.$row['fabricPic'].'" id="'.$row['fabricID'].'" type="hidden">
+                            	
+                            	');
+                          }
+                        }
+                        ?>
+                      			<br>
+                      			<br>
+                      			<img src='' id="tempImage" style="width: 100px;height: 100px;">
+                      			<br>
                       			<br>
 								<h4>Remarks</h4>
 								<textarea name="cust_remarks" class="form-control" rows="4" cols="10"></textarea>
@@ -140,14 +165,15 @@ $_SESSION['passId'] = $userid;
 									<div id="thisCanvas" style="display: none">
 									<canvas id="canvas" height="550" width="700" style="border:1px solid #000000; background-color: gray"></canvas>
 									</div>
-									<img name="cust_image" src='' style="display: none,width:260px;height:260px;" id="savedImage">
+									<img name="cust_image" src='' style="display: none;" height="550" width="700" id="savedImage">
 									<input type="hidden" name="cust_img_data" id="cust_img_data" value=""/>
 									
-										<img src='' id="tempImage">
+										
 									
 							</div>
 							<div class="card-footer text-center">
 								<div class="card-footer text-center" id="anotherDesign" style="display: none">
+								<img src='' id="tempImage">
 									<button type="button" class='btn btn-primary' id="newDesign">New Design</button>
 									<button type="submit" class='btn btn-success' id="submitThis">Submit Design</button>
 
@@ -252,6 +278,37 @@ $_SESSION['passId'] = $userid;
 										  <script type="text/javascript"></script>
 										  <link href="css/literallycanvas.css" rel="stylesheet">
 										  <script>
+										  //remove white pixels
+										  function white2transparent(img)
+										{
+										    var c = document.createElement('canvas');
+
+										    var w = img.width, h = img.height;
+
+										    c.width = w;
+										    c.height = h;
+
+										    var ctx = c.getContext('2d');
+
+										    ctx.drawImage(img, 0, 0, w, h);
+										    var imageData = ctx.getImageData(0,0, w, h);
+										    var pixel = imageData.data;
+
+										    var r=0, g=1, b=2,a=3;
+										    for (var p = 0; p<pixel.length; p+=4)
+										    {
+										      if (
+										          pixel[p+r] == 255 &&
+										          pixel[p+g] == 255 &&
+										          pixel[p+b] == 255) // if white then change alpha to 0
+										      {pixel[p+a] = 0;}
+										    }
+
+										    ctx.putImageData(imageData,0,0);
+
+										    return c.toDataURL('image/png');
+										}
+										  //
 
   										var lc;
 									  $(document).ready(function(){
@@ -262,7 +319,7 @@ $_SESSION['passId'] = $userid;
 									            document.getElementsByClassName('literCanvas')[0],
 									            {
 									              imageURLPrefix: 'img',
-									              imageSize: {width: 950, height: null},
+									              imageSize: {width: 700, height: 550},
 									             tools: [LC.tools.Line,LC.tools.Eraser,
       												LC.tools.Rectangle, LC.tools.Ellipse, LC.tools.Eyedropper, LC.tools.Polygon, LC.tools.Pan],
       												toolbarPosition : 'top'
@@ -270,16 +327,22 @@ $_SESSION['passId'] = $userid;
 									        );
 
 									    $('#chooseFabric').on('change',function(){
-									    	var fabimg = 'fabrics/patterns/'+ $(this).val();
-									    	$('#tempImage').prop('src',fabimg);
+
+
+
+									    	var fabID = $(this).val();
+									    	var getFab = $('#'+fabID).val();
+									    	alert(getFab);
+									    	$('#tempImage').prop('src','fabrics/patterns/'+getFab);
+									    	var fabimg = document.getElementById('tempImage');
 
 									    	var img = document.getElementById('savedImage');
 									    	ctx.drawImage(img,40,40);
 
 									    	ctx.globalCompositeOperation = 'source-in';
 
-									    	fabimg = document.getElementById('tempImage');
-											ctx.drawImage(fabimg,40,40);
+									    	
+											ctx.drawImage(fabimg,10,10);
 
 									    	$('#thisCanvas').show();
 									    	$('#savedImage').hide();
