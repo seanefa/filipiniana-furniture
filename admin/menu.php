@@ -272,7 +272,7 @@ if(!isset($_SESSION["userEmpID"]))
       <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-bar-chart"></i><span class="hide-menu">Reports<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
           <li><a href="sales-reports.php">Sales Report</a></li>
-          <li><a href="">Inventory Report</a></li>
+          <li><a href="inventory-report.php">Inventory Report</a></li>
           <li><a href="">Production Report</a></li>
           <li><a href="">Order Report</a></li>
         </ul>

@@ -68,7 +68,7 @@ $(document).ready(function(){
         var date = $("#dateRep").val();
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'reports-out.php',
         data: {
           id: value, d: date,
         },
@@ -83,7 +83,7 @@ $(document).ready(function(){
         var y = $("#year").val();
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'reports-out.php',
         data: {
           id: value, m: m, y:y,
         },
@@ -98,7 +98,7 @@ $(document).ready(function(){
         alert(y);
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'reports-out.php',
         data: {
           id: value, y : y,
         },
@@ -171,11 +171,11 @@ $(document).ready(function(){
                       <table class="table color-bordered-table muted-bordered-table display nowrap" id="reportsTable">
                         <thead>
                           <tr>
-                            <th style="text-align: left;">Order ID</th>
-                            <th style="text-align: left;">Customer Name</th>
-                            <th style="text-align: left;">Amount Due</th>
-                            <th style="text-align: left;">Amount Paid</th>
-                            <th style="text-align: left;">Remaining Balance</th>
+                            <th style="text-align: left;">Material ID</th>
+                            <th style="text-align: left;">Starting Quantity</th>
+                            <th style="text-align: left;">Used(Till Now)</th>
+                            <th style="text-align: left;">Available</th>
+                            <th style="text-align: left;">Status</th>
                           </tr>
                         </thead>
                         <tbody style="text-align: left;">
