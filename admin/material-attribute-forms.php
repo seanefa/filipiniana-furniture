@@ -42,13 +42,13 @@ if (!$conn) {
                   <div class="form-group">
                     <label class="control-label">Measurement(s)</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
-                      <option value='0'>Description only</option>
+                      
                       <?php
                       $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
-                        if($row['uncategoryStatus']=='Active'){
+                        if($row['uncategoryStatus']=='Active' || $row['uncategoryStatus']=='Hidden'){
                           echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
                         }
                       }
@@ -84,41 +84,17 @@ if (!$conn) {
             <div class="descriptions">
               <?php
               //$tsql = "SELECT * FROM tblmaterials a, tblmat_attribs b, tblattributes c WHERE b.matID = a.materialID AND b.attribID = c.attributeID AND a.materialID = '$jsID';"; 
-              $tsql = "SELECT * FROM tblmaterials WHERE materialID = '$jsID';";
+              $tsql = "SELECT * FROM tblattributes WHERE attributeID = '$jsID';";
               $tresult = mysqli_query($conn,$tsql);
               $trow = mysqli_fetch_assoc($tresult);
               ?>
 
               <div class="form-body">
-
-                <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control"  data-placeholder="Select Material Type" tabindex="1" name="type">
-                      <?php
-                      $sql = "SELECT * FROM tblmat_type;";
-                      $result = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result))
-                      {
-                        if($trow['materialType']==$row['matTypeName']){
-                          echo('<option value='.$row['matTypeID'].' selected="selected">'.$row['matTypeName'].'</option>');
-                        }
-                        else{
-                          echo('<option value='.$row['matTypeID'].'>'.$row['matTypeName'].'</option>');
-                        }
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div>
-              </div>
-
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message"></span> </div>
+                        <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['attributeName']; $_SESSION['tempname'] =$trow['attributeName'];?>"required /><span id="message"></span> </div>
                       </div>
                     </div>
 
@@ -141,48 +117,26 @@ if (!$conn) {
                         echo "<span>". $a ."</span>";
                       }*/
                       ?>
-
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label class="control-label">Variant Attributes</label><span id="x" style="color:red"> *</span>
-                            <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
-                              <?php
-                              $sql1 = "SELECT * FROM tblmat_attribs WHERE mat_attribStatus = 'Active' AND matID = '$jsID'";
-                              $res = mysqli_query($conn,$sql1);
-                              $attribs = "";
-                              while($trow = mysqli_fetch_assoc($res)){ //choosing kung ano pa nandun;
-                                //if($row['mat_attribStatus']=="Active"){
-                                $attribs = $attribs . $trow['attribID'] . ",";
-                              
-                              }
-                              $temp = substr(trim($attribs), 0, -1);
-                              //$attribs = array();
-                              $attribs = explode(',',$temp);
-                              sort($attribs);
-                              
-                              $sql = "SELECT * FROM tblattributes;";
-                              $result = mysqli_query($conn, $sql);
-                              $cnt = 0;
-                              while ($row = mysqli_fetch_assoc($result))
-                              {
-                                if($attribs[$cnt]==$row['attributeID']){
-                                  echo('<option value='.$row['attributeID'].' selected="selected">'.$row['attributeName'].'</option>');
-                                  $cnt++;
-                                }
-                                else{
-                                  echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
-                                }
-                                //$cnt++;
-                              }
-
-                              ?>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <input type="hidden" name="intags" id="intags" >
+                  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Measurement(s)</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
+                      
+                      <?php
+                      $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['uncategoryStatus']=='Active' || $row['uncategoryStatus']=='Hidden'){
+                          echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
 
                     </div>
 
@@ -208,10 +162,10 @@ if (!$conn) {
                 <h3 class="modal-title">Deactivate Material</h3>
               </div>
               <div class="modal-body">
-                <h4>Are you sure you want to deactivate this Material?</h4>
+                <h4>Are you sure you want to deactivate this Material Attribute?</h4>
               </div>
               <div class="modal-footer">
-                <a href="material-delete.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
+                <a href="delete-material-attribute.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
                 <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
               </div>
             </div>
