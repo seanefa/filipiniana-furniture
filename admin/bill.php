@@ -37,7 +37,7 @@ $row = mysqli_fetch_assoc($res);
       <div class="row">
       <div class="col-md-6 col-md-offset-3">
       <div style="text-align: center;">
-          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- R  E  C  E  I  P  T -</p>
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- B I L L -</p>
       </div>
       </div>
       </div>
@@ -50,7 +50,7 @@ $row = mysqli_fetch_assoc($res);
         $res = mysqli_query($conn,$sql);
         $custRow = mysqli_fetch_assoc($res);
         ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">OR#<?php $orderID = str_pad($id, 6, '0', STR_PAD_LEFT); echo $orderID;
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">INV#<?php $orderID = str_pad($id, 6, '0', STR_PAD_LEFT); echo $orderID;
                     $orID = "OR". $orderID;?></span>
         </div>
         </div>
@@ -161,7 +161,7 @@ $row = mysqli_fetch_assoc($res);
           </tr>
           <tr>
             <td>Remaining Balance:</td>
-            <td>Php <?php echo number_format($bal,2)?></td>
+            <td style="color:red">Php <?php echo number_format($bal,2)?></td>
           </tr>
         </table>
       </div>
