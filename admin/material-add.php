@@ -4,19 +4,11 @@ include 'dbconnect.php';
 $name = $_POST['name'];
 $type = $_POST['type'];
 $str = $_POST['attribs'];
-$measure = $_POST['measure'];
 $status = "Listed";
 $flag = 0;
 $unit = $_POST['unit'];
 
-$measurement = "";
 
-foreach($measure as $a){
-	$measurement = $measurement . $a . ",";
-}
-
-$measures = substr(trim($measurement), 0, -1);
-echo $measures;
 
 //$attribs = substr(trim($str), 0, -1);
 
@@ -51,7 +43,7 @@ $temp1 = explode(",", $temps);
 	}*/
 
 
-$sql = "INSERT INTO `tblmaterials` (`materialType`, `materialName`, `materialMeasurement`, `materialStatus`) VALUES ('$type', '$name','$measures','$status')";
+$sql = "INSERT INTO `tblmaterials` (`materialType`, `materialName`, `materialStatus`) VALUES ('$type', '$name','$status')";
 mysqli_query($conn,$sql);
 $flag++;
 $last_id = mysqli_insert_id($conn);

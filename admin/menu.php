@@ -286,14 +286,14 @@ if(!isset($_SESSION["userEmpID"]))
           </li>
           <li><a href="javascript:void(0)" class="waves-effect">Archives<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
-              <li><a href="javascript:void(0)">Supplier</a></li>
-
-              <li><a href="javascript:void(0)">Unit of Measurement</a></li>
+              <li><a href="archived-unit-of-measurement.php">Unit of Measurement</a></li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
                 <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="javascript:void(0)">Materials</a></li>
-                  <li><a href="javascript:void(0)">Material Variants</a></li>
+				  <li><a href="archived-material-attribute.php">Material Attributes</a></li>
+                  <li><a href="archived-material-type.php">Material Type</a></li>
+				  <li><a href="archived-material.php">Materials</a></li>
+                  <li><a href="archived-material-variants.php">Material Variants</a></li>
                 </ul>
               </li>
 
@@ -303,43 +303,43 @@ if(!isset($_SESSION["userEmpID"]))
                     <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="javascript:void(0)" class="waves-effect">Fabric<span class="fa arrow"></span></a>
                         <ul class="nav nav-sixth-level animated fadeIn">
-                          <li><a href="javascript:void(0)">Textures</a></li>
-                          <li><a href="javascript:void(0)">Types</a></li>
-                          <li><a href="javascript:void(0)">Patterns</a></li>
-                          <li><a href="javascript:void(0)">Fabrics Formed</a></li>
+                          <li><a href="archived-fabric-texture.php">Textures</a></li>
+                          <li><a href="archived-fabric-type.php">Types</a></li>
+                          <li><a href="archived-fabric-pattern.php">Patterns</a></li>
+                          <li><a href="archived-fabrics.php">Fabrics Formed</a></li>
                         </ul>
                       </li>
                     </ul>
                     <ul class="nav nav-fifth-level animated fadeIn">
                       <li><a href="javascript:void(0)" class="waves-effect">Frame<span class="fa arrow"></span></a>
                         <ul class="nav nav-sixth-level animated fadeIn">
-                          <li><a href="javascript:void(0)">Designs</a></li>
-                          <li><a href="javascript:void(0)">Materials</a></li>
-                          <li><a href="javascript:void(0)">Frameworks</a></li>
+                          <li><a href="archived-framework-design.php">Designs</a></li>
+                          <li><a href="archived-framework-material.php">Materials</a></li>
+                          <li><a href="archived-frameworks.php">Frameworks</a></li>
                         </ul>
                       </li>
                     </ul>
                   </li> 
-                  <li><a href="javascript:void(0)">Categories</a></li>
-                  <li><a href="javascript:void(0)">Types</a></li>
-                  <li><a href="javascript:void(0)">Products</a></li>
+                  <li><a href="archived-categories.php">Categories</a></li>
+                  <li><a href="archived-furniture-type.php">Types</a></li>
+                  <li><a href="archived-products.php">Products</a></li>
                 </ul>
               </li>
 
-              <li><a href="javascript:void(0)">Packages</a></li>
+              <li><a href="archived-packages.php">Packages</a></li>
               <li><a href="javascript:void(0)">Production Information</a></li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Manpower<span class="fa arrow"></span></a>
                 <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="javascript:void(0)">Jobs</a></li>
-                  <li><a href="javascript:void(0)">Employees</a></li>
+                  <li><a href="archived-jobs.php">Jobs</a></li>
+                  <li><a href="archived-employees.php">Employees</a></li>
                 </ul>
               </li>
 
               <li><a href="javascript:void(0)" class="waves-effect">Promos & Delivery Rates<span class="fa arrow"></span></a>
                 <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="javascript:void(0)">Promos</a></li>
-                  <li><a href="javascript:void(0)">Delivery Rates</a></li>
+                  <li><a href="archived-promos.php">Promos</a></li>
+                  <li><a href="archived-delivery-rates.php">Delivery Rates</a></li>
                 </ul>
               </li>
 

@@ -42,20 +42,20 @@ $promo = $_POST['p_cat'];
 if($condition=="Amount"){
 	$data = $_POST['con_rate'];
 	$con_sql = "UPDATE `tblpromo_condition` SET `conCategory`='$condition', `conData`='$data' WHERE `conditionID`='$id';";
-	//mysqli_query($conn,$con_sql);
-	echo $con_sql . "<br>";
+//	//mysqli_query($conn,$con_sql);
+//	echo $con_sql . "<br>";
 }
 else if($condition=="Pieces"){
 	$data = $_POST['con_quan'];
 	$con_sql = "UPDATE `tblpromo_condition` SET `conCategory`='$condition', `conData`='$data' WHERE `conditionID`='$id';";
-	//mysqli_query($conn,$con_sql);
-	echo $con_sql . "<br>";
+//	//mysqli_query($conn,$con_sql);
+//	echo $con_sql . "<br>";
 }
 else if($condition=="Others"){
 	$data = $_POST['con_desc'];
 	$con_sql = "UPDATE `tblpromo_condition` SET `conCategory`='$condition', `conData`='$ata' WHERE `conditionID`='$id';";
-	//mysqli_query($conn,$con_sql);
-	echo $con_sql . "<br>";
+//	//mysqli_query($conn,$con_sql);
+//	echo $con_sql . "<br>";
 }
 
 if($promo=="Amount"){
@@ -63,21 +63,21 @@ if($promo=="Amount"){
 	$rate = $_POST['pro_rate'];
 	$data = $r_type . "," . $rate;
 	$pro_sql = "UPDATE `tblpromo_promotion` SET `proCategory`='$promo', `proData`='$data' WHERE `proPromoID`='$id';";
-	//mysqli_query($conn,$pro_sql);
-	echo $pro_sql . "<br>";
+//	//mysqli_query($conn,$pro_sql);
+//	echo $pro_sql . "<br>";
 
 }
 else if($promo=="Pieces"){
 	$data = $_POST['pro_quan'];
 	$pro_sql = "UPDATE `tblpromo_promotion` SET `proCategory`='$promo', `proData`='$data' WHERE `proPromoID`='$id';";
-	//mysqli_query($conn,$pro_sql);
-	echo $pro_sql . "<br>";
+//	//mysqli_query($conn,$pro_sql);
+//	echo $pro_sql . "<br>";
 }
 else if($promo=="Others"){
 	$data = $_POST['pro_desc'];
 	$pro_sql = "UPDATE `tblpromo_promotion` SET `proCategory`='$promo', `proData`='$data' WHERE `proPromoID`='$id';";
-	//mysqli_query($conn,$pro_sql);
-	echo $pro_sql . "<br>";
+//	//mysqli_query($conn,$pro_sql);
+//	echo $pro_sql . "<br>";
 }
 
 

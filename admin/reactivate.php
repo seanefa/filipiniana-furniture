@@ -215,5 +215,52 @@ else {
 }
 
 }
+if($rName=="Material Attribute"){
+$updateSql = "UPDATE tblattributes SET attributeStatus = 'Active' WHERE attributeID = '$jsID'";
+        // Check connection
 
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: archived-material-attribute.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+
+}
+if($rName=="Material Type"){
+$updateSql = "UPDATE tblmat_type SET matTypeStatus = 'Listed' WHERE matTypeID = '$jsID'";
+        // Check connection
+
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: archived-material-type.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+
+}
+if($rName=="Material"){
+$updateSql = "UPDATE tblmaterials SET materialStatus = 'Listed' WHERE materialID = '$jsID'";
+        // Check connection
+
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: archived-material.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+
+}
+if($rName=="Material Variants"){
+$updateSql = "UPDATE tblmat_var SET variantStatus = 'Listed' WHERE variantID = '$jsID'";
+        // Check connection
+
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: archived-material-variants.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+
+}
 ?>

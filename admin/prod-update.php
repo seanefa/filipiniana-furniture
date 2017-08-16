@@ -6,10 +6,10 @@ $id = $_SESSION['varname'];
 
 $fabric = 0;
 
-if(isset($_POST['_fabric']))
-{
-	$fabric = $_POST['_fabric'];
-}
+//if(isset($_POST['_fabric']))
+//{
+//	$fabric = $_POST['_fabric'];
+//}
 
 $category = $_POST["_category"];
 $type = $_POST["_type"];
@@ -31,7 +31,7 @@ if($_FILES["image"]["error"] > 0)
 }
 else
 {
-	move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/images/" . date("Y-m-d") . time() . ".png");	 
+	move_uploaded_file($tmp_name, "plugins/images/" . date("Y-m-d") . time() . ".png");	 
 	echo "SAVED";
 	$pic = date("Y-m-d") . time() . ".png";
 }

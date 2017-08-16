@@ -155,7 +155,7 @@ if (!$conn) {
             <h4>Are you sure you want to deactivate this Material Type?</h4>
           </div>
           <div class="modal-footer">
-            <a href="material-type-delete.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
+            <a href="delete-material-type.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
             <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
           </div>
         </div>

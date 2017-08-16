@@ -350,9 +350,9 @@ $(document).ready(function(){
                                     ');?>
                                     <td>
                                       <!-- UPDATE -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="material-type-forms.php" data-remote="material-type-forms.php?id=<?php echo $row['matTypeID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="material-attribute-forms.php" data-remote="material-attribute-forms.php?id=<?php echo $row['attributeID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
                                       <!-- DELETE -->
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="material-type-forms.php" data-remote="material-type-forms.php?id=<?php echo $row['matTypeID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="material-attribute-forms.php" data-remote="material-attribute-forms.php?id=<?php echo $row['attributeID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
                                     </td>
                                     <?php echo ('</tr>');
                                   }

@@ -31,7 +31,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username" class="form-control" name="uType" required/><span id="message"></span>
+                      <input type="text" id="username" class="form-control" name="uType" required /><span id="message"></span>
                     </div>
                   </div>
                 </div>
@@ -47,7 +47,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Unit Category</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" id="unit" data-placeholder="Select Category" tabindex="1" name="attribs[]" id="attribs">
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Category" tabindex="1" name="attribs[]" id="attribs" required>
                       <?php
                       $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
@@ -108,6 +108,27 @@ if (!$conn) {
                           <input type="text" name="unUnit" value="<?php echo $rrow['unUnit'];?>" class="form-control" id="unUnit" required/> </div>
                         </div>
                   </div>
+                    
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Unit Category</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Category" tabindex="1" name="attribs[]" id="attribs" required>
+                      <?php
+                      $sql = "SELECT * FROM tblunit_cat a, tblunitofmeasurement_category b WHERE a.unitID = '$jsID' AND a.uncategoryID = b.uncategoryID;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['uncategoryStatus']=='Active'){
+                          echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
