@@ -1,6 +1,10 @@
 <?php
 include "dbconnect.php";
-$orderID = $_GET['id'];
+$orderID = $_POST['orderID'];
+$phaseID = $_POST['phaseID'];
+echo $orderID;
+echo $phaseID;
+/*
 $sql1 = "SELECT * from tblorder_request a, tblorders b, tblproduct c WHERE a.tblOrdersID = b.orderID and c.productID = a.orderProductID and b.orderID = '$orderID'";
 $res = mysqli_query($conn,$sql1);
 while($row1 = mysqli_fetch_assoc($res)){
@@ -18,8 +22,9 @@ while($row1 = mysqli_fetch_assoc($res)){
       mysqli_query($conn,$phSQL);
       echo "<br>" . $phSQL;
 	}
-}
+}*/
 
+/*
 $sql = "UPDATE tblorders SET orderStatus = 'Ongoing' WHERE orderID = '$orderID'";
 mysqli_query($conn,$sql);
 
@@ -27,7 +32,6 @@ echo '<script type="text/javascript">';
           $loc = "Location: production-tracking-details.php?id=". $orderID;
           header($loc); 
  echo '</script>';
-
-
+*/
 
 ?>

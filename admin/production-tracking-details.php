@@ -79,6 +79,7 @@ if(isset($_GET['id'])){
                           <div class="descriptions">
                             <h2>Order Information:</h2>
                             <?php
+                            $isFinish = 0;
                             include "dbconnect.php";
                             $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
                             $res = mysqli_query($conn,$sql);
@@ -96,7 +97,7 @@ if(isset($_GET['id'])){
                               <h2 style="margin-top: -20px;">'.$row['productName'].'</h2>
                               </div>
                               <div class="col-md-6">
-                              <h2 class="pull-right" style="margin-top: -20px;"><a data-toggle="modal" data-target="#myModal" href="production-forms.php" data-remote="production-forms.php #history"><i class="ti-list pull-right" style="margin-left: 20px;"></i></a>'.$row['orderStatus'].'</h2>
+                              <h2 class="pull-right" style="margin-top: -20px;"><a data-toggle="modal" data-target="#myModal" href="production-forms.php" data-remote="production-forms.php #history"><i class="ti-list pull-right" style="margin-left: 20px;"></i></a>Production History</h2>
 
                               <h2></h2>
                               </div>
@@ -118,8 +119,8 @@ if(isset($_GET['id'])){
                                               $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and c.order_requestID = '$ordReqID';";
                                               $prResult = mysqli_query($conn,$pSQL);
                                               $ctr = mysqli_num_rows($prResult);
+                                              $isFirst = 0;
                                               while($pRow = mysqli_fetch_assoc($prResult)){
-
                                                   if($pRow['prodStatus']=="Pending"){
                                                     echo '<div class="col-md-2" style="margin-right:27px;">
                                                 <div class="panel panel-info" style="margin-top: -20px;">
@@ -135,15 +136,23 @@ if(isset($_GET['id'])){
                                                   </div>
                                                   <h4 style="text-align:center; background-color:orange; color:white">'.$pRow['prodStatus'].'</h4>
                                                   <div class="row">
-                                                    <div class="col-md-2" style="margin-left:14px;">
-                                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>
-                                                    </div>
+                                                    <div class="col-md-2" style="margin-left:14px;">';
+                                                    if($isFinish==1){
+                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                      }
+                                                      if($isFirst==0){
+                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                      $isFirst = 1;
+                                                      }
+                                                    echo '</div>
                                                   </div>
                                                 </div>
                                               </div>';
+                                              $isFinish = 0;
                                                 }
 
                                                 if($pRow['prodStatus']=="Finished"){
+                                                  $isFinish = 1;
                                                   echo '<div class="col-md-2" style="margin-right:27px;">
                                                 <div class="panel panel-info" style="margin-top: -20px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
@@ -158,7 +167,6 @@ if(isset($_GET['id'])){
                                                   </div><h4 style="text-align:center; background-color:green; color:white">'.$pRow['prodStatus'].'</h4>
                                                   <div class="row">
                                                     <div class="col-md-2" style="margin-left:14px;">
-                                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> </button>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -180,13 +188,16 @@ if(isset($_GET['id'])){
                                                   </div>
                                                   <h4 style="text-align:center; background-color:green; color:white">'.$pRow['prodStatus'].'</h4>
                                                   <div class="row">
-                                                    <div class="col-md-2" style="margin-left:14px;">
-                                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update</button>
-                                                    </div>
+                                                    <div class="col-md-2" style="margin-left:14px;">';
+                                                    if($isFinish==1){
+                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    }
+                                                    echo '</div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                                  ';
+                                              </div>';
+                                              $isFirst = 1;
+                                              $isFinish = 0;
                                                 }
                                                 
                                               }

@@ -8,8 +8,8 @@ if(isset($_GET['id'])){
  $jsID = $_GET['id']; 
 }
 
-if(isset($_GET['smth'])){
-$pr = $_GET['smth'];
+if(isset($_GET['pID'])){
+$pID = $_GET['pID'];
 }
 
 if(isset($_GET['oID'])){
@@ -22,7 +22,6 @@ $pr = $_GET['smth'];
 
 
 $_SESSION['varname'] = $jsID;
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 ?>
 <!DOCTYPE>
@@ -38,7 +37,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 class="modal-title" id="modalProduct">Start Production</h3>
       </div>
-      <form action="" method = "post">
+      <form action="start-prod-phase.php" method = "post">
+        <input type="hidden" name="orderID" value="<?php echo $jsID?>">
+        <input type="hidden" name="phaseID" value="<?php echo $pID?>">
         <div class="modal-body">
           <div class="descriptions">
             <div class="form-body">
@@ -46,7 +47,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
               <div class="col-md-12">
               <label class="control-label">Date Started: </label>
                 <div class="col-md-10 pull-right">
-                  <input type="date" id="" name ="" class="form-control" required /> 
+                  <input type="date" id="dateStart" name ="dateStart" class="form-control" required/> 
                 </div>
               </div> 
                 </div>
@@ -55,9 +56,20 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
               <div class="col-md-12">
               <label class="control-label">Handler: </label>
                 <div class="col-md-10 pull-right">
-                  <select>
-                    <option></option>
-                  </select>
+                  <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
+                      <option value="">Select Employee Handler</option>
+                      <?php
+                      include "dbconnect.php";
+                      $sql = "SELECT * FROM tblemployee order by empFirstName;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['empStatus']!='Archived'){
+                          echo('<option value='.$row['empID'].'>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
+                        }
+                      }
+                      ?>
+                    </select>
                 </div>
               </div> 
                 </div>
@@ -66,7 +78,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
               <div class="col-md-12">
               <label class="control-label">Remarks: </label>
                 <div class="col-md-10 pull-right">
-                  <textarea rows="4" id="" name ="" class="form-control"> </textarea>
+                  <textarea rows="4" id="remarks" name ="remarks" class="form-control"> </textarea>
                 </div>
               </div> 
                 </div>
@@ -74,7 +86,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
           </div>
         </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
+            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
           </div>                
         </form>
