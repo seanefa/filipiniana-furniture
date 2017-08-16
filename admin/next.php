@@ -127,7 +127,7 @@ include 'dbconnect.php';
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
                                     if($row['customerStatus'] != "Archived"){
-                                      echo('<option value='.$row['customerID'].'>'.$row['customerLastName'].' '.$row['customerFirstName'].'</option>
+                                      echo('<option value='.$row['customerID'].'>'.$row['customerLastName'].' '.$row['customerFirstName'].' '.$row['customerMiddleName'].'</option>
                                         ');
                                     }
                                   }
@@ -369,8 +369,8 @@ include 'dbconnect.php';
 
                     <tfoot>
                       <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                      <td style="text-align: right;"><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></td>
-                      <td style="text-align: right;">&#8369; <?php echo number_format($totPrice,2); ?></td>
+                      <td style="text-align: right;"><b><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></b></td>
+                      <td style="text-align: right;"><b>&#8369; <?php echo number_format($totPrice,2); ?></b></td>
                       <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
                     </tfoot>
                   </tbody>
@@ -470,7 +470,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
             <div class="col-md-6 col-md-offset-3" style="text-align: center;">
               <div class="form-group">
                 <h4><b>For:</b> 
-                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up" checked/> Pick-up</label>
+                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
                   <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label></h4>
                 </div>
               </div>
@@ -535,6 +535,8 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
 
                     $('#dRate').val(0);
 
+                  var x = parseFloat($('#totalPrice').val());
+                  $('#amountDue').val(parseFloat(x));
                     if($('#aTendered').val() < (x / 2)){
                       Math.round($('#aTendered').val( (x / 2)+d));
                     }
@@ -575,7 +577,6 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                   $('#paydRate').val(parseFloat($('#delloc').val()));
                   var d = parseFloat($('#delloc').val());
                   var due = x + d;
-                  alert(due);
                   $('#amountDue').val(parseFloat(due));
                 });
               });
@@ -651,7 +652,7 @@ $(document).ready(function(){
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row pull">
           <div class="col-md-6 col-md-offset-3" style="text-align: center;">
             <div class="form-group">
               <label class="control-label">Downpayment <span id="x" style="color:red"> *</span>
