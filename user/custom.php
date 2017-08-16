@@ -325,6 +325,9 @@ $_SESSION['passId'] = $userid;
       												toolbarPosition : 'top'
 									            }
 									        );
+									    
+									    var fabimg = document.getElementById('tempImage');
+									    var img = document.getElementById('savedImage');
 
 									    $('#chooseFabric').on('change',function(){
 
@@ -332,17 +335,44 @@ $_SESSION['passId'] = $userid;
 
 									    	var fabID = $(this).val();
 									    	var getFab = $('#'+fabID).val();
-									    	alert(getFab);
-									    	$('#tempImage').prop('src','fabrics/patterns/'+getFab);
-									    	var fabimg = document.getElementById('tempImage');
 
-									    	var img = document.getElementById('savedImage');
-									    	ctx.drawImage(img,40,40);
+									    	//img.src = white2transparent(img);
+
+									    	$('#tempImage').prop('src','fabrics/patterns/'+getFab);
+									    	fabimg = document.getElementById('tempImage');
+
+									    	ctx.drawImage(img,10,10,700,550);
 
 									    	ctx.globalCompositeOperation = 'source-in';
 
 									    	
-											ctx.drawImage(fabimg,10,10);
+									    	////// -white pixels
+									    	/*	
+									    	var w = img.width, h = img.height;
+
+										    canvas.width = w;
+										    canvas.height = h;
+
+									    	var imageData = ctx.getImageData(0,0, w, h);
+										    var pixel = imageData.data;
+
+										    var r=0, g=1, b=2,a=3;
+										    for (var p = 0; p<pixel.length; p+=4)
+										    {
+										      if (
+										          pixel[p+r] == 255 &&
+										          pixel[p+g] == 255 &&
+										          pixel[p+b] == 255) // if white then change alpha to 0
+										      {pixel[p+a] = 0;}
+										    }
+
+										    ctx.putImageData(imageData,40,100);
+
+											
+											*/
+										    //////end white pixels
+									    	
+											ctx.drawImage(fabimg,10,10,700,550);
 
 									    	$('#thisCanvas').show();
 									    	$('#savedImage').hide();
@@ -365,6 +395,8 @@ $_SESSION['passId'] = $userid;
 
 									    	$('#savedImage').show();
 									    	$('#savedImage').prop('src',d);
+
+
 									    	
 
 									    	$('#submitThis').show();

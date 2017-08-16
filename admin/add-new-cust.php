@@ -11,7 +11,7 @@ if (!$conn) {
 
 $ln = $_POST['newlastn'];
 $mn = $_POST['newmidn'];
-$fn = $_POST['newcustn'];
+$fn = $_POST['newfirstn'];
 $addrss = $_POST['newcustoadd'];
 $cont = $_POST['newcustocont'];
 $emailadd = $_POST['newcustoemail'];
