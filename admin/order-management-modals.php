@@ -523,10 +523,6 @@ $_SESSION['varname'] = $jsID;
                           <td>Amount Paid</td>
                           <td>Php <input type="number" id="amount" name="amount" style="text-align:right"/></td>
                         </tr>
-                        <tr>
-                          <td>Change</td>
-                          <td>Php <input type="number" id="change" name="change" style="text-align:right"/></td>
-                        </tr>
                       </table>
                     </div>
                   </div>

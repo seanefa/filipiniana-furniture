@@ -162,7 +162,7 @@ $(document).ready(function(){
                     </div>
                   </div>
                     <div class="col-md-3">
-                      <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>Generate</button>
+                      <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>&nbsp;Generate</button>
                     </div>
                   </div>
                   <br>

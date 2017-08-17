@@ -187,8 +187,8 @@ $("#backArch").click(function(){
               <nav>
                 <ul>
                   <li><a href="#home" class="sticon ti-home"><span>Home</span></a></li>
-                  <li><a href="#purchaseorder" class="sticon ti-reload"><span>Purchase Order</span></a></li>
-                  <li><a href="#acceptdelivery" class="sticon ti-time"><span>Accept Delivery</span></a></li>
+                  <!--<li><a href="#purchaseorder" class="sticon ti-reload"><span>Purchase Order</span></a></li>
+                  <li><a href="#acceptdelivery" class="sticon ti-time"><span>Accept Delivery</span></a></li>-->
                 </ul>
               </nav>
               <div class="content-wrap text-center">
@@ -216,7 +216,7 @@ $("#backArch").click(function(){
                                   <td></td>
                                   <td></td>
                                   <td></td>
-                                  <td><button type="button" class="btn btn-danger" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #deduct" data-target="#myModal">Deduct</button></td>
+                                  <td><button type="button" class="btn btn-success" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #deduct" data-target="#myModal">Update</button></td>
                                     </tbody>
                                     </table>
                                   </div>
