@@ -39,16 +39,14 @@ if(isset($_GET['id'])){
                   <div class="row">
                     <div class="descriptions">
                       <div class="form-body">
-                        <div class="row">
                           <h2>Customer Information</h2>
-                          <div class="row">
                             <?php
                             $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
                             $result = mysqli_query($conn,$sql);
                             $row = mysqli_fetch_assoc($result);
                             ?>
                             <div class="row">
-                              <div class="col-md-12" style="text-align:left;">
+                              <div class="col-md-12">
                                 <h5>
                                   <table class="table">
                                     <tr>
@@ -71,11 +69,10 @@ if(isset($_GET['id'])){
                                 </h5>
                               </div>
                             </div>
-                          </div>
                           <br>
-                        </div>
 
                         <div class="row">
+                         <div class="col-md-12">
                           <div class="descriptions">
                             <h2>Order Information:</h2>
                             <?php
@@ -129,19 +126,21 @@ if(isset($_GET['id'])){
                                                     <div role="tabpanel" class="tab-pane fade active in" id="job">
                                                       <div class="panel-wrapper collapse in" aria-expanded="true">
                                                         <div class="panel-body">
-                                                          <img height="115px" style="filter:gray; -webkit-filter: grayscale(1); filter: grayscale(1);" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                          <img height="80px" width="80px" style="filter:gray; -webkit-filter: grayscale(1); filter: grayscale(1);" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
                                                         </div>
                                                       </div>
                                                     </div>
                                                   </div>
-                                                  <h4 style="text-align:center; background-color:orange; color:white">'.$pRow['prodStatus'].'</h4>
+                                                  <div class="progress progress-lg" style="margin-top:15px;">
+                                                    <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
                                                   <div class="row">
-                                                    <div class="col-md-2" style="margin-left:14px;">';
+                                                    <div class="col-md-12">';
                                                     if($isFinish==1){
-                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                      echo '<button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
                                                       }
                                                       if($isFirst==0){
-                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                      echo '<button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
                                                       $isFirst = 1;
                                                       }
                                                     echo '</div>
@@ -160,11 +159,14 @@ if(isset($_GET['id'])){
                                                     <div role="tabpanel" class="tab-pane fade active in" id="job">
                                                       <div class="panel-wrapper collapse in" aria-expanded="true">
                                                         <div class="panel-body">
-                                                          <img height="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                          <img height="100px" width="100px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
                                                         </div>
                                                       </div>
                                                     </div>
-                                                  </div><h4 style="text-align:center; background-color:green; color:white">'.$pRow['prodStatus'].'</h4>
+                                                  </div>
+                                                  <div class="progress progress-lg" style="margin-top:15px;">
+                                                    <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
                                                   <div class="row">
                                                     <div class="col-md-2" style="margin-left:14px;">
                                                     </div>
@@ -181,12 +183,14 @@ if(isset($_GET['id'])){
                                                     <div role="tabpanel" class="tab-pane fade active in" id="job">
                                                       <div class="panel-wrapper collapse in" aria-expanded="true">
                                                         <div class="panel-body">
-                                                          <img height="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                          <img height="100px" width="100px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
                                                         </div>
                                                       </div>
                                                     </div>
                                                   </div>
-                                                  <h4 style="text-align:center; background-color:green; color:white">'.$pRow['prodStatus'].'</h4>
+                                                  <div class="progress progress-lg" style="margin-top:15px;">
+                                                    <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
                                                   <div class="row">
                                                     <div class="col-md-2" style="margin-left:14px;">';
                                                     if($isFinish==1){
@@ -214,7 +218,7 @@ if(isset($_GET['id'])){
                             </div> 
 
                           </div>
-
+                         </div>
                         </div>
                       </div>
                     </div>

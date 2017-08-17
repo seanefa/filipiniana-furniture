@@ -645,8 +645,15 @@ hr {
 label {
   font-weight: 500;
 }
+.productionButton {
+  background-color: ForestGreen;  
+  border-radius: 5px;
+  color: white;
+  padding: .5em;
+  text-decoration: none;
+}
 .btn {
-  border-radius: 0px;
+  border-radius: 7px;
 }
 .form-control {
   background-color: #ffffff;
@@ -5107,7 +5114,7 @@ ul.list-icons li i {
   display: none;
   background: rgba(255, 255, 255, 0.8);
 }
-.product-img .pro-img-overlay a {
+/*.product-img .pro-img-overlay a {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 40px;
   width: 40px;
@@ -5119,7 +5126,7 @@ ul.list-icons li i {
   padding: 11px 0;
   color: #ffffff;
   margin: 30% 5px;
-}
+}*/
 .product-img .pro-img-overlay a:hover {
   background: #4c5667 !important;
 }
