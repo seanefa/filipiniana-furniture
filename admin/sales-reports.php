@@ -170,6 +170,13 @@ $(document).ready(function(){
                   </div>
                     <div class="col-md-3">
                       <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>&nbsp;Generate</button>
+                    <nav>
+                      <ul>
+                        <li><h3><a href="#orders" class="ti-shopping-cart"><span> List of Orders</span></a></h3></li>
+                        <li><h3><a href="#orderrequest" class="ti-write"><span> Order Request</span></a></h3></li>
+                        <li><h3><a href="#customizationrequest" class="ti-marker-alt"><span> Customization Request</span></a></h3></li>
+                      </ul>
+                    </nav>
                     </div>
                   </div>
                   <br>
