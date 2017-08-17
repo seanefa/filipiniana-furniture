@@ -12,6 +12,8 @@ $end = $_POST['end'];
 $status = "Active";
 $exist_image=$_POST["exist_image"];
 
+echo $pic;
+
 if ($_FILES["image"]["error"] > 0)
 {
  echo "Error: NO CHOSEN FILE";
@@ -19,7 +21,7 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/promo" . date("Y-m-d") . time() . ".png");
+ move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/" . date("Y-m-d") . time() . ".png");
  $pic = date("Y-m-d") . time() . ".png";
 }
 
@@ -27,6 +29,8 @@ if($pic=="")
 {
 	$pic=$exist_image;
 }
+
+echo $pic;
 
 $sql = "UPDATE `tblpromos` SET `promoName`='$name', `promoDescription`='$desc', `promoStartDate`='$start', `promoEnd`='$end', `promoImage`='$pic' WHERE `promoID`='$id';";
 mysqli_query($conn,$sql);

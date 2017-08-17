@@ -482,7 +482,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <h3 class="box-title m-t-20">Promo Image</h3>
                         <div class="product-img"><br>
-                    		<input type="file" name="image" enctype="multipart/form-data" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
+                    		<input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
                     		<input type="hidden" name="exist_image" value="<?php echo $row['promoImage']?>">
                         </div>
                       </div>

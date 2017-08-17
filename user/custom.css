@@ -16,6 +16,7 @@ a.navbar-brand:focus,
 .card{margin-bottom: 10%;}
 .bond-paper{height: 887px; width: 1037px; padding: 40px;}
 .hover-lighten:hover{opacity: 0.7;}
+.thumbnail{margin-bottom: 10%;}
 /*animations*/
 @-webkit-keyframes webdarker
 {
