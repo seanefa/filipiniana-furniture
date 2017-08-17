@@ -253,7 +253,8 @@ if(!isset($_SESSION['userID']))
 							</div>
 						</div>
 						<div class="modal-footer">
-							<a class="btn btn-web" href="accesscheckout.php">Proceed to check out</a>
+						<button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
+                                                      <button type="button" id="check-out" class="fcbtn btn btn-success btn-outline btn-1b wave effect" onclick="checkout()"><i class="fa fa fa-shopping-cart"></i> Proceed to Check-Out</button>
 						</div>
 					</div>
 				</div>
@@ -263,9 +264,7 @@ if(!isset($_SESSION['userID']))
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title"></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+							
 						</div>
 						<div class="modal-body">
 						</div>
@@ -273,19 +272,26 @@ if(!isset($_SESSION['userID']))
 				</div>
 			</div>
 		</div>
-		<div id="thisIsCart">
-		</div>
+		<<div class="row" id="allprod">
+                                        <div id="thisIsCart">
+                                        </div>
+
+                                        <div class="row" id="tblProd">
+
+                                        </div>
+                                      </div>
 	</body>
 </html>
 <script type="text/javascript">
 	
-                 var prv_id = 0;
-                 var idArray = [];
-                  var qCtr = 0;
-                  var totalQuant = 0;
-                  var tempPrice = 0;
+                 //global variables
+                    var prv_id = 0;
+                    var idArray = [];
+                    var qCtr = 0;
+                    var totalQuant = 0;
+                    var tempPrice = 0;
 
-                  function deleteRow(row){
+                    function deleteRow(row){
                       var qunatityy = parseInt($('#quants'+row.value).val());
                       var x = totalQuant - parseInt($('#quants'+row.value).val());
                       var y = tempPrice - parseInt($('#prices'+row.value).val());
@@ -293,28 +299,28 @@ if(!isset($_SESSION['userID']))
 
                       result = parseInt(prompt('Remove how many products?'));
                       if(result == null || isNaN(result) || result > qunatityy ||  result == 0 || result < 0) {
-                          if(result > qunatityy){
-                            alert('Input must be less than '+qunatityy);
-                          }
-                          else if(result == 0){
-                            alert('Input number');
-                          }
-                          else if(isNaN(result)){
-                            alert('Input number');
-                          }
-                          else if(result < 0){
-                            alert('Input positive number');
-                          }
-                           return;
-                          
-                          }
-                          else{
-                            if(qunatityy != 0){
-                      var remover = qunatityy;
-                      var a = parseInt($('#prices'+row.value).val());
-                      var b = parseInt($('#quants'+row.value).val());
+                        if(result > qunatityy){
+                          alert('Input must be less than '+qunatityy);
+                        }
+                        else if(result == 0){
+                          alert('Input number');
+                        }
+                        else if(isNaN(result)){
+                          alert('Input number');
+                        }
+                        else if(result < 0){
+                          alert('Input positive number');
+                        }
+                        return;
 
-                      var totalP= $('#totalPrice').html();
+                      }
+                      else{
+                        if(qunatityy != 0){
+                          var remover = qunatityy;
+                          var a = parseInt($('#prices'+row.value).val());
+                          var b = parseInt($('#quants'+row.value).val());
+
+                          var totalP= $('#totalPrice').html();
                       totalP=totalP.replace(/\,/g,''); //deletes comma
                       totalP=parseInt(totalP,10);
 
@@ -346,25 +352,25 @@ if(!isset($_SESSION['userID']))
 
                       //if quantity is zero delete row
                       if(remover == 0){
-                     var t = idArray.indexOf(row.value);
-                      idArray.splice(t,1);
-                    
+                       var t = idArray.indexOf(row.value);
+                       idArray.splice(t,1);
 
-                    $('#totalQ').html(String(x));
-                    $('#totalPrice').html(String(y));
-                    qCtr--;
-                    var i=row.parentNode.parentNode.rowIndex;
-                    $('#thisIsCart').append('<input type="hidden" name="removed[]" value="'+$('#id'+row.value).val()+'">');
-                    $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value="'+$('#prices'+row.value).val()+'">');
-                    $('#thisIsCart').append('<input type="hidden" name="quantremoved[]" value="'+$('#quants'+row.value).val()+'">');
-                    document.getElementById('cartTbl').deleteRow(i);
 
-                      }
-                      
-                  }
-                  else if(qunatityy == 0){
+                       $('#totalQ').html(String(x));
+                       $('#totalPrice').html(String(y));
+                       qCtr--;
+                       var i=row.parentNode.parentNode.rowIndex;
+                       $('#thisIsCart').append('<input type="hidden" name="removed[]" value="'+$('#id'+row.value).val()+'">');
+                       $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value="'+$('#prices'+row.value).val()+'">');
+                       $('#thisIsCart').append('<input type="hidden" name="quantremoved[]" value="'+$('#quants'+row.value).val()+'">');
+                       document.getElementById('cartTbl').deleteRow(i);
+
+                     }
+
+                   }
+                   else if(qunatityy == 0){
                     var t = idArray.indexOf(row.value);
-                      idArray.splice(t,1);
+                    idArray.splice(t,1);
                     
 
                     $('#totalQ').html(String(x));
@@ -377,36 +383,34 @@ if(!isset($_SESSION['userID']))
                     $('#thisIsCart').append('<input type="hidden" name="quantremoved[]" value="'+$('#quants'+row.value).val()+'">');
                     document.getElementById('cartTbl').deleteRow(i);
                   }
-                          }
-                    
-                    
-                      
-                  
-                 }
+                }
+
+
+              }
                  ////////             ADD OF PRODUCTS TO CART ///////////////
                  function addRow(row){
-                      var qunatityy = parseInt($('#quants'+row.value).val());
-                      var x = totalQuant - parseInt($('#quants'+row.value).val());
-                      var y = tempPrice - parseInt($('#prices'+row.value).val());
-                      var result;
+                  var qunatityy = parseInt($('#quants'+row.value).val());
+                  var x = totalQuant - parseInt($('#quants'+row.value).val());
+                  var y = tempPrice - parseInt($('#prices'+row.value).val());
+                  var result;
 
-                      result = parseInt(prompt('Add how many products?'));
-                      if(result == null || isNaN(result) ||  result == 0 || result < 0) {
-                         
-                          if(result == 0){
-                            alert('Input a number');
-                          }
-                          else if(isNaN(result)){
-                            alert('Input a number');
-                          }
-                          else if(result < 0 ){
-                            alert('Input positive number');
-                          }
-                           return;
-                          
-                          }
-                          else{
-                            if(qunatityy != 0){
+                  result = parseInt(prompt('Add how many products?'));
+                  if(result == null || isNaN(result) ||  result == 0 || result < 0) {
+
+                    if(result == 0){
+                      alert('Input a number');
+                    }
+                    else if(isNaN(result)){
+                      alert('Input a number');
+                    }
+                    else if(result < 0 ){
+                      alert('Input positive number');
+                    }
+                    return;
+
+                  }
+                  else{
+                    if(qunatityy != 0){
                       var remover = qunatityy;
                       var a = parseInt($('#prices'+row.value).val());
                       var b = parseInt($('#quants'+row.value).val());
@@ -440,39 +444,38 @@ if(!isset($_SESSION['userID']))
                       $('#totalQ').html(String(totalQ + result));
                       
                       
+                    }
                   }
-                          }
-                    
-                    
-                      
-                  
-                 }
 
-                 function isInArray(value, array) {
-                    return array.indexOf(value) > -1;
-                  }
-                 
-                 function btnClick(id){
-                 	
+
+
+                  
+                }
+
+                function isInArray(value, array) {
+                  return array.indexOf(value) > -1;
+                }
+
+                function btnClick(id){
                  tempPrice = parseInt($('#totalPrice').text().slice());
                  var quant =parseInt($('#quant'+id).val());
-                
-                totalQuant = parseInt($('#totalQ').text());
-                var tP = $('#price'+id).val().toString();
-                var price =parseInt(tP.replace(',',''));
-                price = price * quant;
-                tempPrice = tempPrice+price;
-                totalQuant = totalQuant+quant;
 
-                if(isInArray(id,idArray)){
+                 totalQuant = parseInt($('#totalQ').text());
+                 var tP = $('#price'+id).val().toString();
+                 var price =parseInt(tP.replace(',',''));
+                 price = price * quant;
+                 tempPrice = tempPrice+price;
+                 totalQuant = totalQuant+quant;
+
+                 if(isInArray(id,idArray)){
 
                   if(quant > 0){
                     $('#quant'+id).val(0);
                     $('#'+id).attr('data-toggle','modal');
-                  $('#'+id).attr('href','#myModal1');
-                
+                    $('#'+id).attr('href','#myModal1');
+
                     //price parser
-                  var priced= $('#prices'+id+'').val();
+                    var priced= $('#prices'+id+'').val();
                   priced=priced.replace(/\,/g,''); //deletes comma
                   priced=parseInt(priced,10);
 
@@ -514,42 +517,42 @@ if(!isset($_SESSION['userID']))
                   $('#totalPrice').html(String(totalP + tPriced));
                   $('#totalQ').html(String(totalQ + q));
 
-                  }
-                  else{
-                    alert('please input the quantity');
-                    $('#'+id).attr('data-toggle','');
-                  $('#'+id).attr('href','');
-                  }
-                
                 }
                 else{
+                  alert('please input the quantity');
+                  $('#'+id).attr('data-toggle','');
+                  $('#'+id).attr('href','');
+                }
+                
+              }
+              else{
 
                 if(quant > 0){
                  prv_id = id;
-                qCtr++;
-                var name = $('#product'+id).val();
-                var size =$('#size'+id).val();
-                  $('#'+id).attr('data-toggle','modal');
-                  $('#'+id).attr('href','#myModal1');
-                  $('#quant'+id).val(0);
+                 qCtr++;
+                 var name = $('#product'+id).val();
+                 var size =$('#size'+id).val();
+                 $('#'+id).attr('data-toggle','modal');
+                 $('#'+id).attr('href','#myModal1');
+                 $('#quant'+id).val(0);
                   //push id to array
                   idArray.push(id);
-                  alert('Added to Cart');
-					
-                  $('#cartTbl').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
-					
-				  $('#cartTbl').append('<tr><td width="250"><h6 class="font-500">'+name+'</h6></td><td>'+size+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" title="Add Quantity"><i class="fa fa-cart-plus"></i></button>&nbsp;<button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'" title="Remove Products"><i class="fa fa-times"></i></button></td></tr>');
+                  alert('added to cart')
 
-                 $('#totalPrice').html(String(tempPrice));
-                 $('#totalQ').html(String(totalQuant));
-                    }
-                    else if(quant == 0){
-                      alert('please input the quantity');
-                      $('#'+id).attr('data-toggle','');
+                  $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+                  $('#cartTbl').append(
+                    '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'">Add</button></td><td><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">Remove</button></td></tr>');
+
+                  $('#totalPrice').html(String(tempPrice));
+                  $('#totalQ').html(String(totalQuant));
+                }
+                else if(quant == 0){
+                  alert('please input the quantity');
+                  $('#'+id).attr('data-toggle','');
                   $('#'+id).attr('href','');
-                    }
-                    }
-                  }
+                }
+              }
+            }
                   //CHECK OUT
 
 
@@ -561,8 +564,8 @@ if(!isset($_SESSION['userID']))
                     else if(qCtr > 0){
                       var result = confirm("Are you sure? \n\n\n *this action cannot be undone*");
                       if(result){
-                      $('#check-out').attr('type','submit');
-                      $('#myForm').attr('action','next.php');
+                        $('#check-out').attr('type','submit');
+                        $('#myForm').attr('action','next.php');
                       }
                       else{
 

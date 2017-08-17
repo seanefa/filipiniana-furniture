@@ -89,7 +89,7 @@ if (!$conn) {
                             <div class="pull-right text-right">
                               <h4><p>Recieved By:</p></h4>
                               <?php 
-                                $emp = $_SESSION['emp'];
+                                $emp = 1;
                                 $sqli = "SELECT * FROM tblemployee;";
                                 $sresult = mysqli_query($conn,$sqli);
                                 $empRow = mysqli_fetch_assoc($sresult);

@@ -47,6 +47,12 @@ $ordertype = "On-Hand";
     $ssql = "SELECT * FROM `tblcustomer` WHERE `customerLastName` = '$ln';";
     $result = mysqli_query($conn,$ssql);
     
+    if($ordershipadd == ""){
+
+      $ordershipadd = "  ";
+
+    }
+    else{ 
     if($result){
 
       
@@ -55,7 +61,7 @@ $ordertype = "On-Hand";
 
         $row = mysqli_fetch_assoc($result);
         $custid = $row['customerID'];
-        $pssql = "INSERT INTO `tblorders` (`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`) VALUES ('$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype')";
+        $pssql = "INSERT INTO `tblorders` (`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`) VALUES ('$orderdaterec', '$orderdatepick','$customId','$totalPrice','$orderstat','$ordershipadd','$ordertype')";
 
         
         if (mysqli_query($conn, $pssql)) {
@@ -77,6 +83,7 @@ $ordertype = "On-Hand";
         else{
           echo "Error: " . $pssql . "<br>" . mysqli_error($conn);
         }
+}
 }
 
        
