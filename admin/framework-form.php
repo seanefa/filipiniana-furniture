@@ -110,8 +110,8 @@ if (!$conn) {
                       <input type="file" name="image" class="dropify" required>
                     </div>
                   </div>
-                  <!--
-                  <div id="toCustomize" class="col-md-12" style="display: none">
+                  
+                  <!--div id="toCustomize" class="col-md-12" style="display: none">
                     <h3 class="box-title m-t-20">Make your own<span id="x" style="color:red"> * </span></h3>
                     <div class="product-img"><br>
                     <div  id="anotherDesign" style="display: none">
@@ -121,10 +121,10 @@ if (!$conn) {
                       <Input value="Save Design" id="saveDesign" class="btn-success" type="button"/>
                       <div class="literCanvas"></div>
                       <img src='' style="display: none,width:160px;height:160px;" id="savedImage">
-                      -->
+                      
                       
                     </div>
-                  </div>
+                  </div-->
                 </div>
               </div>
             </div>

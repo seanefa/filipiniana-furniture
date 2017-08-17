@@ -190,8 +190,7 @@ $('#selectType').on("change",function() {
                                   </div>
 
                                   <div class="row" id="allprod">
-                                    <div id="thisIsCart">
-                                    </div>
+                                    
 
                                     <div class="row formScroll" id="tblProd">
 
@@ -250,8 +249,9 @@ $('#selectType').on("change",function() {
 </div>
 
 
-</div>
-
+</div> <form id="myForm" method="post">
+                      <div id="thisIsCart" style="display: none">
+                                    </div>
 
         <div class="col-md-4">
           <form id="myForm" method="post">
@@ -353,10 +353,35 @@ $('#selectType').on("change",function() {
                     </select>
 					</div>
 					</div>
+                        <?php
+                        $sql = "SELECT * FROM tblcustomer ORDER BY customerLastName ASC;";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                          if($row['customerStatus'] != "Archived"){
+                            if($row['customerLastName'] != ""){
+                              echo ('
+                              <input type="hidden" id="ln'.$row['customerID'].'" class="form-control" value=""/>
+                              <input type="hidden" id="fn'.$row['customerID'].'" class="form-control" value=""/>
+                              <input type="hidden" id="mn'.$row['customerID'].'" class="form-control" value=""/>
 
-                    <input type="hidden" id="ln" class="form-control" name="lastn" value=""/>
-                    <input type="hidden" id="fn" class="form-control" name="firstn" value=""/>
-                    <input type="hidden" id="mn" class="form-control" name="midn" value=""/>
+                              <input type="hidden" id="caddr'.$row['customerID'].'" class="form-control" value=""/>
+                              <input type="hidden" id="ccont'.$row['customerID'].'" class="form-control" value=""/>
+                              <input type="hidden" id="cemail'.$row['customerID'].'" class="form-control" value=""/>
+                              ');
+                            }
+                          }
+                        }
+                        ?>
+
+                   
+                              <input type="hidden" id="putFname" class="form-control" name="firstn" value=""/>
+                              <input type="hidden" id="putMname" class="form-control" name="midn" value=""/>
+                              <input type="hidden" id="putLname" class="form-control" name="lastn" value=""/>
+                              
+                              <input type="hidden" id="putAddr" class="form-control" name="custAdd" value=""/>
+                              <input type="hidden" id="putContact" class="form-control" name="custocont" value=""/>
+                              <input type="hidden" id="putEmail" class="form-control" name="custoemail" value=""/>
 
                                    
                      </div>
@@ -408,29 +433,29 @@ $('#selectType').on("change",function() {
                       </div>
                     </div>
 
-                  <div class="deliveryDetails" id="deliveryDetails">
+                  <div class="deliveryDetails" id="deliveryDetails" style="display: none;">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                         <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
                         <div class="row">
                       <div class="col-md-12">
-                        <input type="text" id="da" class="form-control" name="deladd[]" placeholder="Street Address" disabled required/>
+                        <input type="text" id="da" class="form-control" name="del_addr" placeholder="Street Address" />
                         </div>
                         </div>
                         <br>
                         <div class="row">
                         <div class="col-md-6">
-                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="City" disabled required/>
+                        <input type="text" id="city" class="form-control" name="del_city" placeholder="City" />
                         </div>
                         <div class="col-md-6">
-                        <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Zip Code" disabled required/>
+                        <input type="text" id="zip" class="form-control" name="del_zip" placeholder="Zip Code"/>
                         </div>
                         </div>
                       </div>
                         </div>
                       </div>
-                    </div>
+                    
                   <div class="row">
                       <div class="col-md-6">
                             <div class="form-group">
@@ -452,6 +477,7 @@ $('#selectType').on("change",function() {
                         <input type="number" style="text-align:right;" id="dRate" class="form-control" name="ln" value='0' readonly/>
                       </div>
                     </div>
+                  </div>
                   </div>
                 </div> <!--Delivery Details-->
 </div>
@@ -1017,10 +1043,12 @@ $('#selectType').on("change",function() {
                                        $('#isBool').attr('value','changed');
                                     $('#customerIds').attr('value',id);
                                     $('#hidebuttoncustomer').hide();
-                                     $('#ln').attr('value',$('#lstName'+id+'').val());
-                                    $('#ln').html($('#lstName'+id+'').val());
-                                    $('#fn').attr('value',$('#firstName'+id+'').val());
-                                    $('#mn').attr('value',$('#midName'+id+'').val());
+                                     $('#putFname').attr('value',$('#fn'+id+'').val());
+                                    $('#putLname').attr('value',$('#ln'+id+'').val());
+                                    $('#putMname').attr('value',$('#mn'+id+'').val());
+                                    $('#putAddr').attr('value',$('#caddr'+id+'').val());
+                                    $('#putEmail').attr('value',$('#cemail'+id+'').val());
+                                    $('#putContact').attr('value',$('#ccont'+id+'').val());
                                   }
                                     else{
                                       $('#customerIds').attr('value',id+1);
@@ -1032,6 +1060,28 @@ $('#selectType').on("change",function() {
                                     }
                                   });
                                 });
+
+
+                        $(document).ready(function(){
+
+                          $('#rateDel').on('change', function(){
+
+                            $('#deliveryDetails').show();
+
+
+                          });
+
+                          $('#ratePick').on('change',function(){
+                            $('#deliveryDetails').hide();
+                            $('#da').val(" ");
+                            $('#city').val(" ");
+                            $('#zip').val(" ");
+
+                          });
+
+                        });
+
+
                     </script>
 
         <script>

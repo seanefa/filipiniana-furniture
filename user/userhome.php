@@ -30,7 +30,11 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--navbar-->
-				<?php
+				<nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-inverse img-fluid">
+				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				  	</button>
+				  	<?php
 				include "userconnect.php";
 				$sql="SELECT * from tblcompany_info";
 				$result=$conn->query($sql);
@@ -39,17 +43,11 @@
 					while($row=$result->fetch_assoc())
 					{
 				?>
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 logo">
-					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">
-				</div>
+					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">&nbsp;
 				<?php
 					}
 				}
 				?>
-				<nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-inverse img-fluid">
-				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  	</button>
 					<?php
 					include "userconnect.php";
 					$sql="SELECT * from tblcompany_info";

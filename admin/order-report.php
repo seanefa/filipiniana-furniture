@@ -68,7 +68,7 @@ $(document).ready(function(){
         var date = $("#dateRep").val();
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'order-output.php',
         data: {
           id: value, d: date,
         },
@@ -83,7 +83,7 @@ $(document).ready(function(){
         var y = $("#year").val();
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'order-output.php',
         data: {
           id: value, m: m, y:y,
         },
@@ -98,7 +98,7 @@ $(document).ready(function(){
         alert(y);
         $.ajax({
         type: 'post',
-        url: 'sales-output.php',
+        url: 'order-output.php',
         data: {
           id: value, y : y,
         },
