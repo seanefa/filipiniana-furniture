@@ -141,7 +141,7 @@ $('#selectType').on("change",function() {
                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                     <div class="panel-body">  
                                         <div class="row" style="margin: 0 auto; margin-top: -100px;">
-                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge">0</span></button>
+                                          <button type="button" href="#myCart" data-toggle="modal" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge"></span></button>
                                           <!--button class="fcbtn btn-lg btn-default btn-outline btn-1e wave effect" data-toggle="modal" href="#chout1">Update Products</button-->
                                         </div>
                                         <div class="row">
