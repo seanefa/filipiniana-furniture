@@ -194,7 +194,7 @@ if(isset($_GET['id'])){
                                                   <div class="row">
                                                     <div class="col-md-2" style="margin-left:14px;">';
                                                     if($isFinish==1){
-                                                      echo '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                      echo '<button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
                                                     }
                                                     echo '</div>
                                                   </div>
