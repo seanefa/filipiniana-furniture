@@ -74,6 +74,27 @@ include 'dbconnect.php';
     }
   });
     });
+
+
+
+
+
+  });
+  $(document).ready(function(){
+    $('#frequency').change(function(){
+      var value = $("#frequency").val();
+      $.ajax({
+        type: 'post',
+        url: 'reports-drop.php',
+        data: {
+          id: value,
+        },
+        success: function (response) {
+          $( '#range' ).html(response);
+        }
+      });
+
+    });
   });
 
   </script>
