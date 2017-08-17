@@ -497,9 +497,7 @@ if (!$conn) {
                         <div class="col-md-6">
                           <div class="form-group">
                             <label class="control-label" style="font-size:18px;">End</label><span id="x" style="color:red"> *</span>
-                            <input type="date" id="endDate" class="form-control" name="end" value="<?php echo $row['promoEnd']?>"/> 
-
-               
+                            <input type="date" id="endDate" class="form-control" name="end" value="<?php echo $row['promoEnd']?>"/>
                           </div>
                         </div>
                       </div>

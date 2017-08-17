@@ -37,7 +37,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Remarks</label>
+                      <label class="control-label">Description</label>
                       <textarea class="form-control" rows="4" name="remarks"></textarea></div>
                     </div>
                   </div>
@@ -84,7 +84,7 @@ if (!$conn) {
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="control-label">Remarks</label>
+                          <label class="control-label">Description</label>
                           <textarea class="form-control" rows="4" name="remarks" id="remText"><?php echo $trow['f_patternRemarks'];?></textarea></div>
                         </div>
                       </div>

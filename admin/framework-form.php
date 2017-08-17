@@ -93,7 +93,7 @@ if (!$conn) {
                     </div>
                   </div>
                 </div>
-                <label class="box-title">Remarks</label>
+                <label class="box-title">Description</label>
                 <div class="row">
                   <div class="col-md-12 ">
                     <div class="form-group">
@@ -347,7 +347,7 @@ if (!$conn) {
                                                     </div>
                                                   </div>
                                                 </div>
-                                                <label class="box-title">Remarks</label>
+                                                <label class="box-title">Description</label>
                                                 <div class="row">
                                                   <div class="col-md-12 ">
                                                     <div class="form-group">
