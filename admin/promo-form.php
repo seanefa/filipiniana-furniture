@@ -258,7 +258,7 @@ if (!$conn) {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct">Update Promo</h3>
         </div>
-        <form enctype="multipart/form-body" action="promo-update.php" method="post">
+        <form enctype="multipart/form-data" action="promo-update.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <?php
