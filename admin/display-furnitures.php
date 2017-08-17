@@ -214,15 +214,15 @@ else if($id=="Packages"){
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['packagePrice'],2).'</span>
 				<br>
 				<label>Quantity</label>
-				<input type="hidden" id="package'.$row['packageID'].'" value="'.$row['packageID'].'"/>
-				<input type="hidden" id="product'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
-				<input type="hidden" id="price'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
-				<input type="hidden" id="size'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
-				<input type="hidden" id="uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
-				<input value="0" id="quant'.$row['packageID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
+				<input type="hidden" id="P_package'.$row['packageID'].'" value="'.$row['packageID'].'"/>
+				<input type="hidden" id="P_product'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
+				<input type="hidden" id="P_price'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
+				<input type="hidden" id="P_size'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
+				<input type="hidden" id="P_uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
+				<input value="0" id="P_quant'.$row['packageID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="addPackage('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" >Add to Cart</button>
 				</div>
 				</div>
 				</div>

@@ -283,20 +283,20 @@ include "dbconnect.php";
       ?>
       <div class="modal-body">
         <div class="descriptions">
-                            <div class="">
-                                <h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $trow['productName'];?></h2>
-                                <hr>
-                                <div class="row">
+			<div class="">
+            	<h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $trow['productName'];?></h2>
+                	<hr>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+							<h4 class="box-title m-t-40">Description</h4>
+                         	<p><?php echo $trow['productDescription'];?></p>
+                        	<h4 class="m-t-40">Price</h4>
+                         	<h2 class="text-success" style="font-weight: bold;">&#8369;<?php echo number_format($trow['productPrice']);?></h2>
+                        </div>
+                    	<div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['prodMainPic']?>" alt="Unavailable" class="img-responsive"> </div>
+                        </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['prodMainPic']?>" alt="Unavailable" class="img-responsive"> </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <h4 class="box-title m-t-40">Description</h4>
-                                        <p><?php echo $trow['productDescription'];?></p>
-                                        <h4 class="m-t-40">Price</h4>
-                                        <h2 class="text-success" style="font-weight: bold;">&#8369;<?php echo $trow['productPrice'];?></h2>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
                                         <h3 class="box-title">General Info</h3>
                                         <div class="table-responsive">
                                             <table class="table">
@@ -323,7 +323,7 @@ include "dbconnect.php";
                                                     </tr>
                                                     <tr>
                                                         <td>Dimensions(L x W x H)</td>
-                                                        <td> <?php echo $trow['prodSizeSpecs'];?> </td>
+                                                        <td> <?php echo $trow['prodSizeSpecs'] . " " . $trow[""];?> </td>
                                                     </tr>
                                                     <!--tr>
                                                         <td>Style</td>

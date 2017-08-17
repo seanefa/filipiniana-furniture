@@ -8,10 +8,11 @@ $quan = $_POST['quan'];
 $tPrice = $_POST['tPrice'];
 $ctr = 0;
 
+
 //UPDATE ORDER INFO
-//$sql = "UPDATE tblorders SET orderPrice = '$tPrice' WHERE orderID = '$orderid'";
-//echo "SQL: " . $sql . "<br>";
-//mysqli_query($conn,$sql);
+$sql = "UPDATE tblorders SET orderPrice = '$tPrice' WHERE orderID = '$orderid'";
+echo "SQL: " . $sql . "<br>";
+mysqli_query($conn,$sql);
 
 
 //UPDATE ORDER REQUEST INFO

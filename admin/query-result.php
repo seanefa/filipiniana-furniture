@@ -8,6 +8,7 @@ if($id=="1"){ // most ordered furniture
 	$tempID = "";
 	$ctr = 0;
 	$sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b WHERE a.productID = b.orderProductID GROUP BY b.orderProductID order by quan DESC;";
+	
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>

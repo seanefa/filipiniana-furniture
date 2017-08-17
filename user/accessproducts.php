@@ -273,7 +273,7 @@ if(!isset($_SESSION['userID']))
 				</div>
 			</div>
 		</div>
-		<<div class="row" id="allprod">
+		<div class="row" id="allprod">
                                         <div id="thisIsCart">
                                         </div>
 
@@ -567,6 +567,7 @@ if(!isset($_SESSION['userID']))
                       var result = confirm("Are you sure? \n\n\n *this action cannot be undone*");
                       if(result){
                         $('#check-out').attr('type','submit');
+                        $('#myForm').attr('action','accessorder.php');
                         $('#myForm').attr('action','accesscheckout.php');
                       }
                       else{

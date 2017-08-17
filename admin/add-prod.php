@@ -53,12 +53,14 @@ else
 
 $sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$prodStat','$design')";
 
+echo $sql;
+/*
 if (mysqli_query($conn, $sql)) {
   header( "Location: products.php?newSuccess" );
 }
 else {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+}*
 
 mysqli_close($conn);
 

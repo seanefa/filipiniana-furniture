@@ -27,7 +27,10 @@ if(isset($_GET['id'])){
     calculateSum();
     $(".quan").each(function () {
       $(this).keyup(function () {
-        calculateSum();
+        var qnt = calculateSum();
+        qnt = qnt - parseInt($('#totalQ').val()) +1;
+        var id = $(this).attr('id');
+        getPrice(id,qnt);
       });
     });
   });
@@ -39,7 +42,17 @@ if(isset($_GET['id'])){
         sum += parseFloat(this.value);
       }
     });
+    return sum;
     $("#totalQ").val(sum.toFixed(2));
+  }
+
+  function getPrice(id,qnt){
+    id = id.replace('existQ','',id);
+    var uprice = parseInt($('#uprice'+id).val());
+    var total = uprice * qnt;
+    $('#thisPrice'+id).val(total.toFixed(2));
+    var tprice = parseInt($('#totalPrice').val());
+    $('#totalPrice').val(tprice + total);
   }
 
 /*
@@ -213,7 +226,7 @@ $(document).ready(function(){ //wala lang
                                     <input id="existQ'.$row['order_requestID'].'" type="number" size="1" style="text-align:right" class="quan" name="quan[]" value="'.$row['orderQuantity'].'" /></td>';
                                     $tPrice1 = $row['orderQuantity'] * $row['productPrice'];
                                     $tPrice =  number_format($tPrice1,2);
-                                    echo '<td style="text-align:right;" class="prices">&#8369; '.$tPrice.'
+                                    echo '<td style="text-align:right;" class="prices">&#8369;  <input type="text" style="text-align:right; border:none" disabled value="'.$tPrice.'" id="thisPrice'.$row['order_requestID'].'"/> 
                                     <input type="hidden" id="price"  value="'.$tPrice1.'" /></td>';
                                     $tPrice = $row['orderPrice'];
                                     $tQuan = $tQuan + $row['orderQuantity'];
@@ -224,8 +237,8 @@ $(document).ready(function(){ //wala lang
                                 </tbody>
                                 <tfoot style="text-align:right;">
                                   <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                                  <td  style="text-align:right;"><input type="text" id="totalQ" style="text-align:right; border:none" value="<?php echo $tQuan?>" disabled/></td>
-                                  <td  style="text-align:right;"><input type="text" id="totalPrice" style="text-align:right; border:none" value="<?php echo number_format($tPrice,2)?>" disabled/></td>
+                                  <td  style="text-align:right;"><input type="text" id="totalQ" style="text-align:right; border:none" value="<?php echo $tQuan?>" readonly/></td>
+                                  <td  style="text-align:right;"><input name="tPrice" type="text" id="totalPrice" style="text-align:right; border:none" value="<?php echo number_format($tPrice,2)?>" readonly/></td>
                                   <td></td>
                                 </tfoot>
                               </table>
