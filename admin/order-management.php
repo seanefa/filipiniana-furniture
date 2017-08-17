@@ -606,6 +606,273 @@ include "menu.php";
                 }
               }
             }
+                //add Package
+                function addPackage(id){
+                  alert('this is oke');
+                 tempPrice = parseInt($('#totalPrice').text().slice());
+                 var quant =parseInt($('#P_quant'+id).val());
+
+                 totalQuant = parseInt($('#totalQ').text());
+                 var tP = $('#P_price'+id).val().toString();
+                 var price =parseInt(tP.replace(',',''));
+                 price = price * quant;
+                 tempPrice = tempPrice+price;
+                 totalQuant = totalQuant+quant;
+
+                 if(isInArray(id,idArray)){
+
+                  if(quant > 0){
+                    $('#P_quant'+id).val(0);
+                    $('#'+id).attr('data-toggle','modal');
+                    $('#'+id).attr('href','#myModal1');
+
+                    //price parser
+                    var priced= $('#P_prices'+id+'').val();
+                  priced=priced.replace(/\,/g,''); //deletes comma
+                  priced=parseInt(priced,10);
+
+                  var tPriced= tP;
+                  tPriced=tPriced.replace(/\,/g,''); //deletes comma
+                  tPriced=parseInt(tPriced,10);
+                  
+                  //quantity parser
+                  var quantd= $('#P_quants'+id+'').val();
+                  quantd=quantd.replace(/\,/g,''); //deletes comma
+                  quantd=parseInt(quantd,10);
+
+                  var q = parseInt(quant);
+
+                  //total price parser
+
+                  var totalP= $('#totalPrice').html();
+                  totalP=totalP.replace(/\,/g,''); //deletes comma
+                  totalP=parseInt(totalP,10);
+
+                  var totalQ= $('#totalQ').html();
+                  totalQ=totalQ.replace(/\,/g,''); //deletes comma
+                  totalQ=parseInt(totalQ,10);
+
+                  var newPrice = priced + tPriced;
+                  var newQuant = quantd + q;
+
+                  $('#P_quants'+id+'').val(newQuant);
+                  $('#P_qt'+id+'').html(''+newQuant);
+
+                  $('#P_prices'+id+'').val(newPrice);
+                  $('#P_pr'+id+'').html(''+newPrice);
+
+                  $('#ttq').val(0);
+                  $('#ttp').val(0); 
+                  $('#ttp').val(totalP + tPriced);
+                  $('#ttq').val(totalQ + q);
+
+                  $('#totalPrice').html(String(totalP + tPriced));
+                  $('#totalQ').html(String(totalQ + q));
+
+                }
+                else{
+                  alert('please input the quantity');
+                  $('#'+id).attr('data-toggle','');
+                  $('#'+id).attr('href','');
+                }
+                
+              }
+              else{
+
+                if(quant > 0){
+                 prv_id = id;
+                 qCtr++;
+                 var name = $('#P_product'+id).val();
+                 var size =$('#P_size'+id).val();
+                 $('#'+id).attr('data-toggle','modal');
+                 $('#'+id).attr('href','#myModal1');
+                 $('#P_quant'+id).val(0);
+                  //push id to array
+                  idArray.push(id);
+
+                  $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value=""><input type="hidden" name="P_quantremoved[]" value=""><input type="hidden" name="P_removed[]" value=""><input type="hidden" id="P_id'+id+'" name="P_cart[]" value="'+id+'"/><input type="hidden" name="P_quant[]" id="P_quants'+id+'" value="'+quant+'"/><input type="hidden" name="P_price[]" id="P_prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
+                  $('#cartTbl').append(
+                    '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="P_qt'+id+'">'+quant+'</td><td id="P_pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="P_addRow(this)" value="'+id+'">Add</button></td><td><button type="button" class="btn btn-danger" onclick="P_deleteRow(this)" value="'+id+'">Remove</button></td></tr>');
+
+                  $('#totalPrice').html(String(tempPrice));
+                  $('#totalQ').html(String(totalQuant));
+                }
+                else if(quant == 0){
+                  alert('please input the quantity');
+                  $('#'+id).attr('data-toggle','');
+                  $('#'+id).attr('href','');
+                }
+              }
+
+
+                }
+
+                //package row edit
+
+                function P_deleteRow(row){
+                      var qunatityy = parseInt($('#P_quants'+row.value).val());
+                      var x = totalQuant - parseInt($('#P_quants'+row.value).val());
+                      var y = tempPrice - parseInt($('#P_prices'+row.value).val());
+                      var result;
+
+                      result = parseInt(prompt('Remove how many products?'));
+                      if(result == null || isNaN(result) || result > qunatityy ||  result == 0 || result < 0) {
+                        if(result > qunatityy){
+                          alert('Input must be less than '+qunatityy);
+                        }
+                        else if(result == 0){
+                          alert('Input number');
+                        }
+                        else if(isNaN(result)){
+                          alert('Input number');
+                        }
+                        else if(result < 0){
+                          alert('Input positive number');
+                        }
+                        return;
+
+                      }
+                      else{
+                        if(qunatityy != 0){
+                          var remover = qunatityy;
+                          var a = parseInt($('#P_prices'+row.value).val());
+                          var b = parseInt($('#P_quants'+row.value).val());
+
+                          var totalP= $('#totalPrice').html();
+                      totalP=totalP.replace(/\,/g,''); //deletes comma
+                      totalP=parseInt(totalP,10);
+
+                      var totalQ= $('#totalQ').html();
+                      totalQ=totalQ.replace(/\,/g,''); //deletes comma
+                      totalQ=parseInt(totalQ,10);
+                      
+                      var realPrice =  a / b;
+                      //quantity
+                      $('#P_quants'+row.value).val(0);
+                      remover = remover - result;
+                      $('#P_quants'+row.value).val(qunatityy - result);
+                      $('#P_qt'+row.value+'').html($('#P_quants'+row.value).val());
+                      var newQuantt = $('#P_quants'+row.value).val();
+                      //price
+                      $('#P_prices'+row.value).val(0);
+                      $('#P_prices'+row.value).val(realPrice * newQuantt);
+                      $('#P_pr'+row.value+'').html($('#P_prices'+row.value).val());
+
+
+
+                      //total
+                      $('#ttp').val(totalP - (realPrice * result));
+                      $('#ttq').val(totalQ - result);
+
+                      $('#totalPrice').html(String(totalP - (realPrice * result) ));
+                      $('#totalQ').html(String(totalQ - result));
+                      
+
+                      //if quantity is zero delete row
+                      if(remover == 0){
+                       var t = idArray.indexOf(row.value);
+                       idArray.splice(t,1);
+
+
+                       $('#totalQ').html(String(x));
+                       $('#totalPrice').html(String(y));
+                       qCtr--;
+                       var i=row.parentNode.parentNode.rowIndex;
+                       $('#thisIsCart').append('<input type="hidden" name="P_removed[]" value="'+$('#P_id'+row.value).val()+'">');
+                       $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value="'+$('#P_prices'+row.value).val()+'">');
+                       $('#thisIsCart').append('<input type="hidden" name="P_quantremoved[]" value="'+$('#P_quants'+row.value).val()+'">');
+                       document.getElementById('cartTbl').deleteRow(i);
+
+                     }
+
+                   }
+                   else if(qunatityy == 0){
+                    var t = idArray.indexOf(row.value);
+                    idArray.splice(t,1);
+                    
+
+                    $('#totalQ').html(String(x));
+                    $('#totalPrice').html(String(y));
+                    qCtr--;
+                    var i=row.parentNode.parentNode.rowIndex;
+                    
+                    $('#thisIsCart').append('<input type="hidden" name="P_removed[]" value="'+$('#P_id'+row.value).val()+'">');
+                    $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value="'+$('#P_prices'+row.value).val()+'">');
+                    $('#thisIsCart').append('<input type="hidden" name="P_quantremoved[]" value="'+$('#P_quants'+row.value).val()+'">');
+                    document.getElementById('cartTbl').deleteRow(i);
+                  }
+                }
+              }
+                 ////////             ADD OF PRODUCTS TO CART ///////////////
+                 function P_addRow(row){
+                  var qunatityy = parseInt($('#P_quants'+row.value).val());
+                  var x = totalQuant - parseInt($('#P_quants'+row.value).val());
+                  var y = tempPrice - parseInt($('#P_prices'+row.value).val());
+                  var result;
+
+                  result = parseInt(prompt('Add how many products?'));
+                  if(result == null || isNaN(result) ||  result == 0 || result < 0) {
+
+                    if(result == 0){
+                      alert('Input a number');
+                    }
+                    else if(isNaN(result)){
+                      alert('Input a number');
+                    }
+                    else if(result < 0 ){
+                      alert('Input positive number');
+                    }
+                    return;
+
+                  }
+                  else{
+                    if(qunatityy != 0){
+                      var remover = qunatityy;
+                      var a = parseInt($('#P_prices'+row.value).val());
+                      var b = parseInt($('#P_quants'+row.value).val());
+
+                      var totalP= $('#totalPrice').html();
+                      totalP=totalP.replace(/\,/g,''); //deletes comma
+                      totalP=parseInt(totalP,10);
+
+                      var totalQ= $('#totalQ').html();
+                      totalQ=totalQ.replace(/\,/g,''); //deletes comma
+                      totalQ=parseInt(totalQ,10);
+                      
+                      var realPrice =  a / b;
+                      //quantity
+                      remover = remover + result;
+                      $('#P_quants'+row.value).val(qunatityy + result);
+                      $('#P_qt'+row.value+'').html($('#P_quants'+row.value).val());
+                      var newQuantt = $('#P_quants'+row.value).val();
+                      //price
+                      $('#P_prices'+row.value).val(0);
+                      $('#P_prices'+row.value).val(realPrice * newQuantt);
+                      $('#P_pr'+row.value+'').html($('#P_prices'+row.value).val());
+
+
+
+                      //total
+                      $('#ttp').val(totalP + (realPrice * result));
+                      $('#ttq').val(totalQ + result);
+
+                      $('#totalPrice').html(String(totalP + (realPrice * result) ));
+                      $('#totalQ').html(String(totalQ + result));
+                      
+                      
+                    }
+                  }
+
+
+
+                  
+                }
+
+                //
+
+
+                //
+
                   //CHECK OUT
 
 
