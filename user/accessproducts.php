@@ -219,6 +219,7 @@ if(!isset($_SESSION['userID']))
 				</div>
 			</div>
 -->
+	<form action="" method="post" id="myForm">
 			<div class="modal fade" id="myCart">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -280,6 +281,7 @@ if(!isset($_SESSION['userID']))
 
                                         </div>
                                       </div>
+                                      </form>
 	</body>
 </html>
 <script type="text/javascript">
@@ -565,7 +567,11 @@ if(!isset($_SESSION['userID']))
                       var result = confirm("Are you sure? \n\n\n *this action cannot be undone*");
                       if(result){
                         $('#check-out').attr('type','submit');
+<<<<<<< HEAD
                         $('#myForm').attr('action','accessorder.php');
+=======
+                        $('#myForm').attr('action','accesscheckout.php');
+>>>>>>> 7a8c4f38334fa4386f67adcabbefce3425e8fdbe
                       }
                       else{
 

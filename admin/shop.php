@@ -169,7 +169,7 @@ $(this).show();
                                     <div class="row" style="margin: 0 auto; margin-top: -120px;">
                                       <div class="col-md-6" style="margin-top: 10px;">
                                         <div class="row">
-                                          <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge">0</span></button>
+                                          <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge"></span></button>
 
                                         </div>
                                       </div>

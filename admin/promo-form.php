@@ -258,7 +258,7 @@ if (!$conn) {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct">Update Promo</h3>
         </div>
-        <form enctype="multipart/form-body" action="promo-update.php" method="post">
+        <form enctype="multipart/form-data" action="promo-update.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <?php
@@ -482,7 +482,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <h3 class="box-title m-t-20">Promo Image</h3>
                         <div class="product-img"><br>
-                    		<input type="file" name="image" enctype="multipart/form-data" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
+                    		<input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
                     		<input type="hidden" name="exist_image" value="<?php echo $row['promoImage']?>">
                         </div>
                       </div>

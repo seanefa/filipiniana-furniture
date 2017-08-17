@@ -448,8 +448,5 @@ if(!isset($_SESSION["userEmpID"]))
   <!-- Auto Hide Menu -->
   <script src="js/admin/menu/auto-hide-menu.js"></script>
   <!-- Literally Canvas -->
-  <script src="js/literallycanvas.js"></script>
-  <script src="js/literallycanvas-core.js"></script>
-  <script src="js/literallycanvas-core.min.js"></script>
 </body>
 </html>

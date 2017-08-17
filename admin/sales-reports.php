@@ -110,6 +110,12 @@ $(document).ready(function(){
     });
   });
   </script>
+  <script src="plugins/bower_components/Chart.js/Chart.js"></script>
+  <script src="plugins/bower_components/Chart.js/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" ></script>
+
+
 </head>
 <body>
   <!-- Preloader -->
@@ -158,10 +164,19 @@ $(document).ready(function(){
                     <div id="range">
                     <div class="col-md-3">
                       <input type="date" id="dateRep" name ="dateRep" class="form-control" required/>
+                      
+
                     </div>
                   </div>
                     <div class="col-md-3">
                       <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>&nbsp;Generate</button>
+                    <nav>
+                      <ul>
+                        <li><h3><a href="#orders" class="ti-shopping-cart"><span> List of Orders</span></a></h3></li>
+                        <li><h3><a href="#orderrequest" class="ti-write"><span> Order Request</span></a></h3></li>
+                        <li><h3><a href="#customizationrequest" class="ti-marker-alt"><span> Customization Request</span></a></h3></li>
+                      </ul>
+                    </nav>
                     </div>
                   </div>
                   <br>
@@ -187,6 +202,7 @@ $(document).ready(function(){
               </div>
             </div>
           </div>
+<canvas id="myChart" width="500" height="500" style="width: 100px; height: 100px;"></canvas>
         </div>  
       </div>
     </div>
@@ -212,6 +228,40 @@ $(document).on('hidden.bs.modal', function (e) {
   target.removeData('bs.modal')
   .find(".clearable-content").html('');
 });
+</script>
+<script type="text/javascript">
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: false
+    }
+});
+
 </script>
 
 </body>

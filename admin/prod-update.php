@@ -24,6 +24,9 @@ $exist_image = $_POST["exist_image"];
 $file= date("Y-m-d") . time() . ".png";
 $tmp_name=$_FILES["image"]["tmp_name"];
 
+$p = str_replace(',','',$price);
+$price = $p;
+
 if($_FILES["image"]["error"] > 0)
 {
 	echo "Error: NO CHOSEN FILE<br>";
@@ -40,8 +43,13 @@ if($pic=="")
 {
 	$pic = $exist_image;
 }
+
+echo $pic;
 // Create connection
 $updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', prodFrameworkID='$framework', prodDesign='$design',	prodFabricID='$fabric', productName='$name', productDescription='$description', productPrice='$price', prodMainPic='$pic', prodSizeSpecs='$dimension' WHERE productID=$id";
+
+echo $updateSql;
+
 
 if(mysqli_query($conn,$updateSql))
 {
