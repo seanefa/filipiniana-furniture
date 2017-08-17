@@ -59,6 +59,8 @@ $(document).ready(function(){
         }
       });
 
+      
+
     });//end change
 
     $("#gen").on('click',function(){
@@ -170,39 +172,73 @@ $(document).ready(function(){
                   </div>
                     <div class="col-md-3">
                       <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>&nbsp;Generate</button>
+                    </div>
+                    <br><br>
+                      <div class="sttabs tabs-style-flip" style="margin-top: 40px;">
                     <nav>
                       <ul>
-                        <li><h3><a href="#orders" class="ti-shopping-cart"><span> List of Orders</span></a></h3></li>
-                        <li><h3><a href="#orderrequest" class="ti-write"><span> Order Request</span></a></h3></li>
-                        <li><h3><a href="#customizationrequest" class="ti-marker-alt"><span> Customization Request</span></a></h3></li>
+                        <li><h3><a href="#myChart" class="ti-layout"><span> Table View</span></a></h3></li>
+                        <li><h3><a href="#myTable" class="ti-bar-chart"><span> Chart View</span></a></h3></li>
                       </ul>
                     </nav>
+                    <div class="content-wrap text-center" style="margin-top: -10px;">
+                    <section id="myTable">
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="barchart">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                          <div class="row" id="reportsOut">
+                            <div class="table-responsive"> 
+                              <table class="table color-bordered-table muted-bordered-table display nowrap" id="reportsTable">
+                                <thead>
+                                  <tr>
+                                    <th style="text-align: left;">Order ID</th>
+                                    <th style="text-align: left;">Customer Name</th>
+                                    <th style="text-align: left;">Amount Due</th>
+                                    <th style="text-align: left;">Amount Paid</th>
+                                    <th style="text-align: left;">Remaining Balance</th>
+                                  </tr>
+                                </thead>
+                                <tbody style="text-align: left;">
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+                        </div>
+                    </section>
+                    <section >
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="barchart">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                              <div class="row" id="reportsChart">
+                                <div class="col-md-6">
+                                <h2>BAR GRAPH</h2>
+                                <canvas id="myChart" width="400" height="300" style="width: 100px; height: 100px;"></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                <h2>PIE GRAPH</h2>
+                                <canvas id="my2ndChart" width="400" height="300" style="width: 100px; height: 100px;"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
                     </div>
+                    </div>
+                      </div>
                   </div>
                   <br>
-                  <div class="row" id="reportsOut">
-                    <div class="table-responsive"> 
-                      <table class="table color-bordered-table muted-bordered-table display nowrap" id="reportsTable">
-                        <thead>
-                          <tr>
-                            <th style="text-align: left;">Order ID</th>
-                            <th style="text-align: left;">Customer Name</th>
-                            <th style="text-align: left;">Amount Due</th>
-                            <th style="text-align: left;">Amount Paid</th>
-                            <th style="text-align: left;">Remaining Balance</th>
-                          </tr>
-                        </thead>
-                        <tbody style="text-align: left;">
-
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-<canvas id="myChart" width="500" height="500" style="width: 100px; height: 100px;"></canvas>
         </div>  
       </div>
     </div>
@@ -231,8 +267,39 @@ $(document).on('hidden.bs.modal', function (e) {
 </script>
 <script type="text/javascript">
 var ctx = document.getElementById("myChart").getContext('2d');
+var ctx2 = document.getElementById("my2ndChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: false
+    }
+});
+var my2ndChart = new Chart(ctx2, {
+    type: 'pie',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{

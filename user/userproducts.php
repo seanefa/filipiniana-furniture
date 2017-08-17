@@ -6,14 +6,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="x-ua-compatible" content="ie-edge">
+		<link rel="icon" href="pics/filfurniturelogo.png">
 		<!--bootstrap 4-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!--custom css-->
-		<link rel="stylesheet" href="custom.css">
-		<!--scripts-->
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 		<!--custom css-->
 		<link rel="stylesheet" href="custom.css">
 		<!--google icons-->
@@ -22,16 +17,18 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!--my css-->
 		<link rel="stylesheet" href="myStyle.css">
-		<!--javascript-->
-		<script src="myScript.js"></script>
-		<link rel="icon" href="pics/filfurniturelogo.png">
+		<link rel="stylesheet" href="css/footer.css">
 	</head>
 	<body>
 		<!--navbar-->
 		<div class="container-fluid">
 			<div class="row">
 				<!--navbar-->
-				<?php
+				<nav class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-inverse img-fluid">
+				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				  	</button>
+				  	<?php
 				include "userconnect.php";
 				$sql="SELECT * from tblcompany_info";
 				$result=$conn->query($sql);
@@ -40,17 +37,11 @@
 					while($row=$result->fetch_assoc())
 					{
 				?>
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 logo">
-					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">
-				</div>
+					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">&nbsp;
 				<?php
 					}
 				}
 				?>
-				<nav class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-inverse img-fluid">
-				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  	</button>
 					<?php
 					include "userconnect.php";
 					$sql="SELECT * from tblcompany_info";
@@ -86,7 +77,7 @@
 						</ul>
 						<ul class="navbar-nav navbar-right">
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info">1738</span></a>
+								<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info"></span></a>
 							</li>
 						</ul>
 				  	</div>
@@ -188,62 +179,9 @@
 		</div>
 		<br>
 		<!--footer-->
-		<footer class="jumbotron-fluid footer">
-			<div class="row">
-				<?php
-				include "userconnect.php";
-				$sql="SELECT * from tblcompany_info";
-				$result=$conn->query($sql);
-				if($result->num_rows>0)
-				{
-					while($row=$result->fetch_assoc())
-					{
-				?>
-				<div class="col-md-3 col-lg-3 col-xl-3">
-					<h3><b>Navigation Links</b></h3>
-					<hr>
-					<ul>
-						<li><a href="userhome.php" class="btn btn-web">Home</a></li>
-						<li><a href="userproducts.php" class="btn btn-web">Products</a></li>
-						<li><a href="#" class="btn btn-web">User Manual</a></li>
-					</ul>
-				</div>
-				<div class="col-md-5 col-lg-5 col-xl-5">
-					<h3 class="text-center"><b>About</b></h3>
-					<hr>
-					<p class="text-justify"><?php echo "" . $row['comp_about'];?></p>
-				</div>
-				<div class="col-md-4 col-lg-4 col-xl-4">
-					<h3 class="text-center"><b>Additional Infos</b></h3>
-					<hr>
-					<div class="row">
-						<div class="col-md-12 col-lg-12 col-xl-12 text-center">
-							<b>Visit Us</b>
-							<br>
-							<?php echo "" . $row['comp_address'];?><br>
-						</div>
-					</div>
-					<hr>
-					<div class="row text-center">
-						<div class="col-md-6 col-lg-6 col-xl-6">
-							<b>Contact</b>
-							<br>
-							<?php echo "" . $row['comp_num'];?><br>
-						</div>
-						<div class="col-md-6 col-lg-6 col-xl-6">
-							<b>Email</b>
-							<br>
-							<?php echo "" . $row['comp_email'];?><br>
-						</div>
-					</div>
-				</div>
-				<?php
-					}
-				}
-				$conn->close();
-				?>
-			</div>
-		</footer>
+		<?php
+		include 'footer.php';
+		?>
 		<!--signup modal-->
 		<div class="modal fade" id="signupmodal">
 			<div class="modal-dialog" role="document">
@@ -370,4 +308,16 @@
 			</div>
 		</div>
 	</body>
+	<!--scripts-->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<!--javascript-->
+		<script src="myScript.js" type="text/javascript"></script>
+		<script src="js/illbeback.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+        $(document).ready(function() {
+            $("#scroll-to-top").illBeBack();
+        });
+    </script>
 </html>
