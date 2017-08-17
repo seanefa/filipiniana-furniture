@@ -10,6 +10,10 @@ html,body
 {
     background: linear-gradient(to right, #105170, lightsteelblue, #105170);
 }
+.bg-web-faded
+{
+	background: linear-gradient(to right, lightsteelblue, #105170, #105170, #105170, #105170, #105170, #105170);
+}
 .btn-inverse
 {
 	color: white;

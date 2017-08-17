@@ -565,7 +565,7 @@ if(!isset($_SESSION['userID']))
                       var result = confirm("Are you sure? \n\n\n *this action cannot be undone*");
                       if(result){
                         $('#check-out').attr('type','submit');
-                        $('#myForm').attr('action','next.php');
+                        $('#myForm').attr('action','accessorder.php');
                       }
                       else{
 
