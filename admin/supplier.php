@@ -311,7 +311,13 @@ var flag = true;
 
 });
 
-
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#telNumber").select2({
+      tags: true
+    });
+});
+});
   /*  $(document).ready(function(){
       $("#archiveTable").hide();
       $("#backArch").hide();

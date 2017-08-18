@@ -45,14 +45,16 @@ if (!$conn) {
                     </div>
                   </div>
                 </div>
+
                 <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group field">
-                      <label class="control-label">Telephone Number</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="telNumber" data-mask="+63 (999) 999-9999" class="form-control" name="telnum" data-mask="999-9999" required><span id="telNumberValidate"></span>
-                    </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Telephone Number</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="telNumber[]" id="telNumber">
+                    </select>
                   </div>
                 </div>
+              </div>
                   </div>
                 </div>
                 <div class="row">
