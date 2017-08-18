@@ -40,7 +40,7 @@ var value = $("#selectCat").val(); // on load
 
 $.ajax({
   type: 'post',
-  url: 'display-furnitures.php',
+  url: 'display-furnitures-pos.php',
   data: {
     id: value,
   },
@@ -55,7 +55,7 @@ $('#selectCat').on("change",function() {
   if(isNaN(value)){
     $.ajax({
       type: 'post',
-      url: 'display-furnitures.php',
+      url: 'display-furnitures-pos.php',
       data: {
         id: value,
       },
@@ -70,7 +70,7 @@ $('#selectCat').on("change",function() {
     var drop = 1;
     $.ajax({
       type: 'post',
-      url: 'display-furnitures.php',
+      url: 'display-furnitures-pos.php',
       data: {
         id: value,
       },
@@ -95,10 +95,9 @@ $('#selectCat').on("change",function() {
 
 $('#selectType').on("change",function() {
   var value = $("#selectType").val();
-  alert(value);
   $.ajax({
     type: 'post',
-    url: 'display-furnitures.php',
+    url: 'display-furnitures-pos.php',
     data: {
       id: value,
     },
@@ -159,10 +158,7 @@ $('#selectType').on("change",function() {
                                           <div class="row">
                                             <label class="control-label">CATEGORY</label>
                                             <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
-                                              <option value="All">All Furnitures</option>
-                                              <option value="On-Promo">All On-Promo Furnitures</option>
-                                              <option value="On-Hand">All On-hand Furnitures</option>
-                                              <option value="Packages">All Packages</option>
+                                              <option value="On-Hand">All On-Hand Furnitures</option>
                                               <?php
                                               include 'ew.php';
                                               $delsql = "SELECT * FROM tblfurn_category ORDER BY categoryName ASC;";
