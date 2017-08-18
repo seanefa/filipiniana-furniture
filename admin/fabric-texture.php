@@ -48,6 +48,7 @@ echo '</script>';
 <link href="plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
 <!-- Range slider  -->
 <script src="plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+<script src="plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
 
 <script>
 $(document).on('focus','.modal',function () {
