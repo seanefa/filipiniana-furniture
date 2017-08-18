@@ -5,8 +5,7 @@ include 'dbconnect.php';
 $id = $_SESSION['varname'];
 
 $editfName = $_POST['name'];
-$colorArray = $_POST['colors'];
-$colors = implode(",", $colorArray); 
+$colors = $_POST['color'];
 $editfPattern = $_POST['pattern'];
 $editfType = $_POST['type'];
 $editfRemarks = $_POST['Remarks'];

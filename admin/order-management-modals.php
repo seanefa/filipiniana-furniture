@@ -49,8 +49,8 @@ $_SESSION['varname'] = $jsID;
                       <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
                       <table class="table product-overview" id="cartTbl">
                         <thead>
-                          <th style="text-align:center">Furniture Name</th>
-                          <th style="text-align:center">Furniture Description</th>
+                          <th style="text-align:left">Furniture Name</th>
+                          <th style="text-align:left">Furniture Description</th>
                           <th style="text-align:right;">Unit Price</th>
                           <th style="text-align:right;">Quantity</th>
                           <th style="text-align:right;">Total Price</th>
@@ -307,7 +307,12 @@ $_SESSION['varname'] = $jsID;
 
               <div class="col-md-6" style="text-align:left;">
                 <h3 style="text-align:center;"> <label class="control-label">Payment Information</label></h3>
-                <h5 style="margin-left: 100px;"><p><b>Total Amount Due: </b>&#8369; <?php echo number_format($row['orderPrice'])?></p>
+                
+                <table class="table">
+                  <tr>
+                    <td><b>Total Amount Due: </b></td>
+                    <td>&#8369; <?php echo number_format($row['orderPrice'])?></td>
+                  </tr>
                   <?php
                   $down = 0;
                   $bal = 0;
@@ -320,10 +325,22 @@ $_SESSION['varname'] = $jsID;
                   $down = $tpay;
                   $bal = $row['orderPrice'] - $down;
                   ?>
-                  <p><b>Downpayment: &#8369; </b><?php echo number_format($down,2)?></p>
-                  <p><b>Remaining Balance: &#8369; </b><?php echo number_format($bal,2)?></p>
-                </h5>
+                  <tr>
+                    <td><b>Downpayment:  </b></td>
+                    <td>&#8369; <?php echo number_format($down,2)?></td>
+                  </tr>
+                  <tr>
+                    <td><b>Remaining Balance: </b></td>
+                    <td>&#8369; <?php echo number_format($bal,2)?></td>
+                  </tr>
+                </table>
               </div>
+              <?php
+              function getPayInfo(){
+                echo '';
+              }
+
+              ?>
             </div>
 
             <div class="row">
@@ -335,8 +352,8 @@ $_SESSION['varname'] = $jsID;
                         <h3 style="text-align:center;"><label class="control-label">Orders</label></h3>
                         <table class="table product-overview" id="cartTbl">
                           <thead>
-                            <th style="text-align:center">Furniture Name</th>
-                            <th style="text-align:center">Furniture Description</th>
+                            <th style="text-align:left">Furniture Name</th>
+                            <th style="text-align:left">Furniture Description</th>
                             <th style="text-align:right;">Unit Price</th>
                             <th style="text-align:right;">Quantity</th>
                             <th style="text-align:right;">Total Price</th>

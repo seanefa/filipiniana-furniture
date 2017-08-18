@@ -32,6 +32,7 @@ if(!isset($_SESSION["userEmpID"]))
   <!-- DataTable CSS -->
   <link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="plugins/bower_components/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
   <!-- Timeline CSS -->
   <!--link href="../plugins/bower_components/horizontal-timeline/css/horizontal-timeline.css" rel="stylesheet">
   <link href="../plugins/bower_components/timeliner/src/css/jquery-timeliner.css" rel="stylesheet">
@@ -385,6 +386,7 @@ if(!isset($_SESSION["userEmpID"]))
   <!-- Counter js -->
   <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
   <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+<script src="plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
   <!-- Morris JavaScript -->
   <!--script src="../plugins/bower_components/raphael/raphael-min.js"></script>
   <script src="../plugins/bower_components/morrisjs/morris.js"></script>

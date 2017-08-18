@@ -374,7 +374,7 @@ var flag = true;
                               <th>Type</th>
                               <th>Pattern</th>
                               <th>Color</th>
-                              <th>Remarks</th>
+                              <th>Description</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
@@ -395,12 +395,7 @@ var flag = true;
                                   $pattern = fpattern($row['fabricPatternID']) ;
                                   echo '<td>'. $type .'</td>';
                                   echo '<td>'. $pattern .'</td>';
-                                  echo ('<td>');
-                                    while($colorCtr != 0){ 
-                                      echo'<input maxlength="1" size="1" type="img" style="background-color:'.$colorArray[$colorCtr-1].';" disabled/>'; 
-                                      $colorCtr--;
-                                    }
-                                      echo('</td>');
+                                  echo ('<td>'.$colorDb.'</td>');
                                   echo '<td>'. $row['fabricRemarks'] .'</td>';
                                   ; ?>
                                   <td>

@@ -38,6 +38,22 @@ if (!$conn) {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
+                        <label class="control-label">Rating</label><span id="x" style="color:red"> *</span>
+                        <p><i>On the scale of 1 - 5 how would you rate the texture's quality with 1 being the lowest and 5 being the highest.</i></p>
+                        <input type="text" id="rating" class="form-control" name="rating" style="text-align:right" required/>
+                        <p id="error"></p>
+
+                        <!--<div class="form-group">
+                    <label class="control-label">Rating</label>
+                    <p><i>On the scale of 1 - 5 how would you rate the texture's quality with 1 being the lowest and 5 being the highest.</i></p>
+                    <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-default btn-outline bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" class="form-control" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-default btn-outline bootstrap-touchspin-up" type="button">+</button></span></div>
+                  </div>-->
+                      </div>
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
                         <label class="control-label">Description</label>
                         <textarea class="form-control" rows="4" name="desc"></textarea></div>
                       </div>
@@ -79,6 +95,22 @@ if (!$conn) {
                           <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['textureName']; $_SESSION['tempname'] = $trow['textureName'];?>" required/><span id="message"></span> </div>
                         </div>
                       </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Rating</label><span id="x" style="color:red"> *</span>
+                        <p><i>On the scale of 1 - 5 how would you rate the texture's quality with 1 being the lowest and 5 being the highest.</i></p>
+                        <input type="text" id="editrating" class="form-control" name="rating" style="text-align:right" value="<?php echo $trow['textureRating'];?>" required/>
+                        <p id="error"></p>
+
+                        <!--<div class="form-group">
+                    <label class="control-label">Rating</label>
+                    <p><i>On the scale of 1 - 5 how would you rate the texture's quality with 1 being the lowest and 5 being the highest.</i></p>
+                    <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-default btn-outline bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-default btn-outline" data-bts-button-up-class="btn btn-default btn-outline" class="form-control" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-default btn-outline bootstrap-touchspin-up" type="button">+</button></span></div>
+                  </div>-->
+                      </div>
+                      </div>
+                    </div>
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">

@@ -80,15 +80,16 @@ if (!$conn) {
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">Color</label><span id="x" style="color:red"> *</span>
-                    <input type="color" id="colorPick" class="form-control" name="color[]" required/>
+                    <label class="control-label">Color(s)</label><span id="x" style="color:red"> *</span>
+                    <input type="text" id="colorPick" class="form-control" name="color" required/>
+                    <!--<input type="color" id="colorPick" class="form-control" name="color[]" required/>
                     <div id="addHere"></div>
                     <input type="hidden" id="delPicker" class="btn btn-default" value="-"/>
-                    <button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button> 
+                    <button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button> -->
                   </div>
                 </div>
                 </div>
-                <label class="box-title">Remarks</label>
+                <label class="box-title">Description</label>
                 <div class="row">
                   <div class="col-md-12 ">
                     <div class="form-group">
@@ -184,8 +185,9 @@ if (!$conn) {
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="control-label">Color</label><span id="x" style="color:red">*</span>
-                      <div id="colorPick">
+                      <label class="control-label">Color(s)</label><span id="x" style="color:red">*</span>
+                    <input type="text" class="form-control" name="color" value="<?php echo $trow['fabricColor'];?>" required/>
+                      <!--<div id="colorPick">
                       <?php
                       while($colorCtr !=0){
                       echo '<input type="color" id="thisColor'.$colorCtr.'" class="form-control" placeholder="Golden Yellow" name="colors[]" value="'.$colorArray[$colorCtr-1].'" required/>';
@@ -194,14 +196,14 @@ if (!$conn) {
                       ?>
                       </div>
                       <div id="addHere"></div>
-                      <input type="hidden" id="delPicker" class="btn btn-default" value="-"/><button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button>
+                      <input type="hidden" id="delPicker" class="btn btn-default" value="-"/><button type="button" id="addPicker" class="btn btn-default"><i class="ti-plus"></i></button>-->
 
                 </div>
 
                     </div>
                   </div>
                   </div>
-                  <label class="box-title">Remarks</label>
+                  <label class="box-title">Description</label>
                   <div class="row">
                     <div class="col-md-12 ">
                       <div class="form-group">

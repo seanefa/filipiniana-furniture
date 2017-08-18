@@ -24,8 +24,7 @@ else
  $pic = $date . $time . ".png";
 
 }
-$colorArray = $_POST['color'];
-$colors = implode(",",$colorArray); 
+$colors = $_POST['color']; 
 
 $sql = "INSERT INTO `tblfabrics` (`fabricName`, `fabricTypeID`, `fabricPatternID`, `fabricColor`, `fabricRemarks`, `fabricPic`, `fabricStatus`) VALUES ('$name', '$type', '$pattern', '$colors', '$remarks', '$pic', '$status')";
 if($sql){
