@@ -5,12 +5,6 @@ session_start();
 $arrayPrice = array();
 $prod = array();
 
-
-
-
-
-
-
 $jsID = "";
 
 if(isset($_POST['id'])){
@@ -24,11 +18,6 @@ if(isset($_GET['id'])){
 
 $_SESSION['varname'] = $jsID;
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 ?>
 <!DOCTYPE html>  
 <html lang="en">
@@ -106,7 +95,7 @@ if (!$conn) {
   $(this).val(function(index, value) {
     return value
     .replace(/\D/g, "")
-    .replace(/\B(?=(\d{2})+(?!\d))/g, ",")
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     ;
   });
   });
@@ -135,7 +124,7 @@ if (!$conn) {
                     <div class="panel-body">
                       <div class="form-body">
                         <div class="row">
-                          <div class="col-md-4">
+                          <div class="col-md-6">
                             <div class="form-group">
                             <?php
 
@@ -164,18 +153,13 @@ if (!$conn) {
                                         echo "<b>Please Select Atleast One Option.</b>";
                                       }
                                     }
-
-
-
-
                             ?>
-
 
                               <label class="control-label">Name</label><span id="x" style="color:red">*</span>
                               <input type="text" id="username" class="form-control" placeholder="Christmas Package" name="pName" required/> <span id="message"></span>
                             </div>
                           </div><!--/span-->
-                          <div class="col-md-3">
+                          <div class="col-md-6">
                             <div class="form-group">
 
                             <script type="text/javascript">
@@ -204,20 +188,22 @@ if (!$conn) {
                             </script>
 
                               <label class="control-label">Price</label><span id="x" style="color:red">*</span>
-                              <input id="thisPrice" class="form-control" name="pPrice" style="text-align:right;" required/><input type="checkbox" id="suggestPrice" value="<?php echo array_sum($arrayPrice); ?>"/><label class="control-label">Suggested Price: <small>&#8369;</small><?php echo number_format(array_sum($arrayPrice)); ?></label> 
+                              <input id="thisPrice" class="form-control" name="pPrice" style="text-align:right;" required/><input type="checkbox" id="suggestPrice" value="<?php echo array_sum($arrayPrice); ?>"/><label class="control-label">Suggested Price: <small>&#8369;</small><?php echo number_format(array_sum($arrayPrice),2); ?></label> 
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="form-group">
-                            <label class="control-label">&nbsp;&nbsp;Inclusion</label>
+                            <h4><label class="control-label">&nbsp;&nbsp;Inclusions</label></h4>
                             <table class="table color-bordered-table muted-bordered-table" id="selectedProduct">
                               <thead>
-                                <th style="text-align: center;">Product Name</th>
-                                <th style="text-align: center;">Product Price</th>
+                                <th>Product Category</th>
+                                <th>Product Name</th>
+                                <th>Product Description</th>
+                                <th>Product Price</th>
                                 <th style="text-align: center;">Actions</th>
                               </thead>
-                              <tbody style="text-align: center;">
+                              <tbody>
 
                                   <?php
                                   include "dbconnect.php";
@@ -232,15 +218,17 @@ if (!$conn) {
 //Loop to store and display values of individual checked checkbox
                                       foreach($_POST['check'] as $selected) {
                                         echo '<tr><input type="hidden" name="pr[]" value="'. $selected .'">';
-                                        $sql = "SELECT * FROM tblproduct WHERE productID='$selected'";
+                                        $sql = "SELECT * FROM tblproduct a, tblfurn_category b WHERE a.prodCatID = b.categoryID and  a.productID='$selected'";
                                         $result = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_assoc($result))
                                         {
                                           echo ('
+                                            <td>'.$row['categoryName'].'</td>
                                             <td>'.$row['productName'].'</td>
-                                            <td>'.$row['productPrice'].'</td>
+                                            <td>'.$row['productDescription'].'</td>
+                                            <td>&#8369; '.number_format($row['productPrice'],2).'</td>
                                             
-                                            <td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Remove</button>
+                                            <td style="text-align: center;"><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Remove</button>
                                             </td></tr>');
                                           }
                                         }
@@ -447,7 +435,7 @@ if (!$conn) {
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="control-label">Price</label><span id="x" style="color:red">*</span>
-                          <input id="remText" class="form-control" placeholder="0.00" name="pPrice" value="<?php echo $row['packagePrice'];?>" required/> 
+                          <input id="remText" class="form-control" placeholder="0.00" name="pPrice" value="<?php echo number_format($row['packagePrice'],2);?>" required/> 
                         </div>
                       </div>
                     </div>
@@ -459,23 +447,33 @@ if (!$conn) {
                       $("#backAdd").hide();
                     });
                     </script>
-                    <button type="button" id="showAdd" class="btn btn-success waves-effect text-left" >Add Inclusion</button>
-                    <button type="button" id="backAdd" class="btn btn-danger waves-effect text-left" >Back</button>
+
+                    <div id="showAdd">
+                    <button type="button" style="margin-right:50px" class="btn btn-success waves-effect text-left pull-right" >Add Inclusion</button>
+                    <h4><label class="control-label">&nbsp;&nbsp;Inclusions</label></h4>
+                  </div>
+
+                  <div  id="backAdd">
+                    <button type="button" style="margin-right:50px" class="btn btn-danger waves-effect text-left pull-right" >Back</button>
+                    <h4><label class="control-label">&nbsp;&nbsp;List of Products</label></h4>
+                  </div>
+                  
                     <div class="row">
                       <div class="form-group">
                         <div id="tempRemove">
                         <br>
                         <table class="table color-bordered-table muted-bordered-table" id="tblRemove">
                           <thead>
-                            <th style="text-align: center;">Product Name</th>
-                            <th style="text-align: center;">Product Price</th>
+                                <th>Product Category</th>
+                                <th>Product Name</th>
+                                <th style="text-align: right;">Product Price</th>
                             <th style="text-align: center;">Actions</th>
                           </thead>
-                          <tbody style="text-align: center;">
+                          <tbody>
                             
                               <?php
                               include "dbconnect.php";
-                              $sql = "SELECT * from tblpackages a inner join tblpackage_inclusions b on a.packageID = b.package_incID inner join tblproduct c on c.productID = b.product_incID inner join tblfurn_type d on d.typeID = c.prodTypeID WHERE a.packageID = '$jsID'";
+                              $sql = "SELECT * from tblpackages a inner join tblpackage_inclusions b on a.packageID = b.package_incID inner join tblproduct c on c.productID = b.product_incID inner join tblfurn_category d on d.categoryID = c.prodCatID WHERE a.packageID = '$jsID'";
                               $result = mysqli_query($conn, $sql);
                               $countThis = 0;
                               while ($row = mysqli_fetch_assoc($result))
@@ -485,10 +483,11 @@ if (!$conn) {
                                   $countThis++;
                                 echo ('
                                   <tr id="trowID'.$row['package_inclusionID'].'"><input id="checkThis'.$row['package_inclusionID'].'" type="checkbox" name="" value="'.$row['package_inclusionID'].'" checked="" style="opacity:0; position:absolute; left:9999px;"/>
+                                  <td>'.$row['categoryName'].'</td>
                                   <td>'.$row['productName'].'</td>
-                                  <td><small>&#8369;</small>'.$row['productPrice'].'</td>
+                                  <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
                                   
-                                  <td>
+                                  <td style="text-align: center;">
                                   <input onclick="deleteRow('.$row['package_inclusionID'].')" id="hideThis" type="button" class="btn btn-danger waves-effect text-left" value="Remove"/>
                                   </td>
                                  </tr>');
@@ -503,15 +502,16 @@ if (!$conn) {
                       <div id="tblAdd">
                       <table class="table color-bordered-table muted-bordered-table" id="tblAddInside">
                           <thead>
-                            <th style="text-align: center;">Product Name</th>
-                            <th style="text-align: center;">Product Price</th>
+                                <th>Product Category</th>
+                                <th>Product Name</th>
+                                <th>Product Price</th>
                             <th style="text-align: center;">Actions</th>
                           </thead>
-                          <tbody style="text-align: center;">
+                          <tbody>
                             
                               <?php
                               include "dbconnect.php";
-                              $sql = "SELECT * from tblproduct where productID NOT IN (SELECT productID from tblproduct a, tblpackage_inclusions b, tblpackages c WHERE c.packageID = '$jsID' and b.package_incStatus = 'Listed' and c.packageID = b.package_incID AND a.productID = b.product_incID)";
+                              $sql = "SELECT * from tblproduct a, tblfurn_category b where a.prodCatID = b.categoryID and a.productID NOT IN (SELECT productID from tblproduct a, tblpackage_inclusions b, tblpackages c WHERE c.packageID = '$jsID' and b.package_incStatus = 'Listed' and c.packageID = b.package_incID AND a.productID = b.product_incID)";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
@@ -519,9 +519,10 @@ if (!$conn) {
                                 if($row['prodStat'] != "Archived"){
                                 echo ('<tr id="addrowID'.$row['productID'].'">
                                   <input id="checkThisAgain'.$row['productID'].'" type="checkbox" name="" value='.$row['productID'].' checked="" style="opacity:0; position:absolute; left:9999px;"/>
+                                  <td>'.$row['categoryName'].'</td>
                                   <td id="incName">'.$row['productName'].'</td>
-                                  <td id="incPrice"><small>&#8369;</small>'.$row['productPrice'].'</td>
-                                  <td>
+                                  <td id="incPrice">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                  <td style="text-align: center;">
                                   <input onclick="insRow('.$row['productID'].')" type="button" class="btn btn-success waves-effect text-left" value="Add"></input>
                                   </td>
                                   </tr>');
