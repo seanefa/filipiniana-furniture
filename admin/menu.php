@@ -448,7 +448,6 @@ if(!isset($_SESSION["userEmpID"]))
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js"></script>
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
   <!-- Auto Hide Menu -->
-  <script src="js/admin/menu/auto-hide-menu.js"></script>
-  <!-- Literally Canvas -->
+  <script src="js/admin/menu/auto-hide-menu.js"></script>  
 </body>
 </html>

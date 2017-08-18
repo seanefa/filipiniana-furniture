@@ -40,7 +40,7 @@ if (!$conn) {
                       <div class="form-group">
                         <label class="control-label">Rating</label><span id="x" style="color:red"> *</span>
                         <p><i>On the scale of 1 - 5 how would you rate the texture's quality with 1 being the lowest and 5 being the highest.</i></p>
-                        <input type="text" id="rating" class="form-control" name="rating" style="text-align:right" required/>
+                        <div id="range_02"></div>
                         <p id="error"></p>
 
                         <!--<div class="form-group">

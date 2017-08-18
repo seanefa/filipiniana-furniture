@@ -1,3 +1,5 @@
+$(document).on('focus','.modal',function () {
+
 $("#range_01").ionRangeSlider();
 
 $("#range_02").ionRangeSlider({
@@ -49,5 +51,6 @@ $("#range_22").ionRangeSlider({
     hide_min_max: true,
     hide_from_to: true,
     grid: true
+});
 });
 
