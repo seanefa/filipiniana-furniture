@@ -46,6 +46,20 @@ else if (isset($_GET['deactivateSuccess']))
 <head>
   <script>
 
+  $(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#job").select2({
+    });
+});
+});
+
+    $(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#select").select2({
+    });
+});
+});
+
   /*  $(document).ready(function(){
       $("#archiveTable").hide();
       $("#backArch").hide();
@@ -297,7 +311,7 @@ var error = 0;
                               {
                                 if($row['empStatus']=="Active"){
                                   echo('<tr><td>'.$row['empLastName'].', '.$row['empFirstName'].' '.$row['empMidName'].'</td>');
-                                  $job = jName($row['empJobID']);
+                                  $job = jName($row['empID']);
                                   echo ('<td>'.$job.'</td>
                                   <td>'.$row['empRemarks'].'</td>'); ?>
                                   <td>
@@ -309,13 +323,15 @@ var error = 0;
                                   <?php echo('</tr>');} }
                                   function jName($id){
                                     include "dbconnect.php";
-                                    $sql = "SELECT * from tbljobs WHERE jobID = '$id'";
+                                    $sql = "SELECT * from tblemp_job a, tbljobs b WHERE b.jobID = a.emp_jobDescID and a.emp_empID = '$id';";
                                     $result = mysqli_query($conn,$sql);
                                     $cat = "";
                                     while($row = mysqli_fetch_assoc($result)){
-                                      $cat = $row['jobName'];
+                                      $cat = $cat . $row['jobName'] . " - ";
                                     }
-                                    return $cat;
+
+                                    $temp = substr(trim($cat), 0, -1);
+                                    return $temp;
                                   }
                                   ?>
 
@@ -337,7 +353,7 @@ var error = 0;
     </div>
 
     <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-md">
         <div class="modal-content clearable-content">
           <div class="modal-body">
 

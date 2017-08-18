@@ -18,7 +18,7 @@ $editRemarks = $_POST['remarks'];
 
   // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$updateSql = "UPDATE tblemployee SET empFirstName='$editFN', empMidName='$editMN', empLastName='$editLN', empJobID='$editJob', empRemarks='$editRemarks' WHERE empID=$id";
+$updateSql = "UPDATE tblemployee SET empFirstName='$editFN', empMidName='$editMN', empLastName='$editLN', empRemarks='$editRemarks' WHERE empID=$id";
 
 if(mysqli_query($conn,$updateSql)){
 	header( "Location: employees.php?updateSuccess" );

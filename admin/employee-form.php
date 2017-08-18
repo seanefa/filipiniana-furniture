@@ -31,7 +31,7 @@ if (!$conn) {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct">New Employee</h3>
         </div>
-        <form action="add-Employee.php" method = "post">
+        <form action="add-employee.php" method = "post">
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
@@ -62,7 +62,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Job</label><span id="x" style="color:red"> *</span>
-                          <select class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job">
+                          <select class="form-control" multiple="multiple" id="job" data-placeholder="Choose a Job" tabindex="1" name="job[]">
                             <?php
                             $sql = "SELECT * FROM tbljobs order by jobName;";
                             $result = mysqli_query($conn, $sql);
@@ -141,21 +141,33 @@ if (!$conn) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Job</label><span id="x" style="color:red"> *</span>
-                                <select id="select" class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job">
+                                <select id="select" multiple="multiple" class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job[]">
                                   <?php
                                   include "dbconnect.php";
+                                  $sql1 = "SELECT * from tblemp_job WHERE emp_empID = '$jsID';";
+                                  $res = mysqli_query($conn,$sql1);
+                                  $jobs = "";
+                                  while($jrow = mysqli_fetch_assoc($res)){
+                                    $jobs = $jobs . $jrow['emp_jobDescID'] . ",";
+                                    echo $jobs;
+                                  }
+                                  $temp = substr(trim($jobs), 0, -1);
+                                  $jobs = explode(',',$temp);
+
                                   $sql = "SELECT * FROM tbljobs order by jobName;";
                                   $result = mysqli_query($conn, $sql);
+                                  $cnt = 0;
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
                                     if($row['jobStatus']=='Listed'){
-                                      if ($trow["empJobID"] == $row['jobID'])
+                                      if ($jobs[$cnt] == $row['jobID'])
                                       {
                                         echo('<option value='.$row['jobID'].'" selected="selected">'.$row['jobName'].'</option>');
+                                        $cnt++;
                                       }
                                       else
                                       {
-                                      echo('<option value='.$row['jobID'].'>'.$row['jobName'].'</option>');
+                                      echo('<option value='.$row['jobID'].'selected="selected">'.$row['jobName'].'</option>');
                                       }
 
                                     }
