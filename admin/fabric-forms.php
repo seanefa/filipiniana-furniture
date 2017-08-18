@@ -323,10 +323,9 @@ if (!$conn) {
                         </tr>
                         <tr>
                           <td>Color</td>
-                          <td> <?php while($colorCtr != 0){ 
-                                      echo'<input type="img" style="background-color:'.$colorArray[$colorCtr-1].'; width:75pt" />'; 
-                                      $colorCtr--;
-                                    }?> </td>
+                          <td> 
+                            <?php echo "" . $trow["fabricColor"];?>
+                          </td>
                         </tr>
                                                 
                                                   </tbody>

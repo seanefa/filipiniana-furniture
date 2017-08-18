@@ -29,7 +29,7 @@ if($id=="On-Hand"){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">
-				<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>
+				<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;"><span style="color:red; font-weight:600;">'.$oQuan.'</span>&nbsp;ON-HAND</h4>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>

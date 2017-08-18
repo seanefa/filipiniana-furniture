@@ -87,7 +87,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Description</label>
-                        <input type="text" id="remText" class="form-control" placeholder="Description" name="desc" value="<?php echo $trow['jobDescription'];?>">
+                        <textarea class="form-control" placeholder="Description" name="desc"><?php echo "" . $trow["jobDescription"];?></textarea>
                       </div>
                     </div>
                   </div>

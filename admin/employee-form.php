@@ -81,7 +81,8 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Remarks</label>
-                          <input type="text" id="remarks" class="form-control" name="remarks" /> </div>
+                          <textarea class="form-control" id="remarks" name="remarks"></textarea>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -168,7 +169,7 @@ if (!$conn) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Remarks</label>
-                                <input type="text" id="remText" class="form-control" name="remarks" value="<?php echo $trow['empRemarks'];?>"/> </div>
+                                <textarea id="remText" class="form-control" name="remarks"><?php echo $trow['empRemarks'];?></textarea>
                               </div>
                             </div>
                           </div>
