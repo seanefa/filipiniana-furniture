@@ -29,7 +29,7 @@ if (!$conn) {
               <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
+                  <label class="control-label ">Type</label><span id="x" style="color:red"> *</span>
                   <select class="form-control" tabindex="1" id="type" name="type" id="type" required>
                     <option value="" selected disabled>Choose Furniture Type</option>
                     <?php
@@ -142,7 +142,7 @@ if (!$conn) {
   <div class="modal fade" tabindex="-1" role="dialog" id="viewFrameworkModal" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="view">
-        <?php 
+        <?php
 
         $tsql = "SELECT * FROM tblframeworks WHERE frameworkID = $jsID;";
         $tresult = mysqli_query($conn,$tsql);
@@ -158,17 +158,10 @@ if (!$conn) {
               <h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $trow['frameworkName'];?></h2>
               <hr>
               <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['frameworkPic']?>" alt="Unavailable" class="img-responsive"> </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-
-
-
-                  <h4 class="box-title m-t-40">Remarks</h4>
-                  <p><?php echo $trow['frameworkRemarks'];?></p>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-6">
 
                   <h3 class="box-title">General Info</h3>
                   <div class="table-responsive">
@@ -242,6 +235,13 @@ if (!$conn) {
                                                 </table>
                                               </div>
                                             </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+
+                  <h4 class="box-title m-t-40">Description</h4>
+                  <p><?php echo $trow['frameworkRemarks'];?></p>
+                </div>
                                           </div>
                                         </div>
                                       </div>

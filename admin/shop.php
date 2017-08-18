@@ -531,7 +531,7 @@ function addPackage(id){
 
                   $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value=""><input type="hidden" name="P_quantremoved[]" value=""><input type="hidden" name="P_removed[]" value=""><input type="hidden" id="P_id'+id+'" name="P_cart[]" value="'+id+'"/><input type="hidden" name="P_quant[]" id="P_quants'+id+'" value="'+quant+'"/><input type="hidden" name="P_price[]" id="P_prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
                   $('#cartTbl').append(
-                    '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="P_qt'+id+'">'+quant+'</td><td id="P_pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="P_addRow(this)" value="'+id+'">Add</button></td><td><button type="button" class="btn btn-danger" onclick="P_deleteRow(this)" value="'+id+'">Remove</button></td></tr>');
+                    '<tr><td width="550"><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td width="70" id="P_qt'+id+'">'+quant+'</td><td id="P_pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="P_addRow(this)" value="'+id+'">+</button></td><td><button type="button" class="btn btn-danger" onclick="P_deleteRow(this)" value="'+id+'">x</button></td></tr>');
 
                   $('#totalPrice').html(String(tempPrice));
                   $('#totalQ').html(String(totalQuant));
