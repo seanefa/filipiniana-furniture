@@ -36,47 +36,10 @@ if(!isset($_SESSION["userID"]))
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 					<!--navbar-->
-					<br>
-					<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
-					 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					  	</button>
-						<?php
-						include "userconnect.php";
-						$sql="SELECT * from tblcompany_info";
-						$result=$conn->query($sql);
-						if($result->num_rows>0)
-						{
-							while($row=$result->fetch_assoc())
-							{
-						?>
-						<a class="navbar-brand" href="access.php"><?php echo "" . $row['comp_name'];?></a>
-						<?php
-							}
-						}
-						$conn->close();
-						?>
-					  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto">
-						  		<li class="nav-item">
-									<a class="nav-link" href="access.php"><i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNT <span class="sr-only">(current)</span></a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accessproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accesscustom.php"><i class="fa fa-hand-pointer-o"></i>&nbsp;CUSTOMIZE</a>
-						  		</li>
-						  		<li class="nav-item active">
-									<a class="nav-link" href="accessproduction.php"><i class="fa fa-cog fa-spin"></i>&nbsp;PRODUCTION</a>
-						  		</li>
-							</ul>
-							<form class="form-inline my-2 my-lg-0">
-						  		<input class="form-control mr-sm-2" type="text" placeholder="Search">
-						  		<button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-							</form>
-					  </div>
-					</nav>
+					<br><br>
+					<?php
+					include "accessheader.php";
+					?>
 				</div>
 			</div>
 		</div>

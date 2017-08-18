@@ -23,68 +23,9 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!--navbar-->
-				<nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-inverse img-fluid">
-				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  	</button>
-				  	<?php
-				include "userconnect.php";
-				$sql="SELECT * from tblcompany_info";
-				$result=$conn->query($sql);
-				if($result->num_rows>0)
-				{
-					while($row=$result->fetch_assoc())
-					{
-				?>
-					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">&nbsp;
 				<?php
-					}
-				}
+				include "header.php";
 				?>
-					<?php
-					include "userconnect.php";
-					$sql="SELECT * from tblcompany_info";
-					$result=$conn->query($sql);
-					if($result->num_rows>0)
-					{
-						while($row=$result->fetch_assoc())
-						{
-					?>
-					<a class="navbar-brand" href="userhome.php"><?php echo "" . $row['comp_name'];?></a>
-					<?php
-						}
-					}
-					$conn->close();
-					?>
-				  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-					  		<li class="nav-item active">
-								<a class="nav-link" href="userhome.php"><i class="fa fa-home"></i>&nbsp;HOME <span class="sr-only">(current)</span></a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="userproducts.php"><i class="fa fa-gift"></i>&nbsp;PRODUCTS</a>
-					  		</li>
-					  		<li class="nav-item dropdown">
-								<a class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">
-									<i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNTS
-								</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" data-toggle="modal" href="" data-target="#loginmodal">Log In</a>
-									<a class="dropdown-item" data-toggle="modal" href="" data-target="#signupmodal">Sign Up</a>
-								</div>
-					  		</li>
-						</ul>
-						<ul class="navbar-nav navbar-right">
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info"></span></a>
-							</li>
-						</ul>
-						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="text">
-							<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>&nbsp;Search</button>
-						</form>
-				  	</div>
-				</nav>
 				<!--carousel-->
 				<div class="container">
 					<div class="row">
@@ -125,23 +66,26 @@
 			<div class="row">
 				<?php
 				include "userconnect.php";
-				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 6";
+				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 4";
 				$result = mysqli_query($conn, $sql);
 					if(mysqli_num_rows($result) > 0)
 				{
 					while($row = mysqli_fetch_assoc($result))
 					{
 				?>
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2">
+				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
 					<div class="card text-center">
+						<form method="post">
+							<input type="hidden" value="<?php echo "" . $row["prodID"];?>" name="i_d"/>
+						</form>
 						<img class="card-img-top img-fluid img-thumbnail" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="card-block">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>
 								<b>Php<?php echo "" . $row["productPrice"]; ?></b>
 							</p>
-							<button role="button" class="btn btn-primary" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
-							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn btn-success"><i class="fa fa-search"></i></button>
+							<button role="button" class="btn btn-success" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
+							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn"><i class="fa fa-eye"></i></button>
 						</div>
 					</div>
 				</div>
@@ -174,7 +118,7 @@
 						{
 				?>
 							<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-								<image role="button" type="image" class="btn img-fluid hover-lighten" src="/admin/plugins/images/<?php echo "" . $row['promoImage'];?>" data-toggle="modal" data-target="#promomodal">
+								<image role="button" type="image" class="btn img-fluid hover-lighten" src="/admin/plugins/images/<?php echo "" . $row['promoImage'];?>" data-toggle="modal" data-target="#promomodal"></image>
 							</div>
 				<?php
 						}
@@ -328,16 +272,16 @@
 			</div>
 		</div>
 	</body>
-		<!--scripts-->
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<!--javascript-->
-		<script src="myScript.js" type="text/javascript"></script>
-		<script src="js/illbeback.min.js" type="text/javascript"></script>
-		<script type="text/javascript">
-        $(document).ready(function() {
-            $("#scroll-to-top").illBeBack();
-        });
+	<!--scripts-->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<!--javascript-->
+	<script src="myScript.js" type="text/javascript"></script>
+	<script src="js/illbeback.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $("#scroll-to-top").illBeBack();
+    });
     </script>
 </html>

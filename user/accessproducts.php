@@ -39,52 +39,10 @@ if(!isset($_SESSION['userID']))
 					<!--navbar-->
 					<br>
 					<br>
-					<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
-					 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					  	</button>
-						<?php
-						include "userconnect.php";
-						$sql="SELECT * from tblcompany_info";
-						$result=$conn->query($sql);
-						if($result->num_rows>0)
-						{
-							while($row=$result->fetch_assoc())
-							{
-						?>
-						<a class="navbar-brand" href="access.php"><?php echo "" . $row['comp_name'];?></a>
-						<?php
-							}
-						}
-						$conn->close();
-						?>
-					  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto">
-						  		<li class="nav-item">
-									<a class="nav-link" href="access.php"><i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNT <span class="sr-only">(current)</span></a>
-						  		</li>
-						  		<li class="nav-item active">
-									<a class="nav-link" href="accessproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accesscustom.php"><i class="fa fa-hand-pointer-o"></i>&nbsp;CUSTOMIZE</a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accessproduction.php"><i class="fa fa-cog fa-spin"></i>&nbsp;PRODUCTION</a>
-						  		</li>
-							</ul>
-							<form class="form-inline my-2 my-lg-0">
-						  		<input class="form-control mr-sm-2" type="text" placeholder="Search">
-						  		<button class="btn btn-outline-primary my-2 my-sm-0" type=""><i class="fa fa-search"></i></button>
-							</form>
-							&nbsp;
-		          			<ul class="nav navbar-nav navbar-right">
-								<li class="nav-item">
-									<button class="btn btn-outline-success" data-toggle="modal" data-target="#myCart" title="Cart"><i class="fa fa-shopping-cart"></i></button>
-								</li>
-		        			</ul>
-					  </div>
-					</nav>
+					<br>
+					<?php
+					include "accessheader.php";
+					?>
 				</div>
 			</div>
 		</div>
@@ -95,7 +53,7 @@ if(!isset($_SESSION['userID']))
 			<hr>
 			<div class="container">
 				<div class="row">
-					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
 						<label>Category</label>
 						<select class="form-control">
 							<option>All Furnitures</option>
@@ -104,18 +62,21 @@ if(!isset($_SESSION['userID']))
 							<option>All Pre-Order Furnitures</option>
 						</select>
 					</div>
-					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
 						<label>Type</label>
 						<select class="form-control" disabled>
 							<option></option>
 						</select>
+					</div>
+					<div class="form group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+						<button class="btn-lg btn-warning" data-toggle="modal" data-target="#myCart"><span class="fa fa-shopping-cart"></span>&nbsp;<b>YOUR CART</b></button>
 					</div>
 				</div>
 				<br>
 				<div class="row">
 				<?php
 				include "userconnect.php";
-				$sql="SELECT * from tblproduct";
+				$sql="SELECT * from tblproduct where prodStat = 'Pre-Order'";
 				$result=$conn->query($sql);
 				if($result->num_rows>0)
 				{
