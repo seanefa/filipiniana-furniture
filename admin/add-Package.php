@@ -4,13 +4,15 @@ include 'dbconnect.php';
 
 
 $pName = $_POST['pName'];
-$pPrice = $_POST['pPrice'];
+$price = $_POST['pPrice'];
 $status = "Listed";
 $flag = 0;
 
+$p = str_replace(',','',$price);
+$pPrice = $p;
+
 $sql = "SELECT * FROM tblpackages;";
 $result = mysqli_query($conn, $sql);
-
 $temp = 0;
 while ($row = mysqli_fetch_assoc($result))
 {

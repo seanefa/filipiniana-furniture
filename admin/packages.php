@@ -252,9 +252,9 @@ $(this).val(function(index, value) {
                         <thead>
                           <tr>
                             <th>Package Description</th>
-                            <th>Package Price</th>
-                            <th>No. of Products</th>
-                            <th class="removeSort">Actions</th>
+                            <th style="text-align:center">No. of Products Included</th>
+                            <th style="text-align:right">Package Price</th>
+                            <th class="removeSort" style="text-align:center">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -269,10 +269,10 @@ $(this).val(function(index, value) {
 
                             if($row['packageStatus']=="Listed"){
                               echo ('<td>'.$row['packageDescription'].'</td>
-                                <td><small>&#8369;</small>'.$row['packagePrice'].'</td>
-                                <td>'.$c.'</td>
+                                <td style="text-align:center">'.$c.' pcs</td>
+                                <td style="text-align:right">&#8369; '.number_format($row['packagePrice'],2).'</td>
                                 ');?>
-                                <td>
+                                <td style="text-align:center">
                                   <!-- VIEW -->
                                   <button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #view" data-target="#myModal"><span class='glyphicon glyphicon-eye-open'></span> View</button>
                                   <!-- UPDATE -->
@@ -342,17 +342,18 @@ $(this).val(function(index, value) {
                         });
                       });
                       </script>
+                    <h4><label class="control-label">&nbsp;&nbsp;List of Products</label></h4>
                       <form action="packages-form.php" method="post">
                         <input type="hidden" name="id" value="1">
                         <div class="table-responsive">
                           <table class="table color-bordered-table muted-bordered-table dataTable" id="tblAddPackages">
                             <thead>
                               <tr>
-                                <th>-</th>
-                                <th>Furniture Type</th>
-                                <th>Furniture Name</th>
+                                <th style="text-align:center" class="removeSort">-</th>
+                                <th>Category</th>
+                                <th>Name</th>
+                                <th>Description</th>
                                 <th>Price</th>
-                                <th>Furniture Description</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -362,15 +363,17 @@ $(this).val(function(index, value) {
                                 include "checkbox_value.php";
 
                                 $prodArray = array();
-                                $sql = "SELECT * FROM tblproduct a, tblfurn_type b WHERE a.prodTypeID = b.typeID;";
+                                $sql = "SELECT * FROM tblproduct a, tblfurn_category b WHERE a.prodCatID = b.categoryID;";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result))
                                 {
                                   if($row['prodStat']!="Archived"){
-                                    echo ('<tr><td><input class="chBox" type="checkbox" name="check[]" value='.$row['productID'].'/></td>
-                                      <td>'. $row['typeName'] .'</td><td>'.$row['productName'].'</td>
-                                      <td><small>&#8369;</small>'.$row['productPrice'].'</td>
-                                      <td>'.$row['productDescription'].'</td></tr>
+                                    echo ('<tr><td style="text-align:center"><input class="chBox" type="checkbox" name="check[]" value='.$row['productID'].'/></td>
+                                      <td>'. $row['categoryName'] .'</td>
+                                      <td>'.$row['productName'].'</td>
+                                      <td>'.$row['productDescription'].'</td>
+                                      <td>&#8369; '.number_format($row['productPrice'],2).'</td>
+                                      </tr>
                                       ');
 /*<td>
 <!-- VIEW -->

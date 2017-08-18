@@ -43,6 +43,70 @@ echo '</script>';
 <!DOCTYPE html>  
 <html lang="en">
 <head>
+<!--Range slider CSS -->
+<link href="plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet">
+<link href="plugins/bower_components/ion-rangeslider/css/ion.rangeSlider.skinModern.css" rel="stylesheet">
+<!-- Range slider  -->
+<script src="plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js"></script>
+<script src="plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
+
+<script>
+$(document).on('focus','.modal',function () {
+  $("#range_01").ionRangeSlider();
+
+  $("#range_02").ionRangeSlider({
+      min: 1,
+      max: 5,
+      from: 1
+  });
+  $("#range_03").ionRangeSlider({
+      type: "double",
+      grid: true,
+      min: 0,
+      max: 1000,
+      from: 200,
+      to: 800,
+      prefix: "$"
+  });
+  $("#range_04").ionRangeSlider({
+      type: "double",
+      grid: true,
+      min: -1000,
+      max: 1000,
+      from: -500,
+      to: 500
+  });
+  $("#range_16").ionRangeSlider({
+      grid: true,
+      min: 18,
+      max: 70,
+      from: 30,
+      prefix: "Age ",
+      max_postfix: "+"
+  });
+  $("#range_18").ionRangeSlider({
+      type: "double",
+      min: 100,
+      max: 200,
+      from: 145,
+      to: 155,
+      prefix: "Weight: ",
+      postfix: " million pounds",
+      decorate_both: false
+  });
+  $("#range_22").ionRangeSlider({
+      type: "double",
+      min: 1000,
+      max: 2000,
+      from: 1200,
+      to: 1800,
+      hide_min_max: true,
+      hide_from_to: true,
+      grid: true
+  });
+  });
+</script>
+
   <script>
 
   $(document).ready(function(){ //update form validation
