@@ -151,7 +151,7 @@ if(!isset($_SESSION["userEmpID"]))
       <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
       <li role="separator" class="divider"></li-->
       <li>
-      <a href="javascript:void(0)" class="dropdown-toggle waves-effect waves-light"><i class="fa fa-power-off"></i> Logout</a>
+      <a href="adminlogout.php" class="dropdown-toggle waves-effect waves-light"><i class="fa fa-power-off"></i> Logout</a>
       </li>
       </ul>
     </li>
