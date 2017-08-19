@@ -45,22 +45,27 @@ echo '</script>';
 <head>
   <script>
   var change = 0;
-  function deleteRow(row)
-  {
+  function deleteRow(row,catName,prodName,prodPrice){
+    var catName,prodName,prodPrice;
     var res = confirm("Are you sure?");
     if(res){
       $('#trowID'+row).hide();
       $('#checkThis'+row).attr('name','pis[]');
+
+      $('#insertTable').append('<tr id="addrowID'+row+'"> <input id="checkThisAgain'+row+'" type="checkbox" name="" value='+row+' checked="" style="opacity:0; position:absolute; left:9999px;"/><td>'+catName+'</td><td id="incName">'+prodName+'</td><td id="incPrice">&#8369; '+prodPrice+'</td><td style="text-align: center;"><input onclick="insRow('+"'"+row+"'"+','+"'"+catName+"'"+','+"'"+prodName+"'"+','+"'"+prodPrice+"'"+')" type="button" class="btn btn-success waves-effect text-left" value="Add"></input></td></tr>');
+     
       if($('#message').html() != 'Already Exist!'){
         $('#updateBtn').prop('disabled',false);
       }
     }
   }
-  function insRow(rows)
-  {
-
+  function insRow(rows,catName,prodName,prodPrice){
+    alert(rows+','+catName+','+prodName+','+prodPrice);
     $('#addrowID'+rows).hide(); 
     $('#checkThisAgain'+rows).attr('name','addis[]'); 
+
+    $('#deleteTable').append('<tr id="addrowID'+rows+'"> <input id="checkThisAgain'+rows+'" type="checkbox" name="" value='+rows+' checked="" style="opacity:0; position:absolute; left:9999px;"/><td>'+catName+'</td><td id="incName">'+prodName+'</td><td id="incPrice">&#8369; '+prodPrice+'</td><td style="text-align: center;"><input onclick="deleteRow('+"'"+rows+"'"+','+"'"+catName+"'"+','+"'"+prodName+"'"+','+"'"+prodPrice+"'"+')" type="button" class="btn btn-danger waves-effect text-left" value="Remove"></input></td></tr>');
+
     if($('#message').html() != 'Already Exist!'){
       $('#updateBtn').prop('disabled',false);
     }          
@@ -201,6 +206,8 @@ $(document).ready(function(){
     });
   });
 });
+
+
 $('body').on('keyup','#remText',function(event) {
 
 // skip for arrow keys

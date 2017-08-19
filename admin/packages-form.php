@@ -469,7 +469,7 @@ include 'dbconnect.php';
                                 <th style="text-align: right;">Product Price</th>
                             <th style="text-align: center;">Actions</th>
                           </thead>
-                          <tbody>
+                          <tbody id="deleteTable">
                             
                               <?php
                               include "dbconnect.php";
@@ -481,16 +481,18 @@ include 'dbconnect.php';
 
                                 if($row['package_incStatus'] == "Listed"){
                                   $countThis++;
-                                echo ('
-                                  <tr id="trowID'.$row['package_inclusionID'].'"><input id="checkThis'.$row['package_inclusionID'].'" type="checkbox" name="" value="'.$row['package_inclusionID'].'" checked="" style="opacity:0; position:absolute; left:9999px;"/>
-                                  <td>'.$row['categoryName'].'</td>
-                                  <td>'.$row['productName'].'</td>
-                                  <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                ?>
+                                  <tr id="trowID<?php echo $row['package_inclusionID']; ?>"><input id="checkThis<?php echo $row['package_inclusionID']; ?>" type="checkbox" name="" value="<?php echo $row['package_inclusionID']; ?>" checked="" style="opacity:0; position:absolute; left:9999px;"/>
+                                  <td><?php echo $row['categoryName'] ?></td>
+                                  <td><?php echo $row['productName'] ?></<?php echo $row['categoryName'] ?>td>
+                                  <td style="text-align: right;">&#8369;<?php echo number_format($row['productPrice'],2); ?></td>
                                   
                                   <td style="text-align: center;">
-                                  <input onclick="deleteRow('.$row['package_inclusionID'].')" id="hideThis" type="button" class="btn btn-danger waves-effect text-left" value="Remove"/>
+                                  <input onclick="deleteRow('<?php echo $row['package_inclusionID'] ?>','<?php echo $row['categoryName'] ?>','<?php echo $row['productName'] ?>','<?php echo $row['productPrice'] ?>')" id="hideThis" type="button" class="btn btn-danger waves-effect text-left" value="Remove"/>
                                   </td>
-                                 </tr>');
+                                 </tr>
+
+                                 <?php
                                 }
                                 }
                                 ?>
@@ -507,7 +509,7 @@ include 'dbconnect.php';
                                 <th>Product Price</th>
                             <th style="text-align: center;">Actions</th>
                           </thead>
-                          <tbody>
+                          <tbody id="insertTable">
                             
                               <?php
                               include "dbconnect.php";
@@ -517,15 +519,19 @@ include 'dbconnect.php';
                               {
 
                                 if($row['prodStat'] != "Archived"){
-                                echo ('<tr id="addrowID'.$row['productID'].'">
-                                  <input id="checkThisAgain'.$row['productID'].'" type="checkbox" name="" value='.$row['productID'].' checked="" style="opacity:0; position:absolute; left:9999px;"/>
-                                  <td>'.$row['categoryName'].'</td>
-                                  <td id="incName">'.$row['productName'].'</td>
-                                  <td id="incPrice">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                echo ('
+
+                                  ');?>
+                                <tr id="addrowID<?php echo $row['productID'] ?>">
+                                  <input id="checkThisAgain<?php echo $row['productID'] ?>" type="checkbox" name="" value='<?php echo $row['productID'] ?>' checked="" style="opacity:0; position:absolute; left:9999px;"/>
+                                  <td><?php echo $row['categoryName'] ?></td>
+                                  <td id="incName"><?php echo $row['productName'] ?></td>
+                                  <td id="incPrice">&#8369; <?php echo number_format($row['productPrice'],2); ?></td>
                                   <td style="text-align: center;">
-                                  <input onclick="insRow('.$row['productID'].')" type="button" class="btn btn-success waves-effect text-left" value="Add"></input>
+                                  <input onclick="insRow('<?php echo $row['productID'] ?>','<?php echo $row['categoryName'] ?>','<?php echo $row['productName'] ?>','<?php echo $row['productPrice'] ?>')" type="button" class="btn btn-success waves-effect text-left" value="Add"></input>
                                   </td>
-                                  </tr>');
+                                  </tr>
+                                  <?php
                                 }
                                 }
                                 ?>
