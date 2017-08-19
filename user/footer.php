@@ -1,4 +1,4 @@
-<footer>
+<footer class="bg-web">
 	<?php
 		include "userconnect.php";
 		$sql="SELECT * from tblcompany_info";
@@ -11,7 +11,7 @@
 			  <div class="container">
 				<div class="row">
 				  <div class="col-md-3 col-sm-6 footer-col"><img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">
-					<p style="text-align: center; color: white;"><a class="navbar-brand" href="userhome.php"><?php echo "" . $row['comp_name'];?></a></p>
+					<p style="text-align: center; color: white;"><a class="navbar-brand" href="userhome.php" style="color:white;"><?php echo "" . $row['comp_name'];?></a></p>
 					<p class="text-justify"><?php echo "" . $row['comp_about'];?></p>
 					<p><i class="fa fa-map-pin"></i> <?php echo "" . $row['comp_address'];?></p>
 					<p><i class="fa fa-phone"></i> Phone : <?php echo "" . $row['comp_num'];?></p>
@@ -28,6 +28,11 @@
 				  </div>
 				  <div class="col-md-3 col-sm-6 footer-col">
 					<h6 class="heading7">CUSTOMER CARE</h6>
+					<ul class="footer-ul">
+					  <li><a href=""><span class="fa fa-question-circle"></span> How to Order a Furniture</a></li>
+					  <li><a href=""><span class="fa fa-question-circle"></span> How to pick the perfect furniture</a></li>
+					  <li><a href=""> </a></li>
+					</ul>
 					<div class="post">
 					  <!--p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
 					  <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>

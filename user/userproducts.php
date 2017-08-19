@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Filipiniana Furnitures - Products</title>
-		<!--meta tags-->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="x-ua-compatible" content="ie-edge">
-		<link rel="icon" href="pics/filfurniturelogo.png">
-		<!--bootstrap 4-->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!--custom css-->
-		<link rel="stylesheet" href="custom.css">
-		<!--google icons-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!--font awesome icons-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--my css-->
-		<link rel="stylesheet" href="myStyle.css">
-		<link rel="stylesheet" href="css/footer.css">
+		<?php
+		include "plugins.php";
+		?>
 	</head>
 	<body>
 		<!--navbar-->
@@ -84,7 +70,7 @@
 					while ($row = mysqli_fetch_assoc($result))
 					{
 				?>
-				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
 					<div class="card text-center">
 						<img class="card-img-top img-fluid img-thumbnail" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="card-block text-center">
@@ -254,15 +240,15 @@
 		</div>
 	</body>
 	<!--scripts-->
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<!--javascript-->
-		<script src="myScript.js" type="text/javascript"></script>
-		<script src="js/illbeback.min.js" type="text/javascript"></script>
-		<script type="text/javascript">
-        $(document).ready(function() {
-            $("#scroll-to-top").illBeBack();
-        });
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<!--javascript-->
+	<script src="myScript.js" type="text/javascript"></script>
+	<script src="js/illbeback.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#scroll-to-top").illBeBack();
+    	});
     </script>
 </html>

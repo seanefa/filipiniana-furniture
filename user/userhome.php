@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Filipiniana Furnitures - Home</title>
-		<!--meta tags-->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="x-ua-compatible" content="ie-edge">
-		<link rel="icon" href="pics/filfurniturelogo.png">
-		<!--bootstrap 4-->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!--custom css-->
-		<link rel="stylesheet" href="custom.css">
-		<!--google icons-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!--font awesome icons-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--my css-->
-		<link rel="stylesheet" href="myStyle.css">
-		<link rel="stylesheet" href="css/footer.css">
+		<?php
+		include "plugins.php";
+		?>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -66,7 +52,7 @@
 			<div class="row">
 				<?php
 				include "userconnect.php";
-				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 4";
+				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 8";
 				$result = mysqli_query($conn, $sql);
 					if(mysqli_num_rows($result) > 0)
 				{
@@ -110,7 +96,7 @@
 			<div class="row">
 				<?php
 					include "userconnect.php";
-					$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 3";
+					$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";
 					$result = mysqli_query($conn, $sql);
 					if(mysqli_num_rows($result) > 0)
 					{
@@ -125,6 +111,10 @@
 					}
 					mysqli_close($conn);
 				?>
+			</div>
+			<br>
+			<div class="text-center">
+				<a href=".php">See all promos</a>
 			</div>
 		</div>
 		<br>
@@ -147,37 +137,39 @@
 					</div>
 					<div class="modal-body">
 						<form action="newuser.php" method="post">
+							<label><small>Note: All fields are <b class="text-danger">required.</b></small></label><br><br>
+							
 							<div class="form-group row">
 								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-										<input type="text" class="form-control" placeholder="*First Name" name="fname" required/>
+										<input type="text" class="form-control" placeholder="First Name" name="fname" required/>
 								</div>
 								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-									<input type="text" class="form-control" placeholder="*Middle Name" name="mname" required/>
+									<input type="text" class="form-control" placeholder="Middle Name" name="mname" required/>
 								</div>
 								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-									<input type="text" class="form-control" placeholder="*Last Name" name="lname" required/>
+									<input type="text" class="form-control" placeholder="Last Name" name="lname" required/>
 								</div>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-									<textarea type="text" class="form-control" placeholder="*Address" name="address" required></textarea><br>
+									<textarea type="text" class="form-control" placeholder="Address" name="address" required></textarea><br>
 								</div>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="email" class="form-control" placeholder="*Email" name="email" required/><br>
+									<input type="email" class="form-control" placeholder="Email" name="email" required/><br>
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="text" class="form-control" placeholder="*Contact Number" name="number" required/>
+									<input type="text" class="form-control" placeholder="Contact Number" name="number" required/>
 								</div>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="text" class="form-control" placeholder="*Username" name="uname" required/><br>
+									<input type="text" class="form-control" placeholder="Username" name="uname" required/><br>
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="password" class="form-control" placeholder="*Password" name="upass" required/><br>
-									<input type="password" class="form-control" placeholder="*Confirm Password" name="cpass" required/><br>
+									<input type="password" class="form-control" placeholder="Password" name="upass" required/><br>
+									<input type="password" class="form-control" placeholder="Confirm Password" name="cpass" required/><br>
 								</div>
 							</div>
 							<div class="form-group row text-center">
@@ -280,8 +272,8 @@
 	<script src="myScript.js" type="text/javascript"></script>
 	<script src="js/illbeback.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-    $(document).ready(function() {
-        $("#scroll-to-top").illBeBack();
-    });
+		$(document).ready(function() {
+			$("#scroll-to-top").illBeBack();
+		});
     </script>
 </html>
