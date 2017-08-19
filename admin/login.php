@@ -23,11 +23,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body style="background-image: url('plugins/images/ElegantSalaSet.jpg');">
     <section id="wrapper" class="login-register">
       <div class="login-box">
         <div class="white-box">
-          <form class="form-horizontal form-material" id="loginform" action="loginVerify.php" method="POST">
+          <form class="form-horizontal form-material" id="loginform" action="loginVerify.php" method="POST" style="border:solid 3px steelblue; padding: 5%; border-radius: 25px;">
             <h3 class="box-title m-b-20">Sign In</h3>
             <div class="form-group ">
               <div class="col-xs-12">
