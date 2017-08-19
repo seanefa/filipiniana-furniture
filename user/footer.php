@@ -24,6 +24,7 @@
 					  <li><a href="userhome.php"> Home</a></li>
 					  <li><a href="userproducts.php"> Products</a></li>
 					  <li><a href="#"> User Manual</a></li>
+					  <li><a href="/admin/login.html"> Log in as admin</a></li>
 					</ul>
 				  </div>
 				  <div class="col-md-3 col-sm-6 footer-col">

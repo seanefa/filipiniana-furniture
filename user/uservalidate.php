@@ -24,16 +24,9 @@ $result=$conn->query($sql);
   	}
   	if($flag==1)
   	{
-		switch($id)
+		if($id=="customer")
 		{
-			case "admin":
-				header("Location: /admin/dashboard.php");
-				break;
-			case "customer":
-				header("Location: access.php");
-				break;
-			default:
-				echo("error.html");
+			header("Location: access.php");
 		}
   	}
   	else
