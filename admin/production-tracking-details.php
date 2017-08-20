@@ -192,7 +192,7 @@ if(isset($_GET['id'])){
                                                     <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$pRow['prodStatus'].'</h3>
                                                   </div>
                                                   <div class="row">
-                                                    <div class="col-md-2" style="margin-left:14px;">';
+                                                    <div class="col-md-12">';
                                                     if($isFinish==1){
                                                       echo '<button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
                                                     }
