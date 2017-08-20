@@ -1,4 +1,7 @@
 <?php
+include "session-check.php";
+include 'dbconnect.php';
+session_start();
 
 $prName = $_POST['_prodName'];
 $prCtg = $_POST['_category'];
@@ -25,15 +28,6 @@ $datetime=$date + $time;
 $p = str_replace(',','',$prPrice);
 $prPrice = $p;
 
-include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
 if ($_FILES["image"]["error"] > 0)
 {
  echo "Error: NO CHOSEN FILE";
@@ -53,15 +47,18 @@ else
 
 $sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$prodStat','$design')";
 
-echo $sql;
-/*
 if (mysqli_query($conn, $sql)) {
-  header( "Location: products.php?newSuccess" );
-}
-else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}*
-
+	// Logs start here
+	$sID = mysqli_insert_id($conn); // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new product ".$prName.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Products', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+  	header( "Location: products.php?newSuccess" );
+} else {
+  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

@@ -1,5 +1,7 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $name = $_POST['name'];
 $type = $_POST['type'];
@@ -27,15 +29,19 @@ else
 $colors = $_POST['color']; 
 
 $sql = "INSERT INTO `tblfabrics` (`fabricName`, `fabricTypeID`, `fabricPatternID`, `fabricColor`, `fabricRemarks`, `fabricPic`, `fabricStatus`) VALUES ('$name', '$type', '$pattern', '$colors', '$remarks', '$pic', '$status')";
-if($sql){
-  if (mysqli_query($conn, $sql)) {
-   header( "Location: fabrics.php?newSuccess" );
-  	
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
- } 
- else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+
+if (mysqli_query($conn, $sql)) {
+	// Logs start here
+	$sID = mysqli_insert_id($conn); // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new fabric ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabrics Formed', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: fabrics.php?newSuccess" );
+} else {
+  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-}
 ?>

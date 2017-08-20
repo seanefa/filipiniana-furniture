@@ -1,30 +1,25 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
+session_start();
 
 $id = $_SESSION['varname'];
 $editName = $_POST['name'];
 $editRemarks = $_POST['remarks'];
 
-  // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tblfabric_pattern SET f_patternName='$editName', f_patternRemarks='$editRemarks' WHERE f_patternID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated fabric pattern ".$editName.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabric Pattern', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: fabric-pattern.php" );
-	echo '</script>';
-}
-else {
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
-
+  }
 ?>

@@ -1,6 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $id = $_POST['recID'];
 
@@ -60,7 +61,6 @@ else if($condition=="Others"){
 	mysqli_query($conn,$con_sql);
 	echo $con_sql . "<br>";
 }
-
 if($promo=="Amount"){
 	$r_type = $_POST['type'];
 	$rate = $_POST['pro_rate'];
@@ -83,11 +83,15 @@ else if($promo=="Others"){
 	echo $pro_sql . "<br>";
 }
 
-
-
-header( "Location: promo.php?newSuccess" );
+// Logs start here
+$sID = $id; // ID of last input;
+$date = date("Y-m-d");
+$logDesc = "Updated promo ".$name.", ID = " .$sID;
+$empID = $_SESSION['userID'];
+$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Promos', 'Update', '$date', '$logDesc', '$empID')";
+mysqli_query($conn,$logSQL);
+// Logs end here
+header( "Location: promo.php?updateSuccess" );
 
 mysqli_close($conn);
-
-
 ?>

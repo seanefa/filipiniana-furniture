@@ -1,13 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
+session_start();
 
 $id = $_SESSION['varname'];
 $editFN = $_POST['fn'];
@@ -16,15 +10,19 @@ $editLN = $_POST['ln'];
 $editJob = $_POST['job'];
 $editRemarks = $_POST['remarks'];
 
-  // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tblemployee SET empFirstName='$editFN', empMidName='$editMN', empLastName='$editLN', empRemarks='$editRemarks' WHERE empID=$id";
 
 if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated employee ".$editFN." ".$editMN." ".$editLN.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Employees', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: employees.php?updateSuccess" );
-}
-else {
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
-
+  }
 ?>

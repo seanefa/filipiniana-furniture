@@ -1,6 +1,7 @@
 <?php
-
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $name = $_POST['name'];
 $desc = $_POST['desc'];
@@ -34,7 +35,6 @@ $promoID = mysqli_insert_id($conn);
 $condition = $_POST['cat'];
 $promo = $_POST['p_cat'];
 
-
 if($condition=="Amount"){
 	$con_rate = $_POST['con_rate'];
 	$con_sql = "INSERT INTO tblpromo_condition(conPromoID,conCategory,conData) VALUES ('$promoID','$condition','$con_rate')";
@@ -53,7 +53,6 @@ else if($condition=="Others"){
 	mysqli_query($conn,$con_sql);
 	echo $con_sql . "<br>";
 }
-
 if($promo=="Amount"){
 	$r_type = $_POST['type'];
 	$rate = $_POST['pro_rate'];
@@ -76,11 +75,15 @@ else if($promo=="Others"){
 	echo $pro_sql . "<br>";
 }
 
-
-
+// Logs start here
+$sID = mysqli_insert_id($conn); // ID of last input;
+$date = date("Y-m-d");
+$logDesc = "Added new promo ".$name.", ID = " .$sID;
+$empID = $_SESSION['userID'];
+$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Promos', 'New', '$date', '$logDesc', '$empID')";
+mysqli_query($conn,$logSQL);
+// Logs end here
 header( "Location: promo.php?newSuccess" );
 
 mysqli_close($conn);
-
-
 ?>

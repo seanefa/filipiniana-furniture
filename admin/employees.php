@@ -1,5 +1,5 @@
 <?php
-include "session-check.php";
+// include "session-check.php";
 include "titleHeader.php";
 include "menu.php";
 include 'dbconnect.php';
@@ -8,7 +8,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 
-  session_start();
+  //session_start();
   if(isset($GET['id'])){
     $jsID = $_GET['id'];
   }

@@ -1,6 +1,7 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
-
+session_start();
 
 $pName = $_POST['pName'];
 $price = $_POST['pPrice'];
@@ -13,7 +14,6 @@ $result = mysqli_query($conn, $sql);
 
 $p = str_replace(',','',$price);
 $pPrice = $p;
-
 
 $temp=0;
 while ($row = mysqli_fetch_assoc($result))
@@ -52,10 +52,10 @@ if(isset($_POST['pis'])){
 		$flag++;
 	}
 }
+
 /*else{
 	echo "not set";
 }*/
-
 
 $sql1 = "";
 
@@ -64,7 +64,7 @@ if(isset($_POST['addis'])){
 
 	foreach($addThis as $add) {
 		echo $add;
-//$sql2 = "UPDATE tblpackage_inclusions SET package_incStatus='Listed' WHERE package_inclusionID = $add";
+		//$sql2 = "UPDATE tblpackage_inclusions SET package_incStatus='Listed' WHERE package_inclusionID = $add";
 		$sql = "INSERT INTO `tblpackage_inclusions` (`product_incID`,`package_incID`,`package_incStatus`) VALUES ('$add','$id','Listed')";
 		if(mysqli_query($conn,$sql)){
 			$flag++;
@@ -75,20 +75,23 @@ if(isset($_POST['addis'])){
 		}
 	}
 }
+
 /*else{
 	echo "not set";
-}
+}*/
 
-*/
 if($flag>0){
-	
-  header( "Location: packages.php?updateSuccess" );
-}
-else{
-
-  echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
-}
-
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated packages ".$pName.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Packages', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+  	header( "Location: packages.php?updateSuccess" );
+} else {
+  	echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

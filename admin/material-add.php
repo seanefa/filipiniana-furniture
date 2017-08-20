@@ -1,5 +1,7 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $name = $_POST['name'];
 $type = $_POST['type'];
@@ -7,8 +9,6 @@ $str = $_POST['attribs'];
 $status = "Listed";
 $flag = 0;
 $unit = $_POST['unit'];
-
-
 
 //$attribs = substr(trim($str), 0, -1);
 
@@ -42,7 +42,6 @@ $temp1 = explode(",", $temps);
 "
 	}*/
 
-
 $sql = "INSERT INTO `tblmaterials` (`materialType`, `materialName`, `materialStatus`) VALUES ('$type', '$name','$status')";
 mysqli_query($conn,$sql);
 $flag++;
@@ -56,15 +55,18 @@ foreach($str as $a){
 echo $sql . "<br>";
 }
 
-
- if ($flag>0) {
-   header( "Location: materials.php?newSuccess" );
- 	echo "lo";
- } 
- else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
+if ($flag>0) {
+  	// Logs start here
+	$sID = $last_id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new material ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Materials', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: materials.php?newSuccess" );
+} else {
+  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

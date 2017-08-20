@@ -1,7 +1,7 @@
 <?php
 $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
-session_start();
+//session_start();
 $arrayPrice = array();
 $prod = array();
 
@@ -260,7 +260,7 @@ include 'dbconnect.php';
         </div>
       </div>
       <!-- /.container-fluid -->
-      <footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer>
+      <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
     </div>
     <!-- /#page-wrapper -->
 

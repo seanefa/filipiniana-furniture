@@ -1,5 +1,7 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
+session_start();
 
 $prod = $_POST['prod'];
 $phase = $_POST['phase'];
@@ -11,7 +13,6 @@ $quan = $_POST['quan'];
 $unit = $_POST['unit'];
 
 $flag=0;
-
 
 $sql = "INSERT INTO tblprod_info(prodInfoProduct,prodInfoPhase,prodInfoStatus) VALUES('$prod','$phase','$status')";
 mysqli_query($conn,$sql);
@@ -34,8 +35,17 @@ for($x=0;$x<$ctr;$x++){
 }
 
 if($flag>1){
-header( "Location: production-information.php?newSuccess" );
-	echo 'ksk';
-}
+	// Logs start here
+	$sID = mysqli_insert_id($conn); // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new production information ".$prod.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Production Information', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: production-information.php?newSuccess" );
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
 ?>

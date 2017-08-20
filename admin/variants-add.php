@@ -1,10 +1,11 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $material = $_POST['material'];
 //$remarks = $_POST['remarks'];
 $status = "Listed";
-
 $var_desc = $_POST["desc"];
 $var_label = $_POST["label"];
 
@@ -28,17 +29,18 @@ foreach($var_desc as $x){
 	$flag++;
 }
 
-	
-
-
- if ($flag>0) {
-   header( "Location: material-variants.php?newSuccess" );
- 	echo "yey";
- } 
- else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
+if ($flag>0) {
+	// Logs start here
+	$sID = $last_id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new material variant ".$material.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Variants', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: material-variants.php?newSuccess" );
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

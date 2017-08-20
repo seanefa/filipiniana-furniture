@@ -1,6 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $id = $_SESSION['varname'];
 
@@ -28,20 +29,20 @@ if($pic=="")
 {
 	$pic=$exist_image;
 }
-//create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 $updateSql = "UPDATE tblfabrics SET fabricName='$editfName', fabricTypeID='$editfType', fabricPatternID='$editfPattern', fabricColor='$colors', fabricRemarks='$editfRemarks', fabricPic='$pic' WHERE fabricID=$id";
 
-if(mysqli_query($conn,$updateSql))
-{
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
+if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated fabric ".$editfName.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabrics Formed', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: fabrics.php?updateSuccess" );
-	echo '</script>';
-}
-else 
-{
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+  }
 ?>

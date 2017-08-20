@@ -1,28 +1,25 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
+session_start();
 
 $id = $_SESSION['varname'];
-$editType = $_POST['unType'];
-$editUnit = $_POST['unUnit'];
+$editType = $_POST['uType'];
+$editUnit = $_POST['uUnit'];
 
-
-  // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tblunitofmeasure SET unType='$editType', unUnit='$editUnit' WHERE unID=$id;";
 
 if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated unit of measurement ".$editType.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Unit of Measurement', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: unit-of-measurement.php?updateSuccess" );
-}
-else {
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
-
+  }
 ?>

@@ -1,5 +1,7 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $name = $_POST['name'];
 $str = $_POST['attribs'];
@@ -38,7 +40,6 @@ $temp1 = explode(",", $temps);
 "
 	}*/
 
-
 $sql = "INSERT INTO `tblattributes` (`attributeName`, `attributeStatus`) VALUES ('$name','$status')";
 mysqli_query($conn,$sql);
 $flag++;
@@ -52,15 +53,18 @@ foreach($str as $a){
 echo $sql . "<br>";
 }
 
-
- if ($flag>0) {
-   header( "Location: material-attribute.php?newSuccess" );
- 	echo "lo";
- } 
- else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
+if ($flag>0) {
+	// Logs start here
+	$sID = $last_id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new material attribute ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Attribute', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: material-attribute.php?newSuccess" );
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

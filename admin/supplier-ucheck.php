@@ -12,7 +12,7 @@ echo "No white Space";
 }
 else{
 	
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $texture)){
+if(preg_match('/[\\/\'\\^£$%&*}{@#~?><!>,|=_¬]/', $texture)){
 	echo "Symbols not allowed";
 	}
 	else{

@@ -1,12 +1,13 @@
 <?php
+include "session-check.php";
+include 'dbconnect.php';
+session_start();
 
 $type = $_POST['uType'];
 $rate = $_POST['uUnit'];
 $str = $_POST['attribs'];
 $status = "Active";
 $flag = 0;
-
-include 'dbconnect.php';
 
 $sql = "INSERT INTO `tblunitofmeasure` (`unType`, `unUnit`, `unStatus`) VALUES('$type','$rate','$status')";
 mysqli_query($conn,$sql);
@@ -19,14 +20,18 @@ foreach($str as $a){
 	$flag++;
 }
 
-
- if ($flag>0) {
-   header( "Location: unit-of-measurement.php?newSuccess" );
- } 
- else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
+if ($flag>0) {
+	// Logs start here
+	$sID = $last_id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new unit of measurement ".$type.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Unit of Measurement', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	header( "Location: unit-of-measurement.php?newSuccess" );
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
-
 ?>

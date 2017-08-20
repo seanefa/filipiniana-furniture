@@ -1,6 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $id = $_SESSION['varname'];
 
@@ -50,16 +51,17 @@ $updateSql = "UPDATE tblproduct SET prodCatID='$category', prodTypeID='$type', p
 
 echo $updateSql;
 
-
-if(mysqli_query($conn,$updateSql))
-{
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
+if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated product ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Products', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: products.php?updateSuccess" );
-	echo '</script>';
-}
-else
-{
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+  }
 ?>
