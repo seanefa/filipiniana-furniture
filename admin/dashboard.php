@@ -1,6 +1,6 @@
 <?php
-include "titleHeader.php";
 include "menu.php";
+include "titleHeader.php";
 //session_start();
 /*if(isset($GET['id'])){
 $jsID = $_GET['id']; 

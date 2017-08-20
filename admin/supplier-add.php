@@ -1,4 +1,5 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);

@@ -1,9 +1,10 @@
 <?php
-$type = 0;
-$type = $_SESSION['userType'];
-if($type=="customer"){
-	echo "<script>
-			alert('Sorry you have no access here');
-			</script>";
+session_start();
+if(!isset($_SESSION["userID"]))
+{
+  echo "<script>
+      window.location.href='/user/userhome.php';
+      alert('You have no access here');
+      </script>";
 }
 ?>

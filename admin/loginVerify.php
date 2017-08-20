@@ -6,25 +6,35 @@ $password = $_POST["password"];
 $flag = 0;
 
 $selectquery = "SELECT * from tbluser where userType = 'admin'";
-$querystorage = $conn->query($selectquery);
+$querystorage = mysqli_query($conn,$selectquery);
 
-if($querystorage->num_rows>0)
+while($row = mysqli_fetch_assoc($querystorage))
 {
-	while($row=$querystorage->fetch_assoc())
+	if($username == $row["userName"])
 	{
-		if($username == $row["userName"])
-		{
-			if($password == $row["userPassword"])
-			{
-				$flag = 1;
-				$_SESSION["userID"] = $row["userID"];
-			}
+		if($password == $row["userPassword"])
+		{			
+			$flag = 1;
+			session_start();
+			$_SESSION["userID"] = $row["userID"];
 		}
 	}
-	if($flag = 1)
-	{
-		header("Location: dashboard.php");
-	}
+}
+
+
+if($flag==1)
+{
+	/*echo "<script>
+	window.location.href='dashboard.php';
+	alert('Welcome!');
+	</script>";*/
+	header("Location: dashboard.php");
+}
+else{
+	echo "<script>
+	window.location.href='login.php';
+	alert('Account not registered');
+	</script>";
 }
 $conn->close();
 ?>
