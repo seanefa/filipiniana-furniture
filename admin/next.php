@@ -1,12 +1,25 @@
 <?php
 $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
-//session_start();
+session_start();
 /*
 if(isset($_GET['customerId'])){
 $jsID = $_GET['customId']; 
 }*/
 //$_SESSION['varname'] = 3;
+
+$jsID = "";
+
+if(isset($_POST['id'])){
+  $jsID = $_POST['id']; 
+}
+
+if(isset($_GET['id'])){
+  $jsID = $_GET['id']; 
+}
+
+
+
 include 'dbconnect.php';
 ?>
 <!DOCTYPE html>  
@@ -436,17 +449,14 @@ else{
                 <tbody>
 
                   <?php 
+
+                  //PRODUCT VARIABLES
                   $removed = $_POST['removed'];
                   $priceremoved = $_POST['priceremoved'];
                   $quantremoved = $_POST['quantremoved'];
                   $selected = $_POST['cart'];
                   $selectedQuant = $_POST['quant'];
                   $selectedPrice = $_POST['price'];
-                  $tempPrice = 0;
-                  $tempQuant = 0;
-
-                  $totPrice = $_POST['totalPrice'];
-                  $totQuant = $_POST['totalQuant'];
 
                   $ctr = 0;
                   $pCtr = 0;
@@ -456,6 +466,98 @@ else{
                   $priceremovearray = array();
                   $quantremovearray = array();
 
+                   $tempPrice = 0;
+                  $tempQuant = 0;
+                  //
+
+
+                  //PACKAGE VARIABLES
+
+                  $P_removed = $_POST['P_removed'];
+                  $P_priceremoved = $_POST['P_priceremoved'];
+                  $P_quantremoved = $_POST['P_quantremoved'];
+                  $P_selected = $_POST['P_cart'];
+                  $P_selectedQuant = $_POST['P_quant'];
+                  $P_selectedPrice = $_POST['P_price'];
+
+                   $P_tempPrice = 0;
+                  $P_tempQuant = 0;
+                  $P_ctr = 0;
+                  $P_pCtr = 0;
+
+                  $P_quantarray = array();
+                  $P_pricearray = array();
+                  $P_removearray = array();
+                  $P_priceremovearray = array();
+                  $P_quantremovearray = array();
+
+                 
+
+                  $totPrice = $_POST['totalPrice'];
+                  $totQuant = $_POST['totalQuant'];
+                  //
+
+                  ///DISPLAY PACKGAGEGE
+                  if($P_selected[0] == 0){
+
+                  }
+                  else{
+                  foreach ($P_removed as $P_removedItem) {
+                    array_push($P_removearray, $P_removedItem);
+                  }
+                  foreach ($P_priceremoved as $P_priceremovedItem) {
+                    array_push($P_priceremovearray, $P_priceremovedItem);
+                  }
+                  foreach ($P_quantremoved as $P_quantremovedItem) {
+                    array_push($P_quantremovearray, $P_quantremovedItem);
+                  }
+
+                  foreach ($P_selectedQuant as $P_itemQuant) {
+                    if(!in_array($P_itemQuant, $P_quantremovearray)){
+                      $P_tempQuant =+ $P_itemQuant;
+                      array_push($P_quantarray,$P_itemQuant);
+                    }
+                    else{
+                    }
+                  } 
+                  foreach ($P_selectedPrice as $P_itemPrice) {
+                    if(!in_array($P_itemPrice, $P_priceremovearray)){
+                      $P_tempPrice =+ $P_itemPrice;
+                      array_push($P_pricearray,$P_itemPrice);
+                    }
+                    else{
+                    }
+                  }
+                  foreach ($P_selected as $P_items) {
+                    if(!in_array($P_items, $P_removearray)){
+                      $sql = "SELECT * FROM tblpackages where packageID = '$P_items';";
+                      $result = mysqli_query($conn, $sql);
+
+                      if($result){
+                        while ($row = mysqli_fetch_assoc($result)) {
+                          $P_ctr++; 
+                          $P_pCtr++;                            
+                          echo ('
+                            <tr>
+                            <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
+
+                            <td>PACKAGE '); ?><button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']; ?> #view" data-target="#myModal">
+                            <span class='glyphicon glyphicon-eye-open'></span> View</button> <?php echo('</td>
+
+                            <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
+                            <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
+                            <td id="price'.$P_ctr.'"style="text-align: right;">&#8369; '.number_format($P_pricearray[$P_pCtr-1],2).'<input id="price'.$P_ctr.'" name="P_prices[]" value="'.$P_pricearray[$P_pCtr-1].'" type="hidden"/></td>');
+      echo'</tr>';   
+    }
+  }
+}
+}
+}
+
+
+                  //
+
+  if($selected[0] != 0){
                   foreach ($removed as $removedItem) {
                     array_push($removearray, $removedItem);
                   }
@@ -497,19 +599,10 @@ else{
                             <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
                             <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
                             <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
-          /*<td><div class="col-md-12">
-          <div  class="col-md-10">
-          <input type="text" class="form-control" id="cstmztn'.$ctr.'" value="None">
-          </div>
-          <div class="col-md-2>
-          <button type="button" href="#customization" data-toggle="modal" id="cart" class="btn-info"><span class="glyphicon glyphicon-edit"></span></button>
-        </div>
-      </div>
-      </td>*/
-      echo'</tr>';?>
-      <?php    
+      echo'</tr>';   
     }
   }
+}
 }
 }
 ?>
@@ -793,7 +886,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Amount Paid</label><span id="x" style="color:red"> *</span>
-                          <input type="text" style="text-align:right;" id="aTendered" class="form-control" name="aTendered"/>
+                          <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" value="<?php echo $totPrice * .5; ?>"/>
                           <p id="error"></p>
                         </div>
                       </div>
@@ -933,5 +1026,18 @@ $(document).ready(function(){
     }
   });
 })();
+
 </script>
+<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal content-->
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </html>
