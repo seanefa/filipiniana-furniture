@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2017 at 09:31 AM
+-- Generation Time: Aug 20, 2017 at 05:35 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -115,9 +115,19 @@ CREATE TABLE `tblcheck_details` (
   `check_detailsID` int(11) NOT NULL,
   `p_detailsID` int(11) NOT NULL,
   `checkNumber` int(11) NOT NULL,
-  `checkAmount` decimal(5,2) NOT NULL,
+  `checkAmount` double NOT NULL,
   `checkRemarks` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblcheck_details`
+--
+
+INSERT INTO `tblcheck_details` (`check_detailsID`, `p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES
+(1, 45, 1807656324, 50000, '2nd payment'),
+(2, 46, 98723982, 50000, '2nd payment'),
+(3, 51, 1234566, 50000, 'BDO Bank'),
+(4, 52, 0, 50000, 'sodangerou');
 
 -- --------------------------------------------------------
 
@@ -166,13 +176,20 @@ CREATE TABLE `tblcustomer` (
 INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleName`, `customerLastName`, `customerAddress`, `customerContactNum`, `customerEmail`, `customerStatus`) VALUES
 (1, 'Na', 'Oh', 'Cor', '#1635 HAHAHAHA ', '0982376338', 'hongkaira@gmail.com', 'Active'),
 (2, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Active'),
-(3, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Active'),
-(4, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Active'),
-(5, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Active'),
+(3, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Archived'),
+(4, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Archived'),
+(5, 'May', 'Rhodora', 'Barrameda', '#1234 BHQC', '09994145004', 'hongkaira@yahoo.com', 'Archived'),
 (6, '', 'Daniel', 'Padilla', '#1234 Street Name, Brgy. Anuna QC', '09994145004', 'hongkaira@gmail.com', 'Active'),
 (7, '', 'Kathryn', 'Bernardo', '#123 Street Brgy Anuna QC', '0921458475', 'eyembisi@yahoo.com', 'Active'),
-(8, 'A', 'A', 'A', 'a', '989872', 'hongkaira@gmail.com', 'Active'),
-(9, '', 'Lauro', 'Pabalan', '', '09998563123178', 'lala@lala.com', '');
+(8, 'Anna', 'Ange', 'Andres', '#423 Is shookt', '989872', 'hongkaira@gmail.com', 'Active'),
+(9, '', 'Lauro', 'Pabalan', '', '09998563123178', 'lala@lala.com', 'Archived'),
+(10, 'Bi', 'Bana', 'Cooper', 'Riverdale, Florida', '8001022309', 'bcooper@outlook.com', 'Archived'),
+(11, 'Bi', 'Bana', 'Cooper', 'Riverdale, Florida', '8020202039', 'bcooper@outlook.com', 'Active'),
+(12, '', 'ui', 'keriqio', 'jkh', '678698', 'jh@lala.com', 'Archived'),
+(13, '', 'h', 'h', 'h', '33333', '72362738@hjksadh.cpm', 'Archived'),
+(14, 'Betty', 'ui', 'Cooper', '#123', '98979877867', 'bcooper@outlook.com', ''),
+(15, 'jkgklblkg', 'jbkbkb', 'jghfkjgb', 'ugkjgjg', '757680790', 'hongkaira@jhfjh.com', ''),
+(16, 'Mark Joseph', 'Baghari', 'Publico', '', '09197464382', 'mjoseph.publico@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -309,7 +326,6 @@ CREATE TABLE `tblemployee` (
   `empFirstName` varchar(45) NOT NULL,
   `empLastName` varchar(45) NOT NULL,
   `empMidName` varchar(45) DEFAULT NULL,
-  `empJobID` int(11) NOT NULL,
   `empRemarks` varchar(100) NOT NULL,
   `empStatus` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -318,9 +334,40 @@ CREATE TABLE `tblemployee` (
 -- Dumping data for table `tblemployee`
 --
 
-INSERT INTO `tblemployee` (`empID`, `empFirstName`, `empLastName`, `empMidName`, `empJobID`, `empRemarks`, `empStatus`) VALUES
-(1, 'Aira', 'Lee', 'Marie', 2, 'Good job', 'Active'),
-(2, 'Lee', 'Ki', 'Hong', 4, 'La', 'Active');
+INSERT INTO `tblemployee` (`empID`, `empFirstName`, `empLastName`, `empMidName`, `empRemarks`, `empStatus`) VALUES
+(1, 'Aira', 'Lee', 'Marie', 'Good job', 'Active'),
+(2, 'Lee', 'Ki', '', 'Hindi ko alam', 'Active'),
+(3, 'Doc', 'Publico', '', '', 'Active'),
+(4, 'Mark Joseph', 'Publico', 'Bahaghari', 'Masipag', 'Active'),
+(5, 'Mark Joseph', 'Publico', 'Bahaghari', 'Masipag', 'Active'),
+(6, 'Mark Joseph', 'Publico', 'Bahaghari', 'Masipag', 'Active'),
+(7, 'Sean', 'Efa', 'Lester', 'Designer', 'Active'),
+(8, 'Sean', 'Efa', 'Lester', 'Designer', 'Active'),
+(9, 'Sean', 'Efa', 'Lester', 'Designer', 'Active'),
+(10, 'Sean', 'Efa', 'Lester', 'Designer', 'Active'),
+(11, 'Sean', 'Efa', 'Lester', 'Designer', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblemp_job`
+--
+
+CREATE TABLE `tblemp_job` (
+  `emp_jobID` int(11) NOT NULL,
+  `emp_empID` int(11) NOT NULL,
+  `emp_jobDescID` int(11) NOT NULL,
+  `emp_jobStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblemp_job`
+--
+
+INSERT INTO `tblemp_job` (`emp_jobID`, `emp_empID`, `emp_jobDescID`, `emp_jobStatus`) VALUES
+(4, 11, 4, 'Active'),
+(5, 11, 2, 'Active'),
+(6, 11, 5, 'Active');
 
 -- --------------------------------------------------------
 
@@ -349,7 +396,9 @@ INSERT INTO `tblfabrics` (`fabricID`, `fabricName`, `fabricTypeID`, `fabricPatte
 (3, 'Test', 1, 1, '#000000,#2eb715,#00e8e8', ' ', '', 'Listed'),
 (4, 'Bru', 1, 1, '#3555d2,#c6da34', ' Talaga ba?', 'chair1.png', 'Archived'),
 (5, 'gfghjfdeh1qhi', 3, 3, '#000000,#000000,#000000,#000000,#000000,#000000,#000000,#000000', ' ', '', 'Archived'),
-(6, 'Roosevelt', 3, 3, '#000000,#be11cc', ' Haha', 'DD7jGryU0AA37lQ.jpg', 'Archived');
+(6, 'Roosevelt', 3, 3, '#000000,#be11cc', ' Haha', 'DD7jGryU0AA37lQ.jpg', 'Archived'),
+(7, 'Elizabeth', 2, 3, 'Black and Yellow', ' ', '', 'Listed'),
+(8, 'Camo', 2, 3, 'Black Green', ' A green and black leather fabric', '2017-08-181503019490.png', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -373,7 +422,8 @@ INSERT INTO `tblfabric_pattern` (`f_patternID`, `f_patternName`, `f_patternRemar
 (2, 'Geometric', 'Anuna', 'Archived'),
 (3, 'Diamonds', 'Diamonds', 'Listed'),
 (4, '', '', 'Archived'),
-(5, 'Geometrical', 'Circles', 'Listed');
+(5, 'Geometrical', 'Circles', 'Listed'),
+(6, 'Polka Dots', 'Dots', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -385,6 +435,7 @@ CREATE TABLE `tblfabric_texture` (
   `textureID` int(11) NOT NULL,
   `textureName` varchar(45) NOT NULL,
   `textureDescription` varchar(100) DEFAULT NULL,
+  `textureRating` int(11) DEFAULT NULL,
   `textureStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -392,15 +443,19 @@ CREATE TABLE `tblfabric_texture` (
 -- Dumping data for table `tblfabric_texture`
 --
 
-INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription`, `textureStatus`) VALUES
-(1, 'New Texture', 'Good One', 'Archived'),
-(2, 'Nice Texture', '', 'Archived'),
-(3, 'New----', 'Bes', 'Archived'),
-(4, 'New', 'New Texture', 'Listed'),
-(5, 'sdjhsjkd', 'kjsdhkajh', 'Archived'),
-(6, 'Silky', 'Silky Texture', 'Listed'),
-(7, 'Hello!@#$%^&*&^%$#@', '', 'Archived'),
-(8, '"425trw8wef"', '', 'Archived');
+INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription`, `textureRating`, `textureStatus`) VALUES
+(1, 'New Texture', 'Good One', NULL, 'Archived'),
+(2, 'Nice Texture', '', NULL, 'Archived'),
+(3, 'New----', 'Bes', NULL, 'Archived'),
+(4, 'New', 'New Texture', NULL, 'Listed'),
+(5, 'sdjhsjkd', 'kjsdhkajh', NULL, 'Archived'),
+(6, 'Silky', 'Silky Texture', NULL, 'Listed'),
+(7, 'Hello!@#$%^&*&^%$#@', '', NULL, 'Archived'),
+(8, '"425trw8wef"', '', NULL, 'Archived'),
+(9, 'Plain Fabric', '', NULL, 'Archived'),
+(10, 'Leather', '', NULL, 'Archived'),
+(11, 'Wool', '', NULL, 'Listed'),
+(12, 'Slightly Smooth', 'Slightly Smooth', 3, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -422,7 +477,8 @@ CREATE TABLE `tblfabric_type` (
 
 INSERT INTO `tblfabric_type` (`f_typeID`, `f_typeName`, `f_typeWeaves`, `f_typeTextureID`, `f_typeStatus`) VALUES
 (1, 'Leather', 'Compact-weaved', 4, 'Listed'),
-(2, 'Cotton', 'Softly-weaved', 4, 'Listed');
+(2, 'Cotton', 'Softly-weaved', 4, 'Listed'),
+(3, 'Plain Fabric', '', 4, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -451,7 +507,8 @@ INSERT INTO `tblframeworks` (`frameworkID`, `frameworkFurnType`, `frameworkName`
 (4, 4, 'Diamo', 'chair6.png', 3, 5, 'Checkered Victorian Classic', 'Listed'),
 (5, 0, 'Floral Frame', 'chair2.png', 3, 4, 'A victorian classic floral frame', 'Listed'),
 (6, 0, 'Frame2', 'DD-NGPiUwAE6ANZ.jpg', 1, 4, ' Lol', 'Archived'),
-(7, 0, 'Lol', '', 1, 1, ' Anuna', 'Archived');
+(7, 0, 'Lol', '', 1, 1, ' Anuna', 'Archived'),
+(8, 7, 'Mahogany Twist', '2017-08-161502866081.png', 4, 4, ' ', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -473,7 +530,8 @@ CREATE TABLE `tblframe_design` (
 INSERT INTO `tblframe_design` (`designID`, `designName`, `designDescription`, `designStatus`) VALUES
 (1, 'New Frame', 'Dont leave this empty', 'Listed'),
 (2, 'A Frame', 'A nice frame', 'Listed'),
-(3, 'Victorian Classic', ' Heavy detailed design', 'Listed');
+(3, 'Victorian Classic', ' Heavy detailed design', 'Listed'),
+(4, 'Reversed Scroll', ' ', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -497,7 +555,8 @@ INSERT INTO `tblframe_material` (`materialID`, `materialName`, `materialRemarks`
 (2, 'Anu', ' Lul', 'Archived'),
 (3, 'Nail', ' Description,Size', 'Archived'),
 (4, 'Mahogany Wood', ' Wood', 'Listed'),
-(5, 'Bamboo Wood', ' Bamboo', 'Listed');
+(5, 'Bamboo Wood', ' Bamboo', 'Listed'),
+(6, 'Malaysian Wood', ' Malaysian', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -563,7 +622,7 @@ CREATE TABLE `tblfurn_type` (
 --
 
 INSERT INTO `tblfurn_type` (`typeID`, `typeName`, `typeDescription`, `typeStatus`, `typeCategoryID`) VALUES
-(1, 'Divan', 'Higaan sa Salad', 'Listed', 1),
+(1, 'Divan', 'Higaan sa Sala', 'Listed', 1),
 (2, 'Pls', 'Ajejejej', 'Archived', 3),
 (3, 'Dining Table', ' Hapag-kainan', 'Listed', 3),
 (4, 'Chair', ' ', 'Listed', 3),
@@ -572,7 +631,8 @@ INSERT INTO `tblfurn_type` (`typeID`, `typeName`, `typeDescription`, `typeStatus
 (7, 'Side-Table', ' Table beside the bed', 'Listed', 4),
 (8, 'Rocking Chair', ' ', 'Listed', 1),
 (9, 'Cabinet', ' ', 'Listed', 1),
-(10, 'Cabinett', ' ', 'Archived', 3);
+(10, 'Cabinett', ' ', 'Archived', 3),
+(11, 'Sala Set', ' ', 'Listed', 1);
 
 -- --------------------------------------------------------
 
@@ -652,7 +712,16 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (30, 53, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
 (31, 54, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
 (32, 55, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
-(33, 56, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1);
+(33, 56, 50140, '2017-08-14', 'Pending', 'Initial Invoice', 1, 1),
+(34, 58, 770000, '2017-08-16', 'Pending', 'Initial Invoice', 1, 1),
+(35, 60, 180050, '2017-08-16', 'Pending', 'Initial Invoice', 1, 1),
+(36, 61, 180000, '2017-08-16', 'Pending', 'Initial Invoice', 1, 1),
+(37, 63, 250000, '2017-08-17', 'Pending', 'Initial Invoice', 1, 1),
+(38, 64, 180000, '2017-08-19', 'Pending', 'Initial Invoice', 1, 1),
+(39, 65, 180000, '2017-08-19', 'Pending', 'Initial Invoice', 1, 1),
+(40, 66, 180000, '2017-08-19', 'Pending', 'Initial Invoice', 1, 1),
+(41, 67, 100000, '2017-08-19', 'Pending', 'Initial Invoice', 1, 1),
+(42, 68, 50000, '2017-08-19', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -676,7 +745,8 @@ INSERT INTO `tbljobs` (`jobID`, `jobName`, `jobDescription`, `jobStatus`) VALUES
 (2, 'Carver', 'Carves', 'Listed'),
 (3, 'test', 'ok', 'Archived'),
 (4, 'Carpentry', 'Upholstered', 'Listed'),
-(5, 'Cashier', 'Cashier', 'Listed');
+(5, 'Cashier', 'Cashier', 'Listed'),
+(6, 'Painter', 'Paints', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -715,7 +785,12 @@ INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `mater
 (1, '3', 'Water-Based', '', 'Listed'),
 (2, '3', 'Acrilyc', '', 'Archived'),
 (3, '5', 'Clear', '5', 'Listed'),
-(4, '2', 'Cotton', '2,3,4', 'Listed');
+(4, '2', 'Cotton', '2,3,4', 'Listed'),
+(5, '', 'Cedar', '', 'Listed'),
+(6, '', 'Cedar', '', 'Listed'),
+(7, '', 'Cedar', '', 'Listed'),
+(8, '', 'Wood', '', 'Listed'),
+(9, '', 'Cedar', '', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -832,7 +907,8 @@ CREATE TABLE `tblonhand` (
 --
 
 INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
-(1, 9, 6, NULL);
+(1, 9, 10, NULL),
+(2, 14, 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -874,9 +950,9 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (21, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Archived', '', 'Pre-Order', 'A remark'),
 (22, NULL, '2017-07-31', '2017-08-31', 1, 240000, 'Cancelled', '', 'Pre-Order', ''),
 (23, NULL, '2017-07-31', '2017-08-31', 1, 360000, 'Ongoing', '', 'Pre-Order', 'A remark'),
-(24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Ongoing', '', 'Pre-Order', NULL),
+(24, NULL, '2017-08-01', '2017-08-17', 2, 480000, 'Archived', '', 'Pre-Order', NULL),
 (25, NULL, '2017-08-01', '2017-08-24', 6, 190000, 'Ongoing', '', 'Pre-Order', 'A remark'),
-(26, NULL, '2017-08-01', '2017-08-17', 7, 260000, 'Pending', '', 'Pre-Order', 'A remark'),
+(26, NULL, '2017-08-01', '2017-08-17', 7, 260000, 'Ongoing', '', 'Pre-Order', 'A remark'),
 (27, NULL, '2017-08-02', '2017-08-31', 2, 50000, 'Pending', '', 'Pre-Order', 'A remark'),
 (28, NULL, '2017-08-03', '2017-08-23', 3, 120000, 'Pending', '', 'Pre-Order', 'Remark'),
 (29, NULL, '2017-08-03', '2017-08-25', 8, 180000, 'Cancelled', '', 'Pre-Order', 'No reason.'),
@@ -896,13 +972,24 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (47, NULL, '2017-08-09', '2017-08-25', 7, 120000, 'Pending', 'Array', 'Pre-Order', 'A REMARK'),
 (48, NULL, '2017-08-09', '2017-08-24', 9, 60000, 'Pending', '', 'Pre-Order', 'A remarks'),
 (49, NULL, '2017-08-13', '2017-08-18', 8, 120000, 'Pending', '', 'Pre-Order', 'jj'),
-(50, NULL, '2017-08-14', '2017-08-24', 7, 200070, 'Pending', '', 'Pre-Order', 'Remark'),
+(50, NULL, '2017-08-14', '2017-08-24', 7, 200070, 'Ongoing', '', 'Pre-Order', 'Remark'),
 (51, NULL, '2017-08-14', '2017-08-23', 7, 110000, 'Pending', '', 'Pre-Order', 'hAHA'),
 (52, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
 (53, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
 (54, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
 (55, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
-(56, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes');
+(56, NULL, '2017-08-14', '2017-08-24', 7, 50140, 'Pending', '', 'Pre-Order', 'Bes'),
+(57, NULL, '2017-08-15', '0000-00-00', 1, 0, 'pending', 'qwqw`, qekqhw, kdhkaled', 'Pre-order', ''),
+(58, NULL, '2017-08-16', '1111-02-23', 7, 770000, 'Cancelled', '', 'Pre-Order', 'No reason.'),
+(60, NULL, '2017-08-16', '2017-08-24', 8, 180050, 'Pending', '', 'Pre-Order', 'A remark'),
+(61, NULL, '2017-08-16', '2017-08-24', 8, 180000, 'Pending', '', 'Pre-Order', 'An order'),
+(62, NULL, '2017-08-17', '2017-08-17', 1, 150, 'Rejected', ',,', 'On-Hand', 'Wala lang'),
+(63, NULL, '2017-08-17', '2017-09-18', 16, 250000, 'Cancelled', 'Array', 'Pre-Order', 'the dog ate my wallet'),
+(64, NULL, '2017-08-19', '2017-08-24', 8, 180000, 'Pending', '', 'Pre-Order', 'An order.'),
+(65, NULL, '2017-08-19', '2017-08-24', 8, 180000, 'Pending', '', 'Pre-Order', 'An order.'),
+(66, NULL, '2017-08-19', '2017-08-24', 8, 180000, 'Pending', '', 'Pre-Order', 'An order.'),
+(67, NULL, '2017-08-19', '2017-08-17', 7, 100000, 'Pending', '', 'Pre-Order', 'An order'),
+(68, NULL, '2017-08-19', '2017-08-17', 2, 50000, 'Pending', 'Lot 12 Blk 24 Santa Street Brgy Ilo ilo Quezo', 'Pre-Order', 'An order');
 
 -- --------------------------------------------------------
 
@@ -914,8 +1001,16 @@ CREATE TABLE `tblorder_actions` (
   `orActionID` int(11) NOT NULL,
   `orOrderID` int(11) NOT NULL,
   `orAction` varchar(450) NOT NULL,
-  `orDescription` varchar(450) DEFAULT NULL
+  `orReason` varchar(450) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblorder_actions`
+--
+
+INSERT INTO `tblorder_actions` (`orActionID`, `orOrderID`, `orAction`, `orReason`) VALUES
+(1, 58, 'Cancelled', 'No reason.'),
+(2, 62, 'Rejected', 'Wala lang');
 
 -- --------------------------------------------------------
 
@@ -1028,7 +1123,20 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (74, 13, 55, 0, 1, 'Active'),
 (75, 12, 55, 0, 2, 'Active'),
 (76, 13, 56, 0, 1, 'Active'),
-(77, 12, 56, 0, 2, 'Active');
+(77, 12, 56, 0, 2, 'Active'),
+(78, 8, 58, 0, 11, 'Active'),
+(79, 15, 60, 0, 2, 'Active'),
+(80, 10, 60, 0, 1, 'Active'),
+(81, 15, 61, 0, 2, 'Active'),
+(82, 10, 0, 0, 3, ''),
+(83, 9, 63, 0, 2, 'Active'),
+(84, 14, 63, 0, 1, 'Active'),
+(85, 11, 63, 0, 1, 'Active'),
+(86, 15, 64, 0, 2, 'Active'),
+(87, 15, 65, 0, 2, 'Active'),
+(88, 15, 66, 0, 2, 'Active'),
+(89, 14, 67, 0, 2, 'Active'),
+(90, 14, 68, 0, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1051,15 +1159,18 @@ INSERT INTO `tblpackages` (`packageID`, `packagePrice`, `packageDescription`, `p
 (0, 600, 'Package 1', 'Archived'),
 (1, 6, 'Christmas Packages', 'Archived'),
 (2, 990, 'Bessy', 'Archived'),
-(3, 25, 'Good For 2', 'Listed'),
-(4, 50, 'Christmas Package', 'Listed'),
-(5, 10, 'Birthday Package', 'Listed'),
+(3, 25, 'Good For 2', 'Archived'),
+(4, 50000, 'Christmas Package', 'Listed'),
+(5, 1000000, 'Birthday Package', 'Listed'),
 (6, 306, 'Bday1', 'Archived'),
 (7, 306, 'Bday1', 'Archived'),
 (8, 306, 'Bday1', 'Archived'),
 (9, 173, 'Why Tho', 'Archived'),
 (10, 306, 'Bday1', 'Archived'),
-(11, 183, 'Name', 'Archived');
+(11, 183, 'Name', 'Archived'),
+(12, 500000, 'Family Set', 'Listed'),
+(13, 120000, 'Grand Home Package', 'Listed'),
+(14, 130000, 'Ano Yon', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1125,7 +1236,18 @@ INSERT INTO `tblpackage_inclusions` (`package_inclusionID`, `product_incID`, `pa
 (44, 8, 10, 'Listed'),
 (45, 5, 11, 'Listed'),
 (46, 8, 11, 'Listed'),
-(47, 3, 4, 'Listed');
+(47, 3, 4, 'Listed'),
+(48, 13, 12, 'Listed'),
+(49, 12, 12, 'Listed'),
+(50, 8, 12, 'Listed'),
+(51, 5, 12, 'Listed'),
+(52, 4, 3, 'Listed'),
+(53, 5, 3, 'Listed'),
+(54, 8, 3, 'Listed'),
+(55, 4, 13, 'Listed'),
+(56, 5, 13, 'Listed'),
+(57, 2, 14, 'Listed'),
+(58, 3, 14, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1178,7 +1300,24 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (33, 30, '2017-08-14 06:21:33', 30000, 1, 'Paid'),
 (34, 31, '2017-08-14 06:21:57', 30000, 1, 'Paid'),
 (35, 32, '2017-08-14 06:22:20', 30000, 1, 'Paid'),
-(36, 33, '2017-08-14 06:22:49', 30000, 1, 'Paid');
+(36, 33, '2017-08-14 06:22:49', 30000, 1, 'Paid'),
+(37, 34, '2017-08-16 07:39:30', 999999, 1, 'Paid'),
+(38, 5, '2017-08-16 10:04:57', 80000, 1, 'Paid'),
+(39, 5, '2017-08-16 10:05:10', 80000, 1, 'Paid'),
+(40, 35, '2017-08-16 12:28:01', 150000, 1, 'Paid'),
+(41, 36, '2017-08-16 14:50:11', 100000, 1, 'Paid'),
+(42, 36, '2017-08-16 14:53:11', 80000, 1, 'Paid'),
+(43, 37, '2017-08-17 19:02:01', 150000, 1, 'Paid'),
+(44, 0, '2017-08-19 08:38:39', 0, 1, 'Paid'),
+(45, 0, '2017-08-19 10:49:42', 50000, 2, 'Paid'),
+(46, 7, '2017-08-19 10:55:06', 50000, 2, 'Paid'),
+(47, 7, '2017-08-19 11:17:23', 5000, 1, 'Paid'),
+(48, 7, '2017-08-19 11:59:39', 5000, 1, 'Paid'),
+(49, 38, '2017-08-19 17:08:56', 50000, 1, 'Paid'),
+(50, 39, '2017-08-19 17:10:54', 50000, 1, 'Paid'),
+(51, 40, '2017-08-19 17:11:22', 50000, 2, 'Paid'),
+(52, 41, '2017-08-19 17:25:52', 50000, 2, 'Paid'),
+(53, 42, '2017-08-19 17:56:56', 15000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1273,18 +1412,20 @@ CREATE TABLE `tblproduct` (
 
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
 (1, 1, 1, 2, '2', 0, 'Mani gidalreo', ' ', 70000, '', 'Height-34 inch, Width-34 inch, Depth 45 inch', 'Archived'),
-(2, 1, 1, 4, '1', 0, 'Never', ' A description', 70, '2017-08-131502640722.png', '32,12,32', 'On-Hand'),
-(3, 1, 1, 2, '1', 0, 'Rocky', ' ', 70000, 'DDsSANoUAAAs2ed.jpg', 'LALAL66', 'Pre-Order'),
-(4, 1, 1, 2, '3', 1, 'Manille', ' ', 70000, '', '322', 'Pre-Order'),
-(5, 1, 1, 2, '', 0, 'White', ' ', 70000, '', '23,23,23', 'Pre-Order'),
-(6, 0, 2, 2, '', 0, 'Manillenia', ' Lul', 70000, 'KnittedSet.jpg', 'H-34,W-36,D-5', 'Archived'),
-(7, 0, 2, 2, '', 0, 'Laguna', ' ', 70000, 'chair2.png', '12,32,12', 'Archived'),
-(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 persons', 70000, '', '5,6,7', 'On-Hand'),
-(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', 70000, '', '4,4,4', 'On-Hand'),
-(10, 3, 5, 4, '3', 0, 'Jollibee', 'Hi-chair for jolly kids', 50, '2017-08-131502640312.png', '5,3,4', 'Pre-Order'),
-(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', 60000, '17240315_1375401649150049_4621152707863733699_o.jpg', '6,5,4', 'Pre-Order'),
-(12, 3, 4, 5, '1', 0, 'Bessy mo to', '', 70, '2017-08-131502639920.png', '4,4,4', 'Pre-Order'),
-(13, 4, 6, 4, '1', 0, 'Umay', '', 50000, '2017-08-131502640817.png', '4,3,2', 'Pre-Order');
+(2, 1, 1, 4, '1', 0, 'Never Ever', ' A description', 80000, 'chair2.png', '32,12,32', 'On-Hand'),
+(3, 1, 1, 2, '1', 0, 'Rocky', ' ', 70000, '2017-08-161502869222.png', 'LALAL66', 'Pre-Order'),
+(4, 1, 1, 2, '3', 1, 'Manille', ' ', 70000, 'CouchwithFoam.jpg', '322', 'Pre-Order'),
+(5, 1, 1, 2, '', 0, 'White', ' ', 70000, '2017-08-161502869222.png', '23,23,23', 'Pre-Order'),
+(6, 0, 2, 2, '', 0, 'Manillenia', ' Lul', 70000, '2017-08-161502869222.png', 'H-34,W-36,D-5', 'Archived'),
+(7, 0, 2, 2, '', 0, 'Laguna', ' ', 70000, '2017-08-161502869222.png', '12,32,12', 'Archived'),
+(8, 3, 3, 6, '3', 1, 'Eliza', ' A great dining table for 8 people', 70000, '2017-08-161502869222.png', '5,6,7', 'On-Hand'),
+(9, 4, 6, 2, '1', 0, 'Queen', ' A queen size bed for 5', 70000, 'distressed queen size bed.jpg', '4,4,4', 'On-Hand'),
+(10, 3, 5, 4, '3', 0, 'Jollibee', 'Hi-chair for jolly kids', 50, '2017-08-161502869222.png', '5,3,4', 'Pre-Order'),
+(11, 1, 1, 5, '1', 0, 'Aira', 'Floral Frame ', 60000, '2017-08-161502869222.png', '6,5,4', 'Pre-Order'),
+(12, 3, 4, 5, '1', 0, 'Bessy mo to', '', 70, '2017-08-161502869222.png', '4,4,4', 'Archived'),
+(13, 4, 6, 4, '1', 0, 'Umay', '', 50000, '2017-08-161502869222.png', '4,3,2', 'Archived'),
+(14, 1, 8, 5, '2', 0, 'Rock', 'A rocky furniture', 50000, '2017-08-161502869222.png', '5,5,4', 'Pre-Order'),
+(15, 1, 1, 8, '1', 0, 'Elizabeth II', 'A classic modern furniture', 90000, '2017-08-161502869222.png', '3,8,7', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -1330,7 +1471,13 @@ INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `prodDateStar
 (22, 39, NULL, NULL, NULL, 'Ongoing'),
 (23, 62, NULL, NULL, NULL, 'Ongoing'),
 (24, 41, NULL, NULL, NULL, 'Ongoing'),
-(25, 42, NULL, NULL, NULL, 'Ongoing');
+(25, 42, NULL, NULL, NULL, 'Ongoing'),
+(26, 41, NULL, NULL, NULL, 'Ongoing'),
+(27, 42, NULL, NULL, NULL, 'Ongoing'),
+(28, 64, NULL, NULL, NULL, 'Ongoing'),
+(29, 65, NULL, NULL, NULL, 'Ongoing'),
+(30, 43, NULL, NULL, NULL, 'Ongoing'),
+(31, 44, NULL, NULL, NULL, 'Ongoing');
 
 -- --------------------------------------------------------
 
@@ -1410,7 +1557,27 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (62, 25, 2, 1, '2017-08-14', NULL, 'Remarks', 'Ongoing'),
 (63, 25, 3, 1, NULL, NULL, NULL, 'Pending'),
 (64, 25, 4, 1, NULL, NULL, NULL, 'Pending'),
-(65, 25, 5, 1, NULL, NULL, NULL, 'Pending');
+(65, 25, 5, 1, NULL, NULL, NULL, 'Pending'),
+(76, 28, 1, 1, NULL, NULL, NULL, 'Pending'),
+(77, 28, 2, 1, NULL, NULL, NULL, 'Pending'),
+(78, 28, 3, 1, NULL, NULL, NULL, 'Pending'),
+(79, 28, 4, 1, NULL, NULL, NULL, 'Pending'),
+(80, 28, 5, 1, NULL, NULL, NULL, 'Pending'),
+(81, 29, 1, 1, NULL, NULL, NULL, 'Pending'),
+(82, 29, 2, 1, NULL, NULL, NULL, 'Pending'),
+(83, 29, 3, 1, NULL, NULL, NULL, 'Pending'),
+(84, 29, 4, 1, NULL, NULL, NULL, 'Pending'),
+(85, 29, 5, 1, NULL, NULL, NULL, 'Pending'),
+(86, 30, 1, 1, NULL, NULL, NULL, 'Pending'),
+(87, 30, 2, 1, NULL, NULL, NULL, 'Pending'),
+(88, 30, 3, 1, NULL, NULL, NULL, 'Pending'),
+(89, 30, 4, 1, NULL, NULL, NULL, 'Pending'),
+(90, 30, 5, 1, NULL, NULL, NULL, 'Pending'),
+(91, 31, 1, 1, NULL, NULL, NULL, 'Pending'),
+(92, 31, 2, 1, NULL, NULL, NULL, 'Pending'),
+(93, 31, 3, 1, NULL, NULL, NULL, 'Pending'),
+(94, 31, 4, 1, NULL, NULL, NULL, 'Pending'),
+(95, 31, 5, 1, NULL, NULL, NULL, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1447,7 +1614,8 @@ INSERT INTO `tblprod_info` (`prodInfoID`, `prodInfoProduct`, `prodInfoPhase`, `p
 (2, 4, 2, 'Archived'),
 (3, 0, 1, 'Active'),
 (4, 9, 1, 'Active'),
-(5, 8, 1, 'Active');
+(5, 8, 1, 'Active'),
+(6, 9, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1503,9 +1671,10 @@ CREATE TABLE `tblpromos` (
 --
 
 INSERT INTO `tblpromos` (`promoID`, `promoName`, `promoDescription`, `promoStartDate`, `promoEnd`, `promoImage`, `promoStatus`) VALUES
-(1, 'Grand Opening  Promo', 'Buy 1 Take 1 on any specified products', '2017-07-23', '2017-07-23', 'DE7If2LUwAAqvAR.png', 'Active'),
-(3, 'New Beginning Promo', 'Buy as least Php 50,000 worth of furniture and bring home a free coffee table', '2017-07-23', '2017-07-23', 'DE7If2LUwAAqvAR.png', 'Active'),
-(4, 'Back to School Promo', '5 Chairs Free 1 stool', '2017-08-02', '2017-08-31', '19553445_1435850453104539_877905206_n.png', 'Active');
+(1, 'Christmas Giveaways', 'Ngayon pasko, ako ang ninong mo. Kaya para lang sayo, meron kang kiss sa cheeks', '2017-08-17', '2017-08-17', '2017-08-171502997071.png', 'Active'),
+(3, 'New Beginning Promo', 'Buy as least Php 50,000 worth of furniture and bring home a free coffee table', '2017-08-17', '2017-08-17', '2017-08-171502997254.png', 'Active'),
+(4, 'Back to School Promo', '5 Chairs Free 1 stool', '2017-08-17', '2017-08-17', '2017-08-171502997199.png', 'Active'),
+(5, 'Anniversary Promo', 'Sala Set with center table Free Hi-Chair', '2017-08-16', '2017-09-17', '2017-08-161502869908.png', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1525,9 +1694,10 @@ CREATE TABLE `tblpromo_condition` (
 --
 
 INSERT INTO `tblpromo_condition` (`conditionID`, `conCategory`, `conData`, `conPromoID`) VALUES
-(1, 'Pieces', '1', 1),
+(1, 'Others', '', 1),
 (2, 'Amount', '50,000', 3),
-(3, 'Pieces', '5', 4);
+(3, 'Amount', '50,000', 4),
+(4, 'Pieces', '5', 5);
 
 -- --------------------------------------------------------
 
@@ -1547,9 +1717,10 @@ CREATE TABLE `tblpromo_promotion` (
 --
 
 INSERT INTO `tblpromo_promotion` (`promotionID`, `proPromoID`, `proCategory`, `proData`) VALUES
-(1, 1, 'Pieces', '1'),
+(1, 1, 'Others', 'Libreng kiss mula kay ninong.'),
 (2, 3, 'Others', ' Free coffee table'),
-(3, 4, 'Pieces', '1');
+(3, 4, 'Pieces', '1'),
+(4, 5, 'Pieces', '40');
 
 -- --------------------------------------------------------
 
@@ -1577,7 +1748,9 @@ INSERT INTO `tblsupplier` (`supplierID`, `supCompName`, `supCompAdd`, `supCompNu
 (3, 'SMENT', '#GANGNAMGU', '284288', 'Lee Soo Man', 'CEO', 'Listed'),
 (4, 'JYP Ent', '#1234 Gangnam', '374676', 'JYP', 'CEO', 'Listed'),
 (5, 'CUBEENT              ', 'AAAA', '3324', 'DFEFREF', 'DFDFADGA', 'Archived'),
-(6, '                          ', '', '', '', '', 'Archived');
+(6, '                          ', '', '', '', '', 'Archived'),
+(7, 'BIGHIT Entertainment', 'Sokor', '+63 (888) 888-8888', 'Jimin', 'CEO', 'Listed'),
+(8, 'BIGHIT Entertainment', 'Sokorr', '+63 (888) 888-8889', 'Jimin', 'ceo', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1607,7 +1780,9 @@ INSERT INTO `tblunitofmeasure` (`unID`, `unType`, `unUnit`, `unStatus`) VALUES
 (8, 'Bes                    ', 'bs        ', 'Archived'),
 (9, 'Liter', 'l', 'Active'),
 (10, 'Feet', 'ft', 'Active'),
-(11, 'Meter', 'm', 'Active');
+(11, 'Meter', 'm', 'Active'),
+(12, 'Mile', 'mile', 'Active'),
+(13, 'Mile', 'mile', 'Archived');
 
 -- --------------------------------------------------------
 
@@ -1664,7 +1839,15 @@ INSERT INTO `tblunit_cat` (`unitcatID`, `unitID`, `uncategoryID`, `unitcatStatus
 (6, 12, 6, 'Active'),
 (7, 12, 7, 'Active'),
 (8, 12, 8, 'Active'),
-(9, 12, 9, 'Active');
+(9, 12, 9, 'Active'),
+(10, 12, 4, 'Active'),
+(11, 12, 6, 'Active'),
+(12, 12, 1, 'Active'),
+(13, 12, 2, 'Active'),
+(14, 13, 4, 'Active'),
+(15, 13, 6, 'Active'),
+(16, 13, 1, 'Active'),
+(17, 13, 2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1813,8 +1996,15 @@ ALTER TABLE `tbldownpayment`
 -- Indexes for table `tblemployee`
 --
 ALTER TABLE `tblemployee`
-  ADD PRIMARY KEY (`empID`),
-  ADD KEY `employeeJob_idx` (`empJobID`);
+  ADD PRIMARY KEY (`empID`);
+
+--
+-- Indexes for table `tblemp_job`
+--
+ALTER TABLE `tblemp_job`
+  ADD PRIMARY KEY (`emp_jobID`),
+  ADD KEY `empName_idx` (`emp_empID`),
+  ADD KEY `jobName_idx` (`emp_jobDescID`);
 
 --
 -- Indexes for table `tblfabrics`
@@ -2145,7 +2335,7 @@ ALTER TABLE `tblbranches`
 -- AUTO_INCREMENT for table `tblcheck_details`
 --
 ALTER TABLE `tblcheck_details`
-  MODIFY `check_detailsID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `check_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblcompany_info`
 --
@@ -2155,7 +2345,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -2190,42 +2380,47 @@ ALTER TABLE `tbldownpayment`
 -- AUTO_INCREMENT for table `tblemployee`
 --
 ALTER TABLE `tblemployee`
-  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `tblemp_job`
+--
+ALTER TABLE `tblemp_job`
+  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblfabrics`
 --
 ALTER TABLE `tblfabrics`
-  MODIFY `fabricID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `fabricID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblfabric_pattern`
 --
 ALTER TABLE `tblfabric_pattern`
-  MODIFY `f_patternID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `f_patternID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblfabric_texture`
 --
 ALTER TABLE `tblfabric_texture`
-  MODIFY `textureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `textureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tblfabric_type`
 --
 ALTER TABLE `tblfabric_type`
-  MODIFY `f_typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `f_typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblframeworks`
 --
 ALTER TABLE `tblframeworks`
-  MODIFY `frameworkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `frameworkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblframe_design`
 --
 ALTER TABLE `tblframe_design`
-  MODIFY `designID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `designID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblframe_material`
 --
 ALTER TABLE `tblframe_material`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblfurn_category`
 --
@@ -2240,7 +2435,7 @@ ALTER TABLE `tblfurn_design`
 -- AUTO_INCREMENT for table `tblfurn_type`
 --
 ALTER TABLE `tblfurn_type`
-  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tblinventory_logs`
 --
@@ -2250,12 +2445,12 @@ ALTER TABLE `tblinventory_logs`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
 ALTER TABLE `tbljobs`
-  MODIFY `jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbllogs`
 --
@@ -2265,7 +2460,7 @@ ALTER TABLE `tbllogs`
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblmat_attribs`
 --
@@ -2290,17 +2485,17 @@ ALTER TABLE `tblmodeofpayment`
 -- AUTO_INCREMENT for table `tblonhand`
 --
 ALTER TABLE `tblonhand`
-  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
 ALTER TABLE `tblorder_actions`
-  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
 --
@@ -2310,17 +2505,17 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
 ALTER TABLE `tblpackage_inclusions`
-  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2340,17 +2535,17 @@ ALTER TABLE `tblprodsonpromo`
 -- AUTO_INCREMENT for table `tblproduct`
 --
 ALTER TABLE `tblproduct`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2360,7 +2555,7 @@ ALTER TABLE `tblprod_images`
 -- AUTO_INCREMENT for table `tblprod_info`
 --
 ALTER TABLE `tblprod_info`
-  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblprod_materials`
 --
@@ -2370,27 +2565,27 @@ ALTER TABLE `tblprod_materials`
 -- AUTO_INCREMENT for table `tblpromos`
 --
 ALTER TABLE `tblpromos`
-  MODIFY `promoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `promoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblpromo_condition`
 --
 ALTER TABLE `tblpromo_condition`
-  MODIFY `conditionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `conditionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblpromo_promotion`
 --
 ALTER TABLE `tblpromo_promotion`
-  MODIFY `promotionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `promotionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
-  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasure`
 --
 ALTER TABLE `tblunitofmeasure`
-  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasurement_category`
 --
@@ -2400,7 +2595,7 @@ ALTER TABLE `tblunitofmeasurement_category`
 -- AUTO_INCREMENT for table `tblunit_cat`
 --
 ALTER TABLE `tblunit_cat`
-  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
@@ -2448,10 +2643,11 @@ ALTER TABLE `tbldesign_phase`
   ADD CONSTRAINT `d` FOREIGN KEY (`p_design`) REFERENCES `tblfurn_design` (`designID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tblemployee`
+-- Constraints for table `tblemp_job`
 --
-ALTER TABLE `tblemployee`
-  ADD CONSTRAINT `employeeJob` FOREIGN KEY (`empJobID`) REFERENCES `tbljobs` (`jobID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tblemp_job`
+  ADD CONSTRAINT `empName` FOREIGN KEY (`emp_empID`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `jobName` FOREIGN KEY (`emp_jobDescID`) REFERENCES `tbljobs` (`jobID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tblfabrics`

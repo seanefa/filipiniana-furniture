@@ -151,11 +151,11 @@
                         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
                           <thead>
                             <tr>
-                              <th>Order ID</th>
-                              <th>Customer Name</th>
-                              <th>Release Date</th>
-                              <th>Total Price</th>
-                              <th>Production Status</th>
+                              <th style="text-align:left">Order ID</th>
+                              <th style="text-align:left">Customer Name</th>
+                              <th style="text-align:left">Release Date</th>
+                              <th style="text-align:right">Total Price</th>
+                              <th style="text-align:center">Production Status</th>
                               <th class="removeSort" style="text-align: center;">Actions</th>
                             </tr>
                           </thead>
@@ -172,17 +172,17 @@
             $get_name = getName($row['custOrderID']);
             $production_stat = getStatus($row['orderID']);
             $date = date_create($row['dateOfRelease']);
-            $dates = date_format($date,"F/d/Y");
+            $dates = date_format($date,"F d, Y");
             echo ('<tr>
-              <td>'.$orderID.'</td>
-              <td>'.$get_name.'</td>
-              <td>'.$dates.'</td>
-              <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
-              <td>'.$production_stat.'</td>
+              <td style="text-align:left">'.$orderID.'</td>
+              <td style="text-align:left">'.$get_name.'</td>
+              <td style="text-align:left">'.$dates.'</td>
+              <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
+              <td style="text-align:center">'.$production_stat.'</td>
               <td>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
 
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderUpdate"><span class="glyphicon glyphicon-edit"></span> Update</button>
+              <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span> Update</a>
 
               <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
 
@@ -191,6 +191,7 @@
               ');
           }     
         }    
+        //<button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderUpdate"><span class="glyphicon glyphicon-edit"></span> Update</button>
 
         function getStatus($id){
           include "dbconnect.php";
@@ -201,7 +202,7 @@
             $stat = $row['productionStatus'];
           }
           if($stat==""){
-            return "Pending";
+            return "Not set";
           }
           else{
             return $stat;
@@ -288,7 +289,7 @@
           $result = mysqli_query($conn,$sql);
           $row = mysqli_fetch_assoc($result);
           $date = date_create($row['dateOfReceived']);
-          $dates = date_format($date,"F/d/Y");
+          $dates = date_format($date,"F d, Y");
           return $dates;
         }
         function getName($id){
@@ -348,8 +349,8 @@
                       <td>1</td>
                       <td>&#8369; 25,000</td>
                       <td>
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
                       </tr>
                     </tbody>
                   </table>

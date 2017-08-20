@@ -20,7 +20,7 @@ $mn = $_POST['midn'];
 $addrss = $_POST['custoadd'];
 $cont = $_POST['custocont'];
 $emailadd = $_POST['custoemail'];
-$ordershipadd = $_POST['deladd'];
+$add = $_POST['deladd'];
 $remarks = $_POST['orderremarks'];
 
 $payment = $_POST['aTendered'];
@@ -44,8 +44,12 @@ $_SESSION['price'] = $selectedPrice;
 $_SESSION['totalPrice'] = $totalPrice;
 $sample = 'Pending';
 
-
+$mop = $_POST['mop'];
 $orderid = 0;
+
+foreach($add as $a){
+  $ordershipadd  = $ordershipadd . $a . " ";
+}
 
 if($isBool == "new"){
   $sql = "INSERT INTO `tblcustomer` (`customerLastName`, `customerFirstName`, `customerMiddleName`, `customerAddress`, `customerContactNum`, `customerEmail`) VALUES ('$ln', '$fn', '$mn', '$addrss', '$cont', '$emailadd')";
@@ -59,29 +63,44 @@ if($isBool == "new"){
     $ctr = 0;
     if (mysqli_query($conn, $pssql)) {
     $orderid = mysqli_insert_id($conn); //last id ng na-input na data
-      foreach($selected as $str) {
-       $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
-       mysqli_query($conn,$sql1);
-       $ctr++;
+    foreach($selected as $str) {
+     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
+     mysqli_query($conn,$sql1);
+     $ctr++;
    }
+
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
 
-  echo "<br>inv: " . $inv;
+   echo "<br>inv: " . $inv;
    mysqli_query($conn,$inv);
    $invID = mysqli_insert_id($conn);
-   $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '1', 'Paid');";
-   mysqli_query($conn,$paysql);
-   $paymentID = mysqli_insert_id($conn);
-  echo "<br>inv: " . $paysql;
 
-    echo '<script type="text/javascript">';
-          $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
-          header($loc); 
-     echo '</script>';
-   }
-   else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   if($mop==1){
+    $tendered = $_POST['aTendered'];
+    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
+    echo $paysql . "<br>";
+    mysqli_query($conn,$paysql);
+    $receiptID = mysqli_insert_id($conn);
+    header( "Location: receipt2.php?id=".$receiptID);
+
   }
+  else if($mop==2){
+    $number = $_POST['cNumber'];
+    $amount = $_POST['cAmount'];
+    $remarks = $_POST['remarks'];
+    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
+    echo $paysql . "<br>";
+    mysqli_query($conn,$paysql);
+    $pdID = mysqli_insert_id($conn);
+    $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
+    echo $ch . "<br>";
+    mysqli_query($conn,$ch);
+    header( "Location: receipt2.php?id=".$pdID);
+  }
+}
+else {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 }
 else {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -98,31 +117,41 @@ else if($isBool=="existing"){ //EXISTING
   echo "<br>pssql" . $pssql;
 
   if (mysqli_query($conn, $pssql)) {
-  $ctr = 0;
-  $orderid = mysqli_insert_id($conn);
-  echo "<br>orderID: " . $orderid;
+    $ctr = 0;
+    $orderid = mysqli_insert_id($conn);
+    echo "<br>orderID: " . $orderid;
     foreach($selected as $str) {
-       $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
-       mysqli_query($conn,$sql1);
-       echo "<br>sql1: " . $sql1;
-       $ctr++;
+     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
+     mysqli_query($conn,$sql1);
+     echo "<br>sql1: " . $sql1;
+     $ctr++;
    }
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
-
-  echo "<br>inv: " . $inv;
+   echo "<br>inv: " . $inv;
    mysqli_query($conn,$inv);
    $invID = mysqli_insert_id($conn);
-   $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '1', 'Paid');";
-   mysqli_query($conn,$paysql);
+   if($mop==1){
+    $tendered = $_POST['aTendered'];
+    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
+    echo $paysql . "<br>";
+    mysqli_query($conn,$paysql);
+    $receiptID = mysqli_insert_id($conn);
+    header( "Location: receipt2.php?id=".$receiptID);
 
-   $paymentID = mysqli_insert_id($conn);
-  echo "<br>inv: " . $paysql;
-
-
-   echo '<script type="text/javascript">';
-          $loc = "Location: receipt2.php?pID=" .$paymentID. "&id=". $orderid;
-          header($loc); 
-   echo '</script>';
+  }
+  else if($mop==2){
+    $number = $_POST['cNumber'];
+    $amount = $_POST['cAmount'];
+    $remarks = $_POST['remarks'];
+    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
+    echo $paysql . "<br>";
+    mysqli_query($conn,$paysql);
+    $pdID = mysqli_insert_id($conn);
+    $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
+    echo $ch . "<br>";
+    mysqli_query($conn,$ch);
+    header( "Location: receipt2.php?id=".$pdID);
+  }
 
  }
 }

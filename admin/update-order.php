@@ -150,7 +150,6 @@ $(document).ready(function(){ //wala lang
                         </div>
                         <br>
                       </div>
-
                       
                       <h2>Order Information</h2><!--<button type="button" href="#customization" data-toggle="modal" id="cart" class="btn-info"><span class="glyphicon glyphicon-edit"></span></button>
                       <div class="row">-->
@@ -198,7 +197,8 @@ $(document).ready(function(){ //wala lang
                           <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
                           <div class="panel-body">
                             <div class="table-responsive">
-                              <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
+                              <h2><label class="control-label" style="text-align:left;">Orders</label></h2>
+                              <a class="btn btn-success pull-right" style="color:white;" href="shop.php?id=<?php echo $id;?>"><span class="glyphicon">+</span> Add</a>
                               <table class="table product-overview" id="tblOrders">
                                 <thead>
                                   <th style="text-align:left">Furniture Name</th>

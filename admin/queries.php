@@ -86,6 +86,7 @@ $.ajax({
                          <option value="2">Customer Information</option>
                          <option value="4">Customer with Balances</option>
                          <option value="5">List of Cancelled Orders</option>
+                         <option value="">List of Rejected Order Request</option>
                        </select>
                      </div>
                       <!--<div class="col-md-2">

@@ -7,7 +7,6 @@ $date = $_POST['pidate'];
 
 include 'dbconnect.php';
 $updateSql = "UPDATE tblorders SET orderStatus = 'Pending', orderRemarks =  '$remarks',dateOfRelease = '$date' WHERE orderID = $id";
-        // Check connection
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
 	header( "Location: orders.php" );

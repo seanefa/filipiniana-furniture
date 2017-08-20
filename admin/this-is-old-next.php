@@ -15,102 +15,6 @@ include 'dbconnect.php';
   <title>Check-Out</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
-    $(document).ready(function(){
-      $('#aTendered').on('keyup',function(){
-        var mat = $("#aTendered").val();
-        var bal = $("#dp").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $("#error").html(e);
-          $('#aTendered').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#error").html(e);
-          $('#aTendered').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat==""){
-          var e = "";
-          var change = 0.00;
-          $("#dChange").val(change);
-          $("#error").html(e);
-          $('#aTendered').css('border-color','gray');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<bal){ //if may malaki diba? hahaha
-            var change = mat - bal;
-            var e = "Downpayment must be 50% of the total price";
-            $("#error").html(e);
-            $('#aTendered').css('border-color','red');
-            $('#saveBtn').prop('disabled',true);
-          }
-          else{
-            var e = "";
-            var change = mat - bal;
-            var change = change + ".00";
-            $("#dChange").val(change);
-            $("#error").html(e);
-            $('#aTendered').css('border-color','gray');
-            $('#saveBtn').prop('disabled',false);
-
-          }
-
-      });
-  });
-
-
-  $(document).ready(function(){
-      $('#cNum').on('keyup',function(){
-        var mat = $("#cNum").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-        }
-
-      });
-  });
-
-  $(document).ready(function(){
-      $('#cAmount').on('keyup',function(){
-        var mat = $("#cAmount").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-        }
-
-      });
-  });
-
   $(document).ready(function(){
     $("#check").hide();
     $("#mop").on('change',function(){
@@ -146,17 +50,6 @@ include 'dbconnect.php';
   $(document).ready(function(){
     $("#custcont").on('keyup',function(){
       var val = $("#custcont").val(); 
-      if(isNaN(val)){
-        var e = "Please input a number";
-        $('#erCon').html(e);
-            $('#custcont').css('border-color','red');
-      }
-      else if(val<0){
-        var e = "Please input a valid number";
-        $('#erCon').html(e);
-            $('#custcont').css('border-color','red');
-      }
-      else{
       var t = 0;
       $.ajax({
         type: 'post',
@@ -165,16 +58,16 @@ include 'dbconnect.php';
           id: val, t : t,
         },
         success: function (response) {
-          $( '#erCon').html(response);
-          if(response!=""){
-            $('#custcont').css('border-color','red');
-          }
-          else{
-            $('#custcont').css('border-color','black');
-          }
-        }
-      });
-    }
+// We get the element having id of display_info and put the response inside it
+$( '#erCon').html(response);
+if(response!=""){
+  $('#custcont').css('border-color','red');
+}
+else{
+  $('#custcont').css('border-color','black');
+}
+}
+});
     });
   });
 
@@ -654,7 +547,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                         <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
                       </div>
                       <div class="col-md-4">
-                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
+                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Batasan Hills" disabled required/>
                       </div>
                       <div class="col-md-3">
                         <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
@@ -684,6 +577,13 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
 
                     var x = parseFloat($('#totalPrice').val());
                     $('#amountDue').val(parseFloat(x));
+                    if($('#aTendered').val() < (x / 2)){
+                      Math.round($('#aTendered').val( (x / 2)+d));
+                    }
+                    else if($('#aTendered').val() >= (x / 2)){
+                      var e = parseInt($('#aTendered').val());
+                      Math.round($('#dChange').val((x-$('#aTendered').val())+d));
+                    }
                   }
 
                 });
@@ -698,6 +598,14 @@ $('#rateDel').click(function(){
     $('#city').val('');
     $('#zip').val('');
     $('#delloc').val('');
+
+    if($('#aTendered').val() < (x / 2)){
+      Math.round($('#aTendered').val( (x / 2)+d));
+    }
+    else if($('#aTendered').val() >= (x / 2)){
+      var e = parseInt($('#aTendered').val());
+      Math.round($('#dChange').val((x-$('#aTendered').val())+d));
+    }
   }
 });
 
@@ -711,6 +619,31 @@ $('#delloc').change(function(){
   var due = x + d;
   $('#amountDue').val(parseFloat(due));
 });
+});
+
+$(document).ready(function(){
+  var x = parseInt($('#totalPrice').html());
+  var y =  parseInt($('#aTendered').val());
+  Math.round($('#aTendered').val( x / 2));
+
+  var d = parseInt($('#dRate').val());
+  if($('#aTendered').val() < (x / 2)){
+    Math.round($('#aTendered').val( (x / 2))+d);
+  }
+  else if($('#aTendered').val() >= (x / 2)){
+    var e = parseInt($('#aTendered').val());
+    Math.round($('#dChange').val((x-$('#aTendered').val())+d));
+  }
+
+  $('#aTendered').keyup(function(){
+    if($('#aTendered').val() < (x / 2)){
+      Math.round($('#aTendered').val( (x / 2)+d));
+    }
+    else if($('#aTendered').val() >= (x / 2)){
+      var e = parseInt($('#aTendered').val());
+      Math.round($('#dChange').val((x-$('#aTendered').val())+d));
+    }
+  });
 });
 
 $(document).ready(function(){
@@ -765,7 +698,6 @@ $(document).ready(function(){
               <label class="control-label">Downpayment
                 <h6><em> Downpayment must be 50% of the total order price</em></h6></label>
                 <input type="text" style="text-align:right;" class="form-control" value="<?php echo "Php " . number_format($totPrice * .5,2); ?>" readonly/>
-                <input type="hidden" id="dp" value="<?php $dp = $totPrice * .5; echo $dp;?>" readonly/>
               </div>
             </div>
           </div>
@@ -836,7 +768,6 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="row">
-        <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save & Print</button>
 <!--<div class="col-md-5 pull-right">
 <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>
 </div>-->
@@ -917,7 +848,7 @@ $(document).ready(function(){
         '</li>' +
         '<li class="next">'+
         '<a href="#'+this.id+'" data-wizard="next" role="button">'+options.buttonLabels.next+'</a>' +
-        '' +
+        '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>' +
         '</li>'+
         '</ul></div>';
       }

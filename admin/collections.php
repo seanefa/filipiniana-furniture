@@ -67,10 +67,10 @@ echo '</script>';
                             <tr>
                               <th>Order ID</th>
                               <th>Customer Name</th>
-                              <th>Order Price</th>
-                              <th>Remaining Balance</th>
-                              <th>Payment Status</th>
-                              <th class="removeSort">Actions</th>
+                              <th style="text-align:right">Order Price</th>
+                              <th style="text-align:right">Remaining Balance</th>
+                              <th style="text-align:right">Payment Status</th>
+                              <th class="removeSort" style="text-align:center">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -92,18 +92,20 @@ echo '</script>';
                                   <tr>
                                   <td>'.$orderID.'</td>
                                   <td>'.$get_name.'</td>
-                                  <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
-                                  <td>&#8369;'.number_format($bal,2).'</td>
-                                  <td>'.$paymentStat.'</td>
-                                  <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="glyphicon glyphicon-eye-open"></span> View</button>  
+                                  <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
+                                  <td style="text-align:right">&#8369; '.number_format($bal,2).'</td>
+                                  <td style="text-align:right">'.$paymentStat.'</td>
+                                  <td style="text-align:center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="glyphicon glyphicon-eye-open"></span> View</button>  
 
                                    <a class="btn btn-info" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span>  Bill </a>
 
-                                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #payment">&#8369; Payment</button></td>
+                                   <a class="btn btn-success" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                  </td>
                                   </tr>
                                   ');
                               }     
                             }
+                            /*<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #payment">&#8369; Payment</button>*/
                             function pCount($id){
                               include "dbconnect.php";
                               $cnt = 0;

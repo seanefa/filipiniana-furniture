@@ -528,7 +528,7 @@ $(document).ready(function(){
                                 ?>
                                   <?php
                                   $date = date_create($row['promoStartDate']);
-                                  $date = date_format($date,"F/d/Y");
+                                  $date = date_format($date,"F d, Y");
                                   echo ('
                                     <td>'.$row['promoName'].'</td>
                                     <td>'.$row['promoDescription'].'</td>

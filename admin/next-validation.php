@@ -14,6 +14,7 @@ if($t==0){
 }
 if($t==1){
 	$email = $_POST['id'];
+	$email = strtolower($email);
 	$sql = "SELECT *, COUNT(customerID) AS num FROM tblcustomer WHERE customerEmail = '$email';";
 	$res = mysqli_query($conn,$sql);
 	$row = mysqli_fetch_assoc($res);
