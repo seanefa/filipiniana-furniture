@@ -541,7 +541,7 @@ else{
                             <tr>
                             <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
 
-                            <td>PACKAGE '); ?><button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']; ?> #view" data-target="#myModal">
+                            <td>PACKAGE '); ?><button type="button" class="btn btn-info " data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']; ?> #view" data-target="#myModal">
                             <span class='glyphicon glyphicon-eye-open'></span> View</button> <?php echo('</td>
 
                             <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
