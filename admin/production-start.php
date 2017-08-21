@@ -12,12 +12,14 @@ while($row1 = mysqli_fetch_assoc($res)){
 	$prID = mysqli_insert_id($conn);
 	$sql2 = "SELECT * FROM tblphases a, tbldesign_phase c, tblfurn_design b WHERE a.phaseID = c.d_phase and c.p_design = b.designID and b.designID = '$d'";
 	$res1 = mysqli_query($conn,$sql2);
+
 	while($row2 = mysqli_fetch_assoc($res1)){
 		$phaseID = $row2['phaseID'];
       $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','$phaseID','1','Pending')";
       mysqli_query($conn,$phSQL);
       echo "<br>" . $phSQL;
 	}
+	
 }
 
 $sql = "UPDATE tblorders SET orderStatus = 'Ongoing' WHERE orderID = '$orderID'";

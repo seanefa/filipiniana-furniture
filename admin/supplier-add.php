@@ -32,7 +32,7 @@ if($sql){
 	//end here
 	//notes: yung category and action nababago ha! 
 	//YUNG SESSION_START WAG KALIMUTAN!!!! CHECK SA DB KUNG PUMAPASOK NG MAAYOS HA! 
-	//Bilisan ang gawa pero wag madaliin para lang makapag-dota/NBA na ulet ha! HAHAHAHA Jusmiya 
+	//Bilisan ang gawa pero wag madaliin para lang may masabing may nagawa ha! At lalo wag madaliin para lang makapag-DOTA/NBA na ulet ha! HAHAHAHA Jusmiya 
 	//And yes hard coded yang mga yan
 header( "Location: supplier.php?newSuccess" );
 } 
