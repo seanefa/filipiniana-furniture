@@ -189,7 +189,7 @@ $(document).ready(function(){
                             <div class="panel-body">
                           <div class="row" id="reportsOut">
                             <div class="table-responsive"> 
-                              <table class="table color-bordered-table muted-bordered-table display nowrap" id="reportsTable">
+                              <table class="table color-bordered-table muted-bordered-table display" id="reportsTable">
                                 <thead>
                                   <tr>
                                     <th style="text-align: left;">Order ID</th>

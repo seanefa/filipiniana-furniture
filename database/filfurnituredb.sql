@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2017 at 02:28 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Aug 21, 2017 at 02:57 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tblattributes` (
   `attributeID` int(11) NOT NULL,
-  `attributeName` varchar(150) NOT NULL,
-  `attributeStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `attributeName` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `attributeStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblattributes`
@@ -53,8 +55,8 @@ CREATE TABLE `tblattribute_measure` (
   `amID` int(11) NOT NULL,
   `attributeID` int(11) NOT NULL,
   `uncategoryID` int(11) NOT NULL,
-  `amStatus` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `amStatus` varchar(20) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblattribute_measure`
@@ -77,11 +79,11 @@ INSERT INTO `tblattribute_measure` (`amID`, `attributeID`, `uncategoryID`, `amSt
 
 CREATE TABLE `tblbank_accounts` (
   `accountID` int(11) NOT NULL,
-  `accountName` varchar(100) NOT NULL,
-  `accountNumber` varchar(50) NOT NULL,
-  `accountStatus` varchar(45) NOT NULL,
-  `accountRemarks` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `accountName` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `accountNumber` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `accountStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `accountRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -91,11 +93,11 @@ CREATE TABLE `tblbank_accounts` (
 
 CREATE TABLE `tblbranches` (
   `branchID` int(11) NOT NULL,
-  `branchLocation` varchar(45) NOT NULL,
-  `branchAddress` varchar(80) NOT NULL,
-  `branchRemarks` varchar(100) DEFAULT NULL,
-  `branchStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `branchLocation` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `branchAddress` varchar(80) CHARACTER SET utf8 NOT NULL,
+  `branchRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `branchStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblbranches`
@@ -116,8 +118,8 @@ CREATE TABLE `tblcheck_details` (
   `p_detailsID` int(11) NOT NULL,
   `checkNumber` int(11) NOT NULL,
   `checkAmount` double NOT NULL,
-  `checkRemarks` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `checkRemarks` varchar(100) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblcheck_details`
@@ -137,13 +139,13 @@ INSERT INTO `tblcheck_details` (`check_detailsID`, `p_detailsID`, `checkNumber`,
 
 CREATE TABLE `tblcompany_info` (
   `comp_recID` int(11) NOT NULL,
-  `comp_logo` varchar(450) NOT NULL,
-  `comp_name` varchar(150) NOT NULL,
+  `comp_logo` varchar(450) CHARACTER SET latin1 NOT NULL,
+  `comp_name` varchar(150) CHARACTER SET latin1 NOT NULL,
   `comp_num` int(11) NOT NULL,
-  `comp_email` varchar(45) NOT NULL,
-  `comp_address` varchar(150) NOT NULL,
-  `comp_about` varchar(450) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `comp_email` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `comp_address` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `comp_about` varchar(450) CHARACTER SET latin1 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblcompany_info`
@@ -160,14 +162,14 @@ INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num
 
 CREATE TABLE `tblcustomer` (
   `customerID` int(11) NOT NULL,
-  `customerFirstName` varchar(45) NOT NULL,
-  `customerMiddleName` varchar(45) DEFAULT NULL,
-  `customerLastName` varchar(45) NOT NULL,
-  `customerAddress` varchar(100) NOT NULL,
-  `customerContactNum` varchar(45) NOT NULL,
-  `customerEmail` varchar(80) NOT NULL,
-  `customerStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `customerFirstName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `customerMiddleName` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `customerLastName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `customerAddress` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `customerContactNum` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `customerEmail` varchar(80) CHARACTER SET utf8 NOT NULL,
+  `customerStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblcustomer`
@@ -200,13 +202,13 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 
 CREATE TABLE `tblcustomize_request` (
   `customizedID` int(11) NOT NULL,
-  `customizedPic` varchar(45) DEFAULT NULL,
-  `customizedDescription` varchar(250) NOT NULL,
+  `customizedPic` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `customizedDescription` varchar(250) CHARACTER SET utf8 NOT NULL,
   `accountdetailsID` int(11) NOT NULL,
   `customFrameID` int(11) DEFAULT NULL,
   `customFabricID` int(11) DEFAULT NULL,
-  `customStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `customStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -217,9 +219,9 @@ CREATE TABLE `tblcustomize_request` (
 CREATE TABLE `tblcust_req_images` (
   `cust_req_imagesID` int(11) NOT NULL,
   `cust_req_ID` int(11) NOT NULL,
-  `cust_req_images` varchar(100) NOT NULL,
-  `cust_req_imageStat` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cust_req_images` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `cust_req_imageStat` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -231,11 +233,11 @@ CREATE TABLE `tbldelivery` (
   `deliveryID` int(11) NOT NULL,
   `deliveryOrdReq` int(11) NOT NULL,
   `deliveryEmpAssigned` int(11) DEFAULT NULL,
-  `deliveryStatus` varchar(45) NOT NULL,
-  `deliveryRecStatus` varchar(45) NOT NULL,
+  `deliveryStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `deliveryRecStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
   `deliveryDate` datetime NOT NULL,
-  `deliveryRemarks` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `deliveryRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -246,11 +248,11 @@ CREATE TABLE `tbldelivery` (
 CREATE TABLE `tbldelivery_rates` (
   `delivery_rateID` int(11) NOT NULL,
   `delBranchID` int(11) NOT NULL,
-  `delLocation` varchar(100) NOT NULL,
-  `delRateType` varchar(45) NOT NULL,
-  `delRate` varchar(45) NOT NULL,
-  `delRateStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `delLocation` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `delRateType` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `delRate` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `delRateStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbldelivery_rates`
@@ -272,8 +274,8 @@ CREATE TABLE `tbldesign_phase` (
   `d_phaseID` int(11) NOT NULL,
   `p_design` int(11) NOT NULL,
   `d_phase` int(11) NOT NULL,
-  `d_phaseStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `d_phaseStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbldesign_phase`
@@ -307,7 +309,7 @@ INSERT INTO `tbldesign_phase` (`d_phaseID`, `p_design`, `d_phase`, `d_phaseStatu
 CREATE TABLE `tbldownpayment` (
   `downpaymentID` int(11) NOT NULL,
   `downpaymentPercentage` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbldownpayment`
@@ -324,12 +326,12 @@ INSERT INTO `tbldownpayment` (`downpaymentID`, `downpaymentPercentage`) VALUES
 
 CREATE TABLE `tblemployee` (
   `empID` int(11) NOT NULL,
-  `empFirstName` varchar(45) NOT NULL,
-  `empLastName` varchar(45) NOT NULL,
-  `empMidName` varchar(45) DEFAULT NULL,
-  `empRemarks` varchar(100) NOT NULL,
-  `empStatus` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `empFirstName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `empLastName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `empMidName` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `empRemarks` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `empStatus` varchar(45) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblemployee`
@@ -358,8 +360,8 @@ CREATE TABLE `tblemp_job` (
   `emp_jobID` int(11) NOT NULL,
   `emp_empID` int(11) NOT NULL,
   `emp_jobDescID` int(11) NOT NULL,
-  `emp_jobStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `emp_jobStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblemp_job`
@@ -378,14 +380,14 @@ INSERT INTO `tblemp_job` (`emp_jobID`, `emp_empID`, `emp_jobDescID`, `emp_jobSta
 
 CREATE TABLE `tblfabrics` (
   `fabricID` int(11) NOT NULL,
-  `fabricName` varchar(45) NOT NULL,
+  `fabricName` varchar(45) CHARACTER SET utf8 NOT NULL,
   `fabricTypeID` int(11) NOT NULL,
   `fabricPatternID` int(11) NOT NULL,
-  `fabricColor` varchar(255) NOT NULL,
-  `fabricRemarks` varchar(100) DEFAULT NULL,
-  `fabricPic` varchar(100) DEFAULT NULL,
-  `fabricStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fabricColor` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `fabricRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `fabricPic` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `fabricStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfabrics`
@@ -409,10 +411,10 @@ INSERT INTO `tblfabrics` (`fabricID`, `fabricName`, `fabricTypeID`, `fabricPatte
 
 CREATE TABLE `tblfabric_pattern` (
   `f_patternID` int(11) NOT NULL,
-  `f_patternName` varchar(45) NOT NULL,
-  `f_patternRemarks` varchar(100) DEFAULT NULL,
-  `f_patternStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `f_patternName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `f_patternRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `f_patternStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfabric_pattern`
@@ -434,11 +436,11 @@ INSERT INTO `tblfabric_pattern` (`f_patternID`, `f_patternName`, `f_patternRemar
 
 CREATE TABLE `tblfabric_texture` (
   `textureID` int(11) NOT NULL,
-  `textureName` varchar(45) NOT NULL,
-  `textureDescription` varchar(100) DEFAULT NULL,
+  `textureName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `textureDescription` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `textureRating` int(11) DEFAULT NULL,
-  `textureStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `textureStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfabric_texture`
@@ -452,7 +454,7 @@ INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription
 (5, 'sdjhsjkd', 'kjsdhkajh', NULL, 'Archived'),
 (6, 'Silky', 'Silky Texture', NULL, 'Listed'),
 (7, 'Hello!@#$%^&*&^%$#@', '', NULL, 'Archived'),
-(8, '"425trw8wef"', '', NULL, 'Archived'),
+(8, '\"425trw8wef\"', '', NULL, 'Archived'),
 (9, 'Plain Fabric', '', NULL, 'Archived'),
 (10, 'Leather', '', NULL, 'Archived'),
 (11, 'Wool', '', NULL, 'Listed'),
@@ -466,11 +468,11 @@ INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription
 
 CREATE TABLE `tblfabric_type` (
   `f_typeID` int(11) NOT NULL,
-  `f_typeName` varchar(50) NOT NULL,
-  `f_typeWeaves` varchar(100) DEFAULT NULL,
+  `f_typeName` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `f_typeWeaves` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `f_typeTextureID` int(11) NOT NULL,
-  `f_typeStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `f_typeStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfabric_type`
@@ -490,13 +492,13 @@ INSERT INTO `tblfabric_type` (`f_typeID`, `f_typeName`, `f_typeWeaves`, `f_typeT
 CREATE TABLE `tblframeworks` (
   `frameworkID` int(11) NOT NULL,
   `frameworkFurnType` int(11) NOT NULL,
-  `frameworkName` varchar(45) NOT NULL,
-  `frameworkPic` varchar(255) NOT NULL,
+  `frameworkName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `frameworkPic` varchar(255) CHARACTER SET utf8 NOT NULL,
   `framedesignID` int(11) NOT NULL,
   `materialUsedID` int(11) NOT NULL,
-  `frameworkRemarks` varchar(100) DEFAULT NULL,
-  `frameworkStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `frameworkRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `frameworkStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblframeworks`
@@ -519,10 +521,10 @@ INSERT INTO `tblframeworks` (`frameworkID`, `frameworkFurnType`, `frameworkName`
 
 CREATE TABLE `tblframe_design` (
   `designID` int(11) NOT NULL,
-  `designName` varchar(45) NOT NULL,
-  `designDescription` varchar(250) DEFAULT NULL,
-  `designStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `designName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `designDescription` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
+  `designStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblframe_design`
@@ -542,10 +544,10 @@ INSERT INTO `tblframe_design` (`designID`, `designName`, `designDescription`, `d
 
 CREATE TABLE `tblframe_material` (
   `materialID` int(11) NOT NULL,
-  `materialName` varchar(45) NOT NULL,
-  `materialRemarks` varchar(100) DEFAULT NULL,
-  `materialStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `materialName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `materialRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `materialStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblframe_material`
@@ -567,10 +569,10 @@ INSERT INTO `tblframe_material` (`materialID`, `materialName`, `materialRemarks`
 
 CREATE TABLE `tblfurn_category` (
   `categoryID` int(11) NOT NULL,
-  `categoryName` varchar(100) NOT NULL,
-  `categoryStatus` varchar(45) NOT NULL,
-  `categoryRemarks` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `categoryName` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `categoryStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `categoryRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfurn_category`
@@ -591,9 +593,9 @@ INSERT INTO `tblfurn_category` (`categoryID`, `categoryName`, `categoryStatus`, 
 
 CREATE TABLE `tblfurn_design` (
   `designID` int(11) NOT NULL,
-  `designName` varchar(45) NOT NULL,
-  `designStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `designName` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `designStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfurn_design`
@@ -612,11 +614,11 @@ INSERT INTO `tblfurn_design` (`designID`, `designName`, `designStatus`) VALUES
 
 CREATE TABLE `tblfurn_type` (
   `typeID` int(11) NOT NULL,
-  `typeName` varchar(45) NOT NULL,
-  `typeDescription` varchar(100) DEFAULT NULL,
-  `typeStatus` varchar(45) NOT NULL,
+  `typeName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `typeDescription` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `typeStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
   `typeCategoryID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblfurn_type`
@@ -644,9 +646,9 @@ INSERT INTO `tblfurn_type` (`typeID`, `typeName`, `typeDescription`, `typeStatus
 
 CREATE TABLE `tblinventory_logs` (
   `inLogID` int(11) NOT NULL,
-  `inLogDescription` varchar(450) NOT NULL,
+  `inLogDescription` varchar(450) CHARACTER SET utf8 NOT NULL,
   `inLogDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblinventory_logs`
@@ -675,11 +677,11 @@ CREATE TABLE `tblinvoicedetails` (
   `invorderID` int(11) NOT NULL,
   `balance` double NOT NULL,
   `dateIssued` date NOT NULL,
-  `invoiceStatus` varchar(45) NOT NULL,
-  `invoiceRemarks` varchar(250) DEFAULT NULL,
+  `invoiceStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `invoiceRemarks` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
   `invDelrateID` int(11) DEFAULT NULL,
   `invPenID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblinvoicedetails`
@@ -733,10 +735,10 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 
 CREATE TABLE `tbljobs` (
   `jobID` int(11) NOT NULL,
-  `jobName` varchar(45) NOT NULL,
-  `jobDescription` varchar(100) DEFAULT NULL,
-  `jobStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `jobName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `jobDescription` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `jobStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbljobs`
@@ -758,12 +760,12 @@ INSERT INTO `tbljobs` (`jobID`, `jobName`, `jobDescription`, `jobStatus`) VALUES
 
 CREATE TABLE `tbllogs` (
   `logID` int(11) NOT NULL,
-  `category` varchar(250) NOT NULL,
-  `action` varchar(150) NOT NULL,
+  `category` varchar(250) CHARACTER SET latin1 NOT NULL,
+  `action` varchar(150) CHARACTER SET latin1 NOT NULL,
   `date` date NOT NULL,
-  `description` varchar(450) NOT NULL,
+  `description` varchar(450) CHARACTER SET latin1 NOT NULL,
   `userID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbllogs`
@@ -785,11 +787,11 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 
 CREATE TABLE `tblmaterials` (
   `materialID` int(11) NOT NULL,
-  `materialType` varchar(150) DEFAULT NULL,
-  `materialName` varchar(45) NOT NULL,
-  `materialMeasurement` varchar(450) NOT NULL,
-  `materialStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `materialType` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  `materialName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `materialMeasurement` varchar(450) CHARACTER SET utf8 NOT NULL,
+  `materialStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmaterials`
@@ -815,9 +817,9 @@ INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `mater
 CREATE TABLE `tblmat_attribs` (
   `mat_attribsID` int(11) NOT NULL,
   `matID` int(11) NOT NULL,
-  `attribID` varchar(150) NOT NULL,
-  `mat_attribStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `attribID` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `mat_attribStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmat_attribs`
@@ -838,11 +840,11 @@ INSERT INTO `tblmat_attribs` (`mat_attribsID`, `matID`, `attribID`, `mat_attribS
 
 CREATE TABLE `tblmat_type` (
   `matTypeID` int(11) NOT NULL,
-  `matTypeName` varchar(450) NOT NULL,
-  `matTypeMeasure` varchar(450) NOT NULL,
-  `matTypeRemarks` varchar(45) DEFAULT NULL,
-  `matTypeStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `matTypeName` varchar(450) CHARACTER SET latin1 NOT NULL,
+  `matTypeMeasure` varchar(450) CHARACTER SET latin1 NOT NULL,
+  `matTypeRemarks` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
+  `matTypeStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmat_type`
@@ -868,10 +870,10 @@ CREATE TABLE `tblmat_var` (
   `variantID` int(11) NOT NULL,
   `mat_varID` int(11) NOT NULL,
   `variantQuantity` int(11) DEFAULT NULL,
-  `variantMeasurement` varchar(45) NOT NULL,
-  `variantRemarks` varchar(250) DEFAULT NULL,
-  `variantStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `variantMeasurement` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `variantRemarks` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
+  `variantStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmat_var`
@@ -891,9 +893,9 @@ INSERT INTO `tblmat_var` (`variantID`, `mat_varID`, `variantQuantity`, `variantM
 
 CREATE TABLE `tblmodeofpayment` (
   `modeofpaymentID` int(11) NOT NULL,
-  `modeofpaymentDesc` varchar(45) NOT NULL,
-  `modeofpaymentStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `modeofpaymentDesc` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `modeofpaymentStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmodeofpayment`
@@ -913,8 +915,8 @@ CREATE TABLE `tblonhand` (
   `onHandID` int(11) NOT NULL,
   `ohProdID` int(11) NOT NULL,
   `ohQuantity` int(11) NOT NULL,
-  `ohRemarks` varchar(450) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ohRemarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblonhand`
@@ -937,11 +939,11 @@ CREATE TABLE `tblorders` (
   `dateOfRelease` date NOT NULL,
   `custOrderID` int(11) NOT NULL,
   `orderPrice` double NOT NULL,
-  `orderStatus` varchar(45) NOT NULL,
-  `shippingAddress` varchar(45) DEFAULT NULL,
-  `orderType` varchar(45) NOT NULL,
-  `orderRemarks` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `orderStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `shippingAddress` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `orderType` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `orderRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblorders`
@@ -1014,9 +1016,9 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 CREATE TABLE `tblorder_actions` (
   `orActionID` int(11) NOT NULL,
   `orOrderID` int(11) NOT NULL,
-  `orAction` varchar(450) NOT NULL,
-  `orReason` varchar(450) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `orAction` varchar(450) CHARACTER SET latin1 NOT NULL,
+  `orReason` varchar(450) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblorder_actions`
@@ -1037,9 +1039,9 @@ CREATE TABLE `tblorder_customization` (
   `orOrderReqID` int(11) NOT NULL,
   `orFabricID` int(11) DEFAULT NULL,
   `orFrameworkID` int(11) DEFAULT NULL,
-  `orSizeSpecs` varchar(150) DEFAULT NULL,
-  `orDescription` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `orSizeSpecs` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  `orDescription` varchar(250) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1054,8 +1056,8 @@ CREATE TABLE `tblorder_request` (
   `orderRemarks` int(11) NOT NULL,
   `orderPackageID` int(11) DEFAULT NULL,
   `orderQuantity` int(11) DEFAULT NULL,
-  `orderRequestStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `orderRequestStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblorder_request`
@@ -1162,9 +1164,9 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 CREATE TABLE `tblpackages` (
   `packageID` int(11) NOT NULL,
   `packagePrice` double NOT NULL,
-  `packageDescription` varchar(250) DEFAULT NULL,
-  `packageStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `packageDescription` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
+  `packageStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpackages`
@@ -1197,8 +1199,8 @@ CREATE TABLE `tblpackage_inclusions` (
   `package_inclusionID` int(11) NOT NULL,
   `product_incID` int(11) NOT NULL,
   `package_incID` int(11) NOT NULL,
-  `package_incStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `package_incStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpackage_inclusions`
@@ -1276,8 +1278,8 @@ CREATE TABLE `tblpayment_details` (
   `dateCreated` datetime NOT NULL,
   `amountPaid` double NOT NULL,
   `mopID` int(11) NOT NULL,
-  `paymentStatus` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `paymentStatus` varchar(45) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpayment_details`
@@ -1342,12 +1344,12 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 
 CREATE TABLE `tblpenalty` (
   `penaltyID` int(11) NOT NULL,
-  `penaltyName` varchar(45) NOT NULL,
-  `penaltyRateType` varchar(45) NOT NULL,
+  `penaltyName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `penaltyRateType` varchar(45) CHARACTER SET utf8 NOT NULL,
   `penaltyRate` decimal(6,2) NOT NULL,
-  `penaltyRemarks` varchar(250) DEFAULT NULL,
-  `penStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `penaltyRemarks` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
+  `penStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1357,10 +1359,10 @@ CREATE TABLE `tblpenalty` (
 
 CREATE TABLE `tblphases` (
   `phaseID` int(11) NOT NULL,
-  `phaseName` varchar(250) NOT NULL,
-  `phaseIcon` varchar(450) NOT NULL,
-  `phaseStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `phaseName` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `phaseIcon` varchar(450) CHARACTER SET utf8 NOT NULL,
+  `phaseStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblphases`
@@ -1383,8 +1385,8 @@ CREATE TABLE `tblprodsonpromo` (
   `onpromoID` int(11) NOT NULL,
   `prodPromoID` int(11) NOT NULL,
   `promoDescID` int(11) NOT NULL,
-  `onPromoStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `onPromoStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblprodsonpromo`
@@ -1411,15 +1413,15 @@ CREATE TABLE `tblproduct` (
   `prodCatID` int(11) NOT NULL,
   `prodTypeID` int(11) NOT NULL,
   `prodFrameworkID` int(11) NOT NULL,
-  `prodDesign` varchar(50) NOT NULL,
+  `prodDesign` varchar(50) CHARACTER SET utf8 NOT NULL,
   `prodFabricID` int(11) DEFAULT NULL,
-  `productName` varchar(45) NOT NULL,
-  `productDescription` varchar(450) DEFAULT NULL,
+  `productName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `productDescription` varchar(450) CHARACTER SET utf8 DEFAULT NULL,
   `productPrice` double NOT NULL,
-  `prodMainPic` varchar(100) NOT NULL,
-  `prodSizeSpecs` varchar(100) NOT NULL,
-  `prodStat` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `prodMainPic` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `prodSizeSpecs` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `prodStat` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblproduct`
@@ -1453,9 +1455,9 @@ CREATE TABLE `tblproduction` (
   `productionOrderReq` int(11) NOT NULL,
   `prodStartDate` date DEFAULT NULL,
   `prodEndDate` date DEFAULT NULL,
-  `productionRemarks` varchar(100) DEFAULT NULL,
-  `productionStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `productionRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `productionStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblproduction`
@@ -1507,9 +1509,9 @@ CREATE TABLE `tblproduction_phase` (
   `prodEmp` int(11) DEFAULT NULL,
   `prodDateStart` date DEFAULT NULL,
   `prodDateEnd` date DEFAULT NULL,
-  `prodRemarks` varchar(450) DEFAULT NULL,
-  `prodStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `prodRemarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL,
+  `prodStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblproduction_phase`
@@ -1603,9 +1605,9 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 CREATE TABLE `tblprod_images` (
   `prodImageID` int(11) NOT NULL,
   `prodImgID` int(11) NOT NULL,
-  `prodImageName` varchar(100) NOT NULL,
-  `prodImgStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `prodImageName` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `prodImgStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1617,8 +1619,8 @@ CREATE TABLE `tblprod_info` (
   `prodInfoID` int(11) NOT NULL,
   `prodInfoProduct` int(11) NOT NULL,
   `prodInfoPhase` int(11) NOT NULL,
-  `prodInfoStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `prodInfoStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblprod_info`
@@ -1643,10 +1645,10 @@ CREATE TABLE `tblprod_materials` (
   `p_prodInfoID` int(11) NOT NULL,
   `p_matMaterialID` int(11) NOT NULL,
   `p_matDescID` int(11) NOT NULL,
-  `p_matQuantity` varchar(250) NOT NULL,
-  `p_matUnit` varchar(45) NOT NULL,
-  `p_matStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `p_matQuantity` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `p_matUnit` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `p_matStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblprod_materials`
@@ -1673,13 +1675,13 @@ INSERT INTO `tblprod_materials` (`p_matID`, `p_prodInfoID`, `p_matMaterialID`, `
 
 CREATE TABLE `tblpromos` (
   `promoID` int(11) NOT NULL,
-  `promoName` varchar(45) NOT NULL,
-  `promoDescription` varchar(450) NOT NULL,
+  `promoName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `promoDescription` varchar(450) CHARACTER SET utf8 NOT NULL,
   `promoStartDate` date NOT NULL,
-  `promoEnd` varchar(450) DEFAULT NULL,
-  `promoImage` varchar(450) DEFAULT NULL,
-  `promoStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `promoEnd` varchar(450) CHARACTER SET utf8 DEFAULT NULL,
+  `promoImage` varchar(450) CHARACTER SET utf8 DEFAULT NULL,
+  `promoStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpromos`
@@ -1699,10 +1701,10 @@ INSERT INTO `tblpromos` (`promoID`, `promoName`, `promoDescription`, `promoStart
 
 CREATE TABLE `tblpromo_condition` (
   `conditionID` int(11) NOT NULL,
-  `conCategory` varchar(45) NOT NULL,
-  `conData` varchar(450) NOT NULL,
+  `conCategory` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `conData` varchar(450) CHARACTER SET latin1 NOT NULL,
   `conPromoID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpromo_condition`
@@ -1723,9 +1725,9 @@ INSERT INTO `tblpromo_condition` (`conditionID`, `conCategory`, `conData`, `conP
 CREATE TABLE `tblpromo_promotion` (
   `promotionID` int(11) NOT NULL,
   `proPromoID` int(11) NOT NULL,
-  `proCategory` varchar(45) NOT NULL,
-  `proData` varchar(450) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `proCategory` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `proData` varchar(450) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblpromo_promotion`
@@ -1745,13 +1747,13 @@ INSERT INTO `tblpromo_promotion` (`promotionID`, `proPromoID`, `proCategory`, `p
 
 CREATE TABLE `tblsupplier` (
   `supplierID` int(11) NOT NULL,
-  `supCompName` varchar(250) NOT NULL,
-  `supCompAdd` varchar(100) NOT NULL,
-  `supCompNum` varchar(20) NOT NULL,
-  `supContactPerson` varchar(100) NOT NULL,
-  `supPosition` varchar(45) NOT NULL,
-  `supStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `supCompName` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `supCompAdd` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `supCompNum` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `supContactPerson` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `supPosition` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `supStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblsupplier`
@@ -1781,10 +1783,10 @@ INSERT INTO `tblsupplier` (`supplierID`, `supCompName`, `supCompAdd`, `supCompNu
 
 CREATE TABLE `tblunitofmeasure` (
   `unID` int(11) NOT NULL,
-  `unType` varchar(50) NOT NULL,
-  `unUnit` varchar(10) NOT NULL,
-  `unStatus` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `unType` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `unUnit` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `unStatus` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblunitofmeasure`
@@ -1813,10 +1815,10 @@ INSERT INTO `tblunitofmeasure` (`unID`, `unType`, `unUnit`, `unStatus`) VALUES
 
 CREATE TABLE `tblunitofmeasurement_category` (
   `uncategoryID` int(11) NOT NULL,
-  `uncategoryName` varchar(50) NOT NULL,
-  `uncategoryDescription` varchar(50) NOT NULL,
-  `uncategoryStatus` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `uncategoryName` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `uncategoryDescription` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `uncategoryStatus` varchar(20) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblunitofmeasurement_category`
@@ -1844,8 +1846,8 @@ CREATE TABLE `tblunit_cat` (
   `unitcatID` int(11) NOT NULL,
   `unitID` int(11) NOT NULL,
   `uncategoryID` int(11) NOT NULL,
-  `unitcatStatus` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `unitcatStatus` varchar(20) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblunit_cat`
@@ -1878,14 +1880,14 @@ INSERT INTO `tblunit_cat` (`unitcatID`, `unitID`, `uncategoryID`, `unitcatStatus
 
 CREATE TABLE `tbluser` (
   `userID` int(11) NOT NULL,
-  `userName` varchar(80) NOT NULL,
-  `userPassword` varchar(45) NOT NULL,
-  `userStatus` varchar(45) NOT NULL,
-  `userType` varchar(45) NOT NULL,
+  `userName` varchar(80) CHARACTER SET utf8 NOT NULL,
+  `userPassword` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `userStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `userType` varchar(45) CHARACTER SET utf8 NOT NULL,
   `userCustID` int(20) DEFAULT NULL,
   `userEmpID` int(11) DEFAULT NULL,
   `dateCreated` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbluser`
@@ -1904,11 +1906,11 @@ INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `user
 
 CREATE TABLE `tblvariant_desc` (
   `variant_descID` int(11) NOT NULL,
-  `varAttribID` varchar(45) NOT NULL,
-  `varMatvarID` varchar(45) NOT NULL,
-  `varVariantDesc` varchar(150) NOT NULL,
-  `varStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `varAttribID` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `varMatvarID` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `varVariantDesc` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `varStatus` varchar(45) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblvariant_desc`
@@ -2776,6 +2778,7 @@ ALTER TABLE `tblprod_images`
 ALTER TABLE `tbluser`
   ADD CONSTRAINT `cust` FOREIGN KEY (`userCustID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `emp` FOREIGN KEY (`userEmpID`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -168,7 +168,7 @@ $(document).ready(function(){
                   <br>
                   <div class="row" id="reportsOut">
                     <div class="table-responsive"> 
-                      <table class="table color-bordered-table muted-bordered-table display nowrap" id="reportsTable">
+                      <table class="table color-bordered-table muted-bordered-table display" id="reportsTable">
                         <thead>
                           <tr>
                             <th style="text-align: left;"></th>
