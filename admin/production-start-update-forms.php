@@ -232,6 +232,53 @@ $_SESSION['varname'] = $jsID;
                               <th style="text-align: left;">Status</th>
                               <th style="text-align: left;">Remarks</th>
                             </thead>
+                            <?php
+                            include "dbconnect.php";
+                            $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and c.order_requestID = '$ordReq'";
+                            $pRes = mysqli_query($conn,$pSQL);
+                            while($pRow = mysqli_fetch_assoc($pRes)){
+                              $dateStart = "N/A";
+                              $temp = $pRow['prodDateStart'];
+                              if($temp!=""){
+                                $dateStart = date_create($pRow['prodDateStart']);
+                                $dateStart = date_format($dateStart,"F d, Y");
+                              }
+
+                              $dateEnd = "N/A";
+                              $temp = $pRow['prodDateEnd'];
+                              if($temp!=""){
+                                $dateEnd = date_create($pRow['prodDateEnd']);
+                                $dateEnd = date_format($dateEnd,"F d, Y");
+                              }
+
+                              $empName = getName($pRow['prodEmp']);
+
+                              $remarks = "N/A";
+                              $temp = $pRow['prodRemarks'];
+                              if($temp!=""){
+                                $remarks = $pRow['prodRemarks'];
+                              }
+                              echo "<tr>
+                                    <td>".$pRow['phaseName']."</td>
+                                    <td>".$empName."</td>
+                                    <td>".$dateStart."</td>
+                                    <td>".$dateEnd."</td>
+                                    <td>".$pRow['prodStatus']."</td>
+                                    <td>".$remarks."</td>
+                                    </tr>";
+                            }
+                            function getName($id){
+                              include "dbconnect.php";
+                              $name = "";
+                              $sql = "SELECT * FROM tblemployee  WHERE empID = '$id';";
+                              $result = mysqli_query($conn, $sql);
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+                                  $name = $row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'];
+                              }
+                              return $name;
+                            }
+                            ?>
                           </table>
                         </div>
                       </div>

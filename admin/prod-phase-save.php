@@ -36,7 +36,7 @@ else{
 		if(mysqli_query($conn,$sql)){
 			echo "<script>
 			window.location.href='production-tracking-details.php?id=".$orderID."';
-			alert('Production finished');
+			alert('Production in this phase is finished');
 			</script>";
 		}
 		else {
@@ -49,7 +49,7 @@ else{
 		$handler = $_POST['handler'];
 		$remarks = $_POST['remarks'];
 
-		$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks',prodStatus= 
+		$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks', prodStatus= 
 		'Ongoing' WHERE prodHistID = '$phaseID'";
 
 		if(mysqli_query($conn,$sql)){
@@ -65,4 +65,5 @@ else{
 
 	}
 }
+
 ?>

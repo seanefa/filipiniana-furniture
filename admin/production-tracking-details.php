@@ -45,12 +45,21 @@ if(isset($_GET['id'])){
             <h3>
 
               <?php
-              $orderID = "OR" . str_pad($id, 6, '0', STR_PAD_LEFT);        
+              $orderID = "OR" . str_pad($id, 6, '0', STR_PAD_LEFT);   
+              $sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
+              $res = mysqli_query($conn,$sql);
+              $row = mysqli_fetch_assoc($res);
+              $status = $row['orderStatus'];  
               ?>
 
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                   <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"><?php echo $orderID?></span></a>
+                </li>
+              </ul>
+              <ul class="nav customtab2 nav-tabs pull-right" role="tablist">
+                <li role="presentation" class="active">
+                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"><?php echo $status?></span></a>
                 </li>
               </ul>
             </h3>

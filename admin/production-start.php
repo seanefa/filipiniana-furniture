@@ -15,11 +15,11 @@ while($row1 = mysqli_fetch_assoc($res)){
 
 	while($row2 = mysqli_fetch_assoc($res1)){
 		$phaseID = $row2['phaseID'];
-      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase, prodEmp,prodStatus) VALUES ('$prID','$phaseID','1','Pending')";
+      $phSQL = "INSERT INTO tblproduction_phase(prodID,prodPhase,prodStatus) VALUES ('$prID','$phaseID','Pending')";
       mysqli_query($conn,$phSQL);
       echo "<br>" . $phSQL;
 	}
-	
+
 }
 
 $sql = "UPDATE tblorders SET orderStatus = 'Ongoing' WHERE orderID = '$orderID'";
