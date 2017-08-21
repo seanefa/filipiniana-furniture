@@ -12,7 +12,7 @@ if($id=="1"){ // most ordered furniture
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
     <thead>
 	<tr>
 	<th>Product ID</th>
@@ -65,7 +65,7 @@ else if($id=="2"){ // customer info
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
 	<thead>
 	<tr>
 	<th>ID</th>
@@ -120,7 +120,7 @@ else if($id=="3"){ // loyal customer
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
 	<thead>
 	<tr>
 	<th>ID</th>
@@ -176,7 +176,7 @@ else if($id=="4"){ // loyal customer
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
 	<thead>
 	<tr>
 	<th>Customer ID</th>
@@ -234,7 +234,7 @@ else if($id=="5"){ // loyal customer
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='tblQuery'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
 	<thead>
 	<tr>
 	<th>Order ID</th>
