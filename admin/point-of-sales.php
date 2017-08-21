@@ -19,7 +19,10 @@ include "menu.php";
 <body class ="fix-header fix-sidebar">
 <head>
   <script>
-  
+    
+  var added_new_cust = false;
+
+
   $(document).ready(function(){
 
     $("#selectCust").hide();
@@ -108,7 +111,59 @@ $('#selectType').on("change",function() {
 });
 });
 
+$('#savedCustomer').on('click', function(){
+$.ajax({
+  type: 'post',
+  url: 'POS-load-customer.php',
+  data: {
+
+  },
+  success: function (response) {
+    $('#savedCustomer').empty().append(response);
+//$("#selectType").attr('disabled','disabled');  
+}
 });
+});
+
+//end of document
+});
+
+/*
+ $('body').on('focus','.modal' function(){
+$('#saveCustBtn').on('click',function(){
+  
+
+
+});
+
+
+ }); 
+ */
+function addnewCust(){
+  var lName = $('#newln').val();
+  var fName = $('#newfn').val();
+  var mName = $('#newmn').val();
+  var addrs = $('#newcustadd').val();
+  var conts= $('#newcustcont').val();
+  var emails = $('#newcustemail').val();
+
+  $.ajax({
+    type: 'post',
+    url: 'add-new-cust.php',
+    data: {
+      ln: lName, fn: fName, mn: mName, addr: addrs, cont: conts, email: emails, 
+    },
+    success: function (response) {
+      $('#msg').html(response);
+}
+});
+
+ added_new_cust = true; 
+
+
+}
+
+
 </script>
 </head>
 
@@ -333,19 +388,7 @@ $('#selectType').on("change",function() {
                      <input type="hidden" name="customerIds" id="customerIds">
                       <select id="savedCustomer" style="height:40px;" class="form-control" data-placeholder="Choose Customer Name" tabindex="1" name="customer">
                       <option value="">Select Existing</option>
-                        <?php
-                        $sql = "SELECT * FROM tblcustomer ORDER BY customerLastName ASC;";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-                          if($row['customerStatus'] != "Archived"){
-                            if($row['customerLastName'] != ""){
-                            echo('<option value='.$row['customerID'].'>'.$row['customerLastName'].', '.$row['customerFirstName'].', '.$row['customerMiddleName'].'</option>
-                            ');
-                            }
-                          }
-                        }
-                        ?>
+                        
                     </select>
 					</div>
 					</div>

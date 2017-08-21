@@ -28,7 +28,6 @@ if (!$conn) {
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 class="modal-title" id="modalProduct">New Customer</h3>
           </div>
-          <form action="add-new-cust.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
 
@@ -81,11 +80,11 @@ if (!$conn) {
                 </div>
         
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
+              <h4 id='msg'></h4>
+              <button type="button" class="btn btn-success waves-effect text-left" id="saveCustBtn" onclick="addnewCust()"><i class="fa fa-check"></i> Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
             </div>
           </div>
-</form>
       </div>
     </div>
 

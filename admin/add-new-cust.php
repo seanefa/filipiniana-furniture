@@ -1,20 +1,13 @@
 <?php
 
 include 'dbconnect.php';
-session_start();
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-  // Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-$ln = $_POST['newlastn'];
-$mn = $_POST['newmidn'];
-$fn = $_POST['newfirstn'];
-$addrss = $_POST['newcustoadd'];
-$cont = $_POST['newcustocont'];
-$emailadd = $_POST['newcustoemail'];
+$ln = $_POST['ln'];
+$mn = $_POST['mn'];
+$fn = $_POST['fn'];
+$addrss = $_POST['addr'];
+$cont = $_POST['cont'];
+$emailadd = $_POST['email'];
 
 
 
@@ -28,7 +21,7 @@ if (mysqli_query($conn, $sql)) {
 
 
             echo '<script type="text/javascript">';
-            header( "Location: point-of-sales.php" );
+            echo 'alert("Customer succesfully added");';
             echo '</script>';
     
 }
