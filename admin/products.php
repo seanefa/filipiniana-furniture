@@ -599,10 +599,8 @@ $(document).ready(function(){
                                   <td>
                                     <!-- VIEW -->
                                     <button type="button" class="btn btn-warning" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id=<?php echo $row['productID']?> #view" data-target="#myModal"><i class='fa fa-info-circle'></i> View</button>
-                                    <br>
                                     <!-- UPDATE -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id=<?php echo $row['productID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
-                                    <br>
                                     <!-- DELETE -->
                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id=<?php echo $row['productID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                   </td>

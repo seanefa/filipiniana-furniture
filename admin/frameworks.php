@@ -369,10 +369,8 @@ var flag = true;
                                   echo '<td>'.$material.'</td><td>'.$design.'</td><td>'.$row['frameworkRemarks'].'</td>'; ?>
                                   <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #view" data-target="#myModal"><i class='fa fa-info-circle'></i> View</button>
-                                    <br>
                                     <!-- UPDATE -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
-                                    <br>
                                     <!-- DELETE -->
                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                   </td>

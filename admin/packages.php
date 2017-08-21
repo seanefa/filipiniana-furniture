@@ -282,10 +282,8 @@ $(this).val(function(index, value) {
                                 <td>
                                   <!-- VIEW -->
                                   <button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #view" data-target="#myModal"><i class='fa fa-info-circle'></i> View</button>
-                                  <br>
                                   <!-- UPDATE -->
                                   <button type="button" class="btn btn-success" data-toggle="modal" href="pacakages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
-                                  <br>
                                   <!-- DELETE -->
                                   <button type="button" class="btn btn-danger" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                 </td>
