@@ -1,4 +1,4 @@
-<?php s
+<?php
 include "titleHeader.php";
 include "menu.php";
 //session_start();
