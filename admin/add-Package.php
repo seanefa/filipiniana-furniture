@@ -1,7 +1,7 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
-//include 'packages-form.php';
-
+session_start();
 
 $pName = $_POST['pName'];
 $price = $_POST['pPrice'];
@@ -23,7 +23,10 @@ $fID = $temp;
 $sql = "INSERT INTO tblpackages(packageID, packageDescription, packagePrice,packageStatus) VALUES('$fID','$pName','$pPrice','$status')";
 
 mysqli_query($conn, $sql); //package saved
+$flag++;
+$last_id = mysqli_insert_id($conn);
 $shit = $_POST['pr'];
+
 //inclusions
 foreach($shit as $str) {
 $sql1 = "INSERT INTO `tblpackage_inclusions` (`product_incID`,`package_incID`,`package_incStatus`) VALUES ('$str','$fID','$status')";
@@ -31,14 +34,18 @@ mysqli_query($conn,$sql1);
   $flag++;
 }
 
-
 if($flag>0){
-      header( "Location: packages.php?newSuccess" );
-}
-else{
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-
+	// Logs start here
+	$sID = $last_id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new packages ".$pName.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Packages', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+    header( "Location: packages.php?newSuccess" );
+} else {
+  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
 mysqli_close($conn);
 ?>

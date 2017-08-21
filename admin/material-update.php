@@ -1,13 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
+session_start();
 
 $id = $_SESSION['varname'];
 
@@ -18,10 +12,10 @@ $str = $_POST['attribs'];
 $status = "Listed";
 $flag = 0;
 
-
 $sql = "UPDATE `tblmaterials` SET `materialType`='$type', `materialName`='$name' WHERE `materialID`='$id';";
 mysqli_query($conn,$sql);
 echo $sql . "<br>";
+
 /*
 echo $exist . "<br>";
 
@@ -42,8 +36,6 @@ while($row = mysqli_fetch_assoc($existing)){
 		echo "nadelete????<br>";
 	}
 }*/
-
-
 
 $attribArr = "";
 $attribs = "SELECT * from tblattributes where attributeID NOT IN (SELECT attribID from tblmat_attribs a, tblattributes b WHERE a.attribID = b.attributeID AND a.matID = '$id');";
@@ -68,7 +60,18 @@ foreach($att as $a){
 		}
 		}
 
-if($flag>0){
+if ($flag>0) {
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated material ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Materials', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: materials.php?updateSuccess" );
-}
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+mysqli_close($conn);
 ?>

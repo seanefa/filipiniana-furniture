@@ -344,6 +344,10 @@ $(this).show();
 
               <script type="text/javascript">
 //global variables
+var num_of_package = 0;
+var num_of_product = 0;
+
+
 var prv_id = 0;
 var idArray = [];
 var qCtr = 0;
@@ -378,6 +382,7 @@ function deleteRow(row){
       var remover = qunatityy;
       var a = parseInt($('#prices'+row.value).val());
       var b = parseInt($('#quants'+row.value).val());
+      num_of_product =  num_of_product + quant;
 
       var totalP= $('#totalPrice').html();
 totalP=totalP.replace(/\,/g,''); //deletes comma
@@ -447,8 +452,13 @@ else if(qunatityy == 0){
 }
 
 function addPackage(id){
+
+
                  tempPrice = parseInt($('#totalPrice').text().slice());
                  var quant =parseInt($('#P_quant'+id).val());
+
+                  num_of_package =  num_of_package + quant;
+
 
                  totalQuant = parseInt($('#totalQ').text());
                  var tP = $('#P_price'+id).val().toString();
@@ -554,6 +564,7 @@ function addPackage(id){
                       var y = tempPrice - parseInt($('#P_prices'+row.value).val());
                       var result;
 
+
                       result = parseInt(prompt('Remove how many products?'));
                       if(result == null || isNaN(result) || result > qunatityy ||  result == 0 || result < 0) {
                         if(result > qunatityy){
@@ -573,6 +584,9 @@ function addPackage(id){
                       }
                       else{
                         if(qunatityy != 0){
+
+                          num_of_package =  num_of_package - quantityy;
+
                           var remover = qunatityy;
                           var a = parseInt($('#P_prices'+row.value).val());
                           var b = parseInt($('#P_quants'+row.value).val());
@@ -667,6 +681,8 @@ function addPackage(id){
                   }
                   else{
                     if(qunatityy != 0){
+
+                      num_of_package =  num_of_package + quantityy;
                       var remover = qunatityy;
                       var a = parseInt($('#P_prices'+row.value).val());
                       var b = parseInt($('#P_quants'+row.value).val());
@@ -738,6 +754,7 @@ function addRow(row){
   }
   else{
     if(qunatityy != 0){
+      num_of_product =  num_of_product + quantityy;
       var remover = qunatityy;
       var a = parseInt($('#prices'+row.value).val());
       var b = parseInt($('#quants'+row.value).val());
@@ -788,6 +805,8 @@ function btnClick(id){
   tempPrice = parseFloat($('#totalPrice').text().slice());
   var quant =parseInt($('#quant'+id).val());
 
+
+
   totalQuant = parseInt($('#totalQ').text());
   var tP = $('#price'+id).val().toString();
   var price =parseFloat(tP.replace(',',''));
@@ -798,6 +817,8 @@ function btnClick(id){
   if(isInArray(id,idArray)){
 
     if(quant > 0){
+
+      
       $('#quant'+id).val(0);
       $('#'+id).attr('data-toggle','modal');
       $('#'+id).attr('href','#myModal1');
@@ -854,6 +875,7 @@ function btnClick(id){
 }
 else{
     if(quant > 0){
+      num_of_product =  num_of_product + quant;
     prv_id = id;
     qCtr++;
     var pack = $('#package'+id).val(); //packages
@@ -916,6 +938,12 @@ function checkout(){
         $('#myForm').attr('action','confirm-update.php');
       }
       else{
+        if(num_of_product == 0){
+          $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+0+'" name="cart[]" value="0"/><input type="hidden" name="quant[]" id="quants'+0+'" value="'+0+'"/><input type="hidden" name="price[]" id="prices'+0+'" value="'+0+'"/>');
+        }
+        if(num_of_package == 0){
+          $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value=""><input type="hidden" name="P_quantremoved[]" value=""><input type="hidden" name="P_removed[]" value=""><input type="hidden" id="P_id'+0+'" name="P_cart[]" value="'+0+'"/><input type="hidden" name="P_quant[]" id="P_quants'+0+'" value="'+0+'"/><input type="hidden" name="P_price[]" id="P_prices'+0+'" value="'+0+'"/>');
+        }
         $('#check-out').attr('type','submit');
         $('#myForm').attr('action','next.php');
       }

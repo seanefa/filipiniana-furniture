@@ -38,6 +38,18 @@ $selectedPrice = $_POST['prices'];
 $totalPrice = $_POST['totalPrice'];
 $employee = $_POST['emp'];
 
+//PACKAGE VARIABLES
+$P_selected = $_POST['P_cart'];
+$P_selectedQuant = $_POST['P_quant'];
+$P_selectedPrice = $_POST['P_prices'];
+
+
+$_SESSION['P_cart'] = $P_selected;
+$_SESSION['P_quant'] = $P_selectedQuant;
+$_SESSION['P_price'] = $P_selectedPrice;
+//
+
+
 $_SESSION['cart'] = $selected;
 $_SESSION['quant'] = $selectedQuant;
 $_SESSION['price'] = $selectedPrice;
@@ -61,6 +73,7 @@ if($isBool == "new"){
     $pssql = "INSERT INTO `tblorders` (`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
     echo "<br>orderr: " . $pssql;
     $ctr = 0;
+    $P_ctr = 0;
     if (mysqli_query($conn, $pssql)) {
     $orderid = mysqli_insert_id($conn); //last id ng na-input na data
     foreach($selected as $str) {
@@ -68,6 +81,13 @@ if($isBool == "new"){
      mysqli_query($conn,$sql1);
      $ctr++;
    }
+   foreach($P_selected as $P_str) {
+     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
+     mysqli_query($conn,$sql1);
+     $P_ctr++;
+   }
+
+
 
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
 
@@ -118,6 +138,7 @@ else if($isBool=="existing"){ //EXISTING
 
   if (mysqli_query($conn, $pssql)) {
     $ctr = 0;
+    $P_ctr = 0;
     $orderid = mysqli_insert_id($conn);
     echo "<br>orderID: " . $orderid;
     foreach($selected as $str) {
@@ -126,6 +147,13 @@ else if($isBool=="existing"){ //EXISTING
      echo "<br>sql1: " . $sql1;
      $ctr++;
    }
+   foreach($P_selected as $P_str) {
+     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
+     mysqli_query($conn,$sql1);
+     $P_ctr++;
+   }
+
+
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
    echo "<br>inv: " . $inv;
    mysqli_query($conn,$inv);

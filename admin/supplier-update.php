@@ -1,8 +1,7 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+session_start();
 
 $id = $_POST['id'];
 $name = $_POST['compname'];
@@ -14,13 +13,18 @@ $status = "Listed";
 
 $updateSql = "UPDATE `tblsupplier` SET supCompName='$name', supCompAdd='$add', supCompNum='$telnum', supContactPerson='$conper', supPosition='$posi' WHERE supplierID='$id'";
 
-
 if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated supplier ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Supplier', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: supplier.php?updateSuccess" );
-}
-else {
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
-
+  }
 //echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
 ?>

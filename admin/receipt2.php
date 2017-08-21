@@ -121,6 +121,21 @@ $orderID = $orRoq['orderID'];
             $tQuan = 0;
             $tPrice = 0;
 
+            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblpackages c WHERE c.packageID = a.orderPackageID and b.orderID = a.tblOrdersID and b.orderID = '$orderID'";
+            $res = mysqli_query($conn,$sql1);
+            while($row = mysqli_fetch_assoc($res)){
+              echo '<tr>
+              <td>'.$row['packageDescription'].'</td>
+              <td>PACKAGE</td>
+              <td style="text-align:right;">Php  '.number_format($row['packagePrice'],2).'</td>
+              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+              $tPrice = $row['orderQuantity'] * $row['packagePrice'];
+              $tPrice =  number_format($tPrice,2);
+              echo '<td style="text-align:right;">Php  '.$tPrice.'</td></tr>';
+              $tPrice = $row['orderPrice'];
+              $tQuan = $tQuan + $row['orderQuantity'];
+            }
+
             $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$orderID'";
             $res = mysqli_query($conn,$sql1);
             while($row = mysqli_fetch_assoc($res)){

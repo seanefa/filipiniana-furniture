@@ -1,9 +1,9 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
+session_start();
 
 $id = $_SESSION['varname'];
-
 
 $name = $_POST['name'];
 $material = $_POST['material'];
@@ -29,17 +29,20 @@ if($pic=="")
 {
 	$pic = $exist_image;
 }
-        // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 $updateSql = "UPDATE tblframeworks SET frameworkName='$name', frameworkFurnType='$type', frameDesignID='$design', materialUsedID='$material', frameworkRemarks='$remarks', frameworkPic='$pic' WHERE frameworkID=$id";
 
-if(mysqli_query($conn,$updateSql))
-{
+if(mysqli_query($conn,$updateSql)){
+	// Logs start here
+	$sID = $id; // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Updated framework ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Frameworks', 'Update', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
 	header( "Location: frameworks.php?updateSuccess" );
-}
-else 
-{
+} else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+  }
 ?>

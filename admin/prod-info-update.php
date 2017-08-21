@@ -1,5 +1,7 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
+session_start();
 
 $id = $_POST['recID'];
 $prod = $_POST['prod'];
@@ -10,11 +12,9 @@ $status = "Active";
 $desc = $_POST['mat_var'];
 $quan = $_POST['quan'];
 
-
 $mats = array();
 $exist = array();
 $deleted = array();
-
 
 if(isset($_POST['mate'])){
 	$mats = $_POST['mates'];
@@ -25,8 +25,6 @@ if(isset($_POST['existRec'])){
 if(isset($_POST['deleted'])){
 	$deleted = $_POST['deleted'];
 }
-
-
 
 $sql = "UPDATE tblprod_info SET prodInfoProduct='$prod', prodInfoPhase='$phase' WHERE prodInfoID = '$id'";
 mysqli_query($conn,$sql);
@@ -58,7 +56,6 @@ foreach($exist as $a){
 	$x++;
 }
 
-
 /*
 for($x=0;$x<$ctr;$x++){
 	/*if($exist[$x]){
@@ -83,4 +80,3 @@ if($x>1){
 }
 mysqli_close($conn);
 ?>
-
