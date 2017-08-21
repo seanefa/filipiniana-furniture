@@ -116,8 +116,8 @@ $(document).ready(function(){ //wala lang
                   <div class="descriptions">
                     <div class="form-body">
                       <div class="row">
-                        <h2>Customer Information</h2>
-                        <div class="row">
+                        <div class="col-md-6">
+                        <h2 style="text-align: center;">Customer Information</h2>
                           <?php
                           $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
                           $result = mysqli_query($conn,$sql);
@@ -148,12 +148,10 @@ $(document).ready(function(){ //wala lang
                             </div>
                           </div>
                         </div>
-                        <br>
-                      </div>
-                      
-                      <h2>Order Information</h2><!--<button type="button" href="#customization" data-toggle="modal" id="cart" class="btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+
+                        <div class="col-md-6">
+                        <h2 style="text-align: center;">Order Information</h2><!--<button type="button" href="#customization" data-toggle="modal" id="cart" class="btn-info"><span class="glyphicon glyphicon-edit"></span></button>
                       <div class="row">-->
-                        <div class="row"> <!-- AYOKO  NG DESIGN NETO HAHA BAKET KO GINAWA HAHAH-->
                           <?php
                           $sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
                           $result = mysqli_query($conn,$sql);
@@ -164,23 +162,23 @@ $(document).ready(function(){ //wala lang
                               <h5>
                                 <table class="table">
                                   <tr>
-                                    <td><b>Order Remarks</b></td>
+                                    <td><b> Order Remarks</b></td>
                                     <td><?php echo $row['orderRemarks'];?></td>
                                   </tr>
                                   <tr>
-                                    <td><b>Received</b></td>
-                                    <td><?php 
+                                    <td><i class="fa fa-caret-right text-info"></i><b> Received</b></td>
+                                    <td><mark><em><?php 
                                     $date = date_create($row['dateOfReceived']);
                                     $date = date_format($date,"F/d/Y");
                                     echo $date;
-                                    ?></td>
+                                    ?></mark></em></td>
                                   </tr>
                                   <tr>
-                                    <td><b>Pick Up/Delivery Date</b></td>
-                                    <td><?php 
+                                    <td><i class="fa fa-caret-right text-info"></i><b> Pick Up/Delivery Date</b></td>
+                                    <td><mark><em><?php 
                                     $date = date_create($row['dateOfRelease']);
                                     $date = date_format($date,"F/d/Y");
-                                    echo $date;?>
+                                    echo $date;?></em></mark>
                                   </td>
                                 </tr>
                               </table>
@@ -188,18 +186,18 @@ $(document).ready(function(){ //wala lang
                           </div>
                         </div>
                       </div>
-                      <br>
-                    </div>
+                      </div>
+
                     <div class="row">
                       <div class="col-md-12">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
                             <form action="save-order-update1.php" method = "post">
                           <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
                           <div class="panel-body">
+                              <h2 style="text-align: center;">Orders</h2>
+                              <a class="btn btn-info" style="color:white; margin-top:-15px; position: absolute;" href="shop.php?id=<?php echo $id;?>"><i class="ti-plus"></i> Add Product</a>
                             <div class="table-responsive">
-                              <h2><label class="control-label" style="text-align:left;">Orders</label></h2>
-                              <a class="btn btn-success pull-right" style="color:white;" href="shop.php?id=<?php echo $id;?>"><span class="glyphicon">+</span> Add</a>
-                              <table class="table product-overview" id="tblOrders">
+                              <table class="table product-overview" id="tblOrders" style="border: 2px solid #E4E7EA; margin-top: 35px;">
                                 <thead>
                                   <th style="text-align:left">Furniture Name</th>
                                   <th style="text-align:left">Furniture Description</th>
@@ -236,26 +234,25 @@ $(document).ready(function(){ //wala lang
                                   ?>
                                 </tbody>
                                 <tfoot style="text-align:right;">
-                                  <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                                  <td  style="text-align:right;"><input type="text" id="totalQ" style="text-align:right; border:none" value="<?php echo $tQuan?>" readonly/></td>
-                                  <td  style="text-align:right;"><input name="tPrice" type="text" id="totalPrice" style="text-align:right; border:none" value="<?php echo number_format($tPrice,2)?>" readonly/></td>
+                                  <td colspan="3" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> GRAND TOTAL</b></td>
+                                  <td style="text-align:right;"><mark><strong><input type="text" id="totalQ" style="text-align:right; border:none" value="<?php echo $tQuan?>" readonly/></bold></mark></td>
+                                  <td style="text-align:right;"><mark><strong><input name="tPrice" type="text" id="totalPrice" style="text-align:right; border:none" value="&#8369;&nbsp;<?php echo number_format($tPrice,2)?>" readonly/></strong></mark></td>
                                   <td></td>
                                 </tfoot>
                               </table>
                             </div>
                         </div>
-                    <div class="row">
                       <div class="col-md-6">
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false">Cancel Order</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false"><i class='ti-close'></i> Cancel Order</button>
                       </div>
                       <div class="col-md-6 pull-right">
-                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="fa fa-check"></i> Save</button>
+                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="ti-check"></i> Save Order</button>
                       </div>
-                    </div>
                   </form>
                 </div>
               </div>
             </div>
+           </div>
           </div>
         </div>
       </div>

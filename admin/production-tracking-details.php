@@ -155,11 +155,13 @@ if(isset($_GET['id'])){
                                                   echo '<div class="col-md-2" style="margin-right:27px;">
                                                   <div class="panel panel-info" style="margin-top: -20px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
-                                                  <div class="tab-content thumbnail">
+                                                  <div class="tab-content">
                                                   <div role="tabpanel" class="tab-pane fade active in" id="job">
                                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                                   <div class="panel-body">
+                                                  <div class="thumbnail">
                                                   <img height="80px" width="80px" style="filter:gray; -webkit-filter: grayscale(1); filter: grayscale(1);" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  </div>
                                                   </div>
                                                   </div>
                                                   </div>
@@ -213,11 +215,13 @@ if(isset($_GET['id'])){
                                                   echo '<div class="col-md-2" style="margin-right:27px;">
                                                   <div class="panel panel-info" style="margin-top: -20px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
-                                                  <div class="tab-content thumbnail">
+                                                  <div class="tab-content">
                                                   <div role="tabpanel" class="tab-pane fade active in" id="job">
                                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                                   <div class="panel-body">
-                                                  <img height="100px" width="100px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  <div class="thumbnail">
+                                                  <img height="150px" width="150px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  </div>
                                                   </div>
                                                   </div>
                                                   </div>

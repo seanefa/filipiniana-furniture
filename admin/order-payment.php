@@ -137,7 +137,7 @@ include 'dbconnect.php';
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
           <h4 class="box-title">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
@@ -169,9 +169,8 @@ include 'dbconnect.php';
                                 <div class="col-md-12">
                                   <div class="panel-wrapper collapse in" aria-expanded="true">
                                     <div class="panel-body">
-                                      <div class="row">
+                                    <h2 style="text-align:center">Orders</h2>
                                         <div class="table-responsive">
-                                    <h1 style="text-align:center"><label class="form-control" style="border:0px;">Orders</label></h1>
                                           <table class="table product-overview" id="cartTbl">
                                             <thead>
                                               <th style="text-align:left">Furniture Name</th>
@@ -210,7 +209,6 @@ include 'dbconnect.php';
                                             </tfoot>
                                           </table>
                                         </div>
-                                      </div>
                                     </div>
                                   </div>
                                 </div>

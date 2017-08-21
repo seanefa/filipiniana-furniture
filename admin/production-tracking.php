@@ -71,19 +71,21 @@ include "menu.php";
                                           <form method="get" id="">
                                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                               <div class="thumbnail instafilta-target">
-                                              <h4 style="text-align:center;">'.$orderID .'</h4>
+                                              <h4 style="text-align:center; font-weight: bolder; font-family: inherit">'.$orderID .'</h4>
                                               <hr>
                                                 <div class="product-img">
                                                 <img height="115px" src="plugins/images/furnitureicon.png" alt="Unavailable">');
                                             if($row['orderStatus']=='Pending'){
                                               echo ('<div class="pro-img-overlay">
                                                     <a class="btn btn-primary" href="production-start.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
+                                                <h4 class="fcbtn btn btn-outline btn-primary btn-1d" style="text-align:center;">'.$production.'</h4>   
                                                   </div>
                                                 </div>');
                                             }
                                             else{
                                                   echo ('<div class="pro-img-overlay">
                                                     <a class="btn btn-primary" href="production-tracking-details.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
+                                                <h4 class="fcbtn btn btn-outline btn-primary btn-1d" style="text-align:center;">'.$production.'</h4>   
                                                   </div>
                                                 </div>');
                                                 }
@@ -102,13 +104,11 @@ include "menu.php";
                                                           <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$row['orderStatus'].'</h3>
                                                         </div>';
                                                 }
-                                                echo ('<hr>
-                                                <h4 style="text-align:center; color:red">'.$production.'</h4>                                                    
+                                                echo ('                                                 
                                                 </div>
                                               </div>
                                             </form>
                                             '); 
-                                          
                                         }
                                       }   
                                       function production($id){

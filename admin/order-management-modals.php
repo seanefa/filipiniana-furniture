@@ -583,8 +583,8 @@ $_SESSION['varname'] = $jsID;
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" role="button" class="btn btn-danger waves-effect text-left">Cancel Order</button>
-            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+            <button type="submit" role="button" class="btn btn-danger waves-effect text-left"><i class='ti-check'></i> Cancel Order</button>
+            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><i class='ti-close'></i> Cancel</button>
           </div>
         </form>
       </div>
