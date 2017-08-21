@@ -1,24 +1,48 @@
 <?php
 include "titleHeader.php";
-include "menu.php";
+include "menu.php";  
 //session_start();
-/*if(isset($GET['id'])){
-   $jsID = $_GET['id']; 
- }
- $jsID=$_GET['id'];
- $_SESSION['varname'] = $jsID;*/
- include 'dbconnect.php';
- $conn = mysqli_connect($servername, $username, $password, $dbname);
-          // Check connection
- if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+/* if(isset($GET['id'])){
+$jsID = $_GET['id']; 
 }
+$jsID=$_GET['id'];
+$_SESSION['varname'] = $jsID;*/
+include 'dbconnect.php';
+
+if (isset($_GET['newSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastNewSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['updateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastUpdateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['deactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastDeactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
 </head>
-<body class ="fix-header fix-sidebar">
+<body>
+  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
+  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
+  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
@@ -26,103 +50,94 @@ include "menu.php";
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-              <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="del-form.php" data-remote="del-form.php?oID #view" aria-expanded="false" style="margin-right: 20px;">View Delivery History</button>
+                <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="del-form.php" data-remote="del-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active">
-                  <a role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="fa fa-check-square"></i>&nbsp;<?php echo $titlePage?></a>
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-check-box"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
             <div class="tab-content">
               <!-- CATEGORY -->
-              <div role="tabpanel" class="tab-pane fade active in" id="modeofpayment">
+              <div role="tabpanel" class="tab-pane fade active in" id="job">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tbljobs">
                           <thead>
                             <tr>
-                              <th>Order ID</th>
-                              <th>Customer Name</th>
-                              <th>Furniture Name</th>
-                              <th>Date Release</th>
-                              <th>Status</th>
-                              <th class="removeSort">Action</th>
+                              <th style="text-align: center;">Name</th>
+                              <th style="text-align: center;">Actions</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody style="text-align: center;">
                             
                               <?php
                               include "dbconnect.php";
-                              $sql = "SELECT * FROM tbldelivery a inner join tblorder_request b on b.order_requestID = a.deliveryOrdReq inner join tblorders c on c.orderID = b.tblOrdersID inner join tblproduct d on d.productID = b.orderProductID  inner join tblcustomer e on e.customerID = c.custOrderID";
+                              $sql = "SELECT * FROM tblphases;";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['deliveryRecStatus']=="Active"){
-                                  echo('<td>'. $row['orderID'] .'</td>
-                                    <td>'.$row['customerLastName'].', '.$row['customerFirstName'].'</td>
-                                    <td>'.$row['productName'].'</td>
-                                    <td>'.$row['dateOfRelease'].'</td>
-                                    <td>'.$row['deliveryStatus'].'</td>
+                                if($row['phaseStatus']=="Active"){
+                                  echo('<td>'.$row['phaseName'].'</td>
                                     ');?>
                                     <td>
-                                      <!-- VIEW -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>
+                                      <!-- UPDATE -->
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['phaseID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                      <!-- DELETE -->
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['phaseID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
                                     </td>
                                     <?php echo ('</tr>');
                                   }
                                 }
-                              ?>
-                            
-                            <script type="text/javascript">
-                              function confirmDelete(id) {
-                               window.location.href="delete-modeofpayment.php?id="+id+"";
-                             }
-                             function edit(id){
-                              window.location.href="update-modeofpayment.php?id="+id+"";
-                            }
-                          </script>
-                        </tbody>
-                      </table>
+                                ?>
+                              
+                              <script type="text/javascript">
+                                function confirmDelete(id) {
+                                  window.location.href="delete-job.php?id="+id+"";
+                                }
+                                function edit(id){
+                                  window.location.href="update-job.php?id="+id+"";
+                                }
+                              </script>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- New Framework Mo
-            <!-- /.modal -->
-          </div>
-        </div>  
-      </div>
-    </div>
-    <!-- /.container-fluid -->
-    <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
-  </div>
-  <!-- /#page-wrapper -->
-</div>   
+<!-- New Framework Mo
+  <!-- /.modal -->
+</div>
+</div>  
+</div>
+</div>
+<!-- /.container-fluid -->
+<!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
+</div>
+<!-- /#page-wrapper -->
+</div>
 
+<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- Modal content-->
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
 
-        <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            <!-- Modal content -->
-            <div class="modal-content clearable-content">
-            <div class="modal-body">
-
-            </div>
-            </div>
-          </div>
-          </div>
         </div>
-
-        <script>
-          $(document).on('hidden.bs.modal', function (e) {
-            var target = $(e.target);
-            target.removeData('bs.modal')
-            .find(".clearable-content").html('');
-          });
-          </script>
       </div>
     </div>
-    </body> 
+  </div>
+</div>
+
+<script>
+  $(document).on('hidden.bs.modal', function (e) {
+    var target = $(e.target);
+    target.removeData('bs.modal')
+    .find(".clearable-content").html('');
+  });
+</script>
+</body>
 </html>
