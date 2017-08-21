@@ -227,7 +227,7 @@ var flag = true;
                   <div class="panel-body">                   
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblFrameDesign">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFrameDesign">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -247,9 +247,9 @@ var flag = true;
                                     <td>'.$row['designDescription'].'</td>'); ?>
                                     <td>
                                       <!-- UPDATE -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="frame-design-form.php" data-remote="frame-design-form.php?id=<?php echo $row['designID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="frame-design-form.php" data-remote="frame-design-form.php?id=<?php echo $row['designID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
                                       <!-- DELETE -->
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="frame-design-form.php" data-remote="frame-design-form.php?id=<?php echo $row['designID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="frame-design-form.php" data-remote="frame-design-form.php?id=<?php echo $row['designID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                     </td>
                                     <?php echo('</tr>');} }
                                     ?>

@@ -255,13 +255,13 @@ $(this).val(function(index, value) {
                 <div class="panel-body">
                   <div class="row">
                     <div class="table-responsive">
-                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblPackages">
+                      <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblPackages">
                         <thead>
                           <tr>
                             <th>Package Description</th>
                             <th style="text-align:center">No. of Products Included</th>
                             <th style="text-align:right">Package Price</th>
-                            <th class="removeSort" style="text-align:center">Actions</th>
+                            <th class="removeSort">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -279,13 +279,15 @@ $(this).val(function(index, value) {
                                 <td style="text-align:center">'.$c.' pcs</td>
                                 <td style="text-align:right">&#8369; '.number_format($row['packagePrice'],2).'</td>
                                 ');?>
-                                <td style="text-align:center">
+                                <td>
                                   <!-- VIEW -->
-                                  <button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #view" data-target="#myModal"><span class='glyphicon glyphicon-eye-open'></span> View</button>
+                                  <button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #view" data-target="#myModal"><i class='fa fa-info-circle'></i> View</button>
+                                  <br>
                                   <!-- UPDATE -->
-                                  <button type="button" class="btn btn-success" data-toggle="modal" href="pacakages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" href="pacakages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
+                                  <br>
                                   <!-- DELETE -->
-                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                 </td>
                                 <?php echo ('</tr>');
                               }

@@ -294,7 +294,7 @@ var error = 0;
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblEmployees">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblEmployees">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -317,9 +317,9 @@ var error = 0;
                                   <td>'.$row['empRemarks'].'</td>'); ?>
                                   <td>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href="employee-form.php" data-remote="employee-form.php?id=<?php echo $row['empID'];?> #update" data-target="#myModal" ><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href="employee-form.php" data-remote="employee-form.php?id=<?php echo $row['empID'];?> #update" data-target="#myModal" ><i class='ti-pencil-alt'></i> Update</button>
                                     <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="employee-form.php" data-remote="employee-form.php?id=<?php echo $row['empID'];?> #delete" data-target="#myModal" ><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="employee-form.php" data-remote="employee-form.php?id=<?php echo $row['empID'];?> #delete" data-target="#myModal" ><i class='ti-close'></i> Deactivate</button>
                                   </td>
                                   <?php echo('</tr>');} }
                                   function jName($id){

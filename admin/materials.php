@@ -348,7 +348,7 @@ $(document).ready(function(){
                   <div class="panel-body">                 
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblFrameworkMaterial">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFrameworkMaterial">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -368,9 +368,9 @@ $(document).ready(function(){
                                 <td>'.$row['matTypeName'].'</td>'); ?>
                                 <td>
                                   <!-- UPDATE -->
-                                  <button type="button" class="btn btn-success" data-toggle="modal" href="material-form.php" data-remote="material-form.php?id=<?php echo $row['materialID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" href="material-form.php" data-remote="material-form.php?id=<?php echo $row['materialID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
                                   <!-- DELETE -->
-                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="material-form.php" data-remote="material-form.php?id=<?php echo $row['materialID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="material-form.php" data-remote="material-form.php?id=<?php echo $row['materialID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                 </td>
                                 <?php echo('</tr>');} }
                                 ?>

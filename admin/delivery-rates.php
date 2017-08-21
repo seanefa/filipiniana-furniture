@@ -242,13 +242,13 @@ var flag = true;
                   <div class="panel-body">                  
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblDeliveryRates">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblDeliveryRates">
                           <thead>
                             <tr>
                               <th>Branch(From:)</th>
                               <th>Location(To:)</th>
                               <th>Rate Type</th>
-                              <th>Rate</th>
+                              <th style="text-align: right;">Rate</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
@@ -264,13 +264,13 @@ var flag = true;
                                   echo('<tr><td>'.$branch.'</td>
                                     <td>'.$row['delLocation'].'</td>
                                     <td>'.$row['delRateType'].'</td>
-                                    <td><small>&#8369;</small>'.$row['delRate'].'</td>'); 
+                                    <td style="text-align: right;"><small>&#8369;</small>'.$row['delRate'].'</td>'); 
                                     ?>
                                     <td>
                                       <!-- UPDATE -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="del-rate-forms.php" data-remote="del-rate-forms.php?id=<?php echo $row['delivery_rateID'];?> #update"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="del-rate-forms.php" data-remote="del-rate-forms.php?id=<?php echo $row['delivery_rateID'];?> #update"><i class='ti-pencil-alt'></i> Update</button>
                                       <!-- DELETE -->
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="del-rate-forms.php" data-remote="del-rate-forms.php?id=<?php echo $row['delivery_rateID'];?> #delete"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="del-rate-forms.php" data-remote="del-rate-forms.php?id=<?php echo $row['delivery_rateID'];?> #delete"><i class='ti-close'></i>  Deactivate</button>
                                     </td>
                                     <?php echo('</tr>');} }
                                     function bName($id){

@@ -333,7 +333,7 @@ var flag = true;
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active">
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="ti-ink-pen"></i>&nbsp;<?php echo $titlePage?></a>
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-ink-pen"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
@@ -345,7 +345,7 @@ var flag = true;
                     <div class="row">
                       <div class="table-responsive">
 
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblframeworks">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblframeworks">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -368,11 +368,13 @@ var flag = true;
                                   $material = mName($row['materialUsedID']);
                                   echo '<td>'.$material.'</td><td>'.$design.'</td><td>'.$row['frameworkRemarks'].'</td>'; ?>
                                   <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #view" data-target="#myModal"><span class='glyphicon glyphicon-eye-open'></span> View</button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #view" data-target="#myModal"><i class='fa fa-info-circle'></i> View</button>
+                                    <br>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
+                                    <br>
                                     <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="framework-form.php" data-remote="framework-form.php?id=<?php echo $row['frameworkID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                   </td>
                                   <?php echo('</tr>');} }
 

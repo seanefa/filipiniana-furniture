@@ -374,12 +374,12 @@ $(document).ready(function(){
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblProducts">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblProducts">
                           <thead>
                             <tr>
                               <th>Furniture Name</th>
                               <th>Furniture Type</th>
-                              <th>Materials</th>
+                              <th class="removeSort">Materials</th>
                               <th class="removeSort">Action</th>
                             </tr>
                           </thead>
@@ -396,12 +396,12 @@ $(document).ready(function(){
                                   echo('<td>'. $row['productName'].'</td>
                                     <td>'.$row['typeName'] .'</td>
                                     ');?>
-                                    <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?> #view1" data-target="#myModal"><span class='glyphicon glyphicon-eye-open'></span> View Materials</button></td>
+                                    <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?> #view1" data-target="#myModal"><i class='fa fa-info-circle'></i> View Materials</button></td>
                                     <td>
                                       <!-- UPDATE -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
                                       <!-- DELETE -->
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                     </td>
                                     <?php echo ('</tr>');
                                   }

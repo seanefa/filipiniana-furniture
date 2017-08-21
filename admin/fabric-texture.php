@@ -343,7 +343,7 @@ $('body').on('keyup','#remText',function(){
 
 });
 
-/* $(document).ready(function(){
+ $(document).ready(function(){
 $("#archiveTable").hide();
 $("#backArch").hide();
 $("#showArch").click(function(){
@@ -364,7 +364,7 @@ $("#tempbtn").show();
 $("#showArch").show();
 $("#backArch").hide();
 });
-}); */
+});
 
 </script>
 </head>
@@ -372,7 +372,7 @@ $("#backArch").hide();
   <!-- Preloader -->
 <!--div class="preloader">
 <div class="cssload-speeding-wheel"></div>
-</div==>
+</div-->
 <!-- Toast Notification -->
 <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
 <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
@@ -391,6 +391,10 @@ $("#backArch").hide();
             </ul>
           </h3>
 
+
+            <button type="button" class="btn btn-danger" id="showArch"><span class="ti-archive"></span> Archive</button>
+            <button type="button" class="btn btn-danger" id="backArch"><span class=""></span> Back</button>
+
           <div class="tab-content">
             <!-- FABRIC TYPE -->
             <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
@@ -398,13 +402,19 @@ $("#backArch").hide();
                 <div class="panel-body">      
                   <div class="row">
                     <div class="table-responsive"> 
-                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblFabricTexture">
+                      <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                         <thead>
                           <tr>
                             <th>Name</th>
-                            <th style="text-align:center">Description</th>
-                            <th style="text-align:right">Rating</th>
-                            <th class="removeSort" style="text-align:center">Actions</th>
+                            <th>Description</th>
+                            <th>Rating <span class="mytooltip tooltip-effect-5">
+                    <span class="tooltip-item">?</span>
+                      <span class="tooltip-content clearfix">
+                      <span class="tooltip-text">'Rating' refers to how<br>smooth or rough<br>a texture is</span>
+                    </span>
+                   </span>
+                          </th>
+                            <th class="removeSort">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -417,14 +427,14 @@ $("#backArch").hide();
                             if($row['textureStatus']=="Listed"){
                               echo('<tr>
                                 <td>'.$row['textureName'].'</td>
-                                <td style="text-align:center">'.$row['textureDescription'].'</td>
-                                <td style="text-align:right">'.$row['textureRating'].'</td>
+                                <td>'.$row['textureDescription'].'</td>
+                                <td>'.$row['textureRating'].'</td>
                                 '); ?>
-                                <td style="text-align:center">
+                                <td>
                                   <!-- UPDATE -->
-                                  <button type="button" class="btn btn-success" data-toggle="modal" href="fab-text-form.php" data-remote="fab-text-form.php?id=<?php echo $row['textureID'];?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" href="fab-text-form.php" data-remote="fab-text-form.php?id=<?php echo $row['textureID'];?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
                                   <!-- DELETE -->
-                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="fab-text-form.php" data-remote="fab-text-form.php?id=<?php echo $row['textureID'];?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="fab-text-form.php" data-remote="fab-text-form.php?id=<?php echo $row['textureID'];?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                 </td>
                                 <?php echo ('</tr>'); }}?>
 
@@ -440,10 +450,49 @@ $("#backArch").hide();
                                 </script>
                               </tbody>
                             </table>
-
-                            <p style="margin:100px;">Note: 'Rating' refers to how smooth or rough a texture is</p>
                           </div>
                         </div>
+
+                        <div id="archiveTable">
+                                <table class="table color-bordered-table muted-bordered-table" id="tblFabricTexture">
+                          <thead>
+                            <tr>
+                              <th style="text-align: center;">Name</th>
+                              <th style="text-align: center;">Description</th>
+                              <th style="text-align: center;">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody style="text-align: center;">
+                            <tr>
+                              <?php
+                              $sql = "SELECT * FROM tblfabric_texture;";
+                              $result = mysqli_query($conn, $sql);
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+                                if($row['textureStatus']=="Archived"){
+                                  echo('<tr>
+                                    <td>'.$row['textureName'].'</td>
+                                    <td>'.$row['textureDescription'].'</td>
+                                    '); ?>
+                                    <td>
+                                      <!-- UPDATE -->
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="react-form.php" data-remote="react-form.php?rName=Fabric+Texture&amp;id=<?php echo $row['textureID']?> #react" data-target="#myModal">Reactivate</button> 
+                                    </td>
+                                    <?php echo ('</tr>'); }}?>
+                                  </tr>
+                                  <script type="text/javascript">
+                                    function confirmDelete(id) {
+                                      if (confirm("Are you sure you want to delete")) {
+                                        window.location.href="delete-fab.php?id="+id+"";
+                                      }
+                                    }
+                                    function edit(id) {
+                                      window.location.href="update-fab.php?id="+id+"";
+                                    }
+                                  </script>
+                                </tbody>
+                              </table>
+                              </div>
                       </div>
                     </div>
                   </div>

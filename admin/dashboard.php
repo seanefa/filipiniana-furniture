@@ -1,6 +1,6 @@
 <?php
-include "menu.php";
 include "titleHeader.php";
+include "menu.php";
 //session_start();
 /*if(isset($GET['id'])){
 $jsID = $_GET['id']; 
@@ -167,9 +167,9 @@ var error=0;
 </head>
 <body>
   <!-- Preloader -->
-  <!--div class="preloader">
+  <!-- div class="preloader">
     <div class="cssload-speeding-wheel"></div>
-  </div==>
+  </div -->
   <!-- Toast Notification -->
   <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
   <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
@@ -195,7 +195,7 @@ var error=0;
                   <div class="panel-body">      
                     <div class="row">
                       <div class="table-responsive"> 
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblFabricTexture">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                           <thead>
                             <tr>
                               <th>New Registrations</th>

@@ -4,3 +4,6 @@ CHANGELOGS
 * Improved shop management.
 * Improved Point of Sales
 * Added maintenance logs.
+* Minor UI and admin side changes.
+* Improved production tracking.
+* Added responsive datatables.

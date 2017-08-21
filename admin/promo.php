@@ -507,7 +507,7 @@ $(document).ready(function(){
                   <div class="panel-body">                 
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblPromos">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblPromos">
                           <thead>
                             <tr>
                               <th>Name</th>
@@ -532,14 +532,16 @@ $(document).ready(function(){
                                   echo ('
                                     <td>'.$row['promoName'].'</td>
                                     <td>'.$row['promoDescription'].'</td>
-                                    <td >'.$date.'</td>
+                                    <td>'.$date.'</td>
                                     <td>
                                     <!-- VIEW -->
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #view"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #view"><i class="fa fa-info-circle"></i> View</button>
+                                    <br>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #update"><span class="glyphicon glyphicon-edit"></span> Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #update"><i class="ti-pencil-alt"></i> Update</button>
+                                    <br>
                                     <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #delete"><span class="glyphicon glyphicon-trash"></span> Deactivate</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="promo-form.php" data-remote="promo-form.php?id='. $row['promoID'].' #delete"><i class="ti-close"></i> Deactivate</button>
                                     </td>
                                     
                                     </tr>');} }
