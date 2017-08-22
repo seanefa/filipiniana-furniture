@@ -77,7 +77,7 @@ echo '</script>';
     var tempname;
     var error = 0;
     var flag = true;
-
+    var userkey = '';
 
 
 
@@ -86,6 +86,14 @@ echo '</script>';
 
       tempname = $('#editname').val();
       temprem = $('#rem').val();
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#editname').val(
+        user.slice(0, user.length - 1));
+      }else{
       $.post('pack-Ucheck.php',{username : user}, function(data){
 
         if(data == 'unchanged'){
@@ -131,7 +139,7 @@ echo '</script>';
 
       });
 
-
+    }
 
 });
 $('body').on('change','#select',function(){

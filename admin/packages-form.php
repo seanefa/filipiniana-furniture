@@ -43,6 +43,10 @@ include 'dbconnect.php';
   $('#username').keyup(function(){
     var user = $(this).val();
     var flag = true;
+    if(user == '\\'){
+        user.replace('\\', "");
+        $('#username').val('');
+      }else{
     $.post('pack-check.php',{username : user}, function(data){
      
      if(data == 'Already Exist!'){
@@ -81,6 +85,7 @@ include 'dbconnect.php';
       
     
     });
+  }
     });
 
   });

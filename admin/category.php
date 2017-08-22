@@ -48,6 +48,10 @@ else if (isset($_GET['deactivateSuccess']))
      $('body').on('keyup','#username',function(){
     var user = $(this).val();
     var flag = true;
+    if(user == '\\'){
+        user.replace('\\', "");
+        $('#username').val('');
+      }else{
     $.post('furn-cat-check.php',{username : user}, function(data){
      
      if(data == 'Already Exist!'){
@@ -87,7 +91,7 @@ else if (isset($_GET['deactivateSuccess']))
     
     });
 
-    
+    }
 
   });
 
@@ -134,15 +138,21 @@ var temprem;
 var tempname;
 var error = 0;
 var flag = true;
- 
+var userkey = '';
 
 
 
   $('body').on('keyup','#editname',function(){
     var user = $(this).val();
-    
+    userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
       tempname = $('#editname').val();
       temprem = $('#rem').val();
+      if(userkey == '\\'){
+        $('#editname').val(
+        user.slice(0, user.length - 1));
+      }else{
     $.post('furn-cat-Ucheck.php',{username : user}, function(data){
      
      if(data == 'unchanged'){
@@ -188,7 +198,7 @@ var flag = true;
 
     });
 
-    
+    }
 
   });
         
