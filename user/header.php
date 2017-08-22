@@ -26,10 +26,12 @@
 	  		<li class="nav-item">
 				<a class="nav-link" href="userproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
 	  		</li>
+	  		<li class="nav-item">
+				<a class="nav-link" href="userpromos.php"><i class="fa fa-gift"></i>&nbsp;PROMOS</a>
+	  		</li>
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info"></span></a>
 			</li>
-<!--
 	  		<li class="nav-item dropdown">
 				<a class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">
 					<i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNTS
@@ -39,13 +41,18 @@
 					<a class="dropdown-item" data-toggle="modal" href="" data-target="#signupmodal">Sign Up</a>
 				</div>
 	  		</li>
--->
 		</ul>
+		<form class="navbar-right form-inline">
+			<input type="text" class="form-control"/>&nbsp;
+			<button class="btn" type="button" role="button"><span class="fa fa-search"></span></button>
+		</form>
+<!--
 		<form class="form-inline my-2 my-lg-0" action="uservalidate.php" method="post">
 			<input type="text" class="form-control" name="username" placeholder="Username" required/><br>&nbsp;
 			<input type="password" class="form-control" name="password" placeholder="Password" required/><br>&nbsp;
 			<button role="button" type="submit" class="btn btn-outline-warning">Log in</button>&nbsp;
 			<button type="button" data-target="#signupmodal" data-toggle="modal" class="btn btn-outline-success">Sign up</button>
 		</form>
+-->
   	</div>
 </nav>

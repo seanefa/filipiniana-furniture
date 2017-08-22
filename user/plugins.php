@@ -1,5 +1,4 @@
 
-		<title>Filipiniana Furnitures - Home</title>
 		<!--meta tags-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +15,8 @@
 		<!--my css-->
 		<link rel="stylesheet" href="css/myStyle.css">
 		<link rel="stylesheet" href="css/footer.css">
-<!--popovers-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
+		<!--popovers-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
 		<!--javascript-->
 		<script src="myScript.js"></script>
 		<link rel="icon" href="pics/filfurniturelogo.png">

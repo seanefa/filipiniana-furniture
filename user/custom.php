@@ -12,6 +12,9 @@ $_SESSION['passId'] = $userid;
 
 <html>
 	<head>
+		<?php
+		include "plugins.php";
+		?>
 		<title>Filipiniana Furnitures - Check out</title>
 		<!--meta tags-->
 		<meta charset="utf-8">

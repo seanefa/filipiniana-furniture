@@ -36,19 +36,6 @@ if(!isset($_SESSION['userID']))
 						<div class="card-deck">
 							<div class="card border-web">
 								<div class="card-header text-center">
-									<h3>Display</h3>
-								</div>
-								<div class="card-block">
-									<img class="img-fluid img-thumbnail text-center" alt="Display Picture" src="pics/demitdonald.jpg"><br>
-									<form class="form-group text-center" action="update.php" method="post">
-										<input type="file" class="form-control"><br>
-										<textarea type="text" class="form-control" placeholder="update BIO..."></textarea><br>
-										<button type="submit" class="btn btn-outline-web">Save</button>
-									</form>
-								</div>
-							</div>
-							<div class="card border-web">
-								<div class="card-header text-center">
 									<h3>Account</h3>
 								</div>
 								<?php

@@ -8,7 +8,10 @@ if(!isset($_SESSION['userID']))
 ?>
 <html>
 	<head>
-		<title>Filipiniana Furnitures - Home</title>
+		<?php
+		include "plugins.php";
+		?>
+		<title>Products - Filipiniana Furnitures</title>
 		<!--meta tags-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,8 +24,6 @@ if(!isset($_SESSION['userID']))
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<!--custom css-->
-		<link rel="stylesheet" href="custom.css">
 		<!--google icons-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<!--font awesome icons-->
@@ -31,6 +32,7 @@ if(!isset($_SESSION['userID']))
 		<link rel="stylesheet" href="myStyle.css">
 		<!--javascript-->
 		<script src="myScript.js"></script>
+		<link rel="icon" href="pics/filfurniturelogo.png">
 	</head>
 	<body>
 		<div class="jumbotron-fluid">
@@ -53,7 +55,7 @@ if(!isset($_SESSION['userID']))
 			<hr>
 			<div class="container">
 				<div class="row">
-					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
 						<label>Category</label>
 						<select class="form-control">
 							<option>All Furnitures</option>
@@ -62,14 +64,11 @@ if(!isset($_SESSION['userID']))
 							<option>All Pre-Order Furnitures</option>
 						</select>
 					</div>
-					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+					<div class="form-group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
 						<label>Type</label>
 						<select class="form-control" disabled>
 							<option></option>
 						</select>
-					</div>
-					<div class="form group col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
-						<button class="btn-lg btn-warning" data-toggle="modal" data-target="#myCart"><span class="fa fa-shopping-cart"></span>&nbsp;<b>YOUR CART</b></button>
 					</div>
 				</div>
 				<br>
@@ -90,18 +89,18 @@ if(!isset($_SESSION['userID']))
 								<div class="card-text">
 									<p class="text-danger">
 										<b class="text-primary"><?php echo "" . $row['productName'];?></b><br>
-										Php <?php echo "" . $row['productPrice'];?>
+										<b>Php <?php echo "" . number_format($row['productPrice']);?></b>
 									</p>
 								</div>
 								<form class="form-group">
 									<?php echo('
 										<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
-										<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
+										<input type="hidden" id="price'.$row['productID'].'" value="'.number_format($row['productPrice']).'"/>
                                         <input type="hidden" id="size'.$row['productID'].'" value="'.$row['prodSizeSpecs'].'"/>
                                         <input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px;" required/>
                                         <br>
-                                        <button onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-primary" value="'.$row['productID'].'" ><i class="fa fa-cart-plus"></i></button>
-										<button class="btn btn-success" data-toggle="modal" data-target="#viewmodal"><i class="fa fa-search"></i></button>
+                                        <button onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="fa fa-cart-plus"></i></button>
+										<button class="btn" data-toggle="modal" data-target="#viewmodal"><i class="fa fa-eye"></i></button>
                                    '); ?>
 								</form>
 							</div>
@@ -232,7 +231,7 @@ if(!isset($_SESSION['userID']))
 						</div>
 					</div>
 				</div>
-			</div>
+		</div>
 		</div>
 		<div class="row" id="allprod">
                                         <div id="thisIsCart">

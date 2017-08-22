@@ -8,6 +8,7 @@ if(!isset($_SESSION["userID"]))
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Profile - Filipiniana Furnitures</title>
 		<?php
 		include "plugins.php";
 		?>
@@ -44,18 +45,11 @@ if(!isset($_SESSION["userID"]))
 						<div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-3">
 							<div class="card">
 								<div class="card-header text-center">
-									<h1 class="card-title text-web text-fluid"><?php echo "" . $row["customerFirstName"] . " " . $row['customerLastName'];?></h1>
+									<h3 class="card-title text-web text-fluid"><?php echo "" . $row["customerFirstName"] . " " . $row['customerLastName'];?></h3>
 								</div>
-								<img class="card-img-top img-fluid img-thumbnail" src="pics/demitdonald.jpg">
-								<ul class="list-group list-group-flush">
+								<ul class="list-group list-group-flush text-center">
 									<li class="list-group-item">Lives in <?php echo "" . $row['customerAddress'];?></li>
-									<li class="list-group-item"><?php echo "" . $row['customerContactNum'];?></li>
-									<li class="list-group-item"><?php echo "" .$row['customerEmail'];?></li>
 								</ul>
-								<div class="card-block">
-									<b>BIO</b>
-									<p>Hi I'm friendly pls love me.</p>
-								</div>
 								<div class="card-footer text-center">
 									<a class="btn btn-sm btn-outline-web" href="accessprofilesettings.php"><i class="fa fa-wrench"></i>&nbsp;Settings</a>
 								</div>
@@ -63,7 +57,7 @@ if(!isset($_SESSION["userID"]))
 						</div>
 						<div class="col-12 col-sm-7 col-md-8 col-lg-9 col-xl-9">
 							<br>
-							<h3 class="text-center"><strong>My Designs</strong></h3>
+							<h3 class="text-center"><strong>Recently Ordered Products</strong></h3>
 							<br>
 							<div class="row">
 								<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">

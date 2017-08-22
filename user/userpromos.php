@@ -1,15 +1,11 @@
 <?php
 include "userconnect.php";
-session_start();
-if(!isset($_SESSION['userID']))
-{
-	header("Location: error.html");
-}
 ?>
 <!DOCTYPE html>
 
 <html>
 	<head>
+		<title>Filipiniana Furnitures - Promos</title>
 		<?php
 		include "plugins.php";
 		?>

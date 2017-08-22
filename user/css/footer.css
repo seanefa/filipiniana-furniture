@@ -8,7 +8,8 @@ li{
 
 
 
-footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', sans-serif; }
+footer { 
+	background: linear-gradient(to right, #105170);; min-height:350px; font-family: 'Open Sans', sans-serif; }
 .footer-col { margin-top:50px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
 
@@ -19,7 +20,7 @@ footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', s
 .footer-ul li { line-height:29px; font-size:12px;}
 .footer-ul li a { color:#a0a3a4; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
 .footer-ul i { margin-right:10px;}
-.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color:#ff670f; }
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: honeydew; }
 
  .copyright { min-height:40px; background-color:#000000;}
  .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0;}

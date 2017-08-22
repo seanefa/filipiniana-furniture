@@ -53,7 +53,11 @@
 						<!-- Right Side Of Navbar -->
 		       			<ul class="nav navbar-nav navbar-right">
 							<li clas="nav-item">
-								<a class="btn btn-outline-danger" href="userlogout.php" title="Log out"><i class="fa fa-sign-out"></i></a>
+								<a class="btn btn-outline-success" title="Log out" data-toggle="modal" href="#myCart"><i class="fa fa-shopping-cart"></i></a>
+							</li>
+							&nbsp;
+							<li clas="nav-item">
+								<a class="btn btn-outline-warning" href="userlogout.php" title="Log out"><i class="fa fa-sign-out"></i></a>
 							</li>
 		       			</ul>
 				  	</div>

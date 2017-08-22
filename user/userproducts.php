@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Filipiniana Furnitures - Products</title>
 		<?php
 		include "plugins.php";
 		?>
@@ -76,7 +77,7 @@
 						<div class="card-block text-center">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>
-								<b><?php echo "" . $row["productPrice"]; ?></b>
+								<b>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></b>
 							</p>
 							<button role="button" class="btn btn-success" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
 							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn"><i class="fa fa-eye"></i></button>
