@@ -19,14 +19,14 @@
 				?>
 					<?php
 					include "userconnect.php";
-					$sql="SELECT * from tblcompany_info";
+					$sql="SELECT * from tblcustomer where customerID='" . $_SESSION["userID"] . "'";
 					$result=$conn->query($sql);
 					if($result->num_rows>0)
 					{
 						while($row=$result->fetch_assoc())
 						{
 					?>
-						<a class="navbar-brand" href="access.php"><?php echo "" . $row['comp_name'];?></a>
+						<a class="navbar-brand" href="access.php">Hello, <?php echo "" . $row['customerFirstName'];?>!</a>
 					<?php
 						}
 					}
@@ -53,7 +53,7 @@
 						<!-- Right Side Of Navbar -->
 		       			<ul class="nav navbar-nav navbar-right">
 							<li clas="nav-item">
-								<a class="btn btn-outline-success" title="Log out" data-toggle="modal" href="#myCart"><i class="fa fa-shopping-cart"></i></a>
+								<a class="btn btn-outline-success" title="Cart" data-toggle="modal" href="#myCart"><i class="fa fa-shopping-cart"></i></a>
 							</li>
 							&nbsp;
 							<li clas="nav-item">

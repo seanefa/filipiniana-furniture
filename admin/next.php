@@ -717,7 +717,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                   <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
                     <option value="">Choose a Location</option>
                     <?php
-                    $delsql = "SELECT * FROM tbldelivery_rates;";
+                    $delsql = "SELECT * FROM tbldelivery_rates ORDER BY delLocation;";
                     $delresult = mysqli_query($conn,$delsql);
                     while($delrow = mysqli_fetch_assoc($delresult)){
                       echo('<option value="'.$delrow['delRate'].'">'.$delrow['delLocation'].'</option>');
