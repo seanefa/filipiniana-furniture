@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2017 at 02:57 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.2
+-- Generation Time: Aug 22, 2017 at 01:42 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -231,13 +229,42 @@ CREATE TABLE `tblcust_req_images` (
 
 CREATE TABLE `tbldelivery` (
   `deliveryID` int(11) NOT NULL,
-  `deliveryOrdReq` int(11) NOT NULL,
-  `deliveryEmpAssigned` int(11) DEFAULT NULL,
-  `deliveryStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
-  `deliveryRecStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `deliveryEmpAssigned` int(11) NOT NULL,
   `deliveryDate` datetime NOT NULL,
-  `deliveryRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+  `deliveryRate` double NOT NULL,
+  `deliveryAddress` varchar(450) COLLATE utf8_unicode_ci NOT NULL,
+  `deliveryRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `deliveryStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbldelivery`
+--
+
+INSERT INTO `tbldelivery` (`deliveryID`, `deliveryEmpAssigned`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES
+(1, 1, '2017-08-22 00:00:00', 1000, 'An address', 'A remark', 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbldelivery_details`
+--
+
+CREATE TABLE `tbldelivery_details` (
+  `del_detailsID` int(11) NOT NULL,
+  `del_deliveryID` int(11) NOT NULL,
+  `del_orderReqID` int(11) NOT NULL,
+  `del_quantity` int(11) NOT NULL,
+  `del_status` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbldelivery_details`
+--
+
+INSERT INTO `tbldelivery_details` (`del_detailsID`, `del_deliveryID`, `del_orderReqID`, `del_quantity`, `del_status`) VALUES
+(1, 1, 36, 2, 'Pending'),
+(2, 1, 37, 2, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -454,7 +481,7 @@ INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription
 (5, 'sdjhsjkd', 'kjsdhkajh', NULL, 'Archived'),
 (6, 'Silky', 'Silky Texture', NULL, 'Listed'),
 (7, 'Hello!@#$%^&*&^%$#@', '', NULL, 'Archived'),
-(8, '\"425trw8wef\"', '', NULL, 'Archived'),
+(8, '"425trw8wef"', '', NULL, 'Archived'),
 (9, 'Plain Fabric', '', NULL, 'Archived'),
 (10, 'Leather', '', NULL, 'Archived'),
 (11, 'Wool', '', NULL, 'Listed'),
@@ -1099,8 +1126,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `orderProductID`, `tblOrdersI
 (33, 9, 20, 0, NULL, 2, 'Active'),
 (34, 10, 21, 0, NULL, 2, 'Active'),
 (35, 9, 21, 0, NULL, 2, 'Active'),
-(36, 10, 22, 0, NULL, 2, 'Active'),
-(37, 9, 22, 0, NULL, 2, 'Active'),
+(36, 10, 22, 0, NULL, 2, 'Ready for delivery'),
+(37, 9, 22, 0, NULL, 2, 'Ready for delivery'),
 (38, 10, 23, 0, NULL, 2, 'Active'),
 (39, 9, 23, 0, NULL, 2, 'Active'),
 (40, 11, 2, 0, NULL, 8, 'Active'),
@@ -1991,8 +2018,15 @@ ALTER TABLE `tblcust_req_images`
 --
 ALTER TABLE `tbldelivery`
   ADD PRIMARY KEY (`deliveryID`),
-  ADD KEY `orderReqID_idx` (`deliveryOrdReq`),
   ADD KEY `empAssignedID_idx` (`deliveryEmpAssigned`);
+
+--
+-- Indexes for table `tbldelivery_details`
+--
+ALTER TABLE `tbldelivery_details`
+  ADD PRIMARY KEY (`del_detailsID`),
+  ADD KEY `del_id_idx` (`del_deliveryID`),
+  ADD KEY `ordReq_id_idx` (`del_orderReqID`);
 
 --
 -- Indexes for table `tbldelivery_rates`
@@ -2186,7 +2220,10 @@ ALTER TABLE `tblorder_customization`
 -- Indexes for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  ADD PRIMARY KEY (`order_requestID`);
+  ADD PRIMARY KEY (`order_requestID`),
+  ADD KEY `prod_idx` (`orderProductID`),
+  ADD KEY `order_idx` (`tblOrdersID`),
+  ADD KEY `pack_idx` (`orderPackageID`);
 
 --
 -- Indexes for table `tblpackages`
@@ -2384,7 +2421,12 @@ ALTER TABLE `tblcust_req_images`
 -- AUTO_INCREMENT for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
-  MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tbldelivery_details`
+--
+ALTER TABLE `tbldelivery_details`
+  MODIFY `del_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbldelivery_rates`
 --
@@ -2651,8 +2693,14 @@ ALTER TABLE `tblcustomize_request`
 -- Constraints for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
-  ADD CONSTRAINT `empAssignedID` FOREIGN KEY (`deliveryEmpAssigned`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `orderReqID` FOREIGN KEY (`deliveryOrdReq`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `empAssignedID` FOREIGN KEY (`deliveryEmpAssigned`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tbldelivery_details`
+--
+ALTER TABLE `tbldelivery_details`
+  ADD CONSTRAINT `del_id` FOREIGN KEY (`del_deliveryID`) REFERENCES `tbldelivery` (`deliveryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ordReq_id` FOREIGN KEY (`del_orderReqID`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tbldelivery_rates`
@@ -2732,6 +2780,12 @@ ALTER TABLE `tblorder_customization`
   ADD CONSTRAINT `orderReq` FOREIGN KEY (`orOrderReqID`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `tblorder_request`
+--
+ALTER TABLE `tblorder_request`
+  ADD CONSTRAINT `prod` FOREIGN KEY (`orderProductID`) REFERENCES `tblproduct` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `tblpackage_inclusions`
 --
 ALTER TABLE `tblpackage_inclusions`
@@ -2778,7 +2832,6 @@ ALTER TABLE `tblprod_images`
 ALTER TABLE `tbluser`
   ADD CONSTRAINT `cust` FOREIGN KEY (`userCustID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `emp` FOREIGN KEY (`userEmpID`) REFERENCES `tblemployee` (`empID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
