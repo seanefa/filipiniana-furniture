@@ -62,15 +62,15 @@ echo '</script>';
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                           <thead>
                             <tr>
                               <th>Order ID</th>
                               <th>Customer Name</th>
                               <th style="text-align:right">Order Price</th>
                               <th style="text-align:right">Remaining Balance</th>
-                              <th style="text-align:right">Payment Status</th>
-                              <th class="removeSort" style="text-align:center">Actions</th>
+                              <th style="text-align:left">Payment Status</th>
+                              <th class="removeSort" style="text-align:left">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -94,10 +94,10 @@ echo '</script>';
                                   <td>'.$get_name.'</td>
                                   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
                                   <td style="text-align:right">&#8369; '.number_format($bal,2).'</td>
-                                  <td style="text-align:right">'.$paymentStat.'</td>
-                                  <td style="text-align:center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="glyphicon glyphicon-eye-open"></span> View</button>  
+                                  <td style="text-align:left">'.$paymentStat.'</td>
+                                  <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
 
-                                   <a class="btn btn-info" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span>  Bill </a>
+                                   <a class="btn btn-info" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="ti-receipt"></span>  Bill </a>
 
                                    <a class="btn btn-success" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
                                   </td>

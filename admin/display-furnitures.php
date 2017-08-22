@@ -30,7 +30,7 @@ if($id=="All"){
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">';
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo '<label>Price</label>
 				<br>
@@ -45,7 +45,7 @@ if($id=="All"){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -76,6 +76,7 @@ else if($id=="On-Promo"){
 
 
 	while ($row = mysqli_fetch_assoc($result)){
+		$oQuan = quan($row['productID']);
 		$random = rand(0,2);
 		if($row['prodTypeID']==""){$row['productDescription']="________________";}
 		if($row['prodStat'] != "Archived")
@@ -93,10 +94,10 @@ else if($id=="On-Promo"){
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('
-				<h4 class="fcbtn btn-sm btn-outline btn-warning btn-1c" style="font-weight:600; font-family:inherit;">ON-PROMO</h4>
+				<div class="ribbon left"><span style="font-weight:bolder; font-family:inherit;">ON-PROMO</span></div>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -110,7 +111,7 @@ else if($id=="On-Promo"){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -160,7 +161,7 @@ else if($id=="On-Hand"){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">
-				<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>
+				<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -173,7 +174,7 @@ else if($id=="On-Hand"){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -219,6 +220,7 @@ else if($id=="Packages"){
 				<br>
 				<p class="box-title m-b-0" style="font-weight:bolder;">'.substr($row['packageDescription'], 0,20).'</p>
 				<div class="product-text">
+				<div class="ribbon packages"><span style="font-weight:bolder; font-family:inherit;">PACKAGE SET</span></div>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['packagePrice'],2).'</span>
@@ -232,7 +234,7 @@ else if($id=="Packages"){
 				<input value="0" id="P_quant'.$row['packageID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="addPackage('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="addPackage('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -260,6 +262,7 @@ else{ //category
 	$sql = "SELECT * FROM tblproduct WHERE prodCatID = '$id'";
 	$result = mysqli_query($conn, $sql);
 	while ($row = mysqli_fetch_assoc($result)){
+		$oQuan = quan($row['productID']);
 		$random = rand(0,2);
 		if($row['prodTypeID']==""){$row['productDescription']="________________";}
 		if($row['prodStat'] != "Archived"){
@@ -276,7 +279,7 @@ else{ //category
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('
 				<label>Price</label>
@@ -291,7 +294,7 @@ else{ //category
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -320,6 +323,7 @@ if(isset($_POST['type'])){
 	$sql = "SELECT * FROM tblproduct WHERE prodTypeID = '$id'";
 	$result = mysqli_query($conn, $sql);
 	while ($row = mysqli_fetch_assoc($result)){
+		$oQuan = quan($row['productID']);
 		$random = rand(0,2);
 		if($row['prodTypeID']==""){$row['productDescription']="________________";}
 		if($row['prodStat'] != "Archived"){
@@ -336,7 +340,7 @@ if(isset($_POST['type'])){
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('
 				<label>Price</label>
@@ -351,7 +355,7 @@ if(isset($_POST['type'])){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -372,8 +376,6 @@ if(isset($_POST['type'])){
 			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
 		}
 		} 
-
-
 
 		function quan($id){
 			include "dbconnect.php";

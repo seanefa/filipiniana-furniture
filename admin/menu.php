@@ -58,6 +58,8 @@ if(!isset($_SESSION["userID"]))
   <link href="plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
   <!-- LiterallyCanvas CSS -->
   <link href="css/literallycanvas.css" rel="stylesheet">
+  <!-- CornerRibbons CSS -->
+  <link href="css/cornerribbons.css" rel="stylesheet">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

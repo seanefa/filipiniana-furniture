@@ -148,15 +148,15 @@
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                           <thead>
                             <tr>
-                              <th style="text-align:left">Order ID</th>
-                              <th style="text-align:left">Customer Name</th>
-                              <th style="text-align:left">Release Date</th>
-                              <th style="text-align:right">Total Price</th>
-                              <th style="text-align:center">Production Status</th>
-                              <th class="removeSort" style="text-align: center;">Actions</th>
+                              <th>Order ID</th>
+                              <th>Customer Name</th>
+                              <th>Release Date</th>
+                              <th style="text-align: right;">Total Price</th>
+                              <th>Production Status</th>
+                              <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -178,13 +178,13 @@
               <td style="text-align:left">'.$get_name.'</td>
               <td style="text-align:left">'.$dates.'</td>
               <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
-              <td style="text-align:center">'.$production_stat.'</td>
-              <td>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
+              <td style="text-align:left">'.$production_stat.'</td>
+              <td style="text-align:left">
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
 
-              <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-edit"></span> Update</a>
+              <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="ti-pencil-alt"></span> Update</a>
 
-              <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class="glyphicon glyphicon-list-alt"></span> Bill</a>
+              <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class=" ti-receipt"></span> Bill</a>
 
               </td>
               </tr>
@@ -228,7 +228,7 @@
         <div class="panel-body">
           <div class="row">
             <div class="table-responsive">
-              <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+              <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                 <thead>
                   <tr>
                     <th>Order ID</th>
@@ -236,10 +236,10 @@
                     <th>Request Date</th>
                     <th>Total Quantity</th>
                     <th>Price</th>
-                    <th class="removeSort">Actions</th>
+                    <th class="removeSort" style="text-align:left">Actions</th>
                   </tr>
                 </thead>
-                <tbody style="text-align:left;">
+                <tbody>
                   <?php
                   include "dbconnect.php";
                   $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
@@ -254,17 +254,17 @@
                                   $get_name = getName($row['custOrderID']);
                                   echo ('
                                     <tr>
-                                    <td>'.$orderID.'</td>
-                                    <td>'.$get_name.'</td>
-                                    <td>'.$get_date.'</td>
+                                    <td style="text-align:left">'.$orderID.'</td>
+                                    <td style="text-align:left">'.$get_name.'</td>
+                                    <td style="text-align:left">'.$get_date.'</td>
                                     <td style="text-align:center">'.$count_prod.'</td>
                                     <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
-                                    <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="glyphicon glyphicon-eye-open"></i></button> 
+                                    <td style="text-align:left">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button> 
 
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="glyphicon glyphicon-ok"></i>Accept </button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="glyphicon glyphicon-cross"></i>Reject</button> 
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button> 
                                     </td>
                                     </tr>
                                     ');
@@ -320,7 +320,7 @@
         <div class="panel-body">
           <div class="row">
             <div class="table-responsive">
-              <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+              <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                 <thead>
                   <tr>
                     <th>Order ID</th>
@@ -331,7 +331,7 @@
                     <th class="removeSort">Actions</th>
                   </tr>
                 </thead>
-                <tbody style="text-align:center;">
+                <tbody>
                   <tr>
                     <td>2</td>
                     <td>Dela Cruz, Celia</td>
@@ -339,8 +339,8 @@
                     <td>3</td>
                     <td>&#8369; 33,000</td>
                     <td>
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button> 
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button></td>
                     </tr>
                     <tr>
                       <td>5</td>
@@ -349,8 +349,8 @@
                       <td>1</td>
                       <td>&#8369; 25,000</td>
                       <td>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="glyphicon glyphicon-eye-open"></i> View</button> 
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button> 
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#custRequest" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button></td>
                       </tr>
                     </tbody>
                   </table>

@@ -169,39 +169,26 @@ $("#backArch").click(function(){
   <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
   <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
   <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
-  <div id="page-wrapper">
+<div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <!--button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="furn-type-form.php" data-remote="furn-type-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button-->
+                <!-- button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="supplier-form.php" data-remote="supplier-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button -->
                 <li role="presentation" class="active">
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-dropbox"></i>&nbsp;<?php echo $titlePage?></a>
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-dropbox"></i></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
-
-            <div class="sttabs tabs-style-flip">
-              <nav>
-                <ul>
-                  <li><a href="#home" class="sticon ti-home"><span>Home</span></a></li>
-                  <!--<li><a href="#purchaseorder" class="sticon ti-reload"><span>Purchase Order</span></a></li>
-                  <li><a href="#acceptdelivery" class="sticon ti-time"><span>Accept Delivery</span></a></li>-->
-                </ul>
-              </nav>
-              <div class="content-wrap text-center">
-
-                <section id="home">
-                  <div class="tab-content">
-                    <!-- CATEGORY -->
+            <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade active in" id="type">
                       <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
                           <div class="row">
                             <div class="table-responsive">
-                              <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="myTable">
+                              <table class="table color-bordered-table muted-bordered-table dataTable display" id="myTable">
                                 <thead>
                                   <tr>
                                     <th>Material</th>
@@ -216,7 +203,7 @@ $("#backArch").click(function(){
                                   <td></td>
                                   <td></td>
                                   <td></td>
-                                  <td><button type="button" class="btn btn-success" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #deduct" data-target="#myModal">Update</button></td>
+                                  <td><button type="button" class="btn btn-success" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #deduct" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button></td>
                                     </tbody>
                                     </table>
                                   </div>
@@ -224,14 +211,46 @@ $("#backArch").click(function(){
                               </div>
                             </div>
                           </div>
-                  <!-- New Framework Mo
+                  <!-- New Framework Modal -->
                   <!-- /.modal -->
                 </div>
+            
+</div>  
+</div>
+</div>
+<!-- /.container-fluid -->
+<!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
+</div>
+<!-- /#page-wrapper -->
+</div>
+
+
+  <!-- div id="page-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+          <div class="panel panel-info">
+            <h3>
+              <ul class="nav customtab2 nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-dropbox"></i>&nbsp;<?php echo $titlePage?></a>
+                </li>
+              </ul>
+            </h3>
+
+            <div class="sttabs tabs-style-flip">
+              <nav>
+                <ul>
+                  <li><a href="#home" class="sticon ti-home"><span>Home</span></a></li>
+                </ul>
+              </nav>
+              <div class="content-wrap text-center">
+
+                <section id="home">
               </section>
 
                 <section id="purchaseorder">
                   <div class="tab-content">
-                    <!-- CATEGORY -->
                     <div role="tabpanel" class="tab-pane fade active in" id="type">
                       <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
@@ -329,14 +348,11 @@ $("#backArch").click(function(){
                               </div>
                             </div>
                           </div>
-                  <!-- New Framework Mo
-                  <!-- /.modal -->
                 </div>
               </section>
 
               <section id="acceptorder">
                   <div class="tab-content">
-                    <!-- CATEGORY -->
                     <div role="tabpanel" class="tab-pane fade active in" id="type">
                       <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
@@ -360,12 +376,6 @@ $("#backArch").click(function(){
                                 </select>
                               </div>
                             </div> 
-                            <!--<div class="col-md-6">
-                            <label class="control-label pull-left">Date: </label>
-                              <div class="col-md-10 pull-right">
-                                <input type="date">
-                              </div>
-                            </div> -->
                           </div>
                           <br>
                           <div class="row">
@@ -406,22 +416,16 @@ $("#backArch").click(function(){
                               </div>
                             </div>
                           </div>
-                  <!-- New Framework Mo
-                  <!-- /.modal -->
                 </div>
               </section>
 
-
-            </div><!-- /content -->
-          </div><!-- /tabs -->
+            </div>
+          </div>
         </div>  
       </div>
     </div>
-    <!-- /.container-fluid -->
-    <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
   </div>
-  <!-- /#page-wrapper -->
-</div>
+</div-->
 
 <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
   <div class="modal-dialog">

@@ -178,7 +178,7 @@ function addnewCust(){
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a aria-controls="ordermanagement.php" role="tab" aria-expanded="false" href="point-of-sales.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart"></i> <?php echo $titlePage?></a>
+                  <a aria-controls="ordermanagement.php" role="tab" aria-expanded="false" href="point-of-sales.php"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i  class="ti-shopping-cart-full"></i> <?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
@@ -370,7 +370,7 @@ function addnewCust(){
 					
 					<div id="hidebuttoncustomer">
 					<hr>
-                    <button type="button" class="btn btn-info" data-toggle="modal" href="point-of-sales-form.php" data-remote="point-of-sales-form.php #newCustomer" data-target="#myModal" id="newCust">New Customer</button> 
+                    <button type="button" class="btn btn-info" data-toggle="modal" href="point-of-sales-form.php" data-remote="point-of-sales-form.php #newCustomer" data-target="#myModal" id="newCust"><i class="ti-user"></i> New Customer</button> 
                     </div> 
                     <hr>
                     <div class="row">
@@ -571,7 +571,7 @@ function addnewCust(){
 
                   <div class="row">
                     <div class="col-md-5 pull-right">
-                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()">Save & Print</button>
+                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()"><i class="ti-check"></i> Save & Print</button>
                     </div>
                   </div>
                   </div>
@@ -1153,7 +1153,7 @@ function addnewCust(){
                           <script>
 $(document).ready(function () {
   $('.formScroll').slimScroll({
-    height: '1120px',
+    height: '832px',
     size: '8px',
     wheelStep: 3,
     railVisible: true

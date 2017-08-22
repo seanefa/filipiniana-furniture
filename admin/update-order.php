@@ -228,15 +228,15 @@ $(document).ready(function(){ //wala lang
                                     <input type="hidden" id="price"  value="'.$tPrice1.'" /></td>';
                                     $tPrice = $row['orderPrice'];
                                     $tQuan = $tQuan + $row['orderQuantity'];
-                                    echo '<td style="text-align:center"><button type="button" class="btn btn-danger" onclick="deleteExisting('.$row['order_requestID'].')">X</button></td>
+                                    echo '<td style="text-align:center"><button type="button" class="btn btn-danger" onclick="deleteExisting('.$row['order_requestID'].')"><i class="ti-close"></i></button></td>
                                     </tr>';
                                   }
                                   ?>
                                 </tbody>
                                 <tfoot style="text-align:right;">
                                   <td colspan="3" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> GRAND TOTAL</b></td>
-                                  <td style="text-align:right;"><mark><strong><input type="text" id="totalQ" style="text-align:right; border:none" value="<?php echo $tQuan?>" readonly/></bold></mark></td>
-                                  <td style="text-align:right;"><mark><strong><input name="tPrice" type="text" id="totalPrice" style="text-align:right; border:none" value="&#8369;&nbsp;<?php echo number_format($tPrice,2)?>" readonly/></strong></mark></td>
+                                  <td style="text-align:right;"><mark><strong><span id="totalQ"><?php echo $tQuan?></span></bold></mark></td>
+                                  <td style="text-align:right;"><mark><strong><span name="tPrice" id="totalPrice">&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
                                   <td></td>
                                 </tfoot>
                               </table>

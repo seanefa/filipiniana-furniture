@@ -130,31 +130,22 @@ $(this).show();
 });
 });
 </script-->
+
 <div id="page-wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="panel panel-info">
-          <!-- nav start -->
-          <h3>
-            <ul class="nav customtab2 nav-tabs" role="tablist">
-            </ul>
-          </h3>
-          <!-- nav end -->
-
-          <div class="sttabs tabs-style-flip" style="margin-top: -40px;">
-            <nav>
-              <ul>
-                <li><h3><a href="#orders" class="ti-shopping-cart"><span>Shop</span></a></h3></li>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+          <div class="panel panel-info">
+            <h3>
+              <ul class="nav customtab2 nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-shopping-cart-full"></i>&nbsp;<?php echo $titlePage?></a>
+                </li>
               </ul>
-            </nav>
-            <div class="content-wrap text-center" style="margin-top: -10px;">
-
-              <!-- ORDER MANAGEMENT TAB -->
-              <section id="orders">
-                <div class="tab-content">
-                  <!-- CATEGORY -->
-                  <div role="tabpanel" class="tab-pane fade active in" id="type">
+            </h3>
+            <div class="tab-content">
+              <!-- CATEGORY -->
+              <div role="tabpanel" class="tab-pane fade active in" id="type">
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                       <div class="panel-body">
                         <form id="myForm" method="post">
@@ -166,7 +157,7 @@ $(this).show();
                               <div role="tabpanel" class="tab-pane fade active in" id="allprod">
                                 <div class="panel-wrapper collapse in" aria-expanded="true">
                                   <div class="panel-body">  
-                                    <div class="row" style="margin: 0 auto; margin-top: -120px;">
+                                    <div class="row" style="margin: 0 auto; margin-top: -90px;">
                                       <div class="col-md-6" style="margin-top: 10px;">
                                         <div class="row">
                                           <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge"></span></button>
@@ -339,9 +330,8 @@ $(this).show();
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
 
+                  
               <script type="text/javascript">
 //global variables
 var num_of_package = 0;
@@ -954,16 +944,16 @@ function checkout(){
   }
 }
 </script>
-
-
-</div><!-- /content -->
-</div><!-- /tabs -->
-</div> <!-- panel info -->
-
+<!-- New Framework Modal -->
+  <!-- /.modal -->
+</div>
+</div>  
 </div>
 </div>
+<!-- /.container-fluid -->
 <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
 </div>
+<!-- /#page-wrapper -->
 </div>
 
 <script>
@@ -998,13 +988,12 @@ $(document).ready(function(){
 <script>
 $(document).ready(function () {
   $('.formScroll').slimScroll({
-    height: '950px',
+    height: '832px',
     size: '8px',
     wheelStep: 3,
     railVisible: true
   });
 });
 </script>
-
 </body> 
 </html>

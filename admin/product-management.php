@@ -187,13 +187,13 @@ $(document).ready(function(){
             <div class="sttabs tabs-style-flip">
               <nav>
                 <ul>
-                  <li><a href="#onhand" class="sticon ti-thumb-up"><span>On-Hand</span></a></li>
-                  <li><a href="#onpromo" class="sticon ti-cut"><span>On-Promo</span></a></li>
+                  <li><a href="#onhand" class="sticon ti-hand-stop"><span>On-Hand</span></a></li>
+                  <li><a href="#onpromo" class="sticon ti-tag"><span>On-Promo</span></a></li>
                 </ul>
               </nav>
               <div class="content-wrap text-center">
                 <section id="onhand">
-                  <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal1" href="product-management-form.php" data-remote="product-management-form.php #newOnHand" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                  <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal1" href="product-management-form.php" data-remote="product-management-form.php #newOnHand" aria-expanded="false" style="margin-right: 20px; margin-top: -15px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                   <div class="tab-content">
                     <!-- CATEGORY -->
                     <div role="tabpanel" class="tab-pane fade active in">
@@ -201,14 +201,14 @@ $(document).ready(function(){
                         <div class="panel-body">
                           <div class="row">
                             <div class="table-responsive">
-                              <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="myTable">
+                              <table class="table color-bordered-table muted-bordered-table dataTable display" id="myTable">
                                 <thead>
                                   <tr>
                                     <th>Furniture Type</th>
                                     <th>Furniture Name</th>
                                     <th>Furniture Description</th>
-                                    <th style="text-align:center">Quantity</th>
-                                    <th>Actions</th>
+                                    <th>Quantity</th>
+                                    <th class="removeSort">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -218,14 +218,14 @@ $(document).ready(function(){
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
                                     if($row['prodStat']!="Archived"){
-                                      echo('<tr><td  style="text-align: left;">'. $row['typeName'] .'</td>
-                                        <td  style="text-align: left;">'.$row['productName'].'</td>
-                                        <td  style="text-align: left;">'.$row['productDescription'].'</td>
-                                        <td  style="text-align: center;">'.$row['ohQuantity'].'</td>');
+                                      echo('<tr><td style="text-align: left;">'. $row['typeName'] .'</td>
+                                        <td style="text-align: left;">'.$row['productName'].'</td>
+                                        <td style="text-align: left;">'.$row['productDescription'].'</td>
+                                        <td style="text-align: left;">'.$row['ohQuantity'].'</td>');
                                         ?>
-                                        <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1">Add</button>
+                                        <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1"><i class="ti-plus"></i> Add</button>
 
-                                          <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #deductOnHand" data-target="#myModal1">Deduct</button>
+                                          <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #deductOnHand" data-target="#myModal1"><i class="ti-close"></i> Deduct</button>
                                         </td>
 
                                         <?php echo('</tr>');} }
@@ -237,13 +237,13 @@ $(document).ready(function(){
                               </div>
                             </div>
                           </div> 
-                      <!-- New Framework Mo
+                      <!-- New Framework Modal -->
                       <!-- /.modal -->
                     </div>
                   </section>
 
                   <section id="onpromo">
-                    <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="product-management-form.php" data-remote="product-management-form.php #newOnPromo" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                    <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="product-management-form.php" data-remote="product-management-form.php #newOnPromo" aria-expanded="false" style="margin-right: 20px; margin-top: -15px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                     <div class="tab-content">
                       <!-- CATEGORY -->
                       <div role="tabpanel" class="tab-pane fade active in">
@@ -251,15 +251,15 @@ $(document).ready(function(){
                           <div class="panel-body">
                             <div class="row">
                               <div class="table-responsive">
-                                <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="myTable">
+                                <table class="table color-bordered-table muted-bordered-table dataTable display" id="myTable">
                                   <thead>
                                     <tr>
                                       <th>Promo Name</th>
                                       <th>Description</th>
                                       <th>Start Date</th>
                                       <th>End</th>
-                                      <th>No. of Products</th>
-                                      <th>Actions</th>
+                                      <th style="text-align: center;">No. of Products</th>
+                                      <th class="removeSort">Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -271,14 +271,14 @@ $(document).ready(function(){
                                       $date = date_create($row['promoStartDate']);
                                       $date = date_format($date,"F/d/Y");
                                       if($row['onPromoStatus']=="Active"){
-                                        echo('<tr><td>'. $row['promoName'] .'</td>
-                                          <td>'.$row['promoDescription'].'</td>
-                                          <td>'. $date.'</td>
-                                          <td>'. $row['promoEnd'].'</td>
-                                          <td>'. $row['bilang'].'</td>
+                                        echo('<tr><td style="text-align: left;">'. $row['promoName'] .'</td>
+                                          <td style="text-align: left;">'.$row['promoDescription'].'</td>
+                                          <td style="text-align: left;">'. $date.'</td>
+                                          <td style="text-align: left;">'. $row['promoEnd'].'</td>
+                                          <td style="text-align: center;">'. $row['bilang'].'</td>
                                           ');
                                           ?>
-                                          <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #updatePromo" data-target="#myModal">Update</button>
+                                          <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #updatePromo" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
 
                                             <!--<button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnPromo" data-target="#myModal">Deduct</button>-->
                                           </td>
@@ -292,7 +292,7 @@ $(document).ready(function(){
                                 </div>
                               </div>
                             </div>
-                      <!-- New Framework Mo
+                      <!-- New Framework Modal -->
                       <!-- /.modal -->
                     </div>
                   </section>

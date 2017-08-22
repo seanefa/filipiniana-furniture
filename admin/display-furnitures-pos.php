@@ -29,7 +29,7 @@ if($id=="On-Hand"){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">
-				<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;"><span style="color:red; font-weight:600;">'.$oQuan.'</span>&nbsp;ON-HAND</h4>
+				<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>
 				<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -42,7 +42,7 @@ if($id=="On-Hand"){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -102,7 +102,7 @@ else if($id=="Packages"){
 				<input value="0" id="P_quant'.$row['packageID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="addPackage('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="addPackage('.$row['packageID'].')" id="'.$row['packageID'].'"  type="button" class="btn btn-success" value="'.$row['packageID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -148,7 +148,7 @@ else{ //category
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('<label>Price</label>
 				<br>
@@ -162,7 +162,7 @@ else{ //category
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>
@@ -209,7 +209,7 @@ if(isset($_POST['type'])){
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
-					echo '<h4 class="fcbtn btn-sm btn-outline btn-primary btn-1c" style="font-weight:600; font-family:inherit;">ON-HAND</h4><span style="color:red; font-weight:600;">'.$oQuan.'</span>';
+					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('<label>Price</label>
 				<br>
@@ -223,7 +223,7 @@ if(isset($_POST['type'])){
 				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
 				<br>
 				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" >Add to Cart</button>
+				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
 				</div>
 				</div>
 				</div>

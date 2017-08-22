@@ -77,31 +77,29 @@ include "menu.php";
                                                 <img height="115px" src="plugins/images/furnitureicon.png" alt="Unavailable">');
                                             if($row['orderStatus']=='Pending'){
                                               echo ('<div class="pro-img-overlay">
-                                                    <a class="btn btn-primary" href="production-start.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
-                                                <h4 class="fcbtn btn btn-outline btn-primary btn-1d" style="text-align:center;">'.$production.'</h4>   
+                                                    <a class="btn btn-primary" href="production-start.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/> 
                                                   </div>
                                                 </div>');
                                             }
                                             else{
                                                   echo ('<div class="pro-img-overlay">
-                                                    <a class="btn btn-primary" href="production-tracking-details.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
-                                                <h4 class="fcbtn btn btn-outline btn-primary btn-1d" style="text-align:center;">'.$production.'</h4>   
+                                                    <a class="btn btn-primary" href="production-tracking-details.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>  
                                                   </div>
                                                 </div>');
                                                 }
                                                 if($row['orderStatus']=="Ongoing"){
                                                   echo '<div class="progress progress-lg" style="margin-top:15px;">
-                                                          <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$row['orderStatus'].'</h3>
+                                                          <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$row['orderStatus'].'<br>'.$production.'</h3>
                                                         </div>';
                                                 }
                                                 if($row['orderStatus']=="Cancelled"){
                                                   echo '<div class="progress progress-lg" style="margin-top:15px;">
-                                                          <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$row['orderStatus'].'</h3>
+                                                          <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$row['orderStatus'].'<br>'.$production.'</h3>
                                                         </div>';
                                                 }
                                                 if($row['orderStatus']=="Pending"){
                                                   echo '<div class="progress progress-lg" style="margin-top:15px;">
-                                                          <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:inherit;" role="progressbar">'.$row['orderStatus'].'</h3>
+                                                          <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$row['orderStatus'].'<br>'.$production.'</h3>
                                                         </div>';
                                                 }
                                                 echo ('                                                 
@@ -190,7 +188,7 @@ include "menu.php";
           <script>
             $(document).ready(function () {
               $('.formScroll').slimScroll({
-                height: '700px',
+                height: '832px',
                 size: '8px',
                 wheelStep: 3,
                 railVisible: true

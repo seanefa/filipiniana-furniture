@@ -1,7 +1,6 @@
 <?php
-$activePage = basename($_SERVER['PHP_SELF'],".php");
+include 'dbconnect.php';
 include "menu.php";
-session_start();
 /*
 if(isset($_GET['customerId'])){
 $jsID = $_GET['customId']; 
@@ -17,16 +16,11 @@ if(isset($_POST['id'])){
 if(isset($_GET['id'])){
   $jsID = $_GET['id']; 
 }
-
-
-
-include 'dbconnect.php';
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
   <title>Check-Out</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
     $(document).ready(function(){
       $('#aTendered').on('keyup',function(){
@@ -242,9 +236,9 @@ else{
   <!-- Preloader -->
   <div id="page-wrapper">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" style="margin-top: 20px;">
         <div class="col-sm-12">
-          <h4 class="box-title">
+          <!--h4 class="box-title">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -252,7 +246,7 @@ else{
                 </li>
               </ul>
             </h3>
-          </h4>
+          </h4-->
           <div class="orderconfirm">
             <form action="add-customer.php" method = "post">
               <div class="panel-group wiz-aco" id="accordion" role="tablist" aria-multiselectable="true">
