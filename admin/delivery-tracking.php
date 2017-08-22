@@ -8,6 +8,11 @@ $jsID = $_GET['id'];
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
 
 if (isset($_GET['newSuccess']))
 {
@@ -50,7 +55,8 @@ else if (isset($_GET['deactivateSuccess']))
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="del-form.php" data-remote="del-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                <a class="btn btn-lg btn-info pull-right" style="color:white;" href="new-delivery.php"><span class="btn-label"><i class="ti-plus"></i> New</a>
+
                 <li role="presentation" class="active">
                   <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-check-box"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
@@ -63,45 +69,85 @@ else if (isset($_GET['deactivateSuccess']))
                   <div class="panel-body">
                     <div class="row">
                       <div class="table-responsive">
-                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tbljobs">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
                           <thead>
                             <tr>
-                              <th style="text-align: center;">Name</th>
-                              <th style="text-align: center;">Actions</th>
+                              <th style="text-align:left">Delivery Code</th>
+                              <th style="text-align:left">Order ID</th>
+                              <th style="text-align:center">Customer Name</th>
+                              <th style="text-align:right">No. of items</th>
+                              <th style="text-align:center">Status</th>
+                              <th class="removeSort" style="text-align:center">Action</th>
                             </tr>
                           </thead>
-                          <tbody style="text-align: center;">
+                          <tbody>
                             
                               <?php
                               include "dbconnect.php";
-                              $sql = "SELECT * FROM tblphases;";
+                              $sql = "SELECT * from tbldelivery WHERE deliveryStatus != 'Archived'";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['phaseStatus']=="Active"){
-                                  echo('<td>'.$row['phaseName'].'</td>
+
+                                $delID = str_pad($row['deliveryID'], 6, '0', STR_PAD_LEFT);
+                                $delID = "DEL" . $delID;
+                                $orderID = getOrderID($row['deliveryID']);
+                                $custName = getCustName($row['deliveryID']);
+                                $quan = getQuan($row['deliveryID']);
+                                  echo('<td style="text-align:left">'. $delID .'</td>
+                                    <td style="text-align:left">'.$orderID.'</td>
+                                    <td style="text-align:center">'.$custName.'</td>
+                                    <td style="text-align:right">'.$quan.'</td>
+                                    <td style="text-align:center">'.$row['deliveryStatus'].'</td>
                                     ');?>
-                                    <td>
-                                      <!-- UPDATE -->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['phaseID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
-                                      <!-- DELETE -->
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['phaseID']?> #delete" data-target="#myModal"><span class='glyphicon glyphicon-trash'></span> Deactivate</button>
+                                    <td style="text-align:center">
+                                      <!-- VIEW -->
+                                      <!--<button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>-->
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"> Delivery Receipt</button>
                                     </td>
                                     <?php echo ('</tr>');
+                                  
+                                }
+                                function getOrderID($id){
+                                  include "dbconnect.php";
+                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  $row = mysqli_fetch_assoc($res);
+                                  $oID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                                  return $oID;
+                                }
+                                function getCustName($id){
+                                  include "dbconnect.php";
+                                  $name = "";
+                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b, tblcustomer e WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and a.custOrderID=e.customerID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  $row = mysqli_fetch_assoc($res);
+                                  $name = $row['customerLastName'].' '.$row['customerFirstName'].' '.$row['customerMiddleName'];
+                                  return $name;
+                                }
+                                function getQuan($id){
+                                  include "dbconnect.php";
+                                  $quan = 0;
+                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  while($row = mysqli_fetch_assoc($res)){
+                                    $quan += $row['del_quantity'];
                                   }
+                                  return $quan;
                                 }
-                                ?>
-                              
-                              <script type="text/javascript">
-                                function confirmDelete(id) {
-                                  window.location.href="delete-job.php?id="+id+"";
-                                }
-                                function edit(id){
-                                  window.location.href="update-job.php?id="+id+"";
-                                }
-                              </script>
-                            </tbody>
-                          </table>
+                              ?>
+                            
+                            <script type="text/javascript">
+                              function confirmDelete(id) {
+                               window.location.href="delete-modeofpayment.php?id="+id+"";
+                             }
+                             function edit(id){
+                              window.location.href="update-modeofpayment.php?id="+id+"";
+                            }
+                          </script>
+                        </tbody>
+                      </table>
                         </div>
                       </div>
                     </div>
@@ -120,7 +166,7 @@ else if (isset($_GET['deactivateSuccess']))
 </div>
 
 <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <!-- Modal content-->
       <div class="modal-content clearable-content">

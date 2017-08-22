@@ -23,31 +23,31 @@ $pr = $_GET['smth'];
   <!-- New -->
   <div class="modal fade" tabindex="-1" role="dialog" id="updateModeofPaymentModal" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="new">
+      <div class="modal-content" id="update">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">New Delivery <?php echo $jsID ?></h3>
+          <h3 class="modal-title" id="modalProduct">Update Delivery <?php $delID = str_pad($jsID, 6, '0', STR_PAD_LEFT);
+          echo $delID ?></h3>
         </div>
         <form action="save-del.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
-                <input type="hidden" name="recID" value="<?php echo $jsID?>">
-                <input type="hidden" name="orID" value="<?php echo $oID?>">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Orders</label>
-                    <p>Note: This only displays orders that are available and ready to be delivered.</p>
-                      <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="emp">
+                      <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order">
                         <?php
                         include "dbconnect.php";
-                        $sql = "SELECT * FROM tblemployee";
-                        $result = mysqli_query($conn, $sql);
+                        $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID";
+                        $result = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_assoc($result))
                         {
-                          if($row['empStatus']=='Active'){
-                            echo('<option value='.$row['empID'].'>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
+                          if($row['orderStatus']!='Archived'){
+                            $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                            $orderID = "OR" . $orderID;
+                            echo('<option value='.$row['orderID'].'>'.$orderID.'  -  '.$row['customerLastName'].' '.$row['customerFirstName'].' '.$row['customerMiddleName'].'</option>');
                           }
                         }
                         ?>
@@ -83,7 +83,7 @@ $pr = $_GET['smth'];
                       <label class="control-label">Status</label>
                       <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="stat">
                         <option value="--">-- Choose Status --</option>
-                        <option value="Started">Start Delivery</option>
+                        <option value="Ongoing">Start Delivery</option>
                         <option value="Delivered">Delivered</option>
                         <option value="Cancelled">Cancelled</option>
                       </select>
