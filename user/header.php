@@ -43,6 +43,7 @@
 	  		</li>
 		</ul>
 		<form class="navbar-right form-inline">
+			
 			<input type="text" class="form-control"/>&nbsp;
 			<button class="btn" type="button" role="button"><span class="fa fa-search"></span></button>
 		</form>

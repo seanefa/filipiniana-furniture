@@ -15,7 +15,7 @@ $_SESSION['passId'] = $userid;
 		<?php
 		include "plugins.php";
 		?>
-		<title>Filipiniana Furnitures - Check out</title>
+		<title>Customization - Filipiniana Furnitures</title>
 		<!--meta tags-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">

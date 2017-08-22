@@ -12,6 +12,27 @@ if(!isset($_SESSION["userID"]))
 		<?php
 		include "plugins.php";
 		?>
+		<!--meta tags-->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="x-ua-compatible" content="ie-edge">
+		<!--bootstrap 4-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<!--custom css-->
+		<link rel="stylesheet" href="custom.css">
+		<!--scripts-->
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<!--google icons-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<!--font awesome icons-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--my css-->
+		<link rel="stylesheet" href="myStyle.css">
+		<!--javascript-->
+		<script src="myScript.js"></script>
+		<link rel="icon" href="pics/filfurniturelogo.png">
 	</head>
 	<body>
 		<div class="container">
@@ -31,58 +52,18 @@ if(!isset($_SESSION["userID"]))
 		</div>
 		<div class="container">
 			<div class="row">
-				<?php
-				include "userconnect.php";
-				$sql="SELECT A.*, B.* from tblcustomer A join tbluser B where B.userID = '" . $_SESSION['userID'] . "' AND B.userCustID=A.customerID";
-				$result=$conn->query($sql);
-				if($result->num_rows > 0)
-				{
-					while($row=$result->fetch_assoc())
-					{
-				?>
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-3">
-							<div class="card">
-								<div class="card-header text-center">
-									<h3 class="card-title text-web text-fluid"><?php echo "" . $row["customerFirstName"] . " " . $row['customerLastName'];?></h3>
-								</div>
-								<ul class="list-group list-group-flush text-center">
-									<li class="list-group-item">Lives in <?php echo "" . $row['customerAddress'];?></li>
-								</ul>
-								<div class="card-footer text-center">
-									<a class="btn btn-sm btn-outline-web" href="accessprofilesettings.php"><i class="fa fa-wrench"></i>&nbsp;Settings</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-sm-7 col-md-8 col-lg-9 col-xl-9">
-							<br>
-							<h3 class="text-center"><strong>Recently Ordered Products</strong></h3>
-							<br>
-							<div class="row">
-								<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-									<div class="card">
-										<div class="card-header">
-										</div>
-										<img class="card-img-top img-fluid img-thumbnail" src="">
-										<div class="card-block">
-											<p class="card-text">
-											</p>
-										</div>
-										<div class="card-footer text-center">
-											<button role="button" class="btn btn-success" title="View Product"><i class="fa fa-search"></i></button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<h3 class="text-center">Recently Ordered Furnitures</h3>
+					
+					<div class="">
 					</div>
 				</div>
-				<?php
-					}
-				}
-				$conn->close();
-				?>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<h3 class="text-center">Your Designs Furnitures</h3>
+					
+					<div class="">
+					</div>
+				</div>
 			</div>
 		</div>
 		<br>

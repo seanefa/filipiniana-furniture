@@ -12,6 +12,7 @@ if(!isset($_SESSION["userID"]))
 		<?php
 		include "plugins.php";
 		?>
+		<title>Production - Filipiniana Furnitures</title>
 	</head>
 	<body>
 		<div class="jumbotron-fluid">
@@ -48,8 +49,8 @@ if(!isset($_SESSION["userID"]))
 							<div class="card-block text-center">
 								<div class="card-title"><h4><b><?php echo "" . $row['productName'];?></b></h4></div>
 								<?php echo "" . $row['productionStatus'];?><br>
-								<?php echo "" . $row['prodDateStart'];?>
-								<?php echo "" . $row['prodDateEnd'];?>
+								Started: <?php echo "" . $row['prodStartDate'];?><br>
+								Will end: <?php echo "" . $row['prodEndDate'];?>
 							</div>
 						</div>
 					</div>
