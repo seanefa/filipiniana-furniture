@@ -454,7 +454,7 @@ $("#backArch").hide();
                         </div>
 
                         <div id="archiveTable">
-                                <table class="table color-bordered-table muted-bordered-table" id="tblFabricTexture">
+                                <table class="table color-bordered-table muted-bordered-table">
                           <thead>
                             <tr>
                               <th style="text-align: center;">Name</th>

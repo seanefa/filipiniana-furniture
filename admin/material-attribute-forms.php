@@ -31,7 +31,7 @@ if (!$conn) {
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
+                    <label class="control-label">Attribute Name</label><span id="x" style="color:red"> *</span>
                     <input type="text" id="materialName" class="form-control" name="name" required><span id="materialNameValidate"></span> 
                   </div>
                 </div>
@@ -41,14 +41,13 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Measurement(s)</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
-                      
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Measurement Category" tabindex="1" name="attribs[]" id="attribs">
                       <?php
                       $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
-                        if($row['uncategoryStatus']=='Active' || $row['uncategoryStatus']=='Hidden'){
+                        if($row['uncategoryStatus']=='Active' || $row['uncategoryStatus']=='Hidden' ){
                           echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
                         }
                       }
@@ -77,9 +76,9 @@ if (!$conn) {
       <div class="modal-content" id="update">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">Update Material</h3>
+          <h3 class="modal-title" id="modalProduct">Update Material Attribute</h3>
         </div>
-        <form enctype="multipart/form-data" role="form" action="material-update.php" method="post">
+        <form enctype="multipart/form-data" role="form" action="materialattri-update.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <?php
@@ -93,7 +92,7 @@ if (!$conn) {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
+                        <label class="control-label">Attribute Name</label><span id="x" style="color:red"> *</span>
                         <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['attributeName']; $_SESSION['tempname'] =$trow['attributeName'];?>"required /><span id="message"></span> </div>
                       </div>
                     </div>
@@ -117,26 +116,48 @@ if (!$conn) {
                         echo "<span>". $a ."</span>";
                       }*/
                       ?>
-                  <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Measurement(s)</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
-                      
-                      <?php
-                      $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
-                      $result = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result))
-                      {
-                        if($row['uncategoryStatus']=='Active' || $row['uncategoryStatus']=='Hidden'){
-                          echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="control-label">Measurement</label><span id="x" style="color:red"> *</span>
+                            <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
+                              <?php
+                              $sql1 = "SELECT * FROM tblattributes a, tblattribute_measure b, tblunitofmeasurement_category c WHERE a.attributeStatus = 'Active' AND a.attributeID = '$jsID' AND b.attributeID = a.attributeID AND b.uncategoryID = c.uncategoryID;";
+                              $res = mysqli_query($conn,$sql1);
+                              $attribs = "";
+                              while($trow = mysqli_fetch_assoc($res)){ //choosing kung ano pa nandun;
+                                //if($row['mat_attribStatus']=="Active"){
+                                $attribs = $attribs . $trow['uncategoryID'] . ",";
+                              
+                              }
+                              $temp = substr(trim($attribs), 0, -1);
+                              //$attribs = array();
+                              $attribs = explode(',',$temp);
+                              sort($attribs);
+                              
+                              $sql = "SELECT * FROM tblunitofmeasurement_category;";
+                              $result = mysqli_query($conn, $sql);
+                              $cnt = 0;
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+                                if($attribs[$cnt]==$row['uncategoryID']){
+                                  echo('<option value='.$row['uncategoryID'].' selected="selected">'.$row['uncategoryName'].'</option>');
+                                  $cnt++;
+                                }
+                                else{
+                                  echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
+                                }
+                                //$cnt++;
+                              }
+
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <input type="hidden" name="intags" id="intags" >
 
                     </div>
 
@@ -162,10 +183,10 @@ if (!$conn) {
                 <h3 class="modal-title">Deactivate Material</h3>
               </div>
               <div class="modal-body">
-                <h4>Are you sure you want to deactivate this Material Attribute?</h4>
+                <h4>Are you sure you want to deactivate this Material?</h4>
               </div>
               <div class="modal-footer">
-                <a href="delete-material-attribute.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
+                <a href="material-delete.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
                 <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
               </div>
             </div>

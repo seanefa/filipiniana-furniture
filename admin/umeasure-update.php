@@ -9,6 +9,10 @@ $editUnit = $_POST['uUnit'];
 
 $updateSql = "UPDATE tblunitofmeasure SET unType='$editType', unUnit='$editUnit' WHERE unID=$id;";
 
+
+
+
+
 if(mysqli_query($conn,$updateSql)){
 	// Logs start here
 	$sID = $id; // ID of last input;

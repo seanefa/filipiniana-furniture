@@ -149,6 +149,7 @@ if(isset($_GET['id'])){
                                               $prResult = mysqli_query($conn,$pSQL);
                                               $ctr = mysqli_num_rows($prResult);
                                               $isFirst = 0;
+                                              $isFirst = 0;
                                               while($pRow = mysqli_fetch_assoc($prResult)){
 
                                                 if($pRow['prodStatus']=="Pending"){

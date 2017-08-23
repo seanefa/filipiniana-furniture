@@ -10,7 +10,7 @@ $measures = $_POST['intags'];
 
 $measures = substr(trim($measures), 0, -1);
 
-$updateSql = "UPDATE tblmat_type SET matTypeName='$editName', matTypeRemarks='$editDescription', matTypeMeasure='$measures' WHERE matTypeID=$id";
+$updateSql = "UPDATE tblmat_type SET matTypeName='$editName', matTypeRemarks='$editDescription' WHERE matTypeID=$id";
 
 if(mysqli_query($conn,$updateSql)){
 	// Logs start here

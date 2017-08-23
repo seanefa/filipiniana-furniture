@@ -102,25 +102,6 @@ if (!$conn) {
                       </div>
                     </div>
                   </div>
-                <div class="row">
-                <div class="col-md-12">
-                <label class="control-label">Measurement(s):</label><span id="x" style="color:red"> *</span>
-                  <div class="form-group">
-                    <!--<input type="text" class="form-control" id="tags" name="name"/>-->
-                    <div class="col-md-12" id="tags">
-                  <?php
-                      $attribs = $trow['matTypeMeasure'];
-                      $attribsArr = explode(",", $attribs);
-                      foreach($attribsArr as $a){
-                        echo "<span>". $a ."</span>";
-                      }
-                      ?>
-                    <input type="text" class="form-control" id="tags" class="col-md-12" placeholder="Separatd by comma"/>
-                    <input type="hidden" name="intags" id="intags">
-                    </div>
-                  </div>
-                </div>
-              </div>
               <br>
                   <div class="row">
                     <div class="col-md-12">

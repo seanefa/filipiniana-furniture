@@ -172,6 +172,14 @@ var error = 0;
       });
 
 });
+      
+      $(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attribs").select2({
+      tags: true
+    });
+});
+});
 
    /* $(document).ready(function(){
       $("#archiveTable").hide();
