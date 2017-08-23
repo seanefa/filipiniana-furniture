@@ -48,6 +48,12 @@ else if (isset($_GET['deactivateSuccess']))
     $('body').on('keyup','#fabricPatternName',function(){
       var user = $(this).val();
       var flag = true;
+
+
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#fabricPatternName').val('');
+      }else{
       $.post('fab-pat-check.php',{fabricPatternName : user}, function(data){ 
         $('#fabricPatternNameValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -76,6 +82,7 @@ else if (isset($_GET['deactivateSuccess']))
           $('#fabricPatternName').css('border-color','limegreen');
         }
       });
+    }
     });
 
   });
@@ -85,7 +92,7 @@ var temprem;
 var tempname;
 var error = 0;
 var flag = true;
- 
+var userkey= '';
 
 
 
@@ -94,6 +101,14 @@ var flag = true;
     
       tempname = $('#editname').val();
       temprem = $('#rem').val();
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#editname').val(
+        user.slice(0, user.length - 1));
+      }else{
     $.post('fab-pat-Ucheck.php',{username : user}, function(data){
      
      if(data == 'unchanged'){
@@ -139,7 +154,7 @@ var flag = true;
 
     });
 
-    
+    }
 
   });
         $('body').on('change','#select',function(){

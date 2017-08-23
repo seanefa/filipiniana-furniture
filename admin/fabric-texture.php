@@ -218,6 +218,10 @@ $(document).on('focus','.modal',function () {
 $('body').on('keyup','#fabricTextureName',function(){
   var user = $(this).val();
   var flag = true;
+  if(user == '\\'){
+        user.replace('\\', "");
+        $('#fabricTextureName').val('');
+      }else{
   $.post('fab-text-check.php',{fabricTextureName : user}, function(data){ 
     $('#fabricTextureNameValidate').html(data);
     if(data != "Data Already Exist!"){
@@ -246,6 +250,7 @@ $('body').on('keyup','#fabricTextureName',function(){
       $('#fabricTextureName').css('border-color','limegreen');
     }
   });
+}
 });
 
 });
@@ -255,6 +260,7 @@ $('body').on('keyup','#fabricTextureName',function(){
     var tempname;
     var error = 0;
     var flag = true;
+    var userkey = "";
 
 
 
@@ -264,6 +270,15 @@ $('body').on('keyup','#fabricTextureName',function(){
 
       tempname = $('#editname').val();
       temprem = $('#rem').val();
+
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#editname').val(
+        user.slice(0, user.length - 1));
+      }else{
       $.post('fab-text-Ucheck.php',{username : user}, function(data){
 
         if(data == 'unchanged'){
@@ -309,7 +324,7 @@ $('body').on('keyup','#fabricTextureName',function(){
 
       });
 
-
+}
 
 });
 $('body').on('change','#select',function(){

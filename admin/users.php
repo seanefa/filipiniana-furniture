@@ -58,7 +58,7 @@ include "dbconnect.php";
                               {
                                 if($row['userStatus']=="active" && $row['userType']=="admin"){
                                   echo('<tr><td>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</td>');
-                                  $job = jName($row['empJobID']);
+                                  $job = jName($row['empID']);
                                   echo ('<td>'.$job.'</td>
                                   <td>'.$row['userName'].'</td>
                                   <td>'.$row['dateCreated'].'</td>'); ?>

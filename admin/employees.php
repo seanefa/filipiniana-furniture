@@ -137,9 +137,13 @@ else if (isset($_GET['deactivateSuccess']))
 var error = 0;
 
     function validateInput(id){
-
+      alert($('#job').val());
       var user = $('#'+id).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#'+id).val('');
+      }else{
     $.post('employee-check.php',{username : user}, function(data){
 
      if(data == 'Already Exist!'){
@@ -178,6 +182,7 @@ var error = 0;
 
 
     });
+  }
     }
 
       function validateUpdate(id){
@@ -185,6 +190,14 @@ var error = 0;
 
       tempname = $('#edit'+id).val();
       temprem = $('#rem').val();
+
+      userkey = $('#edit'+id).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#edit'+id).val(
+        user.slice(0, user.length - 1));
+      }else{
     $.post('employee-Ucheck.php',{username : user}, function(data){
 
      if(data == 'unchanged'){
@@ -224,7 +237,7 @@ var error = 0;
 
     });
 
-
+      }
 
       }
 
@@ -324,7 +337,7 @@ var error = 0;
                                   <?php echo('</tr>');} }
                                   function jName($id){
                                     include "dbconnect.php";
-                                    $sql = "SELECT * from tblemp_job a, tbljobs b WHERE b.jobID = a.emp_jobDescID and a.emp_empID = '$id';";
+                                    $sql = "SELECT * from tblemp_job a, tbljobs b WHERE b.jobID = a.emp_jobDescID and a.emp_jobID = '$id';";
                                     $result = mysqli_query($conn,$sql);
                                     $cat = "";
                                     while($row = mysqli_fetch_assoc($result)){

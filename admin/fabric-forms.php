@@ -37,7 +37,7 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input placeholder="Gold Rani" type="text" id="username" class="form-control" name="name" required/><span id="fabricNameValidate"></span> 
+                      <input placeholder="Gold Rani" type="text" id="username" class="form-control" name="name" required/><span id="message"></span> 
                     </div>
                   </div>
                   <div class="col-md-6">

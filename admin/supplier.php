@@ -50,6 +50,10 @@ else if (isset($_GET['deactivateSuccess']))
     $('body').on('keyup','#companyName',function(){
       var user = $(this).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#companyName').val('');
+      }else{
       $.post('supplier-check.php',{companyName : user}, function(data){ 
         $('#companyNameValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -78,6 +82,7 @@ else if (isset($_GET['deactivateSuccess']))
           $('#companyName').css('border-color','limegreen');
         }
       });
+    }
     });
 
 
@@ -85,6 +90,10 @@ else if (isset($_GET['deactivateSuccess']))
     $('body').on('keyup','#companyAddress',function(){
       var user = $(this).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#companyAddress').val('');
+      }else{
       $.post('supplier-check.php',{companyAddress : user}, function(data){ 
         $('#companyAddressValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -113,12 +122,17 @@ else if (isset($_GET['deactivateSuccess']))
           $('#companyAddress').css('border-color','limegreen');
         }
       });
+    }
     });
 
     // Telephone Number
     $('body').on('keyup','#telNumber',function(){
       var user = $(this).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#telNumber').val('');
+      }else{
       $.post('supplier-check.php',{telNumber : user}, function(data){ 
         $('#telNumberValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -147,12 +161,17 @@ else if (isset($_GET['deactivateSuccess']))
           $('#telNumber').css('border-color','limegreen');
         }
       });
+    }
     });
 
     // Contact Person
     $('body').on('keyup','#contactPerson',function(){
       var user = $(this).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#contactPerson').val('');
+      }else{
       $.post('supplier-check.php',{contactPerson : user}, function(data){ 
         $('#contactPersonValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -181,12 +200,17 @@ else if (isset($_GET['deactivateSuccess']))
           $('#contactPerson').css('border-color','limegreen');
         }
       });
+    }
     });
 
     // Position
     $('body').on('keyup','#position',function(){
       var user = $(this).val();
       var flag = true;
+      if(user == '\\'){
+        user.replace('\\', "");
+        $('#position').val('');
+      }else{
       $.post('supplier-check.php',{position : user}, function(data){ 
         $('#positionValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -215,6 +239,7 @@ else if (isset($_GET['deactivateSuccess']))
           $('#position').css('border-color','limegreen');
         }
       });
+    }
     });
 
   });
@@ -224,12 +249,21 @@ var tempname;
 var error = 0;
 var flag = true;
 
+    var userkey = '';
+
   function updateValidate(id){
     var user = $('#edit'+id).val();
 
-    
       tempname = $('#edit'+id).val();
       temprem = $('#rem').val();
+      
+    userkey = $('#edit'+id).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#edit'+id).val(
+        user.slice(0, user.length - 1));
+      }else{
     $.post('supplier-ucheck.php',{username : user}, function(data){
      
      if(data == 'unchanged'){
@@ -274,7 +308,7 @@ var flag = true;
 
 
     });
-
+  }
 
   }
 
