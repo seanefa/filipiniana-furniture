@@ -8,13 +8,13 @@ $fn = $_POST['fn'];
 $addrss = $_POST['addr'];
 $cont = $_POST['cont'];
 $emailadd = $_POST['email'];
+$status = 'Active';
 
 
 
 
 
-
-$sql = "INSERT INTO `tblcustomer` (`customerLastName`, `customerFirstName`, `customerMiddleName`, `customerAddress`, `customerContactNum`, `customerEmail`) VALUES ('$ln', '$fn', '$mn', '$addrss', '$cont', '$emailadd')";
+$sql = "INSERT INTO `tblcustomer` (`customerLastName`, `customerFirstName`, `customerMiddleName`, `customerAddress`, `customerContactNum`, `customerEmail`,`customerStatus`) VALUES ('$ln', '$fn', '$mn', '$addrss', '$cont', '$emailadd','$status')";
 
 
 if (mysqli_query($conn, $sql)) {

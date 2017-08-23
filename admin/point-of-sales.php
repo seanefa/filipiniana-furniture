@@ -111,7 +111,7 @@ $('#selectType').on("change",function() {
 });
 });
 
-$('#savedCustomer').on('click', function(){
+$('#savedCustomer').on('focus', function(){
 $.ajax({
   type: 'post',
   url: 'POS-load-customer.php',
