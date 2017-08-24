@@ -18,25 +18,33 @@ if (isset($_GET['newSuccess']))
 {
   echo  '<script>';
   echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastNewSuccess").click();';
-    echo '});';
-echo '</script>';
+  echo 'document.getElementById("toastNewSuccess").click();';
+  echo '});';
+  echo '</script>';
 }
 else if (isset($_GET['updateSuccess']))
 {
   echo  '<script>';
   echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastUpdateSuccess").click();';
-    echo '});';
-echo '</script>';
+  echo 'document.getElementById("toastUpdateSuccess").click();';
+  echo '});';
+  echo '</script>';
 }
 else if (isset($_GET['deactivateSuccess']))
 {
   echo  '<script>';
   echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastDeactivateSuccess").click();';
-    echo '});';
-echo '</script>';
+  echo 'document.getElementById("toastDeactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['reactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastReactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
 }
 
 ?>
@@ -139,29 +147,6 @@ echo '</script>';
     });
 
   });
-  /*  $(document).ready(function(){
-      $("#archiveTable").hide();
-      $("#backArch").hide();
-    $("#showArch").click(function(){
-        $("#tblFrameworkMaterial").hide();
-        $("#archiveTable").show();
-        $("#temptitle").text("");
-        $("#temptitle").text("Archived");
-        $("#tempbtn").hide();
-        $("#showArch").hide();
-        $("#backArch").show();
-    });
-    $("#backArch").click(function(){
-      $("#tblFrameworkMaterial").show();
-        $("#archiveTable").hide();
-        $("#temptitle").text("");
-        $("#temptitle").text("Frame Material");
-        $("#tempbtn").show();
-        $("#showArch").show();
-        $("#backArch").hide();
-    });
-}); */
-
 
 $(function(){ // DOM ready
 
@@ -272,9 +257,44 @@ $(document).ready(function(){
 });
 });
 
+
+$(document).ready(function(){
+  $("#archiveTable").hide();
+  $('#archiveSwitch').change(function(){
+    if($(this).prop("checked")) {
+      $('#archiveTable').show();
+      $('#archiveTitle').css({'display' : ''});
+      $("#tempbtn").hide();
+      $('#mainTable').hide();
+    } else {
+      $('#archiveTable').hide();
+      $('#archiveTitle').css({'display' : 'none'});
+      $('#mainTable').show();
+      $("#tempbtn").show();
+    }
+  });
+
+  // Tooltip only Text
+  $('.masterTooltip').hover(function(){
+          // Hover over code
+          var title = $(this).attr('title');
+          $(this).data('tipText', title).removeAttr('title');
+          $('<p class="tooltipsy"></p>')
+          .text(title)
+          .appendTo('body')
+          .fadeIn('slow');
+  }, function() {
+          // Hover out code
+          $(this).attr('title', $(this).data('tipText'));
+          $('.tooltipsy').remove();
+  }).mousemove(function(e) {
+          var mousex = e.pageX + -100; //Get X coordinates
+          var mousey = e.pageY + -15; //Get Y coordinates
+          $('.tooltipsy')
+          .css({ top: mousey, left: mousex })
+  });
+});
 </script>
-
-
 
 <style>
 #tags{
@@ -325,9 +345,10 @@ $(document).ready(function(){
     <div class="cssload-speeding-wheel"></div>
   </div-->
   <!-- Toast Notification -->
-  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
+<button class="tst1" id="toastNewSuccess" style="display: none;"></button>
+<button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
+<button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
+<button class="tst4" id="toastReactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
@@ -336,18 +357,21 @@ $(document).ready(function(){
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="material-form.php" data-remote="material-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
-                <li role="presentation" class="active">
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-hummer"></i>&nbsp;Materials</a>
-                </li>
-              </ul>
-            </h3>
+                <li role="presentation" class="active" >
+                <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-hummer"></i>&nbsp;<span id="archiveTitle" style="display: none;">Archived</span>&nbsp;<?php echo $titlePage?></a>
+              </li>
+            </ul>
+          </h3>
+          <div class="pull-right" style="margin-right: 20px; margin-top: -10px;">
+            <a href="javascript:void(0)" title="Archives" class="masterTooltip"><input type="checkbox" class="js-switch" id="archiveSwitch" data-color="#f96262" style="display: none;" data-switchery="true"></a>
+          </div>
             <div class="tab-content">
               <!-- FRAMEWORKS -->
               <div role="tabpanel" class="tab-pane fade active in" id=frameworks>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">                 
                     <div class="row">
-                      <div class="table-responsive">
+                      <div class="table-responsive" id="mainTable">
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFrameworkMaterial">
                           <thead>
                             <tr>
@@ -387,6 +411,35 @@ $(document).ready(function(){
                             </table>
                           </div>
                         </div>
+
+                        <div id="archiveTable">
+                          <div class="table-responsive"> 
+                            <table class="table color-bordered-table muted-bordered-table dataTable display">
+                              <thead>
+                                <tr>
+                              <th>Name</th>
+                              <th>Category</th>
+                              <th class="removeSort">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                             $sql = "SELECT * FROM tblmaterials a, tblmat_type b WHERE b.matTypeID = a.materialType";
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result))
+                            {
+                              if($row['materialStatus']=="Archived"){
+                                echo('<tr><td>'.$row['materialName'].'</td>
+                                <td>'.$row['matTypeName'].'</td>'); ?>
+                                <td>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Materials&amp;id=<?php echo $row['materialID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
+                                </td>
+                                <?php echo('</tr>');} }
+                                ?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
                       </div>
                     </div>
                   </div>

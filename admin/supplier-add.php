@@ -27,10 +27,7 @@ if (mysqli_query($conn,$sql)) {
 	//And yes hard coded yang mga yan
 header( "Location: supplier.php?newSuccess" );
 } 
-else {
-	// Logs end here
-	header( "Location: supplier.php?newSuccess" );
-	} else {
+ else {
 	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
   }
 mysqli_close($conn);

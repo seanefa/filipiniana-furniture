@@ -36,7 +36,7 @@ if(!isset($_SESSION["userID"]))
   <!-- DataTable CSS -->
   <link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <link href="plugins/bower_components/datatables/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+  <link href="plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
   <!-- Timeline CSS -->
   <!--link href="../plugins/bower_components/horizontal-timeline/css/horizontal-timeline.css" rel="stylesheet">
   <link href="../plugins/bower_components/timeliner/src/css/jquery-timeliner.css" rel="stylesheet">
@@ -60,6 +60,9 @@ if(!isset($_SESSION["userID"]))
   <link href="css/literallycanvas.css" rel="stylesheet">
   <!-- CornerRibbons CSS -->
   <link href="css/cornerribbons.css" rel="stylesheet">
+  <!-- Switchery CSS -->  
+  <link href="plugins/bower_components/switchery/dist/switchery.min.css" rel="stylesheet" />
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -294,67 +297,6 @@ if(!isset($_SESSION["userID"]))
               <li><a href="branches.php">Branches</a></li>
             </ul>
           </li>
-          <li><a href="javascript:void(0)" class="waves-effect">Archives<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level animated fadeIn">
-              <li><a href="archived-unit-of-measurement.php">Unit of Measurement</a></li>
-
-              <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level animated fadeIn">
-				  <li><a href="archived-material-attribute.php">Material Attributes</a></li>
-                  <li><a href="archived-material-type.php">Material Type</a></li>
-				  <li><a href="archived-material.php">Materials</a></li>
-                  <li><a href="archived-material-variants.php">Material Variants</a></li>
-                </ul>
-              </li>
-
-              <li><a href="javascript:void(0)" class="waves-effect">Furniture<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="javascript:void(0)" class="waves-effect">Design<span class="fa arrow"></span></a>
-                    <ul class="nav nav-fifth-level animated fadeIn">
-                      <li><a href="javascript:void(0)" class="waves-effect">Fabric<span class="fa arrow"></span></a>
-                        <ul class="nav nav-sixth-level animated fadeIn">
-                          <li><a href="archived-fabric-texture.php">Textures</a></li>
-                          <li><a href="archived-fabric-type.php">Types</a></li>
-                          <li><a href="archived-fabric-pattern.php">Patterns</a></li>
-                          <li><a href="archived-fabrics.php">Fabrics Formed</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <ul class="nav nav-fifth-level animated fadeIn">
-                      <li><a href="javascript:void(0)" class="waves-effect">Frame<span class="fa arrow"></span></a>
-                        <ul class="nav nav-sixth-level animated fadeIn">
-                          <li><a href="archived-framework-design.php">Designs</a></li>
-                          <li><a href="archived-framework-material.php">Materials</a></li>
-                          <li><a href="archived-frameworks.php">Frameworks</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li> 
-                  <li><a href="archived-categories.php">Categories</a></li>
-                  <li><a href="archived-furniture-type.php">Types</a></li>
-                  <li><a href="archived-products.php">Products</a></li>
-                </ul>
-              </li>
-
-              <li><a href="archived-packages.php">Packages</a></li>
-              <li><a href="javascript:void(0)">Production Information</a></li>
-
-              <li><a href="javascript:void(0)" class="waves-effect">Manpower<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="archived-jobs.php">Jobs</a></li>
-                  <li><a href="archived-employees.php">Employees</a></li>
-                </ul>
-              </li>
-
-              <li><a href="javascript:void(0)" class="waves-effect">Promos & Delivery Rates<span class="fa arrow"></span></a>
-                <ul class="nav nav-fourth-level animated fadeIn">
-                  <li><a href="archived-promos.php">Promos</a></li>
-                  <li><a href="archived-delivery-rates.php">Delivery Rates</a></li>
-                </ul>
-              </li>
-
-            </ul>
-          </li>
           <li><a href="users.php">Users</a></li>
           <li><a href="mode-of-payment.php">Mode of Payment</a></li>
           <li><a href="penalties.php">Penalties</a></li>
@@ -414,6 +356,9 @@ if(!isset($_SESSION["userID"]))
   <script src="plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
   <!-- Style Switcher -->
   <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+  <!-- Switchery -->
+  <script src="plugins/bower_components/switchery/dist/switchery.min.js"></script>
+  <script src="js/admin/menu/switchery-init.js"></script>  
   <!-- Toastr -->
   <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
   <script src="js/toastr.js"></script>

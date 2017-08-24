@@ -38,6 +38,14 @@ else if (isset($_GET['deactivateSuccess']))
   echo '});';
   echo '</script>';
 }
+else if (isset($_GET['reactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastReactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
 
 ?>
 <!DOCTYPE html>  
@@ -181,28 +189,42 @@ var error = 0;
 });
 });
 
-   /* $(document).ready(function(){
-      $("#archiveTable").hide();
-      $("#backArch").hide();
-    $("#showArch").click(function(){
-        $("#tblFabricTexture").hide();
-        $("#archiveTable").show();
-        $("#temptitle").text("");
-        $("#temptitle").text("Archived");
-        $("#tempbtn").hide();
-        $("#showArch").hide();
-        $("#backArch").show();
-    });
-    $("#backArch").click(function(){
-      $("#tblFabricTexture").show();
-        $("#archiveTable").hide();
-        $("#temptitle").text("");
-        $("#temptitle").text("Fabric Texture");
-        $("#tempbtn").show();
-        $("#showArch").show();
-        $("#backArch").hide();
-    });
-}); */
+$(document).ready(function(){
+  $("#archiveTable").hide();
+  $('#archiveSwitch').change(function(){
+    if($(this).prop("checked")) {
+      $('#archiveTable').show();
+      $('#archiveTitle').css({'display' : ''});
+      $("#tempbtn").hide();
+      $('#mainTable').hide();
+    } else {
+      $('#archiveTable').hide();
+      $('#archiveTitle').css({'display' : 'none'});
+      $('#mainTable').show();
+      $("#tempbtn").show();
+    }
+  });
+
+  // Tooltip only Text
+  $('.masterTooltip').hover(function(){
+          // Hover over code
+          var title = $(this).attr('title');
+          $(this).data('tipText', title).removeAttr('title');
+          $('<p class="tooltipsy"></p>')
+          .text(title)
+          .appendTo('body')
+          .fadeIn('slow');
+  }, function() {
+          // Hover out code
+          $(this).attr('title', $(this).data('tipText'));
+          $('.tooltipsy').remove();
+  }).mousemove(function(e) {
+          var mousex = e.pageX + -100; //Get X coordinates
+          var mousey = e.pageY + -15; //Get Y coordinates
+          $('.tooltipsy')
+          .css({ top: mousey, left: mousex })
+  });
+});
 
   </script>
 </head>
@@ -212,9 +234,10 @@ var error = 0;
     <div class="cssload-speeding-wheel"></div>
   </div-->
   <!-- Toast Notification -->
-  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
+<button class="tst1" id="toastNewSuccess" style="display: none;"></button>
+<button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
+<button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
+<button class="tst4" id="toastReactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
@@ -224,18 +247,20 @@ var error = 0;
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="umeasure-form.php" data-remote="umeasure-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active" >
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-ruler-alt-2"></i>&nbsp;<?php echo $titlePage?></a>
-                </li>
-              </ul>
-            </h3>
-
+                <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-ruler-alt-2"></i>&nbsp;<span id="archiveTitle" style="display: none;">Archived</span>&nbsp;<?php echo $titlePage?></a>
+              </li>
+            </ul>
+          </h3>
+          <div class="pull-right" style="margin-right: 20px; margin-top: -10px;">
+            <a href="javascript:void(0)" title="Archives" class="masterTooltip"><input type="checkbox" class="js-switch" id="archiveSwitch" data-color="#f96262" style="display: none;" data-switchery="true"></a>
+          </div>
             <div class="tab-content">
               <!-- FABRIC TYPE -->
               <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">      
                     <div class="row">
-                      <div class="table-responsive"> 
+                      <div class="table-responsive" id="mainTable"> 
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                           <thead>
                             <tr>
@@ -251,7 +276,7 @@ var error = 0;
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['unStatus'] !="Archived"){
+                                if($row['unStatus']=="Active"){
                                   echo('<tr>
                                     <td>'.$row['unType'].'</td>
                                     <td>'.$row['unUnit'].'</td>
@@ -278,6 +303,36 @@ var error = 0;
                               </table>
                             </div>
                           </div>
+
+                        <div id="archiveTable">
+                          <div class="table-responsive"> 
+                            <table class="table color-bordered-table muted-bordered-table dataTable display">
+                              <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Unit</th>
+                              <th class="removeSort">Actions</th>
+                            </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                              $sql = "SELECT * FROM tblunitofmeasure;";
+                              $result = mysqli_query($conn, $sql);
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+                                if($row['unStatus']=="Archived"){
+                                  echo('<tr>
+                                    <td>'.$row['unType'].'</td>
+                                    <td>'.$row['unUnit'].'</td>
+                                    '); ?>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Unit+Of+Measurement&amp;id=<?php echo $row['unID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
+                                    </td>
+                                    <?php echo ('</tr>'); }}?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
                         </div>
                       </div>
                     </div>
