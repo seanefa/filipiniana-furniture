@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var url = window.location.href.split(location.search||location.hash||/[?#]/)[0];
+  var url = window.location.href.split(location.search||location.hash||/[?#]/)[0];s
   var element = $('ul.nav a').filter(function () {
     return this.href == url;
   });
