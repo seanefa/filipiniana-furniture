@@ -19,3 +19,4 @@ CHANGELOG
 
 24/08/2017
 * Added archives on all maintenance.
+* Improved sidebar menu.
