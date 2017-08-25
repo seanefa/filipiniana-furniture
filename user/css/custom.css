@@ -5,7 +5,7 @@ a.navbar-brand:focus,
 .carousel-control-next:hover{transition:opacity 300ms ease;}
 .carousel-control-prev:hover{transition:opacity 300ms ease;}
 .text-web{color: #105170;}
-.bg-web{background-color: #105170;color: white;}
+.bg-web{background-color: #47382b;color: white;}
 .border-web{border: solid 2px #105170;}
 .btn-web{background-color: #105170;color: white;}
 .btn-web:hover{animation: webdarker .5s;animation-fill-mode: forwards;}

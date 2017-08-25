@@ -18,13 +18,13 @@ footer {
 
 .footer-ul { list-style-type:none;  padding-left:0; margin-left:2px;}
 .footer-ul li { line-height:29px; font-size:12px;}
-.footer-ul li a { color:#a0a3a4; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
+.footer-ul li a { color:#fff; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
 .footer-ul i { margin-right:10px;}
-.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: honeydew; }
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: coral; }
 
  .copyright { min-height:40px; background-color:#000000;}
  .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0;}
- .heading7 { font-size:21px; font-weight:700; color:#d9d6d6; margin-bottom:22px;}
+ .heading7 { font-size:21px; font-weight:700; color:#fff; margin-bottom:22px;}
  .post p { font-size:12px; color:#FFF; line-height:20px;}
  .post p span { display:block; color:#8f8f8f;}
  .bottom_ul { list-style-type:none; float:right; margin-bottom:0;}
@@ -66,4 +66,9 @@ footer {
 .socialicons:hover {
   -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
+}
+.bg-wood2{
+	background-image: url("images/pexels-photo-281513.jpeg");
+	background-size: cover;
+	background-attachment: fixed;
 }

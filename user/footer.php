@@ -1,4 +1,7 @@
-<footer class="bg-web">
+<head>
+	<link rel="stylesheet" href="css/footer.css">
+</head>
+<footer class="bg-wood2">
 	<?php
 		include "userconnect.php";
 		$sql="SELECT * from tblcompany_info";
