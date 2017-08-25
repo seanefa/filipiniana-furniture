@@ -1,0 +1,5 @@
+.bg-wood{
+  /*background-image: url('images/wood.jpg');*/
+  background-image: url("images/wood.jpg");
+	background-attachment: fixed;
+}

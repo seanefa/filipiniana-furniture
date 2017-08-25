@@ -1,4 +1,31 @@
-<nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-web-faded img-fluid">
+<div class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<?php
+				include "userconnect.php";
+				$sql="SELECT * from tblcompany_info";
+				$result=$conn->query($sql);
+				if($result->num_rows>0){
+					while($row=$result->fetch_assoc()){
+				?>
+					<img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>">
+				<?php
+					}
+				}
+				?>
+			</div>
+			<div class="col-12 col-sm-6 col-md-8 col-lg-9 col-xl-10 text-right">
+				<br>
+				<form class="form-inline">
+					<input type="text" class="form-control"/>&nbsp;
+					<button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-web img-fluid" data-spy="affix" data-offset-top="197">
  	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
   	</button>
@@ -11,7 +38,6 @@
 			while($row=$result->fetch_assoc())
 			{
 		?>
-			<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">&nbsp;
 			<a class="navbar-brand" href="userhome.php"><?php echo "" . $row['comp_name'];?></a>
 		<?php
 			}
