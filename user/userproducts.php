@@ -2,38 +2,25 @@
 <html>
 	<head>
 		<title>Products - Filipiniana Furnitures</title>
-		<!--meta tags-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="x-ua-compatible" content="ie-edge">
 		<link rel="icon" href="pics/filfurniturelogo.png">
-		<!--bootstrap 4-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!--custom css-->
-		<link rel="stylesheet" href="css/custom.css">
-		<!--google icons-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!--font awesome icons-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--my css-->
-		<link rel="stylesheet" href="css/myStyle.css">
-		<link rel="stylesheet" href="css/footer.css">
-		<!--popovers-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
-		<!--javascript-->
 		<script src="myScript.js"></script>
-		<link rel="icon" href="pics/filfurniturelogo.png">
+		<link  rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/footer.css">
 	</head>
 	<body>
 		<!--navbar-->
-		<div class="container-fluid">
-			<div class="row">
-				<!--navbar-->
-				<?php
-				include "header.php";
-				?>
-			</div>
-		</div>
+		<?php
+		include "header.php";
+		?>
 		<!--product type-->
 		<div class="jumbotron-fluid">
 			<hr>
@@ -109,108 +96,31 @@
 				?>
 			</div>
 			<br>
-			<ul class="pagination text-center">
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&larr;</span>
-						<span class="sr-only">Previous</span>
-					</a>
-				</li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&rarr;</span>
-						<span class="sr-only">Next</span>
-					</a>
-				</li>
-			</ul>
+			<div class="text-center">
+				<ul class="pagination text-center">
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&larr;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+					</li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&rarr;</span>
+							<span class="sr-only">Next</span>
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<br>
 		<!--footer-->
 		<?php
 		include 'footer.php';
 		?>
-		<!--signup modal-->
-		<div class="modal fade" id="signupmodal">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h6 class="modal-title"><i class="fa fa-user-plus"></i>&nbsp;Sign up</h6>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form action="newuser.php" method="post">
-							<div class="form-group row">
-								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-										<input type="text" class="form-control" placeholder="*First Name" name="fname" required/>
-								</div>
-								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-									<input type="text" class="form-control" placeholder="*Middle Name" name="mname" required/>
-								</div>
-								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-									<input type="text" class="form-control" placeholder="*Last Name" name="lname" required/>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-									<textarea type="text" class="form-control" placeholder="*Address" name="address" required></textarea><br>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="email" class="form-control" placeholder="*Email" name="email" required/><br>
-								</div>
-								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="text" class="form-control" placeholder="*Contact Number" name="number" required/>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="text" class="form-control" placeholder="*Username" name="uname" required/><br>
-								</div>
-								<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-									<input type="password" class="form-control" placeholder="*Password" name="upass" required/><br>
-									<input type="password" class="form-control" placeholder="*Confirm Password" name="cpass" required/><br>
-								</div>
-							</div>
-							<div class="form-group row text-center">
-								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-									<div class="btn-group" role="group">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i>&nbsp;Save</button>
-										<button type="reset" class="btn btn-warning"><i class="fa fa-minus-circle"></i>&nbsp;Clear</button>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i lass="fa fa-times-circle"></i>&nbsp;Cancel</button>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--login modal-->
-		<div class="modal fade" id="loginmodal">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h6><i class="fa fa-sign-in"></i>&nbsp;Log In</h6>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body text-center">
-						<form class="form-group" action="uservalidate.php" method="post">
-							<input type="text" class="form-control" name="username" placeholder="*Username" required/><br>
-							<input type="password" class="form-control" name="password" placeholder="*Password" required/><br>
-							<button role="button" type="submit" class="btn btn-web">Log in</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!--cart-->
 		<div class="modal fade" id="myCart">
 			<div class="modal-dialog modal-lg" role="document">

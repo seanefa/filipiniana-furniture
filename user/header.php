@@ -1,6 +1,3 @@
-<head>
-	<link rel="stylesheet" href="css/header.css">
-</head>
 <div class="container-fluid bg-wood">
 	<div class="container">
 		<div class="row">
@@ -17,15 +14,6 @@
 					}
 				}
 				?>
-			</div>
-			<div class="col-12 col-sm-6 col-md-8 col-lg-9 col-xl-10 text-right">
-				<br>
-				<div class="text-right">
-					<form class="form-inline text-right">
-						<input type="text" class="form-control"/>&nbsp;
-						<button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -63,15 +51,6 @@
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info"></span></a>
 			</li>
-	  		<li class="nav-item dropdown">
-					<a class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">
-						<i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNTS
-					</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" data-toggle="modal" href="" data-target="#loginmodal">Log In</a>
-						<a class="dropdown-item" data-toggle="modal" href="" data-target="#signupmodal">Sign Up</a>
-					</div>
-	  		</li>
 		</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -141,9 +120,9 @@
 							<div class="form-group row text-center">
 								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 									<div class="btn-group" role="group">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i>&nbsp;Save</button>
-										<button type="reset" class="btn btn-warning"><i class="fa fa-minus-circle"></i>&nbsp;Clear</button>
-										<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i lass="fa fa-times-circle"></i>&nbsp;Cancel</button>
+										<button type="submit" class="btn btn-primary">Save</button>
+										<button type="reset" class="btn btn-warning">Clear</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
 									</div>
 								</div>
 							</div>
@@ -154,7 +133,7 @@
 		</div>
 		<!--login modal-->
 		<div class="modal fade" id="loginmodal">
-			<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h6><i class="fa fa-sign-in"></i>&nbsp;Log In</h6>
@@ -166,7 +145,11 @@
 						<form class="form-group" action="uservalidate.php" method="post">
 							<input type="text" class="form-control" name="username" placeholder="*Username" required/><br>
 							<input type="password" class="form-control" name="password" placeholder="*Password" required/><br>
-							<button role="button" type="submit" class="btn btn-web">Log in</button>
+							<div class="btn-group" role="group">
+								<button type="submit" class="btn btn-primary">Log In</button>
+								<button type="reset" class="btn btn-warning">Clear</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+							</div>
 						</form>
 					</div>
 				</div>

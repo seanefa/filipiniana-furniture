@@ -11,26 +11,26 @@ li{
 footer { 
 	background: linear-gradient(to right, #105170);; min-height:350px; font-family: 'Open Sans', sans-serif; }
 .footer-col { margin-top:50px; }
-.logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
+.logofooter { margin-bottom:10px; font-size:25px; color:#000; font-weight:700;}
 
-.footer-col p { color:#fff; font-size:12px; font-family: 'Open Sans', sans-serif; margin-bottom:15px;}
+.footer-col p { color:#000; font-size:12px; font-family: 'Open Sans', sans-serif; margin-bottom:15px;}
 .footer-col p i { width:20px; color:#999;}
 
 .footer-ul { list-style-type:none;  padding-left:0; margin-left:2px;}
 .footer-ul li { line-height:29px; font-size:12px;}
-.footer-ul li a { color:#fff; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
+.footer-ul li a { color:#000; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
 .footer-ul i { margin-right:10px;}
-.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: coral; }
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: saddlebrown; text-decoration: none;}
 
  .copyright { min-height:40px; background-color:#000000;}
- .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0;}
- .heading7 { font-size:21px; font-weight:700; color:#fff; margin-bottom:22px;}
- .post p { font-size:12px; color:#FFF; line-height:20px;}
+ .copyright p { text-align:left; color:#000; padding:10px 0; margin-bottom:0;}
+ .heading7 { font-size:21px; font-weight:700; color:#000; margin-bottom:22px;}
+ .post p { font-size:12px; color:#000; line-height:20px;}
  .post p span { display:block; color:#8f8f8f;}
  .bottom_ul { list-style-type:none; float:right; margin-bottom:0;}
  .bottom_ul li { float:left; line-height:40px;}
- .bottom_ul li:after { content:"/"; color:#FFF; margin-right:8px; margin-left:8px;}
- .bottom_ul li a { color:#FFF;  font-size:12px;}
+ .bottom_ul li:after { content:"/"; color:#000; margin-right:8px; margin-left:8px;}
+ .bottom_ul li a { color:#000;  font-size:12px;}
 .social-icon {
     width: 30px;
     height: 30px;
@@ -68,7 +68,8 @@ footer {
           transform: rotate(360deg);
 }
 .bg-wood2{
-	background-image: url("images/pexels-photo-281513.jpeg");
+	background-image: url("images/woodbg.jpg");
 	background-size: cover;
+	background-position: top;
 	background-attachment: fixed;
 }

@@ -1,4 +1,6 @@
 .bg-wood{
-	background-image: url("images/wood.jpg");
+	background-image: url("images/woodbg.jpg");
 	background-attachment: fixed;
+	background-size: cover;
+	background-position: top;
 }
