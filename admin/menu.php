@@ -358,7 +358,7 @@ if(!isset($_SESSION["userID"]))
   <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
   <!-- Switchery -->
   <script src="plugins/bower_components/switchery/dist/switchery.min.js"></script>
-  <script src="js/admin/menu/switchery-init.js"></script>  
+  <script src="js/admin/menu/archive-button.js"></script>  
   <!-- Toastr -->
   <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
   <script src="js/toastr.js"></script>
