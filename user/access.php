@@ -35,18 +35,22 @@ if(!isset($_SESSION["userID"]))
 			<hr>
 			<h1 class="text-center"><b>PROFILE</b></h1>
 			<hr>
+			<div class="text-center">
+				<a class="btn btn-web" href="accessprofilesettings.php">Profile Settings</a>
+			</div>
 		</div>
+		<br>
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 					<h3 class="text-center">Recently Ordered Furnitures</h3>
-					
+
 					<div class="">
 					</div>
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 					<h3 class="text-center">Your Designs Furnitures</h3>
-					
+
 					<div class="">
 					</div>
 				</div>

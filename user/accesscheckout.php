@@ -8,79 +8,34 @@ if(!isset($_SESSION["userID"]))
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Filipiniana Furnitures - Check out</title>
-		<!--meta tags-->
+		<title>Check out - Filipiniana Furnitures</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="x-ua-compatible" content="ie-edge">
-		<!--bootstrap 4-->
+		<link rel="icon" href="pics/filfurniturelogo.png">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!--custom css-->
-		<link rel="stylesheet" href="custom.css">
-		<!--scripts-->
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<!--google icons-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!--font awesome icons-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--my css-->
-		<link rel="stylesheet" href="myStyle.css">
-		<!--javascript-->
 		<script src="js/myScript.js"></script>
-		<link rel="icon" href="pics/filfurniturelogo.png">
+		<link  rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/footer.css">
 	</head>
 	<body>
-		<div class="jumbotron-fluid">
-			<div class="row">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<!--navbar-->
-					<br><br>
-					<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
-					 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					  	</button>
-						<?php
-						include "userconnect.php";
-						$sql="SELECT * from tblcompany_info";
-						$result=$conn->query($sql);
-						if($result->num_rows>0)
-						{
-							while($row=$result->fetch_assoc())
-							{
-						?>
-						<a class="navbar-brand" href="access.php"><?php echo "" . $row['comp_name'];?></a>
-						<?php
-							}
-						}
-						$conn->close();
-						?>
-					  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto">
-						  		<li class="nav-item">
-									<a class="nav-link" href="access.php"><i class="fa fa-user-circle-o"></i>&nbsp;ACCOUNT <span class="sr-only">(current)</span></a>
-						  		</li>
-						  		<li class="nav-item active">
-									<a class="nav-link" href="accessproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accesscustom.php"><i class="fa fa-hand-pointer-o"></i>&nbsp;CUSTOMIZE</a>
-						  		</li>
-						  		<li class="nav-item">
-									<a class="nav-link" href="accessproduction.php"><i class="fa fa-cog fa-spin"></i>&nbsp;PRODUCTION</a>
-						  		</li>
-							</ul>
-					  	</div>
-					</nav>
-				</div>
-			</div>
-		</div>
+		<?php
+		include "accessheader.php";
+		?>
 		<!--checkout-->
-		<div class="container">
-			<br>
+		<div class="jumbotron-fluid">
+			<hr>
 			<h1 class="text-center"><b>CHECK OUT</b></h1>
-			<br>
+			<hr>
+		</div>
+		<div class="container">
 			<form action="accessorder.php" method="post">
 				<h6 class="text-center"><b>Order Information</b></h6>
 				<br>
@@ -162,8 +117,11 @@ if(!isset($_SESSION["userID"]))
 					<input type="submit" class="text-center btn btn-web" value="Save and Print">
 				</div>
 			</form>
-			<br>
 		</div>
+		<br>
+		<?php
+		include "accessfooter.php";
+		?>
 <!--
 			<div class="jumbotron-fluid">
 				<div class="row">
