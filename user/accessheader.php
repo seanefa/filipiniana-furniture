@@ -40,22 +40,22 @@
 				  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 					  		<li class="nav-item">
-								<a class="nav-link" href="accesshome.php"><i class="fa fa-home"></i>&nbsp;HOME</a>
+								<a class="nav-link" href="accesshome.php">Home</a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="access.php"><i class="fa fa-user-circle-o"></i>&nbsp;PROFILE <span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="access.php">Proifle<span class="sr-only">(current)</span></a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="accessproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
+								<a class="nav-link" href="accessproducts.php">Products</a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="accesspromos.php"><i class="fa fa-gift"></i>&nbsp;PROMOS</a>
+								<a class="nav-link" href="accesspromos.php">Promos</a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="custom.php"><i class="fa fa-hand-pointer-o"></i>&nbsp;CUSTOMIZE</a>
+								<a class="nav-link" href="custom.php">Customize</a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="accessproduction.php"><i class="fa fa-cog fa-spin"></i>&nbsp;PRODUCTION</a>
+								<a class="nav-link" href="accessproduction.php">Production</a>
 					  		</li>
 						</ul>
 						<!-- Right Side Of Navbar -->

@@ -40,24 +40,24 @@
   	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 	  		<li class="nav-item">
-				<a class="nav-link" href="userhome.php"><i class="fa fa-home"></i>&nbsp;HOME <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="userhome.php">Home<span class="sr-only">(current)</span></a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userproducts.php"><i class="fa fa-bed"></i>&nbsp;PRODUCTS</a>
+				<a class="nav-link" href="userproducts.php">Products</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php"><i class="fa fa-gift"></i>&nbsp;PROMOS</a>
+				<a class="nav-link" href="userpromos.php">Promos</a>
 	  		</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="modal" data-target="#myCart" href=""><span class="fa fa-shopping-cart"></span>&nbsp;CART&nbsp;<span class="badge text-info"></span></a>
+				<a class="nav-link" data-toggle="modal" data-target="#myCart" href="">Cart&nbsp;<span class="badge text-info"></span></a>
 			</li>
 		</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#signupmodal"><span class="fa fa-user-plus">&nbsp;Sign Up</span></a>
+					<a class="nav-link" data-toggle="modal" href="#signupmodal">Sign Up</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#loginmodal"><span class="fa fa-sign-in">&nbsp;Log In</span></a>
+					<a class="nav-link" data-toggle="modal" href="#loginmodal">Log In</a>
 				</li>
 			</ul>
 <!--
