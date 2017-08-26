@@ -19,3 +19,12 @@ $(document).ready(function () {
     ]
   });
 });
+
+/*<![CDATA[
+jQuery(function($) { 'use strict';
+  $("#printReceipt").find('.print-link').on('click', function() {
+      //Print ele2 with default options
+      $.print("#printReceipt");
+    });
+});
+]]>*/
