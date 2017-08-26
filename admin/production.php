@@ -29,7 +29,7 @@ if(!isset($_SESSION["userID"]))
 		<!--my css-->
 		<link rel="stylesheet" href="myStyle.css">
 		<!--javascript-->
-		<script src="myScript.js"></script>
+		<script src="js/myScript.js"></script>
 	</head>
 	<body>
 		<div class="jumbotron-fluid">

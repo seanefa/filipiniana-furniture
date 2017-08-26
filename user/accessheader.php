@@ -43,7 +43,7 @@
 								<a class="nav-link" href="accesshome.php">Home</a>
 					  		</li>
 					  		<li class="nav-item">
-								<a class="nav-link" href="access.php">Proifle<span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="access.php">Profile<span class="sr-only">(current)</span></a>
 					  		</li>
 					  		<li class="nav-item">
 								<a class="nav-link" href="accessproducts.php">Products</a>

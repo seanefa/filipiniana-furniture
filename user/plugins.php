@@ -17,5 +17,5 @@
 		<!--popovers-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
 		<!--javascript-->
-		<script src="myScript.js"></script>
+		<script src="js/myScript.js"></script>
 		<link rel="icon" href="pics/filfurniturelogo.png">

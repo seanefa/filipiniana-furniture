@@ -26,7 +26,7 @@ $result=$conn->query($sql);
   	{
 		if($id=="customer")
 		{
-			header("Location: access.php");
+			header("Location: accesshome.php");
 		}
   	}
   	else
