@@ -266,7 +266,7 @@ if(!isset($_SESSION["userID"]))
           <li><a href="product-management.php">Product Management</a></li>
           <li><a href="javascript:void(0)" class="waves-effect">Order Management<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
-              <li><a href="shop.php">Shop</a></li>
+              <li><a href="ordering.php">Ordering</a></li>
               <li><a href="orders.php">Orders</a></li>
               <li><a href="collections.php">Collections</a></li>
             </ul>

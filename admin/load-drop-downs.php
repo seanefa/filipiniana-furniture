@@ -5,16 +5,21 @@ $id = $_POST["id"];
 $type = $_POST["type"];	
 
 if($type==1){
+  $ctr = 0;
   $sql = "SELECT * FROM tblfurn_type WHERE typeCategoryID = '$id' ORDER BY typeName ASC";
   $res = mysqli_query($conn,$sql);
-  echo '<option>Choose a Type</option>';
   while($row = mysqli_fetch_assoc($res)){
     if($row['typeStatus']=='Listed'){
       echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
     }
+    $ctr++;
+  }
+  if($ctr==0){
+      echo('<option value="0">Nothing to show</option>');
   }
 }
 else if($type==2){
+  $ctr = 0;
   $sql = "SELECT * FROM tblproduct WHERE prodTypeID = '$id' ORDER BY productName ASC";
   $res = mysqli_query($conn,$sql);
   while($row = mysqli_fetch_assoc($res)){
@@ -22,6 +27,10 @@ else if($type==2){
     if($row['prodStat']!='Archived'){
       echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
     }
+    $ctr++;
+  }
+  if($ctr==0){
+      echo('<option value="0">Nothing to show</option>');
   }
 }
 else if($type==3){
