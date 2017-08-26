@@ -9,34 +9,38 @@ if(!isset($_SESSION["userID"]))
 
 <html>
 	<head>
-		<?php
-		include "plugins.php";
-		?>
 		<title>Production - Filipiniana Furnitures</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="x-ua-compatible" content="ie-edge">
+		<link rel="icon" href="pics/filfurniturelogo.png">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<script src="myScript.js"></script>
+		<link  rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/footer.css">
 	</head>
 	<body>
-		<div class="jumbotron-fluid">
-			<div class="row">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 					<!--navbar-->
-					<br><br>
 					<?php
 					include "accessheader.php";
 					?>
-				</div>
-			</div>
-		</div>
 		<div class="jumbotron-fluid">
-			<br>
 			<!--account-->
 			<hr>
-			<h1 class="text-center"><b>FURNITURE PRODUCTION</b></h1>
+			<h1 class="text-center"><b>PRODUCTION</b></h1>
 			<hr>
 			<div class="container">
 				<div class="row">
 					<?php
 					include "userconnect.php";
-					$sql="SELECT production.*, request.*, product.* from tblproduction as production join tblorder_request as request on production.productionOrderReq = request.order_requestID join tblproduct as product on request.orderProductID = product.productID";
+					$sql="SELECT production.*, request.*, product.*, orders.*, customer.* from tblproduction as production join tblorder_request as request join tblproduct as product join tblorders as orders join tblcustomer as customer WHERE production.productionOrderReq = request.order_requestID and request.orderProductID = product.productID and request.tblOrdersID = orders.orderID and orders.custOrderID = customer.customerID and customer.customerID = 1";
 					$result=$conn->query($sql);
 					if($result->num_rows>0)
 					{

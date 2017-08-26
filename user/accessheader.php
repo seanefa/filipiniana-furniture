@@ -1,22 +1,27 @@
-
-				<nav class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md fixed-top navbar-inverse bg-web-faded">
-				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				  <?php
+<div class="container-fluid bg-wood">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+				<?php
 				include "userconnect.php";
 				$sql="SELECT * from tblcompany_info";
 				$result=$conn->query($sql);
-				if($result->num_rows>0)
-				{
-					while($row=$result->fetch_assoc())
-					{
+				if($result->num_rows>0){
+					while($row=$result->fetch_assoc()){
 				?>
-					<img class="mx-auto d-block img-fluid" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">&nbsp;
+					<img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>">
 				<?php
 					}
 				}
 				?>
+			</div>
+		</div>
+	</div>
+</div>
+				<nav class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md sticky-top navbar-inverse bg-web">
+				 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				  </button>
 					<?php
 					include "userconnect.php";
 					$sql="SELECT * from tblcustomer where customerID='" . $_SESSION["userID"] . "'";
@@ -34,6 +39,9 @@
 					?>
 				  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
+					  		<li class="nav-item">
+								<a class="nav-link" href="accesshome.php"><i class="fa fa-home"></i>&nbsp;HOME</a>
+					  		</li>
 					  		<li class="nav-item">
 								<a class="nav-link" href="access.php"><i class="fa fa-user-circle-o"></i>&nbsp;PROFILE <span class="sr-only">(current)</span></a>
 					  		</li>

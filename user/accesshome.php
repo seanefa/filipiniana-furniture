@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["userID"]))
+{
+	header("Location: error.html");
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,7 +28,7 @@
 	<body>
 		<!--navbar-->
 		<?php
-		include "header.php";
+		include "accessheader.php";
 		?>
 		<div class="container-fluid">
 			<div class="row">
@@ -134,7 +141,7 @@
 		<a href="" id="scroll-to-top"></a>
 		<!--footer-->
 		<?php
-		include 'footer.php';
+		include 'accessfooter.php';
 		?>
 <!--footer start from here-->
 

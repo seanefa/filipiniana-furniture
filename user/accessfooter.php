@@ -1,3 +1,6 @@
+<head>
+	<link rel="stylesheet" href="css/footer.css">
+</head>
 <footer class="bg-wood2">
 	<?php
 		include "userconnect.php";
@@ -20,10 +23,9 @@
 				  <div class="col-md-2 col-sm-6 footer-col">
 					<h6 class="heading7">GENERAL LINKS</h6>
 					<ul class="footer-ul">
-					  <li><a href="userhome.php"> Home</a></li>
-					  <li><a href="userproducts.php"> Products</a></li>
+					  <li><a href="access.php"> Profile</a></li>
+					  <li><a href="accessproducts.php"> Products</a></li>
 					  <li><a href="#"> User Manual</a></li>
-					  <li><a href="/admin/login.php"> Log in as admin</a></li>
 					</ul>
 				  </div>
 				  <div class="col-md-3 col-sm-6 footer-col">
