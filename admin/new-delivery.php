@@ -119,32 +119,31 @@ include 'dbconnect.php';
   <title>New Delivery</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
+
+
+
 <body class ="fix-header fix-sidebar">
-  <div id="page-wrapper">
+          <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12">
-          <h4 class="box-title">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+          <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">New Delivery</span></a>
+                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></i></span><span class="hidden-xs"><i class="ti-check-box"></i> New Delivery</span></a>
                 </li>
               </ul>
             </h3>
-          </h4>
-          <div class="orderconfirm">
-            <div class="panel panel-default">
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <form action="save-new-delivery.php" method="post">
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="descriptions">
-                        <div class="col-md-12">
-                          <div class="row">
+            <div class="tab-content">
+              <!-- CATEGORY -->
+              <div role="tabpanel" class="tab-pane fade active in">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                          <div class="row" style="margin-top: -30px;">
                             <div class="col-md-6">
                               <div class="form-group">
-                                <h1 class="control-label">Currently Showing</h1>
+                                <h2 class="control-label" style="text-align: center;">CURRENTLY SHOWING</h2>
                                 <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order" style="text-align:right">
                                   <?php
                                   include "dbconnect.php";
@@ -180,26 +179,31 @@ include 'dbconnect.php';
 
 
                             <div class="col-md-6" > 
-                              <div class="panel-body" style="background-color:#8dcfe7">
-                                <h2 style="border:0px;text-align:center">Delivery Information</h2>
+                              <div class="panel-body blue-gradient">
+                                <h2 style="text-align:center">DELIVERY INFORMATION</h2>
                                 <hr>
-                                <div id="delInfo">
-
+                                <div class="row">
+                                <div id="delInfo"></div>
                                 </div>
                                 <?php
                                 $date = new DateTime();
                                 $date = date_format($date, "Y-m-d");
                                 ?>
-                                <div class="col-md-4">
+                                <div class="row">
+                                <div class="col-md-6">
+                                <div class="row">
                                   <div class="form-group">
-                                    <label class="control-label">Delivery Date</label><span id="x" style="color:red"> *</span>
+                                    <label class="control-label" style="color: white;">Delivery Date</label><span id="x" style="color:red"> *</span>
                                     <input type="date" id="delDate" class="form-control" name="delDate" value="<?php echo $date?>"/> 
                                   </div>
                                 </div>
+                                </div>
+                                </div>
                                 <div class="row">
                                   <div class="col-md-12">
+                                <div class="row">
                                     <div class="form-group">
-                                      <label class="control-label">Delivery Man</label><span id="x" style="color:red"> *</span>
+                                      <label class="control-label" style="color: white;">Delivery Man</label><span id="x" style="color:red"> *</span>
                                       <select class="form-control" data-placeholder="Select Delivery Man" tabindex="1" name="emp">
                                         <?php
                                         include "dbconnect.php";
@@ -214,33 +218,36 @@ include 'dbconnect.php';
                                         ?>
                                       </select>
                                     </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-md-12">
+                                <div class="row">
                                     <div class="form-group">
-                                      <label class="control-label">Remarks</label>
+                                      <label class="control-label" style="color: white;">Remarks</label>
                                       <textarea name="remarks" class="form-control"></textarea>
                                       <br>
                                     </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
                           <div class="row" style="margin:10px">
                             <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save</button>
                           </div>
-                        </form>
-                      </div>
-                    </div>  
-                  </div>
-                </div>
-              </div>
+                              </div>
+                            </div>
+                          </div>
             </div>
-          </div>
-        </div>
-      </body> 
+</div>  
+</div>
+</div>
+<!-- /.container-fluid -->
+<!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
+</div>
+<!-- /#page-wrapper -->
+</div>
+        </body> 
 
       <script type="text/javascript">
       (function(){

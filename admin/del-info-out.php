@@ -8,9 +8,10 @@ $row = mysqli_fetch_assoc($result);
 
 $delAdd = $row['shippingAddress'];
 
-echo '<div class="col-md-6">
+echo '<div class="col-md-6" style="margin-top:"-10px;">
+<div class="row">
 <div class="form-group">
-<b>Delivery Location</b><span id="x" style="color:red"> *</span>
+<label class="control-label">Delivery Location</label><span id="x" style="color:red"> *</span>
 <select class="form-control" data-placeholder="Select Location" tabindex="1" name="location" id="location">
 <option value="">Select Location</option>';
 
@@ -23,13 +24,15 @@ while($delrow = mysqli_fetch_assoc($delresult)){
 echo '</select>
 </div>
 </div>
-<div class="col-md-6">
+</div>
+<div class="col-md-5 pull-right">
+<div class="row">
   <div class="form-group">
-    <b>Delivery Rate</b>
+    <label class="control-label">Delivery Rate</label>
     <input type="text" id="delRate" class="form-control" style="text-align:right;" name="delRate" value="" readonly>
   </div>
 </div>
-<hr>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="form-group">

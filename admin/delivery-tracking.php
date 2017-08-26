@@ -55,8 +55,7 @@ else if (isset($_GET['deactivateSuccess']))
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <a class="btn btn-lg btn-info pull-right" style="color:white;" href="new-delivery.php"><span class="btn-label"><i class="ti-plus"></i> New</a>
-
+                <button id="tempbtn" class="btn btn-lg btn-info pull-right" onclick="location.href='new-delivery.php';" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active">
                   <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-check-box"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
@@ -72,12 +71,12 @@ else if (isset($_GET['deactivateSuccess']))
                         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
                           <thead>
                             <tr>
-                              <th style="text-align:left">Delivery Code</th>
-                              <th style="text-align:left">Order ID</th>
-                              <th style="text-align:center">Customer Name</th>
+                              <th>Delivery Code</th>
+                              <th>Order ID</th>
+                              <th>Customer Name</th>
                               <th style="text-align:right">No. of items</th>
-                              <th style="text-align:center">Status</th>
-                              <th class="removeSort" style="text-align:center">Action</th>
+                              <th>Status</th>
+                              <th class="removeSort">Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -94,17 +93,17 @@ else if (isset($_GET['deactivateSuccess']))
                                 $orderID = getOrderID($row['deliveryID']);
                                 $custName = getCustName($row['deliveryID']);
                                 $quan = getQuan($row['deliveryID']);
-                                  echo('<td style="text-align:left">'. $delID .'</td>
-                                    <td style="text-align:left">'.$orderID.'</td>
-                                    <td style="text-align:center">'.$custName.'</td>
+                                  echo('<td>'. $delID .'</td>
+                                    <td>'.$orderID.'</td>
+                                    <td>'.$custName.'</td>
                                     <td style="text-align:right">'.$quan.'</td>
-                                    <td style="text-align:center">'.$row['deliveryStatus'].'</td>
+                                    <td>'.$row['deliveryStatus'].'</td>
                                     ');?>
-                                    <td style="text-align:center">
+                                    <td>
                                       <!-- VIEW -->
                                       <!--<button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>-->
-                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>
-                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"> Delivery Receipt</button>
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"><i class="ti-receipt"></i> Delivery Receipt</button>
                                     </td>
                                     <?php echo ('</tr>');
                                   
@@ -166,7 +165,7 @@ else if (isset($_GET['deactivateSuccess']))
 </div>
 
 <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal content-->
       <div class="modal-content clearable-content">
