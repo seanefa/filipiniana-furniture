@@ -3,4 +3,4 @@ $(document).ready(function () {
   $('.js-switch').each(function() {
       new Switchery($(this)[0], $(this).data());
   }); 
-});
+});s
