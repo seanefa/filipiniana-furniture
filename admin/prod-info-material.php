@@ -36,7 +36,7 @@ function desc($iid){
 }
 
 //<input type='hidden' class='form-control' name='quan[]' value='". $quan ."'/>
-echo "<tr id='trowID'>
+echo "<tr id='trowID' class='materialNeed'>
       <td>
       <p>". $matName ."</p>
       <input type='hidden' class='form-control' id='mate' name='mate[]' value='". $mat ."'/></td>

@@ -32,7 +32,7 @@ function deleteRow(row){
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 class="modal-title" id="modalProduct">New Production Information</h3>
       </div>
-      <form action="prod-info-add.php" method = "post">
+      <form id="myForm" action="prod-info-add.php" method = "post">
         <div class="modal-body">
           <div class="descriptions">
 
@@ -84,6 +84,7 @@ function deleteRow(row){
                 <select class="form-control" tabindex="1" name="prod" id="products" disabled>
 
                 </select>
+                <p id="errorProd" style="color:red"></p>
               </div>
             </div>
           </div>
@@ -114,6 +115,7 @@ function deleteRow(row){
               <div class="form-group">
                 <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
                 <select class="form-control" tabindex="1" name="material" id="mat">
+                  <option value="">Choose Material Type</option>
                   <?php
                   include "dbconnect.php";
                   $sql = "SELECT * FROM tblmat_type order by matTypeName;";
@@ -131,9 +133,10 @@ function deleteRow(row){
             <div class="col-md-4">
               <div class="form-group">
                 <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
-                <select class="form-control" tabindex="1" name="var" id="var" disabled>
-
+                <select class="form-control" tabindex="1" name="var" id="var">
+                  <option value="">-</option>
                 </select>
+                <p id="errorMat" style="color:red"></p>
               </div>
             </div>
 
@@ -141,6 +144,7 @@ function deleteRow(row){
               <div class="form-group">
                 <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
                 <input type="text" class="form-control" name="quan" id="quan" placeholder="500" style="text-align: right" />
+                <p id="error" style="color:red"></p>
               </div>
             </div>
 
@@ -162,7 +166,7 @@ function deleteRow(row){
 
             <div class="col-md-1">
               <div class="form-group pull-right">
-                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
+                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;" disabled><i class="ti-plus"></i></button>
               </div>
             </div>
 
@@ -199,7 +203,7 @@ function deleteRow(row){
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+        <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn"><i class="fa fa-check"></i> Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
       </div>                
     </form>

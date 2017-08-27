@@ -1,12 +1,50 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
+
+
+if(!isset($_POST['prod'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+if(!isset($_POST['phase'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+if(!isset($_POST['mate'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+if(!isset($_POST['mat_var'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+if(!isset($_POST['quan'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+if(!isset($_POST['unit'])){
+	echo "<script>
+      window.location.href='production-information.php';
+      alert('Invalid input.');
+      </script>";
+}
+
+
 
 $prod = $_POST['prod'];
 $phase = $_POST['phase'];
 $status = "Active";
-
 $mats = $_POST['mate'];
 $desc = $_POST['mat_var'];
 $quan = $_POST['quan'];

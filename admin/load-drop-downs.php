@@ -34,6 +34,7 @@ else if($type==2){
   }
 }
 else if($type==3){
+  echo "<option value=''>Choose a material</option>";
 //$sql = "SELECT * FROM tblmaterials b,    tblmat_var a WHERE mat_varID = '$id'";
  $sql = "SELECT * FROM tblmat_var a, tblmaterials b, tblmat_type c WHERE c.matTypeID = b.materialType and a.mat_varID = b.materialID and b.materialType = '$id'";
  $result = mysqli_query($conn, $sql);
