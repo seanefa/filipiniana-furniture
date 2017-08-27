@@ -63,6 +63,8 @@ if(!isset($_SESSION["userID"]))
   <!-- Switchery CSS -->  
   <link href="plugins/bower_components/switchery/dist/switchery.min.css" rel="stylesheet" />
 
+  <link href="plugins/bower_components/flatWeatherPlugin/css/flatWeatherPlugin.css" rel="stylesheet" />
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -399,5 +401,7 @@ if(!isset($_SESSION["userID"]))
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
   <!-- Auto Hide Menu -->
   <script src="js/admin/menu/auto-hide-menu.js"></script>  
+  <!-- Auto Hide Menu -->
+  <script src="plugins/bower_components/flatWeatherPlugin/js/jquery.flatWeatherPlugin.min.js"></script>  
 </body>
 </html>

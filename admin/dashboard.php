@@ -176,8 +176,8 @@ var error=0;
   <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
+        <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
       <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
@@ -216,12 +216,9 @@ var error=0;
                     </div>
                     <!-- /.modal -->
                   </div>
-                </div>  
-              </div>
-            </div>
-
+                </div>
+                </div>
             <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
@@ -271,8 +268,106 @@ var error=0;
                     <!-- /.modal -->
                   </div>
                 </div>  
-              </div>
             </div>
+              </div>
+              <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
+
+     <div class="panel panel-info">
+            <div class="tab-content">
+              <!-- FABRIC TYPE -->
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+            <h3 class="box-title">Todays Weather</h3>
+                      <div id="flatWeather"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>  
+
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
+     <div class="panel panel-info">
+            <div class="tab-content">
+              <!-- FABRIC TYPE -->
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+                      <div class="analytics-info">
+            <h3 class="box-title">Total Website Visit</h3>
+            <ul class="list-inline two-part">
+              <li>
+                <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+              </li>
+              <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">8659</span></li>
+            </ul>
+          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
+     <div class="panel panel-info">
+            <div class="tab-content">
+              <!-- FABRIC TYPE -->
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+                      <div class="analytics-info">
+            <h3 class="box-title">Unique Visitor</h3>
+            <ul class="list-inline two-part">
+              <li>
+                <div id="sparklinedash4"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+              </li>
+              <li class="text-right"><i class="ti-arrow-up text-danger"></i> <span class="counter text-danger">6011</span></li>
+            </ul>
+          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>  
+        </div>
+        </div>
+
+<div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
+     <div class="panel panel-info">
+            <div class="tab-content">
+              <!-- FABRIC TYPE -->
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+            <h3 class="box-title">Site Traffic</h3>
+            <div class="stats-row">
+              <div class="stat-item">
+                <h6>Overall Growth</h6>
+                <b>80.40%</b></div>
+              <div class="stat-item">
+                <h6>Montly</h6>
+                <b>15.40%</b></div>
+              <div class="stat-item">
+                <h6>Day</h6>
+                <b>5.50%</b></div>
+            </div>
+            <div id="sparkline9"><canvas width="628" height="50" style="display: inline-block; width: 628px; height: 50px; vertical-align: top;"></canvas></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>  
+        </div>
+        </div>
             <!-- /.container-fluid -->
             <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
           </div>
@@ -297,6 +392,18 @@ var error=0;
             var target = $(e.target);
             target.removeData('bs.modal')
             .find(".clearable-content").html('');
+          });
+        </script>
+
+        <script>  
+          $(document).ready(function() {
+            //ex.2 simple view, city name only, yahoo weather
+            var example2 = $("#flatWeather").flatWeatherPlugin({
+              location: "Manila",
+              country: "Philippines",
+              api: "yahoo",
+              view : "simple"
+            });
           });
         </script>
       </body>

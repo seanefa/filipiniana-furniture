@@ -218,11 +218,11 @@ $(document).ready(function(){
                               <div class="row" id="reportsChart">
                                 <div class="col-md-6">
                                 <h2>BAR GRAPH</h2>
-                                <canvas id="myChart" width="400" height="300" style="width: 100px; height: 100px;"></canvas>
+                                <canvas id="myChart" width="400" height="300"></canvas>
                                 </div>
                                 <div class="col-md-6">
                                 <h2>PIE GRAPH</h2>
-                                <canvas id="my2ndChart" width="400" height="300" style="width: 100px; height: 100px;"></canvas>
+                                <canvas id="my2ndChart" width="400" height="300"></canvas>
                                 </div>
                               </div>
                             </div>
@@ -295,7 +295,7 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
-      responsive: false
+      responsive: true
     }
 });
 var my2ndChart = new Chart(ctx2, {
@@ -325,7 +325,7 @@ var my2ndChart = new Chart(ctx2, {
         }]
     },
     options: {
-      responsive: false
+      responsive: true
     }
 });
 

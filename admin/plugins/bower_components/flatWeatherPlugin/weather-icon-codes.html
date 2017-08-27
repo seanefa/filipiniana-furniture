@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>flat:Weather Conditions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style type="text/css">
+      .wi:before {
+        font-size: 200%;
+        width: 50px;
+        display: inline-block;
+        padding-right: 5px;
+        line-height: 1;
+      }
+
+      .wi:after {
+        font-size: 200%;
+        width: 50px;
+        display: inline-block;
+        padding-left: 5px;
+        line-height: 1;
+      }
+
+
+      body { font-family: sans-serif; background: #ecf0f1; color:#444; padding: 0; margin: 0; }
+      body p.heading { padding: 30px 0px; }
+      div.header { background: #95a5a6;}
+      div.wrap {width: 650px; margin: 0 auto;}
+      h1 { color: #EEE; margin: 0 0 0 0; padding: 15px 0px; width: 650px; margin: 0 auto;}
+      h2 { color: #e74c3c; padding: 20px 0px 0px 0px; margin: 15px 0 0 0; border-top: 1px solid #dce0e1; }
+      h2:first-of-type{ padding-top: 0px; border: none;}
+      small { padding: 5px 0px 10px 0px; margin: 0; color: #AAA; display: block; }
+      p { padding: 5px 0px 15px; }
+      footer {text-align: center; color: #AAA; padding: 10px; border-top: 1px solid #dce0e1;}
+
+    </style>
+
+    <link href="css/flatWeatherPlugin.css" rel="stylesheet">
+  </head>
+<body>
+
+
+
+<div class="header">
+  <h1>Weather condition codes</h1>
+</div>
+
+<div class="wrap">
+  <p class="heading">If you are building your own custom markup or just want to use any of the icons below, this is a handy reference to the included icon set. Use icons on an element by adding two classes, "wi" and the specific icon class listed below ex. "wi200" or "sunrise".</p>
+
+  <h2>General</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class</small>
+  <p class="wi sunrise">sunrise</p>
+  <p class="wi sunset">sunset</p>
+  <p class="wi wind">wind</p>
+  <p class="wi humidity">humidity</p>
+  <p class="wi pressure">pressure</p>
+  <p class="wi cloudiness">cloudiness</p>
+  <p class="wi temperature metric">temperature metric</p>
+  <p class="wi temperature imperial">temperature imperial</p>
+
+  <h2>Thunderstorm</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi200">wi200 = thunderstorm with light rain  </p>
+  <p class="wi wi201">wi201 = thunderstorm with rain  </p>
+  <p class="wi wi202">wi202 = thunderstorm with heavy rain  </p>
+  <p class="wi wi210">wi210 = light thunderstorm  </p>
+  <p class="wi wi211">wi211 = thunderstorm  </p>
+  <p class="wi wi212">wi212 = heavy thunderstorm  </p>
+  <p class="wi wi221">wi221 = ragged thunderstorm </p>
+  <p class="wi wi230">wi230 = thunderstorm with light drizzle </p>
+  <p class="wi wi231">wi231 = thunderstorm with drizzle </p>
+  <p class="wi wi232">wi232 = thunderstorm with heavy drizzle </p>
+
+  <h2>Drizzle</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi300">wi300 = light intensity drizzle </p>
+  <p class="wi wi301">wi301 = drizzle </p>
+  <p class="wi wi302">wi302 = heavy intensity drizzle </p>
+  <p class="wi wi310">wi310 = light intensity drizzle rain  </p>
+  <p class="wi wi311">wi311 = drizzle rain  </p>
+  <p class="wi wi312">wi312 = heavy intensity drizzle rain  </p>
+  <p class="wi wi313">wi313 = shower rain and drizzle </p>
+  <p class="wi wi314">wi314 = heavy shower rain and drizzle </p>
+  <p class="wi wi321">wi321 = shower drizzle  </p>
+
+  <h2>Rain</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi500">wi500 = light rain  </p>
+  <p class="wi wi501">wi501 = moderate rain </p>
+  <p class="wi wi502">wi502 = heavy intensity rain  </p>
+  <p class="wi wi503">wi503 = very heavy rain </p>
+  <p class="wi wi504">wi504 = extreme rain  </p>
+  <p class="wi wi511">wi511 = freezing rain </p>
+  <p class="wi wi520">wi520 = light intensity shower rain </p>
+  <p class="wi wi521">wi521 = shower rain </p>
+  <p class="wi wi522">wi522 = heavy intensity shower rain </p>
+  <p class="wi wi531">wi531 = ragged shower rain  </p>
+
+  <h2>Snow</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi600">wi600 = light snow  </p>
+  <p class="wi wi601">wi601 = snow  </p>
+  <p class="wi wi602">wi602 = heavy snow  </p>
+  <p class="wi wi611">wi611 = sleet </p>
+  <p class="wi wi612">wi612 = shower sleet  </p>
+  <p class="wi wi615">wi615 = light rain and snow </p>
+  <p class="wi wi616">wi616 = rain and snow </p>
+  <p class="wi wi620">wi620 = light shower snow </p>
+  <p class="wi wi621">wi621 = shower snow </p>
+  <p class="wi wi622">wi622 = heavy shower snow </p>
+
+  <h2>Atmosphere</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi701">wi701 = mist  </p>
+  <p class="wi wi711">wi711 = smoke </p>
+  <p class="wi wi721">wi721 = haze  </p>
+  <p class="wi wi731">wi731 = sand, dust whirls </p>
+  <p class="wi wi741">wi741 = fog </p>
+  <p class="wi wi751">wi751 = sand  </p>
+  <p class="wi wi761">wi761 = dust  </p>
+  <p class="wi wi762">wi762 = volcanic ash  </p>
+  <p class="wi wi771">wi771 = squalls </p>
+  <p class="wi wi781">wi781 = tornado </p>
+
+  <h2>Clouds</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi800">wi800 = clear sky </p>
+  <p class="wi wi801">wi801 = few clouds  </p>
+  <p class="wi wi802">wi802 = scattered clouds  </p>
+  <p class="wi wi803">wi803 = broken clouds </p>
+  <p class="wi wi804">wi804 = overcast clouds </p>
+
+  <h2>Extreme</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi900">wi900 = tornado</p>
+  <p class="wi wi901">wi901 = tropical storm</p>
+  <p class="wi wi902">wi902 = hurricane</p>
+  <p class="wi wi903">wi903 = cold</p>
+  <p class="wi wi904">wi904 = hot</p>
+  <p class="wi wi905">wi905 = windy</p>
+  <p class="wi wi906">wi906 = hail</p>
+
+  <h2>Additional</h2>
+  <small>icon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class = weather condition</small>
+  <p class="wi wi951">wi951 = calm</p>
+  <p class="wi wi952">wi952 = light breeze</p>
+  <p class="wi wi953">wi953 = gentle breeze</p>
+  <p class="wi wi954">wi954 = moderate breeze</p>
+  <p class="wi wi955">wi955 = fresh breeze</p>
+  <p class="wi wi956">wi956 = strong breeze</p>
+  <p class="wi wi957">wi957 = high wind, near gale</p>
+  <p class="wi wi958">wi958 = gale</p>
+  <p class="wi wi959">wi959 = severe gale</p>
+  <p class="wi wi960">wi960 = storm</p>
+  <p class="wi wi961">wi961 = violent storm</p>
+  <p class="wi wi962">wi962 = hurricane</p>
+
+  <footer>
+    <p>- Flat Weather Plugin -</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
