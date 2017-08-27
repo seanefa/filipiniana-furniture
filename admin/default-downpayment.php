@@ -22,7 +22,7 @@ include "menu.php";
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
@@ -36,11 +36,8 @@ include "menu.php";
               <div role="tabpanel" class="tab-pane fade active in" id="default-downpayment">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
-                  <div class="row">
-                    <p>**Note: The downpayment is taken as percentage.</p>
-                  </div>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <?php
                        include "dbconnect.php";
@@ -54,10 +51,13 @@ include "menu.php";
                       <input type="text" id="ln" class="form-control" name="dp" value="<?php echo $dp;?>" required disabled/>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <button type="button" class="btn btn-success" data-toggle="modal" href="form.php" data-remote="form.php?id=<?php echo $row['packageID']?> #update" data-target="#myModal"><span class='glyphicon glyphicon-edit'></span> Update</button>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-success" data-toggle="modal" href="default-downpayment-form.php" data-remote="default-downpayment-form.php?id=<?php echo $row['downpaymentID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
                   </div>
                 </div>
+                  <div class="row">
+                    <p style="color: red;">*Note: The downpayment is taken as percentage.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ include "menu.php";
 </div>
 
      <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-sm">
             <div class="modal-content">
             <!-- Modal content-->
             <div class="modal-content clearable-content">

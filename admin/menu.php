@@ -191,10 +191,10 @@ if(!isset($_SESSION["userID"]))
         </div>
       </li>
 
-      <li><a href="dashboard.php" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-clipboard"></i> <span class="hide-menu">Dashboard</span></a>
+      <li><a href="dashboard.php" class="waves-effect"><i class="fa-fw fa fa-clipboard"></i> <span class="hide-menu">Dashboard</span></a>
       </li>
 
-      <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-settings"></i> <span class="hide-menu">Maintenance<span class="fa arrow"></span></span></a>
+      <li><a href="javascript:void(0)" class="waves-effect"><i class="fa-fw fa fa-wrench"></i> <span class="hide-menu">Maintenance<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
 
           <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
@@ -259,7 +259,7 @@ if(!isset($_SESSION["userID"]))
         </ul>
       </li>
 
-      <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-server"></i> <span class="hide-menu">Transaction<span class="fa arrow"></span></span></a>
+      <li><a href="javascript:void(0)" class="waves-effect"><i class="fa-fw fa fa-exchange"></i> <span class="hide-menu">Transaction<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
           <li><a href="point-of-sales.php">Point of Sales</a></li>
           <li><a href="raw-materials-management.php">Raw Materials Management</a></li>
@@ -276,10 +276,10 @@ if(!isset($_SESSION["userID"]))
         </ul>
       </li>
 
-      <li><a href="queries.php" class="waves-effect"><i class="linea-icon linea-basic fa-fw fa-fw ti-pencil"></i> <span class="hide-menu">Queries</span></a>
+      <li><a href="queries.php" class="waves-effect"><i class="fa-fw fa-fw fa fa-pencil"></i> <span class="hide-menu">Queries</span></a>
       </li>
 
-      <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-bar-chart"></i><span class="hide-menu">Reports<span class="fa arrow"></span></span></a>
+      <li><a href="javascript:void(0)" class="waves-effect"><i class="fa-fw fa fa-bar-chart-o"></i><span class="hide-menu">Reports<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
           <li><a href="sales-reports.php">Sales Report</a></li>
           <li><a href="inventory-report.php">Inventory Report</a></li>
@@ -288,7 +288,7 @@ if(!isset($_SESSION["userID"]))
         </ul>
       </li>
 
-      <li><a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw ti-wand"></i> <span class="hide-menu">Utilities<span class="fa arrow"></span></span></a>
+      <li><a href="javascript:void(0)" class="waves-effect"><i class="fa fa-spin fa-gear"></i> <span class="hide-menu">Utilities<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
           <li><a href="javascript:void(0)" class="waves-effect">Company<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
@@ -305,7 +305,6 @@ if(!isset($_SESSION["userID"]))
             <ul class="nav nav-third-level animated fadeIn">
               <li><a href="default-downpayment.php">Default Downpayment</a></li>
               <li><a href="phases.php">Production Phases</a></li>
-              <li><a href="javascript:void(0)">Variant Attributes</a></li>
               <li><a href="javascript:void(0)">Product Design Phases</a></li>
             </ul>
           </li>

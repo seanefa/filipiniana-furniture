@@ -20,7 +20,7 @@ $updateSql = "UPDATE tblmodeofpayment SET modeofpaymentStatus = 'Archived' WHERE
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
 	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: modeofpayment.php" );
+	header( "Location: mode-of-payment.php" );
 	echo '</script>';
 }
 else {

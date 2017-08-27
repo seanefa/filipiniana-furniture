@@ -1,4 +1,6 @@
 <?php
+include "session-check.php";
+include 'dbconnect.php';
 session_start();
 
 // Create connection

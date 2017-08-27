@@ -13,6 +13,7 @@ $rName = $_GET['rName'];
 echo $rName;
 echo $jsID;
 
+/* MAINTENANCE */
 if($rName=="Supplier"){
 $updateSql = "UPDATE tblsupplier SET supStatus = 'Listed' WHERE supplierID = '$jsID'";
 if(mysqli_query($conn,$updateSql)){
@@ -274,11 +275,56 @@ else {
 }
 }
 
-if($rName=="Penalty"){
+/* UTILITIES */
+if($rName=="Branches"){
+$updateSql = "UPDATE tblbranches SET branchStatus = 'Listed' WHERE branchID = '$jsID'";
+        // Check connection
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: branches.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+}
+
+if($rName=="Users"){
+$updateSql = "UPDATE tbluser SET userStatus = 'Active' WHERE userID = '$jsID'";
+        // Check connection
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: users.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+}
+
+if($rName=="Mode Of Payment"){
+$updateSql = "UPDATE tblmodeofpayment SET modeofpaymentStatus = 'Active' WHERE modeofpaymentID = '$jsID'";
+        // Check connection
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: mode-of-payment.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+}
+
+if($rName=="Penalties"){
 $updateSql = "UPDATE tblpenalty SET penStatus = 'Active' WHERE penaltyID = '$jsID'";
         // Check connection
 if(mysqli_query($conn,$updateSql)){
 	header( "Location: penalties.php?reactivateSuccess" );
+}
+else {
+	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+}
+}
+
+if($rName=="Phases"){
+$updateSql = "UPDATE tblphases SET phaseStatus = 'Active' WHERE phaseID = '$jsID'";
+        // Check connection
+if(mysqli_query($conn,$updateSql)){
+	header( "Location: phases.php?reactivateSuccess" );
 }
 else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);

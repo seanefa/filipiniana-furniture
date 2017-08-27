@@ -9,7 +9,7 @@ if (!$conn) {
 }
 
 $desc = $_POST['desc'];
-$status = "Listed";
+$status = "Active";
 
 $sql = "INSERT INTO `tblmodeofpayment` (`modeofpaymentDesc`, `modeofpaymentStatus`) VALUES ('$desc', '$status');";
 
@@ -19,7 +19,7 @@ if($sql){
     
     echo '<script type="text/javascript">';
     echo 'alert("RECORD SUCCESFULLY SAVED!")';
-    header( "Location: modeofpayment.php" );
+    header( "Location: mode-of-payment.php" );
     echo '</script>';
 
   } 
