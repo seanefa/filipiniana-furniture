@@ -53,35 +53,53 @@ else if (isset($_GET['reactivateSuccess']))
 <head>
   <script>
     
-    /*
+    
 $(document).ready(function(){
+  var userkey = '';
 
   $('body').on('keyup','#username',function(){
+
     var user = $(this).val();
     var flag = true;
-    $.post('furn-cat-check.php',{username : user}, function(data){
-     
-      
-      if(data != "Already Exist!"){
-          flag = false;
-          $('#message').html("");
 
-      }
-      else if(data == "Already Exist!"){
+    userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+    if(userkey == '\\'){
+        $('#addFab').prop('disabled',true);
+          $('#username').css('border-color','red');
+          $('#message').html('Symbols not Allowed');
+      }else{
+      $.post('unit-of-measurement-category-check.php',{username : user}, function(data){ 
+
         $('#message').html(data);
+        if(data != "Data Already Exist!"){
+          if(data == "Symbols not allowed"){
         flag = true;
       }
-      if(flag){
-      $('#addFab').prop('disabled',true);
+      else{
+        if(data == "White Space not allowed"){
+          flag = true;
+        }
+        else{
+          flag = false;
+        }
+      }
+      }
+      else if(data == "Data Already Exist!" && data == "" && data == "White Space not allowed" && data == "Symbols not allowed"){
+        flag = true;
+      }
 
-      $('#username').css('border-color','red');
+        if(flag){
+          $('#addFab').prop('disabled',true);
+          $('#username').css('border-color','red');
+        }
+        else if(!flag){
+          $('#addFab').prop('disabled', false);
+          $('#username').css('border-color','limegreen');
+        }
+      });
     }
-    else if(!flag){
-      $('#addFab').prop('disabled', false);
-
-      $('#username').css('border-color','limegreen');
-    }
-    });
 
     
 
@@ -89,73 +107,58 @@ $(document).ready(function(){
       
 
 });
-*/
+
     $(document).ready(function(){
 var temprem;
 var tempname;
 var error = 0;
-var flag = true;
- 
-
-
-
+var userkey = 0;
   $('body').on('keyup','#editname',function(){
-    var user = $(this).val();
+      var user = $(this).val();
     
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-    $.post('furn-cat-Ucheck.php',{username : user}, function(data){
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#message1').html('Symbols not allowed');
+         $('#updateBtn').prop('disabled',true);
+
+         $('#editname').css('border-color','red');
+      }else{
+    $.post('unit-of-measurement-category-ucheck.php',{username : user}, function(data){
      
       
-      if(data != "Already Exist!" && data != "unchanged" && data != "Symbols not allowed" && data != "No white Space"){
-       
-       if(data =="Symbols not allowed" && data == "No white Space"){
-        error++;
-        flag = true;
-        
-         
-      }else{
+      if(data != "Already Exist!" && data !="unchanged"){
           flag = false;
           error = 0;
-      
-}
-      }
-     else if(data == "Already Exist!" && data != "unchanged" && data =="Symbols not allowed" && data == "No white Space"){
-    flag = true;
-     if(data =="Symbols not allowed" && data == "No white Space"){
-        error++;
-        flag = true;
-        
-         
-      }
-      }
-
-      if(data == "unchanged" && data != "Already Exist!" && data != "Symbols not allowed" && data != "No white Space"){
-        error = 0;
-      $('#editname').css('border-color','black')
-      }
-
-      if(flag){
-        $('#message').html(data);
-        $('#updateBtn').prop('disabled',true);
-
-      $('#editname').css('border-color','red');
-      flag = true;
-    }
-    else if(!flag){
-    $('#message').html(data);
+        $('#message1').html("");
         $('#updateBtn').prop('disabled', false);
       $('#editname').css('border-color','limegreen');
-      flag = false;
-    }
+
+      }
+      if(data == "unchanged"){
+        error = 0;
+        $('#message1').html("");
+      $('#editname').css('border-color','black')
+      }
+            else if(data == "Already Exist!"){
+        flag = true;
+        error++;
+        $('#message1').html(data);
+         $('#updateBtn').prop('disabled',true);
+
+      $('#editname').css('border-color','red');
+      }
 
     });
 
-    
+    }
 
   });
-        $('body').on('change','#rem',function(){
-          
+         $('body').on('change','#rem',function(){
           if(error == 0){
           $('#updateBtn').prop('disabled',false);
         }

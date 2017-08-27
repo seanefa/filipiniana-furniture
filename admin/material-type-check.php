@@ -4,15 +4,18 @@ $conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $matTypeName = "";
 
-if(isset($_POST['matTypeName'])){
-	$matTypeName = strip_tags($_POST['matTypeName']);
+if(isset($_POST['username'])){
+	$matTypeName = strip_tags($_POST['username']);
 }
+
+$matTypeName = mysqli_real_escape_string($conn,$matTypeName);
 
 $sql = "SELECT * FROM tblmat_type WHERE matTypeName = '$matTypeName'";
 
 $result = mysqli_query($conn, $sql);
 
 $rowcount = mysqli_num_rows($result);
+
 
 // Company Name
 if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $matTypeName)){

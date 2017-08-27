@@ -24,6 +24,8 @@ if(isset($_POST['position'])){
 	$position = strip_tags($_POST['position']);
 }
 
+$companyName = mysqli_real_escape_string($conn,$companyName);
+
 $sql = "SELECT * FROM tblsupplier WHERE supCompName = '$companyName'";
 
 $result = mysqli_query($conn, $sql);
@@ -54,6 +56,9 @@ else if (substr($companyName, 0 , 1) != " " || substr($companyName, strlen($comp
 	}
 }
 
+
+$companyAddress = mysqli_real_escape_string($conn,$companyAddress);
+
 $sql2 = "SELECT * FROM tblsupplier WHERE supCompAdd= '$companyAddress'";
 
 $result2 = mysqli_query($conn, $sql2);
@@ -61,7 +66,7 @@ $result2 = mysqli_query($conn, $sql2);
 $rowcount2 = mysqli_num_rows($result2);
 
 // Company Address
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $companyAddress)){
+if(preg_match('/[\\/\'\\^£$%&*()}{@~?><!>|=_+¬-]/', $companyAddress)){
 	echo "Symbols not allowed";
 }
 else{

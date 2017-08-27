@@ -12,6 +12,8 @@ if(isset($_POST['unitMeasure'])){
 	$unitMeasure = strip_tags($_POST['unitMeasure']);
 }
 
+$unitName = mysqli_real_escape_string($conn,$unitName);
+
 $sql = "SELECT * FROM tblunitofmeasure WHERE unType = '$unitName'";
 
 $result = mysqli_query($conn, $sql);
@@ -41,6 +43,8 @@ else if (substr($unitName, 0 , 1) != " " || substr($unitName, strlen($unitName)-
 		}
 	}
 }
+
+$unitMeasure = mysqli_real_escape_string($conn,$unitMeasure);
 
 $sql2 = "SELECT * FROM tblunitofmeasure WHERE unUnit= '$unitMeasure'";
 

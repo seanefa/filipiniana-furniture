@@ -117,7 +117,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control"  data-placeholder="Select Material Type" tabindex="1" name="type">
+                    <select class="form-control" id="select"  data-placeholder="Select Material Type" tabindex="1" name="type">
                       <?php
                       $sql = "SELECT * FROM tblmat_type order by matTypeName;";
                       $result = mysqli_query($conn, $sql);
@@ -140,7 +140,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Brand/Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message"></span> </div>
+                        <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message1"></span> </div>
                       </div>
                     </div>
 

@@ -33,7 +33,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username" class="form-control" name="name" required/><span id="message"></span> </div>
+                      <input type="text" id="unitName" class="form-control" name="name" required/><span id="message"></span> </div>
                     </div>
                   </div>
                   <div class="row">

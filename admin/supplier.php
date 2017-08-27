@@ -59,8 +59,9 @@ else if (isset($_GET['reactivateSuccess']))
       var user = $(this).val();
       var flag = true;
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#companyName').val('');
+        $('#saveBtn').prop('disabled',true);
+          $('#companyName').css('border-color','red');
+          $('#companyNameValidate').html('Symbols not Allowed');
       }else{
       $.post('supplier-check.php',{companyName : user}, function(data){ 
         $('#companyNameValidate').html(data);
@@ -99,8 +100,9 @@ else if (isset($_GET['reactivateSuccess']))
       var user = $(this).val();
       var flag = true;
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#companyAddress').val('');
+        $('#companyAddressValidate').html('Sybols not allowed');
+        $('#saveBtn').prop('disabled',true);
+          $('#companyAddress').css('border-color','red');
       }else{
       $.post('supplier-check.php',{companyAddress : user}, function(data){ 
         $('#companyAddressValidate').html(data);
@@ -138,8 +140,9 @@ else if (isset($_GET['reactivateSuccess']))
       var user = $(this).val();
       var flag = true;
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#telNumber').val('');
+        $('#telNumberValidate').html('Symbols not Allowed');
+         $('#saveBtn').prop('disabled',true);
+          $('#telNumber').css('border-color','red');
       }else{
       $.post('supplier-check.php',{telNumber : user}, function(data){ 
         $('#telNumberValidate').html(data);
@@ -177,8 +180,9 @@ else if (isset($_GET['reactivateSuccess']))
       var user = $(this).val();
       var flag = true;
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#contactPerson').val('');
+         $('#saveBtn').prop('disabled',true);
+          $('#contactPerson').css('border-color','red');
+          $('#contactPersonValidate').html('Symbols not allowed');
       }else{
       $.post('supplier-check.php',{contactPerson : user}, function(data){ 
         $('#contactPersonValidate').html(data);
@@ -216,8 +220,9 @@ else if (isset($_GET['reactivateSuccess']))
       var user = $(this).val();
       var flag = true;
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#position').val('');
+        $('#positionValidate').html('Symbols not allowed');
+        $('#saveBtn').prop('disabled',true);
+          $('#position').css('border-color','red');
       }else{
       $.post('supplier-check.php',{position : user}, function(data){ 
         $('#positionValidate').html(data);
@@ -269,8 +274,9 @@ var flag = true;
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#edit'+id).val(
-        user.slice(0, user.length - 1));
+        $('#updateBtn').prop('disabled',true);
+      $('#message'+id).html('Symbols not Allowed');
+      $('#edit'+id).css('border-color','red');
       }else{
     $.post('supplier-ucheck.php',{username : user}, function(data){
      
@@ -397,6 +403,18 @@ $(document).ready(function(){
           .css({ top: mousey, left: mousex })
   });
 });
+
+function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
+
+
 </script>
 </head>
 <body>

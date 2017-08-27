@@ -98,7 +98,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" class="form-control" placeholder="Name" name="name" value="<?php echo $trow['matTypeName']; $_SESSION['tempname'] = $trow['matTypeName'];?>"><span id="message"></span>
+                        <input type="text" id="editname" class="form-control" placeholder="Name" name="name" value="<?php echo $trow['matTypeName']; $_SESSION['tempname'] = $trow['matTypeName'];?>"><span id="message1"></span>
                       </div>
                     </div>
                   </div>
@@ -107,7 +107,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Remarks</label>
-                      <textarea type="text" id="jobName" class="form-control" name="desc"><?php echo $trow['matTypeRemarks']?></textarea>
+                      <textarea type="text" id="rem" class="form-control" name="desc"><?php echo $trow['matTypeRemarks']?></textarea>
                       </div>
                     </div>
                   </div>

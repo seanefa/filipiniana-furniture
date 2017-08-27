@@ -31,7 +31,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username" class="form-control" name="uType" required /><span id="message"></span>
+                      <input type="text" id="unitName" class="form-control" name="uType" required /><span id="message"></span>
                     </div>
                   </div>
                 </div>
@@ -39,7 +39,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Unit</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username1" class="form-control" name="uUnit" required/><span id="message1"></span> </div>
+                      <input type="text" id="unitMeasure" class="form-control" name="uUnit" required/><span id="message1"></span> </div>
                     </div>
                   </div>
                 
@@ -67,7 +67,7 @@ if (!$conn) {
             </div>
           </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+              <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn"><i class="fa fa-check"></i> Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
             </div>
           </form>
@@ -97,7 +97,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="unName" name="uType" class="form-control" value="<?php echo $rrow['unType'];?>" required/>
+                        <input type="text" id="editname" name="uType" class="form-control" value="<?php echo $rrow['unType'];?>" onkeyup="updateValidate('name')" required/><span id="messagename"></span>
                         </div>
                       </div>
                     </div>
@@ -105,7 +105,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Unit</label><span id="x" style="color:red"> *</span>
-                          <input type="text" name="uUnit" value="<?php echo $rrow['unUnit'];?>" class="form-control" id="unUnit" required/> </div>
+                          <input type="text" name="uUnit" value="<?php echo $rrow['unUnit'];?>" class="form-control" id="editUnit" onkeyup="updateValidate('Unit')" required/><span id="messageUnit"></span> </div>
                         </div>
                   </div>
                     
@@ -154,7 +154,7 @@ if (!$conn) {
                     
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+                  <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>
               </form>

@@ -49,7 +49,7 @@ if (!$conn) {
                 <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="control-label">Telephone Number</label><span id="x" style="color:red"> *</span>
+                    <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="telNumber[]" id="telNumber">
                     </select>
                   </div>
@@ -119,7 +119,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Telephone Number</label><span id="x" style="color:red"> *</span>
+                      <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="editNumber" onkeyup="updateValidate('Number')" data-mask="+63 (999) 999-9999" class="form-control" value="<?php echo $trow['supCompNum']?>" name="telnum" required><span id="messageNumber"></span>
                     </div>
                   </div>

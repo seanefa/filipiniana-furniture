@@ -3,7 +3,7 @@ include "session-check.php";
 include 'dbconnect.php';
 session_start();
 
-$name = $_POST['ctgName'];
+$name = $_POST['username'];
 $remarks = $_POST['remarks'];
 $status = "Active";
 

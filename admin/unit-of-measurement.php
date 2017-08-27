@@ -57,8 +57,16 @@ else if (isset($_GET['reactivateSuccess']))
     $('body').on('keyup','#unitName',function(){
       var user = $(this).val();
       var flag = true;
+
+      var user = $(this).val();
+      var flag = true;
+      if(user == '\\'){
+        $('#saveBtn').prop('disabled',true);
+          $('#unitName').css('border-color','red');
+          $('#message').html('Symbols not Allowed');
+      }else{
       $.post('umeasure-check.php',{unitName : user}, function(data){ 
-        $('#unitNameValidate').html(data);
+        $('#message').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
         flag = true;
@@ -85,6 +93,7 @@ else if (isset($_GET['reactivateSuccess']))
           $('#unitName').css('border-color','limegreen');
         }
       });
+    }
     });
 
 
@@ -92,8 +101,14 @@ else if (isset($_GET['reactivateSuccess']))
     $('body').on('keyup','#unitMeasure',function(){
       var user = $(this).val();
       var flag = true;
+
+      if(user == '\\'){
+        $('#saveBtn').prop('disabled',true);
+          $('#unitMeasure').css('border-color','red');
+          $('#message1').html('Symbols not Allowed');
+      }else{
       $.post('umeasure-check.php',{unitMeasure : user}, function(data){ 
-        $('#unitMeasureValidate').html(data);
+        $('#message1').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
             flag = true;
@@ -120,66 +135,79 @@ else if (isset($_GET['reactivateSuccess']))
           $('#unitMeasure').css('border-color','limegreen');
         }
       });
+    }
     });
 
   });
 	  
-	$(document).ready(function(){
-var temprem;
+	var temprem;
 var tempname;
 var error = 0;
-  $('body').on('keyup','#editname',function(){
-    var user = $(this).val();
-    
-      tempname = $('#editname').val();
+var flag = true;
+
+    var userkey = '';
+
+  function updateValidate(id){
+    var user = $('#edit'+id).val();
+
+      tempname = $('#edit'+id).val();
       temprem = $('#rem').val();
-    $.post('umeasure-form-Ucheck.php',{username : user}, function(data){
-     
       
-      if(data != "Already Exist!" && data !="unchanged"){
-          flag = false;
-          error = 0;
-        $('#message').html("");
-        $('#updateBtn').prop('disabled', false);
-      $('#editname').css('border-color','limegreen');
+    userkey = $('#edit'+id).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
 
-      }
-      if(data == "unchanged"){
-        error = 0;
-        $('#message').html("");
-      $('#editname').css('border-color','black')
-      }
-            else if(data == "Already Exist!"){
-        flag = true;
-        error++;
-        $('#message').html(data);
-         $('#updateBtn').prop('disabled',true);
+      if(userkey == '\\'){
+        $('#updateBtn').prop('disabled',true);
+      $('#message'+id).html('Symbols not Allowed');
+      $('#edit'+id).css('border-color','red');
+      }else{
+    $.post('supplier-ucheck.php',{username : user}, function(data){
+     
+     if(data == 'unchanged'){
+      error = 0;
+       $('#message'+id).html('');
+          $('#updateBtn').prop('disabled',false);
+      $('#edit'+id).css('border-color','black');
+     }
+     else if(data == 'Already Exist!'){
+       error++;
+          $('#updateBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'Symbols not allowed'){
+       error++;
+          $('#updateBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'No white Space'){
+       error++;
 
-      $('#editname').css('border-color','red');
-      }
+          $('#updateBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == ''){
+      error = 0;
+          $('#message'+id).html('');
+          $('#updateBtn').prop('disabled',true);
+      $('#edit'+id).css('border-color','black');
+     }
+
+     
+     else if(data == 'Good!'){
+      error = 0;
+       $('#message'+id).html('');
+     $('#updateBtn').prop('disabled',false);
+      $('#edit'+id).css('border-color','limegreen');
+     }
+
 
     });
+  }
 
-    
-
-  });
-         $('body').on('change','#rem',function(){
-          if(error == 0){
-          $('#updateBtn').prop('disabled',false);
-        }
-
-      });
-        $('body').on('keyup','#remText',function(){
-        var tem = $(this).val();
-        if(error == 0){
-        flag = false;
-        if(!flag){
-          $('#updateBtn').prop('disabled',false);
-        }
-        }
-      });
-
-});
+  }
       
       $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){

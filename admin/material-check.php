@@ -8,6 +8,8 @@ if(isset($_POST['materialName'])){
 	$materialName = strip_tags($_POST['materialName']);
 }
 
+$materialName = mysqli_real_escape_string($conn,$materialName);
+
 $sql = "SELECT * FROM tblmaterials WHERE materialName = '$materialName'";
 
 $result = mysqli_query($conn, $sql);
