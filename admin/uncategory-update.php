@@ -8,6 +8,8 @@ $editType = $_POST['type'];
 $editName = $_POST['name'];
 $editRemarks = $_POST['remarks'];
 
+$editRemarks = mysqli_real_escape_string($conn,$editRemarks);
+
 $updateSql = "UPDATE tblunitofmeasurement_category SET uncategoryName='$editName', uncategoryDescription='$editRemarks' WHERE uncategoryID=$id";
 
 if(mysqli_query($conn,$updateSql)){

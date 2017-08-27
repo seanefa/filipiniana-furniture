@@ -10,6 +10,8 @@ $job = $_POST['job'];
 $remarks = $_POST['remarks'];
 $status = "Active";
 
+$remarks = mysqli_real_escape_string($conn,$remarks);
+
 $sql = "INSERT INTO `tblemployee` (`empFirstName`, `empLastName`, `empMidName`, `empRemarks`, `empStatus`) VALUES ('$fn', '$ln', '$mn','$remarks', '$status')";
 echo $sql. "<br>";
 $empID = mysqli_insert_id($conn);

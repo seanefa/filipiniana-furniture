@@ -45,6 +45,8 @@ else
 
 }
 
+$prDesc = mysqli_real_escape_string($conn,$prDesc);
+
 $sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$prodStat','$design')";
 
 if (mysqli_query($conn, $sql)) {

@@ -8,6 +8,8 @@ $cat = $_POST['cat'];
 $desc = $_POST['desc'];
 $status = "Listed";
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblfurn_type` (`typeName`, `typeDescription`, `typeStatus`, `typeCategoryID`) VALUES ('$name', '$desc','$status' , '$cat');";
 
 if (mysqli_query($conn, $sql)){

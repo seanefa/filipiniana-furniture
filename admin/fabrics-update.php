@@ -30,6 +30,8 @@ if($pic=="")
 	$pic=$exist_image;
 }
 
+$editfRemarks = mysqli_real_escape_string($conn,$editfRemarks);
+
 $updateSql = "UPDATE tblfabrics SET fabricName='$editfName', fabricTypeID='$editfType', fabricPatternID='$editfPattern', fabricColor='$colors', fabricRemarks='$editfRemarks', fabricPic='$pic' WHERE fabricID=$id";
 
 if(mysqli_query($conn,$updateSql)){

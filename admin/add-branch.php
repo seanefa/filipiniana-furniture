@@ -15,6 +15,8 @@
     die("Connection failed: " . mysqli_connect_error());
   }
 
+  $remarks = mysqli_real_escape_string($conn,$remarks);
+
   $sql = "INSERT INTO `tblbranches` (`branchLocation`, `branchAddress`, `branchRemarks`, `branchStatus`) VALUES ('$location', '$address', '$remarks', '$status')";
   if($sql){
     if (mysqli_query($conn, $sql)) {

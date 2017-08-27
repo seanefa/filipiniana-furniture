@@ -29,6 +29,8 @@ else
 
 }
 
+$remarks = mysqli_real_escape_string($conn,$remarks);
+
 $sql = "INSERT INTO `tblframeworks` (`frameworkName`,  `frameworkFurnType`,`frameworkPic`, `frameDesignID`, `materialUsedID`, `frameworkRemarks`, `frameworkStatus`) VALUES ('$name', '$type','$pic', '$design','$material', '$remarks', '$status')";
 
 if (mysqli_query($conn, $sql)) {

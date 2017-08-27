@@ -33,6 +33,10 @@ if($pic=="")
 
 echo $pic;
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
+
+
 $sql = "UPDATE `tblpromos` SET `promoName`='$name', `promoDescription`='$desc', `promoStartDate`='$start', `promoEnd`='$end', `promoImage`='$pic' WHERE `promoID`='$id';";
 mysqli_query($conn,$sql);
 echo $sql . "<br>";

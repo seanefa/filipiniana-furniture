@@ -7,6 +7,8 @@ $id = $_SESSION['varname'];
 $editName = $_POST['name'];
 $editRemarks = $_POST['remarks'];
 
+$editRemarks = mysqli_real_escape_string($conn,$editRemarks);
+
 $updateSql = "UPDATE tblfabric_pattern SET f_patternName='$editName', f_patternRemarks='$editRemarks' WHERE f_patternID=$id";
 
 if(mysqli_query($conn,$updateSql)){

@@ -8,6 +8,8 @@ $editName = $_POST['name'];
 $editDescription = $_POST['desc'];
 $rating = $_POST['rating'];
 
+$editDescription = mysqli_real_escape_string($conn,$editDescription);
+
 $updateSql = "UPDATE tblfabric_texture SET textureName='$editName', textureRating='$rating', textureDescription='$editDescription' WHERE textureID=$id";
 
 if(mysqli_query($conn,$updateSql)){

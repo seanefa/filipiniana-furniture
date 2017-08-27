@@ -7,6 +7,8 @@ $name = $_POST['name'];
 $desc = $_POST['desc'];
 $status = "Listed";
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblframe_design` (`designName`, `designDescription`, `designStatus`) VALUES ('$name','$desc', '$status')";
 
 if (mysqli_query($conn, $sql)) {

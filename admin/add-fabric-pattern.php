@@ -7,6 +7,8 @@ $name = $_POST['name'];
 $remarks = $_POST['remarks'];
 $status = "Listed";
 
+$remarks = mysqli_real_escape_string($conn,$remarks);
+
 $sql = "INSERT INTO `tblfabric_pattern` (`f_patternName`, `f_patternRemarks`, `f_patternStatus`) VALUES ('$name', '$remarks', '$status')";
 
 if (mysqli_query($conn, $sql)) {

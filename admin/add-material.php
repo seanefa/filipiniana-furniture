@@ -7,6 +7,8 @@ $name = $_POST['name'];
 $remarks = $_POST['remarks'];
 $status = "Listed";
 
+$remarks = mysqli_real_escape_string($conn,$remarks);
+
 $sql = "INSERT INTO `tblframe_material` (`materialName`, `materialRemarks`, `materialStatus`) VALUES ('$name', '$remarks','$status')";
 
 if (mysqli_query($conn, $sql)) {

@@ -11,6 +11,8 @@ if (!$conn) {
 $desc = $_POST['desc'];
 $status = "Active";
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblmodeofpayment` (`modeofpaymentDesc`, `modeofpaymentStatus`) VALUES ('$desc', '$status');";
 
 if($sql){

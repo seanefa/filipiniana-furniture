@@ -8,6 +8,8 @@ $editName = $_POST['name'];
 $editWeaves = $_POST['weaves'];
 $editTexture= $_POST['texture'];
 
+$editTexture = mysqli_real_escape_string($conn,$editTexture);
+
 $updateSql = "UPDATE tblfabric_type SET f_typeName='$editName', f_typeWeaves='$editWeaves', f_typeTextureID='$editTexture' WHERE f_typeID= '$id'";
 
 if(mysqli_query($conn,$updateSql)){

@@ -14,6 +14,9 @@ $editfName = $_POST['ename'];
 $editfremarks= $_POST['eremarks'];
         // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+$editfremarks = mysqli_real_escape_string($conn,$editfremarks);
+
 $updateSql = "UPDATE tblfabric_pattern SET f_patternName='$editfName', f_patternRemarks='$editfremarks' WHERE f_patternID= '$id'";
 
 if(mysqli_query($conn,$updateSql)){

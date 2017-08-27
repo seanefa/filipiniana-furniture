@@ -10,6 +10,8 @@ $start = $_POST['start'];
 $end = $_POST['end'];
 $status = "Active";
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 if ($_FILES["image"]["error"] > 0)
 {
  echo "Error: NO CHOSEN FILE";

@@ -26,7 +26,8 @@ else
  $pic = $date . $time . ".png";
 
 }
-$colors = $_POST['color']; 
+$colors = $_POST['color'];
+$remarks = mysqli_real_escape_string($conn,$remarks); 
 
 $sql = "INSERT INTO `tblfabrics` (`fabricName`, `fabricTypeID`, `fabricPatternID`, `fabricColor`, `fabricRemarks`, `fabricPic`, `fabricStatus`) VALUES ('$name', '$type', '$pattern', '$colors', '$remarks', '$pic', '$status')";
 

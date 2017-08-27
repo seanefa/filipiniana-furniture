@@ -7,6 +7,8 @@ $id = $_SESSION['varname'];
 $editName = $_POST['name'];
 $editRemarks = $_POST['remarks'];
 
+$editRemarks = mysqli_real_escape_string($conn,$editRemarks);
+
 $updateSql = "UPDATE tblframe_material SET materialName='$editName', materialRemarks='$editRemarks' WHERE materialID=$id";
 
 if(mysqli_query($conn,$updateSql)){

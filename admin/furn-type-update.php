@@ -8,6 +8,8 @@ $editCategory = $_POST['cat'];
 $editName = $_POST['name'];
 $editDescription = $_POST['desc'];
 
+$editDescription = mysqli_real_escape_string($conn,$editDescription);
+
 $updateSql = "UPDATE tblfurn_type SET typeCategoryID='$editCategory', typeName='$editName', typeDescription='$editDescription' WHERE typeID=$id";
 
 if(mysqli_query($conn,$updateSql)){

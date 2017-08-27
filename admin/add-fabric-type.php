@@ -8,6 +8,8 @@ $weaves = $_POST['weaves'];
 $texture = $_POST['rem'];
 $status = "Listed";
 
+$weaves = mysqli_real_escape_string($conn,$weaves);
+
 $sql = "INSERT INTO `tblfabric_type` (`f_typeName`, `f_typeWeaves`, `f_typeTextureID`, `f_typeStatus`) VALUES ('$name', '$weaves', '$texture', '$status')";
 
 if(mysqli_query($conn,$sql)){

@@ -10,6 +10,8 @@ $editLN = $_POST['ln'];
 $editJob = $_POST['job'];
 $editRemarks = $_POST['remarks'];
 
+$editRemarks = mysqli_real_escape_string($conn,$editRemarks);
+
 $updateSql = "UPDATE tblemployee SET empFirstName='$editFN', empMidName='$editMN', empLastName='$editLN', empRemarks='$editRemarks' WHERE empID=$id";
 
 if(mysqli_query($conn,$updateSql)){

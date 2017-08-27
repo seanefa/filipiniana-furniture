@@ -7,6 +7,8 @@ $id = $_SESSION['varname'];
 $editName = $_POST['name'];
 $editDescription = $_POST['desc'];
 
+$editDescription = mysqli_real_escape_string($conn,$editDescription);
+
 $updateSql = "UPDATE tbljobs SET jobName='$editName', jobDescription='$editDescription' WHERE jobID=$id";
 
 if(mysqli_query($conn,$updateSql)){

@@ -8,6 +8,8 @@ $desc = $_POST['desc'];
 $rating = $_POST['rating'];
 $status = "Listed";
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblfabric_texture` (`textureName`,`textureRating`, `textureDescription`, `textureStatus`) VALUES ('$name', '$rating','$desc', '$status')";
 
 if(mysqli_query($conn,$sql)){

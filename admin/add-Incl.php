@@ -13,7 +13,7 @@ $iPname = $_POST['iProdName'];
 $qty = $_POST['qty'];
 $iDesc = $_POST['iDesc'];
 
-
+$iDesc = mysqli_real_escape_string($conn,$iDesc);
 
 $sql = "INSERT INTO tblprod_inclusions(prodIncQuantity, prodIncDesc, productIncID) VALUES('$qty','$iDesc','$iPname')";
 if($sql){

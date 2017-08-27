@@ -7,6 +7,8 @@ $name = $_POST['ctgName'];
 $remarks = $_POST['remarks'];
 $status = "Listed";
 
+$remarks = mysqli_real_escape_string($conn,$remarks);
+
 $sql = "INSERT INTO `tblfurn_category` (`categoryName`, `categoryStatus`, `categoryRemarks`) VALUES ('$name', '$status','$remarks');";
 
 if (mysqli_query($conn, $sql)){
