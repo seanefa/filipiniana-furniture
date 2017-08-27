@@ -6,7 +6,7 @@ $("document").ready(function(e) {
   else{
      $(".hideMenu").trigger('click');
    }
-  },2000);
+  },4000);
 });
 $("document").ready(function() {
   setTimeout(function() {
@@ -17,5 +17,5 @@ $("document").ready(function() {
      $(".sidebar").mouseleave(function () {
       $(".hideMenu").trigger('click');
     });
-  },2000);
+  },4000);
 });

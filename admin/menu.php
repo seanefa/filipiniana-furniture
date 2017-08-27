@@ -145,7 +145,7 @@ if(!isset($_SESSION["userID"]))
           $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result))
           { 
-            if($row['userStatus']=="active" && $row['userType']=="admin")
+            if($row['userStatus']=="Active" && $row['userType']=="admin")
 			{
               echo('<span>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</span>');
             }
