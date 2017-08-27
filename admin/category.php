@@ -53,12 +53,18 @@ else if (isset($_GET['reactivateSuccess']))
 <head>
   <script>
     $(document).ready(function(){
+      var userkey = '';
      $('body').on('keyup','#username',function(){
     var user = $(this).val();
     var flag = true;
-    if(user == '\\'){
-        user.replace('\\', "");
-        $('#username').val('');
+
+     userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+    if(userkey == '\\'){
+        $('#addFab').prop('disabled',true);
+      $('#message').html('Symbols not Allowed');
+      $('#username').css('border-color','red');
       }else{
     $.post('furn-cat-check.php',{username : user}, function(data){
      
@@ -158,8 +164,9 @@ var userkey = '';
       tempname = $('#editname').val();
       temprem = $('#rem').val();
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+        $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not Allowed');
+      $('#editname').css('border-color','red');
       }else{
     $.post('furn-cat-Ucheck.php',{username : user}, function(data){
      

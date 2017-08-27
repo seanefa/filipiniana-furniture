@@ -55,10 +55,14 @@ else if (isset($_GET['reactivateSuccess']))
 
   $(document).ready(function(){
     // Material Name
+    var userkey = '';
     $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
-      if(user == '\\'){
+
+       userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+      if(userkey == '\\'){
         $('#saveBtn').prop('disabled',true);
           $('#materialName').css('border-color','red');
           $('#materialNameValidate').html('Symbols not Allowed');

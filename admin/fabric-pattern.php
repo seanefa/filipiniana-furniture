@@ -53,14 +53,17 @@ else if (isset($_GET['reactivateSuccess']))
   <script>
     $(document).ready(function(){
     // Unit Name
+    var userkey = '';
     $('body').on('keyup','#fabricPatternName',function(){
       var user = $(this).val();
       var flag = true;
 
-
-      if(user == '\\'){
-        user.replace('\\', "");
-        $('#fabricPatternName').val('');
+      userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+      if(userkey == '\\'){
+        $('#fabricPatternNameValidate').html('Symbols not allowed');
+        $('#saveBtn').prop('disabled',true);
+          $('#fabricPatternName').css('border-color','red');
       }else{
       $.post('fab-pat-check.php',{fabricPatternName : user}, function(data){ 
         $('#fabricPatternNameValidate').html(data);
@@ -114,8 +117,9 @@ var userkey= '';
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+        $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
       }else{
     $.post('fab-pat-Ucheck.php',{username : user}, function(data){
      

@@ -99,8 +99,10 @@ else if (isset($_GET['reactivateSuccess']))
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+
+          $('#updateBtn').prop('disabled',true);
+          $('#message').html('Symbols not allowed');
+          $('#editname').css('border-color','red');
       }else{
       $.post('pack-Ucheck.php',{username : user}, function(data){
 

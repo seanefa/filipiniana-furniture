@@ -11,7 +11,6 @@ $remarks = $_POST['remarks'];
 $status = "Active";
 
 $sql = "INSERT INTO `tblemployee` (`empFirstName`, `empLastName`, `empMidName`, `empRemarks`, `empStatus`) VALUES ('$fn', '$ln', '$mn','$remarks', '$status')";
-mysqli_query($conn,$sql);
 echo $sql. "<br>";
 $empID = mysqli_insert_id($conn);
 echo $empID . "<br>";

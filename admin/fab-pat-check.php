@@ -8,6 +8,8 @@ if(isset($_POST['fabricPatternName'])){
 	$fabricPatternName = strip_tags($_POST['fabricPatternName']);
 }
 
+$fabricPatternName = mysqli_real_escape_string($conn,$fabricPatternName);
+
 $sql = "SELECT * FROM tblfabric_pattern WHERE f_patternName = '$fabricPatternName'";
 
 $result = mysqli_query($conn, $sql);

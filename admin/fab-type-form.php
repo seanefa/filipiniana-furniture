@@ -64,7 +64,7 @@ if (!$conn) {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label class="control-label">Weaves</label>
+                        <label class="control-label">Description</label>
                         <textarea id="fabrictypeWeaves" class="form-control" name="weaves"></textarea></div></div>
                       </div>
                     </div>
@@ -130,7 +130,7 @@ if (!$conn) {
                         <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label class="control-label">Weaves</label>
+                            <label class="control-label">Description</label>
                             <textarea id="remText" class="form-control" name="weaves"><?php echo $trow['f_typeWeaves'];?></textarea></div>
                           </div>
                         </div>

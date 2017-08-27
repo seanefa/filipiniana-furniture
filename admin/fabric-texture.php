@@ -59,7 +59,9 @@ else if (isset($_GET['reactivateSuccess']))
 <script src="plugins/bower_components/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider-init.js"></script>
 
 <script>
+
 $(document).on('focus','.modal',function () {
+  var rating = 0;
   $("#range_01").ionRangeSlider();
 
   $("#range_02").ionRangeSlider({
@@ -67,6 +69,12 @@ $(document).on('focus','.modal',function () {
       max: 5,
       from: 1
   });
+
+  $('#range_02').on('change',function(){
+    rating = $('#range_02').val();
+    $('#valueRating').val(rating);
+  });
+
   $("#range_03").ionRangeSlider({
       type: "double",
       grid: true,
@@ -116,7 +124,15 @@ $(document).on('focus','.modal',function () {
 </script>
 
   <script>
+  //GET RATING
+// You could now get your value like
 
+
+
+
+
+
+  //
   $(document).ready(function(){ //update form validation
     $('#myModal').on('shown.bs.modal',function(){
       $("#editname").on('keyup',function(){
@@ -165,25 +181,25 @@ $(document).on('focus','.modal',function () {
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);
         }
         else if(mat<0){
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);
         }
         else if(mat>5){
           var e = "Input a number not greater than 5";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);
         }
         else{
           var e = "";
           $("#error").html(e);
           $('#editrating').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
+          $('#updateBtn').prop('disabled',false);
         }
       });
     });
@@ -223,12 +239,16 @@ $(document).on('focus','.modal',function () {
 
   $(document).ready(function(){
 // Unit Name
+var userkey = '';
 $('body').on('keyup','#fabricTextureName',function(){
   var user = $(this).val();
   var flag = true;
-  if(user == '\\'){
-        user.replace('\\', "");
-        $('#fabricTextureName').val('');
+  userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+  if(userkey == '\\'){
+      $('#fabricTextureNameValidate').html('Symbols not allowed');
+        $('#saveBtn').prop('disabled',true);
+      $('#fabricTextureName').css('border-color','red');
       }else{
   $.post('fab-text-check.php',{fabricTextureName : user}, function(data){ 
     $('#fabricTextureNameValidate').html(data);
@@ -284,8 +304,9 @@ $('body').on('keyup','#fabricTextureName',function(){
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+        $('#message').html('Symbols not allowed');
+          $('#updateBtn').prop('disabled',false);
+          $('#editname').css('border-color','red');
       }else{
       $.post('fab-text-Ucheck.php',{username : user}, function(data){
 

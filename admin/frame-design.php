@@ -54,12 +54,17 @@ else if (isset($_GET['reactivateSuccess']))
   <script>
     $(document).ready(function(){
     // Frame Design
+    var userkey = '';
     $('body').on('keyup','#frameDesignName',function(){
       var user = $(this).val();
       var flag = true;
-      if(user == '\\'){
-        user.replace('\\', "");
-        $('#frameDesignName').val('');
+
+      userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+      if(userkey == '\\'){
+       $('#saveBtn').prop('disabled',true);
+       $('#frameDesignNameValidate').html('Symbols not allowed');
+          $('#frameDesignName').css('border-color','red');
       }else{
       $.post('frame-design-check.php',{frameDesignName : user}, function(data){ 
         $('#frameDesignNameValidate').html(data);
@@ -114,8 +119,9 @@ var flag = true;
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+         $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
       }else{
     $.post('frame-des-Ucheck.php',{username : user}, function(data){
      

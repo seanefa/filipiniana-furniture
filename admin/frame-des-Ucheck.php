@@ -5,6 +5,8 @@ include 'dbconnect.php';
 
 $texture = strip_tags($_POST['username']);
 
+$texture = mysqli_real_escape_string($conn,$texture);
+
 $sql = "SELECT designName FROM tblframe_design where designName = '$texture' ";
 
 $result = mysqli_query($conn, $sql);

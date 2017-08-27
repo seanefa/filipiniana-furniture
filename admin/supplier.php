@@ -455,7 +455,7 @@ function isNumberKey(evt)
                             <tr>
                               <th>Company Name</th>
                               <th>Company Address</th>
-                              <th>Telephone Number</th>
+                              <th>Contact Number</th>
                               <th>Contact Person</th>
                               <th class="removeSort">Actions</th>
                             </tr>

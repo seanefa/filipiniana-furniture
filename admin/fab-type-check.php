@@ -4,7 +4,7 @@ $conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 	$texture = strip_tags($_POST['username']);
 
-
+$texture = mysqli_real_escape_string($conn,$texture);
 $sql = "SELECT * FROM tblfabric_type WHERE f_typeName = '$texture'";
 
 $result = mysqli_query($conn, $sql);

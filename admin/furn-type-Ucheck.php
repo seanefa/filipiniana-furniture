@@ -5,6 +5,8 @@ $conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $texture = strip_tags($_POST['username']);
 
+$texture = mysqli_real_escape_string($conn,$texture);
+
 $sql = "SELECT typeName FROM tblfurn_type where typeName = '$texture' ";
 
 $result = mysqli_query($conn, $sql);
@@ -22,7 +24,7 @@ else{
 }
 
 else{
-if(preg_match('/[\'^£$%&*()}{@#~?><!>,|=_+¬-]/', $texture)){
+if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $texture)){
 	echo "Symbols not allowed";
 	}
 	else{

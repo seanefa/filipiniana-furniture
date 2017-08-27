@@ -8,6 +8,8 @@ if(isset($_POST['frameMaterialName'])){
 	$frameMaterialName = strip_tags($_POST['frameMaterialName']);
 }
 
+$frameMaterialName = mysqli_real_escape_string($conn,$frameMaterialName);
+
 $sql = "SELECT * FROM tblframe_material WHERE materialName = '$frameMaterialName'";
 
 $result = mysqli_query($conn, $sql);
@@ -26,7 +28,7 @@ if( ctype_space($frameMaterialName) || substr($frameMaterialName, 0 , 1)==" " ||
 else if (substr($frameMaterialName, 0 , 1) != " " || substr($frameMaterialName, strlen($frameMaterialName)-1 ,strlen($frameMaterialName) ) != "" ){
 		if($frameMaterialName != ""){
 			if($rowcount !=0){
-				echo "Data Already Exist!";
+				echo "Already Exist!";
 			}
 			else if($rowcount == 0){
 

@@ -92,12 +92,17 @@ else if (isset($_GET['reactivateSuccess']))
 
   
   $(document).ready(function(){
+    var userkey = '';
      $('body').on('keyup','#username',function(){
     var user = $(this).val();
     var flag = true;
-    if(user == '\\'){
-        user.replace('\\', "");
-        $('#username').val('');
+
+    userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+    if(userkey == '\\'){
+        $('#addFab').prop('disabled',true);
+        $('#message').html('Symbols not allowed');
+      $('#username').css('border-color','red');
       }else{
     $.post('promo-check.php',{username : user}, function(data){
      
@@ -161,8 +166,9 @@ var userkey = '';
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+        $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
       }else{
     $.post('promo-Ucheck.php',{username : user}, function(data){
      

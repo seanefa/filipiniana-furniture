@@ -62,9 +62,19 @@ else if (isset($_GET['reactivateSuccess']))
 });
 });
 
+
     $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
     $("#select").select2({
+    });
+});
+});
+
+    $(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#job").on('change',function(){
+      alert($('#job').val());
+
     });
 });
 });
@@ -145,12 +155,15 @@ else if (isset($_GET['reactivateSuccess']))
 var error = 0;
 
     function validateInput(id){
-      alert($('#job').val());
       var user = $('#'+id).val();
       var flag = true;
+
+      userkey = $('#'+id).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#'+id).val('');
+        $('#addFab').prop('disabled',true);
+      $('#message'+id).html('Symbols not allowed');
+      $('#'+id).css('border-color','red');
       }else{
     $.post('employee-check.php',{username : user}, function(data){
 
@@ -192,6 +205,7 @@ var error = 0;
     });
   }
     }
+
 
       function validateUpdate(id){
         var user = $('#edit'+id).val();

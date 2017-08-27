@@ -35,8 +35,8 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat">
-                        <option value="0">Choose Category</option>
+                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" required>
+                       
                         <?php
                         $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);
@@ -105,7 +105,7 @@ if (!$conn) {
                     <div class="form-group">
                       <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="select">
-                        <option value="--">Choose Category</option>
+                        <option value="--" disabled="true">Choose Category</option>
                         <?php
                         $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);

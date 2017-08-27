@@ -8,6 +8,8 @@ if(isset($_POST['frameDesignName'])){
 	$frameDesignName = strip_tags($_POST['frameDesignName']);
 }
 
+$frameDesignName = mysqli_real_escape_string($conn,$frameDesignName);
+
 $sql = "SELECT * FROM tblframe_design WHERE designName = '$frameDesignName'";
 
 $result = mysqli_query($conn, $sql);

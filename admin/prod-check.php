@@ -4,6 +4,8 @@ $conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $texture = strip_tags($_POST['username']);
 
+$texture = mysqli_real_escape_string($conn,$texture);
+
 $sql = "SELECT productName FROM tblproduct where productName = '$texture' ";
 
 $result = mysqli_query($conn, $sql);

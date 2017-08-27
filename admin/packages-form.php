@@ -39,13 +39,17 @@ include 'dbconnect.php';
     });
   });
   $(function(){
-
+    var userkey = '';
   $('#username').keyup(function(){
     var user = $(this).val();
     var flag = true;
-    if(user == '\\'){
-        user.replace('\\', "");
-        $('#username').val('');
+
+    userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+    if(userkey == '\\'){
+      $('#addFab').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#username').css('border-color','red');
       }else{
     $.post('pack-check.php',{username : user}, function(data){
      

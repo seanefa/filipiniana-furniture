@@ -50,7 +50,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="telNumber[]" id="telNumber">
+                    <input type="text" data-mask="+63 (999) 999-9999" class="form-control" name="telnum" required>
                     </select>
                   </div>
                 </div>

@@ -12,6 +12,8 @@ if(isset($_POST['unitMeasure'])){
 	$unitMeasure = strip_tags($_POST['unitMeasure']);
 }
 
+$frameName = mysqli_real_escape_string($conn,$frameName);
+
 $sql = "SELECT * FROM tblframeworks WHERE frameworkName = '$frameName'";
 
 $result = mysqli_query($conn, $sql);

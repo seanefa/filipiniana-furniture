@@ -55,17 +55,22 @@ else if (isset($_GET['reactivateSuccess']))
 
     $(document).ready(function(){
     // Frame Material Name
+    var userkey = '';
     $('body').on('keyup','#frameMaterialName',function(){
       var user = $(this).val();
       var flag = true;
 
+
+      userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
       if(user == '\\'){
-        user.replace('\\', "");
-        $('#frameMaterialName').val('');
+         $('#saveBtn').prop('disabled',true);
+          $('#message').html('Symbols not allowed');
+          $('#frameMaterialName').css('border-color','red');
       }else{
       $.post('frame-mat-check.php',{frameMaterialName : user}, function(data){ 
-        $('#frameMaterialNameValidate').html(data);
-        if(data != "Data Already Exist!"){
+        $('#message').html(data);
+        if(data != "Already Exist!"){
           if(data == "Symbols not allowed"){
         flag = true;
       }
@@ -78,7 +83,7 @@ else if (isset($_GET['reactivateSuccess']))
         }
       }
       }
-      else if(data == "Data Already Exist!" && data == "" && data == "White Space not allowed" && data == "Symbols not allowed"){
+      else if(data == "Already Exist!" && data == "" && data == "White Space not allowed" && data == "Symbols not allowed"){
         flag = true;
       }
 
@@ -115,8 +120,9 @@ var userkey = '';
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#editname').val(
-        user.slice(0, user.length - 1));
+         $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
       }else{
     $.post('frame-mat-Ucheck.php',{username : user}, function(data){
      

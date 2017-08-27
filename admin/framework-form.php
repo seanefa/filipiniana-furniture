@@ -106,25 +106,9 @@ if (!$conn) {
                   <div id="toUpload" class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image<span id="x" style="color:red"> * </span></h3>
                     <div class="product-img"><br>
-                      <!--<button id="openCanvas" class="btn-success" type="button">Make your own</button> -->
                       <input type="file" name="image" class="dropify" required>
                     </div>
                   </div>
-                  
-                  <!--div id="toCustomize" class="col-md-12" style="display: none">
-                    <h3 class="box-title m-t-20">Make your own<span id="x" style="color:red"> * </span></h3>
-                    <div class="product-img"><br>
-                    <div  id="anotherDesign" style="display: none">
-                       <button type="button" class='btn btn-primary' id="newDesign">New Design</button>
-                       </div>
-                      <button id="closeCanvas" class="btn-success" type="button">Upload Image</button>
-                      <Input value="Save Design" id="saveDesign" class="btn-success" type="button"/>
-                      <div class="literCanvas"></div>
-                      <img src='' style="display: none,width:160px;height:160px;" id="savedImage">
-                      
-                      
-                    </div>
-                  </div-->
                 </div>
               </div>
             </div>
