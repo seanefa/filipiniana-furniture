@@ -42,6 +42,7 @@ include "dbconnect.php";
                     <div class="form-group">
                       <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="category" name="_category">
+                        <option value="">Select category</option>
                         <?php
                         $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                         $result = mysqli_query($conn, $sql);
@@ -60,16 +61,7 @@ include "dbconnect.php";
                     <div class="form-group">
                       <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Category" tabindex="1" id="type" name="_type" id="type">
-                        <?php
-                        $sql = "SELECT * FROM tblfurn_type order by typeName;";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-                          if($row['typeStatus']=='Listed'){
-                            echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
-                          }
-                        }
-                        ?>
+                        <option value="">Nothing to show</option>
                       </select>
                     </div>
                   </div>
@@ -105,7 +97,7 @@ include "dbconnect.php";
                         while ($row = mysqli_fetch_assoc($result))
                         {
                           if($row['designStatus']!='Archived'){
-                            echo '<label class="radio-inline"><input type="radio" name="design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
+                            echo '<label class="radio-inline"><input type="radio" name="design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
                           }
                         }
                         ?>
@@ -121,12 +113,6 @@ include "dbconnect.php";
                         <option value="0">Choose a Fabric</option>
                         <?php
                         include "dbconnect.php";
-            // Create connection
-                        $conn = mysqli_connect($servername, $username, $password, $dbname);
-            // Check connection
-                        if (!$conn) {
-                          die("Connection failed: " . mysqli_connect_error());
-                        }
                         $sql = "SELECT * FROM tblfabrics order by fabricName;";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_assoc($result))
@@ -169,7 +155,13 @@ include "dbconnect.php";
                 <input type="hidden" id="firstName" name ="capacity" class="form-control" placeholder="4" style="text-align:right" />
 
                 <div class="row">
-                  <div class="col-md-2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label">Dimension Specification</label><span id="x" style="color:red"> *</span>
+                      <textarea type="text" name ="dimensions" rows="4" class="form-control" style="text-align:right" required></textarea>
+                    </div>
+                  </div>
+                  <!--<div class="col-md-2">
                     <div class="form-group">
                       <label class="control-label">Dimensions (ft)</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="dime" name ="dimensions" class="form-control" placeholder="L x W x H" style="text-align:right" readonly="true" required />
@@ -193,7 +185,7 @@ include "dbconnect.php";
                       }
                       ?>
                     </select>
-                </div>
+                </div>-->
                     <div class="col-md-8">
                       <div class="form-group">
                         <label class="control-label">Description</label>
@@ -300,30 +292,30 @@ include "dbconnect.php";
                                         <h3 class="box-title">General Info</h3>
                                         <div class="table-responsive">
                                             <table class="table">
-                                                <tbody>
+                                                <tbody >
                                                     <tr>
-                                                        <td width="390">Design</td>
-                                                        <td> <?php echo $trow['prodDesign'];?> </td>
+                                                        <td style="text-align:left">Design</td>
+                                                        <td style="text-align:left"><?php echo $trow['prodDesign'];?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="390">Category</td>
-                                                        <td> <?php echo $leerow['categoryName'];?> </td>
+                                                        <td style="text-align:left">Category</td>
+                                                        <td style="text-align:left"> <?php echo $leerow['categoryName'];?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="390">Type</td>
-                                                        <td> <?php echo $crow['typeName'];?> </td>
+                                                        <td style="text-align:left">Type</td>
+                                                        <td style="text-align:left"> <?php echo $crow['typeName'];?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Framework</td>
-                                                        <td> <?php echo $arow['frameworkName'];?> </td>
+                                                        <td style="text-align:left">Framework</td>
+                                                        <td style="text-align:left"> <?php echo $arow['frameworkName'];?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Fabric</td>
-                                                        <td> <?php echo $brow['fabricName'];?> </td>
+                                                        <td style="text-align:left">Fabric</td>
+                                                        <td style="text-align:left"> <?php echo $brow['fabricName'];?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Dimensions(L x W x H)</td>
-                                                        <td> <?php echo $trow['prodSizeSpecs'] . " " . $trow[""];?> </td>
+                                                        <td style="text-align:left">Dimension Specification</td>
+                                                        <td style="text-align:left"> <?php echo $trow['prodSizeSpecs']?> </td>
                                                     </tr>
                                                     <!--tr>
                                                         <td>Style</td>
@@ -561,8 +553,14 @@ include "dbconnect.php";
               <input type="hidden" id="remText" name ="capacity" class="form-control" placeholder="No. of Seaters" style="text-align:right" value="<?php echo $trow['prodCapacity'];?>" required />
 
               <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label">Dimension Specification</label><span id="x" style="color:red"> *</span>
+                      <textarea type="text" name ="dimensions" rows="4" class="form-control" style="text-align:right" required><?php echo $trow['prodSizeSpecs'];?></textarea>
+                    </div>
+                  </div>
                 <!--/span-->
-                <div class="col-md-4">
+                <!--<div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">Dimensions (ft)</label><span id="x" style="color:red">*</span>
                     <input type="hidden" id="checkDime" name="_dimensions" value="<?php echo $trow['prodSizeSpecs'];?>"/>
@@ -576,7 +574,7 @@ include "dbconnect.php";
                       <input role="number" type="hidden" id="upheight" name ="_height" class="form-control" placeholder="Height" max="3" style="text-align:right" value="<?php echo $dimeArr[0]?>" required />
                       <input id="upsaveDime" type="hidden" class="form-control" value="Done">
                   </div>
-                </div>
+                </div>-->
                 <div class="col-md-8">
                   <div class="form-group">
                     <label class="control-label">Description</label>

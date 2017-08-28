@@ -48,7 +48,7 @@ if(isset($_GET['id'])){
         }
         else if(mat<bal){ //if may malaki diba? hahaha
             var change = mat - bal;
-            var e = "Downpayment must be 50% of the total price";
+            var e = "The payment has exceeded the amount due";
             $("#error").html(e);
             $('#aTendered').css('border-color','red');
             $('#saveBtn').prop('disabled',true);
@@ -840,7 +840,7 @@ $(document).ready(function(){
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Delivery Rate</label>
-                <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' readonly/>
+                <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate" readonly/>
               </div>
             </div>
           </div>
@@ -923,7 +923,7 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="row">
-        <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save & Print</button>
+        <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn"><i class="fa fa-check"></i> Save & Print</button>
 <!--<div class="col-md-5 pull-right">
 <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>
 </div>-->

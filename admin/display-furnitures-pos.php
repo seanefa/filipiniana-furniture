@@ -9,14 +9,12 @@ if($id=="On-Hand"){
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct order by productID desc;";
+	$sql = "SELECT * FROM tblonhand a, tblproduct b WHERE b.productID = a.ohProdID order by productID desc;";
 	$result = mysqli_query($conn, $sql);
-
 	while ($row = mysqli_fetch_assoc($result)){
 		$oQuan = quan($row['productID']);
 		$random = rand(0,2);
 		if($row['prodTypeID']==""){$row['productDescription']="________________";}
-		if($row['prodStat'] == "On-Hand"){
 			echo ('
 				<form method="get" id="formProduct">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
@@ -55,7 +53,7 @@ if($id=="On-Hand"){
 			    </script>
 
 				'); 
-				}
+				
 				$ctr++;
 			}
 

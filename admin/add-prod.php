@@ -59,8 +59,12 @@ if (mysqli_query($conn, $sql)) {
 	mysqli_query($conn,$logSQL);
 	// Logs end here
   	header( "Location: products.php?newSuccess" );
-} else {
-  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+} 
+else {
+	echo "<script>
+      window.location.href='products.php';
+      alert('There are some errors on your the data entered. Please enter another data.');
+      </script>";
   }
 mysqli_close($conn);
 ?>

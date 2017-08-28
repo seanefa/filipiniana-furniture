@@ -40,7 +40,7 @@ include "menu.php";
   $(document).ready(function(){
 
 var value = $("#selectCat").val(); // on load
-
+alert(value);
 $.ajax({
   type: 'post',
   url: 'display-furnitures-pos.php',

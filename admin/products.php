@@ -536,7 +536,7 @@ $(document).ready(function(){
 });
 });
 
-
+/*
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
   $("#category").select2();
@@ -544,7 +544,7 @@ $(document).ready(function(){
   $("#_fabric").select2();
   $("#framework").select2();
 });
-});
+});*/
 
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
@@ -558,7 +558,6 @@ $(document).ready(function(){
         id: value, type : drop,
       },
       success: function (response) {
-       // We get the element having id of display_info and put the response inside it
        $( '#type' ).html(response);
       }
       });

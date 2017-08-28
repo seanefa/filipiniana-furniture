@@ -261,18 +261,23 @@ if(!isset($_SESSION["userID"]))
 
       <li><a href="javascript:void(0)" class="waves-effect"><i class="fa-fw fa fa-exchange"></i> <span class="hide-menu">Transaction<span class="fa arrow"></span></span></a>
         <ul class="nav nav-second-level animated fadeIn">
-          <li><a href="point-of-sales.php">Point of Sales</a></li>
-          <li><a href="raw-materials-management.php">Raw Materials Management</a></li>
           <li><a href="product-management.php">Product Management</a></li>
+          <li><a href="point-of-sales.php">Point of Sales</a></li>
           <li><a href="javascript:void(0)" class="waves-effect">Order Management<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
               <li><a href="ordering.php">Ordering</a></li>
               <li><a href="orders.php">Orders</a></li>
-              <li><a href="collections.php">Collections</a></li>
+              <li><a href="return-order.php">Return Order</a></li>
+              <li><a href="releasing.php">Releasing of Orders</a></li>
             </ul>
           </li>
-          <li><a href="production-tracking.php">Production Tracking</a></li>
-          <li><a href="delivery-tracking.php">Delivery Tracking</a></li>
+          <li><a href="javascript:void(0)" class="waves-effect">Production<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level animated fadeIn">
+              <li><a href="raw-materials-management.php">Raw Materials Management</a></li>
+              <li><a href="production-tracking.php">Production Tracking</a></li>
+            </ul>
+          </li>
+          <li><a href="collections.php">Billing and Collections</a></li>
         </ul>
       </li>
 

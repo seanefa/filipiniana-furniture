@@ -8,6 +8,7 @@ if($type==1){
   $ctr = 0;
   $sql = "SELECT * FROM tblfurn_type WHERE typeCategoryID = '$id' ORDER BY typeName ASC";
   $res = mysqli_query($conn,$sql);
+      echo('<option value="">Select A Type</option>');
   while($row = mysqli_fetch_assoc($res)){
     if($row['typeStatus']=='Listed'){
       echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
@@ -99,7 +100,6 @@ else if($type==4){
   </div>
   </div>';
 }
-
 
 function desc($iid){
   include "dbconnect.php";

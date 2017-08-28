@@ -3,11 +3,11 @@
 $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "OR". $or;
-/*
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+
+set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
-ob_start();*/
+ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -239,10 +239,9 @@ $orderID = $orRoq['orderID'];
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 <?php
-/*
 $html = ob_get_clean();
 $dompdf = new DOMPDF();
 $dompdf->load_html($html);
 $dompdf->render();
-$dompdf->stream($orID, array("Attachment" => 0));*/
+$dompdf->stream($orID, array("Attachment" => 0));
 ?>

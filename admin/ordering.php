@@ -271,11 +271,11 @@ $(this).show();
                                                             <thead>
                                                               <tr>
                                                                 <!--th>Image</th-->
-                                                                <th style="text-align:center">Furniture Name</th>
-                                                                <th style="text-align:center">Furniture Description</th>
-                                                                <th style="text-align:center">Unit Price</th>
-                                                                <th style="text-align:center">Quantity</th>
-                                                                <th style="text-align:center">Total Price</th>
+                                                                <th style="text-align:left">Furniture Name</th>
+                                                                <th style="text-align:left">Furniture Description</th>
+                                                                <th style="text-align:right">Unit Price</th>
+                                                                <th style="text-align:right">Quantity</th>
+                                                                <th style="text-align:right">Total Price</th>
                                                                 <th style="text-align:center">Action</th>
                                                               </tr>
                                                             </thead>
@@ -286,8 +286,8 @@ $(this).show();
                                                             </tbody>
                                                             <tfoot>
                                                               <td colspan="3" style="text-align:right"> GRAND TOTAL </td>
-                                                              <td id="totalQ" style="text-align:center">0</td>
-                                                              <td id="totalPrice" style="text-align:center">0</td>
+                                                              <td id="totalQ" style="text-align:right">0</td>
+                                                              <td id="totalPrice" style="text-align:right">0</td>
                                                               <td></td>
                                                             </tfoot>
                                                           </table>
@@ -897,7 +897,7 @@ else{
     idArray.push(id);
     $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value=""><input type="hidden" name="quantremoved[]" value=""><input type="hidden" name="removed[]" value=""><input type="hidden" id="id'+id+'" name="cart[]" value="'+id+'"/><input type="hidden" name="quant[]" id="quants'+id+'" value="'+quant+'"/><input type="hidden" name="price[]" id="prices'+id+'" value="'+price+'"/><input type="hidden" id="ttp" name="totalPrice" value="'+tempPrice+'"/> <input type="hidden" name="totalQuant" id="ttq" value="'+totalQuant+'" />');
     $('#cartTbl').append(
-    '<tr><td><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td>'+uprice+'</td><td width="70" id="qt'+id+'">'+quant+'</td><td id="pr'+id+'" style="text-align: center; width="150" align="center" class="font-500">'+price+'</td><td><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
+    '<tr><td><h5 class="font-500">'+name+'</h5></td><td>'+size+'</td><td style="text-align:right">'+uprice+'</td><td width="70" id="qt'+id+'" style="text-align:right">'+quant+'</td><td id="pr'+id+'" style="text-align: right; width="150" align="center" class="font-500">'+price+'</td><td style="text-align:center"><button type="button" class="btn btn-success" onclick="addRow(this)" value="'+id+'" style="margin:5px;">+</button><button type="button" class="btn btn-danger" onclick="deleteRow(this)" value="'+id+'">x</button></td></tr>');
 
     $('#totalPrice').html(String(tempPrice));
     $('#totalQ').html(String(totalQuant));
