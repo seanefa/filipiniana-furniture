@@ -2,5 +2,32 @@
 	background-image: url("images/woodbg.jpg");
 	background-attachment: fixed;
 	background-size: cover;
-	background-position: top;
+	background-position: bottom;
+}
+
+.translucent{
+	background-color: white;
+	opacity: 0.5;
+}
+
+.ul-inline {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.li-inline {
+    float: right;
+	margin-right: 2%;
+}
+
+.li-inline a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.li-inline a:active{
+    display: block;
+    text-align: center;
+    text-decoration: none;
 }

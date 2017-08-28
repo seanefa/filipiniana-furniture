@@ -1,7 +1,19 @@
 <div class="container-fluid bg-wood">
+	<div class="row justify-content-end">
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
+			<ul class="ul-inline">
+				<li class="li-inline">
+					<a data-toggle="collapse" href="#account"><small><span class="fa fa-user-circle-o" aria-expanded="false"></span>&nbsp;Account</small></a>
+				</li>
+				<li class="li-inline">
+					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"><small><span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span></small></a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+		<div class="row justify-content-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
 				<?php
 				include "userconnect.php";
 				$sql="SELECT * from tblcompany_info";
@@ -9,14 +21,28 @@
 				if($result->num_rows>0){
 					while($row=$result->fetch_assoc()){
 				?>
-					<img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>">
+				<a href="userhome.php"><img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>"></a>
 				<?php
 					}
 				}
 				?>
 			</div>
+<!--
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3c">
+				<br>
+				<form class="form-group text-center" action="uservalidate.php" method="post">
+					<input type="text" class="form-control" name="username" placeholder="Username" required/>
+					<br>
+					<input type="password" class="form-control" name="password" placeholder="Password" required/>
+					<br>
+					<button type="submit" class="btn btn-web"><b>Log In</b></button>
+					<button type="button" class="btn btn-web" data-toggle="modal" data-target="#signupmodal"><b>Sign Up</b></button>
+				</form>
+			</div>
+-->
 		</div>
 	</div>
+	<br>
 </div>
 <nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-web sticky-top">
  	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,26 +66,27 @@
   	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 	  		<li class="nav-item">
-				<a class="nav-link" href="userhome.php">Home<span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="userhome.php">HOME<span class="sr-only">(current)</span></a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userproducts.php">Products</a>
+				<a class="nav-link" href="userproducts.php">FURNITURES</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">Promos</a>
+				<a class="nav-link" href="userpromos.php">OFFICE</a>
 	  		</li>
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="modal" data-target="#myCart" href="">Cart&nbsp;<span class="badge text-info"></span></a>
-			</li>
+	  		<li class="nav-item">
+				<a class="nav-link" href="userpromos.php">SERIES</a>
+	  		</li>
+	  		<li class="nav-item">
+				<a class="nav-link" href="userpromos.php">ON SALE</a>
+	  		</li>
+	  		<li class="nav-item">
+				<a class="nav-link" href="userpromos.php">ABOUT</a>
+	  		</li>
+	  		<li class="nav-item">
+				<a class="nav-link" href="userpromos.php">PROMOS</a>
+	  		</li>
 		</ul>
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#signupmodal">Sign Up</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#loginmodal">Log In</a>
-				</li>
-			</ul>
 <!--
 		<form class="form-inline my-2 my-lg-0" action="uservalidate.php" method="post">
 			<input type="text" class="form-control" name="username" placeholder="Username" required/><br>&nbsp;
