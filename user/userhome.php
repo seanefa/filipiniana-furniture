@@ -23,6 +23,13 @@
 		<?php
 		include "header.php";
 		?>
+		<div class="container-fluid collapse" id="account">
+			<br>
+			<div class="container">
+				<div class="row">
+				</div>
+			</div>
+		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<!--carousel-->
@@ -130,7 +137,6 @@
 				<a href=".php">See all promos</a>
 			</div>
 		</div>
-		<br>
 		<a href="" id="scroll-to-top"></a>
 		<!--footer-->
 		<?php

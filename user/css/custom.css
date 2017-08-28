@@ -5,13 +5,13 @@ a.navbar-brand:focus,
 .carousel-control-next:hover{transition:opacity 300ms ease;}
 .carousel-control-prev:hover{transition:opacity 300ms ease;}
 .text-web{color: 2b3a47;}
-.bg-web{background-color: #45331e; color: white;}
-.border-web{border: solid 2px #45331e;}
-.btn-web{background-color: #45331e;color: white;}
+.bg-web{background-color: #49311c; color: white;}
+.border-web{border: solid 2px #49311c;}
+.btn-web{background-color: #49311c;color: white;}
 .btn-web:hover{animation: webdarker .5s;animation-fill-mode: forwards;}
-.btn-outline-web{background-color: transparent; border: solid 1px #45331e;color: #45331e;}
+.btn-outline-web{background-color: transparent; border: solid 1px #49311c;color: #49311c;}
 .btn-outline-web:hover{animation: outlinedarker .5s;animation-fill-mode: forwards;}
-.text-web{color: #45331e;}
+.text-web{color: #49311c;}
 .carousel-item.active, .carousel-item-next, .carousel-item-prev{display: block;}
 .card{margin-bottom: 10%;}
 .bond-paper{height: 887px; width: 1037px; padding: 40px;}
@@ -41,7 +41,7 @@ a.navbar-brand:focus,
 	to
 	{
 		border: ;
-		background-color: #45331e;
+		background-color: #49311c;
 		color: white;
 	}
 }
