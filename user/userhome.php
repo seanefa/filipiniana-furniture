@@ -23,13 +23,6 @@
 		<?php
 		include "header.php";
 		?>
-		<div class="container-fluid collapse" id="account">
-			<br>
-			<div class="container">
-				<div class="row">
-				</div>
-			</div>
-		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<!--carousel-->

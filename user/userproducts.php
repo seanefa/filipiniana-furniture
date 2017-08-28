@@ -29,42 +29,10 @@
 			<h1 class="text-center"><b>PRODUCTS</b></h1>
 			<hr>
 		</div>
-		<!--sort-->
-		<div class="container">
-			<div class="row text-center">
-				<form class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<div class="form-inline text-center">
-						<input class="form-control mr-sm-2" type="text" placeholder="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">&nbsp;<i class="fa fa-search"></i>&nbsp;</button>
-					</div>
-					<br>
-					<div class="form-group">
-						<label><b>Lets sort it out, shall we?</b></label>
-						<select class="form-control" id="categoryselect">
-							<?php
-							include "userconnect.php";
-							$sql = "SELECT * from tblfurn_type";
-							$result = $conn->query($sql);
-							if(mysqli_num_rows($result) > 0)
-							{
-								while ($row = mysqli_fetch_assoc($result))
-								{
-							?>
-							<option><?php echo "" . $row['typeName'];?></option>
-							<?php
-								}
-							}
-							$conn->close();
-							?>
-						</select>
-					</div>
-				</form>
-			</div>
-		</div>
 		<div class="jumbotron-fluid">
-			<hr>
+			<br>
 			<h3 class="text-center"><b>Product type</b></h3>
-			<hr>
+			<br>
 		</div>
 		<!--products-->
 		<div class="container">

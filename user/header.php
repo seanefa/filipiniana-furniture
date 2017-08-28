@@ -1,9 +1,15 @@
-<div class="container-fluid bg-wood">
-	<div class="row justify-content-end">
+<div class="container-fluid">
+	<div class="row justify-content-between">
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+			<ul class="ul-inline">
+				<li class="li-inline"><a><small><span class="fa fa-heart"></span>&nbsp;Wishlist</small></a></li>
+				<li class="li-inline"><a><small><span class="fa fa-map-marker"></span>&nbsp;Branches</small></a></li>
+			</ul>
+		</div>
 		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
 			<ul class="ul-inline">
 				<li class="li-inline">
-					<a data-toggle="collapse" href="#account"><small><span class="fa fa-user-circle-o" aria-expanded="false"></span>&nbsp;Account</small></a>
+					<a data-toggle="modal" href="#accountmodal"><small><span class="fa fa-user-circle-o" aria-expanded="false"></span>&nbsp;Account</small></a>
 				</li>
 				<li class="li-inline">
 					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"><small><span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span></small></a>
@@ -12,7 +18,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row align-items-center">
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
 				<?php
 				include "userconnect.php";
@@ -26,6 +32,18 @@
 					}
 				}
 				?>
+			</div>
+			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center">
+				<ul class="ul-inline">
+					<li class="li-inline"><a href="userhome.php">HOME</a></li>
+					<li class="li-inline"><a href="">ABOUT</a></li>
+					<li class="li-inline"><a href="userpromos.php">PROMOS</a></li>
+				</ul>
+			</div>
+			<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-right">
+				<form class="form-inline">
+					<input type="text" class="form-control">&nbsp;<button class="btn btn-web"><span class="fa fa-search"></span></button>
+				</form>
 			</div>
 <!--
 			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3c">
@@ -42,7 +60,6 @@
 -->
 		</div>
 	</div>
-	<br>
 </div>
 <nav class="col-12 col-md-12 col-md-12 col-lg-12 col-xl-12 navbar navbar-toggleable-md navbar-inverse bg-web sticky-top">
  	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,12 +79,9 @@
 			}
 		}
 		$conn->close();
-	?> 
+	?>
   	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-	  		<li class="nav-item">
-				<a class="nav-link" href="userhome.php">HOME<span class="sr-only">(current)</span></a>
-	  		</li>
 	  		<li class="nav-item">
 				<a class="nav-link" href="userproducts.php">FURNITURES</a>
 	  		</li>
@@ -78,13 +92,7 @@
 				<a class="nav-link" href="userpromos.php">SERIES</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">ON SALE</a>
-	  		</li>
-	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">ABOUT</a>
-	  		</li>
-	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">PROMOS</a>
+				<a class="nav-link" href=".php">DECORATIONS</a>
 	  		</li>
 		</ul>
 <!--
@@ -97,7 +105,7 @@
 -->
   	</div>
 </nav>
-		<!--signup modal-->
+		<!--signup modal
 		<div class="modal fade" id="signupmodal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -110,7 +118,6 @@
 					<div class="modal-body">
 						<form action="newuser.php" method="post">
 							<label><small>Note: All fields are <b class="text-danger">required.</b></small></label><br><br>
-
 							<div class="form-group row">
 								<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
 										<input type="text" class="form-control" placeholder="First Name" name="fname" required/>
@@ -158,6 +165,7 @@
 				</div>
 			</div>
 		</div>
+-->
 		<!--login modal-->
 		<div class="modal fade" id="loginmodal">
 			<div class="modal-dialog" role="document">
@@ -182,3 +190,38 @@
 				</div>
 			</div>
 		</div>
+<!--account-->
+<div class="modal fade" id="accountmodal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="text-center">ACCOUNT</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+							<h4 class="text-center"><span class="fa fa-sign-in"></span>&nbsp;Log In</h4>
+							<form class="form-control text-center">
+								<input type="text" class="form-control" placeholder="Username" required><br>
+								<input type="password" class="form-control" placeholder="Password" required><br>
+								<button class="btn btn-web" type="submit">Log In</button><br>
+							</form>
+						</div>
+						<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+							<h4 class="text-center"><span class="fa fa-user-plus"></span>&nbsp;Sign Up</h4>
+							<form class="form-control text-center">
+								<input type="text" class="form-control" placeholder="Username" required><br>
+								<input type="password" class="form-control" placeholder="Password" required><br>
+								<button class="btn btn-web" type="submit">Sign Up</button><br>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,8 +1,5 @@
-.bg-wood{
-	background-image: url("images/woodbg.jpg");
-	background-attachment: fixed;
-	background-size: cover;
-	background-position: bottom;
+.bg-wood{background-color: antiquewhite;
+	
 }
 
 .translucent{
@@ -16,7 +13,7 @@
 }
 
 .li-inline {
-    float: right;
+	display: inline-flex;
 	margin-right: 2%;
 }
 
@@ -24,10 +21,16 @@
     display: block;
     text-align: center;
     text-decoration: none;
+	color: black;
 }
 
-.li-inline a:active{
-    display: block;
-    text-align: center;
-    text-decoration: none;
+.li-inline:hover{
+	font-weight: bold;
+	transition: 150ms ease;
+}
+
+.fa-heart:hover{
+	color: crimson;
+	transition: 150ms ease-in;
+	transition: 150ms ease-out;
 }
