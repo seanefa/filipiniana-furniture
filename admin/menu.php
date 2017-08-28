@@ -202,12 +202,10 @@ if(!isset($_SESSION["userID"]))
           <li><a href="javascript:void(0)" class="waves-effect">Raw Materials<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
               <li><a href="supplier.php">Supplier</a></li>
-              <li><a href="unit-of-measurement-category.php">Unit of Measurement Category</a></li>
               <li><a href="unit-of-measurement.php">Unit of Measurement</a></li>
               <li><a href="material-attribute.php">Material Attributes</a></li>
               <li><a href="material-type.php">Material Type</a></li>
               <li><a href="materials.php">Materials</a></li>
-              <li><a href="material-variants.php">Material Variants</a></li>
             </ul>
           </li>
 

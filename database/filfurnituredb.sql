@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2017 at 05:59 PM
+-- Generation Time: Aug 28, 2017 at 01:26 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -32,6 +32,13 @@ CREATE TABLE `tblattributes` (
   `attributeStatus` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblattributes`
+--
+
+INSERT INTO `tblattributes` (`attributeID`, `attributeName`, `attributeStatus`) VALUES
+(8, 'Size', 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +52,13 @@ CREATE TABLE `tblattribute_measure` (
   `amStatus` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblattribute_measure`
+--
+
+INSERT INTO `tblattribute_measure` (`amID`, `attributeID`, `uncategoryID`, `amStatus`) VALUES
+(8, 8, 11, 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +67,6 @@ CREATE TABLE `tblattribute_measure` (
 
 CREATE TABLE `tblbank_accounts` (
   `accountID` int(11) NOT NULL,
-  `accountEmpID` int(11) NOT NULL,
   `accountName` varchar(100) CHARACTER SET utf8 NOT NULL,
   `accountNumber` varchar(50) CHARACTER SET utf8 NOT NULL,
   `accountStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
@@ -135,6 +148,14 @@ CREATE TABLE `tblcustomer` (
   `customerEmail` varchar(80) CHARACTER SET utf8 NOT NULL,
   `customerStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblcustomer`
+--
+
+INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleName`, `customerLastName`, `customerAddress`, `customerContactNum`, `customerEmail`, `customerStatus`) VALUES
+(18, 'Cyreil Neil', '', 'Basilio', '', '09876542572', 'cyreilneil@gmail.com', ''),
+(19, 'Aira', 'Coronado', 'Coronado', '#123 Kagawad Street Batasan Hills Quezon City', '09994145004', 'hongkaira@gmail.com', 'active');
 
 -- --------------------------------------------------------
 
@@ -476,7 +497,8 @@ INSERT INTO `tblfurn_category` (`categoryID`, `categoryName`, `categoryStatus`, 
 (6, 'Living Room', 'Listed', ' Living Area'),
 (7, 'Bedroom', 'Listed', 'Bedroom'),
 (8, 'Outdoor', 'Listed', 'Outdoor Furnitures'),
-(9, 'DIning Room', 'Listed', ' Dining Area');
+(9, 'DIning Room', 'Listed', ' Dining Area'),
+(10, 'Others', 'Listed', ' ');
 
 -- --------------------------------------------------------
 
@@ -622,7 +644,20 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (41, 'Promos', 'New', '2017-08-24', 'Added new promo Grand Opening Promo, ID = 0', 1),
 (42, 'Promos', 'New', '2017-08-24', 'Added new promo Grand Opening Promo, ID = 6', 1),
 (43, 'Delivery Rates', 'New', '2017-08-24', 'Added new delivery rate 1000, ID = 5', 1),
-(44, 'Delivery Rates', 'New', '2017-08-24', 'Added new delivery rate 3000, ID = 6', 1);
+(44, 'Delivery Rates', 'New', '2017-08-24', 'Added new delivery rate 3000, ID = 6', 1),
+(45, 'Category', 'New', '2017-08-24', 'Added new category Others, ID = 10', 1),
+(46, 'Category', 'New', '2017-08-25', 'Added new category , ID = 11', 1),
+(47, 'Unit of Measurement', 'New', '2017-08-26', 'Added new unit of measurement Feet, ID = 14', 1),
+(48, 'Unit of Measurement', 'New', '2017-08-26', 'Added new unit of measurement Meter, ID = 15', 1),
+(49, 'Unit of Measurement Category', 'New', '2017-08-26', 'Added new unit of measurement category Length, ID = 11', 1),
+(50, 'Material Attribute', 'New', '2017-08-26', 'Added new material attribute Size, ID = 8', 1),
+(51, 'Material Type', 'New', '2017-08-26', 'Added new material type Wood, ID = 1', 1),
+(52, 'Materials', 'New', '2017-08-26', 'Added new material FNC, ID = 10', 1),
+(53, 'Material Type', 'New', '2017-08-26', 'Added new material type Fabric, ID = 2', 1),
+(54, 'Material Type', 'New', '2017-08-26', 'Added new material type Paint, ID = 3', 1),
+(55, 'Material Type', 'New', '2017-08-26', 'Added new material type Varnish, ID = 4', 1),
+(56, 'Material Type', 'New', '2017-08-26', 'Added new material type Rattan, ID = 5', 1),
+(57, 'Supplier', 'New', '2017-08-27', 'Added new supplier AA, ID = 17', 4);
 
 -- --------------------------------------------------------
 
@@ -638,6 +673,13 @@ CREATE TABLE `tblmaterials` (
   `materialStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblmaterials`
+--
+
+INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `materialMeasurement`, `materialStatus`) VALUES
+(10, 1, 'FNC', '', 'Listed');
+
 -- --------------------------------------------------------
 
 --
@@ -650,19 +692,6 @@ CREATE TABLE `tblmat_actions` (
   `mat_quantity` int(11) NOT NULL,
   `mat_actionRemarks` varchar(450) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblmat_attribs`
---
-
-CREATE TABLE `tblmat_attribs` (
-  `mat_attribsID` int(11) NOT NULL,
-  `matID` int(11) NOT NULL,
-  `attribID` int(11) NOT NULL,
-  `mat_attribStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -718,6 +747,17 @@ CREATE TABLE `tblmat_type` (
   `matTypeStatus` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblmat_type`
+--
+
+INSERT INTO `tblmat_type` (`matTypeID`, `matTypeName`, `matTypeMeasure`, `matTypeRemarks`, `matTypeStatus`) VALUES
+(1, 'Wood', 'measuring is on materials', 'Wood', 'Listed'),
+(2, 'Fabric', 'measuring is on materials', 'Fabric', 'Listed'),
+(3, 'Paint', 'measuring is on materials', 'Paint', 'Listed'),
+(4, 'Varnish', 'measuring is on materials', 'Varnish', 'Listed'),
+(5, 'Rattan', 'measuring is on materials', 'Rattan', 'Listed');
+
 -- --------------------------------------------------------
 
 --
@@ -727,10 +767,12 @@ CREATE TABLE `tblmat_type` (
 CREATE TABLE `tblmat_var` (
   `variantID` int(11) NOT NULL,
   `mat_varID` int(11) NOT NULL,
-  `variantQuantity` int(11) DEFAULT NULL,
-  `variantMeasurement` varchar(45) CHARACTER SET utf8 NOT NULL,
-  `variantRemarks` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
-  `variantStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+  `attributeID` int(11) NOT NULL,
+  `mat_varDescription` varchar(150) CHARACTER SET utf8 NOT NULL,
+  `uncategoryID` int(11) NOT NULL,
+  `unitValue` int(45) NOT NULL,
+  `unitID` int(11) NOT NULL,
+  `mat_varStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -785,6 +827,13 @@ CREATE TABLE `tblorders` (
   `orderRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblorders`
+--
+
+INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateOfRelease`, `custOrderID`, `orderPrice`, `orderStatus`, `shippingAddress`, `orderType`, `orderRemarks`) VALUES
+(69, NULL, '2017-08-25', '2017-08-11', 18, 100000, 'Pending', '', 'Pre-Order', 'An order');
+
 -- --------------------------------------------------------
 
 --
@@ -821,13 +870,49 @@ CREATE TABLE `tblorder_customization` (
 
 CREATE TABLE `tblorder_request` (
   `order_requestID` int(11) NOT NULL,
+  `tblOrdersID` int(11) NOT NULL,
   `orderProductID` int(11) DEFAULT NULL,
-  `tblOrdersID` int(11) DEFAULT NULL,
+  `prodUnitPrice` double NOT NULL,
   `orderRemarks` int(11) NOT NULL,
   `orderPackageID` int(11) DEFAULT NULL,
-  `orderQuantity` int(11) DEFAULT NULL,
+  `orderQuantity` int(11) NOT NULL,
   `orderRequestStatus` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblorder_request`
+--
+
+INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductID`, `prodUnitPrice`, `orderRemarks`, `orderPackageID`, `orderQuantity`, `orderRequestStatus`) VALUES
+(91, 69, 16, 0, 0, NULL, 2, 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorder_return`
+--
+
+CREATE TABLE `tblorder_return` (
+  `returnID` int(11) NOT NULL,
+  `dateReturned` date NOT NULL,
+  `returnRemarks` varchar(450) NOT NULL,
+  `returnStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorder_return_details`
+--
+
+CREATE TABLE `tblorder_return_details` (
+  `rdetailsID` int(11) NOT NULL,
+  `tblreturnID` int(11) NOT NULL,
+  `tblorderreqID` int(11) NOT NULL,
+  `returnReason` varchar(450) NOT NULL,
+  `returnAssessment` varchar(100) NOT NULL,
+  `rdetailsStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1116,7 +1201,8 @@ CREATE TABLE `tblsupplier` (
 
 INSERT INTO `tblsupplier` (`supplierID`, `supCompName`, `supCompAdd`, `supCompNum`, `supContactPerson`, `supPosition`, `supStatus`) VALUES
 (15, 'FNCENT Trees and Woods Inc.', '1234 Bill Street Batasan Hills Quezon City', '', 'Mr. Jung', 'Manager', 'Listed'),
-(16, 'SMENT Fabrics and Prints', '111 Gangnamgu Seoul South Korea', '+63 (999) 414-5004', 'Lee Soo Man', 'Manager', 'Listed');
+(16, 'SMENT Fabrics and Prints', '111 Gangnamgu Seoul South Korea', '+63 (999) 414-5004', 'Lee Soo Man', 'Manager', 'Listed'),
+(17, 'AA', '111 Resolution Rd. Batasan Hills Quezon City', '', 'Mr. Lee', 'Manager', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1131,6 +1217,14 @@ CREATE TABLE `tblunitofmeasure` (
   `unStatus` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblunitofmeasure`
+--
+
+INSERT INTO `tblunitofmeasure` (`unID`, `unType`, `unUnit`, `unStatus`) VALUES
+(14, 'Feet', 'ft', 'Active'),
+(15, 'Meter', 'm', 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -1143,6 +1237,14 @@ CREATE TABLE `tblunitofmeasurement_category` (
   `uncategoryDescription` varchar(50) CHARACTER SET latin1 NOT NULL,
   `uncategoryStatus` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblunitofmeasurement_category`
+--
+
+INSERT INTO `tblunitofmeasurement_category` (`uncategoryID`, `uncategoryName`, `uncategoryDescription`, `uncategoryStatus`) VALUES
+(11, 'Length', ' Length', 'Active'),
+(12, 'Description', '', 'Hidden');
 
 -- --------------------------------------------------------
 
@@ -1179,21 +1281,8 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `userType`, `userCustID`, `userEmpID`, `dateCreated`) VALUES
-(1, 'eyembisi', 'admin', 'Active', 'admin', NULL, 1, '2017-08-24');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblvariant_desc`
---
-
-CREATE TABLE `tblvariant_desc` (
-  `variant_descID` int(11) NOT NULL,
-  `varAttribID` int(11) NOT NULL,
-  `varMatvarID` int(11) NOT NULL,
-  `varVariantDesc` varchar(150) CHARACTER SET latin1 NOT NULL,
-  `varStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(1, 'eyembisi', 'admin', 'Active', 'admin', NULL, 1, '2017-08-24'),
+(4, 'airaem', 'admin', 'active', 'customer', 19, NULL, '2017-08-27');
 
 --
 -- Indexes for dumped tables
@@ -1217,8 +1306,7 @@ ALTER TABLE `tblattribute_measure`
 -- Indexes for table `tblbank_accounts`
 --
 ALTER TABLE `tblbank_accounts`
-  ADD PRIMARY KEY (`accountID`),
-  ADD KEY `accountEmpID_idx` (`accountEmpID`);
+  ADD PRIMARY KEY (`accountID`);
 
 --
 -- Indexes for table `tblbranches`
@@ -1345,7 +1433,8 @@ ALTER TABLE `tblfabric_type`
 ALTER TABLE `tblframeworks`
   ADD PRIMARY KEY (`frameworkID`),
   ADD KEY `design_idx` (`framedesignID`),
-  ADD KEY `material_idx` (`materialUsedID`);
+  ADD KEY `material_idx` (`materialUsedID`),
+  ADD KEY `furn_type_idx` (`frameworkFurnType`);
 
 --
 -- Indexes for table `tblframe_design`
@@ -1375,7 +1464,8 @@ ALTER TABLE `tblfurn_design`
 -- Indexes for table `tblfurn_type`
 --
 ALTER TABLE `tblfurn_type`
-  ADD PRIMARY KEY (`typeID`);
+  ADD PRIMARY KEY (`typeID`),
+  ADD KEY `furn_category_idx` (`typeCategoryID`);
 
 --
 -- Indexes for table `tblinvoicedetails`
@@ -1414,14 +1504,6 @@ ALTER TABLE `tblmat_actions`
   ADD KEY `matInventory_idx` (`mat_intID`);
 
 --
--- Indexes for table `tblmat_attribs`
---
-ALTER TABLE `tblmat_attribs`
-  ADD PRIMARY KEY (`mat_attribsID`),
-  ADD KEY `matID_idx` (`matID`),
-  ADD KEY `attirbID_idx` (`attribID`);
-
---
 -- Indexes for table `tblmat_deliveries`
 --
 ALTER TABLE `tblmat_deliveries`
@@ -1454,7 +1536,11 @@ ALTER TABLE `tblmat_type`
 --
 ALTER TABLE `tblmat_var`
   ADD PRIMARY KEY (`variantID`),
-  ADD KEY `material_idx` (`mat_varID`);
+  ADD KEY `material_idx` (`mat_varID`),
+  ADD KEY `uncategoryID` (`uncategoryID`,`unitID`),
+  ADD KEY `uncategoryID_2` (`uncategoryID`,`unitID`),
+  ADD KEY `unit_idx` (`unitID`),
+  ADD KEY `attribs_idx` (`attributeID`);
 
 --
 -- Indexes for table `tblmodeofpayment`
@@ -1501,6 +1587,19 @@ ALTER TABLE `tblorder_request`
   ADD KEY `prod_idx` (`orderProductID`),
   ADD KEY `order_idx` (`tblOrdersID`),
   ADD KEY `pack_idx` (`orderPackageID`);
+
+--
+-- Indexes for table `tblorder_return`
+--
+ALTER TABLE `tblorder_return`
+  ADD PRIMARY KEY (`returnID`);
+
+--
+-- Indexes for table `tblorder_return_details`
+--
+ALTER TABLE `tblorder_return_details`
+  ADD PRIMARY KEY (`rdetailsID`),
+  ADD KEY `returntblid_idx` (`tblreturnID`);
 
 --
 -- Indexes for table `tblpackages`
@@ -1650,14 +1749,6 @@ ALTER TABLE `tbluser`
   ADD KEY `emp_idx` (`userEmpID`);
 
 --
--- Indexes for table `tblvariant_desc`
---
-ALTER TABLE `tblvariant_desc`
-  ADD PRIMARY KEY (`variant_descID`),
-  ADD KEY `at_idx` (`varAttribID`),
-  ADD KEY `ma_idx` (`varMatvarID`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1665,12 +1756,12 @@ ALTER TABLE `tblvariant_desc`
 -- AUTO_INCREMENT for table `tblattributes`
 --
 ALTER TABLE `tblattributes`
-  MODIFY `attributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `attributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblattribute_measure`
 --
 ALTER TABLE `tblattribute_measure`
-  MODIFY `amID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `amID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblbank_accounts`
 --
@@ -1695,7 +1786,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -1780,7 +1871,7 @@ ALTER TABLE `tblframe_material`
 -- AUTO_INCREMENT for table `tblfurn_category`
 --
 ALTER TABLE `tblfurn_category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tblfurn_design`
 --
@@ -1795,7 +1886,7 @@ ALTER TABLE `tblfurn_type`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -1805,22 +1896,17 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tblmat_actions`
 --
 ALTER TABLE `tblmat_actions`
   MODIFY `mat_actionsID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tblmat_attribs`
---
-ALTER TABLE `tblmat_attribs`
-  MODIFY `mat_attribsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblmat_deliveries`
 --
@@ -1840,7 +1926,7 @@ ALTER TABLE `tblmat_inventory`
 -- AUTO_INCREMENT for table `tblmat_type`
 --
 ALTER TABLE `tblmat_type`
-  MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblmat_var`
 --
@@ -1860,7 +1946,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -1875,7 +1961,17 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+--
+-- AUTO_INCREMENT for table `tblorder_return`
+--
+ALTER TABLE `tblorder_return`
+  MODIFY `returnID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tblorder_return_details`
+--
+ALTER TABLE `tblorder_return_details`
+  MODIFY `rdetailsID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
@@ -1885,7 +1981,7 @@ ALTER TABLE `tblpackage_inclusions`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -1925,7 +2021,7 @@ ALTER TABLE `tblprod_images`
 -- AUTO_INCREMENT for table `tblprod_info`
 --
 ALTER TABLE `tblprod_info`
-  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tblprod_materials`
 --
@@ -1950,32 +2046,27 @@ ALTER TABLE `tblpromo_promotion`
 -- AUTO_INCREMENT for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
-  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasure`
 --
 ALTER TABLE `tblunitofmeasure`
-  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasurement_category`
 --
 ALTER TABLE `tblunitofmeasurement_category`
-  MODIFY `uncategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `uncategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tblunit_cat`
 --
 ALTER TABLE `tblunit_cat`
-  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `tblvariant_desc`
---
-ALTER TABLE `tblvariant_desc`
-  MODIFY `variant_descID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -1986,12 +2077,6 @@ ALTER TABLE `tblvariant_desc`
 ALTER TABLE `tblattribute_measure`
   ADD CONSTRAINT `attribute` FOREIGN KEY (`attributeID`) REFERENCES `tblattributes` (`attributeID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `unit` FOREIGN KEY (`uncategoryID`) REFERENCES `tblunitofmeasurement_category` (`uncategoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblbank_accounts`
---
-ALTER TABLE `tblbank_accounts`
-  ADD CONSTRAINT `accountEmpID` FOREIGN KEY (`accountEmpID`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblcheck_details`
@@ -2064,7 +2149,14 @@ ALTER TABLE `tblfabric_type`
 --
 ALTER TABLE `tblframeworks`
   ADD CONSTRAINT `design` FOREIGN KEY (`framedesignID`) REFERENCES `tblframe_design` (`designID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `furn_type` FOREIGN KEY (`frameworkFurnType`) REFERENCES `tblfurn_type` (`typeID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `material` FOREIGN KEY (`materialUsedID`) REFERENCES `tblframe_material` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblfurn_type`
+--
+ALTER TABLE `tblfurn_type`
+  ADD CONSTRAINT `furn_category` FOREIGN KEY (`typeCategoryID`) REFERENCES `tblfurn_category` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblinvoicedetails`
@@ -2093,13 +2185,6 @@ ALTER TABLE `tblmat_actions`
   ADD CONSTRAINT `matInventory` FOREIGN KEY (`mat_intID`) REFERENCES `tblmat_inventory` (`mat_inventoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tblmat_attribs`
---
-ALTER TABLE `tblmat_attribs`
-  ADD CONSTRAINT `attirbID` FOREIGN KEY (`attribID`) REFERENCES `tblattributes` (`attributeID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `matID` FOREIGN KEY (`matID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `tblmat_deliveries`
 --
 ALTER TABLE `tblmat_deliveries`
@@ -2122,7 +2207,10 @@ ALTER TABLE `tblmat_inventory`
 -- Constraints for table `tblmat_var`
 --
 ALTER TABLE `tblmat_var`
-  ADD CONSTRAINT `m` FOREIGN KEY (`mat_varID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `attribs` FOREIGN KEY (`attributeID`) REFERENCES `tblattributes` (`attributeID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `m` FOREIGN KEY (`mat_varID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tblmat_var_ibfk_1` FOREIGN KEY (`uncategoryID`) REFERENCES `tblunitofmeasurement_category` (`uncategoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `unitofmeasure` FOREIGN KEY (`unitID`) REFERENCES `tblunitofmeasure` (`unID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblonhand`
@@ -2155,7 +2243,15 @@ ALTER TABLE `tblorder_customization`
 -- Constraints for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  ADD CONSTRAINT `prod` FOREIGN KEY (`orderProductID`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders` FOREIGN KEY (`tblOrdersID`) REFERENCES `tblorders` (`orderID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `pack` FOREIGN KEY (`orderPackageID`) REFERENCES `tblpackages` (`packageID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `prod` FOREIGN KEY (`orderProductID`) REFERENCES `tblproduct` (`productID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblorder_return_details`
+--
+ALTER TABLE `tblorder_return_details`
+  ADD CONSTRAINT `returntblid` FOREIGN KEY (`tblreturnID`) REFERENCES `tblorder_return` (`returnID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblpackage_inclusions`
@@ -2246,13 +2342,6 @@ ALTER TABLE `tblunit_cat`
 ALTER TABLE `tbluser`
   ADD CONSTRAINT `cust` FOREIGN KEY (`userCustID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `emp` FOREIGN KEY (`userEmpID`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblvariant_desc`
---
-ALTER TABLE `tblvariant_desc`
-  ADD CONSTRAINT `at` FOREIGN KEY (`varAttribID`) REFERENCES `tblattributes` (`attributeID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ma` FOREIGN KEY (`varMatvarID`) REFERENCES `tblmat_var` (`variantID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

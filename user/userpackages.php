@@ -23,70 +23,29 @@
 		<?php
 		include "header.php";
 		?>
-		<!--product type-->
-		<div class="jumbotron-fluid">
-			<hr>
-			<h1 class="text-center"><b>PRODUCTS</b></h1>
-			<hr>
-		</div>
-		<div class="jumbotron-fluid">
-			<br>
-			<h3 class="text-center"><b>Product type</b></h3>
-			<br>
-		</div>
-		<!--products-->
-		<div class="container">
-			<div class="row">
-				<?php
-				include "userconnect.php";
-				$sql = "SELECT A.typeName, B.* FROM `tblfurn_type` as A INNER JOIN tblproduct as B where A.typeID = B.prodTypeID and B.prodStat = 'Pre-Order' limit 30";
-				$result = mysqli_query($conn, $sql);
-				if(mysqli_num_rows($result) > 0)
-				{
-					while ($row = mysqli_fetch_assoc($result))
-					{
-				?>
-				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-					<div class="card text-center">
-						<img class="card-img-top img-fluid img-thumbnail" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
-						<div class="card-block text-center">
-							<p class="card-text">
-								<?php echo "" . $row["productName"]; ?><br>
-								<b>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></b>
-							</p>
-							<button role="button" class="btn btn-success" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
-							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn"><i class="fa fa-eye"></i></button>
+		<!--packages-->
+		<div class="container-fluid">
+			<div class="container">
+				<div class="row">
+					<?php
+					include "userconnect.php";
+					$sql="SELECT * from tblpackages";
+					$result=$conn->query($sql);
+					if($result->num_rows){
+						while($row=$result->fetch_assoc()){
+					?>
+					<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+						<div class="card">
+							
 						</div>
 					</div>
-				</div>
-				<?php
+					<?php
+						}
 					}
-				}
-				mysqli_close($conn);
-				?>
-			</div>
-			<br>
-			<div class="text-center">
-				<ul class="pagination text-center">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&larr;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&rarr;</span>
-							<span class="sr-only">Next</span>
-						</a>
-					</li>
-				</ul>
+					?>
+				</div>
 			</div>
 		</div>
-		<br>
 		<!--footer-->
 		<?php
 		include 'footer.php';

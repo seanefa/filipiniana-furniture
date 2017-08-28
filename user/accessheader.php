@@ -1,7 +1,25 @@
-<div class="container-fluid bg-wood">
+<div class="container-fluid">
+	<div class="row justify-content-between">
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+			<ul class="ul-inline">
+				<li class="li-inline red"><a><small><span class="fa fa-heart"></span>&nbsp;Wishlist</small></a></li>
+				<li class="li-inline"><a><small><span class="fa fa-map-marker"></span>&nbsp;Branches</small></a></li>
+			</ul>
+		</div>
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
+			<ul class="ul-inline">
+				<li class="li-inline">
+					<a data-toggle="modal" href="#accountmodal"><small><span class="fa fa-user-circle-o" aria-expanded="false"></span>&nbsp;Account</small></a>
+				</li>
+				<li class="li-inline">
+					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"><small><span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span></small></a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+		<div class="row align-items-center">
+			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
 				<?php
 				include "userconnect.php";
 				$sql="SELECT * from tblcompany_info";
@@ -9,12 +27,38 @@
 				if($result->num_rows>0){
 					while($row=$result->fetch_assoc()){
 				?>
-					<img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>">
+				<a href="userhome.php"><img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>"></a>
 				<?php
 					}
 				}
 				?>
 			</div>
+			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center">
+				<ul class="ul-inline">
+					<li class="li-inline"><a href="userhome.php">HOME</a></li>
+					<li class="li-inline"><a href="">ABOUT</a></li>
+					<li class="li-inline"><a href="userpromos.php">PROMOS</a></li>
+					<li class="li-inline"><a href="accessproduction.php">PRODUCTION</a></li>
+				</ul>
+			</div>
+			<div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-right">
+				<form class="form-inline">
+					<input type="text" class="form-control">&nbsp;<button class="btn btn-web"><span class="fa fa-search"></span></button>
+				</form>
+			</div>
+<!--
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3c">
+				<br>
+				<form class="form-group text-center" action="uservalidate.php" method="post">
+					<input type="text" class="form-control" name="username" placeholder="Username" required/>
+					<br>
+					<input type="password" class="form-control" name="password" placeholder="Password" required/>
+					<br>
+					<button type="submit" class="btn btn-web"><b>Log In</b></button>
+					<button type="button" class="btn btn-web" data-toggle="modal" data-target="#signupmodal"><b>Sign Up</b></button>
+				</form>
+			</div>
+-->
 		</div>
 	</div>
 </div>
@@ -39,24 +83,18 @@
 					?>
 				  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
-					  		<li class="nav-item">
-								<a class="nav-link" href="accesshome.php">Home</a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="access.php">Profile<span class="sr-only">(current)</span></a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="accessproducts.php">Products</a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="accesspromos.php">Promos</a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="custom.php">Customize</a>
-					  		</li>
-					  		<li class="nav-item">
-								<a class="nav-link" href="accessproduction.php">Production</a>
-					  		</li>
+							<li class="nav-item">
+							<a class="nav-link" href="userproducts.php">FURNITURES</a>
+							</li>
+							<li class="nav-item">
+							<a class="nav-link" href="userpromos.php">OFFICE</a>
+							</li>
+							<li class="nav-item">
+							<a class="nav-link" href="userpromos.php">SERIES</a>
+							</li>
+							<li class="nav-item">
+							<a class="nav-link" href=".php">DECORATIONS</a>
+							</li>
 						</ul>
 						<!-- Right Side Of Navbar -->
 		       			<ul class="nav navbar-nav navbar-right">
