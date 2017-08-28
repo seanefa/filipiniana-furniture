@@ -89,7 +89,7 @@
 				<a class="nav-link" href="userpromos.php">OFFICE</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">SERIES</a>
+				<a class="nav-link" href="userpackages.php">PACKAGES</a>
 	  		</li>
 	  		<li class="nav-item">
 				<a class="nav-link" href=".php">DECORATIONS</a>

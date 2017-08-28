@@ -36,7 +36,7 @@
 		</div>
 		<!--products-->
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<?php
 				include "userconnect.php";
 				$sql = "SELECT A.typeName, B.* FROM `tblfurn_type` as A INNER JOIN tblproduct as B where A.typeID = B.prodTypeID and B.prodStat = 'Pre-Order' limit 30";
@@ -66,25 +66,6 @@
 				?>
 			</div>
 			<br>
-			<div class="text-center">
-				<ul class="pagination text-center">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&larr;</span>
-							<span class="sr-only">Previous</span>
-						</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&rarr;</span>
-							<span class="sr-only">Next</span>
-						</a>
-					</li>
-				</ul>
-			</div>
 		</div>
 		<br>
 		<!--footer-->

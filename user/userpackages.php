@@ -25,18 +25,26 @@
 		?>
 		<!--packages-->
 		<div class="container-fluid">
+			<hr>
+			<h1 class="text-center">SERIES</h1>
+			<hr>
 			<div class="container">
-				<div class="row">
+				<div class="row justify-content-center">
 					<?php
 					include "userconnect.php";
-					$sql="SELECT * from tblpackages";
+					$sql="SELECT * from tblpackages where packageStatus='Listed'";
 					$result=$conn->query($sql);
 					if($result->num_rows){
 						while($row=$result->fetch_assoc()){
 					?>
 					<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-						<div class="card">
-							
+						<div class="card border-web">
+							<div class="card-body text-center">
+								<h5 class="text-center"><?php echo "" . $row["packageDescription"];?></h5>
+								<h6 class="text-center"><b class="text-danger">Php&nbsp;<?php echo "" . number_format($row["packagePrice"]);?></b></h6>
+								<a data-toggle="modal" href=""><span class="fa fa-shopping-cart" title="Add to Cart"></span></a>&nbsp;
+								<a data-toggle="modal" href="" title="Title"><span class="fa fa-eye"></span></a>
+							</div>
 						</div>
 					</div>
 					<?php
