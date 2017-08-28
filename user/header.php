@@ -2,7 +2,7 @@
 	<div class="row justify-content-between">
 		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
 			<ul class="ul-inline">
-				<li class="li-inline"><a><small><span class="fa fa-heart"></span>&nbsp;Wishlist</small></a></li>
+				<li class="li-inline red"><a><small><span class="fa fa-heart"></span>&nbsp;Wishlist</small></a></li>
 				<li class="li-inline"><a><small><span class="fa fa-map-marker"></span>&nbsp;Branches</small></a></li>
 			</ul>
 		</div>
@@ -205,9 +205,9 @@
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 							<h4 class="text-center"><span class="fa fa-sign-in"></span>&nbsp;Log In</h4>
-							<form class="form-control text-center">
-								<input type="text" class="form-control" placeholder="Username" required><br>
-								<input type="password" class="form-control" placeholder="Password" required><br>
+							<form class="form-control text-center" action="uservalidate.php" method="post">
+								<input type="text" class="form-control" placeholder="Username" name="username" required><br>
+								<input type="password" name="password" class="form-control" placeholder="Password" required><br>
 								<button class="btn btn-web" type="submit">Log In</button><br>
 							</form>
 						</div>

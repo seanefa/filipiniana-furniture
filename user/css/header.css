@@ -25,11 +25,11 @@
 }
 
 .li-inline:hover{
-	font-weight: bold;
+	font-weight: bolder;
 	transition: 150ms ease;
 }
 
-.fa-heart:hover{
+.red:hover{
 	color: crimson;
 	transition: 150ms ease-in;
 	transition: 150ms ease-out;

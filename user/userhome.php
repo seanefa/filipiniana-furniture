@@ -127,7 +127,7 @@
 			</div>
 			<br>
 			<div class="text-center">
-				<a href=".php">See all promos</a>
+				<a href="userpromos.php">See all promos</a>
 			</div>
 		</div>
 		<a href="" id="scroll-to-top"></a>
