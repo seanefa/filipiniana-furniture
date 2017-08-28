@@ -23,7 +23,7 @@ if (!$conn) {
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 class="modal-title" id="modalProduct">New Material</h3>
       </div>
-      <form action="material-add.php" method = "post">
+      <form action="material-add.php" method = "post" id="varform">
         <div class="modal-body">
           <div class="descriptions">
             <div class="form-body">
@@ -61,23 +61,28 @@ if (!$conn) {
               </div>
 
               <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Variant Attributes</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
-                      <?php
-                      $sql = "SELECT * FROM tblattributes;";
-                      $result = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result))
-                      {
-                        if($row['attributeStatus']=='Active'){
-                          echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
-                        }
-                      }
-                      ?>
-                    </select>
+                <label class="control-label">Variants</label><span id="x" style="color:red"> *</span>
+                  <div class="form-group" id="dynamic_field">
+                    <div class="col-xs-5">
+                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs">
+                          <?php
+                          $sql = "SELECT * FROM tblattributes;";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            if($row['attributeStatus']=='Active'){
+                              echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
+                            }
+                          }
+                          ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-6" id="input_field">
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="btn btn-default" id="add"><i class="fa fa-plus"></i></button>
+                    </div>
                   </div>
-                </div>
               </div>
 
             </div>
@@ -90,7 +95,6 @@ if (!$conn) {
       </form>
     </div>
   </div>
-
 </div>
 <!-- /.modal 
   <!-- Update Framework Material Modal -->
@@ -117,7 +121,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" id="select"  data-placeholder="Select Material Type" tabindex="1" name="type">
+                    <select class="form-control"  data-placeholder="Select Material Type" tabindex="1" name="type">
                       <?php
                       $sql = "SELECT * FROM tblmat_type order by matTypeName;";
                       $result = mysqli_query($conn, $sql);
@@ -140,7 +144,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Brand/Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message1"></span> </div>
+                        <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message"></span> </div>
                       </div>
                     </div>
 

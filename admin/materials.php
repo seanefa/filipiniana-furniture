@@ -53,20 +53,11 @@ else if (isset($_GET['reactivateSuccess']))
 <head>
   <script>
 
-  $(document).ready(function(){
+   $(document).ready(function(){
     // Material Name
-    var userkey = '';
     $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
-
-       userkey = $(this).val();
-      userkey = userkey.slice(userkey.length -1 , userkey.length);
-      if(userkey == '\\'){
-        $('#saveBtn').prop('disabled',true);
-          $('#materialName').css('border-color','red');
-          $('#materialNameValidate').html('Symbols not Allowed');
-      }else{
       $.post('material-check.php',{materialName : user}, function(data){ 
         $('#materialNameValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -95,112 +86,68 @@ else if (isset($_GET['reactivateSuccess']))
           $('#materialName').css('border-color','limegreen');
         }
       });
-    }
     });
 
   });
    
   $(document).ready(function(){
-var temprem;
-var tempname;
-var error = 0;
-var flag = true
-var userkey = ''; 
+    var temprem;
+    var tempname;
+    var error = 0;
+    $('body').on('keyup','#editname',function(){
+      var user = $(this).val();
 
-
-
-  $('body').on('keyup','#editname',function(){
-    var user = $(this).val();
-    
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-
-      userkey = $('#editname').val();
-      userkey = userkey.slice(userkey.length -1 , userkey.length);
-
-      if(userkey == '\\'){
-        $('#message1').html('Symbols not allowed');
-          $('#updateBtn').prop('disabled',false);
-      $('#editname').css('border-color','red');
-      }else{
-    $.post('material-type-ucheck.php',{username : user}, function(data){
-     
-     if(data == 'unchanged'){
-      error = 0;
-       $('#message1').html('');
-          $('#updateBtn').prop('disabled',false);
-      $('#editname').css('border-color','black');
-     }
-     else if(data == 'Already Exist!'){
-       error++;
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == 'Symbols not allowed'){
-       error++;
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == 'No white Space'){
-       error++;
-
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == ''){
-      error = 0;
-          $('#message1').html('');
-          $('#updateBtn').prop('disabled',true);
-      $('#editname').css('border-color','black');
-     }
-
-     
-     else if(data == 'Good!'){
-      error = 0;
-       $('#message1').html('');
-     $('#updateBtn').prop('disabled',false);
-      $('#editname').css('border-color','limegreen');
-     }
+      $.post('frame-mat-Ucheck.php',{username : user}, function(data){
 
 
-    });
+        if(data != "Already Exist!" && data !="unchanged"){
+          flag = false;
+          error =0;
+          $('#message').html("");
+          $('#updateBtn').prop('disabled', false);
+          $('#editname').css('border-color','limegreen');
 
-    }
-
-  });
-        $('body').on('change','#select',function(){
-          if($(this).val() == '--'){
-
-
-          $('#updateBtn').prop('disabled',true);
-
-            }
-            else{
-          if(error == 0){
-          $('#updateBtn').prop('disabled',false);
         }
-        else{
+        if(data == "unchanged"){
+          error = 0;
+          $('#message').html("");
+          $('#updateBtn').prop('disabled', true);
+          $('#editname').css('border-color','black')
+        }
+        else if(data == "Already Exist!"){
+          flag = true;
+          error++;
+          $('#message').html(data);
           $('#updateBtn').prop('disabled',true);
-        }
-        }
 
+          $('#editname').css('border-color','red');
+        }
 
       });
 
-        $('body').on('keyup','#rem',function(){
-        var tem = $(this).val();
-        if(error == 0){
+
+
+    });
+    $('body').on('change','#rem',function(){
+      if(error == 0){
+        $('#updateBtn').prop('disabled',false);
+      }
+
+    });
+    $('body').on('keyup','#remText',function(){
+      var tem = $(this).val();
+      if(error == 0){
         flag = false;
         if(!flag){
           $('#updateBtn').prop('disabled',false);
         }
-        }
-      });
+      }
+    });
 
-});
+  });
+
 $(function(){ // DOM ready
 
   // ::: TAGS BOX
@@ -266,49 +213,107 @@ $(document).ready(function(){
 
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
+  $('#attribs').ready(function() {
+    var value = $("#attribs").val();
+      var arraynum = "0";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value, record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field' ).html(response);
+      }
+      });
+    });
+
+    $('#attribs').change(function() {
+    var value = this.value;
+    var arraynum = "0";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value,record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field' ).html(response);
+      }
+      });
+    });
+
+});
+});      
+      
+      
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+     var i=0;  
+      $('#add').click(function(){  
+           i++;  
+           $('#dynamic_field').append('<div id="row'+i+'"><br><br><br><div class="col-xs-5"><select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs['+i+']" id="attribs'+i+'"><?php $sql = "SELECT * FROM tblattributes;";$result = mysqli_query($conn, $sql);while ($row = mysqli_fetch_assoc($result)){if($row['attributeStatus']=='Active'){echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');}}?></select></div><div class="col-xs-6" id="input_field'+i+'"></div><div class="col-xs-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></div></div>');
+          
+          $('#attribs'+i+'').ready(function() {
+          var value1 = $('#attribs'+i+'').val();
+            var arraynum = i;
+          var recID1 = "1";
+            $.ajax({
+              type: 'post',
+              url: 'load-form-var.php',
+              data: {
+                id: value1, record: recID1, arnum: arraynum,
+              },
+              success: function (response) {
+               // We get the element having id of display_info and put the response inside it
+               $( '#input_field'+i+'' ).html(response);
+              }
+              });
+            });
+
+            $('#attribs'+i+'').change(function() {
+            var value2 = this.value;
+            var arraynum = i;
+          var recID2 = "1";
+            $.ajax({
+              type: 'post',
+              url: 'load-form-var.php',
+              data: {
+                id: value2,record: recID2, arnum: arraynum,
+              },
+              success: function (response) {
+               // We get the element having id of display_info and put the response inside it
+               $( '#input_field'+i+'' ).html(response);
+              }
+              });
+            });
+          
+      });
+      $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#row'+button_id+'').remove();  
+      });
+});
+});     
+      
+
+      
+/*$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
     $("#attribs").select2({
       tags: true
     });
 });
-});
+});*/
 
 
-$(document).ready(function(){
- $('#myModal').on('shown.bs.modal',function(){
-  $('#type').ready(function() {
-    var value = $("#type").val();
-  var recID = "material";
-    $.ajax({
-      type: 'post',
-      url: 'load-form-mat.php',
-      data: {
-        id: value, record: recID,
-      },
-      success: function (response) {
-       // We get the element having id of display_info and put the response inside it
-       $( '#form' ).html(response);
-      }
-      });
-    });
 
-    $('#type').change(function() {
-    var value = this.value;
-  var recID = "material";
-    $.ajax({
-      type: 'post',
-      url: 'load-form-mat.php',
-      data: {
-        id: value,record: recID,
-      },
-      success: function (response) {
-       // We get the element having id of display_info and put the response inside it
-       $( '#form' ).html(response);
-      }
-      });
-    });
-
-});
-});
+      
 
 
 $(document).ready(function(){

@@ -53,21 +53,13 @@ else if (isset($_GET['reactivateSuccess']))
 <head>
   <script>
 
-     $(document).ready(function(){
-    // Material Name
-    $('body').on('keyup','#materialName',function(){
+    $(document).ready(function(){
+    // Material Type Name
+    $('body').on('keyup','#matTypeName',function(){
       var user = $(this).val();
       var flag = true;
-
-      var user = $(this).val();
-      var flag = true;
-      if(user == '\\'){
-        $('#saveBtn').prop('disabled',true);
-          $('#materialName').css('border-color','red');
-          $('#message').html('Symbols not Allowed');
-      }else{
-      $.post('material-attribute-check.php',{username : user}, function(data){ 
-        $('#message').html(data);
+      $.post('material-type-check.php',{matTypeName : user}, function(data){ 
+        $('#matTypeNameValidate').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
         flag = true;
@@ -87,111 +79,62 @@ else if (isset($_GET['reactivateSuccess']))
 
         if(flag){
           $('#saveBtn').prop('disabled',true);
-          $('#materialName').css('border-color','red');
+          $('#matTypeName').css('border-color','red');
         }
         else if(!flag){
           $('#saveBtn').prop('disabled', false);
-          $('#materialName').css('border-color','limegreen');
+          $('#matTypeName').css('border-color','limegreen');
         }
       });
-    }
     });
 
   });
-
-
-
-   $(document).ready(function(){
+    $(document).ready(function(){
 var temprem;
 var tempname;
 var error = 0;
-var flag = true
-var userkey = ''; 
-
-
-
   $('body').on('keyup','#editname',function(){
     var user = $(this).val();
     
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-
-      userkey = $('#editname').val();
-      userkey = userkey.slice(userkey.length -1 , userkey.length);
-
-      if(userkey == '\\'){
-        $('#message1').html('Symbols not allowed');
-          $('#updateBtn').prop('disabled',false);
-      $('#editname').css('border-color','red');
-      }else{
-    $.post('material-attribute-ucheck.php',{username : user}, function(data){
+    $.post('job-Ucheck.php',{username : user}, function(data){
      
-     if(data == 'unchanged'){
-      error = 0;
-       $('#message1').html('');
-          $('#updateBtn').prop('disabled',false);
-      $('#editname').css('border-color','black');
-     }
-     else if(data == 'Already Exist!'){
-       error++;
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == 'Symbols not allowed'){
-       error++;
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == 'No white Space'){
-       error++;
-
-          $('#updateBtn').prop('disabled',true);
-      $('#message1').html(data);
-      $('#editname').css('border-color','red');
-     }
-     else if(data == ''){
-      error = 0;
-          $('#message1').html('');
-          $('#updateBtn').prop('disabled',true);
-      $('#editname').css('border-color','black');
-     }
-
-     
-     else if(data == 'Good!'){
-      error = 0;
-       $('#message1').html('');
-     $('#updateBtn').prop('disabled',false);
+      
+      if(data != "Already Exist!" && data !="unchanged"){
+          flag = false;
+          error = 0;
+        $('#message').html("");
+        $('#updateBtn').prop('disabled', false);
       $('#editname').css('border-color','limegreen');
-     }
 
+      }
+      if(data == "unchanged"){
+        error = 0;
+        $('#message').html("");
+      $('#editname').css('border-color','black')
+      }
+            else if(data == "Already Exist!"){
+        flag = true;
+        error++;
+        $('#message').html(data);
+         $('#updateBtn').prop('disabled',true);
+
+      $('#editname').css('border-color','red');
+      }
 
     });
 
-    }
+    
 
   });
-        $('body').on('change','#select',function(){
-          if($(this).val() == '--'){
-
-
-          $('#updateBtn').prop('disabled',true);
-
-            }
-            else{
+         $('body').on('change','#rem',function(){
           if(error == 0){
           $('#updateBtn').prop('disabled',false);
         }
-        else{
-          $('#updateBtn').prop('disabled',true);
-        }
-        }
-
 
       });
-
-        $('body').on('keyup','#rem',function(){
+        $('body').on('keyup','#remText',function(){
         var tem = $(this).val();
         if(error == 0){
         flag = false;
@@ -275,14 +218,14 @@ $(document).ready(function(){
 });
 });
 
-/*
+
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
-    $("#unit").select2({
+    $("#attribs").select2({
       tags: true
     });
 });
-});*/
+});
 
 
 $(document).ready(function(){
