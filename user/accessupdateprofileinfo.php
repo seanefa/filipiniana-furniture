@@ -11,6 +11,13 @@ $email=$_POST["email"];
 $stat="Active";
 $id = $_SESSION["userID"];
 
+$fname= mysqli_real_escape_string($conn, $fname);
+$mname= mysqli_real_escape_string($conn, $mname);
+$lname= mysqli_real_escape_string($conn, $lname);
+$add= mysqli_real_escape_string($conn, $add);
+$contact= mysqli_real_escape_string($conn, $contact);
+$email= mysqli_real_escape_string($conn, $email);
+
 $sql="UPDATE tblcustomer SET customerFirstName='$fname', customerMiddleName='$mname', customerLastName='$lname', customerAddress='$add', customerContactNum='$contact', customerEmail='$email' where customerID = '$id'";
 
 if($conn->query($sql))

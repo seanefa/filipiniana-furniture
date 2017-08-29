@@ -15,7 +15,6 @@
 					<p><i class="fa fa-map-pin"></i><?php echo "" . $row['comp_address'];?></p>
 					<p><i class="fa fa-phone"></i> Phone : <?php echo "" . $row['comp_num'];?></p>
 					<p><i class="fa fa-envelope"></i> E-mail : <?php echo "" . $row['comp_email'];?></p>
-					<p class="text-justify"><i class="fa fa-book"></i> <?php echo "" . $row['comp_about'];?></p>
 				  </div>
 				  <div class="col-md-2 col-sm-6 footer-col">
 					<h6 class="heading7">GENERAL LINKS</h6>

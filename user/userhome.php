@@ -63,7 +63,7 @@
 			<hr>
 		</div>
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<?php
 				include "userconnect.php";
 				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 8";
@@ -107,7 +107,7 @@
 			<hr>
 		</div>
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<?php
 					include "userconnect.php";
 					$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";

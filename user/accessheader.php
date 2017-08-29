@@ -27,7 +27,7 @@
 				if($result->num_rows>0){
 					while($row=$result->fetch_assoc()){
 				?>
-				<a href="userhome.php"><img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>"></a>
+				<a href="accesshome.php"><img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>"></a>
 				<?php
 					}
 				}
@@ -35,9 +35,9 @@
 			</div>
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center">
 				<ul class="ul-inline">
-					<li class="li-inline"><a href="userhome.php">HOME</a></li>
+					<li class="li-inline"><a href="access.php">PROFILE</a></li>
 					<li class="li-inline"><a href="">ABOUT</a></li>
-					<li class="li-inline"><a href="userpromos.php">PROMOS</a></li>
+					<li class="li-inline"><a href="accesspromos.php">PROMOS</a></li>
 					<li class="li-inline"><a href="accessproduction.php">PRODUCTION</a></li>
 				</ul>
 			</div>
@@ -84,13 +84,13 @@
 				  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item">
-							<a class="nav-link" href="userproducts.php">FURNITURES</a>
+							<a class="nav-link" href="accessproducts.php">FURNITURES</a>
 							</li>
 							<li class="nav-item">
-							<a class="nav-link" href="userpromos.php">OFFICE</a>
+							<a class="nav-link" href="">OFFICE</a>
 							</li>
 							<li class="nav-item">
-							<a class="nav-link" href="userpromos.php">SERIES</a>
+							<a class="nav-link" href="accesspromos.php">SERIES</a>
 							</li>
 							<li class="nav-item">
 							<a class="nav-link" href=".php">DECORATIONS</a>

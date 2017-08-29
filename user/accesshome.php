@@ -24,6 +24,7 @@ if(!isset($_SESSION["userID"]))
 		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/footer.css">
+		<link rel="stylesheet" href="css/hover.css">
 	</head>
 	<body>
 		<!--navbar-->
@@ -69,7 +70,7 @@ if(!isset($_SESSION["userID"]))
 			<hr>
 		</div>
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<?php
 				include "userconnect.php";
 				$sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 8";
@@ -113,7 +114,7 @@ if(!isset($_SESSION["userID"]))
 			<hr>
 		</div>
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<?php
 					include "userconnect.php";
 					$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";
@@ -124,7 +125,14 @@ if(!isset($_SESSION["userID"]))
 						{
 				?>
 							<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-								<image type="image" class="btn img-fluid lighten" src="/admin/plugins/images/<?php echo "" . $row['promoImage'];?>" data-toggle="modal" data-target="#promomodal"></image>
+								<div class="hovereffect">
+                	<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
+									<div class="overlay">
+										<h2><?php echo "" . $row["promoName"];?></h2>
+										<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
+										<a class="info" href=""><span class="fa fa-check-circle"></span>&nbsp; Avail</a>
+									</div>
+								</div>
 							</div>
 				<?php
 						}

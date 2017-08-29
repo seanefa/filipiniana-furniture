@@ -21,7 +21,7 @@ a.navbar-brand:focus,
 .thumbnail{margin-bottom: 10%;}
 .card:hover{
 	transition: 100ms linear;
-	box-shadow: 5px 5px 5px #888888;
+	box-shadow: 5px 5px 20px #888888;
 }
 /*animations*/
 @-webkit-keyframes webdarker
