@@ -1,6 +1,7 @@
 <?php
 $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
+include "titleHeader.php";
 //session_start();
 
 if(isset($_GET['id'])){
