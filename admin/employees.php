@@ -70,16 +70,71 @@ else if (isset($_GET['reactivateSuccess']))
 });
 });
 
-    $(document).ready(function(){
- $('#myModal').on('shown.bs.modal',function(){
-    $("#job").on('change',function(){
-      alert($('#job').val());
 
+
+$(document).ready(function(){
+
+var addCtr = 0;
+var remCtr = 0;
+
+ $('#myModal').on('shown.bs.modal',function(){
+  $('#updateBtn').on('click',function(){
+    if(addCtr == 0){
+      $('#addedJob').append('<input type="hidden" name="addJ[]" value="0">');
+
+    }
+    if(remCtr == 0){
+
+       $('#removedJob').append('<input type="hidden" name="removeJ[]" value="0">');
+    }
+
+
+  });
+
+ });
+
+
+ $('#myModal').on('shown.bs.modal',function(){
+    
+        var temp = $("#select").val().toString();
+    $("#select").on('select2:unselect',function(){
+
+        temp = temp.replace(/,/g , "");
+        
+        alert(temp);
+        var remove = $(this).val().toString();
+        remove = remove.replace(/,/g , "");
+        alert(remove);
+
+        //get the removed number
+        temp = temp.replace(remove,'');
+        alert(temp);
+        $('#removedJob').append('<input type="hidden" name="removeJ[]" value="'+temp+'">');
+       
+        //
+        temp = $("#select").val().toString();
+        remCtr++;
+        alert(remCtr);
     });
 });
-});
 
-  /*  $(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+   
+    $("#select").on('select2:select',function(){
+         var temp = $("#select").val().toString();
+        temp = temp.replace(',','');
+        var add = $(this).val().toString();
+        add = add.slice(add.length - 1, add.length);
+        $('#addedJob').append('<input type="hidden" name="addJ[]" value="'+add+'">');
+        //
+        temp = $("#select").val().toString();
+        addCtr++;
+        alert(addCtr);
+    });
+});
+ });
+/*
+   $(document).ready(function(){
       $("#archiveTable").hide();
       $("#backArch").hide();
     $("#showArch").click(function(){
@@ -398,13 +453,17 @@ $(document).ready(function(){
                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="employee-form.php" data-remote="employee-form.php?id=<?php echo $row['empID'];?> #delete" data-target="#myModal" ><i class='ti-close'></i> Deactivate</button>
                                   </td>
                                   <?php echo('</tr>');} }
+
+
                                   function jName($id){
                                     include "dbconnect.php";
-                                    $sql = "SELECT * from tblemp_job a, tbljobs b WHERE b.jobID = a.emp_jobDescID and a.emp_jobID = '$id';";
+                                    $sql = "SELECT * from tblemp_job a, tbljobs b WHERE b.jobID = a.emp_jobDescID and a.emp_empID = '$id';";
                                     $result = mysqli_query($conn,$sql);
                                     $cat = "";
                                     while($row = mysqli_fetch_assoc($result)){
+                                      if($row['emp_jobStatus'] != 'Archived'){
                                       $cat = $cat . $row['jobName'] . " - ";
+                                      }
                                     }
 
                                     $temp = substr(trim($cat), 0, -1);

@@ -62,6 +62,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Job</label><span id="x" style="color:red"> *</span>
+                        
                           <select class="form-control" multiple="multiple" id="job" data-placeholder="Choose a Job" tabindex="1" name="job[]">
                             <?php
                             $sql = "SELECT * FROM tbljobs order by jobName;";
@@ -76,6 +77,8 @@ if (!$conn) {
                           </select>
                         </div>
                       </div>
+                    </div>
+                    <div id="jobArray">
                     </div>
                     <div class="row">
                       <div class="col-md-12">
@@ -126,7 +129,7 @@ if (!$conn) {
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Middle Name</label>
-                              <input type="text" onkeyup="validateUpdate('m')" id="editm" class="form-control" name="m" value="<?php echo $trow['empMidName']; ?>"/><span id="messagem"></span> 
+                              <input type="text" onkeyup="validateUpdate('m')" id="editm" class="form-control" name="mn" value="<?php echo $trow['empMidName']; ?>"/><span id="messagem"></span> 
                             </div>
                           </div>
                         </div>
@@ -141,15 +144,17 @@ if (!$conn) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Job</label><span id="x" style="color:red"> *</span>
-                                <select id="select" multiple="multiple" class="form-control" data-placeholder="Choose a Job" tabindex="1" name="job[]">
+                                <select id="select" multiple="multiple" class="form-control" data-placeholder="Choose a Job" tabindex="1">
                                   <?php
                                   include "dbconnect.php";
                                   $sql1 = "SELECT * from tblemp_job WHERE emp_empID = '$jsID';";
                                   $res = mysqli_query($conn,$sql1);
                                   $jobs = "";
                                   while($jrow = mysqli_fetch_assoc($res)){
+                                    if($jrow['emp_jobStatus'] != 'Archived'){
                                     $jobs = $jobs . $jrow['emp_jobDescID'] . ",";
                                     echo $jobs;
+                                    }
                                   }
                                   $temp = substr(trim($jobs), 0, -1);
                                   $jobs = explode(',',$temp);
@@ -162,12 +167,12 @@ if (!$conn) {
                                     if($row['jobStatus']=='Listed'){
                                       if ($jobs[$cnt] == $row['jobID'])
                                       {
-                                        echo('<option value='.$row['jobID'].'" selected="selected">'.$row['jobName'].'</option>');
+                                        echo('<option value='.$row['jobID'].' selected="selected">'.$row['jobName'].'</option>');
                                         $cnt++;
                                       }
                                       else
                                       {
-                                      echo('<option value='.$row['jobID'].'selected="selected">'.$row['jobName'].'</option>');
+                                      echo('<option value='.$row['jobID'].'>'.$row['jobName'].'</option>');
                                       }
 
                                     }
@@ -176,6 +181,10 @@ if (!$conn) {
                                 </select>
                               </div>
                             </div>
+                          </div>
+                          <div id="removedJob">
+                          </div>
+                          <div id="addedJob">
                           </div>
                           <div class="row">
                             <div class="col-md-12">
