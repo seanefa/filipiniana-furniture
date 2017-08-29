@@ -150,7 +150,7 @@ include 'dbconnect.php';
   }
 
 </script>
-<title>Return Order</title>
+<title>Receive Deliveries</title>
 <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 <body class ="fix-header fix-sidebar">
@@ -162,7 +162,7 @@ include 'dbconnect.php';
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Return Order</span></a>
+                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Receive Deliveries</span></a>
                 </li>
               </ul>
             </h3>
