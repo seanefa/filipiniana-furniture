@@ -393,7 +393,7 @@ var newQuantt = $('#quants'+row.value).val();
 $('#prices'+row.value).val(0);
 $('#prices'+row.value).val(realPrice * newQuantt);
 $('#pr'+row.value+'').html($('#prices'+row.value).val());
-
+totalQuant = totalQuant - result;
 
 
 //total
@@ -407,6 +407,9 @@ $('#totalBadge').html(String(totalQ - result));
 
 //if quantity is zero delete row
 if(remover == 0){
+
+
+
   var t = idArray.indexOf(row.value);
   idArray.splice(t,1);
 
@@ -419,6 +422,15 @@ if(remover == 0){
   $('#thisIsCart').append('<input type="hidden" name="priceremoved[]" value="'+$('#prices'+row.value).val()+'">');
   $('#thisIsCart').append('<input type="hidden" name="quantremoved[]" value="'+$('#quants'+row.value).val()+'">');
   document.getElementById('cartTbl').deleteRow(i);
+  alert(totalQuant);
+if(totalQuant==0){
+    totalQuant = 0;
+    totalPrice = 0;
+    $('#totalQ').html(String(0));
+  $('#totalPrice').html(String(0));
+  }
+
+
 
 }
 
@@ -601,7 +613,7 @@ function addPackage(id){
                       $('#P_prices'+row.value).val(realPrice * newQuantt);
                       $('#P_pr'+row.value+'').html($('#P_prices'+row.value).val());
 
-
+                      totalQuant = totalQuant - result;
 
                       //total
                       $('#ttp').val(totalP - (realPrice * result));
@@ -626,7 +638,14 @@ function addPackage(id){
                        $('#thisIsCart').append('<input type="hidden" name="P_priceremoved[]" value="'+$('#P_prices'+row.value).val()+'">');
                        $('#thisIsCart').append('<input type="hidden" name="P_quantremoved[]" value="'+$('#P_quants'+row.value).val()+'">');
                        document.getElementById('cartTbl').deleteRow(i);
+                       if(totalQuant==0){
+                        totalQuant = 0;
+                        totalPrice = 0;
+                        $('#totalQ').html(String(0));
+                      $('#totalPrice').html(String(0));
+                      }
 
+                       
                      }
 
                    }
