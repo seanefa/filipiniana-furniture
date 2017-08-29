@@ -22,6 +22,8 @@ $cnt = 0;$temp = "";while($row = mysqli_fetch_assoc($res)){$temp = $temp . $row[
 	}*/
 /*if($cnt>0){$sql1 = "INSERT INTO `tblattributes` (`attributeName`, `attributeStatus`) VALUES ('', 'Active');"}*/
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblmaterials` (`materialType`, `materialName`, `materialStatus`) VALUES ('$type', '$name','$status')";
 mysqli_query($conn,$sql);
 $flag++;

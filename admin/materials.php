@@ -55,9 +55,18 @@ else if (isset($_GET['reactivateSuccess']))
 
    $(document).ready(function(){
     // Material Name
+    var userkey = '';
     $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
+      userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+      if(userkey == '\\'){
+
+      $('#saveBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#materialName').css('border-color','red');
+      }else{
       $.post('material-check.php',{materialName : user}, function(data){ 
         $('#materialNameValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -85,7 +94,9 @@ else if (isset($_GET['reactivateSuccess']))
           $('#saveBtn').prop('disabled', false);
           $('#materialName').css('border-color','limegreen');
         }
+
       });
+    }
     });
 
   });
@@ -94,12 +105,22 @@ else if (isset($_GET['reactivateSuccess']))
     var temprem;
     var tempname;
     var error = 0;
+    var userkey = '';
     $('body').on('keyup','#editname',function(){
       var user = $(this).val();
 
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-      $.post('frame-mat-Ucheck.php',{username : user}, function(data){
+
+       userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
+      }else{
+      $.post('material-Ucheck.php',{username : user}, function(data){
 
 
         if(data != "Already Exist!" && data !="unchanged"){
@@ -127,7 +148,7 @@ else if (isset($_GET['reactivateSuccess']))
 
       });
 
-
+    }
 
     });
     $('body').on('change','#rem',function(){

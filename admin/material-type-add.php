@@ -10,6 +10,8 @@ $status = "Listed";
 
 $measures = substr(trim($measures), 0, -1);
 
+$desc = mysqli_real_escape_string($conn,$desc);
+
 $sql = "INSERT INTO `tblmat_type` (`matTypeName`, `matTypeRemarks`,`matTypeMeasure`, `matTypeStatus`) VALUES ('$name','$desc','$measures','$status');";
 echo $sql . "<br>";
 

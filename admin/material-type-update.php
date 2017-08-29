@@ -10,6 +10,8 @@ $measures = $_POST['intags'];
 
 $measures = substr(trim($measures), 0, -1);
 
+$editDescription = mysqli_real_escape_string($conn,$editDescription);
+
 $updateSql = "UPDATE tblmat_type SET matTypeName='$editName', matTypeRemarks='$editDescription' WHERE matTypeID=$id";
 
 if(mysqli_query($conn,$updateSql)){

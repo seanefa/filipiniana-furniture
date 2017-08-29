@@ -55,10 +55,21 @@ else if (isset($_GET['reactivateSuccess']))
 
     $(document).ready(function(){
     // Material Type Name
+    var userkey = '';
     $('body').on('keyup','#matTypeName',function(){
       var user = $(this).val();
       var flag = true;
-      $.post('material-type-check.php',{matTypeName : user}, function(data){ 
+
+      userkey = $(this).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+
+      $('#saveBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#matTypeName').css('border-color','red');
+      }else{
+      $.post('material-attribute-check.php',{matTypeName : user}, function(data){ 
         $('#matTypeNameValidate').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
@@ -86,6 +97,7 @@ else if (isset($_GET['reactivateSuccess']))
           $('#matTypeName').css('border-color','limegreen');
         }
       });
+    }
     });
 
   });
@@ -93,12 +105,22 @@ else if (isset($_GET['reactivateSuccess']))
 var temprem;
 var tempname;
 var error = 0;
+var userkey = '';
   $('body').on('keyup','#editname',function(){
     var user = $(this).val();
     
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-    $.post('job-Ucheck.php',{username : user}, function(data){
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#updateBtn').prop('disabled',true);
+      $('#message').html('Symbols not allowed');
+      $('#editname').css('border-color','red');
+      }else{
+    $.post('material-attribute-ucheck.php',{username : user}, function(data){
      
       
       if(data != "Already Exist!" && data !="unchanged"){
@@ -125,7 +147,7 @@ var error = 0;
 
     });
 
-    
+    }
 
   });
          $('body').on('change','#rem',function(){
