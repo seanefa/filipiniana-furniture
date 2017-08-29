@@ -372,7 +372,7 @@ function deleteRow(row){
       var remover = qunatityy;
       var a = parseInt($('#prices'+row.value).val());
       var b = parseInt($('#quants'+row.value).val());
-      num_of_product =  num_of_product + quant;
+      num_of_product =  num_of_product + qunatityy;
 
       var totalP= $('#totalPrice').html();
 totalP=totalP.replace(/\,/g,''); //deletes comma
@@ -575,7 +575,7 @@ function addPackage(id){
                       else{
                         if(qunatityy != 0){
 
-                          num_of_package =  num_of_package - quantityy;
+                          num_of_package =  num_of_package - qunatityy;
 
                           var remover = qunatityy;
                           var a = parseInt($('#P_prices'+row.value).val());
@@ -672,7 +672,7 @@ function addPackage(id){
                   else{
                     if(qunatityy != 0){
 
-                      num_of_package =  num_of_package + quantityy;
+                      num_of_package =  num_of_package + qunatityy;
                       var remover = qunatityy;
                       var a = parseInt($('#P_prices'+row.value).val());
                       var b = parseInt($('#P_quants'+row.value).val());
@@ -744,7 +744,7 @@ function addRow(row){
   }
   else{
     if(qunatityy != 0){
-      num_of_product =  num_of_product + quantityy;
+      num_of_product =  num_of_product + qunatityy;
       var remover = qunatityy;
       var a = parseInt($('#prices'+row.value).val());
       var b = parseInt($('#quants'+row.value).val());
