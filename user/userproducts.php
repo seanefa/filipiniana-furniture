@@ -48,7 +48,7 @@
 				?>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
 					<div class="card text-center">
-						<img class="card-img-top img-fluid img-thumbnail" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
+						<img class="card-img-top img-fluid" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="card-block text-center">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>

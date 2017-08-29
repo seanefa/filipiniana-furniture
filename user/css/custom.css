@@ -15,9 +15,13 @@ a.navbar-brand:focus,
 .carousel-item.active, .carousel-item-next, .carousel-item-prev{display: block;}
 .card{margin-bottom: 10%;}
 .bond-paper{height: 887px; width: 1037px; padding: 40px;}
-.hover-lighten:hover{opacity: 0.7; transition: 300ms ease;}
+.lighten:hover{opacity: 0.7; transition: 300ms ease;}
+.lighten{box-shadow: 7px 7px 7px #888888;}
 .bg-clean{background-color: white;}
 .thumbnail{margin-bottom: 10%;}
+.card{
+	box-shadow: 7px 7px 7px #888888;
+}
 /*animations*/
 @-webkit-keyframes webdarker
 {

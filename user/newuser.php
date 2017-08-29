@@ -13,6 +13,17 @@ $status="active";
 $type="customer";
 $datecreated=date("Y/m/d");
 include 'userconnect.php';
+$last_id=$conn->insert_id;
+
+$un= mysqli_real_escape_string($conn, $un);
+$pw= mysqli_real_escape_string($conn, $pw);
+$fn= mysqli_real_escape_string($conn, $fn);
+$mn= mysqli_real_escape_string($conn, $mn);
+$ln= mysqli_real_escape_string($conn, $ln);
+$ar= mysqli_real_escape_string($conn, $ar);
+$cn= mysqli_real_escape_string($conn, $cn);
+$em= mysqli_real_escape_string($conn, $em);
+
 if($cf==$pw)
 {
 	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', '$status')";
@@ -44,3 +55,4 @@ else
 		echo "Passwords does not match.";
 }
 ?>
+$conn-close();

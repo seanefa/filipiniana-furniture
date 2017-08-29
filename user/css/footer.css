@@ -20,7 +20,7 @@ footer {
 .footer-ul li { line-height:29px; font-size:12px;}
 .footer-ul li a { color:#fff; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
 .footer-ul i { margin-right:10px;}
-.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: coral; text-decoration: none; background-color: black;}
+.footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color: darkgoldenrod; text-decoration: none;}
 
  .copyright { min-height:40px; background-color:#fff000;}
  .copyright p { text-align:left; color:#fff; padding:10px 0; margin-bottom:0;}
@@ -68,8 +68,5 @@ footer {
           transform: rotate(360deg);
 }
 .bg-wood2{
-	background-image: url("images/pexels-photo-281513.jpeg");
-	background-size: cover;
-	background-position: top;
-	background-attachment: fixed;
+	background-color: #49311c;
 }

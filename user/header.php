@@ -9,7 +9,10 @@
 		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
 			<ul class="ul-inline">
 				<li class="li-inline">
-					<a data-toggle="modal" href="#accountmodal"><small><span class="fa fa-user-circle-o" aria-expanded="false"></span>&nbsp;Account</small></a>
+					<a data-toggle="modal" href="#signupmodal"><small><span class="fa fa-user-plus" aria-expanded="false"></span>&nbsp;Sign Up</small></a>
+				</li>
+				<li class="li-inline">
+					<a data-toggle="modal" href="#loginmodal"><small><span class="fa fa-sign-in" aria-expanded="false"></span>&nbsp;Log In</small></a>
 				</li>
 				<li class="li-inline">
 					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"><small><span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span></small></a>
@@ -105,7 +108,7 @@
 -->
   	</div>
 </nav>
-		<!--signup modal
+
 		<div class="modal fade" id="signupmodal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -165,8 +168,6 @@
 				</div>
 			</div>
 		</div>
--->
-		<!--login modal-->
 		<div class="modal fade" id="loginmodal">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -190,7 +191,9 @@
 				</div>
 			</div>
 		</div>
-<!--account-->
+
+<!--
+
 <div class="modal fade" id="accountmodal">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -213,9 +216,10 @@
 						</div>
 						<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 							<h4 class="text-center"><span class="fa fa-user-plus"></span>&nbsp;Sign Up</h4>
-							<form class="form-control text-center">
-								<input type="text" class="form-control" placeholder="Username" required><br>
-								<input type="password" class="form-control" placeholder="Password" required><br>
+							<form class="form-control text-center" action="newuser.php" method="post">
+								<input type="text" class="form-control" placeholder="Username" name="uname" required><br>
+								<input type="email" class="form-control" placeholder="Email Address" name="email" required><br>
+								<input type="password" class="form-control" placeholder="Password" name="upass" required><br>
 								<button class="btn btn-web" type="submit">Sign Up</button><br>
 							</form>
 						</div>
@@ -224,4 +228,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->

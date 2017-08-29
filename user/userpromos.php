@@ -41,7 +41,7 @@
                   {
               ?>
                       <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4">
-                          <img class="img-fluid hover-lighten thumbnail" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
+                          <img class="img-fluid lighten thumbnail" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
                       </div>
               <?php
                   }
