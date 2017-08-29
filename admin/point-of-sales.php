@@ -40,7 +40,6 @@ include "menu.php";
   $(document).ready(function(){
 
 var value = $("#selectCat").val(); // on load
-alert(value);
 $.ajax({
   type: 'post',
   url: 'display-furnitures-pos.php',
@@ -477,20 +476,17 @@ function addnewCust(){
                       <div class="col-md-12">
                         <div class="form-group">
                         <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
-                        <div class="row">
-                      <div class="col-md-12">
-                        <input type="text" id="da" class="form-control" name="del_addr" placeholder="Street Address" />
-                        </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                        <div class="col-md-6">
-                        <input type="text" id="city" class="form-control" name="del_city" placeholder="City" />
-                        </div>
-                        <div class="col-md-6">
-                        <input type="text" id="zip" class="form-control" name="del_zip" placeholder="Zip Code"/>
-                        </div>
-                        </div>
+                        
+                    <div class="row">
+                      <div class="col-md-5">
+                        <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
+                      </di
                       </div>
                         </div>
                       </div>
