@@ -38,13 +38,15 @@
 						while($row=$result->fetch_assoc()){
 					?>
 					<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-						<div class="card border-web">
+						<div class="card">
 							<div class="card-body text-center">
+								<br>
 								<h5 class="text-center"><?php echo "" . $row["packageDescription"];?></h5>
 								<h6 class="text-center"><b class="text-danger">Php&nbsp;<?php echo "" . number_format($row["packagePrice"]);?></b></h6>
 								<a data-toggle="modal" href=""><span class="fa fa-shopping-cart" title="Add to Cart"></span></a>&nbsp;
 								<a data-toggle="modal" href="" title="Title"><span class="fa fa-eye"></span></a>
 							</div>
+							<br>
 						</div>
 					</div>
 					<?php

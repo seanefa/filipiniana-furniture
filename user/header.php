@@ -39,7 +39,7 @@
 			<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 text-center">
 				<ul class="ul-inline">
 					<li class="li-inline"><a href="userhome.php">HOME</a></li>
-					<li class="li-inline"><a href="">ABOUT</a></li>
+					<li class="li-inline"><a href="#">ABOUT</a></li>
 					<li class="li-inline"><a href="userpromos.php">PROMOS</a></li>
 				</ul>
 			</div>
@@ -89,13 +89,13 @@
 				<a class="nav-link" href="userproducts.php">FURNITURES</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userpromos.php">OFFICE</a>
+				<a class="nav-link" href="#">OFFICE</a>
 	  		</li>
 	  		<li class="nav-item">
 				<a class="nav-link" href="userpackages.php">PACKAGES</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href=".php">DECORATIONS</a>
+				<a class="nav-link" href="#">DECORATIONS</a>
 	  		</li>
 		</ul>
 <!--

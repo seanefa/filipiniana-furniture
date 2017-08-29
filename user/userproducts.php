@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/footer.css">
+		<link rel="stylesheet" href="css/hoverv2.css">
 	</head>
 	<body>
 		<!--navbar-->
@@ -47,17 +48,15 @@
 					{
 				?>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-					<div class="card text-center">
-						<img class="card-img-top img-fluid" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
-						<div class="card-block text-center">
-							<p class="card-text">
-								<?php echo "" . $row["productName"]; ?><br>
-								<b>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></b>
-							</p>
-							<button role="button" class="btn btn-success" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
-							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn"><i class="fa fa-eye"></i></button>
+					
+					<div class="hovereffect">
+						<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
+						<div class="overlay">
+							<h2><?php echo "" . $row["productName"];?><br><br>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></h2>
+							<a class="info" href=""><span class="fa fa-eye"></span></a>
+							<a class="info" href=""><span class="fa fa-shopping-cart"></span></a>
 						</div>
-					</div>
+    			</div>
 				</div>
 				<?php
 					}
