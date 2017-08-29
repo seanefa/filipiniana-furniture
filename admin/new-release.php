@@ -116,7 +116,7 @@ include 'dbconnect.php';
     });
   });
   </script>
-  <title>New Delivery</title>
+  <title>New Release</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 
@@ -131,7 +131,7 @@ include 'dbconnect.php';
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></i></span><span class="hidden-xs"><i class="ti-check-box"></i> New Delivery</span></a>
+                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></i></span><span class="hidden-xs"><i class="ti-check-box"></i> New Release</span></a>
                 </li>
               </ul>
             </h3>
@@ -139,6 +139,7 @@ include 'dbconnect.php';
               <!-- CATEGORY -->
               <div role="tabpanel" class="tab-pane fade active in">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <form action="save-new-delivery.php" method="post">
                     <div class="panel-body">
                           <div class="row" style="margin-top: -30px;">
                             <div class="col-md-6">
@@ -235,6 +236,7 @@ include 'dbconnect.php';
                           <div class="row" style="margin:10px">
                             <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save</button>
                           </div>
++                        </form>
                               </div>
                             </div>
                           </div>

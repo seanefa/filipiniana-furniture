@@ -66,7 +66,7 @@ if(isset($_GET['id'])){
             <!-- brochure -->
             <div class="panel-body">
               <div class="orderconfirm">
-                <form action="add-customer.php" method = "post">
+                <form action="" method = "post">
                   <div class="row">
                     <div class="descriptions">
                       <div class="form-body">

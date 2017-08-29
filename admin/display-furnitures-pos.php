@@ -14,54 +14,64 @@ if($id=="On-Hand"){
 	while ($row = mysqli_fetch_assoc($result)){
 		$oQuan = quan($row['productID']);
 		$random = rand(0,2);
-		if($row['prodTypeID']==""){$row['productDescription']="________________";}
-			echo ('
-				<form method="get" id="formProduct">
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
-				<div class="thumbnail instafilta-target">
-				<div class="product-img">
-				<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
-				<div class="pro-img-overlay">
-				<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
-				</div>
-				</div>
-				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
-				<div class="product-text">
-				<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>
-				<label>Price</label>
-				<br>
-				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
-				<br><br>
-				<label>Quantity</label>
-				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
-				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
-				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
-				<br>
-				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
-				</div>
-				</div>
-				</div>
-				</form>
-
-				<script>
-				    $(document).ready(function () {
-				      $("#my-input-field").instaFilta();
-				    });
-			    </script>
-
-				'); 
-				
-				$ctr++;
-			}
-
-		if($ctr==0){
-			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+		if($row['prodTypeID']==""){
+			$row['productDescription']="________________";
 		}
+		if($row['ohQuantity']!=0){
+		echo ('
+			<form method="get" id="formProduct">
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
+			<div class="thumbnail instafilta-target">
+			<div class="product-img">
+			<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
+			<div class="pro-img-overlay">
+			<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
+			</div>
+			</div>
+			<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
+			<div class="product-text">
+			<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>
+			<label>Price</label>
+			<br>
+			<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
+			<br><br>
+			<label>Quantity</label>
+			<select class="form-control" style="margin: 0 auto; width:65px; text-align:right;" id="quant'.$row['productID'].'" name="quantity>');
+			$num = $row['ohQuantity'];
+			for($x=0;$x<=$num;$x++){
+			echo '<option value='.$x.'><h3 style="text-align:right" size:"1">'.$x.'</h3></option>';
+			}
+			echo ('</select>
+	<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
+	<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
+	<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+	<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>');
+	//<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
+	echo ('<br>
+	<!-- ADD TO CART -->
+	<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
+	</div>
+	</div>
+	</div>
+	</form>
 
-		} 
+	<script>
+	$(document).ready(function () {
+		$("#my-input-field").instaFilta();
+	});
+</script>
+
+'); 
+
+$ctr++;
+}
+}
+
+if($ctr==0){
+	echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+}
+
+} 
 else if($id=="Packages"){
 	$tempSQL = '';
 	$tempID = "";
@@ -87,7 +97,7 @@ else if($id=="Packages"){
 				<br>
 				<p class="box-title m-b-0" style="font-weight:bolder;">'.substr($row['packageDescription'], 0,20).'</p>
 				<div class="product-text">');
-				echo ('<label>Price</label>
+			echo ('<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['packagePrice'],2).'</span>
 				<br>
@@ -107,20 +117,20 @@ else if($id=="Packages"){
 				</form>
 
 				<script>
-				    $(document).ready(function () {
-				      $("#my-input-field").instaFilta();
-				    });
-			    </script>
+				$(document).ready(function () {
+					$("#my-input-field").instaFilta();
+				});
+</script>
 
 
-				'); 
-				}
-				$ctr++;
-			}
-		if($ctr==0){
-			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
-		}
-		}
+'); 
+}
+$ctr++;
+}
+if($ctr==0){
+	echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+}
+}
 else{ //category
 	$tempSQL = '';
 	$tempID = "";
@@ -132,55 +142,55 @@ else{ //category
 		$random = rand(0,2);
 		if($row['prodTypeID']==""){$row['productDescription']="________________";}
 		if($row['prodStat'] != "Archived"){
-		if($row['prodStat'] == "On-Hand"){
-			echo ('
-				<form method="get" id="formProduct">
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
-				<div class="thumbnail instafilta-target">
-				<div class="product-img">
-				<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
-				<div class="pro-img-overlay">
-				<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
-				</div>
-				</div>
-				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
-				<div class="product-text">');
+			if($row['prodStat'] == "On-Hand"){
+				echo ('
+					<form method="get" id="formProduct">
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
+					<div class="thumbnail instafilta-target">
+					<div class="product-img">
+					<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
+					<div class="pro-img-overlay">
+					<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
+					</div>
+					</div>
+					<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
+					<div class="product-text">');
 				if($row['prodStat']=='On-Hand'){
 					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
 				}
 				echo ('<label>Price</label>
-				<br>
-				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
-				<br><br>
-				<label>Quantity</label>
-				<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
-				<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
-				<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
-				<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
-				<br>
-				<!-- ADD TO CART -->
-				<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
-				</div>
-				</div>
-				</div>
-				</form>
+					<br>
+					<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
+					<br><br>
+					<label>Quantity</label>
+					<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
+					<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
+					<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
+					<input type="hidden" id="uprice'.$row['productID'].'" value="'.$row['productPrice'].'"/>
+					<input value="0" id="quant'.$row['productID'].'" type="number" class="form-control" step="1" min="0" value="" name="quantity" style="margin: 0 auto; width:65px; text-align:right;" required/>
+					<br>
+					<!-- ADD TO CART -->
+					<button style="padding:10px 10px;" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'"  type="button" class="btn btn-success" value="'.$row['productID'].'" ><i class="ti-shopping-cart"></i> Add to Cart</button>
+					</div>
+					</div>
+					</div>
+					</form>
 
-				<script>
-				    $(document).ready(function () {
-				      $("#my-input-field").instaFilta();
-				    });
-			    </script>
+					<script>
+					$(document).ready(function () {
+						$("#my-input-field").instaFilta();
+					});
+</script>
 
-				'); 
-				$ctr++;
-				}
-			}
-		}
-		if($ctr==0){
-			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
-		}
-		} 
+'); 
+$ctr++;
+}
+}
+}
+if($ctr==0){
+	echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+}
+} 
 
 
 if(isset($_POST['type'])){	
@@ -206,10 +216,10 @@ if(isset($_POST['type'])){
 				</div>
 				<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 				<div class="product-text">');
-				if($row['prodStat']=='On-Hand'){
-					echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
-				}
-				echo ('<label>Price</label>
+			if($row['prodStat']=='On-Hand'){
+				echo '<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>';
+			}
+			echo ('<label>Price</label>
 				<br>
 				<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
 				<br><br>
@@ -228,31 +238,31 @@ if(isset($_POST['type'])){
 				</form>
 
 				<script>
-				    $(document).ready(function () {
-				      $("#my-input-field").instaFilta();
-				    });
-			    </script>
-
-			    
-				'); 
-				$ctr++;
-				}
-			}
-		if($ctr==0){
-			echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
-		}
-		} 
+				$(document).ready(function () {
+					$("#my-input-field").instaFilta();
+				});
+</script>
 
 
+'); 
+$ctr++;
+}
+}
+if($ctr==0){
+	echo "<p style='text-align:center; font-family:inherit; font-size:25px;'>NO PRODUCT/S IN THIS CATEGORY</p>";
+}
+} 
 
-		function quan($id){
-			include "dbconnect.php";
-			$quan = 0;
-			$sql = "SELECT * FROM tblonhand WHERE ohProdID = '$id'";
-			$res = mysqli_query($conn,$sql);
-			while($row = mysqli_fetch_assoc($res)){
-				$quan = $row['ohQuantity'];
-			}
-			return $quan;
-		}
+
+
+function quan($id){
+	include "dbconnect.php";
+	$quan = 0;
+	$sql = "SELECT * FROM tblonhand WHERE ohProdID = '$id'";
+	$res = mysqli_query($conn,$sql);
+	while($row = mysqli_fetch_assoc($res)){
+		$quan = $row['ohQuantity'];
+	}
+	return $quan;
+}
 ?> 

@@ -91,7 +91,7 @@ function finishProduction($id){
 	}
 
 	if(($finCtr==$phaseCtr) and ($finCtr!=0) and ($phaseCtr!=0)){
-		$oSQL = "UPDATE tblorder_request SET orderRequestStatus ='Ready for delivery' WHERE order_requestID = $prodID";
+		$oSQL = "UPDATE tblorder_request SET orderRequestStatus ='Ready for release' WHERE order_requestID = $prodID";
 		mysqli_query($conn,$oSQL);
 		$pSQL = "UPDATE tblproduction_phase SET productionStatus ='Finished' WHERE productionID = $productionID";
 		mysqli_query($conn,$pSQL);

@@ -67,9 +67,9 @@ $_SESSION['varname'] = $jsID;
                             echo '<tr>
                             <td>'.$row['productName'].'</td>
                             <td>'.$row['productDescription'].'</td>
-                            <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                            <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
                             <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                            $tPrice = $row['orderQuantity'] * $row['productPrice'];
+                            $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
                             $tPrice =  number_format($tPrice,2);
                             echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                             $tPrice = $row['orderPrice'];
@@ -146,9 +146,9 @@ $_SESSION['varname'] = $jsID;
                               echo '<tr>
                               <td>'.$row['productName'].'</td>
                               <td>'.$row['productDescription'].'</td>
-                              <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
                               <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                              $tPrice = $row['orderQuantity'] * $row['productPrice'];
+                              $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
                               $tPrice =  number_format($tPrice,2);
                               echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                               $tPrice = $row['orderPrice'];
@@ -373,9 +373,9 @@ $_SESSION['varname'] = $jsID;
                               echo '<tr>
                               <td>'.$row['productName'].'</td>
                               <td>'.$row['productDescription'].'</td>
-                              <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
                               <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                              $tPrice = $row['orderQuantity'] * $row['productPrice'];
+                              $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
                               $tPrice =  number_format($tPrice,2);
                               echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                               $tPrice = $row['orderPrice'];
@@ -475,9 +475,9 @@ $_SESSION['varname'] = $jsID;
                                 echo '<tr>
                                 <td>'.$row['productName'].'</td>
                                 <td>'.$row['productDescription'].'</td>
-                                <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
                                 <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                                $tPrice = $row['orderQuantity'] * $row['productPrice'];
+                                $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
                                 $tPrice =  number_format($tPrice,2);
                                 echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                                 $tPrice = $row['orderPrice'];

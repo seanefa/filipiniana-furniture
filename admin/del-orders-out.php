@@ -15,7 +15,7 @@ echo '<thead>
   $res = mysqli_query($conn,$sql1);
   while($row = mysqli_fetch_assoc($res)){
     echo '<tr>';
-    if($row['orderRequestStatus']=="Ready for delivery"){
+    if($row['orderRequestStatus']=="Ready for release"){
       echo '<td style="text-align:center"><input class="chBox" type="checkbox"  value='.$row['order_requestID'].' name="check[]" /></td>';
     }
     else{

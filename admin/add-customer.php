@@ -23,6 +23,7 @@ $emailadd = $_POST['custoemail'];
 $ordershipadd  = "N/A. This order is for pick-up";
 
 if(isset($_POST['deladd'])){
+  $ordershipadd = "";
   $add = $_POST['deladd'];
   foreach($add as $a){
     $ordershipadd  = $ordershipadd . $a . " ";

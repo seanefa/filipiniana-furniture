@@ -33,7 +33,7 @@ $pr = $_GET['smth'];
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
-                <div class="row">
+                <!--div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Orders</label>
@@ -54,7 +54,7 @@ $pr = $_GET['smth'];
                       </select>
                     </div>
                   </div>
-                </div>
+                </div-->
 
                 <div class="row">
                   <div class="col-md-12">

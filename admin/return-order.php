@@ -28,7 +28,6 @@ include 'dbconnect.php';
         $("#cash").hide();
         $("#check").show();
         $("#aTendered").val("");
-//$("#dChange").val("0");
 }
 });
   });
