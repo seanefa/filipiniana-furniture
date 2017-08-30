@@ -895,7 +895,7 @@ $(document).ready(function(){
                       
                       $('#aTendered').prop('disabled',false);
                       xTotal = parseInt($('#totalPrice').html());
-                      Math.round($('#aTendered').val( xTotal / 2));
+                      Math.round($('#aTendered').val( xTotal));
                       Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
 
                       //if quantity is zero delete row
@@ -1009,7 +1009,7 @@ $(document).ready(function(){
                         '<span class="pull-right" id="sideAmountDue">'+String(totalP + (realPrice * result) )+'</span>');
                       $('#aTendered').prop('disabled',false);
                       xTotal = parseInt($('#totalPrice').html());
-                      Math.round($('#aTendered').val( xTotal / 2));
+                      Math.round($('#aTendered').val( xTotal));
                       Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
                       
                     }
@@ -1100,7 +1100,7 @@ $(document).ready(function(){
                     '<span class="pull-right" id="sideAmountDue">'+tempPrice+'</span>');
 
                   $('#aTendered').prop('disabled',false);
-                  Math.round($('#aTendered').val( xTotal / 2));
+                  Math.round($('#aTendered').val( xTotal));
                   Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
 
                 }
@@ -1145,7 +1145,7 @@ $(document).ready(function(){
                   $('#sideAmountDue').html(
                     '<span class="pull-right" id="sideAmountDue">'+tempPrice+'</span>');
                   $('#aTendered').prop('disabled',false);
-                  Math.round($('#aTendered').val( xTotal / 2));
+                  Math.round($('#aTendered').val( xTotal));
                   Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
                 }
                 else if(quant == 0){
@@ -1176,10 +1176,10 @@ $(document).ready(function(){
 
                   $('#dRate').val(0);
 
-                  if($('#aTendered').val() < (x / 2)){
-                   Math.round($('#aTendered').val( (x / 2)+d));
+                  if($('#aTendered').val() < (x)){
+                   Math.round($('#aTendered').val( (x)+d));
                  }
-                 else if($('#aTendered').val() >= (x / 2)){
+                 else if($('#aTendered').val() >= (x)){
                   var e = parseInt($('#aTendered').val());
                   Math.round($('#dChange').val((x-$('#aTendered').val())+d));
                 }
@@ -1200,10 +1200,10 @@ $(document).ready(function(){
                   $('#zip').val('');
                   $('#delloc').val('');
 
-                  if($('#aTendered').val() < (x / 2)){
-                   Math.round($('#aTendered').val( (x / 2)+d));
+                  if($('#aTendered').val() < (x)){
+                   Math.round($('#aTendered').val( (x)+d));
                  }
-                 else if($('#aTendered').val() >= (x / 2)){
+                 else if($('#aTendered').val() >= (x)){
                   var e = parseInt($('#aTendered').val());
                   Math.round($('#aTendered').val((x-$('#aTendered').val())+d));
                 }
@@ -1214,13 +1214,13 @@ $(document).ready(function(){
 
               $('#delloc').change(function(){
                 var y =  parseInt($('#aTendered').val());
-                Math.round($('#aTendered').val( xTotal / 2));
+                Math.round($('#aTendered').val( xTotal));
                 $('#dRate').val(parseInt($('#delloc').val()));
                 var d = parseInt($('#dRate').val());
 
-                if($('#aTendered').val() < (xTotal / 2)){
-                 Math.round($('#aTendered').val( (xTotal / 2)+d));
-                 Math.round($('#dChange').val($('#aTendered').val( (x / 2)+d)));
+                if($('#aTendered').val() < (xTotal)){
+                 Math.round($('#aTendered').val( (xTotal)+d));
+                 Math.round($('#dChange').val($('#aTendered').val( (x)+d)));
                }
                else if($('#aTendered').val() >= (xTotal / 2)){
                 var e = parseInt($('#aTendered').val());
@@ -1233,10 +1233,10 @@ $(document).ready(function(){
   var y =  parseInt($('#aTendered').val());
 
   var d = parseInt($('#dRate').val());
-  if($('#aTendered').val() < (xTotal / 2)){
-   Math.round($('#aTendered').val( (xTotal / 2))+d);
+  if($('#aTendered').val() < (xTotal)){
+   Math.round($('#aTendered').val( (xTotal))+d);
  }
- else if($('#aTendered').val() >= (xTotal / 2)){
+ else if($('#aTendered').val() >= (xTotal)){
   var e = parseInt($('#aTendered').val());
   Math.round($('#dChange').val((xTotal-$('#aTendered').val())+d));
 }
