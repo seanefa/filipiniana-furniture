@@ -13,9 +13,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 		<script src="js/myScript.js"></script>
-		<link  rel="stylesheet" href="css/custom.css">
-		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/footer.css">
 		<link rel="stylesheet" href="css/hover.css">
 	</head>
@@ -24,7 +23,7 @@
 		<?php
 		include "header.php";
 		?>
-		<div class="container-fluid">
+		<div class="container-fluid bg-wood">
 			<div class="row">
 				<!--carousel-->
 				<div class="container">
@@ -37,7 +36,7 @@
 							  <li data-target="#carousel" data-slide-to="3" class=""></li>
 							</ol>
 							<br>
-						  <div class="carousel-inner" role="listbox">
+						  <div class="carousel-inner border-lightweb" role="listbox">
 								<div class="carousel-item active">
 									<img class="img-fluid" src="pics/LIVINGROOMBANNER.png" alt="Living Room">
 								</div>
@@ -51,6 +50,7 @@
 									<img class="img-fluid" src="pics/companybanner.jpg" alt="Company Banner">
 								</div>
 							</div>
+							<br>
 						</div>
 					</div>
 				</div>
@@ -58,9 +58,9 @@
 		</div>
 		<!--featured products-->
 		<div class="jumbotron-fluid">
-			<hr>
+			<br>
 			<h1 class="text-center"><b>PRODUCTS</b></h1>
-			<hr>
+			<br>
 		</div>
 		<div class="container">
 			<div class="row justify-content-center">
@@ -78,7 +78,7 @@
 						<form method="post">
 							<input type="hidden" value="<?php echo "" . $row["prodID"];?>" name="i_d"/>
 						</form>
-						<img class="card-img-top img-fluid img-thumbnail" alt="Product Image" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
+						<img class="card-img-top img-fluid" style="heigth: 200px; width:auto;" alt="" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="card-block">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>
@@ -102,43 +102,47 @@
 		</div>
 		<!--promos-->
 		<div class="jumbotron-fluid">
-			<hr>
+			<br>
 			<h1 class="text-center"><b>GOOD NEWS</b></h1>
-			<hr>
+			<br>
 		</div>
-		<div class="container">
-			<div class="row justify-content-center">
-				<?php
-					include "userconnect.php";
-					$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";
-					$result = mysqli_query($conn, $sql);
-					if(mysqli_num_rows($result) > 0)
-					{
-						while($row = mysqli_fetch_assoc($result))
+		<div class="container-fluid bg-wood">
+			<br>
+			<div class="container">
+				<div class="row justify-content-center">
+					<?php
+						include "userconnect.php";
+						$sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";
+						$result = mysqli_query($conn, $sql);
+						if(mysqli_num_rows($result) > 0)
 						{
-				?>
-							<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-								<div class="hovereffect">
-                	<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
-									<div class="overlay">
-										<h2><?php echo "" . $row["promoName"];?></h2>
-										<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
-										<a class="info" href=""><span class="fa fa-check-circle"></span>&nbsp; Avail</a>
+							while($row = mysqli_fetch_assoc($result))
+							{
+					?>
+								<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+									<div class="hovereffect">
+										<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
+										<div class="overlay">
+											<h2><?php echo "" . $row["promoName"];?></h2>
+											<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
+											<a class="info" href=""><span class="fa fa-check-circle"></span>&nbsp; Avail</a>
+										</div>
 									</div>
 								</div>
-							</div>
-				<?php
+					<?php
+							}
 						}
-					}
-					mysqli_close($conn);
-				?>
-			</div>
-			<br>
-			<div class="text-center">
-				<a href="userpromos.php">See all promos</a>
+						mysqli_close($conn);
+					?>
+				</div>
+				<br>
+				<div class="text-center">
+					<a href="userpromos.php">See all promos</a>
+				</div>
 			</div>
 		</div>
 		<a href="" id="scroll-to-top"></a>
+		<br>
 		<!--footer-->
 		<?php
 		include 'footer.php';

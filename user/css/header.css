@@ -1,12 +1,6 @@
-.bg-wood{background-color: antiquewhite;
-	
+.bg-wood{
+	background-color: #f4f2f0;
 }
-
-.translucent{
-	background-color: white;
-	opacity: 0.5;
-}
-
 .ul-inline {
     list-style-type: none;
     overflow: hidden;
@@ -14,7 +8,7 @@
 
 .li-inline {
 	display: inline-flex;
-	margin-right: 2%;
+	margin-right: 5%;
 }
 
 .li-inline a{
@@ -22,15 +16,21 @@
     text-align: center;
     text-decoration: none;
 	color: black;
+	font-weight: bold;
 }
-
-.li-inline:hover{
-	font-weight: bolder;
-	transition: 150ms ease;
-}
-
 .red:hover{
 	color: crimson;
 	transition: 150ms ease-in;
 	transition: 150ms ease-out;
+}
+
+.nav-link{
+	font-weight: bold;
+	color: black;
+}
+
+.nav-link:hover{
+	font-weight: bold;
+	color: saddlebrown;
+	transition: 300ms ease;
 }
