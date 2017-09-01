@@ -22,7 +22,7 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/images/" . date("Y-m-d") . time() . ".png");
+ move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/promos/" . date("Y-m-d") . time() . ".png");
  $pic = date("Y-m-d") . time() . ".png";
 }
 

@@ -482,7 +482,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <h3 class="box-title m-t-20">Promo Image</h3>
                         <div class="product-img"><br>
-                    		<input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $row['promoImage']?>">
+                    		<input type="file" name="image" class="dropify" data-default-file="plugins/promos/<?php echo $row['promoImage']?>">
                     		<input type="hidden" name="exist_image" value="<?php echo $row['promoImage']?>">
                         </div>
                       </div>
@@ -549,7 +549,7 @@ if (!$conn) {
         <div class="descriptions">
                             <div class="">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="white-box text-center"> <img src="plugins/images/<?php echo $row['promoImage']?>" alt="Unavailable" class="img-responsive"> </div>
+                                        <div class="white-box text-center"> <img src="plugins/promos/<?php echo $row['promoImage']?>" alt="Unavailable" class="img-responsive"> </div>
                                     </div>
                                     <hr>
                                 <h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $row['promoName'];?></h2>

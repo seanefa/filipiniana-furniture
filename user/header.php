@@ -232,7 +232,7 @@
 			if($result->num_rows>0){
 				while($row=$result->fetch_assoc()){
 			?>
-			<a href="userhome.php"><img class="img-fluid col-12" src="/admin/plugins/images/<?php echo "" . $row["comp_logo"];?>"></a>
+			<a href="userhome.php"><img class="img-fluid col-12" src="/admin/plugins/logo/<?php echo "" . $row["comp_logo"];?>"></a>
 			<?php
 				}
 			}

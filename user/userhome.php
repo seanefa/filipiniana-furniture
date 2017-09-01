@@ -78,7 +78,7 @@
 						<form method="post">
 							<input type="hidden" value="<?php echo "" . $row["prodID"];?>" name="i_d"/>
 						</form>
-						<img class="card-img-top img-fluid" style="heigth: 200px; width:auto;" alt="" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
+						<img class="card-img-top img-fluid" style="heigth: 200px; width:auto;" alt="" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="card-block">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>
@@ -121,7 +121,7 @@
 					?>
 								<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
 									<div class="hovereffect">
-										<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
+										<img class="img-fluid" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>">
 										<div class="overlay">
 											<h2><?php echo "" . $row["promoName"];?></h2>
 											<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>

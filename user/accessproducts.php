@@ -69,7 +69,7 @@ if(!isset($_SESSION['userID']))
 				?>
 					<div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-3">
 						<div class="card text-center">
-							<img type="image" class="card-img-top img-fluid img-thumbnail" src="/admin/plugins/images/<?php echo "" .$row['prodMainPic'];?>">
+							<img type="image" class="card-img-top img-fluid img-thumbnail" src="/admin/plugins/products/<?php echo "" .$row['prodMainPic'];?>">
 							<div class="card-block">
 								<div class="card-text">
 									<p class="text-danger">

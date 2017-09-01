@@ -43,7 +43,7 @@
               ?>
                       <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4">
 												<div class="hovereffect">
-                          <img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["promoImage"];?>">
+                          <img class="img-fluid" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>">
 													<div class="overlay">
 														<h2><?php echo "" . $row["promoName"];?></h2>
 														<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>

@@ -50,7 +50,7 @@
 				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
 					
 					<div class="hovereffect">
-						<img class="img-fluid" src="/admin/plugins/images/<?php echo "" . $row["prodMainPic"];?>">
+						<img class="img-fluid" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
 						<div class="overlay">
 							<h2><?php echo "" . $row["productName"];?><br><br>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></h2>
 							<a class="info" href=""><span class="fa fa-eye"></span></a>
