@@ -20,7 +20,7 @@ else
 	$tmp_name = $_FILES["image"]["tmp_name"];
 	$date = date("Y-m-d");
 	$time = time();
- move_uploaded_file($tmp_name, "plugins/images/" . $date . $time . ".png");
+ move_uploaded_file($tmp_name, "plugins/fabrics/" . $date . $time . ".png");
  echo "SAVED" ;
 
  $pic = $date . $time . ".png";

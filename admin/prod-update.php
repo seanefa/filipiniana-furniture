@@ -35,7 +35,7 @@ if($_FILES["image"]["error"] > 0)
 }
 else
 {
-	move_uploaded_file($tmp_name, "plugins/images/" . date("Y-m-d") . time() . ".png");	 
+	move_uploaded_file($tmp_name, "plugins/products/" . date("Y-m-d") . time() . ".png");	 
 	echo "SAVED";
 	$pic = date("Y-m-d") . time() . ".png";
 }

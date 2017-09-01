@@ -31,3 +31,8 @@ CHANGELOG
 27/08/2017
 * Improved utilities.
 * Improved delivery tracking.
+
+September 1, 2017 12:11pm
+update by josefpls
+*four new folders in plugins (fabrics, frameworks, products, logo).
+*every image uploaded will be moved to its respective folders. 

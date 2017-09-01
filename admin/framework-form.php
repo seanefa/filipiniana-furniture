@@ -143,7 +143,7 @@ if (!$conn) {
               <hr>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['frameworkPic']?>" alt="Unavailable" class="img-responsive"> </div>
+                  <div class="white-box text-center"> <img src="plugins/frameworks/<?php echo $trow['frameworkPic']?>" alt="Unavailable" class="img-responsive"> </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
 
@@ -344,7 +344,7 @@ if (!$conn) {
                                                   <div class="col-md-12">
                                                     <h3 class="box-title m-t-20">Upload Image</h3>
                                                     <div class="product-img"><br>
-                                                      <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['frameworkPic']?>">
+                                                      <input type="file" name="image" class="dropify" data-default-file="plugins/frameworks/<?php echo $trow['frameworkPic']?>">
                                                       <input type="hidden" name="exist_image" value="<?php echo $trow['frameworkPic']?>">
                                                     </div>
                                                   </div>

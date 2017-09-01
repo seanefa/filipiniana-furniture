@@ -215,7 +215,7 @@ if (!$conn) {
                   <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3>
-                    <input type="file" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['fabricPic']?>">
+                    <input type="file" name="image" class="dropify" data-default-file="plugins/fabrics/<?php echo $trow['fabricPic']?>">
                     <input type="hidden" name="exist_image" value="<?php echo $trow['fabricPic']?>">
                     </div>
                   </div>
@@ -295,7 +295,7 @@ if (!$conn) {
               <hr>
               <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-6">
-                  <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['fabricPic']?>" alt="Unavailable"> </div>
+                  <div class="white-box text-center"> <img src="plugins/fabrics/<?php echo $trow['fabricPic']?>" alt="Unavailable"> </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
 

@@ -286,7 +286,7 @@ include "dbconnect.php";
                          	<h2 class="text-success" style="font-weight: bold;">&#8369;<?php echo number_format($trow['productPrice']);?></h2>
                         </div>
                     	<div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="white-box text-center"> <img src="plugins/images/<?php echo $trow['prodMainPic']?>" alt="Unavailable" class="img-responsive"> </div>
+                            <div class="white-box text-center"> <img src="plugins/products/<?php echo $trow['prodMainPic']?>" alt="Unavailable" class="img-responsive"> </div>
                         </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <h3 class="box-title">General Info</h3>
@@ -606,7 +606,7 @@ include "dbconnect.php";
    <div class="row">
                   <div class="col-md-12">
                     <h3 class="box-title m-t-20">Upload Image</h3><span id="x" style="color:red">*</span>
-                    <input type="file" enctype="multipart/form-data" id="image" name="image" class="dropify" data-default-file="plugins/images/<?php echo $trow['prodMainPic']?>">
+                    <input type="file" enctype="multipart/form-data" id="image" name="image" class="dropify" data-default-file="plugins/products/<?php echo $trow['prodMainPic']?>">
                     <input type="hidden" name="exist_image" value="<?php echo $trow['prodMainPic']?>">
                     </div>
                   </div>

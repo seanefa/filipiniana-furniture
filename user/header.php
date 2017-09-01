@@ -264,7 +264,7 @@
 				<a class="nav-link" href="#"><span class="fa fa-thumbs-up"></span>&nbsp;ON SALE</a>
 	  		</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="#"><span class="fa fa-gift"></span>&nbsp;PROMOS</a>
+				<a class="nav-link" href="userpromos.php"><span class="fa fa-gift"></span>&nbsp;PROMOS</a>
 	  		</li>
 		</ul>
 	</div>
