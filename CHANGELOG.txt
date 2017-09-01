@@ -41,3 +41,8 @@ September 1, 2017 1:14pm
 update by josefpls
 *promos folder added to the previous update.
 *website pics aligned with the new file organization.
+
+September 1, 2017 9:11pm
+update by josefpls
+*default images on products
+*default images on promos

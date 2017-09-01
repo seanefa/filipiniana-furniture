@@ -25,9 +25,9 @@
 		?>
 		<!--packages-->
 		<div class="container-fluid">
-			<hr>
+			<br>
 			<h1 class="text-center">SERIES</h1>
-			<hr>
+			<br>
 			<div class="container">
 				<div class="row justify-content-center">
 					<?php

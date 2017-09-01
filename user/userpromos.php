@@ -25,40 +25,43 @@
 			include "header.php";
 			?>
       <div class="jumbotron-fluid">
-          <hr>
+          <br>
           <h1 class="text-center"><b>PROMOS</b></h1>
-          <hr>
+          <br>
       </div>
-      <div class="container">
-          <div class="row justify-content-center">
-              <?php
-              include "userconnect.php";
-              
-              $sql="SELECT * from tblpromos where promoStatus='Active'";
-              $result=$conn->query($sql);
-              if($result->num_rows>0)
-              {
-                  while($row=$result->fetch_assoc())
-                  {
-              ?>
-                      <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4">
-												<div class="hovereffect">
-                          <img class="img-fluid" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>">
-													<div class="overlay">
-														<h2><?php echo "" . $row["promoName"];?></h2>
-														<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
-														<a class="info" href=""><span class="fa fa-eye"></span>&nbsp; Avail</a>
+			<div class="container-fluid bg-wood">
+				<div class="container">
+					<br>
+						<div class="row justify-content-center">
+								<?php
+								include "userconnect.php";
+
+								$sql="SELECT * from tblpromos where promoStatus='Active'";
+								$result=$conn->query($sql);
+								if($result->num_rows>0)
+								{
+										while($row=$result->fetch_assoc())
+										{
+								?>
+												<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4">
+													<div class="hovereffect">
+														<img class="img-fluid" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>">
+														<div class="overlay">
+															<h2><?php echo "" . $row["promoName"];?></h2>
+															<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
+															<a class="info" href=""><span class="fa fa-eye"></span>&nbsp; Avail</a>
+														</div>
 													</div>
 												</div>
-                      </div>
-              <?php
-                  }
-              }
-              $conn->close();
-              ?>
-            </div>
-      </div>
-			<br>
+								<?php
+										}
+								}
+								$conn->close();
+								?>
+							</div>
+					<br>
+				</div>
+			</div>
 			<?php
 			include "footer.php";
 			?>
