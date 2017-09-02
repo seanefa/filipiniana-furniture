@@ -78,14 +78,18 @@
 						<form method="post">
 							<input type="hidden" value="<?php echo "" . $row["prodID"];?>" name="i_d"/>
 						</form>
-						<img class="card-img-top img-fluid" onerror="productImgError(this);" style="heigth: 200px; width:auto;" alt="" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
+						<div class="hovereffect">
+							<img class="card-img-top img-fluid" onerror="productImgError(this);" style="heigth: 200px; width:auto;" alt="" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
+							<div class="overlay">
+								<a class="info" href=""><span class="fa fa-eye"></span></a>
+								<a class="info" href=""><span class="fa fa-cart-plus"></span></a>
+							</div>
+						</div>
 						<div class="card-block">
 							<p class="card-text">
 								<?php echo "" . $row["productName"]; ?><br>
 								<b>Php&nbsp;<?php echo "" . number_format($row["productPrice"]); ?></b>
 							</p>
-							<button role="button" class="btn btn-success" title="Add to Cart"><i class="fa fa-cart-plus"></i></button>
-							<button role="button" title="View Product" data-toggle="modal" data-target="#viewmodal" class="btn"><i class="fa fa-eye"></i></button>
 						</div>
 					</div>
 				</div>
@@ -97,7 +101,7 @@
 			</div>
 			<br>
 			<div class="text-right">
-				<a class="link" href="userproducts.php"><b>VIEW MORE</b>&nbsp;<span class="fa fa-caret-right"></span></a>
+				<a href="userproducts.php"><b>VIEW MORE</b>&nbsp;<span class="fa fa-caret-right"></span></a>
 			</div>
 		</div>
 		<!--promos-->
@@ -134,12 +138,12 @@
 				</div>
 				<br>
 				<div class="text-right">
-					<a class="link" href="userpromos.php"><b>VIEW MORE</b>&nbsp;<span class="fa fa-caret-right"></span></a>
+					<a href="userpromos.php"><b>VIEW MORE</b>&nbsp;<span class="fa fa-caret-right"></span></a>
 				</div>
+				<br>
 			</div>
 		</div>
 		<a href="" id="scroll-to-top"></a>
-		<br>
 		<!--footer-->
 		<?php
 		include 'footer.php';

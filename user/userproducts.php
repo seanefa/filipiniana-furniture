@@ -26,11 +26,11 @@
 		?>
 		<!--product type-->
 		<div class="jumbotron-fluid">
-			<hr>
+			<br>
 			<h1 class="text-center"><b>PRODUCTS</b></h1>
-			<hr>
+			<br>
 		</div>
-		<div class="jumbotron-fluid">
+		<div class="container-fluid">
 			<br>
 			<h3 class="text-center"><b>Product type</b></h3>
 			<br>
@@ -48,15 +48,21 @@
 					{
 				?>
 				<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-					
-					<div class="hovereffect">
-						<img class="img-fluid" onerror="imgError(this);" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
-						<div class="overlay">
-							<h2><?php echo "" . $row["productName"];?><br><br>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></h2>
-							<a class="info" href=""><span class="fa fa-eye"></span></a>
-							<a class="info" href=""><span class="fa fa-shopping-cart"></span></a>
+					<div class="card">
+						<div class="hovereffect">
+							<img class="img-fluid" onerror="productImgError(this);" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
+							<div class="overlay">
+								<a class="info" href=""><span class="fa fa-eye"></span></a>
+								<a class="info" href=""><span class="fa fa-cart-plus"></span></a>
+							</div>
 						</div>
-    			</div>
+						<div class="card-block text-center">
+							<h5>
+								<?php echo "" . $row["productName"];?>
+							</h5>
+							<h6>Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></h6>
+						</div>
+					</div>
 				</div>
 				<?php
 					}

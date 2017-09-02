@@ -67,12 +67,6 @@ a.navbar-brand:focus,
 .card{
 	border: solid 3px #8a6f57;
 }
-
-.link{
-	color: #49311c;
-}
-.link:hover{
-	color: #49311c;
-	transition: 3000ms ease;
-	
+.card-img-top{
+	padding: 2%;
 }

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>Promos - Filipiniana Furnitures</title>
+		<title>Accounts - Filipiniana Furnitures</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="x-ua-compatible" content="ie-edge">
@@ -13,57 +12,39 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 		<script src="js/myScript.js"></script>
-		<link  rel="stylesheet" href="css/custom.css">
-		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/footer.css">
 		<link rel="stylesheet" href="css/hover.css">
 	</head>
-    <body>
-			<!--navbar-->
-			<?php
-			include "header.php";
-			?>
-      <div class="jumbotron-fluid">
-          <br>
-          <h1 class="text-center"><b>PROMOS</b></h1>
-          <br>
-      </div>
-			<div class="container-fluid bg-wood">
-				<div class="container">
+	<body>
+		<!--navbar-->
+		<?php
+		include "header.php";
+		?>
+		<div class="container-fluid">
+			<br>
+			<h1 class="text-center"><b>ACCOUNTS</b></h1>
+			<br>
+		</div>
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 bg-wood">
 					<br>
-						<div class="row justify-content-center">
-								<?php
-								include "userconnect.php";
-
-								$sql="SELECT * from tblpromos where promoStatus='Active'";
-								$result=$conn->query($sql);
-								if($result->num_rows>0)
-								{
-										while($row=$result->fetch_assoc())
-										{
-								?>
-												<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-4">
-													<div class="hovereffect">
-														<img class="img-fluid" onerror="promoImgError(this);" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>">
-														<div class="overlay">
-															<h2><?php echo "" . $row["promoName"];?></h2>
-															<a class="info" data-toggle="#viewmodal" href=""><span class="fa fa-eye"></span>&nbsp; View</a>
-															<a class="info" href=""><span class="fa fa-eye"></span>&nbsp; Avail</a>
-														</div>
-													</div>
-												</div>
-								<?php
-										}
-								}
-								$conn->close();
-								?>
-							</div>
+					<h3 class="text-center"><span class="fa fa-sign-in"></span>&nbsp;Log In</h3>
+					<br>
+					<form class="form-group" method="post" action="uservalidate.php">
+						<input class="form-control" type="text" placeholder="Username or Email" required><br>
+						<input class="form-control" type="password" placeholder="Password" required>
+					</form>
+					<br>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 bg-wood">
+					<br>
+					<h3 class="text-center"><span class="fa fa-user-plus"></span>&nbsp;Sign Up</h3>
 					<br>
 				</div>
 			</div>
-			<?php
-			include "footer.php";
-			?>
-    </body>
+		</div>
+	</body>
 </html>

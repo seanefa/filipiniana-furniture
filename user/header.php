@@ -210,10 +210,7 @@
 		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
 			<ul class="ul-inline">
 				<li class="li-inline">
-					<a data-toggle="modal" href="#signupmodal"><span class="fa fa-user-plus" aria-expanded="false"></span>&nbsp;Sign Up</a>
-				</li>
-				<li class="li-inline">
-					<a data-toggle="modal" href="#loginmodal"> <span class="fa fa-sign-in" aria-expanded="false"></span>&nbsp;Log In </a>
+					<a href="useraccounts.php"><span class="fa fa-user-circle"></span>&nbsp;Sign Up</a>
 				</li>
 				<li class="li-inline">
 					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"> <span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span> </a>
@@ -248,20 +245,14 @@
   </button>
   <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
 		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link" href="userhome.php"><span class="fa fa-home"></span>&nbsp;HOME</a>
+			</li>
 	  		<li class="nav-item">
-				<a class="nav-link" href="userproducts.php"><span class="fa fa-bed"></span>&nbsp;FURNITURES</a>
-	  		</li>
-	  		<li class="nav-item">
-				<a class="nav-link" href="#"><span class="fa fa-building"></span>&nbsp;OFFICE</a>
+				<a class="nav-link" href="userproducts.php"><span class="fa fa-bed"></span>&nbsp;PRODUCTS</a>
 	  		</li>
 	  		<li class="nav-item">
 				<a class="nav-link" href="userpackages.php"><span class="fa fa-object-group"></span>&nbsp;PACKAGES</a>
-	  		</li>
-	  		<li class="nav-item">
-				<a class="nav-link" href="#"><span class="fa fa-star"></span>&nbsp;DECORATIONS</a>
-	  		</li>
-	  		<li class="nav-item">
-				<a class="nav-link" href="#"><span class="fa fa-thumbs-up"></span>&nbsp;ON SALE</a>
 	  		</li>
 	  		<li class="nav-item">
 				<a class="nav-link" href="userpromos.php"><span class="fa fa-gift"></span>&nbsp;PROMOS</a>
