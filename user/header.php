@@ -210,7 +210,7 @@
 		<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 text-right">
 			<ul class="ul-inline">
 				<li class="li-inline">
-					<a href="useraccounts.php"><span class="fa fa-user-circle"></span>&nbsp;Sign Up</a>
+					<a href="useraccounts.php"><span class="fa fa-user-circle"></span>&nbsp;Accounts</a>
 				</li>
 				<li class="li-inline">
 					<a data-toggle="modal" data-target="#myCart" href="" title="Cart"> <span class="fa fa-shopping-cart"></span>&nbsp;Cart<span class="badge text-info"></span> </a>

@@ -33,9 +33,11 @@
 					<br>
 					<h3 class="text-center"><span class="fa fa-sign-in"></span>&nbsp;Log In</h3>
 					<br>
-					<form class="form-group" method="post" action="uservalidate.php">
-						<input class="form-control" type="text" placeholder="Username or Email" required><br>
-						<input class="form-control" type="password" placeholder="Password" required>
+					<form class="form-group text-center" method="post" action="uservalidate.php">
+						<input class="form-control" name="username" type="text" placeholder="Username or Email" required><br>
+						<input class="form-control" name="password" type="password" placeholder="Password" required><br>
+						<button type="submit" class="btn btn-web" onclick="newuser.php"><span class="fa fa-check"></span></button>
+						<button type="reset" class="btn btn-web" onclick="newuser.php"><span class="fa fa-times"></span></button>
 					</form>
 					<br>
 				</div>
@@ -46,5 +48,10 @@
 				</div>
 			</div>
 		</div>
+		<br>
+		<!--footer-->
+		<?php
+		include "footer.php";
+		?>
 	</body>
 </html>
