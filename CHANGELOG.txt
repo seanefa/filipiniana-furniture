@@ -46,3 +46,6 @@ September 1, 2017 9:11pm
 update by josefpls
 *default images on products
 *default images on promos
+
+04/09/2017
+* Major UI changes.
