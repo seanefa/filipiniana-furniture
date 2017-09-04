@@ -1,5 +1,0 @@
-<?php
-include "userconnect.php";
-
-
-?>
