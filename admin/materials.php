@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 include "titleHeader.php";
 include "menu.php";
 include "dbconnect.php";
 //session_start();
 /*if(isset($GET['id'])){
 $jsID = $_GET['id']; 
-}
+}   
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';

@@ -1,5 +1,5 @@
 <?php
-include "titleHeader.php";
+include "titleHeader.php"; 
 include "menu.php";
 include "dbconnect.php";
 //session_start();
@@ -108,6 +108,208 @@ $(document).ready(function(){
  });
 });
 
+  
+      
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $('#attribs').ready(function() {
+    var value = $("#attribs").val();
+      var arraynum = "0";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value, record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field' ).html(response);
+      }
+      });
+      
+      
+    });
+
+    $('#attribs').change(function() {
+    var value = this.value;
+    var arraynum = "0";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value,record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field' ).html(response);
+      }
+      });
+        
+    });
+
+});
+}); 
+
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $('#attribs1').ready(function() {
+    var value = $("#attribs1").val();
+      var arraynum = "1";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value, record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field1' ).html(response);
+      }
+      });
+      
+      
+    });
+
+    $('#attribs1').change(function() {
+    var value = this.value;
+    var arraynum = "1";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value,record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field1' ).html(response);
+      }
+      });
+        
+    });
+
+});
+}); 
+      
+      
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $('#attribs2').ready(function() {
+    var value = $("#attribs2").val();
+      var arraynum = "2";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value, record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field2' ).html(response);
+      }
+      });
+      
+      
+    });
+
+    $('#attribs2').change(function() {
+    var value = this.value;
+    var arraynum = "2";
+  var recID = "1";
+    $.ajax({
+      type: 'post',
+      url: 'load-form-var.php',
+      data: {
+        id: value,record: recID, arnum: arraynum,
+      },
+      success: function (response) {
+       // We get the element having id of display_info and put the response inside it
+       $( '#input_field2' ).html(response);
+      }
+      });
+        
+    });
+
+});
+}); 
+      
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attrib").select2({
+      tags: true,
+      tokenSeparators: [',']
+    });
+});
+});        
+
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attrib1").select2({
+      tags: true,
+      tokenSeparators: [',']
+    });
+});
+});
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attrib2").select2({
+      tags: true,
+      tokenSeparators: [',']
+    });
+});
+});   
+      
+$(document).ready(function(){ 
+    $('#myModal').on('shown.bs.modal',function(){
+        var $selects = $('select');
+
+        $selects.on('change', function() {
+
+            // enable all options
+            $selects.find('option').prop('disabled', false);
+
+            // loop over each select, use its value to 
+            // disable the options in the other selects
+            $selects.each(function() {
+               $selects.not(this)
+                       .find('option[value="' + this.value + '"]')
+                       .prop('disabled', true); 
+            });
+
+        });
+    });
+});
+      
+      
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attrib").on('change',function(){
+        if($(this).val()){
+            $("#attrib1").prop('disabled',false);
+        }
+    });
+});
+});
+
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+    $("#attrib1").on('change',function(){
+        if($(this).val()){
+            $("#attrib2").prop('disabled',false);
+        }
+    });
+});
+});
+      
 /*
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
@@ -130,7 +332,7 @@ $(document).ready(function(){
 });
 });*/
 
-$(document).ready(function(){
+/*$(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
   $('#material').ready(function() {
     var value = $("#material").val();
@@ -165,7 +367,7 @@ $(document).ready(function(){
     });
 
 });
-});
+});*/
 
 
 $(document).ready(function(){
@@ -244,39 +446,27 @@ $(document).ready(function(){
                           <thead>
                             <tr>
                               <th>Variants</th>
-                              <th>Remarks</th>
+                              <th>Material Brand</th>
                               <th class="removeSort">Action</th>
                             </tr>
                           </thead>
                           <tbody>
 
                             <?php
-                            $sql = "SELECT * FROM tblmat_var a, tblmaterials b, tblmat_type c WHERE c.matTypeID = b.materialType and a.mat_varID = b.materialID";
+                            $sql = "SELECT * FROM tblmaterials b, tblmat_var a WHERE a.materialID = b.materialID";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                              $desc = desc($row['variantID']);
-                              $desc =  $desc. '-' . $row['materialName']. '-' . $row['matTypeName'];
-                              if($row['variantStatus']=="Listed"){
-                                echo('<tr><td>'.$desc.'</td><td>'.$row['variantRemarks'].'</td>'); ?>
+                              if($row['mat_varStatus']=="Active"){
+                                echo('<tr><td>'.$row['mat_varDescription'].'</td><td>'.$row['materialName'].'</td>'); ?>
                                 <td>
                                   <!-- UPDATE -->
-                                  <button type="button" class="btn btn-success" data-toggle="modal" href="variants-form.php" data-remote="variants-form.php?id=<?php echo $row['variantID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
+                                  <button type="button" class="btn btn-success" data-toggle="modal" href="variants-form.php" data-remote="variants-form.php?id=<?php echo $row['mat_varID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
                                   <!-- DELETE -->
-                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="variants-form.php" data-remote="variants-form.php?id=<?php echo $row['variantID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal" href="variants-form.php" data-remote="variants-form.php?id=<?php echo $row['mat_varID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
                                 </td>
                                 <?php echo('</tr>');} }
-                                function desc($id){
-                                  include "dbconnect.php";
-                                    $sql = "SELECT * FROM tblvariant_desc a, tblmat_var b WHERE b.variantID = a.varMatvarID AND a.varMatvarID = '$id'";
-                                    $result = mysqli_query($conn,$sql);
-                                    $desc = "";
-                                    while($row = mysqli_fetch_assoc($result)){
-                                      $desc = $desc . $row['varVariantDesc'] . "-";
-                                    }
-                                    $temp = substr(trim($desc), 0, -1);
-                                    return $temp;
-                                }
+                                
                                 ?>
 
                                 <script>
@@ -298,22 +488,21 @@ $(document).ready(function(){
                               <thead>
                                 <tr>
                               <th>Variants</th>
-                              <th>Remarks</th>
+                              <th>Material Brand</th>
                               <th class="removeSort">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                               <?php
-                            $sql = "SELECT * FROM tblmat_var a, tblmaterials b, tblmat_type c WHERE c.matTypeID = b.materialType and a.mat_varID = b.materialID";
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <?php
+                            $sql = "SELECT * FROM tblmaterials b, tblmat_var a WHERE a.materialID = b.materialID";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                              $desc = desc($row['variantID']);
-                              $desc =  $desc. '-' . $row['materialName']. '-' . $row['matTypeName'];
-                              if($row['variantStatus']=="Archived"){
-                                echo('<tr><td>'.$desc.'</td><td>'.$row['variantRemarks'].'</td>'); ?>
+                              if($row['mat_varStatus']=="Archived"){
+                                echo('<tr><td>'.$row['mat_varDescription'].'</td><td>'.$row['materialName'].'</td>'); ?>
                                 <td>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Material+Variants&amp;id=<?php echo $row['variantID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Material+Variants&amp;id=<?php echo $row['mat_varID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
                                 </td>
                                 <?php echo('</tr>');} }
                                 ?>

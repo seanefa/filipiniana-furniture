@@ -1,5 +1,4 @@
-<?php
-
+﻿<?php
 session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id'];
@@ -17,6 +16,7 @@ if (!$conn)
 
 ?>
 
+
 <!-- New Framework Material Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="newFrameworkMaterialModal" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
@@ -33,8 +33,6 @@ if (!$conn)
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-
-                    <input type="hidden" name="recID" id="recID" value="0">
                     <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
                     <select id='material' class="form-control" tabindex="1" name="material" required>
                       <option value="" selected disabled>Select Material</option>
@@ -53,16 +51,88 @@ if (!$conn)
                   </div>
                 </div>
               </div>
+                
               <div class="row">
-              <div class="col-md-12 ">
-                  <div class="form-group">
-                <label class="control-label">Attributes: &nbsp;&nbsp;</label><span id="attribbValidate"></span>
-                    <div id="form">
-
+                <label class="control-label"> &nbsp;Variants</label><span id="x" style="color:red"> * </span><span style="font-size:13px"> (if you will need more than three variant, you may want to split them) </span>
+                  <div class="form-group" id="dynamic_field">
+                    <div class="col-xs-5">
+                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs">
+                          <?php
+                          $sql = "SELECT * FROM tblattributes;";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            if($row['attributeStatus']=='Active'){
+                              echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
+                            }
+                          }
+                          ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-7" id="input_multiple">
+                        <select class="form-control" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib[]" id="attrib" required>
+                    </select>
+                        <div class="control-label" id="input_field"></div>
                     </div>
                   </div>
-                </div>
               </div>
+              <div class="row">
+                  <div class="form-group" id="dynamic_field">
+                    <div class="col-xs-5">
+                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs1">
+                          <?php
+                          $sql = "SELECT * FROM tblattributes;";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            if($row['attributeStatus']=='Active'){
+                              echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
+                            }
+                          }
+                          ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-7" id="input_multiple">
+                        <select class="form-control" disabled="true" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib1[]" id="attrib1">
+                    </select>
+                        <div class="control-label" id="input_field1"></div>
+                    </div>
+                  </div>
+              </div>  
+              <div class="row">
+                  <div class="form-group" id="dynamic_field">
+                    <div class="col-xs-5">
+                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs2">
+                          <?php
+                          $sql = "SELECT * FROM tblattributes;";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            if($row['attributeStatus']=='Active'){
+                              echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');
+                            }
+                          }
+                          ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-7" id="input_multiple">
+                        <select class="form-control" disabled="true" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib2[]" id="attrib2">
+                    </select>
+                        <div class="control-label" id="input_field2"></div>
+                    </div>
+                  </div>
+              </div>  
+                
+              <!-- <div class="row">
+              <div class="col-md-12 ">
+                  <div class="form-group">
+                <label class="control-label">Variants: &nbsp;&nbsp;</label><span id="attribbValidate"></span>
+                    <select class="form-control" multiple="multiple" data-placeholder="45g / Yellow / Odorless (separated by comma or enter)" tabindex="1" name="attribs[]" id="attribs" required>
+                    </select>
+                  </div>
+                </div>
+              </div> -->
+                
              <!-- <label class="box-title">Description</label><span id="x" style="color:red"> *</span>
               <div class="row">
                 <div class="col-md-12 ">
@@ -71,14 +141,6 @@ if (!$conn)
                   </div>
                 </div>
               </div>-->
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Remarks</label>
-                      <textarea class="form-control" rows="4" name="remarks"></textarea>
-                    </div>
-                  </div>
-                </div>
 
               </div>
 
@@ -106,21 +168,20 @@ if (!$conn)
           <div class="modal-body">
             <div class="descriptions">
               <?php
-              $tsql = "SELECT * FROM tblmat_var WHERE variantID = $jsID";
+              $tsql = "SELECT * FROM tblmat_var WHERE mat_varID = $jsID";
               $tresult = mysqli_query($conn,$tsql);
               $trow = mysqli_fetch_assoc($tresult);
               ?>
 
               <div class="form-body">
 
-              <input type="hidden" name="recID" id="recID" value="<?php echo $jsID?>">
               <input type="hidden" name="id" value="<?php echo $jsID?>">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <input type="hidden" name="material" value="<?php echo $trow['mat_varID']?>">
                       <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
-                      <select id='material' class="form-control" data-placeholder="Choose a Fabric" tabindex="1">
+                      <select id='material' class="form-control" tabindex="1" required>
                         <?php
                         include "dbconnect.php";
                         $sql = "SELECT * FROM tblmaterials;";
@@ -128,7 +189,7 @@ if (!$conn)
                         while ($row = mysqli_fetch_assoc($result))
                         {
                           if($row['materialStatus']=='Listed'){
-                            if ($trow["mat_varID"] == $row['materialID'])
+                            if ($trow["materialID"] == $row['materialID'])
                             {
                               echo('<option value="'.$row['materialID'].'" selected="selected">'.$row['materialName'].'</option>');
                             }
@@ -145,15 +206,6 @@ if (!$conn)
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                <div class="col-md-12 ">
-                  <div class="form-group">
-                    <div id="form">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
 
                <!-- <label class="box-title">Description</label><span id="x" style="color:red"> *</span>
                 <div class="row">
@@ -167,8 +219,8 @@ if (!$conn)
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Remarks</label>
-                      <textarea class="form-control" rows="4" name="remarks"><?php echo $trow['variantRemarks']?></textarea>
+                      <label class="control-label">Material Variant</label>
+                      <textarea class="form-control" rows="2" name="descripton" required><?php echo $trow['mat_varDescription']?></textarea>
                     </div>
                   </div>
                 </div>

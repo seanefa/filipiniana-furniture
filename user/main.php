@@ -10,7 +10,7 @@
             <div class="col-sm-6 col-xs-12">
               <div class="feature-box fbox_1">
                 <div class="title">Free Shipping</div>
-                <p>Free shipping on order over &#8369 100,000</p>
+                <p>Free shipping on order over Php 100,000</p>
               </div>
             </div>
             <div class="col-sm-6 col-xs-12">
