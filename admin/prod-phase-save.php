@@ -15,10 +15,10 @@ if($type==0){
 
 	if(mysqli_query($conn,$sql)){
 		echo $sql . "<br>";
-		/*echo "<script>
+		echo "<script>
 		window.location.href='production-tracking-details.php?id=".$orderID."';
 		alert('Production started');
-		</script>";*/
+		</script>";
 	}
 	else {
 		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -35,7 +35,6 @@ else{
 
 		if(mysqli_query($conn,$sql)){
 			finishProduction($phaseID);
-			writesmth();
 			echo "<script>
 			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production in this phase is finished');
