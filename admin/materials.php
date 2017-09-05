@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 include "titleHeader.php";
 include "menu.php";
 include "dbconnect.php";
 //session_start();
 /*if(isset($GET['id'])){
 $jsID = $_GET['id']; 
-}
+}   
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
@@ -55,18 +55,9 @@ else if (isset($_GET['reactivateSuccess']))
 
    $(document).ready(function(){
     // Material Name
-    var userkey = '';
     $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
-      userkey = $(this).val();
-      userkey = userkey.slice(userkey.length -1 , userkey.length);
-      if(userkey == '\\'){
-
-      $('#saveBtn').prop('disabled',true);
-      $('#message').html('Symbols not allowed');
-      $('#materialName').css('border-color','red');
-      }else{
       $.post('material-check.php',{materialName : user}, function(data){ 
         $('#materialNameValidate').html(data);
         if(data != "Data Already Exist!"){
@@ -94,9 +85,7 @@ else if (isset($_GET['reactivateSuccess']))
           $('#saveBtn').prop('disabled', false);
           $('#materialName').css('border-color','limegreen');
         }
-
       });
-    }
     });
 
   });
@@ -105,22 +94,12 @@ else if (isset($_GET['reactivateSuccess']))
     var temprem;
     var tempname;
     var error = 0;
-    var userkey = '';
     $('body').on('keyup','#editname',function(){
       var user = $(this).val();
 
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-
-       userkey = $('#editname').val();
-      userkey = userkey.slice(userkey.length -1 , userkey.length);
-
-      if(userkey == '\\'){
-        $('#updateBtn').prop('disabled',true);
-      $('#message').html('Symbols not allowed');
-      $('#editname').css('border-color','red');
-      }else{
-      $.post('material-Ucheck.php',{username : user}, function(data){
+      $.post('frame-mat-Ucheck.php',{username : user}, function(data){
 
 
         if(data != "Already Exist!" && data !="unchanged"){
@@ -148,7 +127,7 @@ else if (isset($_GET['reactivateSuccess']))
 
       });
 
-    }
+
 
     });
     $('body').on('change','#rem',function(){
@@ -278,7 +257,7 @@ $(document).ready(function(){
      var i=0;  
       $('#add').click(function(){  
            i++;  
-           $('#dynamic_field').append('<div id="row'+i+'"><br><br><br><div class="col-xs-5"><select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs['+i+']" id="attribs'+i+'"><?php $sql = "SELECT * FROM tblattributes;";$result = mysqli_query($conn, $sql);while ($row = mysqli_fetch_assoc($result)){if($row['attributeStatus']=='Active'){echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');}}?></select></div><div class="col-xs-6" id="input_field'+i+'"></div><div class="col-xs-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></div></div>');
+           $('#dynamic_field').append('<div id="row'+i+'"><input type="number" id="attribb" class="form-control hide" name="counter['+i+']" value="'+i+'"><br><div class="col-xs-5"><select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs['+i+']" id="attribs'+i+'"><?php $sql = "SELECT * FROM tblattributes;";$result = mysqli_query($conn, $sql);while ($row = mysqli_fetch_assoc($result)){if($row['attributeStatus']=='Active'){echo('<option value='.$row['attributeID'].'>'.$row['attributeName'].'</option>');}}?></select></div><div class="col-xs-6" id="input_field'+i+'"></div><div class="col-xs-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove"><i class="fa fa-minus"></i></button></div></div>');
           
           $('#attribs'+i+'').ready(function() {
           var value1 = $('#attribs'+i+'').val();
