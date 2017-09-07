@@ -37,7 +37,6 @@ include 'dbconnect.php';
   $(document).ready(function(){
     $('#supplier').change(function(){
       var value = $("#supplier").val();
-      alert(value);
       var drop = 3;
       $.ajax({
         type: 'post',

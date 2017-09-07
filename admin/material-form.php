@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 
 session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id']; 
-}
+}  
 $jsID=$_GET['id'];
 
 $_SESSION['varname'] = $jsID;
@@ -60,7 +60,7 @@ if (!$conn) {
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row hide">
                 <label class="control-label">Variants</label><span id="x" style="color:red"> *</span>
                   <div class="form-group" id="dynamic_field">
                     <div class="col-xs-5">

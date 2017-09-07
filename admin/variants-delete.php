@@ -4,11 +4,11 @@ include 'dbconnect.php';
 session_start();
 
 if(isset($GET['id'])){
-	$jsID = $_GET['id']; 
+	$jsID = $_GET['id'];  
 }
 $jsID=$_GET['id'];
 
-$updateSql = "UPDATE tblmat_var SET variantStatus ='Archived' WHERE variantID = '$jsID'";
+$updateSql = "UPDATE tblmat_var SET mat_varStatus ='Archived' WHERE mat_varID = '$jsID'";
 
 if(mysqli_query($conn,$updateSql)){
 	// Logs start here
