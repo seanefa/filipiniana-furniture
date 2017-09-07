@@ -69,6 +69,7 @@
               </div>
             </li>
             <li class="mega-menu dropdown"><a href="packages.php">Packages</a>
+<!--
               <div class="dropdown-menu">
                 <div class="column col-lg-6 col-md-6"><a href="category.php">Sub Category</a>
                   <div>
@@ -92,6 +93,7 @@
                   </div>
                 </div>
               </div>
+-->
             </li>
             <li class="mega-menu dropdown"> <a href="promos.php">Promos</a></li>
             <li class="mega-menu dropdown"> <a href="production.php">Production</a></li>

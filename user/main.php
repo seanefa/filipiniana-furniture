@@ -98,11 +98,18 @@
             </ul>
             <div id="tab-featured" class="tab_content">
               <div class="owl-carousel product_carousel_tab">
+				<?php
+				include "userconnect.php";
+				$sql="SELECT * from tblproduct where prodStat = 'Pre-Order'";
+				$result=$conn->query($sql);
+				if($result->num_rows>0){
+					while($row=$result->fetch_assoc()){
+				?>
                 <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/apple_cinema_30-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
+                  <div class="image"><a href="view-product.php"><img src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>" alt="Product" title="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"><span class="price-new">&#8369 110.00</span> <span class="price-old">&#8369 122.00</span><span class="saving">-10%</span></p>
+                    <p class="price"><span class="price-new">Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></span> <span class="price-old">	</span><span class="saving"></span></p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
@@ -112,80 +119,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/samsung_tab_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 230.00</span> <span class="price-old">&#8369 241.99</span> <span class="saving">-5%</span> </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('49');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/sony_vaio_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 902.00</span> <span class="price-old">&#8369 1,202.00</span> <span class="saving">-25%</span> </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('46');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 211.00 </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('43');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/iphone_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 123.20 </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/canon_eos_5d_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 98.00</span> <span class="price-old">&#8369 122.00</span> <span class="saving">-20%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
+				<?php
+					}
+				}
+				?>
               </div>
             </div>
             <div id="tab-latest" class="tab_content">
@@ -194,7 +131,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/macbook_2-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 110.00 </p>
+                    <p class="price"> Php 110.00 </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -208,7 +145,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/macbook_3-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 123.00 </p>
+                    <p class="price"> Php 123.00 </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -222,7 +159,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/macbook_4-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 85.00 </p>
+                    <p class="price"> Php 85.00 </p>
                     <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                   </div>
                   <div class="button-group">
@@ -237,7 +174,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/iphone_6-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 134.00 </p>
+                    <p class="price"> Php 134.00 </p>
                     <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                   </div>
                   <div class="button-group">
@@ -252,7 +189,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 66.80</span> <span class="price-old">&#8369 90.80</span> <span class="saving">-27%</span> </p>
+                    <p class="price"> <span class="price-new">Php 66.80</span> <span class="price-old">Php 90.80</span> <span class="saving">-27%</span> </p>
                     <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                   </div>
                   <div class="button-group">
@@ -267,7 +204,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_4-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 88.00 </p>
+                    <p class="price"> Php 88.00 </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -281,7 +218,7 @@
                   <div class="image"><a href=""><img src="image/product/macbook_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 95.00</span> <span class="price-old">&#8369 99.00</span> <span class="saving">-4%</span> </p>
+                    <p class="price"> <span class="price-new">Php 95.00</span> <span class="price-old">Php 99.00</span> <span class="saving">-4%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
@@ -299,7 +236,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/FinePix-Long-Zoom-Camera-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> &#8369 122.00 </p>
+                    <p class="price"> Php 122.00 </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -313,7 +250,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 92.00</span> <span class="price-old">&#8369 98.00</span> <span class="saving">-6%</span> </p>
+                    <p class="price"> <span class="price-new">Php 92.00</span> <span class="price-old">Php 98.00</span> <span class="saving">-6%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -331,7 +268,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/ipod_touch_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 62.00</span> <span class="price-old">&#8369 122.00</span> <span class="saving">-50%</span> </p>
+                    <p class="price"> <span class="price-new">Php 62.00</span> <span class="price-old">Php 122.00</span> <span class="saving">-50%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -345,7 +282,7 @@
                   <div class="image"><a href=""><img src="image/product/macbook_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 95.00</span> <span class="price-old">&#8369 99.00</span> <span class="saving">-4%</span> </p>
+                    <p class="price"> <span class="price-new">Php 95.00</span> <span class="price-old">Php 99.00</span> <span class="saving">-4%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
@@ -359,7 +296,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/macbook_air_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 1,142.00</span> <span class="price-old">&#8369 1,202.00</span> <span class="saving">-5%</span> </p>
+                    <p class="price"> <span class="price-new">Php 1,142.00</span> <span class="price-old">Php 1,202.00</span> <span class="saving">-5%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -373,7 +310,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/apple_cinema_30-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"><span class="price-new">&#8369 110.00</span> <span class="price-old">&#8369 122.00</span><span class="saving">-10%</span></p>
+                    <p class="price"><span class="price-new">Php 110.00</span> <span class="price-old">Php 122.00</span><span class="saving">-10%</span></p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
@@ -387,7 +324,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/macbook_pro_1-270x405.jpg" alt=" Product " title=" Product " class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php"> Product </a></h4>
-                    <p class="price"> <span class="price-new">&#8369 1,400.00</span> <span class="price-old">&#8369 1,900.00</span> <span class="saving">-26%</span> </p>
+                    <p class="price"> <span class="price-new">Php 1,400.00</span> <span class="price-old">Php 1,900.00</span> <span class="saving">-26%</span> </p>
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -401,7 +338,7 @@
                   <div class="image"><a href="view-product.php"><img src="image/product/samsung_tab_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                   <div class="caption">
                     <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">&#8369 230.00</span> <span class="price-old">&#8369 241.99</span> <span class="saving">-5%</span> </p>
+                    <p class="price"> <span class="price-new">Php 230.00</span> <span class="price-old">Php 241.99</span> <span class="saving">-5%</span> </p>
                     <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                   </div>
                   <div class="button-group">

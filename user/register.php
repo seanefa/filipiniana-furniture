@@ -91,7 +91,7 @@
               </div>
             </fieldset>
             <fieldset>
-              <legend>Your Password</legend>
+              <legend>Your Password&nbsp;(<i><small class="text-danger">Make sure to pick a strong password.</small></i>)</legend>
               <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Username:</label>
                 <div class="col-sm-10">

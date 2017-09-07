@@ -49,3 +49,8 @@ update by josefpls
 
 04/09/2017
 * Major UI changes.
+
+September 6, 2017
+update by josefpls
+*product viewing in home
+*sitemap

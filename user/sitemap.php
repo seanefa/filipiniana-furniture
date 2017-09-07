@@ -27,71 +27,67 @@
             <div class="col-sm-3 hidden-xs hidden-sm sitemap-icon"><i class="fa fa-sitemap"></i></div>
             <div class="col-md-5 col-sm-6">
               <ul class="sitemap">
-                <li><a href="category.php">Clothing</a>
+                <li><a href="products.php">Furnitures</a>
                   <ul>
-                    <li><a href="category.php">Men</a>
+                    <li><a href="category.php">Categories</a>
                       <ul>
-                        <li><a href="category.php">Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
+						  <?php
+						  include "userconnect.php";
+						  $sql="SELECT * from tblfurn_category";
+						  $result=$conn->query($sql);
+						  if($result->num_rows>0){
+							  while($row=$result->fetch_assoc()){
+							?>
+                        <li><a href=""><?php echo "" . $row["categoryName"];?></a></li>
+						  <?php
+							  }
+						  }
+						  ?>
                       </ul>
-                    </li>
-                    <li><a href="category.php">Women</a> </li>
-                    <li><a href="category.php">Girls</a>
-                      <ul>
-                        <li><a href="category.php">Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.php">Boys</a> </li>
-                    <li><a href="category.php">Baby</a> </li>
-                    <li><a href="category.php">Accessories</a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                      </ul>
-                    </li>
+					</li>
+					  <li><a href="">Types</a>
+						  <ul>
+							  <?php
+							  include "userconnect.php";
+							  $sql="SELECT * from tblfurn_type";
+							  $result=$conn->query($sql);
+							  if($result->num_rows>0){
+								  while($row=$result->fetch_assoc()){
+								?>
+							  <li><a href=""><?php echo "" . $row["typeName"];?></a></li>
+							  <?php
+								  }
+							  }
+							  $conn->close();
+							  ?>
+						  </ul>
+					  </li>
                   </ul>
                 </li>
-                <li><a href="category.php">Electronics</a>
+                <li><a href="category.php">Packages</a>
                   <ul>
-                    <li><a href="category.php">Laptops</a>
+					  <?php
+					  include "userconnect.php";
+					  $sql="SELECT * from tblpackages";
+					  $result=$conn->query($sql);
+					  if($result->num_rows>0){
+						  while($row=$result->fetch_assoc()){
+						?>
+                    <li><a href="category.php"><?php echo "" . $row[""];?></a>
                       <ul>
                         <li><a href="category.php">New Sub Categories</a></li>
                         <li><a href="category.php">New Sub Categories</a></li>
                         <li><a href="category.php">Sub Categories New</a></li>
                       </ul>
                     </li>
-                    <li><a href="category.php">Desktops</a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.php">Cameras</a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.php">Mobile Phones</a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.php">TV &amp; Home Audio</a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.php">MP3 Players</a> </li>
+					  <?php
+						  }
+					  }
+					  $conn->close();
+					  ?>
                   </ul>
                 </li>
-                <li><a href="category.php">Shoes</a>
+                <li><a href="category.php">Promos</a>
                   <ul>
                     <li><a href="category.php">Men</a> </li>
                     <li><a href="category.php">Women</a>
@@ -112,7 +108,7 @@
                     </li>
                   </ul>
                 </li>
-                <li><a href="category.php">Watches</a>
+                <li><a href="category.php">Freebies</a>
                   <ul>
                     <li><a href="category.php">Men's Watches</a> </li>
                     <li><a href="category.php">Women's Watches</a> </li>
