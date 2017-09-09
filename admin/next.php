@@ -880,7 +880,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Amount Paid</label><span id="x" style="color:red"> *</span>
-                          <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" value="<?php echo $totPrice * .5; ?>"/>
+                          <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" value="<?php echo $totPrice * .5; ?>" required/>
                           <p id="error"></p>
                         </div>
                       </div>
@@ -892,7 +892,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Check Number</label><span id="x" style="color:red"> *</span>
-                          <input type="text" style="text-align:right;" id="cNum" class="form-control" name="cNumber"/>
+                          <input type="text" style="text-align:right;" id="cNum" class="form-control" name="cNumber" required/>
                           <p id="cNumError"></p>
                         </div>
                       </div>
@@ -901,7 +901,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Amount</label><span id="x" style="color:red"> *</span>
-                          <input type="text" id="cAmount" style="text-align:right;" class="form-control" name="cAmount"/> 
+                          <input type="text" id="cAmount" style="text-align:right;" class="form-control" name="cAmount" required/> 
                           <p id="cAmountError"></p>
                         </div>
                       </div>
