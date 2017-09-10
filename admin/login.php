@@ -1,30 +1,56 @@
-<!DOCTYPE html>  
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="../plugins/images/favicon.ico">
-  <title>Filipiniana Furniture Login</title>
-  <!-- Bootstrap Core CSS -->
-  <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- animation CSS -->
-  <link href="css/animate.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <!-- color CSS -->
-  <link href="css/colors/default.css" id="theme"  rel="stylesheet">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body style="background-image: url('plugins/images/ElegantSalaSet.jpg');">
-    <section id="wrapper" class="login-register">
+<?php 
+include 'login-layout.php'
+?>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4 style="text-align: center;">Login</h4></div>
+                <div class="panel-body">
+                     <form class="form-horizontal form-material" id="loginform" action="loginVerify.php" method="POST">
+                        <div class="form-group">
+                            <label for="username" class="col-md-4 control-label">Username</label>
+
+                            <div class="col-md-6">
+                                <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--section id="wrapper" class="login-register">
       <div class="login-box">
         <div class="white-box">
           <form class="form-horizontal form-material" id="loginform" action="loginVerify.php" method="POST" style="border:solid 3px steelblue; padding: 5%; border-radius: 25px;">
@@ -67,24 +93,6 @@
           </form>
         </div>
       </div>
-    </section>
-    <!-- jQuery -->
-    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Menu Plugin JavaScript -->
-    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-
-    <!--slimscroll JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!-- Sparkline chart JavaScript -->
-    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="../plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
-    <!--Style Switcher -->
-    <script src="../plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    </section-->
   </body>
   </html>
