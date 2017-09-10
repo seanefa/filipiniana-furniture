@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
  <!-- Main Menu Start-->
     <nav id="menu" class="navbar">
       <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
@@ -96,7 +102,12 @@
 -->
             </li>
             <li class="mega-menu dropdown"> <a href="promos.php">Promos</a></li>
-            <li class="mega-menu dropdown"> <a href="production.php">Production</a></li>
+            <?php 
+            if(isset($_SESSION['logged']) === true)
+              { 
+               echo' <li class="mega-menu dropdown"> <a href="production.php">Production</a></li>';
+              }
+            ?>
           </ul>
         </div>
       </div>

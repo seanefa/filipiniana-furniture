@@ -290,12 +290,10 @@ a:focus { outline:none; }
 #header .links {
 	position: relative;
 	float:left;
-	border-right:1px dotted #5b9ad4;
 }
 #header .links > ul > li {
 	float:left;
 	list-style-type:none;
-	border-left:1px dotted #5b9ad4;
 }
 #header .links > ul > li.mobile, #header .links > ul > li.email { color:#fff; }
 #header .links > ul > li.mobile { padding:0 10px; }
@@ -331,11 +329,9 @@ a:focus { outline:none; }
 #header .links > ul > li.wrap_custom_block > div ul li { list-style-type:none; }
 #header #top-links {
 	color:#fff;
-	border-right:1px dotted #5b9ad4;
 }
 #header #top-links > ul > li {
 	float:left;
-	border-left:1px dotted #5b9ad4;
 }
 #header #top-links > ul > li > a {
 	color:#fff;
@@ -1607,7 +1603,7 @@ visibility:hidden;
 
 /**===== 16.1. Footer Links =====**/
 #footer .fpart-first {
-	background: url(../image/footer.png) center center fixed;
+	background: url(../image/footer.jpg)  fixed;
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
