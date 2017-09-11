@@ -52,7 +52,7 @@ if($cf==$pw)
 }
 else
 {
-		echo "Passwords does not match.";
+	echo "Passwords does not match.";
 }
 ?>
 $conn-close();

@@ -9,6 +9,7 @@ session_start();
 <link href="image/favicon.ico" rel="icon" />
 <title>Register - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
+<script type="text/javascript" src="js/myScript.js"></script>
 <?php include"css.php";?>
 </head>
 <?php 
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <div class="col-sm-12" id="content">
           <h1 class="title">Register Account</h1>
           <p>If you already have an account with us, please login at the <a href="login.php">Login Page</a>.</p>
-          <form action="register.php" method="post" autocomplete="off" class="form-horizontal">
+          <form action="add-user.php" method="post" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
               <legend>Your Personal Details</legend>
               <!--div style="display: none;" class="form-group required">
@@ -64,12 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-password" class="col-sm-2 control-label">Username</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-username" placeholder="Username" value="" name="username" required>
-                </div>
-              </div>
-              <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10">
                   <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="" name="email" required>
@@ -89,17 +84,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               </div>
             </fieldset>
             <fieldset>
-              <legend>Your Password&nbsp;(<i><small class="text-danger">Make sure to pick a strong password.</small></i>)</legend>
+              <legend>Your Account&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
+              <div class="form-group required">
+                <label for="input-password" class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="input-username" placeholder="Username" value="" name="uname" required>
+                </div>
+              </div>
               <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="password" required>
+                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-confirm" class="col-sm-2 control-label">Confirm Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="confirm" required>
+                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass" required>
                 </div>
               </div>
             </fieldset>
@@ -115,9 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </fieldset>
             <div class="buttons">
               <div class="pull-right">
-                <input type="checkbox" value="1" name="agree" required>
+                <input type="checkbox" value="1" name="agree" id="_cbxPolicy">
                 &nbsp;I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a> &nbsp;
-                <input type="submit" class="btn btn-primary" value="Register" name="register">
+                <input type="submit" class="btn btn-primary" value="Register" name="register" id="_btnRegister" disabled>
               </div>
             </div>
           </form>

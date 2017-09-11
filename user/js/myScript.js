@@ -1,15 +1,19 @@
-$(function () {
-  $('[data-toggle="popover"]').popover();
-})
+var register = document.getElementById("_btnRegister");
+var policy = document.getElementById("_cbxPolicy");
 
-function productImgError(image) {
-    image.onerror = "";
-    image.src = "/admin/plugins/images/NoImage.jpg";
-    return true;
-}
+register.disabled = true;
 
-function promoImgError(image) {
-    image.onerror = "";
-    image.src = "/admin/plugins/images/promoNoImage.jpg";
-    return true;
-}
+policy.addEventListener('click', function(event){
+	register.disabled = !register.disabled;
+});
+
+var message = document.getElementById("_lblAccountMsg");
+var password = document.getElementById("input-password");
+
+password.addEventListener('click', function(event){
+	password.setAttribute("placeholder", "Make sure to pick a strong password");
+});
+
+password.addEventListener("focusout", function(event){
+	password.setAttribute("placeholder", "Password");
+});

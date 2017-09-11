@@ -60,3 +60,7 @@ update by josefpls
 
 10/09/2017
 * Improved UI and login.
+
+September 12, 2017 12 :46am
+josefpls
+* Register

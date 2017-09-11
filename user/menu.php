@@ -105,7 +105,7 @@ if(!isset($_SESSION))
             <?php 
             if(isset($_SESSION['logged']) === true)
               { 
-               echo' <li class="mega-menu dropdown"> <a href="production.php">Production</a></li>';
+               echo '<li class="mega-menu dropdown"> <a href="production.php">Production</a></li>';
               }
             ?>
           </ul>
