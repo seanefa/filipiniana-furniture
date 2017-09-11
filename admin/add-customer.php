@@ -68,6 +68,14 @@ $sample = 'Pending';
 $mop = $_POST['mop'];
 $orderid = 0;
 
+$ln = mysqli_real_escape_string($conn,$ln);
+$mn = mysqli_real_escape_string($conn,$mn);
+$fn = mysqli_real_escape_string($conn,$fn);
+$addrss = mysqli_real_escape_string($conn,$addrss);
+$cont = mysqli_real_escape_string($conn,$cont);
+$remarks = mysqli_real_escape_string($conn,$remarks);
+$ordershipadd = mysqli_real_escape_string($conn,$ordershipadd);
+
 echo $mop;
 
 if($isBool == "new"){

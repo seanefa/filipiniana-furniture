@@ -1,24 +1,32 @@
 <div class="wrapper-wide">
-<?php include"header.php";?>
-<?php include"revolutionslider.php";?>
+  <?php include"header.php";?>
+  <?php include"revolutionslider.php";?>
   <div id="container">
     <div class="container">
       <div class="row">
         <!-- Feature Box Start-->
         <div class="container">
           <div class="custom-feature-box row">
-            <div class="col-sm-6 col-xs-12">
-              <div class="feature-box fbox_1">
-                <div class="title">Free Shipping</div>
-                <p>Free shipping on order over Php 100,000</p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xs-12">
-              <div class="feature-box fbox_2">
-                <div class="title">Easy Return</div>
-                <p>Easy return in *insert number of days here* days after purchasing</p>
-              </div>
-            </div>
+            <?php
+            include "userconnect.php";
+            $sql="SELECT * from tblcompany_info";
+            $result=$conn->query($sql);
+            if($result->num_rows>0)
+            {
+              while($row=$result->fetch_assoc())
+              {
+                ?>
+                <div class="col-sm-12 col-xs-12">
+                  <div class="feature-box fbox_1">
+                    <div class="title">About <?php echo "" . $row['comp_name'];?></div>
+                    <p><?php echo "" . $row['comp_about'];?></p>
+                  </div>
+                </div>
+                <?php
+              }
+            }
+            $conn->close();
+            ?>
           </div>
         </div>
         <!-- Feature Box End-->
@@ -28,335 +36,161 @@
       <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-xs-12">
-          <!-- Banner Start -->
-          <div class="marketshop-banner">
-            <div class="row">
-              <!-- PRODUCT -->
-              <?php
-              include "userconnect.php";
-              $sql = "SELECT * FROM tblproduct WHERE prodStat = 'Pre-Order' LIMIT 8";
-              $result = mysqli_query($conn, $sql);
-              if(mysqli_num_rows($result) > 0)
-              {
-                while($row = mysqli_fetch_assoc($result))
-                {
-                  ?>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-x">
-                    <form method="post">
-                      <input type="hidden" value="<?php echo "" . $row["prodID"];?>" name="i_d"/>
-                    </form>
-                    <div class="hovereffect card">
-                      <img class="card-img-top img-fluid" onerror="productImgError(this);" style="height: 230px; width:auto;" alt="" src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>">
-                      <div class="overlay">
-                        <h2>
-                        <?php echo "" . $row["productName"]; ?>
-                        <br><br>
-                        Php&nbsp;<?php echo "" . number_format($row["productPrice"]); ?>
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <?php
-                }
-              }
-              mysqli_close($conn);
-              ?>
-
-              <!-- PROMO -->
-              <?php
-              include "userconnect.php";
-              $sql = "SELECT * FROM tblpromos where promoStatus = 'Active' limit 6";
-              $result = mysqli_query($conn, $sql);
-              if(mysqli_num_rows($result) > 0)
-              {
-                while($row = mysqli_fetch_assoc($result))
-                {
-                  ?>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="hovereffect card">
-                      <img class="img-fluid" onerror="promoImgError(this);" src="/admin/plugins/promos/<?php echo "" . $row["promoImage"];?>" style="height: 230px; width:auto;">
-                      <div class="overlay">
-                        <h2><?php echo "" . $row["promoName"];?></h2>
-                      </div>
-                    </div>
-                  </div>
-                  <?php
-                }
-              }
-              mysqli_close($conn);
-              ?>
-            </div>
-          </div>
-          <!-- Banner End -->
-          <!-- Product Tab Start -->
           <div id="product-tab" class="product-tab">
             <ul id="tabs" class="tabs">
-              <li><a href="#tab-featured">Featured</a></li>
-              <li><a href="#tab-latest">Latest</a></li>
-              <li><a href="#tab-bestseller">Bestseller</a></li>
-              <li><a href="#tab-special">Special</a></li>
+              <li><a href="#tab-featured">Featured Furnitures</a></li>
             </ul>
-            <div id="tab-featured" class="tab_content">
               <div class="owl-carousel product_carousel_tab">
-				<?php
-				include "userconnect.php";
-				$sql="SELECT * from tblproduct where prodStat = 'Pre-Order'";
-				$result=$conn->query($sql);
-				if($result->num_rows>0){
-					while($row=$result->fetch_assoc()){
-				?>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="/admin/plugins/products/<?php echo "" . $row["prodMainPic"];?>" alt="Product" title="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"><span class="price-new">Php&nbsp;<?php echo "" . number_format($row["productPrice"]);?></span> <span class="price-old">	</span><span class="saving"></span></p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                <?php
+                include "userconnect.php"; 
+                $ctr = 0;
+                $sql="SELECT * from tblproduct order by productID desc;";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)){
+                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
+                  if($row['prodStat'] != "Archived"){
+                    echo '<div class="product-thumb clearfix hovereffect card">
+                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <br>
+                    <div class="caption">
+                      <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
-                  </div>
-                </div>
-				<?php
-					}
-				}
-				?>
-              </div>
+                    <div class="button-group">
+                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <div class="add-to-links">
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                      </div>
+                    </div>
+                  </div>';
+                }
+                $ctr++;
+              }
+              ?>
             </div>
-            <div id="tab-latest" class="tab_content">
-              <div class="owl-carousel product_carousel_tab">
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_2-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 110.00 </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_3-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 123.00 </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_4-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 85.00 </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/iphone_6-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 134.00 </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 66.80</span> <span class="price-old">Php 90.80</span> <span class="saving">-27%</span> </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_4-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 88.00 </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href=""><img src="image/product/macbook_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 95.00</span> <span class="price-old">Php 99.00</span> <span class="saving">-4%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick="wishlist.add('61');"><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick="compare.add('61');"><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="tab-bestseller" class="tab_content">
-              <div class="owl-carousel product_carousel_tab">
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/FinePix-Long-Zoom-Camera-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> Php 122.00 </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/nikon_d300_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 92.00</span> <span class="price-old">Php 98.00</span> <span class="saving">-6%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="tab-special" class="tab_content">
-              <div class="owl-carousel product_carousel_tab">
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/ipod_touch_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 62.00</span> <span class="price-old">Php 122.00</span> <span class="saving">-50%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href=""><img src="image/product/macbook_5-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 95.00</span> <span class="price-old">Php 99.00</span> <span class="saving">-4%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick="wishlist.add('61');"><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick="compare.add('61');"><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_air_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 1,142.00</span> <span class="price-old">Php 1,202.00</span> <span class="saving">-5%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb clearfix">
-                  <div class="image"><a href="view-product.php"><img src="image/product/apple_cinema_30-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"><span class="price-new">Php 110.00</span> <span class="price-old">Php 122.00</span><span class="saving">-10%</span></p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick="cart.add('42');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/macbook_pro_1-270x405.jpg" alt=" Product " title=" Product " class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php"> Product </a></h4>
-                    <p class="price"> <span class="price-new">Php 1,400.00</span> <span class="price-old">Php 1,900.00</span> <span class="saving">-26%</span> </p>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-thumb">
-                  <div class="image"><a href="view-product.php"><img src="image/product/samsung_tab_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-                  <div class="caption">
-                    <h4><a href="view-product.php">Product</a></h4>
-                    <p class="price"> <span class="price-new">Php 230.00</span> <span class="price-old">Php 241.99</span> <span class="saving">-5%</span> </p>
-                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                  </div>
-                  <div class="button-group">
-                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                      <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Product Tab Start -->
         </div>
-        <!--Middle Part End-->
-      </div>
+        </div>
     </div>
+      <!--Middle Part End-->
+       <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-xs-12">
+          <div id="product-tab" class="product-tab">
+            <ul id="tabs" class="tabs">
+              <li class="active"><a href="#tab-latest">Latest Furnitures</a></li>
+            </ul>
+              <div class="owl-carousel product_carousel_tab">
+                <?php
+                include "userconnect.php"; 
+                $ctr = 0;
+                $sql="SELECT * from tblproduct order by productID desc;";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)){
+                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
+                  if($row['prodStat'] != "Archived"){
+                    echo '<div class="product-thumb clearfix hovereffect card">
+                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="caption">
+                      <br>
+                      <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
+                    </div>
+                    <div class="button-group">
+                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <div class="add-to-links">
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                      </div>
+                    </div>
+                  </div>';
+                }
+                $ctr++;
+              }
+              ?>
+            </div>
+        </div>
+        </div>
+    </div>
+      <!--Middle Part End-->
+    <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-xs-12">
+          <div id="product-tab" class="product-tab">
+            <ul id="tabs" class="tabs">
+              <li class="active"><a href="#tab-latest">Featured Packages</a></li>
+            </ul>
+              <div class="owl-carousel product_carousel_tab">
+                <?php
+                include "userconnect.php"; 
+                $ctr = 0;
+                $sql="SELECT * from tblpackages order by packageID desc;";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)){
+                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
+                  if($row['prodStat'] != "Archived"){
+                    echo '<div class="product-thumb clearfix hovereffect card">
+                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="caption">
+                      <br>
+                      <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
+                    </div>
+                    <div class="button-group">
+                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <div class="add-to-links">
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                      </div>
+                    </div>
+                  </div>';
+                }
+                $ctr++;
+              }
+              ?>
+            </div>
+        </div>
+        </div>
+    </div>
+      <!--Middle Part End-->
+      <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-xs-12">
+          <div id="product-tab" class="product-tab">
+            <ul id="tabs" class="tabs">
+              <li class="active"><a href="#tab-latest">Promos</a></li>
+            </ul>
+              <div class="owl-carousel product_carousel_tab">
+                <?php
+                include "userconnect.php"; 
+                $ctr = 0;
+                $sql="SELECT * from tblpromos order by promoID desc;";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)){
+                  if($row['promoStatus'] == "Active"){
+                    echo '<div class="product-thumb clearfix hovereffect card">
+                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                      <h4 style="text-transform:uppercase;"><a href="view-product.php">'.$row['promoName'].'</a></h4>
+                    <div class="overlay"> 
+                    <div class="caption">                      
+                      <h2><a href="view-product.php" style="color:white;">'.$row['promoDescription'].'</a></h2>
+                      </div>
+                    </div>
+                  </div>';
+                }
+                $ctr++;
+              }
+              ?>
+            </div>
+        </div>
+        </div>
+    </div>
+      <!--Middle Part End-->
   </div>
+</div>
 <?php include"footer.php";?>
 </div>

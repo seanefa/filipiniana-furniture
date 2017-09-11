@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +11,16 @@
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
+    if (isset($_POST['register'])) { //user registering
+        
+        require 'process-registration.php';
+        
+    }
+}
+?>
 <body>
 <div class="wrapper-wide">
 <?php include"header.php";?>
@@ -22,13 +35,13 @@
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
-        <div class="col-sm-9" id="content">
+        <div class="col-sm-12" id="content">
           <h1 class="title">Register Account</h1>
           <p>If you already have an account with us, please login at the <a href="login.php">Login Page</a>.</p>
-          <form class="form-horizontal">
+          <form action="register.php" method="post" autocomplete="off" class="form-horizontal">
             <fieldset id="account">
               <legend>Your Personal Details</legend>
-              <div style="display: none;" class="form-group required">
+              <!--div style="display: none;" class="form-group required">
                 <label class="col-sm-2 control-label">Customer Group</label>
                 <div class="col-sm-10">
                   <div class="radio">
@@ -37,106 +50,81 @@
                       Default</label>
                   </div>
                 </div>
-              </div>
+              </div-->
               <div class="form-group required">
                 <label for="input-firstname" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="First Name" value="" name="firstname">
+                  <input type="text" class="form-control" id="input-firstname" placeholder="First Name" value="" name="firstname" required>
                 </div>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="Middle Name" value="" name="firstname">
+                  <input type="text" class="form-control" id="input-middlename" placeholder="Middle Name" value="" name="middlename">
                 </div>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="Last Name" value="" name="firstname">
+                  <input type="text" class="form-control" id="input-lastname" placeholder="Last Name" value="" name="lastname" required>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label for="input-password" class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="input-username" placeholder="Username" value="" name="username" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="" name="email">
+                  <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="" name="email" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-telephone" class="col-sm-2 control-label">Telephone</label>
                 <div class="col-sm-10">
-                  <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" value="" name="telephone">
-                </div>
-              </div>
-            </fieldset>
-            <fieldset id="address">
-              <legend>Your Address</legend>
-              <div class="form-group">
-                <label for="input-block" class="col-sm-2 control-label">Block Number</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-company" placeholder="e.g. Blk. 1 Lt. 6, or #1255" value="" name="company">
+                  <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" value="" name="telephone" required>
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-street" class="col-sm-2 control-label">Street Name</label>
+                <label for="input-block" class="col-sm-2 control-label">Address</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-address-1" placeholder="e.g. Saint Francis St." value="" name="address_1">
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-baranggay" class="col-sm-2 control-label">Baranggay</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-city" placeholder="e.g. Brgy. Parang" value="" name="city">
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-postcode" class="col-sm-2 control-label">City or Province</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-postcode" placeholder="e.g. Marikina City or Rizal Province" value="" name="">
+                  <input type="text" class="form-control" id="input-address" placeholder="e.g. #1255 Saint Francis St., Brgy. Parang, Marikina City" value="" name="address" required>
                 </div>
               </div>
             </fieldset>
             <fieldset>
               <legend>Your Password&nbsp;(<i><small class="text-danger">Make sure to pick a strong password.</small></i>)</legend>
               <div class="form-group required">
-                <label for="input-password" class="col-sm-2 control-label">Username:</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-password" placeholder="Username" value="" name="password">
-                </div>
-              </div>
-              <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="password">
+                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="password" required>
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-confirm" class="col-sm-2 control-label">Password Confirm</label>
+                <label for="input-confirm" class="col-sm-2 control-label">Confirm Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-confirm" placeholder="Password Confirm" value="" name="confirm">
+                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="confirm" required>
                 </div>
               </div>
             </fieldset>
             <fieldset>
               <legend>Newsletter</legend>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Subscribe</label>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label">I want to receive exclusive offers by e-mail</label>
                 <div class="col-sm-10">
-                  <label class="radio-inline">
-                    <input type="radio" value="1" name="newsletter">
-                    Yes</label>
-                  <label class="radio-inline">
-                    <input type="radio" checked="checked" value="0" name="newsletter">
-                    No</label>
+                  <input type="checkbox" name="newsletter" checked>
+                  <br>
                 </div>
               </div>
             </fieldset>
             <div class="buttons">
               <div class="pull-right">
-                <input type="checkbox" value="1" name="agree">
+                <input type="checkbox" value="1" name="agree" required>
                 &nbsp;I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a> &nbsp;
-                <input type="submit" class="btn btn-primary" value="Continue">
+                <input type="submit" class="btn btn-primary" value="Register" name="register">
               </div>
             </div>
           </form>
         </div>
         <!--Middle Part End -->
         <!--Right Part Start -->
-        <aside id="column-right" class="col-sm-3 hidden-xs">
+        <!--aside id="column-right" class="col-sm-3 hidden-xs">
           <h3 class="subtitle">Account</h3>
           <div class="list-group">
             <ul class="list-item">
@@ -155,7 +143,7 @@
               <li><a href="#">Recurring payments</a></li>
             </ul>
           </div>
-        </aside>
+        </aside-->
         <!--Right Part End -->
       </div>
     </div>

@@ -34,23 +34,29 @@ CHANGELOG
 
 September 1, 2017 12:11pm
 update by josefpls
-*four new folders in plugins (fabrics, frameworks, products, logo).
-*every image uploaded will be moved to its respective folders. 
+* Four new folders in plugins (fabrics, frameworks, products, logo).
+* Every image uploaded will be moved to its respective folders. 
 
 September 1, 2017 1:14pm
 update by josefpls
-*promos folder added to the previous update.
-*website pics aligned with the new file organization.
+* Promos folder added to the previous update.
+* Website pics aligned with the new file organization.
 
 September 1, 2017 9:11pm
 update by josefpls
-*default images on products
-*default images on promos
+* Default images on products
+* Default images on promos
 
 04/09/2017
 * Major UI changes.
 
 September 6, 2017
 update by josefpls
-*product viewing in home
-*sitemap
+* Product viewing in home
+* Sitemap
+
+09/09/2017
+* Improved ordering.
+
+10/09/2017
+* Improved UI and login.

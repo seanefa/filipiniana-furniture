@@ -172,62 +172,54 @@
           <!-- MAIN IMAGE -->
           <img src="image/slider/revslider/01minimalist-banner.jpg"  alt=""  width="1349" height="480">
           <!-- LAYER NR. 1 -->
-          <div class="tp-caption tp-resizeme rs-parallaxlevel-2" 
-									 id="slide-2-layer-1" 
+          <div class="tp-caption NotGeneric-Title tp-resizeme rs-parallaxlevel-0" 
+									 id="slide-3-layer-2" 
 									 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
-									 data-y="['top','top','top','top']" data-voffset="['40','40','40','10']" 
+									 data-y="['middle','middle','middle','middle']" data-voffset="['-20','0','0','0']" 
+									data-fontsize="['70','70','70','45']"
+									data-lineheight="['70','70','70','50']"
 									data-width="none"
-									data-height="490"
+									data-height="none"
+                                    data-fontweight="700"
 									data-whitespace="nowrap"
 									data-transform_idle="o:1;"
-									data-transform_in="x:-50px;y:-200px;rX:-10deg;rY:-15deg;rZ:-5deg;sX:0;sY:0;opacity:0;s:500;e:Power2.easeInOut;" 
-									data-transform_out="opacity:0;s:1500;e:Power4.easeIn;s:1500;e:Power4.easeInOut;" 
-									data-start="1200" 
+						 
+									 data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Back.easeOut;" 
+									 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Back.easeOut;" 
+									 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+									 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
+									data-start="1000" 
+									data-splitin="chars" 
+									data-splitout="none" 
 									data-responsive_offset="on" 
-									style="z-index: 7;"><img data-lazyload="image/slider/revslider/04sale.png" data-hh="268" data-ww="694" alt="sale" src="image/slider/revslider/04sale.png"> </div>
+
+									data-elementdelay="0.05" 
+									
+									style="z-index: 6; text-transform:uppercase; font-family:inherit;"><strong>GREAT FURNITURES</strong> </div>
           <!-- LAYER NR. 2 -->
           <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0" 
-									 id="slide-2-layer-2" 
+									 id="slide-3-layer-3" 
 									 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
-									 data-y="['bottom','middle','middle','middle']" data-voffset="['80','-70','-70','-31']"
-									data-width="none"
-									data-height="none"
-									data-transform_idle="o:1;"
-						 
-									 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1000;e:Power4.easeInOut;" 
-									 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
-									 data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;" 
-									 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
-									data-start="1100" 
-									data-splitin="none" 
-									data-splitout="none" 
-									data-responsive_offset="on" 
-									
-									style="z-index: 7;"><img data-lazyload="image/slider/revslider/05bg-line.png" data-hh="55" data-ww="338" alt="sale" src="image/slider/revslider/04sale.png"> </div>
-          <!-- LAYER NR. 3 -->
-          <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0" 
-									 id="slide-2-layer-3" 
-									 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
-									 data-y="['bottom','middle','middle','middle']" data-voffset="['90','70','70','31']"
-                                     data-fontsize="['34','34','34','20']"
-                                     data-lineheight="['38','34','34','22']" 
+									 data-y="['middle','middle','middle','middle']" data-voffset="['40','70','70','31']"
+                                     data-fontsize="['28','28','28','20']"
+                                     data-lineheight="['28','28','28','22']" 
                                      data-fontweight="700"
-                                     data-color="#000"
 									data-width="none"
 									data-height="none"
 									data-whitespace="nowrap"
 									data-transform_idle="o:1;"
 						 
-									 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1200;e:Power4.easeInOut;" 
-									 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;" 
+									 data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Back.easeOut;" 
+									 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Back.easeOut;" 
 									 data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;" 
 									 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;" 
-									data-start="1100" 
+									data-start="1500" 
 									data-splitin="none" 
 									data-splitout="none" 
 									data-responsive_offset="on" 
+
 									
-									style="z-index: 8; letter-spacing:0px; font-family:inherit;">Up to 40% off </div>
+									style="z-index: 7; text-transform:uppercase; font-family:inherit;">Better Prices</div>
         </li>
         <li data-transition="random">
           <!-- MAIN IMAGE -->
@@ -280,7 +272,7 @@
 
 									data-elementdelay="0.05" 
 									
-									style="z-index: 6; text-transform:uppercase; font-family:inherit;"><strong>GREAT FURNITURES</strong> </div>
+									style="z-index: 6; text-transform:uppercase; font-family:inherit;"><strong>The Maker of</strong> </div>
           <!-- LAYER NR. 3 -->
           <div class="tp-caption NotGeneric-SubTitle tp-resizeme rs-parallaxlevel-0" 
 									 id="slide-3-layer-3" 
@@ -304,7 +296,7 @@
 									data-responsive_offset="on" 
 
 									
-									style="z-index: 7; text-transform:uppercase; font-family:inherit;">BETTER PRICES</div>
+									style="z-index: 7; text-transform:uppercase; font-family:inherit;">Quality Narra Furniture</div>
           <!-- LAYER NR. 4 -->
           <div class="tp-caption WebProduct-Button rev-btn rs-parallaxlevel-0" 
 									 id="slide-3-layer-4" 

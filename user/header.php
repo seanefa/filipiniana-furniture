@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <div id="header" class="style2">
     <!-- Top Bar Start-->
     <nav id="top" class="htop">
@@ -25,8 +31,19 @@
           </div>
           <div id="top-links" class="nav pull-right flip">
             <ul>
-              <li><a href="login.php">Login</a></li>
-              <li><a href="register.php">Register</a></li>
+              <?php 
+              if(isset($_SESSION['logged']) === true)
+                { 
+                  echo '<li><h5 style="color: white; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $_SESSION["login_user"]; echo '!</span></h5></li>';
+                  echo '<li><a href="profile.php">My Profile</a></li>';
+                  echo '<li><a href="logout.php">Logout</a></li>';
+                }
+              else
+                {
+                  echo '<li><a href="login.php">Login</a></li>
+                        <li><a href="register.php">Register</a></li>';
+                }
+              ?>
             </ul>
           </div>
         </div>
