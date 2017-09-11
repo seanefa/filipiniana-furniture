@@ -55,13 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-firstname" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="First Name" value="" name="firstname" required>
+                  <input type="text" class="form-control" id="input-firstname" placeholder="First Name" value="" name="fname" required>
                 </div>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-middlename" placeholder="Middle Name" value="" name="middlename">
+                  <input type="text" class="form-control" id="input-middlename" placeholder="Middle Name" value="" name="mname">
                 </div>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-lastname" placeholder="Last Name" value="" name="lastname" required>
+                  <input type="text" class="form-control" id="input-lastname" placeholder="Last Name" value="" name="lname" required>
                 </div>
               </div>
               <div class="form-group required">
@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-telephone" class="col-sm-2 control-label">Telephone</label>
+                <label for="input-telephone" class="col-sm-2 control-label">Contact</label>
                 <div class="col-sm-10">
-                  <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" value="" name="telephone" required>
+                  <input type="tel" class="form-control" id="input-telephone" placeholder="Contact" value="" name="number" required>
                 </div>
               </div>
               <div class="form-group required">

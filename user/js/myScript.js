@@ -10,7 +10,7 @@ policy.addEventListener('click', function(event){
 var message = document.getElementById("_lblAccountMsg");
 var password = document.getElementById("input-password");
 
-password.addEventListener('click', function(event){
+password.addEventListener("focus", function(event){
 	password.setAttribute("placeholder", "Make sure to pick a strong password");
 });
 
