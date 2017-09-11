@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2017 at 10:31 PM
+-- Generation Time: Sep 11, 2017 at 04:58 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -115,6 +115,13 @@ CREATE TABLE `tblcheck_details` (
   `checkRemarks` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblcheck_details`
+--
+
+INSERT INTO `tblcheck_details` (`check_detailsID`, `p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES
+(1, 7, 32232, 2, '');
+
 -- --------------------------------------------------------
 
 --
@@ -171,7 +178,9 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (26, 'Angelu', 'Balicuatro', 'Atienza', '#1234 One Way Street BHQC', '+63 (977) 546-7173', 'angeluat@gmail.com', 'Active'),
 (27, 'Shaira', 'Joy', 'Flores', '#1234 Bagong Silangan Veteran QC', '+63 (738) 138-7219', 'shairajhoy@gmail.com', 'Active'),
 (28, 'Sheyne', 'Smth', 'Laristan', '#1234 Somewhere Street Brgy. Litex BHQC', '+63 (967) 136-7192', 'sheynelaristan@gmail.com', 'Active'),
-(29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', 'Active');
+(29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', 'Active'),
+(30, 'Gendy', 'Lopez', 'Uy', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', 'Active'),
+(31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', 'active');
 
 -- --------------------------------------------------------
 
@@ -211,6 +220,7 @@ CREATE TABLE `tblcust_req_images` (
 CREATE TABLE `tbldelivery` (
   `deliveryID` int(11) NOT NULL,
   `deliveryEmpAssigned` int(11) NOT NULL,
+  `deliveryReleaseID` int(11) NOT NULL,
   `deliveryDate` datetime NOT NULL,
   `deliveryRate` double NOT NULL,
   `deliveryAddress` varchar(450) COLLATE utf8_unicode_ci NOT NULL,
@@ -222,29 +232,8 @@ CREATE TABLE `tbldelivery` (
 -- Dumping data for table `tbldelivery`
 --
 
-INSERT INTO `tbldelivery` (`deliveryID`, `deliveryEmpAssigned`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES
-(2, 1, '2017-08-29 00:00:00', 1000, '#65 Resolution Street BHQC', 'A remark', 'Pending');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbldelivery_details`
---
-
-CREATE TABLE `tbldelivery_details` (
-  `del_detailsID` int(11) NOT NULL,
-  `del_deliveryID` int(11) NOT NULL,
-  `del_orderReqID` int(11) NOT NULL,
-  `del_quantity` int(11) NOT NULL,
-  `del_status` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbldelivery_details`
---
-
-INSERT INTO `tbldelivery_details` (`del_detailsID`, `del_deliveryID`, `del_orderReqID`, `del_quantity`, `del_status`) VALUES
-(3, 2, 4, 1, 'Pending');
+INSERT INTO `tbldelivery` (`deliveryID`, `deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES
+(1, 1, 2, '2017-09-11 00:00:00', 0, '#123 Alton Street BHQC', 'TBD', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -267,7 +256,8 @@ CREATE TABLE `tbldelivery_rates` (
 
 INSERT INTO `tbldelivery_rates` (`delivery_rateID`, `delBranchID`, `delLocation`, `delRateType`, `delRate`, `delRateStatus`) VALUES
 (5, 1, 'Metro Manila', 'Amount', '1000', 'Listed'),
-(6, 1, 'Provincial', 'Amount', '3000', 'Listed');
+(6, 1, 'Provincial', 'Amount', '3000', 'Listed'),
+(7, 2, 'Quezon City', 'Amount', '400', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -604,7 +594,9 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (1, 1, 105000, '2017-08-28', 'Pending', 'Initial Invoice', 1, 1),
 (2, 6, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
 (3, 7, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
-(4, 8, 105000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1);
+(4, 8, 105000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
+(5, 9, 120000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1),
+(6, 10, 25000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -727,7 +719,11 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (84, 'Materials', 'New', '2017-08-29', 'Added new material Liza Varnish, ID = 11', 1),
 (85, 'Materials', 'New', '2017-08-29', 'Added new material Mela Varnish, ID = 12', 1),
 (86, 'Supplier', 'Update', '2017-08-29', 'Updated supplier FNCENT Trees and Woods Inc., ID = 15', 1),
-(87, 'Supplier', 'Update', '2017-08-29', 'Updated supplier AA, ID = 17', 1);
+(87, 'Supplier', 'Update', '2017-08-29', 'Updated supplier AA, ID = 17', 1),
+(88, 'Products', 'New', '2017-08-30', 'Added new product Manilenia, ID = 18', 1),
+(89, 'Products', 'Update', '2017-08-30', 'Updated product Manilenia, ID = 18', 1),
+(90, 'Order', 'New', '2017-08-30', 'New order #OR000009', 1),
+(91, 'Delivery Rates', 'New', '2017-08-30', 'Added new delivery rate 400, ID = 7', 1);
 
 -- --------------------------------------------------------
 
@@ -833,23 +829,6 @@ INSERT INTO `tblmat_type` (`matTypeID`, `matTypeName`, `matTypeMeasure`, `matTyp
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmat_var`
---
-
-CREATE TABLE `tblmat_var` (
-  `variantID` int(11) NOT NULL,
-  `mat_varID` int(11) NOT NULL,
-  `attributeID` int(11) NOT NULL,
-  `mat_varDescription` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
-  `uncategoryID` int(11) DEFAULT NULL,
-  `unitValue` int(45) DEFAULT NULL,
-  `unitID` int(11) DEFAULT NULL,
-  `mat_varStatus` varchar(45) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tblmodeofpayment`
 --
 
@@ -885,7 +864,9 @@ CREATE TABLE `tblonhand` (
 --
 
 INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
-(3, 17, 4, NULL);
+(3, 17, 4, NULL),
+(4, 18, 10, NULL),
+(5, 18, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -911,11 +892,13 @@ CREATE TABLE `tblorders` (
 --
 
 INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateOfRelease`, `custOrderID`, `orderPrice`, `orderStatus`, `shippingAddress`, `orderType`, `orderRemarks`) VALUES
-(1, 1, '2017-08-28', '2017-08-24', 18, 105000, 'Pending', 'N/A. This order is for pick-up#62 Resolution ', 'Pre-Order', 'An order.'),
-(4, NULL, '2017-08-29', '2017-08-29', 23, 35000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', NULL),
-(6, 1, '2017-08-29', '2017-08-29', 21, 35000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
-(7, 1, '2017-08-29', '2017-08-29', 26, 35000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
-(8, 1, '2017-08-29', '2017-08-29', 24, 105000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.');
+(1, 1, '2017-08-28', '2017-08-24', 18, 105000, 'Ready for release', '#62 Resolution ', 'Pre-Order', 'An order.'),
+(4, NULL, '2017-08-29', '2017-08-29', 23, 35000, 'Cancelled', 'N/A', 'On-Hand', 'No reason.'),
+(6, 1, '2017-08-29', '2017-08-29', 21, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
+(7, 1, '2017-08-29', '2017-08-29', 26, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
+(8, 1, '2017-08-29', '2017-08-29', 24, 105000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
+(9, 1, '2017-08-30', '2017-08-31', 19, 120000, 'Pending', 'N/A', 'Pre-Order', ''),
+(10, 1, '2017-08-30', '2017-08-30', 30, 25000, 'Pending', 'N/A', 'On-Hand', 'An order.');
 
 -- --------------------------------------------------------
 
@@ -929,6 +912,13 @@ CREATE TABLE `tblorder_actions` (
   `orAction` varchar(450) CHARACTER SET latin1 NOT NULL,
   `orReason` varchar(450) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblorder_actions`
+--
+
+INSERT INTO `tblorder_actions` (`orActionID`, `orOrderID`, `orAction`, `orReason`) VALUES
+(3, 4, 'Cancelled', 'No reason.');
 
 -- --------------------------------------------------------
 
@@ -967,11 +957,14 @@ CREATE TABLE `tblorder_request` (
 --
 
 INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductID`, `prodUnitPrice`, `orderRemarks`, `orderPackageID`, `orderQuantity`, `orderRequestStatus`) VALUES
-(1, 1, 17, 35000, 0, NULL, 3, 'Active'),
-(3, 6, 17, 35000, 0, NULL, 1, 'Active'),
-(4, 6, 17, 35000, 0, NULL, 1, 'Ready for release'),
-(5, 7, 17, 35000, 0, NULL, 1, 'Ready for release'),
-(6, 8, 17, 35000, 0, NULL, 3, 'Ready for release');
+(1, 1, 17, 35000, 0, NULL, 3, 'Ready for release'),
+(3, 6, 17, 35000, 0, NULL, 1, 'Released'),
+(4, 6, 17, 35000, 0, NULL, 1, 'Released'),
+(5, 7, 17, 35000, 0, NULL, 1, 'Released'),
+(6, 8, 17, 35000, 0, NULL, 3, 'Released'),
+(7, 9, 17, 35000, 0, NULL, 2, 'Active'),
+(8, 9, 16, 50000, 0, NULL, 1, 'Active'),
+(9, 10, 18, 25000, 0, NULL, 1, 'Ready for release');
 
 -- --------------------------------------------------------
 
@@ -1050,7 +1043,10 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (1, 1, '2017-08-28 17:23:52', 52500, 1, 'Paid'),
 (2, 2, '2017-08-29 21:16:54', 35000, 1, 'Paid'),
 (3, 3, '2017-08-29 21:18:05', 35000, 1, 'Paid'),
-(4, 4, '2017-08-29 21:22:19', 10500, 1, 'Paid');
+(4, 4, '2017-08-29 21:22:19', 10500, 1, 'Paid'),
+(5, 5, '2017-08-30 09:00:32', 60000, 1, 'Paid'),
+(6, 5, '2017-08-30 09:19:40', 5000, 1, 'Paid'),
+(7, 6, '2017-08-30 09:31:31', 2, 2, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1138,7 +1134,8 @@ CREATE TABLE `tblproduct` (
 
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
 (16, 7, 13, 9, '1', 0, 'Queen', 'A queen sized bed', 50000, '2017-08-241503588669.png', '', 'Pre-Order'),
-(17, 6, 17, 9, '3', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-08-281503930441.png', ' L16.3â€³ x W16.3â€³ x H36.9â€³', 'Pre-Order');
+(17, 6, 17, 9, '3', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-08-281503930441.png', ' L16.3â€³ x W16.3â€³ x H36.9â€³', 'Pre-Order'),
+(18, 7, 13, 10, '1', 0, 'Manilenia', '', 25000, '2017-08-301504075842.png', '', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -1154,6 +1151,13 @@ CREATE TABLE `tblproduction` (
   `productionRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `productionStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblproduction`
+--
+
+INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `prodStartDate`, `prodEndDate`, `productionRemarks`, `productionStatus`) VALUES
+(33, 1, NULL, NULL, NULL, 'Finished');
 
 -- --------------------------------------------------------
 
@@ -1171,6 +1175,17 @@ CREATE TABLE `tblproduction_phase` (
   `prodRemarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL,
   `prodStatus` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblproduction_phase`
+--
+
+INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp`, `prodDateStart`, `prodDateEnd`, `prodRemarks`, `prodStatus`) VALUES
+(101, 33, 1, 1, '2017-08-31', '2017-09-02', ' ', 'Finished'),
+(102, 33, 2, 1, '2017-08-31', '2017-09-13', ' ', 'Finished'),
+(103, 33, 3, 1, '2017-09-14', '2017-09-12', ' ', 'Finished'),
+(104, 33, 4, 1, '2017-09-15', '2017-09-15', ' ', 'Finished'),
+(105, 33, 5, 1, '2017-09-21', '2017-09-14', ' ', 'Finished');
 
 -- --------------------------------------------------------
 
@@ -1276,6 +1291,53 @@ CREATE TABLE `tblpromo_promotion` (
 
 INSERT INTO `tblpromo_promotion` (`promotionID`, `proPromoID`, `proCategory`, `proData`) VALUES
 (6, 6, 'Others', ' 1 table');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblrelease`
+--
+
+CREATE TABLE `tblrelease` (
+  `releaseID` int(11) NOT NULL,
+  `releaseDate` datetime NOT NULL,
+  `releaseType` int(11) NOT NULL,
+  `releaseRemarks` varchar(450) DEFAULT NULL,
+  `releaseStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblrelease`
+--
+
+INSERT INTO `tblrelease` (`releaseID`, `releaseDate`, `releaseType`, `releaseRemarks`, `releaseStatus`) VALUES
+(1, '2017-09-11 00:00:00', 0, '', 'Released'),
+(2, '2017-09-11 00:00:00', 0, 'TBD', 'Released'),
+(3, '2017-09-11 00:00:00', 0, 'PICKED UP', 'Released');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblrelease_details`
+--
+
+CREATE TABLE `tblrelease_details` (
+  `rel_detailsID` int(11) NOT NULL,
+  `tblreleaseID` int(11) NOT NULL,
+  `rel_orderReqID` int(11) NOT NULL,
+  `rel_quantity` int(11) NOT NULL,
+  `rel_status` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblrelease_details`
+--
+
+INSERT INTO `tblrelease_details` (`rel_detailsID`, `tblreleaseID`, `rel_orderReqID`, `rel_quantity`, `rel_status`) VALUES
+(1, 1, 5, 1, 'Released'),
+(2, 2, 6, 3, 'Pending'),
+(3, 3, 3, 1, 'Released'),
+(4, 3, 4, 1, 'Released');
 
 -- --------------------------------------------------------
 
@@ -1392,7 +1454,8 @@ CREATE TABLE `tbluser` (
 
 INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `userType`, `userCustID`, `userEmpID`, `dateCreated`) VALUES
 (1, 'eyembisi', 'admin', 'Active', 'admin', NULL, 1, '2017-08-24'),
-(4, 'airaem', 'admin', 'active', 'customer', 19, NULL, '2017-08-27');
+(4, 'airaem', 'admin', 'active', 'customer', 19, NULL, '2017-08-27'),
+(5, 'hongkaisoo', 'admin', 'active', 'customer', 31, NULL, '2017-09-01');
 
 -- --------------------------------------------------------
 
@@ -1478,15 +1541,8 @@ ALTER TABLE `tblcust_req_images`
 --
 ALTER TABLE `tbldelivery`
   ADD PRIMARY KEY (`deliveryID`),
-  ADD KEY `empAssignedID_idx` (`deliveryEmpAssigned`);
-
---
--- Indexes for table `tbldelivery_details`
---
-ALTER TABLE `tbldelivery_details`
-  ADD PRIMARY KEY (`del_detailsID`),
-  ADD KEY `del_id_idx` (`del_deliveryID`),
-  ADD KEY `ordReq_id_idx` (`del_orderReqID`);
+  ADD KEY `empAssignedID_idx` (`deliveryEmpAssigned`),
+  ADD KEY `tblreleaseid_tbldelivery_idx` (`deliveryReleaseID`);
 
 --
 -- Indexes for table `tbldelivery_rates`
@@ -1652,17 +1708,6 @@ ALTER TABLE `tblmat_inventory`
 --
 ALTER TABLE `tblmat_type`
   ADD PRIMARY KEY (`matTypeID`);
-
---
--- Indexes for table `tblmat_var`
---
-ALTER TABLE `tblmat_var`
-  ADD PRIMARY KEY (`variantID`),
-  ADD KEY `material_idx` (`mat_varID`),
-  ADD KEY `uncategoryID` (`uncategoryID`,`unitID`),
-  ADD KEY `uncategoryID_2` (`uncategoryID`,`unitID`),
-  ADD KEY `unit_idx` (`unitID`),
-  ADD KEY `attribs_idx` (`attributeID`);
 
 --
 -- Indexes for table `tblmodeofpayment`
@@ -1837,6 +1882,19 @@ ALTER TABLE `tblpromo_promotion`
   ADD KEY `promo_idx` (`proPromoID`);
 
 --
+-- Indexes for table `tblrelease`
+--
+ALTER TABLE `tblrelease`
+  ADD PRIMARY KEY (`releaseID`);
+
+--
+-- Indexes for table `tblrelease_details`
+--
+ALTER TABLE `tblrelease_details`
+  ADD PRIMARY KEY (`rel_detailsID`),
+  ADD KEY `tblreleaseid_tblreleasedetails_idx` (`tblreleaseID`);
+
+--
 -- Indexes for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
@@ -1906,7 +1964,7 @@ ALTER TABLE `tblbranches`
 -- AUTO_INCREMENT for table `tblcheck_details`
 --
 ALTER TABLE `tblcheck_details`
-  MODIFY `check_detailsID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `check_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblcompany_info`
 --
@@ -1916,7 +1974,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -1931,22 +1989,17 @@ ALTER TABLE `tblcust_req_images`
 -- AUTO_INCREMENT for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
-  MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `tbldelivery_details`
---
-ALTER TABLE `tbldelivery_details`
-  MODIFY `del_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbldelivery_rates`
 --
 ALTER TABLE `tbldelivery_rates`
-  MODIFY `delivery_rateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `delivery_rateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbldesign_phase`
 --
 ALTER TABLE `tbldesign_phase`
-  MODIFY `d_phaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `d_phaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbldownpayment`
 --
@@ -1956,12 +2009,12 @@ ALTER TABLE `tbldownpayment`
 -- AUTO_INCREMENT for table `tblemployee`
 --
 ALTER TABLE `tblemployee`
-  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblemp_job`
 --
 ALTER TABLE `tblemp_job`
-  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblfabrics`
 --
@@ -1996,12 +2049,12 @@ ALTER TABLE `tblframe_design`
 -- AUTO_INCREMENT for table `tblframe_material`
 --
 ALTER TABLE `tblframe_material`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblfurn_category`
 --
 ALTER TABLE `tblfurn_category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tblfurn_design`
 --
@@ -2016,7 +2069,7 @@ ALTER TABLE `tblfurn_type`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2026,7 +2079,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
@@ -2058,11 +2111,6 @@ ALTER TABLE `tblmat_inventory`
 ALTER TABLE `tblmat_type`
   MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `tblmat_var`
---
-ALTER TABLE `tblmat_var`
-  MODIFY `variantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
@@ -2071,17 +2119,17 @@ ALTER TABLE `tblmodeofpayment`
 -- AUTO_INCREMENT for table `tblonhand`
 --
 ALTER TABLE `tblonhand`
-  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
 ALTER TABLE `tblorder_actions`
-  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
 --
@@ -2091,7 +2139,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblorder_return`
 --
@@ -2106,12 +2154,12 @@ ALTER TABLE `tblorder_return_details`
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
 ALTER TABLE `tblpackage_inclusions`
-  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2126,22 +2174,22 @@ ALTER TABLE `tblphases`
 -- AUTO_INCREMENT for table `tblprodsonpromo`
 --
 ALTER TABLE `tblprodsonpromo`
-  MODIFY `onpromoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `onpromoID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblproduct`
 --
 ALTER TABLE `tblproduct`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2151,12 +2199,12 @@ ALTER TABLE `tblprod_images`
 -- AUTO_INCREMENT for table `tblprod_info`
 --
 ALTER TABLE `tblprod_info`
-  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblprod_materials`
 --
 ALTER TABLE `tblprod_materials`
-  MODIFY `p_matID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `p_matID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblpromos`
 --
@@ -2172,6 +2220,16 @@ ALTER TABLE `tblpromo_condition`
 --
 ALTER TABLE `tblpromo_promotion`
   MODIFY `promotionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `tblrelease`
+--
+ALTER TABLE `tblrelease`
+  MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tblrelease_details`
+--
+ALTER TABLE `tblrelease_details`
+  MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblsupplier`
 --
@@ -2196,7 +2254,7 @@ ALTER TABLE `tblunit_cat`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -2232,14 +2290,8 @@ ALTER TABLE `tblcust_req_images`
 -- Constraints for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
-  ADD CONSTRAINT `empAssignedID` FOREIGN KEY (`deliveryEmpAssigned`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbldelivery_details`
---
-ALTER TABLE `tbldelivery_details`
-  ADD CONSTRAINT `del_id` FOREIGN KEY (`del_deliveryID`) REFERENCES `tbldelivery` (`deliveryID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ordReq_id` FOREIGN KEY (`del_orderReqID`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `empAssignedID` FOREIGN KEY (`deliveryEmpAssigned`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tblreleaseid_tbldelivery` FOREIGN KEY (`deliveryReleaseID`) REFERENCES `tblrelease` (`releaseID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbldelivery_rates`
@@ -2330,15 +2382,6 @@ ALTER TABLE `tblmat_deliverydetails`
 --
 ALTER TABLE `tblmat_inventory`
   ADD CONSTRAINT `matVariant` FOREIGN KEY (`matVariantID`) REFERENCES `tblmat_var` (`variantID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblmat_var`
---
-ALTER TABLE `tblmat_var`
-  ADD CONSTRAINT `attribs` FOREIGN KEY (`attributeID`) REFERENCES `tblattributes` (`attributeID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `m` FOREIGN KEY (`mat_varID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tblmat_var_ibfk_1` FOREIGN KEY (`uncategoryID`) REFERENCES `tblunitofmeasurement_category` (`uncategoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `unitofmeasure` FOREIGN KEY (`unitID`) REFERENCES `tblunitofmeasure` (`unID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblonhand`
@@ -2456,6 +2499,12 @@ ALTER TABLE `tblpromo_condition`
 --
 ALTER TABLE `tblpromo_promotion`
   ADD CONSTRAINT `promo` FOREIGN KEY (`proPromoID`) REFERENCES `tblpromos` (`promoID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblrelease_details`
+--
+ALTER TABLE `tblrelease_details`
+  ADD CONSTRAINT `tblreleaseid_tblreleasedetails` FOREIGN KEY (`tblreleaseID`) REFERENCES `tblrelease` (`releaseID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblunit_cat`

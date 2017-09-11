@@ -19,7 +19,7 @@ echo '<thead>
       echo '<td style="text-align:center"><input class="chBox" type="checkbox"  value='.$row['order_requestID'].' name="check[]" /></td>';
     }
     else{
-      echo '<td style="text-align:center; color:red">Not for delivery</td>';
+      echo '<td style="text-align:center; color:red">Not yet ready.</td>';
     }
     echo '<td>'.$row['productName'].'</td>
     <td>'.$row['orderRequestStatus'].'</td>
@@ -31,6 +31,8 @@ echo '<thead>
     }
     echo '</select>
     </td>';
+    $delAdd = $row['shippingAddress'];
+    //echo '<input type="hidden" id="typeOfRel" name="typeOfRel" value="'.$delAdd.'">';
   }
   
 echo '</tbody>';

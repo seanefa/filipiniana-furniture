@@ -1,8 +1,9 @@
 <?php
 include "dbconnect.php";
 $id = $_POST['id'];
+$orderID = $_POST['oID'];
 
-$sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
+$sql = "SELECT * FROM tblorders WHERE orderID = '$orderID'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -13,12 +14,13 @@ $relDate = date_format($date,"F d, Y");
 
 
 echo '<div class="row"><h4><b>Estimated Release Date: </b> '.$relDate.'</h4></div><br>';
-if($delAdd!="N/A"){
+if($id==2){
+
   echo '<div class="row">
                               <div class="col-md-6 col-md-offset-3" style="text-align: center;">
                                 <div class="form-group">
                                   <h4><b>For: </b>
-                                    <label class="radio-inline"><input type="radio" id="pick" name="relType" value="Pick-up"/> Pick-up</label>
+                                    <label class="radio-inline"><input type="radio" id="pick" name="relType" value="Pick-up" /> Pick-up</label>
                                     <label class="radio-inline"><input type="radio" id="del" name="relType" value="Delivery" checked/> Delivery</label></h4></div>
                                   </div>
                                 </div>';

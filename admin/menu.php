@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION["userID"]))
 {
   echo "<script>
-      window.location.href='/user/userhome.php';
+      window.location.href='/user/home.php';
       alert('You have no access here');
       </script>";
 }
@@ -277,7 +277,7 @@ if(!isset($_SESSION["userID"]))
               <li><a href="production-tracking.php">Production Tracking</a></li>
             </ul>
           </li>
-          <li><a href="collections.php">Billing and Collections</a></li>
+          <li><a href="collections.php">Collections</a></li>
         </ul>
       </li>
 

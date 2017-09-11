@@ -26,8 +26,7 @@ $pr = $_GET['smth'];
       <div class="modal-content" id="update">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">Update Delivery <?php $delID = str_pad($jsID, 6, '0', STR_PAD_LEFT);
-          echo $delID ?></h3>
+          <h3 class="modal-title" id="modalProduct">Update Delivery </h3>
         </div>
         <form action="save-del.php" method="post">
           <div class="modal-body">

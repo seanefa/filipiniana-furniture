@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION["userID"]))
+{
+  echo "<script>
+      window.location.href='dashboard.php';
+      </script>";
+}
+?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>

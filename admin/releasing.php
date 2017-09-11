@@ -97,9 +97,18 @@ else if (isset($_GET['deactivateSuccess']))
                                   echo('<td>'. $delID .'</td>
                                     <td>'.$orderID.'</td>
                                     <td>'.$custName.'</td>
-                                    <td style="text-align:right">'.$quan.'</td>
-                                    <td>'.$row['deliveryStatus'].'</td>
-                                    ');?>
+                                    <td style="text-align:right">'.$quan.'</td>');
+                                    if($row['deliveryStatus']=='Pending'){
+                                      echo '<td style="background-color:orange; color:white">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    if($row['deliveryStatus']=='Start Delivery'){
+                                      echo '<td style="color:green">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    if($row['deliveryStatus']=='Cancelled'){
+                                      echo '<td style="color:red">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    
+                                    ?>
                                     <td>
                                       <!-- VIEW -->
                                       <!--<button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>-->
@@ -111,16 +120,17 @@ else if (isset($_GET['deactivateSuccess']))
                                 }
                                 function getOrderID($id){
                                   include "dbconnect.php";
-                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and d.deliveryID = '$id';";
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and d.deliveryID = '$id';";
                                   $res = mysqli_query($conn,$sql);
                                   $row = mysqli_fetch_assoc($res);
                                   $oID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                                  $oID = "OR" . $oID;
                                   return $oID;
                                 }
                                 function getCustName($id){
                                   include "dbconnect.php";
                                   $name = "";
-                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b, tblcustomer e WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and a.custOrderID=e.customerID and d.deliveryID = '$id';";
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b, tblcustomer e WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and a.custOrderID=e.customerID and d.deliveryID = '$id';";
                                   $res = mysqli_query($conn,$sql);
                                   $row = mysqli_fetch_assoc($res);
                                   $name = $row['customerLastName'].' '.$row['customerFirstName'].' '.$row['customerMiddleName'];
@@ -129,10 +139,10 @@ else if (isset($_GET['deactivateSuccess']))
                                 function getQuan($id){
                                   include "dbconnect.php";
                                   $quan = 0;
-                                  $sql = "SELECT * FROM tbldelivery d, tbldelivery_details c , tblorders a, tblorder_request b WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.del_deliveryID and d.deliveryID = '$id';";
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and d.deliveryID = '$id';";
                                   $res = mysqli_query($conn,$sql);
                                   while($row = mysqli_fetch_assoc($res)){
-                                    $quan += $row['del_quantity'];
+                                    $quan += $row['rel_quantity'];
                                   }
                                   return $quan;
                                 }
