@@ -47,6 +47,7 @@
 									}
 									$conn->close();
 									?>
+									<a href="updateinfo.php"><button class="btn btn-primary">Update</button></a>
 								</div>
 							</div>
 						</div>
