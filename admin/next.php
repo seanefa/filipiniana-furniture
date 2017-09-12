@@ -892,7 +892,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Check Number</label><span id="x" style="color:red"> *</span>
-                          <input type="text" style="text-align:right;" id="cNum" class="form-control" name="cNumber" required/>
+                          <input type="text" style="text-align:right;" id="cNum" class="form-control" name="cNumber"/>
                           <p id="cNumError"></p>
                         </div>
                       </div>
@@ -901,7 +901,7 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Amount</label><span id="x" style="color:red"> *</span>
-                          <input type="text" id="cAmount" style="text-align:right;" class="form-control" name="cAmount" required/> 
+                          <input type="text" id="cAmount" style="text-align:right;" class="form-control" name="cAmount"/> 
                           <p id="cAmountError"></p>
                         </div>
                       </div>
