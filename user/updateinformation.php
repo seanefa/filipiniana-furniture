@@ -30,7 +30,7 @@ if($op==$row["userPassword"]){
 	if($up==$cp){
 
 		$sql="UPDATE tblcustomer SET customerFirstName='$fn', customerMiddleName='$mn', customerLastName='$ln', customerAddress='$adr', customerContactNum='$cn', customerEmail='$email'";
-
+		
 		$sql="UPDATE tbluser SET userName='$un', userPassword='$up'";
 
 		$result=$conn->multi_query($sql);
