@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (isset($_POST['register'])) { //user registering
         
         require 'process-registration.php';
-        
     }
 }
 ?>
@@ -99,19 +98,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Old Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-password-old" placeholder="Old Password" value="" name="opass" required>
+                  <input type="password" class="form-control" id="input-password-old" placeholder="Old Password" value="" name="opass">
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required>
+                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass">
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-confirm" class="col-sm-2 control-label">Confirm Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass" required>
+                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass">
                 </div>
               </div>
             </fieldset>

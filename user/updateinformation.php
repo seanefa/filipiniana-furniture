@@ -23,19 +23,16 @@ $op = mysqli_real_escape_string($conn, $op);
 $cp = mysqli_real_escape_string($conn, $cp);
 
 $select=$conn->query("SELECT * from tbluser where userCustID = 1");
-
 $row=$select->fetch_assoc();
 
 if($op==$row["userPassword"]){
 	if($up==$cp){
-
-		$sql="UPDATE tblcustomer SET customerFirstName='$fn', customerMiddleName='$mn', customerLastName='$ln', customerAddress='$adr', customerContactNum='$cn', customerEmail='$email'";
-		
-		$sql="UPDATE tbluser SET userName='$un', userPassword='$up'";
-
-		$result=$conn->multi_query($sql);
-		if($result){
-			header("Location: profile.php");
+		$customersql="UPDATE tblcustomer SET customerFirstName='$fn', customerMiddleName='$mn', customerLastName='$ln', customerAddress='$adr', customerContactNum='$cn', customerEmail='$email'";
+		if($conn->query($customersql)==true){
+			$usersql="UPDATE tbluser SET userName='$un', userPassword='$up'";
+			if($conn->query($usersql)==true){
+				header("Location: profile.php");
+			}
 		}
 	}
 	else{
