@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2017 at 04:58 PM
+-- Generation Time: Sep 14, 2017 at 08:20 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -159,6 +159,8 @@ CREATE TABLE `tblcustomer` (
   `customerAddress` varchar(100) CHARACTER SET utf8 NOT NULL,
   `customerContactNum` varchar(45) CHARACTER SET utf8 NOT NULL,
   `customerEmail` varchar(80) CHARACTER SET utf8 NOT NULL,
+  `customerDP` varchar(450) COLLATE utf8_unicode_ci NOT NULL,
+  `customerNewsletter` int(11) NOT NULL,
   `customerStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -166,21 +168,21 @@ CREATE TABLE `tblcustomer` (
 -- Dumping data for table `tblcustomer`
 --
 
-INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleName`, `customerLastName`, `customerAddress`, `customerContactNum`, `customerEmail`, `customerStatus`) VALUES
-(18, 'Cyreil Neil', '', 'Basilio', '', '09876542572', 'cyreilneil@gmail.com', ''),
-(19, 'Aira', 'Coronado', 'Coronado', '#123 Kagawad Street Batasan Hills Quezon City', '09994145004', 'hongkaira@gmail.com', 'active'),
-(20, 'Mark Angelo', 'Barrameda', 'Coronado', '#62 Resolution Street Batasan Hills Quezon CIty', '09091543726', 'angelong123@yahoo.com', 'Active'),
-(21, 'Rhodora', 'Barrameda', 'Coronado', '3E Adult Ward PHC Quezon City', '+63 (921) 698-2449', 'rhodoramabr@yahoo.com', 'Active'),
-(22, 'Rhodora', 'Barrameda', 'Coronado', '3E Adult Ward PHC Quezon City', '+63 (921) 698-2449', 'rhodoramabr@yahoo.com', 'Active'),
-(23, 'Donita', 'Rose', 'Aber', '#1234 Anuna Street BHQC', '+63 (930) 678-2267', 'anunadonita@yahoo.com', 'Active'),
-(24, 'Gillian May', 'Piloton', 'Anyayahan', '#1234 Alton Street BHQC', '+63 (999) 516-9790', 'gilanyapilksoo@gmail.com', 'Active'),
-(25, 'Zyrnn Joice', 'Lasay', 'Tibre', '#1234 Saret Street BHQC', '+63 (099) 999-9999', 'zytibs@gmail.com', 'Active'),
-(26, 'Angelu', 'Balicuatro', 'Atienza', '#1234 One Way Street BHQC', '+63 (977) 546-7173', 'angeluat@gmail.com', 'Active'),
-(27, 'Shaira', 'Joy', 'Flores', '#1234 Bagong Silangan Veteran QC', '+63 (738) 138-7219', 'shairajhoy@gmail.com', 'Active'),
-(28, 'Sheyne', 'Smth', 'Laristan', '#1234 Somewhere Street Brgy. Litex BHQC', '+63 (967) 136-7192', 'sheynelaristan@gmail.com', 'Active'),
-(29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', 'Active'),
-(30, 'Gendy', 'Lopez', 'Uy', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', 'Active'),
-(31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', 'active');
+INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleName`, `customerLastName`, `customerAddress`, `customerContactNum`, `customerEmail`, `customerDP`, `customerNewsletter`, `customerStatus`) VALUES
+(18, 'Cyreil Neil', '', 'Basilio', '', '09876542572', 'cyreilneil@gmail.com', '', 0, ''),
+(19, 'Aira', 'Coronado', 'Coronado', '#123 Kagawad Street Batasan Hills Quezon City', '09994145004', 'hongkaira@gmail.com', '', 0, 'active'),
+(20, 'Mark Angelo', 'Barrameda', 'Coronado', '#62 Resolution Street Batasan Hills Quezon CIty', '09091543726', 'angelong123@yahoo.com', '', 0, 'Active'),
+(21, 'Rhodora', 'Barrameda', 'Coronado', '3E Adult Ward PHC Quezon City', '+63 (921) 698-2449', 'rhodoramabr@yahoo.com', '', 0, 'Active'),
+(22, 'Rhodora', 'Barrameda', 'Coronado', '3E Adult Ward PHC Quezon City', '+63 (921) 698-2449', 'rhodoramabr@yahoo.com', '', 0, 'Active'),
+(23, 'Donita', 'Rose', 'Aber', '#1234 Anuna Street BHQC', '+63 (930) 678-2267', 'anunadonita@yahoo.com', '', 0, 'Active'),
+(24, 'Gillian May', 'Piloton', 'Anyayahan', '#1234 Alton Street BHQC', '+63 (999) 516-9790', 'gilanyapilksoo@gmail.com', '', 0, 'Active'),
+(25, 'Zyrnn Joice', 'Lasay', 'Tibre', '#1234 Saret Street BHQC', '+63 (099) 999-9999', 'zytibs@gmail.com', '', 0, 'Active'),
+(26, 'Angelu', 'Balicuatro', 'Atienza', '#1234 One Way Street BHQC', '+63 (977) 546-7173', 'angeluat@gmail.com', '', 0, 'Active'),
+(27, 'Shaira', 'Joy', 'Flores', '#1234 Bagong Silangan Veteran QC', '+63 (738) 138-7219', 'shairajhoy@gmail.com', '', 0, 'Active'),
+(28, 'Sheyne', 'Smth', 'Laristan', '#1234 Somewhere Street Brgy. Litex BHQC', '+63 (967) 136-7192', 'sheynelaristan@gmail.com', '', 0, 'Active'),
+(29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', '', 0, 'Active'),
+(30, 'Gendy', 'Lopez', 'Uy', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', '', 0, 'Active'),
+(31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', '', 0, 'active');
 
 -- --------------------------------------------------------
 
