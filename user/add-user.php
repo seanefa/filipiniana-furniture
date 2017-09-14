@@ -6,6 +6,7 @@ $ln=$_POST['lname'];
 $ar=$_POST['address'];
 $cn=$_POST['number'];
 $em=$_POST['email'];
+$newstat=$_POST["newsletter"];
 $un=$_POST['uname'];
 $pw=$_POST['upass'];
 $cf=$_POST['cpass'];
@@ -14,6 +15,8 @@ $type="customer";
 $datecreated=date("Y/m/d");
 include 'userconnect.php';
 $last_id=$conn->insert_id;
+
+$nl=(int)$newstat;
 
 $un= mysqli_real_escape_string($conn, $un);
 $pw= mysqli_real_escape_string($conn, $pw);
@@ -26,7 +29,8 @@ $em= mysqli_real_escape_string($conn, $em);
 
 if($cf==$pw)
 {
-	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', '$status')";
+	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', '$newstat', '$status')";
+	
 	if($sql2)
 	{
 		if ($conn->query($sql2)==true)
@@ -45,9 +49,8 @@ if($cf==$pw)
 		}
 		else
 		{
-			echo "Error: " . $sql . "<br>" . $conn->error;
+			echo "Error: " . $sql2 . "<br>" . $conn->error;
 		}
-		$conn->close();
 	}
 }
 else

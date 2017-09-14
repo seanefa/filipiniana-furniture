@@ -109,7 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label class="col-sm-2 control-label">I want to receive exclusive offers by e-mail</label>
                 <div class="col-sm-10">
-                  <input type="checkbox" name="newsletter" checked>
+<!--                  <input type="checkbox" id="_cbxNewsletter" value="1" name="newsletter">-->
+					<label>Yes</label>&nbsp;<input type="radio" name="newsletter" value="1" checked><br>
+					<label>No</label>&nbsp;<input type="radio" name="newsletter" value="0">
                   <br>
                 </div>
               </div>
