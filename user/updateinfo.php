@@ -7,7 +7,7 @@ session_start();
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>Profile - Filipiniana Furniture Shop</title>
+<title>Update Profile - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
 <script type="text/javascript" src="js/myScript.js"></script>
 <?php include"css.php";?>
@@ -30,20 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       <ul class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i></a></li>
         <li><a href="login.php">Account</a></li>
-        <li><a href="register.php">Register</a></li>
+        <li><a href="updateinfo.php">Update</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
-        <!--Middle Part Start-->
-        <div class="col-sm-12" id="content">
           <h1 class="title">Update Information</h1>
+        <!--Middle Part Start-->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="content">
 			<?php include "userconnect.php";
 			$sql="SELECT * from tblcustomer as customer join tbluser as user where user.userCustID = customer.customerID and customer.customerID = 1";
 			$result = $conn->query($sql);
 			if($result->num_rows>0){
 				while($row=$result->fetch_assoc()){
 			?>
-          <form action="updateinformation.php" autocomplete="off" class="form-horizontal" method="post">
+          <form action="updatepersonalinformation.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
               <legend>Your Personal Details</legend>
               <!--div style="display: none;" class="form-group required">
@@ -87,36 +87,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
               </div>
             </fieldset>
+            <div class="buttons">
+              <div class="pull-right">
+                <input type="submit" class="btn btn-primary" value="Save" name="register" id="">
+              </div>
+            </div>
+			</form>
+			  </div>
+			<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+				<form action="updateaccountinformation.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset>
               <legend>Your Account&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
               <div class="form-group required">
-                <label for="input-password" class="col-sm-2 control-label">Username</label>
-                <div class="col-sm-10">
+                <label for="input-password" class="col-sm-3 control-label">Username</label>
+                <div class="col-sm-9">
                   <input type="text" class="form-control" id="input-username" placeholder="Username" value="<?php echo "" . $row["userName"];?>" name="uname" required>
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-password" class="col-sm-2 control-label">Old Password</label>
-                <div class="col-sm-10">
+                <label for="input-password" class="col-sm-3 control-label">Old Password</label>
+                <div class="col-sm-9">
                   <input type="password" class="form-control" id="input-password-old" placeholder="Old Password" value="" name="opass">
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-password" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10">
+                <label for="input-password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
                   <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass">
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-confirm" class="col-sm-2 control-label">Confirm Password</label>
-                <div class="col-sm-10">
+                <label for="input-confirm" class="col-sm-3 control-label">Confirm Password</label>
+                <div class="col-sm-9">
                   <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass">
                 </div>
               </div>
             </fieldset>
             <div class="buttons">
               <div class="pull-right">
-                <input type="submit" class="btn btn-primary" value="Update" name="register" id="">
+                <input type="submit" class="btn btn-primary" value="Save" name="register" id="">
               </div>
             </div>
           </form>
