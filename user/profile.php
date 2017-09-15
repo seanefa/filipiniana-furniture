@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -19,7 +25,7 @@
 				<div class="col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4">
 					<?php 
 					include "userconnect.php";
-					$sql="SELECT * from t";
+					$sql="SELECT customerDP from tblcustomer";
 					?>
 					<br>
 					<div class="profilethumb">
@@ -31,7 +37,7 @@
 								<div class="info text-center">
 									<?php
 									include "userconnect.php";
-										$sql="SELECT * from tbluser as user join tblcustomer as customer where user.userCustID = customer.CustomerID and user.userCustID = 1";
+										$sql="SELECT * from tbluser as user join tblcustomer as customer where user.userCustID = customer.CustomerID and user.userCustID =" . $_SESSION["userID"] . "";
 									$result=$conn->query($sql);
 									if($result->num_rows>0){
 									while($row=$result->fetch_assoc()){

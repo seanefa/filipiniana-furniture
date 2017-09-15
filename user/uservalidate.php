@@ -30,7 +30,8 @@ if (isset($_POST['submit'])) {
 		    $row = mysqli_fetch_assoc($count);
 		    if(mysqli_query($conn,$query)){
 		    		$_SESSION['logged']=true;
-					$_SESSION['login_user']=$username; // Initializing Session
+					$_SESSION['login_user']=$username;
+					$_SESSION["userID"]=$row["userID"];// Initializing Session
 					header("location: home.php"); // Redirecting To Other Page
 				} else {
 					$error = "Username or Password is invalid";
