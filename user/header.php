@@ -31,10 +31,23 @@ if(!isset($_SESSION))
           </div>
           <div id="top-links" class="nav pull-right flip">
             <ul>
-              <?php 
+              <?php
+               $user = ""; 
+              if(isset($_SESSION["userName"])){
+                $user = "";
+              }
+              else{
+                $user = $_SESSION["userName"];
+              }
+             
+
+                $sql = "SELECT * FROM tbluser where userID = '$user'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result); 
+
               if(isset($_SESSION['logged']) === true)
                 { 
-                  echo '<li><h5 style="color: white; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $_SESSION["userName"]; echo '!</span></h5></li>';
+                  echo '<li><h5 style="color: white; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $row['userName'];  echo '!</span></h5></li>';
                   echo '<li><a href="profile.php">My Profile</a></li>';
                   echo '<li><a href="logout.php">Logout</a></li>';
                 }

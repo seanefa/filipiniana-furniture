@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 		    if(mysqli_query($conn,$query)){
 		    		$_SESSION['logged']=true;
 					$_SESSION['login_user']=$username;
-					$_SESSION["userID"]=$row["userID"];// Initializing Session
+					$_SESSION["userName"]=$row["userID"];// Initializing Session
 					header("location: home.php"); // Redirecting To Other Page
 				} else {
 					$error = "Username or Password is invalid";
