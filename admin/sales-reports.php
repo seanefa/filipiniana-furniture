@@ -45,6 +45,21 @@ echo '</script>';
 <head>
 
 <script>
+var dateArray = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var jan = 0;
+var feb = 0;
+var mar = 0;
+var apr = 0;
+var may = 0;
+var jun = 0;
+var jul = 0;
+var aug = 0;
+var sep = 0;
+var oct = 0;
+var nov = 0;
+var dec = 0;
+
+
 $(document).ready(function(){
     $('#frequency').change(function(){
       var value = $("#frequency").val();
@@ -83,6 +98,8 @@ $(document).ready(function(){
       if(value==2){
         var m = $("#month").val();
         var y = $("#year").val();
+
+
         $.ajax({
         type: 'post',
         url: 'sales-output.php',
@@ -91,6 +108,7 @@ $(document).ready(function(){
         },
         success: function (response) {
           $( '#reportsOut' ).html(response);
+           
         }
       });
       }
@@ -105,6 +123,60 @@ $(document).ready(function(){
         },
         success: function (response) {
           $( '#reportsOut' ).html(response);
+          jan = $('#01').val();
+           feb = $('#02').val();
+           mar = $('#03').val();
+           apr = $('#04').val();
+           may = $('#05').val();
+           jun = $('#06').val();
+           jul = $('#07').val();
+           aug = $('#08').val();
+           sep = $('#09').val();
+           oct = $('#10').val();
+           nov = $('#11').val();
+           dec = $('#12').val();
+           myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: dateArray,
+        datasets: [{
+            label: 'Sales Report',
+            data: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true
+    }
+});
         }
       });
       }
@@ -218,12 +290,9 @@ $(document).ready(function(){
                               <div class="row" id="reportsChart">
                                 <div class="col-md-6">
                                 <h2>BAR GRAPH</h2>
-                                <canvas id="myChart" width="400" height="300"></canvas>
+                                <canvas id="myChart" width="1380" height="1020"></canvas>
                                 </div>
                                 <div class="col-md-6">
-                                <h2>PIE GRAPH</h2>
-                                <canvas id="my2ndChart" width="400" height="300"></canvas>
-                                </div>
                               </div>
                             </div>
                           </div>
@@ -267,65 +336,49 @@ $(document).on('hidden.bs.modal', function (e) {
 </script>
 <script type="text/javascript">
 var ctx = document.getElementById("myChart").getContext('2d');
-var ctx2 = document.getElementById("my2ndChart").getContext('2d');
+
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: dateArray,
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Sales Report',
+            ddata: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
             ],
             borderWidth: 1
         }]
     },
     options: {
-      responsive: true
-    }
-});
-var my2ndChart = new Chart(ctx2, {
-    type: 'pie',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-      responsive: true
+      responsive: true,
+      maintainAspectRatio : true
     }
 });
 
