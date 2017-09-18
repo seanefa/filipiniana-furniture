@@ -67,12 +67,12 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Password</label><span id="x" style="color:red"> *</span>
-                      <input type="password" id="first" class="form-control" name="_password" required/><span id="messagefirst"></span></div>
+                      <input type="password" id="pass" class="form-control" name="_password" required/></div>
                     </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Confirm Password</label><span id="x" style="color:red"> *</span>
-                      <input type="password" id="first" class="form-control" name="_confirm" required/><span id="messagefirst"></span></div>
+                      <input type="password" id="cpass" class="form-control" name="_confirm" required/><span id="message"></span></div>
                     </div>
                   </div>
                     </div>
@@ -108,7 +108,7 @@ if (!$conn) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Employee Name</label><span id="x" style="color:red"> *</span>
-                                <select id="select" class="form-control" tabindex="1" name="job">
+                                <select name="employee" id="select" class="form-control" tabindex="1" name="job">
                                   <?php
                                   include "dbconnect.php";
                                   $sql = "SELECT * FROM tblemployee order by empID;";
@@ -135,20 +135,25 @@ if (!$conn) {
                             <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
+                            <?php
+                              $sql = "SELECT * FROM tbluser where userID = $jsID;";
+                                  $result = mysqli_query($conn, $sql);
+                                  $row = mysqli_fetch_assoc($result);
+                            ?>
                               <label class="control-label">Username</label><span id="x" style="color:red"> *</span>
-                              <input type="text" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                              <input type="text" id="first" class="form-control" name="username" value="<?php echo $row['userName']?>" required/><span id="messagefirst"></span></div>
                             </div>
                           </div>
                             <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="control-label">Password</label><span id="x" style="color:red"> *</span>
-                                <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                                <input type="password" id="epass" class="form-control" name="password" required/><span id="messagefirst"></span></div>
                               </div>
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="control-label">Confirm Password</label><span id="x" style="color:red"> *</span>
-                                <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                                <input type="password" id="ecpass" class="form-control" required/><span id="emessage"></span></div>
                               </div>
                             </div>
                           </div>
