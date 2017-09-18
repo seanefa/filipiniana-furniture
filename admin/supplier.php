@@ -414,6 +414,15 @@ function isNumberKey(evt)
           return true;
        }
 
+$(document).ready(function(){
+    $('body').on('keypress','#contactPerson', function(event){
+        var inputValue = event.which;
+        // allow letters and whitespaces only.
+        if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) { 
+            event.preventDefault(); 
+        }
+    });
+});
 
 </script>
 </head>

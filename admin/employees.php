@@ -390,6 +390,16 @@ $(document).ready(function(){
           .css({ top: mousey, left: mousex })
   });
 });
+
+
+function nonumber(){
+        var inputValue = event.which;
+        // allow letters and whitespaces only.
+        if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) { 
+            event.preventDefault(); 
+        }
+
+}
 </script>
 </head>
 <body>
