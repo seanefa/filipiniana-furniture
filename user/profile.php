@@ -1,8 +1,9 @@
 <?php
+session_start();
 if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+{ 
+	header("Location: 404.php");
+} 
 ?>
 <html>
 	<head>
@@ -37,7 +38,7 @@ if(!isset($_SESSION))
 								<div class="info text-center">
 									<?php
 									include "userconnect.php";
-										$sql="SELECT * from tbluser as user join tblcustomer as customer where user.userCustID = customer.CustomerID and user.userCustID =" . $_SESSION["userID"] . "";
+									$sql="SELECT * from tbluser as user join tblcustomer as customer where user.userCustID = customer.customerID and user.userCustID =" . $_SESSION["userID"] . "";
 									$result=$conn->query($sql);
 									if($result->num_rows>0){
 									while($row=$result->fetch_assoc()){

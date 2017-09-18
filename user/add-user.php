@@ -39,6 +39,7 @@ if($cf==$pw)
 			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated')";
 			if($conn->query($sql)==true)
 			{
+				$_SESSION["userID"] = $row["userID"];
 				header("Location: home.php");
 			}
 			else
