@@ -165,7 +165,7 @@ include 'dbconnect.php';
                             ?>
 
                               <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                              <input type="text" id="username" class="form-control" placeholder="Christmas Package" name="pName" required/> <span id="message"></span>
+                              <input type="text" id="username" maxlength="45" class="form-control" placeholder="Christmas Package" name="pName" required/> <span id="message"></span>
                             </div>
                           </div><!--/span-->
                           <div class="col-md-6">
@@ -293,7 +293,7 @@ include 'dbconnect.php';
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Name</label>
-                      <input type="text" id="firstName" class="form-control" placeholder="Fabulous Package" name="pName" value="<?php echo $row['packageDescription'];?>" disabled/> 
+                      <input type="text" maxlength="45" id="firstName" class="form-control" placeholder="Fabulous Package" name="pName" value="<?php echo $row['packageDescription'];?>" disabled/> 
                     </div>
                   </div>
                   <div class="col-md-6">

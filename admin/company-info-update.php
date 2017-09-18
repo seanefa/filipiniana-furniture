@@ -9,6 +9,13 @@ $abt=$_POST['about'];
 $email=$_POST['email'];
 $pic = "";
 
+$name =  mysqli_real_escape_string($conn,$name);
+$address = mysqli_real_escape_string($conn,$address);
+$num = mysqli_real_escape_string($conn,$num);
+$abt = mysqli_real_escape_string($conn,$abt);
+$email =mysqli_real_escape_string($conn,$email);
+
+
 if ($_FILES["image"]["error"] > 0)
 {
  echo "Error: NO CHOSEN FILE";

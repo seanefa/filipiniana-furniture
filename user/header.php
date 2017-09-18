@@ -1,9 +1,4 @@
-<?php
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-?>
+
 <div id="header" class="style2">
     <!-- Top Bar Start-->
     <nav id="top" class="htop">
@@ -34,10 +29,12 @@ if(!isset($_SESSION))
               <?php
                $user = ""; 
               if(isset($_SESSION["userName"])){
-                $user = "";
+               
+
+                $user = $_SESSION["userName"];
               }
               else{
-                $user = $_SESSION["userName"];
+                 $user = "";
               }
              
 
@@ -67,13 +64,13 @@ if(!isset($_SESSION))
     <header class="header-row">
       <div class="container">
         <div class="table-container">
-          <!-- Mini Cart Start-->
+          <!-- Mini Cart Start-->-
           <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
             <div id="cart">
               <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="fa fa-shopping-cart fa-2x pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0</span></button>
               <ul class="dropdown-menu">
                 <li>
-                  <table class="table">
+                  <table class="table" id="tblCart">
                     <tbody>
                       <tr>
                         <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/sony_vaio_1-50x75.jpg"></a></td>
