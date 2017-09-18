@@ -37,7 +37,7 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input placeholder="Gold Rani" type="text" id="username" class="form-control" name="name" required/><span id="message"></span> 
+                      <input placeholder="Gold Rani" type="text" id="username" maxlength="45" class="form-control" name="name" required/><span id="message"></span> 
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -81,7 +81,7 @@ if (!$conn) {
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label">Color(s)</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="colorPick" class="form-control" name="color" required/>
+                    <input type="text" id="colorPick" class="form-control" maxlength="45" name="color" required/>
                     <!--<input type="color" id="colorPick" class="form-control" name="color[]" required/>
                     <div id="addHere"></div>
                     <input type="hidden" id="delPicker" class="btn btn-default" value="-"/>
@@ -139,7 +139,7 @@ if (!$conn) {
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                        <input placeholder="Gold Rani" type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['fabricName']; $_SESSION['tempname'] = $trow['fabricName'];?>" required/> <span id="message"></span>
+                        <input placeholder="Gold Rani" type="text" id="editname" maxlength="45" class="form-control" name="name" value="<?php echo $trow['fabricName']; $_SESSION['tempname'] = $trow['fabricName'];?>" required/> <span id="message"></span>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -186,7 +186,7 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Color(s)</label><span id="x" style="color:red">*</span>
-                    <input type="text" class="form-control" name="color" value="<?php echo $trow['fabricColor'];?>" required/>
+                    <input type="text" class="form-control" name="color" maxlength="45" value="<?php echo $trow['fabricColor'];?>" required/>
                       <!--<div id="colorPick">
                       <?php
                       while($colorCtr !=0){

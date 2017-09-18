@@ -61,7 +61,7 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group field">
                       <label class="control-label">Contact Person</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="contactPerson" class="form-control" name="conper" required><span id="contactPersonValidate"></span>
+                      <input type="text" id="contactPerson" class="form-control" name="conper" pattern='[A-Za-z\\s]*' required><span id="contactPersonValidate"></span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -130,7 +130,7 @@ if (!$conn) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Contact Person</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="editPerson" onkeyup="updateValidate('Person')" class="form-control" value="<?php echo $trow['supContactPerson']?>" name="conper" required><span id="messagePerson"></span>
+                      <input type="text" id="editPerson" onkeyup="updateValidate('Person')" class="form-control" value="<?php echo $trow['supContactPerson']?>" name="conper" pattern='[A-Za-z\\s]*' required><span id="messagePerson"></span>
                     </div>
                   </div>
                   <div class="col-md-6">

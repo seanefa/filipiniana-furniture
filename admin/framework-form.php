@@ -50,7 +50,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="frameName" class="form-control" name="name" required/><span id="frameNameValidate"></span> </div>
+                    <input type="text" id="frameName" maxlength="45" class="form-control" name="name" required/><span id="frameNameValidate"></span> </div>
                   </div>
                 </div>
                 <div class="row">
@@ -280,7 +280,7 @@ if (!$conn) {
                                               <div class="col-md-12">
                                                 <div class="form-group">
                                                   <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                                                  <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['frameworkName']; $_SESSION['tempname'] = $trow['frameworkName'];?>" required/><span id="message"></span> </div>
+                                                  <input type="text" maxlength="45" id="editname" class="form-control" name="name" value="<?php echo $trow['frameworkName']; $_SESSION['tempname'] = $trow['frameworkName'];?>" required/><span id="message"></span> </div>
                                                 </div>
                                               </div>
                                               <div class="row">
