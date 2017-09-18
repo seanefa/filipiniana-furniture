@@ -75,7 +75,7 @@ include "dbconnect.php";
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" maxlength="45" id="username" class="form-control" placeholder="Elizabeth" name="_prodName" required/><span id="message"></span>
+                      <input type="text" id="username" class="form-control" placeholder="Elizabeth" name="_prodName" required/><span id="message"></span>
                     </div>
                   </div>
                   <!--/span-->
@@ -459,7 +459,7 @@ include "dbconnect.php";
                 <div class="col-md-12">
                     <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                    <input type="text" id="editname" maxlength="45" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span>
+                    <input type="text" id="editname" class="form-control" placeholder="Manilennia" name="_name" value="<?php echo $trow['productName']; $_SESSION['tempname'] = $trow['productName'];?>" required/><span id="message"></span>
                   </div>
                 </div>
                 <!--/span-->

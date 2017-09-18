@@ -39,14 +39,14 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">First name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="first" maxlength="45" class="form-control" name="fn" onkeyup="validateInput('first')" required/><span id="messagefirst"></span></div>
+                      <input type="text" id="first" class="form-control" name="fn" onkeyup="validateInput('first')" required/><span id="messagefirst"></span></div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Middle Name</label>
-                        <input type="text" id="mid" maxlength="45" onkeyup="validateInput('mid')" class="form-control" name="mn"/><span id="messagemid"></span> 
+                        <input type="text" id="mid" onkeyup="validateInput('mid')" class="form-control" name="mn"/><span id="messagemid"></span> 
                       </div>
                     </div>
                   </div>
@@ -54,7 +54,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="last" maxlength="45" onkeyup="validateInput('last')" class="form-control" name="ln" required/><span id="messagelast"></span> </div>
+                        <input type="text" id="last" onkeyup="validateInput('last')" class="form-control" name="ln" required/><span id="messagelast"></span> </div>
                       </div>
 
                     </div>
@@ -121,7 +121,7 @@ if (!$conn) {
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="control-label">First name</label><span id="x" style="color:red"> *</span>
-                            <input type="text" id="editf" maxlength="45" class="form-control" name="fn" value="<?php echo $trow['empFirstName']; ?>" onkeyup="validateUpdate('f')" required/><span id="messagef"></span> </div>
+                            <input type="text" id="editf" class="form-control" name="fn" value="<?php echo $trow['empFirstName']; ?>" onkeyup="validateUpdate('f')" required/><span id="messagef"></span> </div>
                           </div>
                         </div>
 
@@ -129,7 +129,7 @@ if (!$conn) {
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Middle Name</label>
-                              <input type="text" maxlength="45" onkeyup="validateUpdate('m')" id="editm" class="form-control" name="mn" value="<?php echo $trow['empMidName']; ?>"/><span id="messagem"></span> 
+                              <input type="text" onkeyup="validateUpdate('m')" id="editm" class="form-control" name="mn" value="<?php echo $trow['empMidName']; ?>"/><span id="messagem"></span> 
                             </div>
                           </div>
                         </div>
@@ -137,7 +137,7 @@ if (!$conn) {
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
-                              <input type="text" maxlength="45" onkeyup="validateUpdate('l')" id="editl" class="form-control" name="ln" value="<?php echo $trow['empLastName']; ?>" required/><span id="messagel"></span> </div>
+                              <input type="text" onkeyup="validateUpdate('l')" id="editl" class="form-control" name="ln" value="<?php echo $trow['empLastName']; ?>" required/><span id="messagel"></span> </div>
                             </div>
                           </div>
                           <div class="row">

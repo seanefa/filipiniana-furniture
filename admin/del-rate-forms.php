@@ -52,7 +52,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Location</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="username" maxlength="45" class="form-control" name="location" required/><span id="message"></span> </div>
+                    <input type="text" id="username" class="form-control" name="location" required/><span id="message"></span> </div>
                   </div>
                 </div>
                 <div class="row">
@@ -69,7 +69,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Rate</label><span id="x" style="color:red"> *</span>
-                        <input type="number" class="form-control" maxlength="45" step="1.00" id="rate" name="rate" placeholder="0.00" style="text-align: right;" required/>
+                        <input type="number" class="form-control" step="1.00" id="rate" name="rate" placeholder="0.00" style="text-align: right;" required/>
                       </div>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Location</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" maxlength="45" class="form-control" name="location" value="<?php echo $trow['delLocation']; $_SESSION['tempname'] = $trow['delLocation'];?>" required/><span id="message"></span></div>
+                        <input type="text" id="editname" class="form-control" name="location" value="<?php echo $trow['delLocation']; $_SESSION['tempname'] = $trow['delLocation'];?>" required/><span id="message"></span></div>
                       </div>
                     </div>
                     <div class="row">
@@ -142,7 +142,7 @@ if (!$conn) {
                         <div class="col-md-12">
                             <div class="form-group">
                           <label class="control-label">Rate</label><span id="x" style="color:red"> *</span>
-                          <input type="number" class="form-control" maxlength="45" step="1.00" id="rate" name="rate" placeholder="0.00" style="text-align: right;" value="<?php echo $trow['delRate'];?>" required/>
+                          <input type="number" class="form-control" step="1.00" id="rate" name="rate" placeholder="0.00" style="text-align: right;" value="<?php echo $trow['delRate'];?>" required/>
                         </div>
                           </div>
                         </div>

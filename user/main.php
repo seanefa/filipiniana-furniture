@@ -1,10 +1,6 @@
-<?php include "scripts.php"; ?>
 <div class="wrapper-wide">
   <?php include"header.php";?>
-  <?php include"revolutionslider.php";
-  ?>
-
-
+  <?php include"revolutionslider.php";?>
   <div id="container">
     <div class="container">
       <div class="row">
@@ -62,7 +58,7 @@
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" id="addToCart"><span>Add to Cart</span></button>
+                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>

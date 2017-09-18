@@ -31,7 +31,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="frameDesignName" class="form-control" maxlength="45" name="name" required/><span id="frameDesignNameValidate"></span> </div>
+                    <input type="text" id="frameDesignName" class="form-control" name="name" required/><span id="frameDesignNameValidate"></span> </div>
                   </div>
                 </div>
                 <label class="box-title">Description</label>
@@ -77,7 +77,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="editname" maxlength="45" class="form-control" name="name" value="<?php echo $trow['designName']; $_SESSION['tempname'] = $trow['designName'];?>" required/><span id="message"></span> </div>
+                      <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['designName']; $_SESSION['tempname'] = $trow['designName'];?>" required/><span id="message"></span> </div>
                     </div>
                   </div>
                   <label class="box-title">Description</label>

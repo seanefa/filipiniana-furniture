@@ -50,8 +50,5 @@ jQuery(document).ready(function() {
 	   gridwidth:1230,
       gridheight:480
     });		
-});
-
-
-
+});	
 </script>

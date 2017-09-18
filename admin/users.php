@@ -8,6 +8,7 @@ include "dbconnect.php";
  }
  $jsID=$_GET['id'];
  $_SESSION['varname'] = $jsID;*/
+ include 'dbconnect.php';
  $conn = mysqli_connect($servername, $username, $password, $dbname);
  if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
@@ -88,47 +89,6 @@ $(document).ready(function(){
           .css({ top: mousey, left: mousex })
   });
 });
-
-
-$(document).ready(function(){
-
-  $('body').on('keyup','#cpass',function(){
-    if($('#pass').val() != $('#cpass').val()){
-
-      $('#message').html('Password do not Match');
-      $('#addFab').prop('disabled','true');
-
-    }
-    else{
-      $('#message').html('');
-      $('#addFab').prop('disabled','');
-    }
-
-
-  });
-
-
-});
-$(document).ready(function(){
-
-  $('body').on('keyup','#ecpass',function(){
-    if($('#epass').val() != $('#ecpass').val()){
-
-      $('#emessage').html('Password do not Match');
-      $('#updateBtn').prop('disabled','true');
-
-    }
-    else{
-      $('#emessage').html('');
-      $('#updateBtn').prop('disabled','');
-    }
-
-
-  });
-
-
-});
-
 </script>
 </head>
 <body>
