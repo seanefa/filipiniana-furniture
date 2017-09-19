@@ -79,7 +79,7 @@ include 'dbconnect.php';
 
 
   $(document).ajaxStop(function(){
-    
+
   $(document).ready(function(){ //change ng for
     $("input[name='relType']").on('change',function(){
       var val = $("input[name='relType']:checked").val();
@@ -113,7 +113,7 @@ include 'dbconnect.php';
 
       }
     });
-  });
+  });s
     $(".chBox").on('change',function(){
       if($(this).prop("checked")){
         if(($("#delAdd").val())==""){

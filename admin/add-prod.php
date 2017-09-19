@@ -61,10 +61,11 @@ if (mysqli_query($conn, $sql)) {
   	header( "Location: products.php?newSuccess" );
 } 
 else {
-	echo "<script>
-      window.location.href='products.php';
-      alert('There are some errors on your the data entered. Please enter another data.');
-      </script>";
+	// echo "<script>
+ //      window.location.href='products.php';
+ //      alert('There are some errors on your the data entered. Please enter another data.');
+ //      </script>";
+	header( "Location: products.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

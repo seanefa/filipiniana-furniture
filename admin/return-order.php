@@ -1,222 +1,199 @@
 <?php
-$activePage = basename($_SERVER['PHP_SELF'],".php");
-include "menu.php";
 include "titleHeader.php";
+include "menu.php";  
 //session_start();
-
-if(isset($_GET['id'])){
-  $jsID = $_GET['id']; 
+/* if(isset($GET['id'])){
+$jsID = $_GET['id']; 
 }
-//$_SESSION['varname'] = 3;
+$jsID=$_GET['id'];
+$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_GET['newSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastNewSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['updateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastUpdateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['deactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastDeactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-  <script>
-  $(document).ready(function(){
-    $("#check").hide();
-    $("#mop").on('change',function(){
-      var val = $("#mop").val();
-      if(val==1){
-        $("#check").hide();
-        $("#cash").show();
-        $("#cNum").val("");
-        $("#cAmount").val("");
-      }
-      else if(val==2){
-        $("#cash").hide();
-        $("#check").show();
-        $("#aTendered").val("");
-}
-});
-  });
-
-$(document).ready(function(){
-      $('.quan').on('keyup',function(){
-        var mat = $(".quan").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $(".quanError").html(e);
-          $('.quan').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $(".quanError").html(e);
-          $('.quan').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          $(".quanError").html(e);
-          $('.quan').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-        }
-
-      });
-  });
-
-</script>
-<title>Return Order</title>
-<link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
-<body class ="fix-header fix-sidebar">
+<body>
+  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
+  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
+  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12">
-          <h4 class="box-title">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+          <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
+                <button id="tempbtn" class="btn btn-lg btn-info pull-right" onclick="location.href='new-return.php';" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active">
-                  <a aria-controls="proorders" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Return Order</span></a>
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-check-box"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
-          </h4>
-          <div class="orderconfirm">
-            <div class="panel panel-default">
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <form action="" method = "post">
-                  <input type="hidden" name="orderID" id="orderID" value="<?php echo $jsID?>">
+            <div class="tab-content">
+              <!-- CATEGORY -->
+              <div role="tabpanel" class="tab-pane fade active in" id="job">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
                     <div class="row">
-                      <div class="descriptions">
-
-                        <div class="panel-body">
-                          <div class="row">
-                            <h2>Customer Information</h2>
-                            <div class="row">
+                      <h2>List of Deliveries</h2>
+                      <div class="table-responsive">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="tblCategories">
+                          <thead>
+                            <tr>
+                              <th>Delivery Code</th>
+                              <th>Order ID</th>
+                              <th>Customer Name</th>
+                              <th style="text-align:right">No. of items</th>
+                              <th>Status</th>
+                              <th class="removeSort">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
                               <?php
-                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$jsID'";
-                              $result = mysqli_query($conn,$sql);
-                              $row = mysqli_fetch_assoc($result);
+                              include "dbconnect.php";
+                              $sql = "SELECT * from tbldelivery WHERE deliveryStatus != 'Archived'";
+                              $result = mysqli_query($conn, $sql);
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+
+                                $delID = str_pad($row['deliveryID'], 6, '0', STR_PAD_LEFT);
+                                $delID = "DEL" . $delID;
+                                $orderID = getOrderID($row['deliveryID']);
+                                $custName = getCustName($row['deliveryID']);
+                                $quan = getQuan($row['deliveryID']);
+                                  echo('<td>'. $delID .'</td>
+                                    <td>'.$orderID.'</td>
+                                    <td>'.$custName.'</td>
+                                    <td style="text-align:right">'.$quan.'</td>');
+                                    if($row['deliveryStatus']=='Pending'){
+                                      echo '<td style="background-color:orange; color:white">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    if($row['deliveryStatus']=='Start Delivery'){
+                                      echo '<td style="color:green">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    if($row['deliveryStatus']=='Cancelled'){
+                                      echo '<td style="color:red">'.$row['deliveryStatus'].'</td>';
+                                    }
+                                    
+                                    ?>
+                                    <td>
+                                      <!-- VIEW -->
+                                      <!--<button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>-->
+                                      <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                      <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #" data-target="#myModal"><i class="ti-receipt"></i> Delivery Receipt</button>
+                                    </td>
+                                    <?php echo ('</tr>');
+                                  
+                                }
+                                function getOrderID($id){
+                                  include "dbconnect.php";
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  $row = mysqli_fetch_assoc($res);
+                                  $oID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                                  $oID = "OR" . $oID;
+                                  return $oID;
+                                }
+                                function getCustName($id){
+                                  include "dbconnect.php";
+                                  $name = "";
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b, tblcustomer e WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and a.custOrderID=e.customerID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  $row = mysqli_fetch_assoc($res);
+                                  $name = $row['customerLastName'].' '.$row['customerFirstName'].' '.$row['customerMiddleName'];
+                                  return $name;
+                                }
+                                function getQuan($id){
+                                  include "dbconnect.php";
+                                  $quan = 0;
+                                  $sql = "SELECT * FROM tbldelivery d, tblrelease_details c , tblorders a, tblorder_request b WHERE c.rel_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID and d.deliveryID = c.rel_detailsID and d.deliveryID = '$id';";
+                                  $res = mysqli_query($conn,$sql);
+                                  while($row = mysqli_fetch_assoc($res)){
+                                    $quan += $row['rel_quantity'];
+                                  }
+                                  return $quan;
+                                }
                               ?>
-                              <div class="row">
-                                <div class="col-md-12" style="text-align:left;">
-                                  <h5>
-                                    <table class="table">
-                                      <tr>
-                                        <td><b>Name</b></td>
-                                        <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
-                                      </tr>
-                                      <tr>
-                                        <td><b>Address</b></td>
-                                        <td><?php echo $row['customerAddress'];?></td>
-                                      </tr>
-                                      <tr>
-                                        <td><b>Contact Number</b></td>
-                                        <td><?php echo $row['customerContactNum'];?></td>
-                                      </tr>
-                                      <tr>
-                                        <td><b>Email Address</b></td>
-                                        <td><?php echo $row['customerEmail'];?></td>
-                                      </tr>
-                                    </table>
-                                  </h5>
-                                </div>
-                              </div>
-                            </div>
-                            <br>
-                          </div>
+                            
+                            <script type="text/javascript">
+                              function confirmDelete(id) {
+                               window.location.href="delete-modeofpayment.php?id="+id+"";
+                             }
+                             function edit(id){
+                              window.location.href="update-modeofpayment.php?id="+id+"";
+                            }
+                          </script>
+                        </tbody>
+                      </table>
                         </div>
-                        <div class="col-md-12">
-                          <div class="table-responsive" style="clear: both;">
-
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="panel-wrapper collapse in" aria-expanded="true">
-                                  <div class="panel-body">
-                                    <div class="row">
-                                      <div class="table-responsive">
-
-                                        <h2>Orders</h2>
-                                        <table class="table product-overview" id="cartTbl">
-                                          <thead>
-                                            <th style="text-align:left">Furniture Name</th>
-                                            <th style="text-align:right;">Unit Price</th>
-                                            <th style="text-align:right;">Quantity</th>
-                                            <th style="text-align:right;">Total Price</th>
-                                            <th style="text-align:center;">Reason</th>
-                                            <th style="text-align:right;">Quantity Affected</th>
-                                          </thead>
-                                          <tbody>
-                                            <?php
-                                            include "dbconnect.php";
-                                            $tQuan = 0;
-                                            $tPrice = 0;
-
-                                            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
-                                            $res = mysqli_query($conn,$sql1);
-                                            while($row = mysqli_fetch_assoc($res)){
-                                              echo '<tr>
-                                              <td style="text-align:left">'.$row['productName'].'</td>
-                                              <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'</td>
-                                              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                                              $tPrice = $row['orderQuantity'] * $row['productPrice'];
-                                              $tPrice =  number_format($tPrice,2);
-                                              echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td>';
-                                              $tPrice = $row['orderPrice'];
-                                              $tQuan = $tQuan + $row['orderQuantity'];
-                                              ?>
-                                              <td style="text-align:center; background-color:#8dcfe7;">
-                                                <label class="radio-inline"><input type="radio" name="design<?php echo $row['order_requestID']?>" value="None" checked>None</label>
-                                                <label class="radio-inline"><input type="radio" name="design<?php echo $row['order_requestID']?>" value="Replacement">Replacement</label>
-                                                <label class="radio-inline"><input type="radio" name="design<?php echo $row['order_requestID']?>" value="Repair">Repair</label>
-                                              </td>
-                                              <td style="text-align:center; background-color:#8dcfe7;">
-                                                <input type="text" size="1" style="text-align:right;" class="quan form-control" name="quan[]" value="0"/>
-                                              </td>
-                                              <?php
-                                              echo "</tr>";
-                                            }
-                                            ?>
-                                          </tbody>
-                                          <tfoot style="text-align:right;">
-                                            <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                                            <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-                                            <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
-                                          </tfoot>
-                                        </table>
-                                           <p class="quanError pull-right" style="color:red"></p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row" style="margin:10px">
-                              <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" ><i class="fa fa-check"></i> Save</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>  
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </body> 
+<!-- New Framework Mo
+  <!-- /.modal -->
+</div>
+</div>  
+</div>
+</div>
+<!-- /.container-fluid -->
+<!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
+</div>
+<!-- /#page-wrapper -->
+</div>
 
-        <script type="text/javascript">
-        (function(){
-          $('#accordion').wizard({
-            step: '[data-toggle="collapse"]',
-            buttonsAppendTo: '.panel-collapse',
-            templates: {
-              buttons: function(){
-                var options = this.options;
-                return '<div class="panel-footer"><ul class="pager">' +
-                '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>' +
-                '</div>';
-              }
-            },
-            onFinish: function(){
-              window.location.href = 'receipt.php?id='+id;
-            }
-          });
-        })();
-        </script>
-        </html>
+<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal content-->
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('hidden.bs.modal', function (e) {
+    var target = $(e.target);
+    target.removeData('bs.modal')
+    .find(".clearable-content").html('');
+  });
+</script>
+</body>
+</html>
