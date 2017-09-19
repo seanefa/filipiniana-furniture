@@ -15,7 +15,7 @@ if (!$conn)
 }
 
 ?>
-
+ 
 
 <!-- New Framework Material Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="newFrameworkMaterialModal" aria-hidden="true" style="display: none;">
@@ -179,9 +179,9 @@ if (!$conn)
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <input type="hidden" name="material" value="<?php echo $trow['mat_varID']?>">
+                      <input type="hidden" name="" value="<?php echo $trow['mat_varID']?>">
                       <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
-                      <select id='material' class="form-control" tabindex="1" required>
+                      <select id='material' name="material" class="form-control" tabindex="1" required>
                         <?php
                         include "dbconnect.php";
                         $sql = "SELECT * FROM tblmaterials;";
@@ -220,7 +220,7 @@ if (!$conn)
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Material Variant</label>
-                      <textarea class="form-control" rows="2" name="descripton" required><?php echo $trow['mat_varDescription']?></textarea>
+                      <textarea class="form-control" rows="2" name="description" id="description" required><?php echo $trow['mat_varDescription']?></textarea>
                     </div>
                   </div>
                 </div>

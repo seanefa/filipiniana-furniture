@@ -3,7 +3,7 @@ session_start();
 include 'dbconnect.php';
 
 if(isset($_GET['id'])){
-	$jsID = $_GET['id']; 
+	$jsID = $_GET['id'];  
 }
 
 
@@ -81,7 +81,7 @@ else {
 }
 
 if($rName=="Material Variants"){
-$updateSql = "UPDATE tblmat_var SET variantStatus = 'Listed' WHERE variantID = '$jsID'";
+$updateSql = "UPDATE tblmat_var SET mat_varStatus ='Active' WHERE mat_varID = '$jsID'";
         // Check connection
 
 if(mysqli_query($conn,$updateSql)){
@@ -330,4 +330,5 @@ else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
 }
 }
+
 ?>

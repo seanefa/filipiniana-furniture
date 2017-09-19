@@ -5,17 +5,18 @@ session_start();
 
 $id = $_POST['id'];
 $material = $_POST['material'];
-$remarks = $_POST['remarks'];
+$remarks = $_POST['description'];
 $status = "Listed";
 
 $flag = 0;
 
 $updateSql = "UPDATE tblmat_var SET materialID='$material', mat_varDescription='$remarks' WHERE mat_varID=$id;";
+mysqli_query($conn,$updateSql);
 	$flag++;
 
 //$updateSql = "UPDATE `tblvariant_desc` SET `variantDescription`='$desc', `variantSize`='$size', `variantUnit`='$unit' WHERE `variantID`='$id'";
 
-if($ctr>0){
+if($flag>0){
 	// Logs start here
 	$sID = $id; // ID of last input;
 	$date = date("Y-m-d");
@@ -28,4 +29,4 @@ if($ctr>0){
 } else {
 	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
   }
-?>
+?> 
