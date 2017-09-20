@@ -1,8 +1,5 @@
 <?php
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+include "session.php"; 
 ?>
 <div id="header" class="style2">
     <!-- Top Bar Start-->
