@@ -53,7 +53,16 @@ $(document).ready(function() {
     loaderBg:'transparent',
     icon: 'error',
     hideAfter: 1500
+  });
+ });
 
+    $(".tst6").click(function(){
+   $.toast({
+    heading: '<h4 style="color:white;">Successfully Saved Record!</h4>',
+    position: 'top-right',
+    loaderBg:'transparent',
+    icon: 'success',
+    hideAfter: 1500,
   });
 
  });
