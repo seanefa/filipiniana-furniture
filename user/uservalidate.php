@@ -33,7 +33,8 @@ if (isset($_POST['submit'])) {
 					$_SESSION['login_user']=$username;
 					$_SESSION["userName"]=$row["userID"];// Initializing Session
 					header("location: home.php"); // Redirecting To Other Page
-				} else {
+				} 
+				else {
 					$error = "Username or Password is invalid";
 				}
 		}

@@ -21,16 +21,18 @@ if($relType=="Pick-up"){
 			//echo $detailsSQL. "<br>";
 			$x++;
 		}
-		echo "<script>
-		window.location.href='new-release.php';
-		alert('Successfully saved record.');
-		</script>";
+		// echo "<script>
+		// window.location.href='new-release.php';
+		// alert('Successfully saved record.');
+		// </script>";
+		header( "Location: releasing.php?actionSuccess");
 	}
 	else{
-		echo "<script>
-		window.location.href='new-release.php';
-		alert('Record not saved. There are some errors on the data');
-		</script>";
+		// echo "<script>
+		// window.location.href='new-release.php';
+		// alert('Record not saved. There are some errors on the data');
+		// </script>";
+		header( "Location: releasing.php?actionFailed" );
 	}
 }
 else{	
@@ -56,23 +58,27 @@ else{
 		}
 		$delSQL = "INSERT INTO `tbldelivery` (`deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES ('$employee', '$delID', '$delDate', '$delRate', '$delAdd', '$remarks', 'Pending');";
 		if(mysqli_query($conn,$delSQL)){
-			echo "<script>
-			window.location.href='new-release.php';
-			alert('Successfully saved!');
-			</script>";
+			// echo "<script>
+			// window.location.href='new-release.php';
+			// alert('Successfully saved!');
+			// </script>";
+
+		header( "Location: releasings.php?actionSuccess");
 		}
 		else{
-			echo "<script>
-			window.location.href='new-release.php';
-			alert('Record not saved. There are some errors on the data');
-			</script>";
+			// echo "<script>
+			// window.location.href='new-release.php';
+			// alert('Record not saved. There are some errors on the data');
+			// </script>";
+		header( "Location: releasing.php?actionFailed" );
 		}
 	}
 	else{
-		echo "<script>
-		window.location.href='new-release.php';
-		alert('Record not saved. There are some errors on the data');
-		</script>";
+		// echo "<script>
+		// window.location.href='new-release.php';
+		// alert('Record not saved. There are some errors on the data');
+		// </script>";
+		header( "Location: releasing.php?actionFailed" );
 	}
 
 }
