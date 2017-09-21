@@ -9,6 +9,12 @@ $abt=$_POST['about'];
 $email=$_POST['email'];
 $pic = "";
 
+
+$sql = "SELECT * from tblcompany_info;";
+$result = $conn->query($sql);
+$row = $result->num_rows;
+$oldimage = $row["comp_logo"];
+
 if ($_FILES["image"]["error"] > 0)
 {
  echo "Error: NO CHOSEN FILE";
@@ -16,18 +22,14 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/logo/" . date("Y-m-d") . time() . ".png");
+ move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/logo/$oldimage.png");
  echo "SAVED" ;
- $pic = date("Y-m-d") . time() . ".png";
+ $pic = "$oldimage.png";
 }
-
-$sql = "SELECT * from tblcompany_info;";
-$result = $conn->query($sql);
-$row = $result->num_rows;
 
 if($row == 0)
 {
-	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES ('1', '$pic', '$name', '$num', '$address', '$abt')";
+	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES ('1', '$pic', '$name', '$num', '$address', '$email', '$abt')";
 }
 else
 {
@@ -40,6 +42,7 @@ else
 
 if(mysqli_query($conn,$exec))
 {
+	
 	echo '<script type="text/javascript">';
 	echo 'alert("RECORD SUCCESFULLY SAVED!")';
 	header( "Location: company-information.php" );

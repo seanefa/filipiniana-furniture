@@ -98,7 +98,7 @@ if(!isset($_SESSION["userID"]))
           while($row=$result->fetch_assoc())
           {
         ?>
-          <img width="60" height="62" class="mx-auto d-block img-fluid animated tada" src="/admin/plugins/images/<?php echo "" .$row['comp_logo'];?>">
+          <img width="60" height="62" class="mx-auto d-block img-fluid animated tada" src="/admin/plugins/logo/<?php echo "" .$row['comp_logo'];?>">
         
         <?php
           }
