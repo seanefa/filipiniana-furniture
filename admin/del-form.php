@@ -41,49 +41,50 @@ $jsID = $_GET['id'];
                 $emp = $row['deliveryEmpAssigned'];
                 ?>
 
-                <div class="row">
+                <div class="row" id="ch">
                   <div class="col-md-12">
                     <h4><input type="checkbox" name="finPhase" id="finPhase" value="finish"/>
-                      Finish Delivery?</h4>
+                      Finish Delivery
+                    </h4>
+                  </div>
+                </div>
+                <br>
+                <div id="updateDel">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
+                        <textarea name="delAdd" class="form-control" id="delAdd" required><?php echo $add?></textarea>
+                      </div>
                     </div>
                   </div>
-                  <br>
-                  <div id="updateDel">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
-                          <textarea name="delAdd" class="form-control" id="delAdd" required><?php echo $add?></textarea>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="control-label">Delivery Man</label><span id="x" style="color:red"> *</span>
-                          <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="emp">
-                            <?php
-                            include "dbconnect.php";
-                            $sql = "SELECT * FROM tblemployee";
-                            $result = mysqli_query($conn, $sql);
-                            while ($row = mysqli_fetch_assoc($result))
-                            {
-                              if($row['empStatus']=='Active'){
-                                if($emp==$row['empID']){
-                                  echo('<option value='.$row['empID'].' selected>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
-                                }
-                                else{
-                                  echo('<option value='.$row['empID'].'>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
-                                }
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Delivery Man</label><span id="x" style="color:red"> *</span>
+                        <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="emp">
+                          <?php
+                          include "dbconnect.php";
+                          $sql = "SELECT * FROM tblemployee";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            if($row['empStatus']=='Active'){
+                              if($emp==$row['empID']){
+                                echo('<option value='.$row['empID'].' selected>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
+                              }
+                              else{
+                                echo('<option value='.$row['empID'].'>'.$row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'].'</option>');
                               }
                             }
-                            ?>
-                            <!-- <option value="0">None</option> -->
-                          </select>
-                        </div>
+                          }
+                          ?>
+                          <!-- <option value="0">None</option> -->
+                        </select>
                       </div>
                     </div>
+                  </div>
 
                  <!--  <div class="row">
                     <div class="col-md-12">

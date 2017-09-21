@@ -31,20 +31,30 @@ echo '</script>';
       if($(this).prop("checked")){
         $('#finishDel').show();
         $('#updateDel').hide();
-        // $('#dateStart').val("");
-        // $('#handler').val("");
-        // $('#Uremarks').val("");
       }
       else{
         $('#finishDel').hide();
         $('#updateDel').show();
-        // $('#dateFinish').val("");
-        // $('#remarks').val("");
       }
     });
   });
+   $('#myModal').on('shown.bs.modal',function(){
+    var val = $("#stat").val();
+      if(val=="Start Delivery"){
+        $('#finishDel').show();
+        $('#updateDel').hide();
+        $('#finPhase').prop("checked",true);
+        $('#ch').addClass("disabledbutton");
+      }
+  });
  });
   </script>
+  <style>
+  .disabledbutton{
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  </style>
 </head>
 <body>
   <button class="tst5" id="actionFailed" style="display: none;"></button>
@@ -101,12 +111,13 @@ echo '</script>';
                                 <td style="text-align:right">'.$quan.'</td>');
                               if($row['deliveryStatus']=='Pending'){
                                 echo '<td style="background-color:orange; color:white">'.$row['deliveryStatus'].'</td>';
+                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Start Delivery'){
-                                echo '<td style="color:green">'.$row['deliveryStatus'].'</td>';
+                                echo '<td style="background-color:green; color:white">'.$row['deliveryStatus'].'</td>';echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Cancelled'){
-                                echo '<td style="color:red">'.$row['deliveryStatus'].'</td>';
+                                echo '<td style="background-color:red; color:white">'.$row['deliveryStatus'].'</td>';echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
 
                               ?>
