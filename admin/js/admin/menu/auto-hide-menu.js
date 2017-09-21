@@ -1,3 +1,7 @@
+$(window).load(function() {
+  // When the page has loaded
+  $("#showMenu").fadeIn(500);
+});
 $("document").ready(function(e) {
   setTimeout(function() {
     if( $('.sidebar').is(":hover") ){

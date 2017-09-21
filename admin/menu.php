@@ -98,7 +98,7 @@ if(!isset($_SESSION["userID"]))
           while($row=$result->fetch_assoc())
           {
         ?>
-          <img width="60" height="62" class="mx-auto d-block img-fluid animated tada" src="/admin/plugins/logo/<?php echo "" .$row['comp_logo'];?>">
+          <img width="60" height="62" class="mx-auto d-block img-fluid animated bounce" src="/admin/plugins/logo/<?php echo "" .$row['comp_logo'];?>">
         
         <?php
           }
@@ -175,7 +175,7 @@ if(!isset($_SESSION["userID"]))
 </nav>
 <!-- Left navbar-header -->
 <div class="navbar-default sidebar" role="navigation">
-  <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+  <div class="sidebar-nav navbar-collapse slimscrollsidebar" style="display: none;" id="showMenu">
     <div class="user-profile">
       <div class="dropdown user-pro-body">
 
@@ -405,7 +405,7 @@ if(!isset($_SESSION["userID"]))
   <script src="plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js"></script>
   <!-- Auto Hide Menu -->
   <script src="js/admin/menu/auto-hide-menu.js"></script>  
-  <!-- Auto Hide Menu -->
-  <script src="plugins/bower_components/flatWeatherPlugin/js/jquery.flatWeatherPlugin.min.js"></script>  
+  <!-- Weather Plugin -->
+  <!--script src="plugins/bower_components/flatWeatherPlugin/js/jquery.flatWeatherPlugin.min.js"></script--> 
 </body>
 </html>
