@@ -186,7 +186,8 @@ $_SESSION['varname'] = $jsID;
               <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
 
-            </form></div>  
+            </form>
+          </div>  
           </div>
         </div>
 

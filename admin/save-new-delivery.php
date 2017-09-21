@@ -13,7 +13,7 @@ if($relType=="Pick-up"){
 		$delID = mysqli_insert_id($conn);
 		$x = 0;
 		foreach($ordReq as $order){
-			$detailsSQL = "INSERT INTO `tblrelease_details` (`tblreleaseID`, `rel_orderReqID`, `rel_quantity`, `rel_status`) VALUES ('$delID', '$order','" . $quan[$x] . "','Released')";
+			$detailsSQL = "INSERT INTO `tblrelease_details` (`tblreleaseID`, `rel_orderReqID`, `rel_quantity`) VALUES ('$delID', '$order','" . $quan[$x] . ")";
 			mysqli_query($conn,$detailsSQL);
 			$sql1 = "UPDATE tblorder_request SET orderRequestStatus = 'Released' WHERE order_requestID = $order";
 			$res1 = mysqli_query($conn,$sql1);
@@ -48,7 +48,7 @@ else{
 		$delID = mysqli_insert_id($conn);
 		$x = 0;
 		foreach($ordReq as $order){
-			$detailsSQL = "INSERT INTO `tblrelease_details` (`tblreleaseID`, `rel_orderReqID`, `rel_quantity`, `rel_status`) VALUES ('$delID', '$order','" . $quan[$x] . "','Pending')";
+			$detailsSQL = "INSERT INTO `tblrelease_details` (`tblreleaseID`, `rel_orderReqID`, `rel_quantity`) VALUES ('$delID', '$order','" . $quan[$x] . ")";
 			mysqli_query($conn,$detailsSQL);
 			$sql1 = "UPDATE tblorder_request SET orderRequestStatus = 'Released' WHERE order_requestID = $order";
 			$res1 = mysqli_query($conn,$sql1);

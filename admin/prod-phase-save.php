@@ -39,7 +39,7 @@ else{
 			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production in this phase is finished');
 			</script>";
-			echo $sql . "<br>";
+			//echo $sql . "<br>";
 		}
 		else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
