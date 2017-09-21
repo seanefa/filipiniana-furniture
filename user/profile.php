@@ -1,9 +1,5 @@
 <?php
-session_start();
-if(!isset($_SESSION)) 
-{ 
-	header("Location: 404.php");
-} 
+include "session.php"; 
 ?>
 <html>
 	<head>

@@ -1,9 +1,3 @@
-<?php
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-?>
  <!-- Main Menu Start-->
     <nav id="menu" class="navbar">
       <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
