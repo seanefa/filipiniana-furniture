@@ -1,5 +1,5 @@
 <?php
-include "session.php"; 
+include "session.php";
 ?>
 <html>
 	<head>
@@ -28,7 +28,7 @@ include "session.php";
 					<div class="profilethumb">
 						<div class="row">
 							<div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
-								<img src="" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/>
+								<img src="<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/>
 							</div>
 							<div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
 								<div class="info text-center">
@@ -36,18 +36,15 @@ include "session.php";
 									include "userconnect.php";
 									$sql="SELECT * from tbluser as user join tblcustomer as customer where user.userCustID = customer.customerID and user.userCustID =" . $_SESSION["userID"] . "";
 									$result=$conn->query($sql);
-									if($result->num_rows>0){
-									while($row=$result->fetch_assoc()){
+									$row = $result->num_rows;
 									?>
-									<h4><?php echo "" . $row["customerLastName"] . ", " . $row["customerFirstName"] . " " . substr($row["customerMiddleName"], 0, 1);?>.</h4>
+									<h4><?php echo "" . 	$row["customerLastName"] . ", " . $row["customerFirstName"] . " " . substr($row["customerMiddleName"], 0, 1);?>.</h4>
 									<h6><?php echo "" . $row["customerAddress"];?></h6>
 									<ul class="text-left">
 										<li><?php echo "" . $row["customerEmail"];?></li>
 										<li><?php echo "" . $row["customerContactNum"];?></li>
 									</ul>
 									<?php
-										}
-									}
 									$conn->close();
 									?>
 									<a href="updateinfo.php"><button class="btn btn-primary">Update</button></a>

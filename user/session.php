@@ -7,11 +7,6 @@ if(!isset($_SESSION["userID"]))
       alert('You have no access here. You must logged in first.');
       </script>";
 }
-else{
-	echo "<script>
-      window.location.href='home.php';
-      </script>";
-}
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
 // include "userconnect.php";
 // if(!isset($_SESSION)) 
