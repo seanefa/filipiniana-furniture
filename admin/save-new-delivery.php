@@ -56,7 +56,7 @@ else{
 			//echo $detailsSQL. "<br>";
 			$x++;
 		}
-		$delSQL = "INSERT INTO `tbldelivery` (`deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES ('$employee', '$delID', '$delDate', '$delRate', '$delAdd', '$remarks', 'Pending');";
+		$delSQL = "INSERT INTO `tbldelivery` (`deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES ('$employee', '$delID', '$delRate', '$delAdd', '$remarks', 'Pending');";
 		if(mysqli_query($conn,$delSQL)){
 			// echo "<script>
 			// window.location.href='new-release.php';

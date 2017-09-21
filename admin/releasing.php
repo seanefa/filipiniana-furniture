@@ -35,6 +35,28 @@ else if (isset($_GET['actionFailed']))
 <!DOCTYPE html>  
 <html lang="en">
 <head>
+    <script>
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
+    $('#finish').hide();
+     $("#finPhase").on('change',function(){
+      if($(this).prop("checked")){
+        $('#finish').show();
+        $('#update').hide();
+        // $('#dateStart').val("");
+        // $('#handler').val("");
+        // $('#Uremarks').val("");
+      }
+      else{
+        $('#finish').hide();
+        $('#update').show();
+        $('#dateFinish').val("");
+        $('#remarks').val("");
+      }
+    });
+   });
+ });
+  </script>
 </head>
 <body>
   <button class="tst5" id="actionFailed" style="display: none;"></button>

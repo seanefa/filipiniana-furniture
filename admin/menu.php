@@ -206,6 +206,7 @@ if(!isset($_SESSION["userID"]))
               <li><a href="material-attribute.php">Material Attributes</a></li>
               <li><a href="material-type.php">Material Type</a></li>
               <li><a href="materials.php">Materials</a></li>
+              <li><a href="material-variants.php">Material Variants</a></li>
             </ul>
           </li>
 

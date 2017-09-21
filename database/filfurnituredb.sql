@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2017 at 08:20 AM
+-- Generation Time: Sep 21, 2017 at 08:52 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -831,6 +831,31 @@ INSERT INTO `tblmat_type` (`matTypeID`, `matTypeName`, `matTypeMeasure`, `matTyp
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblmat_var`
+--
+
+CREATE TABLE `tblmat_var` (
+  `mat_varID` int(11) NOT NULL,
+  `materialID` int(11) NOT NULL,
+  `mat_varDescription` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `mat_varStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblmat_var`
+--
+
+INSERT INTO `tblmat_var` (`mat_varID`, `materialID`, `mat_varDescription`, `mat_varStatus`) VALUES
+(257, 11, 'Odorless  / brown ', 'Active'),
+(258, 11, 'Odorless  / red ', 'Active'),
+(259, 11, 'Odorless  / transparent ', 'Active'),
+(260, 11, 'Original  / brown ', 'Active'),
+(261, 11, 'Original  / red ', 'Active'),
+(262, 11, 'Original  / transparent ', 'Active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblmodeofpayment`
 --
 
@@ -899,7 +924,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (6, 1, '2017-08-29', '2017-08-29', 21, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
 (7, 1, '2017-08-29', '2017-08-29', 26, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
 (8, 1, '2017-08-29', '2017-08-29', 24, 105000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
-(9, 1, '2017-08-30', '2017-08-31', 19, 120000, 'Pending', 'N/A', 'Pre-Order', ''),
+(9, 1, '2017-08-30', '2017-08-31', 19, 120000, 'Ongoing', 'N/A', 'Pre-Order', ''),
 (10, 1, '2017-08-30', '2017-08-30', 30, 25000, 'Pending', 'N/A', 'On-Hand', 'An order.');
 
 -- --------------------------------------------------------
@@ -1159,7 +1184,9 @@ CREATE TABLE `tblproduction` (
 --
 
 INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `prodStartDate`, `prodEndDate`, `productionRemarks`, `productionStatus`) VALUES
-(33, 1, NULL, NULL, NULL, 'Finished');
+(33, 1, NULL, NULL, NULL, 'Finished'),
+(34, 8, NULL, NULL, NULL, 'Ongoing'),
+(35, 7, NULL, NULL, NULL, 'Ongoing');
 
 -- --------------------------------------------------------
 
@@ -1187,7 +1214,15 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (102, 33, 2, 1, '2017-08-31', '2017-09-13', ' ', 'Finished'),
 (103, 33, 3, 1, '2017-09-14', '2017-09-12', ' ', 'Finished'),
 (104, 33, 4, 1, '2017-09-15', '2017-09-15', ' ', 'Finished'),
-(105, 33, 5, 1, '2017-09-21', '2017-09-14', ' ', 'Finished');
+(105, 33, 5, 1, '2017-09-21', '2017-09-14', ' ', 'Finished'),
+(106, 34, 1, NULL, NULL, NULL, NULL, 'Pending'),
+(107, 34, 2, NULL, NULL, NULL, NULL, 'Pending'),
+(108, 34, 5, NULL, NULL, NULL, NULL, 'Pending'),
+(109, 35, 1, NULL, NULL, NULL, NULL, 'Pending'),
+(110, 35, 2, NULL, NULL, NULL, NULL, 'Pending'),
+(111, 35, 3, NULL, NULL, NULL, NULL, 'Pending'),
+(112, 35, 4, NULL, NULL, NULL, NULL, 'Pending'),
+(113, 35, 5, NULL, NULL, NULL, NULL, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1712,6 +1747,13 @@ ALTER TABLE `tblmat_type`
   ADD PRIMARY KEY (`matTypeID`);
 
 --
+-- Indexes for table `tblmat_var`
+--
+ALTER TABLE `tblmat_var`
+  ADD PRIMARY KEY (`mat_varID`),
+  ADD KEY `material_idx` (`materialID`);
+
+--
 -- Indexes for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
@@ -2113,6 +2155,11 @@ ALTER TABLE `tblmat_inventory`
 ALTER TABLE `tblmat_type`
   MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `tblmat_var`
+--
+ALTER TABLE `tblmat_var`
+  MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+--
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
@@ -2186,12 +2233,12 @@ ALTER TABLE `tblproduct`
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2373,161 +2420,10 @@ ALTER TABLE `tblmat_deliveries`
   ADD CONSTRAINT `supplier` FOREIGN KEY (`supplierID`) REFERENCES `tblsupplier` (`supplierID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tblmat_deliverydetails`
+-- Constraints for table `tblmat_var`
 --
-ALTER TABLE `tblmat_deliverydetails`
-  ADD CONSTRAINT `matDeliveries` FOREIGN KEY (`del_matDelID`) REFERENCES `tblmat_deliveries` (`mat_deliveriesID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `matVarID` FOREIGN KEY (`del_matVarID`) REFERENCES `tblmat_var` (`variantID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblmat_inventory`
---
-ALTER TABLE `tblmat_inventory`
-  ADD CONSTRAINT `matVariant` FOREIGN KEY (`matVariantID`) REFERENCES `tblmat_var` (`variantID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblonhand`
---
-ALTER TABLE `tblonhand`
-  ADD CONSTRAINT `product` FOREIGN KEY (`ohProdID`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblorders`
---
-ALTER TABLE `tblorders`
-  ADD CONSTRAINT `tblcustID` FOREIGN KEY (`custOrderID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tlbuserID` FOREIGN KEY (`receivedbyUserID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblorder_actions`
---
-ALTER TABLE `tblorder_actions`
-  ADD CONSTRAINT `ordertbl` FOREIGN KEY (`orOrderID`) REFERENCES `tblorders` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblorder_customization`
---
-ALTER TABLE `tblorder_customization`
-  ADD CONSTRAINT `fabricReq` FOREIGN KEY (`orFabricID`) REFERENCES `tblfabrics` (`fabricID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `frameworkReq` FOREIGN KEY (`orFrameworkID`) REFERENCES `tblframeworks` (`frameworkID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderReq` FOREIGN KEY (`orOrderReqID`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblorder_request`
---
-ALTER TABLE `tblorder_request`
-  ADD CONSTRAINT `orders` FOREIGN KEY (`tblOrdersID`) REFERENCES `tblorders` (`orderID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pack` FOREIGN KEY (`orderPackageID`) REFERENCES `tblpackages` (`packageID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `prod` FOREIGN KEY (`orderProductID`) REFERENCES `tblproduct` (`productID`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tblorder_return_details`
---
-ALTER TABLE `tblorder_return_details`
-  ADD CONSTRAINT `returntblid` FOREIGN KEY (`tblreturnID`) REFERENCES `tblorder_return` (`returnID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblpackage_inclusions`
---
-ALTER TABLE `tblpackage_inclusions`
-  ADD CONSTRAINT `packID` FOREIGN KEY (`package_incID`) REFERENCES `tblpackages` (`packageID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prodID` FOREIGN KEY (`product_incID`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblpayment_details`
---
-ALTER TABLE `tblpayment_details`
-  ADD CONSTRAINT `invoice` FOREIGN KEY (`invID`) REFERENCES `tblinvoicedetails` (`invoiceID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mop` FOREIGN KEY (`mopID`) REFERENCES `tblmodeofpayment` (`modeofpaymentID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tblprodsonpromo`
---
-ALTER TABLE `tblprodsonpromo`
-  ADD CONSTRAINT `prodc` FOREIGN KEY (`prodPromoID`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `promodescid` FOREIGN KEY (`promoDescID`) REFERENCES `tblpromos` (`promoID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblproduct`
---
-ALTER TABLE `tblproduct`
-  ADD CONSTRAINT `cat` FOREIGN KEY (`prodCatID`) REFERENCES `tblfurn_category` (`categoryID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `framworkcodeID` FOREIGN KEY (`prodFrameworkID`) REFERENCES `tblframeworks` (`frameworkID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `type` FOREIGN KEY (`prodTypeID`) REFERENCES `tblfurn_type` (`typeID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblproduction`
---
-ALTER TABLE `tblproduction`
-  ADD CONSTRAINT `orReq` FOREIGN KEY (`productionOrderReq`) REFERENCES `tblorder_request` (`order_requestID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblproduction_phase`
---
-ALTER TABLE `tblproduction_phase`
-  ADD CONSTRAINT `employee` FOREIGN KEY (`prodEmp`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `phase` FOREIGN KEY (`prodPhase`) REFERENCES `tblphases` (`phaseID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `production` FOREIGN KEY (`prodID`) REFERENCES `tblproduction` (`productionID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblprod_images`
---
-ALTER TABLE `tblprod_images`
-  ADD CONSTRAINT `prodInfo` FOREIGN KEY (`prodImgID`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblprod_info`
---
-ALTER TABLE `tblprod_info`
-  ADD CONSTRAINT `phaseInfo` FOREIGN KEY (`prodInfoPhase`) REFERENCES `tblphases` (`phaseID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prodInfoID` FOREIGN KEY (`prodInfoProduct`) REFERENCES `tblproduct` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblprod_materials`
---
-ALTER TABLE `tblprod_materials`
-  ADD CONSTRAINT `p_desc` FOREIGN KEY (`p_matDescID`) REFERENCES `tblmat_var` (`variantID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `p_info` FOREIGN KEY (`p_prodInfoID`) REFERENCES `tblprod_info` (`prodInfoID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `p_mat` FOREIGN KEY (`p_matMaterialID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblpromo_condition`
---
-ALTER TABLE `tblpromo_condition`
-  ADD CONSTRAINT `con_promo` FOREIGN KEY (`conPromoID`) REFERENCES `tblpromos` (`promoID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblpromo_promotion`
---
-ALTER TABLE `tblpromo_promotion`
-  ADD CONSTRAINT `promo` FOREIGN KEY (`proPromoID`) REFERENCES `tblpromos` (`promoID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblrelease_details`
---
-ALTER TABLE `tblrelease_details`
-  ADD CONSTRAINT `tblreleaseid_tblreleasedetails` FOREIGN KEY (`tblreleaseID`) REFERENCES `tblrelease` (`releaseID`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tblunit_cat`
---
-ALTER TABLE `tblunit_cat`
-  ADD CONSTRAINT `uniofmeasureID` FOREIGN KEY (`unitID`) REFERENCES `tblunitofmeasure` (`unID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `unitID` FOREIGN KEY (`uncategoryID`) REFERENCES `tblunitofmeasurement_category` (`uncategoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbluser`
---
-ALTER TABLE `tbluser`
-  ADD CONSTRAINT `cust` FOREIGN KEY (`userCustID`) REFERENCES `tblcustomer` (`customerID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `emp` FOREIGN KEY (`userEmpID`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tblvariant_detail`
---
-ALTER TABLE `tblvariant_detail`
-  ADD CONSTRAINT `tblvariant_detail_ibfk_1` FOREIGN KEY (`materialID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tblvariant_detail_ibfk_2` FOREIGN KEY (`mat_varID`) REFERENCES `tblmat_var` (`mat_varID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tblmat_var`
+  ADD CONSTRAINT `m` FOREIGN KEY (`materialID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

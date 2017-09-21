@@ -7,7 +7,10 @@ $emp = $_POST['emp'];
 $rem = $_POST['rem'];
 $status = $_POST['stat'];
 $dateToday = date('Y-m-d H:i:s');
+$delDate = $_POST['delDate'];
 
+
+$sql1 = "UPDATE `tbldelivery` SET `deliveryEmpAssigned`='$emp', `deliveryDate`='$delDate', `deliveryRemarks`='$rem', `deliveryStatus`='$status' WHERE `deliveryID`='$recID'";
 
 $sql1 = "UPDATE tbldelivery SET deliveryRecStatus = 'Inactive' , deliveryDate = '$dateToday' WHERE deliveryID = '$recID'";
 if(mysqli_query($conn,$sql1)){
