@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 ?>
 <div id="header" class="style2">
   <!-- Top Bar Start-->
@@ -41,7 +41,7 @@ session_start();
             // $sql = "SELECT * FROM tbluser where userID = '$user'";
             // $result = mysqli_query($conn, $sql);
             // $row = mysqli_fetch_assoc($result); 
-
+            session_start();
             if(isset($_SESSION['logged']) === true)
             { 
               echo '<li><h5 style="color: white; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $_SESSION["userName"];  echo '!</span></h5></li>';
