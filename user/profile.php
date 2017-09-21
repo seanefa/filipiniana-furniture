@@ -39,7 +39,7 @@
 					?>
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
-							<img src="<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/>
+							<img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/>
 						</div>
 						<div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
 							<div class="info text-center">

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			if($result->num_rows>0){
 				while($row=$result->fetch_assoc()){
 			?>
-          <form action="updatepersonalinformation.php" autocomplete="off" class="form-horizontal" method="post">
+          <form enctype="multipart/form-data" action="updatepersonalinformation.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
               <legend>Your Personal Details</legend>
               <!--div style="display: none;" class="form-group required">
@@ -84,6 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <label for="input-block" class="col-sm-2 control-label">Address</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="input-address" placeholder="e.g. #1255 Saint Francis St., Brgy. Parang, Marikina City" value="<?php echo "" . $row["customerAddress"];?>" name="address" required>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label for="input-block" class="col-sm-2 control-label">Picture</label>
+                <div class="col-sm-10">
+                  <input type="file" name="image" class="form-control"/>
+					<input type="hidden" name="exist_image" value="<?php echo "" . $row["customerDP"];?>">
                 </div>
               </div>
             </fieldset>

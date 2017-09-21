@@ -22,9 +22,9 @@ if ($_FILES["image"]["error"] > 0)
 }
 else
 {
- move_uploaded_file($_FILES["image"]["tmp_name"],"plugins/logo/$oldimage.png");
+ move_uploaded_file($_FILES["image"]["tmp_name"], "plugins/logo/" . date('Y-m-d') . time() . ".png");
  echo "SAVED" ;
- $pic = "$oldimage.png";
+ $pic = date('Y-m-d') . time() . ".png";
 }
 
 if($row == 0)
