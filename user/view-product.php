@@ -21,38 +21,25 @@
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
-        <div id="content" class="col-sm-9">
+        <div id="content" class="col-sm-12">
           <div itemscope itemtype="http://schema.org/Product">
             <h1 class="title" itemprop="name">Product</h1>
             <div class="row product-info">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="image"><img class="img-responsive" itemprop="image" id="zoom_01" src="image/product/macbook_air_1-350x525.jpg" title="Product" alt="Product" data-zoom-image="image/product/macbook_air_1-600x900.jpg" /> </div>
                 <div class="center-block text-center"><span class="zoom-gallery"><i class="fa fa-search"></i> Click image for Gallery</span></div>
                 <div class="image-additional" id="gallery_01"> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_1-600x900.jpg" data-image="image/product/macbook_air_1-350x525.jpg" title="Product"> <img src="image/product/macbook_air_1-66x99.jpg" title="Product" alt = "Product"/></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_4-600x900.jpg" data-image="image/product/macbook_air_4-350x525.jpg" title="Product"><img src="image/product/macbook_air_4-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_2-600x900.jpg" data-image="image/product/macbook_air_2-350x525.jpg" title="Product"><img src="image/product/macbook_air_2-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_3-600x900.jpg" data-image="image/product/macbook_air_3-350x525.jpg" title="Product"><img src="image/product/macbook_air_3-66x99.jpg" title="Product" alt="Product" /></a> </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-8">
                 <ul class="list-unstyled description">
                   <li><b>Product Code:</b> <span itemprop="mpn">Product 17</span></li>
-                  <li><b>Reward Points:</b> 700</li>
                   <li><b>Availability:</b> <span class="instock">In Stock</span></li>
                 </ul>
                 <ul class="price-box">
-                  <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old">&#8369 1,202.00</span> <span itemprop="price">&#8369 1,142.00<span itemprop="availability" content="In Stock"></span></span></li>
+                  <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">&#8369 1,142.00<span itemprop="availability" content="In Stock"></span></span></li>
                   <li></li>
-                  <li>Ex Tax: &#8369 950.00</li>
                 </ul>
                 <div id="product">
-                  <h3 class="subtitle">Available Options</h3>
-                  <div class="form-group required">
-                    <label class="control-label">Color</label>
-                    <select class="form-control" id="input-option200" name="option[200]">
-                      <option value=""> --- Please Select --- </option>
-                      <option value="4">Black </option>
-                      <option value="3">Silver </option>
-                      <option value="1">Green </option>
-                      <option value="2">Blue </option>
-                    </select>
-                  </div>
                   <div class="cart">
                     <div>
                       <div class="qty">
@@ -80,9 +67,8 @@
                 <div class="addthis_toolbox addthis_default_style"> <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_google_plusone" g:plusone:size="medium"></a> <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" pi:pinit:url="http://www.addthis.com/features/pinterest" pi:pinit:media="http://www.addthis.com/cms-content/images/features/pinterest-lg.png"></a> <a class="addthis_counter addthis_pill_style"></a> </div>
                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-514863386b357649"></script>
                 <!-- AddThis Button END -->
-              </div>
-            </div>
-            <ul class="nav nav-tabs">
+                <br>
+                <ul class="nav nav-tabs">
               <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
               <li><a href="#tab-specification" data-toggle="tab">Specification</a></li>
               <li><a href="#tab-review" data-toggle="tab">Reviews (2)</a></li>
@@ -192,13 +178,15 @@
                 </form>
               </div>
             </div>
+            </div>
+            </div>
             <h3 class="subtitle">Related Products</h3>
             <div class="owl-carousel related_pro">
               <div class="product-thumb">
                 <div class="image"><a href="product.php"><img src="image/product/samsung_tab_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                 <div class="caption">
                   <h4><a href="product.php">Product</a></h4>
-                  <p class="price"> <span class="price-new">&#8369 230.00</span> <span class="price-old">&#8369 241.99</span> <span class="saving">-5%</span> </p>
+                  <p class="price"> <span class="price-new">&#8369 230.00</span> </p>
                   <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                 </div>
                 <div class="button-group">
@@ -213,7 +201,7 @@
                 <div class="image"><a href="product.php"><img src="image/product/macbook_pro_1-270x405.jpg" alt=" Product " title=" Product " class="img-responsive" /></a></div>
                 <div class="caption">
                   <h4><a href="product.php"> Product </a></h4>
-                  <p class="price"> <span class="price-new">&#8369 1,400.00</span> <span class="price-old">&#8369 1,900.00</span> <span class="saving">-26%</span> </p>
+                  <p class="price"> <span class="price-new">&#8369 1,400.00</span> </p>
                 </div>
                 <div class="button-group">
                   <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -256,7 +244,7 @@
                 <div class="image"><a href="product.php"><img src="image/product/ipod_touch_1-270x405.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
                 <div class="caption">
                   <h4><a href="product.php">Product</a></h4>
-                  <p class="price"> <span class="price-new">&#8369 62.00</span> <span class="price-old">&#8369 122.00</span> <span class="saving">-50%</span> </p>
+                  <p class="price"> <span class="price-new">&#8369 62.00</span> </p>
                 </div>
                 <div class="button-group">
                   <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
@@ -284,104 +272,6 @@
           </div>
         </div>
         <!--Middle Part End -->
-        <!--Right Part Start -->
-        <aside id="column-right" class="col-sm-3 hidden-xs">
-          <h3 class="subtitle">Bestsellers</h3>
-          <div class="side-item">
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/apple_cinema_30-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"><span class="price-new">&#8369 110.00</span> <span class="price-old">&#8369 122.00</span> <span class="saving">-10%</span></p>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/iphone_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> &#8369 123.20 </p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span></div>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/macbook_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> &#8369 2.00 </p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/sony_vaio_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 902.00</span> <span class="price-old">&#8369 1,202.00</span> <span class="saving">-25%</span> </p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/FinePix-Long-Zoom-Camera-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price">&#8369 122.00</p>
-              </div>
-            </div>
-          </div>
-          <div class="list-group">
-            <h3 class="subtitle">Custom Content</h3>
-            <p>This is a CMS block edited from admin. You can insert any content (HTML, Text, Images) Here. </p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-            <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-          </div>
-          <h3 class="subtitle">Specials</h3>
-          <div class="side-item">
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/macbook_pro_1-50x75.jpg" alt=" Product " title=" Product " class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 1,400.00</span> <span class="price-old">&#8369 1,900.00</span> <span class="saving">-26%</span> </p>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/samsung_tab_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 230.00</span> <span class="price-old">&#8369 241.99</span> <span class="saving">-5%</span> </p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/apple_cinema_30-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="http://demo.harnishdesign.net/opencart/marketshop/v1/index.php?route=product/product&amp;product_id=42">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 110.00</span> <span class="price-old">&#8369 122.00</span> <span class="saving">-10%</span> </p>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/nikon_d300_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 92.00</span> <span class="price-old">&#8369 98.00</span> <span class="saving">-6%</span> </p>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/nikon_d300_5-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 66.80</span> <span class="price-old">&#8369 90.80</span> <span class="saving">-27%</span> </p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-            <div class="product-thumb clearfix">
-              <div class="image"><a href="product.php"><img src="image/product/macbook_air_1-50x75.jpg" alt="Product" title="Product" class="img-responsive" /></a></div>
-              <div class="caption">
-                <h4><a href="product.php">Product</a></h4>
-                <p class="price"> <span class="price-new">&#8369 1,142.00</span> <span class="price-old">&#8369 1,202.00</span> <span class="saving">-5%</span> </p>
-              </div>
-            </div>
-          </div>
-        </aside>
-        <!--Right Part End -->
       </div>
     </div>
   </div>

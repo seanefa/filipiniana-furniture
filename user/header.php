@@ -67,7 +67,7 @@
         <!-- Mini Cart Start-->
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="cart">
-            <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="fa fa-shopping-cart fa-2x pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0</span></button>
+            <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="fa fa-shopping-cart fa-2x pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0.00</span></button>
             <ul class="dropdown-menu">
               <li>
                 <table class="table">

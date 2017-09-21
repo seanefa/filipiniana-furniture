@@ -44,7 +44,7 @@ background: linear-gradient(to bottom, rgba(232,215,125,1) 0%,rgba(241,222,127,1
 /*===================================================================================*/
 #menu {
 	border-top:none;
-	border-bottom-width:2px;
+	border-bottom:none;
 }
 #menu .nav > li > a, #menu .navbar-header > span {
 	color:#000;
@@ -56,19 +56,51 @@ background: linear-gradient(to bottom, rgba(232,215,125,1) 0%,rgba(241,222,127,1
 #menu .nav > li > a.home_link span { background:#000; }
 #menu .nav > li.mega-menu > div, #menu .nav > li.categories > div, #menu .nav > li.mega-menu > div .submenu, #menu .nav > li.categories > div > .column > div, #menu .nav > li > .dropdown-menu, #menu .submenu {
 	border-color: #000;
-	background:#000;
+	/* IE10+ */ 
+background-image: -ms-linear-gradient(bottom left, #EFDA7D 0%, #E9D4B3 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(bottom left, #EFDA7D 0%, #E9D4B3 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(bottom left, #EFDA7D 0%, #E9D4B3 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, #EFDA7D), color-stop(100, #E9D4B3));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(bottom left, #EFDA7D 0%, #E9D4B3 100%);
+
+/* W3C Markup */ 
+background-image: linear-gradient(to top right, #EFDA7D 0%, #E9D4B3 100%);
 }
 #menu .nav > li.sub:hover > a:after { border-bottom-color:#000; }
 #menu .nav > li.mega-menu > div > .column > a {
-	color:#aaa;
+	color:#5f5f5f;
 	border-color:#222;
 }
 #menu .nav > li.categories > div > .column + .column, #menu .nav > li > div > ul li + li, #menu .nav > li.categories > div > .column:hover > div ul li + li, #menu .nav > li.mega-menu > div .submenu ul li + li a { border-color:#222; }
 #menu .nav > li:hover > a {
-	background-color:#fff;
-	color:#777;
+	/* IE10+ */ 
+	background-image: -ms-radial-gradient(center, ellipse closest-corner, #F3E2C7 0%, #E6C86E 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-radial-gradient(center, ellipse closest-corner, #F3E2C7 0%, #E6C86E 100%);
+
+	/* Opera */ 
+	background-image: -o-radial-gradient(center, ellipse closest-corner, #F3E2C7 0%, #E6C86E 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(radial, center center, 0, center center, 286, color-stop(0, #F3E2C7), color-stop(100, #E6C86E));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-radial-gradient(center, ellipse closest-corner, #F3E2C7 0%, #E6C86E 100%);
+
+	/* W3C Markup */ 
+	background-image: radial-gradient(ellipse closest-corner at center, #F3E2C7 0%, #E6C86E 100%);
+	color:#5f5f5f;
 }
-#menu .nav > li.categories > div > .column > a, #menu .nav > li div > ul > li > a, #menu .nav > li.menu_brands > div > div a, #menu .custom_block, #menu .custom_block a { color:#999; }
+#menu .nav > li.categories > div > .column > a, #menu .nav > li div > ul > li > a, #menu .nav > li.menu_brands > div > div a, #menu .custom_block, #menu .custom_block a { color:#5f5f5f; }
 #menu .nav > li.categories > div > .column:hover > a, #menu .nav > li div > ul > li:hover > a, #menu .nav > li.mega-menu > div > .column:hover > a, #menu .nav > li.menu_brands > div > div a:hover, #menu .custom_block a:hover { color:#fff; }
 /*===================================================================================*/
 /*  Feature box
@@ -128,7 +160,7 @@ background: linear-gradient(to bottom, rgba(232,215,125,1) 0%,rgba(241,222,127,1
 /*media responsive*/
 .drop-icon { color:#000; }
 
-.rev_slider_wrapper, .rev_slider, .tp-fullwidth-forcer, .rev_slider .tp-bgimg.defaultimg {
+.rev_slider_wrapper, .rev_slider .tp-bgimg.defaultimg {
     padding-right: 50px;
     padding-left: 50px;
 }
