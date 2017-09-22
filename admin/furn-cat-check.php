@@ -12,7 +12,7 @@ $result = mysqli_query($conn, $sql);
 
 $rowcount = mysqli_num_rows($result);
 //check kung may symbol yung text
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $texture)){
+if(preg_match('/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/', $texture)){
 	echo "Symbols not allowed";
 	}
 	else{

@@ -11,7 +11,7 @@ $sql = "SELECT promoDescription FROM tblpromos where promoDescription = '$textur
 $result = mysqli_query($conn, $sql);
 
 $rowcount = mysqli_num_rows($result);
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $texture)){
+if(preg_match('/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/', $texture)){
 	echo "Symbols not allowed";
 	}
 	else{

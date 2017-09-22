@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $sql);
 $rowcount = mysqli_num_rows($result);
 
 // Company Name
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $frameMaterialName)){
+if(preg_match('/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/', $frameMaterialName)){
 	echo "Symbols not allowed";
 }
 else{
