@@ -110,13 +110,54 @@ $('#saveCustBtn').on('click',function(){
  }); 
 */
 function addnewCust(){
-  var lName = $('#newln').val();
-  var fName = $('#newfn').val();
-  var mName = $('#newmn').val();
-  var addrs = $('#newcustadd').val();
-  var conts= $('#newcustcont').val();
-  var emails = $('#newcustemail').val();
+  var lName = $('#edit1').val();
+  var fName = $('#edit2').val();
+  var mName = $('#edit3').val();
+  var addrs = $('#edit4').val();
+  var conts= $('#edit5').val();
+  var emails = $('#edit6').val();
+  
+if(lName == ""){
+  
+  $('#edit1').css('border-color','red');
+}
+else{
+  $('#edit1').css('border-color','limegreen');
+}
+if(mName == ""){
+  $('#edit2').css('border-color','red');
+}
+else{
+  $('#edit2').css('border-color','limegreen');
+}
+if(fName == ""){
+  $('#edit3').css('border-color','red');
+}
+else{
+  $('#edit3').css('border-color','limegreen');
+}
+if(addrs == ""){
+  $('#edit4').css('border-color','red');
+}
+else{
+  $('#edit4').css('border-color','limegreen');
+}
+if(conts == ""){
+  $('#edit5').css('border-color','red');
+}
+else{
+  $('#edit5').css('border-color','limegreen');
+}
+if(emails == ""){
+  $('#edit6').css('border-color','red');
+}
+else{
+  $('#edit6').css('border-color','limegreen');
+}
 
+
+
+if(lName != "" && fName != "" && mName !=  "" && addrs != "" && conts != "" && emails != ""){
   $.ajax({
     type: 'post',
     url: 'add-new-cust.php',
@@ -138,8 +179,13 @@ function addnewCust(){
       });
     }
   });
+   added_new_cust = true; 
+}
+else if(error != 0){
+  alert('Fill up the required fields');
+}
 
-  added_new_cust = true; 
+ 
 
 
 }
@@ -345,6 +391,72 @@ $(document).ready(function(){
 
   });
 });
+
+//new customer validation
+var flag = true;
+function inputValidate(id){
+    var user = $('#edit'+id).val();
+    
+    userkey = $('#edit'+id).val();
+    userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#saveCustBtn').prop('disabled',true);
+      $('#message'+id).html('Symbols not Allowed');
+      $('#edit'+id).css('border-color','red');
+      }else{
+    $.post('pos-check.php',{username : user}, function(data){
+     
+     if(data == 'Symbols not allowed'){
+       flag = true;
+          $('#saveCustBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'White space not allowed'){
+       flag = true
+
+          $('#saveCustBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'good'){
+      flag = false;
+       $('#message'+id).html('');
+     $('#saveCustBtn').prop('disabled',false);
+      $('#edit'+id).css('border-color','limegreen');
+     }
+    });
+  }
+
+  if(!flag){
+    $('#saveCustBtn').prop('disabled',false);
+  }else if(flag){
+    $('#saveCustBtn').prop('disabled',true);
+  }
+
+  }
+
+  function validate(id){
+    var val = $('#edit'+id).val();
+    if(validateEmail(val)){
+      $('#edit'+id).css('border-color','limegreen');
+       $('#message'+id).html(''); 
+    $('#saveCustBtn').prop('disabled',false);
+    }else{
+       $('#edit'+id).css('border-color','red');
+       $('#message'+id).html('Email not valid'); 
+    $('#saveCustBtn').prop('disabled',true);
+    }
+
+  }
+
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
+
+//
 </script>
 </head>
 
