@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2017 at 03:34 PM
+-- Generation Time: Sep 22, 2017 at 05:19 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -985,7 +985,7 @@ CREATE TABLE `tblorder_request` (
 
 INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductID`, `prodUnitPrice`, `orderRemarks`, `orderPackageID`, `orderQuantity`, `orderRequestStatus`) VALUES
 (1, 1, 17, 35000, 0, NULL, 3, 'Ready for release'),
-(3, 6, 17, 35000, 0, NULL, 1, 'Released'),
+(3, 6, 17, 35000, 0, NULL, 1, 'Active'),
 (4, 6, 17, 35000, 0, NULL, 1, 'Released'),
 (5, 7, 17, 35000, 0, NULL, 1, 'Released'),
 (6, 8, 17, 35000, 0, NULL, 3, 'Released'),
@@ -1001,25 +1001,20 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 
 CREATE TABLE `tblorder_return` (
   `returnID` int(11) NOT NULL,
+  `tblorderReqID` int(11) NOT NULL,
   `dateReturned` date NOT NULL,
+  `returnReason` varchar(450) NOT NULL,
+  `returnAssessment` varchar(45) NOT NULL,
   `returnRemarks` varchar(450) NOT NULL,
   `returnStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `tblorder_return_details`
+-- Dumping data for table `tblorder_return`
 --
 
-CREATE TABLE `tblorder_return_details` (
-  `rdetailsID` int(11) NOT NULL,
-  `tblreturnID` int(11) NOT NULL,
-  `tblorderreqID` int(11) NOT NULL,
-  `returnReason` varchar(450) NOT NULL,
-  `returnAssessment` varchar(100) NOT NULL,
-  `rdetailsStatus` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tblorder_return` (`returnID`, `tblorderReqID`, `dateReturned`, `returnReason`, `returnAssessment`, `returnRemarks`, `returnStatus`) VALUES
+(1, 3, '2017-09-22', 'Sira yung tahi yak', 'Repair', 'Tatahiin nalang po', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1804,13 +1799,6 @@ ALTER TABLE `tblorder_return`
   ADD PRIMARY KEY (`returnID`);
 
 --
--- Indexes for table `tblorder_return_details`
---
-ALTER TABLE `tblorder_return_details`
-  ADD PRIMARY KEY (`rdetailsID`),
-  ADD KEY `returntblid_idx` (`tblreturnID`);
-
---
 -- Indexes for table `tblpackages`
 --
 ALTER TABLE `tblpackages`
@@ -2191,12 +2179,7 @@ ALTER TABLE `tblorder_request`
 -- AUTO_INCREMENT for table `tblorder_return`
 --
 ALTER TABLE `tblorder_return`
-  MODIFY `returnID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tblorder_return_details`
---
-ALTER TABLE `tblorder_return_details`
-  MODIFY `rdetailsID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `returnID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --

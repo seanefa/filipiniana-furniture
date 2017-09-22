@@ -72,86 +72,16 @@ include 'dbconnect.php';
 
   $(document).ajaxStop(function(){
 
-  $(document).ready(function(){ //change ng for
-    $("input[name='relType']").on('change',function(){
-      var val = $("input[name='relType']:checked").val();
-      if(val=="Pick-up"){
-        var valueType = 1;
-        var orderID = $("#order").val();
-        $.ajax({
-          type: 'post',
-          url: 'del-changed-for.php',
-          data: {
-            id: valueType, oID : orderID,
-          },
-          success: function (response) {
-            $( '#orderReqs' ).html(response);
-          }
-        });
-      }
-      else{
-        var valueType = 2;
-        var orderID = $("#order").val();
-        $.ajax({
-          type: 'post',
-          url: 'del-changed-for.php',
-          data: {
-            id: valueType, oID : orderID,
-          },
-          success: function (response) {
-            $( '#orderReqs' ).html(response);
-          }
-        });
-
-      }
-    });
-  });s
-  $(".chBox").on('change',function(){
-    if($(this).prop("checked")){
-      if(($("#delAdd").val())==""){
-        $('#saveBtn').prop('disabled',true);
-      }
-      else{
-        $('#saveBtn').prop('disabled',false);
-      }
-    }
-    else{
-      $('#saveBtn').prop('disabled',true);
-    }
   });
 
-  $('#location').change(function(){
-    var value = $("#location").val();
-    $("#delRate").val(value);
+  $(document).ready(function(){
+    $("#order").select2();
   });
 
+  </script>
 
-  $("#delAdd").on('keyup',function(){
-    var add = $("#delAdd").val();
-    if(add==""){
-      $('#saveBtn').prop('disabled',true);
-    }
-    else{
-      var chbox = $("input[name='check']:checked").val();
-      if(chbox==""){
-        $('#saveBtn').prop('disabled',true);
-
-      }
-      else{
-        $('#saveBtn').prop('disabled',false);
-      }
-    }
-  });
-});
-
-$(document).ready(function(){
-  $("#order").select2();
-});
-
-</script>
-
-<title>New Release</title>
-<link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <title>New Release</title>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 
 <body class ="fix-header fix-sidebar">
@@ -170,7 +100,7 @@ $(document).ready(function(){
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
-                  <form action="save-new-delivery.php" method="post">
+                  <form action="save-new-return.php" method="post">
                     <div class="panel-body">
                       <div class="row" style="margin-top: -30px;">
                         <div class="col-md-6">
@@ -179,7 +109,6 @@ $(document).ready(function(){
                             <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order" style="text-align:right">
                               <?php
                               include "dbconnect.php";
-                             // $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID NOT IN(SELECT orderID FROM tblorders a, tblorder_request b, tbldelivery_details c WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID) ORDER BY orderID;";
                               $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderStatus ='Finished' ORDER BY orderID;";
                               $result = mysqli_query($conn,$sql);
                               while ($row = mysqli_fetch_assoc($result))
@@ -193,15 +122,6 @@ $(document).ready(function(){
                               ?>
                             </select>
                           </div>
-
-                         <!--  <div class="col-md-12">
-                            <div class="table-responsive">
-                              <h3 style="text-align:center">Select Orders to Deliver</h3>
-                              <h1 style="text-align:center"><label class="form-control" style="border:0px;">Orders</label></h1>
-                              <table class="table product-overview" id="ordersTbl">
-                              </table>
-                            </div>
-                          </div> -->
 
                           <div class="row">
                             <div class="col-md-12">
@@ -246,7 +166,7 @@ $(document).ready(function(){
                               <div class="col-md-12">
                                 <div class="form-group">
                                   <h5 class="control-label" style="text-align: left;">Reason</h5>
-                                  <textarea name="remarks" class="form-control" rows="4"></textarea>
+                                  <textarea name="reasons" class="form-control" rows="4"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -279,7 +199,7 @@ $(document).ready(function(){
                                   <div id="orderReqs"></div>
                                 </div> -->
                                 <div class="row" style="margin:10px">
-                                  <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save</button>
+                                  <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn"><i class="fa fa-check"></i> Save</button>
                                 </div>
                               </form>
                             </div>
