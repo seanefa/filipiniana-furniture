@@ -24,7 +24,7 @@ echo '<thead>
     echo '<td>'.$row['productName'].'</td>
     <td>'.$row['orderRequestStatus'].'</td>
     <td style="text-align:right;">
-    <select class="form-control" name="quan[]">';
+    <select class="form-control" name="quan[]" style="text-align:right">';
     $num = $row['orderQuantity'];
     for($x=1;$x<=$num;$x++){
       echo '<option value='.$x.'><h3 style="text-align:right" size:"1">'.$x.'</h3></option>';

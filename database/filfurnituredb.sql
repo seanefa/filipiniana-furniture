@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2017 at 08:52 AM
+-- Generation Time: Sep 22, 2017 at 03:34 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -235,7 +235,7 @@ CREATE TABLE `tbldelivery` (
 --
 
 INSERT INTO `tbldelivery` (`deliveryID`, `deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryDate`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES
-(1, 1, 2, '2017-09-11 00:00:00', 0, '#123 Alton Street BHQC', 'TBD', 'Pending');
+(1, 1, 2, '2017-09-29 00:00:00', 0, '#123 Alton Street BHQCMNL', '', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1215,7 +1215,7 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (103, 33, 3, 1, '2017-09-14', '2017-09-12', ' ', 'Finished'),
 (104, 33, 4, 1, '2017-09-15', '2017-09-15', ' ', 'Finished'),
 (105, 33, 5, 1, '2017-09-21', '2017-09-14', ' ', 'Finished'),
-(106, 34, 1, NULL, NULL, NULL, NULL, 'Pending'),
+(106, 34, 1, 1, '2017-09-22', NULL, ' ', 'Ongoing'),
 (107, 34, 2, NULL, NULL, NULL, NULL, 'Pending'),
 (108, 34, 5, NULL, NULL, NULL, NULL, 'Pending'),
 (109, 35, 1, NULL, NULL, NULL, NULL, 'Pending'),
@@ -1362,19 +1362,18 @@ CREATE TABLE `tblrelease_details` (
   `rel_detailsID` int(11) NOT NULL,
   `tblreleaseID` int(11) NOT NULL,
   `rel_orderReqID` int(11) NOT NULL,
-  `rel_quantity` int(11) NOT NULL,
-  `rel_status` varchar(45) NOT NULL
+  `rel_quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblrelease_details`
 --
 
-INSERT INTO `tblrelease_details` (`rel_detailsID`, `tblreleaseID`, `rel_orderReqID`, `rel_quantity`, `rel_status`) VALUES
-(1, 1, 5, 1, 'Released'),
-(2, 2, 6, 3, 'Pending'),
-(3, 3, 3, 1, 'Released'),
-(4, 3, 4, 1, 'Released');
+INSERT INTO `tblrelease_details` (`rel_detailsID`, `tblreleaseID`, `rel_orderReqID`, `rel_quantity`) VALUES
+(1, 1, 5, 1),
+(2, 2, 6, 3),
+(3, 3, 3, 1),
+(4, 3, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -1578,7 +1577,6 @@ ALTER TABLE `tblcust_req_images`
 --
 ALTER TABLE `tbldelivery`
   ADD PRIMARY KEY (`deliveryID`),
-  ADD KEY `empAssignedID_idx` (`deliveryEmpAssigned`),
   ADD KEY `tblreleaseid_tbldelivery_idx` (`deliveryReleaseID`);
 
 --
@@ -2339,7 +2337,6 @@ ALTER TABLE `tblcust_req_images`
 -- Constraints for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
-  ADD CONSTRAINT `empAssignedID` FOREIGN KEY (`deliveryEmpAssigned`) REFERENCES `tblemployee` (`empID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tblreleaseid_tbldelivery` FOREIGN KEY (`deliveryReleaseID`) REFERENCES `tblrelease` (`releaseID`) ON UPDATE CASCADE;
 
 --
