@@ -1,12 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION["userID"]))
-{
-  header("Location: login.php");
-}
-$userid = $_SESSION["userID"];
-$_SESSION['passId'] = $userid;
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +10,15 @@ $_SESSION['passId'] = $userid;
 </head>
 <body>
 <div class="wrapper-wide">
-<?php include"header.php";?>
+<?php include"header.php";
+	if(!isset($_SESSION["userID"]))
+	{
+		echo "<script>
+		window.location.href='login.php';
+		alert('You have no access here. You must logged in first.');
+		</script>";
+	}
+	?>
   <div id="container">
     <div class="container">
       <!-- Breadcrumb Start-->
