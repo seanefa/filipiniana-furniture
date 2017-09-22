@@ -2,11 +2,8 @@
 
 $conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
-$unitName = "";
+$unitName = strip_tags($_POST['username']);
 
-if(isset($_POST['username'])){
-	$unitName = strip_tags($_POST['username']);
-}
 
 $unitName = mysqli_real_escape_string($conn,$unitName);
 
@@ -17,7 +14,7 @@ $result = mysqli_query($conn, $sql);
 $rowcount = mysqli_num_rows($result);
 
 // Company Name
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $unitName)){
+if(preg_match('/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/', $unitName)){
 	echo "Symbols not allowed";
 }
 else{

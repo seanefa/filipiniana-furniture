@@ -21,7 +21,7 @@ $result = mysqli_query($conn, $sql);
 $rowcount = mysqli_num_rows($result);
 
 // Company Name
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $unitName)){
+if(preg_match('/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/', $unitName)){
 	echo "Symbols not allowed";
 }
 else{
@@ -53,7 +53,7 @@ $result2 = mysqli_query($conn, $sql2);
 $rowcount2 = mysqli_num_rows($result2);
 
 // Company Address
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $unitMeasure)){
+if(preg_match('/[\'\/\\\^£$%&*}{@#~?><!>;:`"|=_¬]/', $unitMeasure)){
 	echo "Symbols not allowed";
 }
 else{

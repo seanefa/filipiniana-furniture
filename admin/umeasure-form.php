@@ -97,7 +97,7 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" name="uType" class="form-control" value="<?php echo $rrow['unType'];?>" onkeyup="updateValidate('name')" required/><span id="messagename"></span>
+                        <input type="text" id="editname" name="uType" class="form-control" value="<?php echo $rrow['unType'];  $_SESSION['tempname'] = $rrow['unType'];?>" onkeyup="updateValidate('name')" required/><span id="messagename"></span>
                         </div>
                       </div>
                     </div>

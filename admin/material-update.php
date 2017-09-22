@@ -12,6 +12,10 @@ $str = $_POST['attribs'];
 $status = "Listed";
 $flag = 0;
 
+$name = mysqli_real_escape_string($conn,$name);
+$type = mysqli_real_escape_string($conn,$type);
+$str = mysqli_real_escape_string($conn,$str);
+
 $sql = "UPDATE `tblmaterials` SET `materialType`='$type', `materialName`='$name' WHERE `materialID`='$id';";
 mysqli_query($conn,$sql);
 echo $sql . "<br>";

@@ -161,7 +161,7 @@ var flag = true;
       $('#message'+id).html('Symbols not Allowed');
       $('#edit'+id).css('border-color','red');
       }else{
-    $.post('supplier-ucheck.php',{username : user}, function(data){
+    $.post('umeasure-ucheck.php',{username : user}, function(data){
      
      if(data == 'unchanged'){
       error = 0;

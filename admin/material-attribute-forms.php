@@ -32,7 +32,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Attribute Name</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="materialName" class="form-control" name="name" required><span id="message"></span> 
+                    <input type="text" id="materialName" class="form-control" maxlength="45" name="name" required><span id="message"></span> 
                   </div>
                 </div>
               </div>
@@ -41,7 +41,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Measurement(s)</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" multiple="multiple" data-placeholder="Select Measurement Category" tabindex="1" name="attribs[]" id="attribs">
+                    <select class="form-control" multiple="multiple" data-placeholder="Select Measurement Category" tabindex="1" name="attribs[]" id="attribs" required>
                       <?php
                       $sql = "SELECT * FROM tblunitofmeasurement_category order by uncategoryName;";
                       $result = mysqli_query($conn, $sql);
@@ -93,7 +93,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Attribute Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['attributeName']; $_SESSION['tempname'] =$trow['attributeName'];?>"required /><span id="message1"></span> </div>
+                        <input type="text" id="editname" maxlength="45" class="form-control" name="name" value="<?php echo $trow['attributeName']; $_SESSION['tempname'] =$trow['attributeName'];?>" required/><span id="message1"></span> </div>
                       </div>
                     </div>
 
@@ -121,7 +121,7 @@ if (!$conn) {
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="control-label">Measurement</label><span id="x" style="color:red"> *</span>
-                            <select class="form-control" multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs">
+                            <select class="form-control"  multiple="multiple" data-placeholder="Select Variant Attributes" tabindex="1" name="attribs[]" id="attribs" required>
                               <?php
                               $sql1 = "SELECT * FROM tblattributes a, tblattribute_measure b, tblunitofmeasurement_category c WHERE a.attributeStatus = 'Active' AND a.attributeID = '$jsID' AND b.attributeID = a.attributeID AND b.uncategoryID = c.uncategoryID;";
                               $res = mysqli_query($conn,$sql1);

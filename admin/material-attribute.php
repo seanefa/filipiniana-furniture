@@ -56,7 +56,7 @@ else if (isset($_GET['reactivateSuccess']))
     $(document).ready(function(){
     // Material Type Name
     var userkey = '';
-    $('body').on('keyup','#matTypeName',function(){
+    $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
 
@@ -67,10 +67,10 @@ else if (isset($_GET['reactivateSuccess']))
 
       $('#saveBtn').prop('disabled',true);
       $('#message').html('Symbols not allowed');
-      $('#matTypeName').css('border-color','red');
+      $('#materialName').css('border-color','red');
       }else{
-      $.post('material-attribute-check.php',{matTypeName : user}, function(data){ 
-        $('#matTypeNameValidate').html(data);
+      $.post('material-attribute-check.php',{username : user}, function(data){ 
+        $('#message').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
         flag = true;
@@ -90,11 +90,11 @@ else if (isset($_GET['reactivateSuccess']))
 
         if(flag){
           $('#saveBtn').prop('disabled',true);
-          $('#matTypeName').css('border-color','red');
+          $('#materialName').css('border-color','red');
         }
         else if(!flag){
           $('#saveBtn').prop('disabled', false);
-          $('#matTypeName').css('border-color','limegreen');
+          $('#materialName').css('border-color','limegreen');
         }
       });
     }
@@ -117,7 +117,7 @@ var userkey = '';
 
       if(userkey == '\\'){
         $('#updateBtn').prop('disabled',true);
-      $('#message').html('Symbols not allowed');
+      $('#message1').html('Symbols not allowed');
       $('#editname').css('border-color','red');
       }else{
     $.post('material-attribute-ucheck.php',{username : user}, function(data){
@@ -126,20 +126,35 @@ var userkey = '';
       if(data != "Already Exist!" && data !="unchanged"){
           flag = false;
           error = 0;
-        $('#message').html("");
+        $('#message1').html("");
         $('#updateBtn').prop('disabled', false);
       $('#editname').css('border-color','limegreen');
 
       }
+      if(data == "White space not allowed"){
+        flag = true;
+        error++;
+        $('#message1').html(data);
+         $('#updateBtn').prop('disabled',true);
+
+      $('#editname').css('border-color','red');
+      }
+      if(data == "Symbols not allowed"){
+        flag = true;
+        error++;
+        $('#message1').html(data);
+         $('#updateBtn').prop('disabled',true);
+      $('#editname').css('border-color','red');
+      }
       if(data == "unchanged"){
         error = 0;
-        $('#message').html("");
+        $('#message1').html("");
       $('#editname').css('border-color','black')
       }
             else if(data == "Already Exist!"){
         flag = true;
         error++;
-        $('#message').html(data);
+        $('#message1').html(data);
          $('#updateBtn').prop('disabled',true);
 
       $('#editname').css('border-color','red');

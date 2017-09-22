@@ -70,7 +70,7 @@ if (!$conn)
                         </select>
                     </div>
                     <div class="col-xs-7" id="input_multiple">
-                        <select class="form-control" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib[]" id="attrib" required>
+                        <select class="form-control" onkeyup="updateValidate('0')" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib[]" id="attrib0" required><span id="message0"></span>
                     </select>
                         <div class="control-label" id="input_field"></div>
                     </div>
@@ -79,7 +79,7 @@ if (!$conn)
               <div class="row">
                   <div class="form-group" id="dynamic_field">
                     <div class="col-xs-5">
-                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs1">
+                        <select class="form-control" data-placeholder="Select Attributes" tabindex="1" name="attribs[]" id="attribs1"><span id="message1"></span>
                           <?php
                           $sql = "SELECT * FROM tblattributes;";
                           $result = mysqli_query($conn, $sql);
@@ -93,7 +93,7 @@ if (!$conn)
                         </select>
                     </div>
                     <div class="col-xs-7" id="input_multiple">
-                        <select class="form-control" disabled="true" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib1[]" id="attrib1">
+                        <select class="form-control" disabled="true" onkeyup="updateValidate('1')" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib1[]" id="attrib1">
                     </select>
                         <div class="control-label" id="input_field1"></div>
                     </div>
@@ -116,7 +116,7 @@ if (!$conn)
                         </select>
                     </div>
                     <div class="col-xs-7" id="input_multiple">
-                        <select class="form-control" disabled="true" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib2[]" id="attrib2">
+                        <select class="form-control" disabled="true" multiple="multiple" data-placeholder="(separated by comma or enter)" tabindex="1" name="attrib2[]" onkeyup="updateValidate('2')" id="attrib2"><span id="message2"></span>
                     </select>
                         <div class="control-label" id="input_field2"></div>
                     </div>
@@ -143,6 +143,7 @@ if (!$conn)
               </div>-->
 
               </div>
+              
 
             </div>
           </div>
@@ -220,7 +221,7 @@ if (!$conn)
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Material Variant</label>
-                      <textarea class="form-control" rows="2" name="description" id="description" required><?php echo $trow['mat_varDescription']?></textarea>
+                      <textarea class="form-control" rows="2" name="description" id="description" required><?php echo $trow['mat_varDescription']?></textarea><span id='descValid'></span>
                     </div>
                   </div>
                 </div>

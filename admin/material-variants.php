@@ -90,6 +90,103 @@ else if (isset($_GET['reactivateSuccess']))
 
   });
 
+  $(document).ready(function(){
+    // Material Attribute
+    $('body').on('keyup','#description',function(){
+      var user = $(this).val();
+      var flag = true;
+      $.post('variants-check.php',{attribb : user}, function(data){ 
+       
+
+        if(data == "White Space not allowed"){
+          flag = true;
+        }
+          if(data == "Symbols not allowed"){
+        flag = true;
+      }
+      
+      else if(data == "good"){
+        flag = false;
+      }
+
+        if(flag){
+          $('#saveBtn').prop('disabled',true);
+          $('#description').css('border-color','red');
+           $('#descValid').html(data);
+        }
+        else if(!flag){
+          $('#saveBtn').prop('disabled', false);
+          $('#description').css('border-color','limegreen');
+           $('#descValid').html("");
+        }
+      });
+    });
+
+  });
+
+
+ function updateValidate(id){
+    var user = $('#attrib'+id).val();
+
+      tempname = $('#attrib'+id).val();
+      temprem = $('#rem').val();
+      
+    userkey = $('#attrib'+id).val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html('Symbols not Allowed');
+      $('#attrib'+id).css('border-color','red');
+      }else{
+    $.post('variants-check.php',{username : user}, function(data){
+     
+     if(data == 'unchanged'){
+      error = 0;
+       $('#message'+id).html('');
+          $('#saveBtn').prop('disabled',false);
+      $('#attrib'+id).css('border-color','black');
+     }
+     else if(data == 'Already Exist!'){
+       error++;
+          $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#attrib'+id).css('border-color','red');
+     }
+     else if(data == 'Symbols not allowed'){
+       error++;
+          $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#attrib'+id).css('border-color','red');
+     }
+     else if(data == 'No white Space'){
+       error++;
+
+          $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#attrib'+id).css('border-color','red');
+     }
+     else if(data == ''){
+      error = 0;
+          $('#message'+id).html('');
+          $('#saveBtn').prop('disabled',true);
+      $('#attrib'+id).css('border-color','black');
+     }
+
+     
+     else if(data == 'Good!'){
+      error = 0;
+       $('#message'+id).html('');
+     $('#saveBtn').prop('disabled',false);
+      $('#attrib'+id).css('border-color','limegreen');
+     }
+
+
+    });
+  }
+
+  }
+
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
 
@@ -243,7 +340,7 @@ $(document).ready(function(){
       
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
-    $("#attrib").select2({
+    $("#attrib0").select2({
       tags: true,
       tokenSeparators: [',']
     });
@@ -292,7 +389,7 @@ $(document).ready(function(){
       
 $(document).ready(function(){
  $('#myModal').on('shown.bs.modal',function(){
-    $("#attrib").on('change',function(){
+    $("#attrib0").on('change',function(){
         if($(this).val()){
             $("#attrib1").prop('disabled',false);
         }

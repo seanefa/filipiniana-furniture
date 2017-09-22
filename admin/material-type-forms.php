@@ -35,7 +35,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                      <label class="control-label">Name</label> <span id="x" style="color:red"> *</span>
-                      <input type="text" id="matTypeName" class="form-control" name="name" required><span id="matTypeNameValidate"></span>
+                      <input type="text" maxlength="45" id="matTypeName" class="form-control" name="name" required><span id="matTypeNameValidate"></span>
                     </div>
                   </div>
                 </div>

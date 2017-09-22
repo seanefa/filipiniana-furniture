@@ -32,8 +32,10 @@ $result = mysqli_query($conn, $sql);
 
 $rowcount = mysqli_num_rows($result);
 
+$regex = '/[\'\/\\\^£$%&*}()\\[\\]{@#~?><!>;:`\'\"|=_¬]/';
+
 // Company Name
-if(preg_match('/[\\/\'\\^£$%&*}{@#~?><!>,|=_¬]/', $companyName)){
+if(preg_match($regex, $companyName)){
 	echo "Symbols not allowed";
 }
 else{
@@ -66,7 +68,7 @@ $result2 = mysqli_query($conn, $sql2);
 $rowcount2 = mysqli_num_rows($result2);
 
 // Company Address
-if(preg_match('/[\\/\'\\^£$%&*()}{@~?><!>|=_+¬-]/', $companyAddress)){
+if(preg_match($regex, $companyAddress)){
 	echo "Symbols not allowed";
 }
 else{
@@ -118,7 +120,7 @@ $result4 = mysqli_query($conn, $sql4);
 $rowcount4 = mysqli_num_rows($result4);
 
 // Contact Person
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $contactPerson)){
+if(preg_match($regex, $contactPerson)){
 	echo "Symbols not allowed";
 	}
 else{
@@ -149,7 +151,7 @@ $result5 = mysqli_query($conn, $sql5);
 $rowcount5 = mysqli_num_rows($result5);
 
 // Position
-if(preg_match('/[\\/\'\\^£$%&*()}{@#~?><!>,|=_+¬-]/', $position)){
+if(preg_match($regex, $position)){
 	echo "Symbols not allowed";
 	}
 else{

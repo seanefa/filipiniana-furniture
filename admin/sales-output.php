@@ -139,7 +139,7 @@ $tpriceArray = array();
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table display' id='reportsTable'>
     <thead>
   <tr>
   <th>Product ID</th>

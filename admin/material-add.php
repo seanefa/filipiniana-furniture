@@ -13,6 +13,18 @@ $acntr = $_POST['counter'];
 $categorycnt = $_POST['categorycounter'];
 $status = "Listed";
 $flag = 0;
+
+$name = mysqli_real_escape_string($conn,$name);
+$type = mysqli_real_escape_string($conn,$type);
+$str = mysqli_real_escape_string($conn,$str);
+$des = mysqli_real_escape_string($conn,$des);
+$ucat = mysqli_real_escape_string($conn,$ucat);
+$valu = mysqli_real_escape_string($conn,$valu);
+$un = mysqli_real_escape_string($conn,$un);
+$acntr = mysqli_real_escape_string($conn,$acntr);
+$categorycnt = mysqli_real_escape_string($conn,$categorycnt);
+
+
 //$attribs = substr(trim($str), 0, -1);
 //ATTRIBUTES SAVING
 /*$sql = "SELECT * FROM tblattributes;";$res = mysqli_query($conn,$sql);

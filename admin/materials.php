@@ -58,7 +58,12 @@ else if (isset($_GET['reactivateSuccess']))
     $('body').on('keyup','#materialName',function(){
       var user = $(this).val();
       var flag = true;
-      $.post('material-check.php',{materialName : user}, function(data){ 
+      if(user == '\\'){
+        $('#saveBtn').prop('disabled',true);
+          $('#materialName').css('border-color','red');
+          $('#materialNameValidate').html('Symbols not Allowed');
+      }else{
+      $.post('material-check.php',{username : user}, function(data){ 
         $('#materialNameValidate').html(data);
         if(data != "Data Already Exist!"){
           if(data == "Symbols not allowed"){
@@ -86,67 +91,112 @@ else if (isset($_GET['reactivateSuccess']))
           $('#materialName').css('border-color','limegreen');
         }
       });
+    }
     });
 
   });
    
   $(document).ready(function(){
-    var temprem;
-    var tempname;
-    var error = 0;
-    $('body').on('keyup','#editname',function(){
-      var user = $(this).val();
+var temprem;
+var tempname;
+var error = 0;
+var flag = true
+var userkey = ''; 
 
+
+
+  $('body').on('keyup','#editname',function(){
+    var user = $(this).val();
+    
       tempname = $('#editname').val();
       temprem = $('#rem').val();
-      $.post('frame-mat-Ucheck.php',{username : user}, function(data){
+
+      userkey = $('#editname').val();
+      userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#message').html('Symbols not allowed');
+          $('#updateBtn').prop('disabled',false);
+      $('#editname').css('border-color','red');
+      }else{
+    $.post('material-ucheck.php',{username : user}, function(data){
+     
+     if(data == 'unchanged'){
+      error = 0;
+       $('#message').html('');
+          $('#updateBtn').prop('disabled',false);
+      $('#editname').css('border-color','black');
+     }
+     else if(data == 'Already Exist!'){
+       error++;
+          $('#updateBtn').prop('disabled',true);
+      $('#message').html(data);
+      $('#editname').css('border-color','red');
+     }
+     else if(data == 'Symbols not allowed'){
+       error++;
+          $('#updateBtn').prop('disabled',true);
+      $('#message').html(data);
+      $('#editname').css('border-color','red');
+     }
+     else if(data == 'No white Space'){
+       error++;
+
+          $('#updateBtn').prop('disabled',true);
+      $('#message').html(data);
+      $('#editname').css('border-color','red');
+     }
+     else if(data == ''){
+      error = 0;
+          $('#message').html('');
+          $('#updateBtn').prop('disabled',true);
+      $('#editname').css('border-color','black');
+     }
+
+     
+     else if(data == 'Good!'){
+      error = 0;
+       $('#message').html('');
+     $('#updateBtn').prop('disabled',false);
+      $('#editname').css('border-color','limegreen');
+     }
 
 
-        if(data != "Already Exist!" && data !="unchanged"){
-          flag = false;
-          error =0;
-          $('#message').html("");
-          $('#updateBtn').prop('disabled', false);
-          $('#editname').css('border-color','limegreen');
+    });
 
-        }
-        if(data == "unchanged"){
-          error = 0;
-          $('#message').html("");
-          $('#updateBtn').prop('disabled', true);
-          $('#editname').css('border-color','black')
-        }
-        else if(data == "Already Exist!"){
-          flag = true;
-          error++;
-          $('#message').html(data);
+    }
+
+  });
+        $('body').on('change','#select',function(){
+          if($(this).val() == '--'){
+
+
           $('#updateBtn').prop('disabled',true);
 
-          $('#editname').css('border-color','red');
+            }
+            else{
+          if(error == 0){
+          $('#updateBtn').prop('disabled',false);
         }
+        else{
+          $('#updateBtn').prop('disabled',true);
+        }
+        }
+
 
       });
 
-
-
-    });
-    $('body').on('change','#rem',function(){
-      if(error == 0){
-        $('#updateBtn').prop('disabled',false);
-      }
-
-    });
-    $('body').on('keyup','#remText',function(){
-      var tem = $(this).val();
-      if(error == 0){
+        $('body').on('keyup','#rem',function(){
+        var tem = $(this).val();
+        if(error == 0){
         flag = false;
         if(!flag){
           $('#updateBtn').prop('disabled',false);
         }
-      }
-    });
+        }
+      });
 
-  });
+});
 
 $(function(){ // DOM ready
 
@@ -433,8 +483,8 @@ $(document).ready(function(){
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFrameworkMaterial">
                           <thead>
                             <tr>
-                              <th>Name</th>
-                              <th>Category</th>
+                              <th>Type</th>
+                              <th>Brand/Name</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
@@ -446,8 +496,9 @@ $(document).ready(function(){
                             while ($row = mysqli_fetch_assoc($result))
                             {
                               if($row['materialStatus']=="Listed"){
-                                echo('<tr><td>'.$row['materialName'].'</td>
-                                <td>'.$row['matTypeName'].'</td>'); ?>
+                                echo('<tr>
+                                <td>'.$row['matTypeName'].'</td>
+                                <td>'.$row['materialName'].'</td>'); ?>
                                 <td>
                                   <!-- UPDATE -->
                                   <button type="button" class="btn btn-success" data-toggle="modal" href="material-form.php" data-remote="material-form.php?id=<?php echo $row['materialID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>

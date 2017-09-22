@@ -144,7 +144,7 @@ if (!$conn) {
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Brand/Name</label><span id="x" style="color:red"> *</span>
-                        <input type="text" id="username" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>"required /><span id="message"></span> </div>
+                        <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['materialName']; $_SESSION['tempname'] =$trow['materialName'];?>" required /><span id="message"></span> </div>
                       </div>
                     </div>
 
@@ -215,7 +215,7 @@ if (!$conn) {
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+                  <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>
 
