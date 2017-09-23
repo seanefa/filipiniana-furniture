@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_SESSION['varname'];
 $editName = $_POST['name'];
@@ -20,8 +19,8 @@ if(mysqli_query($conn,$updateSql)){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabric Pattern', 'Update', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: fabric-pattern.php" );
+	header( "Location: fabric-pattern.php?updateSuccess" );
 } else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: fabric-pattern.php?actionFailed" );
   }
 ?>

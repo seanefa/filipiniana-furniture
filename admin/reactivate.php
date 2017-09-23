@@ -20,7 +20,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: supplier.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: supplier.php?actionFailed" );
 }
 }
 
@@ -30,7 +30,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: unit-of-measurement-category.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: unit-of-measurement-category.php?actionFailed" );
 }
 }
 
@@ -40,7 +40,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: unit-of-measurement.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: unit-of-measurement.php?actionFailed" );
 }
 }
 
@@ -52,7 +52,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: material-attribute.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: material-attribute.php?actionFailed" );
 }
 }
 
@@ -64,7 +64,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: material-type.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: material-type.php?actionFailed" );
 }
 }
 
@@ -76,7 +76,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: materials.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: materials.php?actionFailed" );
 }
 }
 
@@ -88,7 +88,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: material-variants.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: material-variants.php?actionFailed" );
 }
 }
 
@@ -98,7 +98,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: category.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: category.php?actionFailed" );
 }
 }
 
@@ -109,7 +109,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: furniture-type.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: furniture-type.php?actionFailed" );
 }
 }
 
@@ -120,7 +120,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: fabric-texture.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: fabric-texture.php?actionFailed" );
 }
 }
 
@@ -131,7 +131,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: fabric-type.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: fabric-type.php?actionFailed" );
 }
 }
 
@@ -141,7 +141,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: fabric-pattern.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: fabric-pattern.php?actionFailed" );
 }
 }
 
@@ -152,7 +152,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: fabrics.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: fabrics.php?actionFailed" );
 }
 }
 
@@ -163,7 +163,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: frame-design.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: frame-design.php?actionFailed" );
 }
 }
 
@@ -176,7 +176,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: framework-material.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: framework-material.php?actionFailed" );
 }
 }
 
@@ -188,7 +188,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: frameworks.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: frameworks.php?actionFailed" );
 }
 }
 
@@ -200,7 +200,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: products.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: products.php?actionFailed" );
 }
 }
 
@@ -212,7 +212,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: packages.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: packages.php?actionFailed" );
 }
 }
 
@@ -224,7 +224,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: production-information.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: production-information.php?actionFailed" );
 }
 }
 
@@ -236,7 +236,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: jobs.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: jobs.php?actionFailed" );
 }
 }
 
@@ -248,7 +248,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: employees.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: employees.php?actionFailed" );
 }
 }
 
@@ -260,7 +260,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: promo.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: promo.php?actionFailed" );
 }
 }
 
@@ -271,7 +271,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: delivery-rates.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: delivery-rates.php?actionFailed" );
 }
 }
 
@@ -283,7 +283,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: branches.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: branches.php?actionFailed" );
 }
 }
 
@@ -294,7 +294,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: users.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: users.php?actionFailed" );
 }
 }
 
@@ -305,7 +305,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: mode-of-payment.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: mode-of-payment.php?actionFailed" );
 }
 }
 
@@ -316,7 +316,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: penalties.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: penalties.php?actionFailed" );
 }
 }
 
@@ -327,7 +327,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: phases.php?reactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: phases.php?actionFailed" );
 }
 }
 

@@ -1,4 +1,5 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
 
 $promo = $_POST['promo'];
@@ -31,7 +32,7 @@ foreach($prods as $a){
  	echo "lo";
  } 
  else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   header( "Location: product-management.php?actionFailed" );
 }
 
 mysqli_close($conn);

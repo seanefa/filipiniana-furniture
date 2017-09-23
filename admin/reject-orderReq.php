@@ -1,5 +1,6 @@
 <?php
-session_start();
+include "session-check.php";
+include 'dbconnect.php';
 
 $id = $_POST['id'];
 $reason = "No reason.";
@@ -8,7 +9,7 @@ if($_POST['reason']!=""){
 }
 
 $flag = 0;
-include 'dbconnect.php';
+
 $updateSql = "UPDATE tblorders SET orderStatus = 'Rejected', orderRemarks =  '$reason' WHERE orderID = $id";
 if(mysqli_query($conn,$updateSql)){
 	$flag++;
@@ -24,6 +25,6 @@ if($flag>0){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: orders.php?actionFailed" );
 }
 ?>

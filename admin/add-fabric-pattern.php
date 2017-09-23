@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['name'];
 $remarks = $_POST['remarks'];
@@ -22,6 +21,6 @@ if (mysqli_query($conn, $sql)) {
 	// Logs end here
 	header( "Location: fabric-pattern.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: fabric-pattern.php?actionFailed" );
   }
 ?>

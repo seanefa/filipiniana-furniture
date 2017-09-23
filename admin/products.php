@@ -1,18 +1,7 @@
 <?php
 include "titleHeader.php";
 include "menu.php";
-//session_start();
-/*if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 
 if (isset($_GET['newSuccess']))
 {

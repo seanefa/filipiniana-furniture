@@ -1,12 +1,13 @@
 <?php
-session_start();
+include "session-check.php";
+include 'dbconnect.php';
+
 $id = $_POST['id'];
 $flag = 0;
 $reason = "No reason.";
 if($_POST['reason']!=""){
 	$reason = $_POST['reason'];
 }
-include 'dbconnect.php';
 
 $updateSql = "UPDATE tblorders SET orderStatus = 'Cancelled', orderRemarks =  '$reason' WHERE orderID = $id";
 mysqli_query($conn,$updateSql);
@@ -25,6 +26,6 @@ if($flag){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: orders.php?actionFailed" );
 }
 ?>

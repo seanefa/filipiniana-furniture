@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
 
 $name = $_POST['name'];
@@ -8,7 +8,6 @@ $num = $_POST['number'];
 $abt=$_POST['about'];
 $email=$_POST['email'];
 $pic = "";
-
 
 $sql = "SELECT * from tblcompany_info;";
 $result = $conn->query($sql);
@@ -42,15 +41,11 @@ else
 
 if(mysqli_query($conn,$exec))
 {
-	
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: company-information.php" );
-	echo '</script>';
+	header( "Location: company-information.php?updateSuccess" );
 }
 else
 {
-	echo "Error: " . $exec . "<br>" . mysqli_error($conn);
+	header( "Location: company-information.php?actionFailed" );
 }
 $conn->close();
 ?>

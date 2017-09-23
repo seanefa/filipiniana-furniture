@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $type = $_POST['uType'];
 $rate = $_POST['uUnit'];
@@ -31,7 +30,7 @@ if ($flag>0) {
 	// Logs end here
 	header( "Location: unit-of-measurement.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: unit-of-measurement.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

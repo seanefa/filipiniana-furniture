@@ -1,5 +1,6 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
 
 $recID = $_POST['recID'];
 $orID = $_POST['orID'];
@@ -30,7 +31,6 @@ if(mysqli_query($conn,$sql)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: production.php?actionFailed" );
 }
-
 ?>

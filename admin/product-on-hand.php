@@ -1,4 +1,5 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
 
 $name = $_POST['name'];
@@ -11,7 +12,7 @@ if($sql){
    header( "Location: materials.php?newSuccess" );
  } 
  else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   header( "Location: materials.php?actionFailed" );
 }
 
 mysqli_close($conn);

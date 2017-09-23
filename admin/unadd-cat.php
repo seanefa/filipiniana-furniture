@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['username'];
 $remarks = $_POST['remarks'];
@@ -20,7 +19,7 @@ if (mysqli_query($conn,$sql)) {
 	// Logs end here
     header( "Location: unit-of-measurement-category.php?newSuccess" );
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    header( "Location: unit-of-measurement-category.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

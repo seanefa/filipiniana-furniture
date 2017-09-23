@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_POST['id'];
 $name = $_POST['compname'];
@@ -24,7 +23,6 @@ if(mysqli_query($conn,$updateSql)){
 	// Logs end here
 	header( "Location: supplier.php?updateSuccess" );
 } else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: supplier.php?actionFailed" );
   }
-//echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
 ?>

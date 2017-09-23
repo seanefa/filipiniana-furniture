@@ -12,7 +12,7 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: default-downpayment.php?updateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: default-downpayment.php?actionFailed" );
 }
 
 ?>

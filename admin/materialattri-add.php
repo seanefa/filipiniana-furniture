@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['name'];
 $str = $_POST['attribs'];
@@ -64,7 +63,7 @@ if ($flag>0) {
 	// Logs end here
 	header( "Location: material-attribute.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: material-attribute.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

@@ -1,18 +1,7 @@
 <?php
 include "titleHeader.php";
 include "menu.php";  
-//session_start();
-/* if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 
 if (isset($_GET['newSuccess']))
 {
@@ -43,6 +32,14 @@ else if (isset($_GET['reactivateSuccess']))
   echo  '<script>';
   echo '$(document).ready(function () {';
   echo 'document.getElementById("toastReactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['actionFailed']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastFailed").click();';
   echo '});';
   echo '</script>';
 }
@@ -369,6 +366,7 @@ $(document).ready(function(){
 <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
 <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
 <button class="tst4" id="toastReactivateSuccess" style="display: none;"></button>
+<button class="tst5" id="toastFailed" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">

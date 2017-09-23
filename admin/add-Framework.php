@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['name'];
 $material = $_POST['material'];
@@ -44,7 +43,7 @@ if (mysqli_query($conn, $sql)) {
 	// Logs end here
 	header( "Location: frameworks.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: frameworks.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

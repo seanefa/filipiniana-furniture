@@ -1,13 +1,6 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
-
 
 if(isset($_POST['check'])){
 	if(!empty($_POST['check'])) {
@@ -36,16 +29,11 @@ if(isset($_POST['check'])){
 	}
 	if($sql){
 		if (mysqli_query($conn, $sql)) {
-
 			echo $iPname;
-			echo '<script type="text/javascript">';
-			echo 'alert("RECORD SUCCESFULLY SAVED!")';
-			header( "Location: packages.php" );
-			echo '</script>';
-
+    		header( "Location: packages.php?newSuccess" );
 		} 
 		else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			header( "Location: packages.php?actionFailed" );
 		}
 
 		mysqli_close($conn);

@@ -1,13 +1,6 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
 
 $height = $_POST['cust_height'];
 $width = $_POST['cust_width'];
@@ -42,7 +35,7 @@ if($sql){
 		header( "Location: custom.php" );
 	} 
 	else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		header( "Location: custom.php?actionFailed" );
 	}
 
 	mysqli_close($conn);

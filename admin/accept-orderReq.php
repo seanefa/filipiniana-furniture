@@ -1,11 +1,11 @@
 <?php
-session_start();
+include "session-check.php";
+include 'dbconnect.php';
 
 $id = $_POST['id'];
 $remarks = $_POST['orderremarks'];
 $date = $_POST['pidate'];
 
-include 'dbconnect.php';
 $updateSql = "UPDATE tblorders SET orderStatus = 'Pending', orderRemarks =  '$remarks',dateOfRelease = '$date' WHERE orderID = $id";
 if(mysqli_query($conn,$updateSql)){
 	echo '<script type="text/javascript">';
@@ -14,6 +14,6 @@ if(mysqli_query($conn,$updateSql)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: orders.php?actionFailed" );
 }
 ?>

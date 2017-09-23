@@ -2,23 +2,60 @@
 include "titleHeader.php";
 include "menu.php";
 include "dbconnect.php";
-//session_start();
-/*if(isset($GET['id'])){
-   $jsID = $_GET['id']; 
- }
- $jsID=$_GET['id'];
- $_SESSION['varname'] = $jsID;*/
- include 'dbconnect.php';
- $conn = mysqli_connect($servername, $username, $password, $dbname);
- if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+
+if (isset($_GET['newSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastNewSuccess").click();';
+  echo '});';
+  echo '</script>';
 }
+else if (isset($_GET['updateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastUpdateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['deactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastDeactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['reactivateSuccess']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastReactivateSuccess").click();';
+  echo '});';
+  echo '</script>';
+}
+else if (isset($_GET['actionFailed']))
+{
+  echo  '<script>';
+  echo '$(document).ready(function () {';
+  echo 'document.getElementById("toastFailed").click();';
+  echo '});';
+  echo '</script>';
+}
+
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
 </head>
-<body class ="fix-header fix-sidebar">
+<body>
+    <!-- Toast Notification -->
+<button class="tst1" id="toastNewSuccess" style="display: none;"></button>
+<button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
+<button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
+<button class="tst4" id="toastReactivateSuccess" style="display: none;"></button>
+<button class="tst5" id="toastFailed" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">

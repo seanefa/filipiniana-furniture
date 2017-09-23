@@ -2,7 +2,6 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-
 if(!isset($_POST['prod'])){
 	echo "<script>
       window.location.href='production-information.php';
@@ -83,7 +82,7 @@ if($flag>1){
 	// Logs end here
 	header( "Location: production-information.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: production-information.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

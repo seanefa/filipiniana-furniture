@@ -1,14 +1,11 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 if(isset($GET['id'])){
 	$jsID = $_GET['id']; 
 }
 $jsID=$_GET['id'];
-
-include 'dbconnect.php';
 
 $updateSql = "UPDATE tblpackages SET packageStatus = 'Archived' WHERE packageID = '$jsID'";
 
@@ -24,6 +21,6 @@ if(mysqli_query($conn,$updateSql)){
 	header( "Location: packages.php?deactivateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: packages.php?actionFailed" );
 }
 ?>

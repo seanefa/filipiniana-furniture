@@ -1,5 +1,7 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
+
 $ = $_POST[''];
 $status = "Listed";
 
@@ -8,6 +10,6 @@ if(mysqli_query($conn,$sql)){
 	header( "Location: unit-of-measurement.php?newSuccess" );
 }
 else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: unit-of-measurement.php?actionFailed" );
 }
 ?>

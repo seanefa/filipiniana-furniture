@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $material = $_POST['material'];
 //$remarks = $_POST['remarks'];
@@ -109,7 +108,7 @@ if ($flag>0) {
 	// Logs end here
 	header( "Location: material-variants.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: material-variants.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

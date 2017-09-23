@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['ctgName'];
 $remarks = $_POST['remarks'];
@@ -22,7 +21,7 @@ if (mysqli_query($conn, $sql)){
 	// Logs end here
 	header( "Location: category.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: category.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

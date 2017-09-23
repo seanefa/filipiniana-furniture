@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['ctgName'];
 $cat = $_POST['cat'];
@@ -23,7 +22,7 @@ if (mysqli_query($conn, $sql)){
 	// Logs end here
 	header( "Location: furniture-type.php?newSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: furniture-type.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

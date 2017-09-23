@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $pName = $_POST['pName'];
 $price = $_POST['pPrice'];
@@ -29,7 +28,7 @@ if($sql){
 		$flag++;
 	} 
 	else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		header( "Location: packages.php?actionFailed" );
 	}
 }
 
@@ -71,7 +70,7 @@ if(isset($_POST['addis'])){
 		}
 		else{
 
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			header( "Location: packages.php?actionFailed" );
 		}
 	}
 }
@@ -91,7 +90,7 @@ if($flag>0){
 	// Logs end here
   	header( "Location: packages.php?updateSuccess" );
 } else {
-  	echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+  	header( "Location: packages.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

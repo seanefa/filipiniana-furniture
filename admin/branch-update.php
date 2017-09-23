@@ -1,13 +1,6 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-  // Check connection
-if (!$conn) {
-	die("Connection failed: " . mysqli_connect_error());
-}
 
 $id = $_SESSION['varname'];
 $editLocation = $_POST['location'];
@@ -21,13 +14,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tblbranches SET branchLocation='$editLocation', branchAddress='$editAddress', branchRemarks='$editRemarks' WHERE branchID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: branches.php" );
-	echo '</script>';
+	header( "Location: branches.php?updateSuccess" );
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: branches.php?actionFailed" );
 }
-
 ?>

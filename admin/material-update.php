@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_SESSION['varname'];
 
@@ -75,7 +74,7 @@ if ($flag>0) {
 	// Logs end here
 	header( "Location: materials.php?updateSuccess" );
 } else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	header( "Location: materials.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

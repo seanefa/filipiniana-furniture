@@ -1,4 +1,3 @@
-
 <?php
 $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);

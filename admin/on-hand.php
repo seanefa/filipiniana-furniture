@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
 
 $category = $_POST['func'];
@@ -17,7 +17,7 @@ if(mysqli_query($conn,$updateSql)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: product-management.php?actionFailed" );
 }
 }
 
@@ -40,7 +40,7 @@ if(mysqli_query($conn,$updateSql)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: product-management.php?actionFailed" );
 }
 }
 
@@ -63,9 +63,7 @@ if(mysqli_query($conn,$updateSql)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: product-management.php?actionFailed" );
 }
 }
-
-
 ?>

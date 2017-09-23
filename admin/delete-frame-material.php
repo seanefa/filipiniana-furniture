@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 if(isset($GET['id'])){
 	$jsID = $_GET['id']; 
@@ -21,6 +20,6 @@ if(mysqli_query($conn,$updateSql)){
 	// Logs end here
 	header( "Location: framework-material.php?deactivateSuccess" );
 } else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: framework-material.php?actionFailed" );
   }
 ?>

@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_SESSION['varname'];
 $editName = $_POST['name'];
@@ -22,6 +21,6 @@ if(mysqli_query($conn,$updateSql)){
 	// Logs end here
 	header( "Location: frame-design.php?updateSuccess" );
 } else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	header( "Location: frame-design.php?actionFailed" );
   }
 ?>

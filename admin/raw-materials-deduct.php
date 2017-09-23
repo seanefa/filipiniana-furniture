@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
 
 $id = $_SESSION['varname'];
@@ -30,7 +30,7 @@ if($sql){
    header( "Location: raw-materials-management.php?newSuccess" );
  } 
  else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   header( "Location: raw-materials-management.php?actionFailed" );
 }
 }
 mysqli_close($conn);

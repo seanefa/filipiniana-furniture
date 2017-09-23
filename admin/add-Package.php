@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $pName = $_POST['pName'];
 $price = $_POST['pPrice'];
@@ -45,7 +44,7 @@ if($flag>0){
 	// Logs end here
     header( "Location: packages.php?newSuccess" );
 } else {
-  	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  	header( "Location: packages.php?actionFailed" );
   }
 mysqli_close($conn);
 ?>

@@ -1,5 +1,7 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
+
 $orderID = $_POST['orderID'];
 $phaseID = $_POST['phaseID'];
 $type = $_POST['type'];
@@ -65,7 +67,6 @@ else{
 		else {
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
-
 	}
 }
 
