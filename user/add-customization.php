@@ -35,7 +35,7 @@ if($sql){
 		header( "Location: custom.php" );
 	} 
 	else {
-		header( "Location: custom.php?actionFailed" );
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 
 	mysqli_close($conn);
