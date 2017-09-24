@@ -3,12 +3,6 @@ $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
 include 'dbconnect.php';
 $id = $_GET['id'];
-//session_start();
-/*
-if(isset($_GET['customerId'])){
-$jsID = $_GET['customId']; 
-}*/
-//$_SESSION['varname'] = 3;
 $existingOrder = 0;
 if(isset($_GET['id'])){
   $existingOrder = $_GET['id']; 
@@ -195,7 +189,7 @@ $(document).ready(function(){ //wala lang
                           <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
                           <div class="panel-body">
                               <h2 style="text-align: center;">Orders</h2>
-                              <a class="btn btn-info" style="color:white; margin-top:-15px; position: absolute;" href="shop.php?id=<?php echo $id;?>"><i class="ti-plus"></i> Add Product</a>
+                              <a class="btn btn-info" style="color:white; margin-top:-15px; position: absolute;" href="ordering.php?id=<?php echo $id;?>"><i class="ti-plus"></i> Add Product</a>
                             <div class="table-responsive">
                               <table class="table product-overview" id="tblOrders" style="border: 2px solid #E4E7EA; margin-top: 35px;">
                                 <thead>
