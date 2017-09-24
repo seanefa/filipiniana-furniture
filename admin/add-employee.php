@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $fn = $_POST['fn'];
 $mn = $_POST['mn'];
@@ -22,8 +21,7 @@ echo count($job);
 foreach ($job as $j){
 	$sql1 = "INSERT INTO `tblemp_job` (`emp_empID`, `emp_jobDescID`, `emp_jobStatus`) VALUES ('$empID', '$j', '$status');";
 	mysqli_query($conn,$sql1);
-	echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
-	echo $sql1. "<br>";
+	header( "Location: employees.php?actionFailed" );
 }
 
 if ($result) {
@@ -35,9 +33,12 @@ if ($result) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Employees', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: employees.php?newSuccess" );
-} else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

@@ -1,35 +1,24 @@
   <?php
+  include "session-check.php";
+  include 'dbconnect.php';
 
   $location = $_POST['location'];
   $address = $_POST['address'];
   $remarks = $_POST['remarks'];
   $status = "Listed";
 
-
-  include 'dbconnect.php';
-
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-    // Check connection
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-
   $remarks = mysqli_real_escape_string($conn,$remarks);
 
   $sql = "INSERT INTO `tblbranches` (`branchLocation`, `branchAddress`, `branchRemarks`, `branchStatus`) VALUES ('$location', '$address', '$remarks', '$status')";
   if($sql){
     if (mysqli_query($conn, $sql)) {
-
-      echo '<script type="text/javascript">';
-      echo 'alert("RECORD SUCCESFULLY SAVED!")';
-      header( "Location: branches.php" );
-      echo '</script>';
-
-    } 
-    else {
-      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
+      $_SESSION['createSuccess'] = 'Success';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 
     mysqli_close($conn);

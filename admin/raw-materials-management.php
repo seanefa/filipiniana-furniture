@@ -1,36 +1,48 @@
 <?php
 include "menu.php";  
 include "titleHeader.php";
-//session_start();
-/* if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-if (isset($_GET['newSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastNewSuccess").click();';
-    echo '});';
-echo '</script>';
+include 'toastr-buttons.php';
+
+if (!empty($_SESSION['createSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastNewSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['createSuccess']);
 }
-else if (isset($_GET['updateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastUpdateSuccess").click();';
-    echo '});';
-echo '</script>';
+if (!empty($_SESSION['updateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastUpdateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['updateSuccess']);
 }
-else if (isset($_GET['deactivateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastDeactivateSuccess").click();';
-    echo '});';
-echo '</script>';
+if (!empty($_SESSION['deactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastDeactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['deactivateSuccess']);
+}
+if (!empty($_SESSION['reactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastReactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['reactivateSuccess']);
+}
+if (!empty($_SESSION['actionFailed'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastFailed").click();
+          });
+        </script>';
+  unset($_SESSION['actionFailed']);
 }
 
 ?>
@@ -41,10 +53,6 @@ echo '</script>';
   </script>
 </head>
 <body>
-  <!-- Toast Notification -->
-  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">

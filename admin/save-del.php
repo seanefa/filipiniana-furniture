@@ -1,5 +1,6 @@
 <?php
-include "dbconnect.php";
+include "session-check.php";
+include 'dbconnect.php';
 
 $recID = $_POST['recID'];
 

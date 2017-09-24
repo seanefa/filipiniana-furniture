@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_POST['recID'];
 
@@ -95,7 +94,8 @@ $empID = $_SESSION['userID'];
 $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Promos', 'Update', '$date', '$logDesc', '$empID')";
 mysqli_query($conn,$logSQL);
 // Logs end here
-header( "Location: promo.php?updateSuccess" );
+$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 
 mysqli_close($conn);
 ?>

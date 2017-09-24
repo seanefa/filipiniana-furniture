@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 if(isset($GET['id'])){
 	$jsID = $_GET['id']; 
@@ -19,8 +18,11 @@ if(mysqli_query($conn,$updateSql)){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Production Information', 'Deactivate', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: production-information.php?deactivateSuccess" );
-} else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?>

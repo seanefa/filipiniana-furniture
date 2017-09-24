@@ -2,7 +2,6 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-
 if(!isset($_POST['prod'])){
 	echo "<script>
       window.location.href='production-information.php';
@@ -81,9 +80,12 @@ if($flag>1){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Production Information', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: production-information.php?newSuccess" );
-} else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

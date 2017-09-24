@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $name = $_POST['compname'];
 $add = $_POST['compadd'];
@@ -25,10 +24,12 @@ if (mysqli_query($conn,$sql)) {
 	//YUNG SESSION_START WAG KALIMUTAN!!!! CHECK SA DB KUNG PUMAPASOK NG MAAYOS HA! 
 	//Bilisan ang gawa pero wag madaliin para lang may masabing may nagawa ha! At lalo wag madaliin para lang makapag-DOTA/NBA na ulet ha! HAHAHAHA Jusmiya 
 	//And yes hard coded yang mga yan
-header( "Location: supplier.php?newSuccess" );
+    $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 } 
  else {
-	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

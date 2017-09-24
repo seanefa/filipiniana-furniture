@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $prName = $_POST['_prodName'];
 $prCtg = $_POST['_category'];
@@ -20,7 +19,6 @@ $dimension = $_POST['dimensions'];
 $prodStat = "Pre-Order";
 $pic = "";
 
-//no shit by djmj
 $time=time();
 $date=date("Y/m/d");
 $datetime=$date + $time;
@@ -28,28 +26,24 @@ $datetime=$date + $time;
 $p = str_replace(',','',$prPrice);
 $prPrice = $p;
 
-if ($_FILES["image"]["error"] > 0)
-{
- echo "Error: NO CHOSEN FILE";
- echo"INSERT TO DATABASE FAILED";
+if ($_FILES["image"]["error"] > 0){
+	echo "Error: NO CHOSEN FILE";
+	echo"INSERT TO DATABASE FAILED";
 }
-else
-{
+else{
 	$tmp_name = $_FILES["image"]["tmp_name"];
 	$date = date("Y-m-d");
 	$time = time();
- move_uploaded_file($tmp_name, "plugins/products/" . $date . $time . ".png");
- echo "SAVED" ;
-
- $pic = $date . $time . ".png";
-
+		move_uploaded_file($tmp_name, "plugins/products/" . $date . $time . ".png");
+		echo "SAVED" ;
+ 	$pic = $date . $time . ".png";
 }
 
 $prDesc = mysqli_real_escape_string($conn,$prDesc);
 
 $sql = "INSERT INTO `tblproduct` (`prodTypeID`,`prodCatID`,`prodFrameworkID`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`,`prodStat`,`prodDesign`) VALUES ('$type','$prCtg', '$prFramework', '$prFabric', '$prName', '$prDesc', '$prPrice', '$pic', '$dimension', '$prodStat','$design')";
 
-if (mysqli_query($conn, $sql)) {
+if (mysqli_query($conn, $sql)){
 	// Logs start here
 	$sID = mysqli_insert_id($conn); // ID of last input;
 	$date = date("Y-m-d");
@@ -58,14 +52,13 @@ if (mysqli_query($conn, $sql)) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Products', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-  	header( "Location: products.php?newSuccess" );
+  	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 } 
-else {
-	// echo "<script>
- //      window.location.href='products.php';
- //      alert('There are some errors on your the data entered. Please enter another data.');
- //      </script>";
-	header( "Location: products.php?actionFailed" );
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
+
 mysqli_close($conn);
 ?>

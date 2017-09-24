@@ -1,7 +1,7 @@
 <?php 
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
+
 $name = $_POST['name'];
 $type = $_POST['type'];
 $str = $_POST['attribs'];
@@ -80,9 +80,12 @@ if ($flag>0) {
     $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Materials', 'New', '$date', '$logDesc', '$empID')";
     mysqli_query($conn,$logSQL);
     // Logs end here
-    header( "Location: materials.php?newSuccess" );
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    $_SESSION['createSuccess'] = 'Success';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

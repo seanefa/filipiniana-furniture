@@ -9,10 +9,12 @@ $editDownpayment = $_POST['name'];
 $updateSql = "UPDATE tbldownpayment SET downpaymentPercentage='$editDownpayment' WHERE downpaymentID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: default-downpayment.php?updateSuccess" );
-}
-else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 ?>

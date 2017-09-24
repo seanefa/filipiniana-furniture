@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session-check.php";
 include 'dbconnect.php';
 
 $category = $_POST['func'];
@@ -11,14 +11,13 @@ $prodID = $_POST['prod'];
 $updateSql = "INSERT INTO `tblonhand` (`ohProdID`, `ohQuantity`) VALUES ('$prodID', '$quan')";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: product-management.php?newSuccess" );
-	echo '</script>';
-}
-else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
 
 else if($category=="add"){
@@ -34,14 +33,13 @@ $eQuan = $quan + $row['ohQuantity'];
 $updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: product-management.php?updateSuccess" );
-	echo '</script>';
-}
-else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
 
 else if($category=="deduct"){
@@ -57,15 +55,12 @@ $eQuan = $row['ohQuantity'] - $quan;
 $updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: product-management.php?updateSuccess" );
-	echo '</script>';
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
-else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
-}
-
-
 ?>

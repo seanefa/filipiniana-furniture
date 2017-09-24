@@ -1,4 +1,5 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
 
 $orderid = $_POST['updateOrder'];
@@ -7,7 +8,6 @@ $delete = $_POST['deleted'];
 $quan = $_POST['quan'];
 $tPrice = $_POST['tPrice'];
 $ctr = 0;
-
 
 //UPDATE ORDER INFO
 $sql = "UPDATE tblorders SET orderPrice = '$tPrice' WHERE orderID = '$orderid'";
@@ -31,12 +31,12 @@ foreach ($delete as $a) {
 }
 
 if($ctr>0){
-       header( "Location: orders.php" );
-     } 
-     else {
-      echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
-    }
-
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 mysqli_close($conn);
-
 ?>

@@ -21,13 +21,12 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tbluser SET userFirstName='$editfName', userMiddleName='$editmName', userLastName='$editlName', userName='$edituName', userPassword='$editpassW' WHERE userID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	echo '<script type="text/javascript">';
-	echo 'alert("RECORD SUCCESFULLY SAVED!")';
-	header( "Location: accounts.php" );
-	echo '</script>';
-}
-else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
-}
+   $_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 ?>

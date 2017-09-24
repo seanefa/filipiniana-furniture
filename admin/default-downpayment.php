@@ -1,24 +1,56 @@
 <?php
 include "titleHeader.php";
 include "menu.php";  
-//session_start();
- /* if(isset($GET['id'])){
-   $jsID = $_GET['id']; 
- }
- $jsID=$_GET['id'];
- $_SESSION['varname'] = $jsID;*/
- include 'dbconnect.php';
- $conn = mysqli_connect($servername, $username, $password, $dbname);
-  // Check connection
- if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+include 'dbconnect.php';
+include 'toastr-buttons.php';
+
+if (!empty($_SESSION['createSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastNewSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['createSuccess']);
 }
+if (!empty($_SESSION['updateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastUpdateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['updateSuccess']);
+}
+if (!empty($_SESSION['deactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastDeactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['deactivateSuccess']);
+}
+if (!empty($_SESSION['reactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastReactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['reactivateSuccess']);
+}
+if (!empty($_SESSION['actionFailed'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastFailed").click();
+          });
+        </script>';
+  unset($_SESSION['actionFailed']);
+}
+
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
 </head>
-<body class ="fix-header fix-sidebar">
+<body>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">

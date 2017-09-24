@@ -87,7 +87,12 @@ for($x=0;$x<$ctr;$x++){
 }*/
 
 if($x>1){
- header( "Location: production-information.php?updateSuccess" );
-}
+ $_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 mysqli_close($conn);
 ?>

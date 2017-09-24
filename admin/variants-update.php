@@ -1,7 +1,6 @@
 <?php
 include "session-check.php"; 
 include 'dbconnect.php';
-session_start();
 
 $id = $_POST['id'];
 $material = $_POST['material'];
@@ -25,8 +24,11 @@ if($flag>0){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Variants', 'Update', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: material-variants.php?updateSuccess" );
-} else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?> 

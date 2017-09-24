@@ -1,14 +1,7 @@
 <?php
 include "titleHeader.php";
 include "menu.php";
-//session_start();
-/*if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-
 ?>
 <!DOCTYPE html>  
 <html lang="en">
@@ -57,10 +50,6 @@ $.ajax({
   <!--div class="preloader">
     <div class="cssload-speeding-wheel"></div>
   </div-->
-  <!-- Toast Notification -->
-  <button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-  <button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-  <button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
   <div id="page-wrapper">
     <div class="container-fluid">
       <div class="row">

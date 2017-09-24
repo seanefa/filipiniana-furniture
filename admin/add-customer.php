@@ -185,7 +185,8 @@ else if($isBool=="existing"){ //EXISTING
     $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
     echo $paysql . "<br>";
     mysqli_query($conn,$paysql);
-    $receiptID = mysqli_insert_id($conn);echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    $receiptID = mysqli_insert_id($conn);
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     header( "Location: receipt.php?id=".$receiptID);
 
   }

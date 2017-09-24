@@ -1,10 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
-
-// Create connection
-include 'dbconnect.php';
 
 $username=$_POST["_username"];
 $password=$_POST["_password"];
@@ -18,16 +14,13 @@ if($password==$confirm)
 	if($sql)
 	{
 		$_SESSION["userID"] = $row["userID"];
-
-		echo '<script type="text/javascript">';
-		echo 'alert("RECORD SUCCESFULLY SAVED!")';
-		header( "Location: users.php" );
-		echo '</script>';
-	}
-	else
-	{
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	}
+    	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
 else
 {

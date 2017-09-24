@@ -1,17 +1,12 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $id = $_SESSION['varname'];
 $editType = $_POST['uType'];
 $editUnit = $_POST['uUnit'];
 
 $updateSql = "UPDATE tblunitofmeasure SET unType='$editType', unUnit='$editUnit' WHERE unID=$id;";
-
-
-
-
 
 if(mysqli_query($conn,$updateSql)){
 	// Logs start here
@@ -22,8 +17,11 @@ if(mysqli_query($conn,$updateSql)){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Unit of Measurement', 'Update', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: unit-of-measurement.php?updateSuccess" );
-} else {
-	echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?>

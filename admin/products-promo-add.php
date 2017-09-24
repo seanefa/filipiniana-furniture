@@ -1,4 +1,5 @@
 <?php
+include "session-check.php";
 include 'dbconnect.php';
 
 $promo = $_POST['promo'];
@@ -27,12 +28,13 @@ foreach($prods as $a){
 }
 
  if ($flag>0) {
-   header( "Location: product-management.php?newSuccess" );
- 	echo "lo";
- } 
+   $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
  else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 mysqli_close($conn);
 

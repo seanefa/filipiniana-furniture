@@ -4478,7 +4478,7 @@ ul#themecolors li:first-child {
 }
 /*Jquery toaster*/
 .jq-icon-info {
-  background-color: #01c0c8;
+  background-color: #3C8CE4;
   color: #ffffff;
 }
 .jq-icon-success {
@@ -4486,7 +4486,7 @@ ul#themecolors li:first-child {
   color: #ffffff;
 }
 .jq-icon-error {
-  background-color: #FF4C17;
+  background-color: #DF5349;
   color: #ffffff;
 }
 .jq-icon-warning {

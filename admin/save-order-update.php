@@ -1,7 +1,6 @@
 <?php
-
+include "session-check.php";
 include 'dbconnect.php';
-session_start();
 
 $custid = "";
 
@@ -40,12 +39,12 @@ foreach($selected as $str) {
 }
 
 if($ctr>0){
-       header( "Location: orders.php" );
-     } 
-     else {
-      echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
-    }
-
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 mysqli_close($conn);
-
 ?>
