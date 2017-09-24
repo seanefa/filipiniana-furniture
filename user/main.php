@@ -38,7 +38,7 @@
         <div id="content" class="col-xs-12">
           <div id="product-tab" class="product-tab">
             <ul id="tabs" class="tabs">
-              <li><a href="#tab-featured">Featured Furnitures</a></li>
+              <h2 style="text-align: center;">Featured Furnitures</h2>
             </ul>
               <div class="owl-carousel product_carousel_tab">
                 <?php
@@ -51,7 +51,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -79,7 +79,7 @@
         <div id="content" class="col-xs-12">
           <div id="product-tab" class="product-tab">
             <ul id="tabs" class="tabs">
-              <li class="active"><a href="#tab-latest">Latest Furnitures</a></li>
+              <h2 style="text-align: center;">Latest Furnitures</h2>
             </ul>
               <div class="owl-carousel product_carousel_tab">
                 <?php
@@ -92,7 +92,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -120,7 +120,7 @@
         <div id="content" class="col-xs-12">
           <div id="product-tab" class="product-tab">
             <ul id="tabs" class="tabs">
-              <li class="active"><a href="#tab-latest">Featured Packages</a></li>
+              <h2 style="text-align: center;">Featured Packages</h2>
             </ul>
               <div class="owl-carousel product_carousel_tab">
                 <?php
@@ -133,7 +133,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
@@ -161,7 +161,7 @@
         <div id="content" class="col-xs-12">
           <div id="product-tab" class="product-tab">
             <ul id="tabs" class="tabs">
-              <li class="active"><a href="#tab-latest">Promos</a></li>
+              <h2 style="text-align: center;">Promos</h2>
             </ul>
               <div class="owl-carousel product_carousel_tab">
                 <?php
@@ -173,7 +173,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['promoStatus'] == "Active"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:350px; width:265;" src="../admin/plugins/images/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                       <h4 style="text-transform:uppercase;"><a href="view-product.php">'.$row['promoName'].'</a></h4>
                     <div class="overlay"> 
                     <div class="caption">                      

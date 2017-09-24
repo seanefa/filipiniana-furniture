@@ -1,3 +1,7 @@
+<?php
+  include 'scripts.php';
+  include 'css.php';
+?>
  <!-- Main Menu Start-->
     <nav id="menu" class="navbar">
       <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
@@ -107,3 +111,14 @@
       </div>
     </nav>
     <!-- Main Menu End-->
+
+  <script type="text/javascript">
+    var nav = $('#menu');
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) {
+        nav.addClass("f-nav");
+      } else {
+        nav.removeClass("f-nav");
+      }
+    });
+  </script>
