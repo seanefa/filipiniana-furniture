@@ -1,6 +1,3 @@
-<?php 
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <!--Middle Part Start-->
         <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="content">
 			<?php include "userconnect.php";
-			$sql="SELECT * from tblcustomer as customer join tbluser as user where user.userCustID = customer.customerID and customer.customerID =" . $_SESSION["userID"] . "";
+			$sql="SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 			$result = $conn->query($sql);
 			if($result->num_rows>0){
 				while($row=$result->fetch_assoc()){

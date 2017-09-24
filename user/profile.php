@@ -31,7 +31,7 @@
 				<div class="profilethumb">
 					<?php 
 					include "userconnect.php";
-					$sql = "SELECT * from tbluser as user join tblcustomer as customer where userID = " . $_SESSION["userID"] . "";
+					$sql = "SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 					$result = $conn->query($sql);
 					if($result->num_rows>0)
 					{
@@ -61,8 +61,9 @@
 					?>
 					<br>
 					<div class="row">
-						<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-							<h4 class="text-center">Proof of Payment</h4>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+							<a href="proof-of-payment-form.php"><button class="btn btn-danger"><h4 style="color:white;">Proof of Payment</h4></button></a><br><br>
+							<a href="proof-of-payment-form.php"><button class="btn btn-success"><h4 style="color:white;">Customization</h4></button></a>
 						</div>
 					</div>
 				</div>

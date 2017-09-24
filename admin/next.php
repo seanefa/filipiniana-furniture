@@ -230,6 +230,73 @@ else{
     });
   });
 
+  var flag = true;
+function inputValidate(id){
+    var user = $('#edit'+id).val();
+    
+    userkey = $('#edit'+id).val();
+    userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+      if(userkey == '\\'){
+        $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html('Symbols not Allowed');
+      $('#edit'+id).css('border-color','red');
+      }else{
+    $.post('next-check.php',{username : user}, function(data){
+     
+     if(data == 'Symbols not allowed'){
+       flag = true;
+          $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'White space not allowed'){
+       flag = true
+
+          $('#saveBtn').prop('disabled',true);
+      $('#message'+id).html(data);
+      $('#edit'+id).css('border-color','red');
+     }
+     else if(data == 'good'){
+      flag = false;
+       $('#message'+id).html('');
+     $('#saveBtn').prop('disabled',false);
+      $('#edit'+id).css('border-color','limegreen');
+     }
+    });
+  }
+
+  if(!flag){
+    $('#saveBtn').prop('disabled',false);
+    $('#nextMessage').html('');
+  }else if(flag){
+    $('#saveBtn').prop('disabled',true);
+    $('#nextMessage').html('Some Fields have errors');
+    $('#nextMessage').css('color','red');
+  }
+
+  }
+
+  function validate(){
+    var val = $('#custemail').val();
+    if(validateEmail(val)){
+      $('#custemail').css('border-color','limegreen');
+       $('#messageEmail').html(''); 
+    $('#saveBtn').prop('disabled',false);
+    }else{
+       $('#custoemail').css('border-color','red');
+       $('#messageEmail').html('Email not valid'); 
+    $('#saveBtn').prop('disabled',true);
+    }
+
+  }
+
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
+
+
   </script>
 </head>
 <body class ="fix-header fix-sidebar">
@@ -254,7 +321,7 @@ else{
                   <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h3>Customer Information</h3>
+                        <h3>Customer Information</h3><h6><span id="nextMessage"></span></h6>
                       </a>
                     </h4>
                   </div>
@@ -317,15 +384,15 @@ else{
 
                                   if(id==""){
                                     $('#customerIds').attr('value',"");
-                                    $('#submitBtn').attr('type',"submit");
+                                    $('#saveBtn').attr('type',"submit");
                                     $('#isBool').attr('value','new');
-                                    $('#submitBtn').attr('onclick',"");
-                                    $('#ln').attr('value',"");
-                                    $('#ln').attr('readonly',false);
-                                    $('#fn').attr('value',"");
-                                    $('#fn').attr('readonly',false);
-                                    $('#mn').attr('value',"");
-                                    $('#mn').attr('readonly',false);
+                                    $('#saveBtn').attr('onclick',"");
+                                    $('#edit3').attr('value',"");
+                                    $('#edit3').attr('readonly',false);
+                                    $('#edit1').attr('value',"");
+                                    $('#edit1').attr('readonly',false);
+                                    $('#edit2').attr('value',"");
+                                    $('#edit2').attr('readonly',false);
                                     $('#custadd').val("");
                                     $('#custadd').attr('readonly',false);
                                     $('#custcont').attr('value',"");
@@ -335,16 +402,16 @@ else{
                                   }
                                   else{
                                     $('#isBool').attr('value','existing');
-                                    $('#submitBtn').attr('type',"button");
-                                    $('#submitBtn').attr('onclick',"location.href='receipt.php';");
+                                    $('#saveBtn').attr('type',"button");
+                                    $('#saveBtn').attr('onclick',"location.href='receipt.php';");
                                     $('#customerIds').attr('value',id);
-                                    $('#ln').attr('value',$('#lstName'+id+'').val());
-                                    $('#ln').html($('#lstName'+id+'').val());
-                                    $('#ln').attr('readonly',true);
-                                    $('#fn').attr('value',$('#firstName'+id+'').val());
-                                    $('#fn').attr('readonly',true);
-                                    $('#mn').attr('value',$('#midName'+id+'').val());
-                                    $('#mn').attr('readonly',true);
+                                    $('#edit3').attr('value',$('#lstName'+id+'').val());
+                                    $('#edit3').html($('#lstName'+id+'').val());
+                                    $('#edit3').attr('readonly',true);
+                                    $('#edit1').attr('value',$('#firstName'+id+'').val());
+                                    $('#edit1').attr('readonly',true);
+                                    $('#edit2').attr('value',$('#midName'+id+'').val());
+                                    $('#edit2').attr('readonly',true);
                                     $('#custadd').val($('#address'+id+'').val());
                                     $('#custadd').attr('readonly',true);
                                     $('#custcont').attr('value',$('#contact'+id+'').val());
@@ -366,20 +433,20 @@ else{
   <div class="col-md-4">
     <div class="form-group">
       <label class="control-label">First Name</label><span id="x" style="color:red"> *</span>
-      <input type="text" id="fn" class="form-control" name="firstn" placeholder="Juan" required/> 
+      <input type="text" id="edit1" onkeyup="inputValidate('1')" class="form-control" name="firstn" placeholder="Juan" required/><span id="message1"></span> 
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label class="control-label">Middle Name</label>
-      <input type="text" id="mn" class="form-control" name="midn" placeholder="Vito"/> 
+      <input type="text" id="edit2" onkeyup="inputValidate('2')" class="form-control" name="midn" placeholder="Vito"/><span id="message2"></span> 
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <input type="hidden" name="customerIds" id="customerIds">
       <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
-      <input type="text" id="ln" class="form-control" name="lastn" value="" placeholder="de la Cruz" required/>
+      <input type="text" id="edit3" onkeyup="inputValidate('3')" class="form-control" name="lastn" value="" placeholder="de la Cruz" required/><span id="message3"></span>
     </div>
   </div>
 </div>
@@ -387,7 +454,7 @@ else{
   <div class="col-md-12">
     <div class="form-group">
       <label class="control-label">Address</label><span id="x" style="color:red"> *</span>
-      <textarea id="custadd" class="form-control" name="custadd" placeholder="#123 Brgy. Batasan Hills Quezon City" required></textarea>
+      <textarea id="custadd"  class="form-control" name="custadd" placeholder="#123 Brgy. Batasan Hills Quezon City" required></textarea>
     </div>
   </div>
 </div>
@@ -395,14 +462,14 @@ else{
   <div class="col-md-6">
     <div class="form-group">
       <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
-      <input type="number" id="custcont" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
+      <input type="number" id="custcont" data-mask="+63 (999) 999-9999" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
       <p style="color:red" id="erCon"></p>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <label class="control-label">Email</label><span id="x" style="color:red"> *</span>
-      <input type="email" id="custemail" class="form-control" name="custoemail" placeholder="monkeydluffy@gmail.com" required/> 
+      <input type="email" id="custemail" onkeyup="validate()" class="form-control" name="custoemail" placeholder="monkeydluffy@gmail.com" required/><span id="messageEmail"></span> 
       <p style="color:red" id="erEmail"></p>
     </div>
   </div>
@@ -924,10 +991,12 @@ $(document).ready(function(){
       </div>
       <div class="row">
         <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn"><i class="fa fa-check"></i> Save & Print</button>
+        
 <!--<div class="col-md-5 pull-right">
 <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save & Print</button>
 </div>-->
 </div>
+<h6><span class="pull-right" id="nextMessage"></span></h6>
 </div>
 </div>
 </div>
