@@ -115,7 +115,7 @@
   <script type="text/javascript">
     var nav = $('#menu');
     $(window).scroll(function () {
-      if ($(this).scrollTop() > 50) {
+      if ($(this).scrollTop() > 160) {
         nav.addClass("f-nav");
       } else {
         nav.removeClass("f-nav");
