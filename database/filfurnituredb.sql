@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2017 at 05:19 PM
+-- Generation Time: Sep 24, 2017 at 05:20 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -192,11 +192,9 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 
 CREATE TABLE `tblcustomize_request` (
   `customizedID` int(11) NOT NULL,
-  `accountdetailsID` int(11) NOT NULL,
-  `customizedPic` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `customizedDescription` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `customFrameID` int(11) DEFAULT NULL,
-  `customFabricID` int(11) DEFAULT NULL,
+  `tblcustomerID` int(11) NOT NULL,
+  `customizedPic` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `customizedDescription` varchar(450) CHARACTER SET utf8 NOT NULL,
   `customStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -209,8 +207,7 @@ CREATE TABLE `tblcustomize_request` (
 CREATE TABLE `tblcust_req_images` (
   `cust_req_imagesID` int(11) NOT NULL,
   `cust_req_ID` int(11) NOT NULL,
-  `cust_req_images` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `cust_req_imageStat` varchar(45) CHARACTER SET utf8 NOT NULL
+  `cust_req_images` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -725,7 +722,11 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (88, 'Products', 'New', '2017-08-30', 'Added new product Manilenia, ID = 18', 1),
 (89, 'Products', 'Update', '2017-08-30', 'Updated product Manilenia, ID = 18', 1),
 (90, 'Order', 'New', '2017-08-30', 'New order #OR000009', 1),
-(91, 'Delivery Rates', 'New', '2017-08-30', 'Added new delivery rate 400, ID = 7', 1);
+(91, 'Delivery Rates', 'New', '2017-08-30', 'Added new delivery rate 400, ID = 7', 1),
+(92, 'Material Type', 'New', '2017-09-23', 'Added new material type Foam, ID = 6', 1),
+(93, 'Materials', 'New', '2017-09-23', 'Added new material Uratex Foam, ID = 13', 1),
+(94, 'Material Variants', 'New', '2017-09-23', 'Added new material variant 13, ID = ', 1),
+(95, 'Material Variants', 'New', '2017-09-23', 'Added new material variant 12, ID = ', 1);
 
 -- --------------------------------------------------------
 
@@ -738,17 +739,19 @@ CREATE TABLE `tblmaterials` (
   `materialType` int(11) NOT NULL,
   `materialName` varchar(45) CHARACTER SET utf8 NOT NULL,
   `materialMeasurement` varchar(450) CHARACTER SET utf8 NOT NULL,
-  `materialStatus` varchar(45) CHARACTER SET utf8 NOT NULL
+  `materialStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `dateCreated` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblmaterials`
 --
 
-INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `materialMeasurement`, `materialStatus`) VALUES
-(10, 1, 'FNC', '', 'Listed'),
-(11, 4, 'Liza Varnish', '', 'Listed'),
-(12, 4, 'Mela Varnish', '', 'Listed');
+INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `materialMeasurement`, `materialStatus`, `dateCreated`) VALUES
+(10, 1, 'FNC', '', 'Listed', NULL),
+(11, 4, 'Liza Varnish', '', 'Listed', NULL),
+(12, 4, 'Mela Varnish', '', 'Listed', NULL),
+(13, 6, 'Uratex Foam', '', 'Listed', NULL);
 
 -- --------------------------------------------------------
 
@@ -826,7 +829,8 @@ INSERT INTO `tblmat_type` (`matTypeID`, `matTypeName`, `matTypeMeasure`, `matTyp
 (2, 'Fabric', 'measuring is on materials', 'Fabric', 'Listed'),
 (3, 'Paint', 'measuring is on materials', 'Paint', 'Listed'),
 (4, 'Varnish', 'measuring is on materials', 'Varnish', 'Listed'),
-(5, 'Rattan', 'measuring is on materials', 'Rattan', 'Listed');
+(5, 'Rattan', 'measuring is on materials', 'Rattan', 'Listed'),
+(6, 'Foam', 'measuring is on materials', '', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -851,7 +855,63 @@ INSERT INTO `tblmat_var` (`mat_varID`, `materialID`, `mat_varDescription`, `mat_
 (259, 11, 'Odorless  / transparent ', 'Active'),
 (260, 11, 'Original  / brown ', 'Active'),
 (261, 11, 'Original  / red ', 'Active'),
-(262, 11, 'Original  / transparent ', 'Active');
+(262, 11, 'Original  / transparent ', 'Active'),
+(263, 13, 'White  / Feather ', 'Active'),
+(264, 13, 'White  / Spring ', 'Active'),
+(265, 13, 'Pink  / Feather ', 'Active'),
+(266, 13, 'Pink  / Spring ', 'Active'),
+(267, 13, 'Blue  / Feather ', 'Active'),
+(268, 13, 'Blue  / Spring ', 'Active'),
+(269, 12, 'white  / odorless  / 25 g', 'Active'),
+(270, 12, 'white  / odorless  / 35 g', 'Active'),
+(271, 12, 'white  / odorless  / 45 g', 'Active'),
+(272, 12, 'white  / odorless  / 55 g', 'Active'),
+(273, 12, 'white  / odorless  / 65 g', 'Active'),
+(274, 12, 'white  / original  / 25 g', 'Active'),
+(275, 12, 'white  / original  / 35 g', 'Active'),
+(276, 12, 'white  / original  / 45 g', 'Active'),
+(277, 12, 'white  / original  / 55 g', 'Active'),
+(278, 12, 'white  / original  / 65 g', 'Active'),
+(279, 12, 'blue  / odorless  / 25 g', 'Active'),
+(280, 12, 'blue  / odorless  / 35 g', 'Active'),
+(281, 12, 'blue  / odorless  / 45 g', 'Active'),
+(282, 12, 'blue  / odorless  / 55 g', 'Active'),
+(283, 12, 'blue  / odorless  / 65 g', 'Active'),
+(284, 12, 'blue  / original  / 25 g', 'Active'),
+(285, 12, 'blue  / original  / 35 g', 'Active'),
+(286, 12, 'blue  / original  / 45 g', 'Active'),
+(287, 12, 'blue  / original  / 55 g', 'Active'),
+(288, 12, 'blue  / original  / 65 g', 'Active'),
+(289, 12, 'pink  / odorless  / 25 g', 'Active'),
+(290, 12, 'pink  / odorless  / 35 g', 'Active'),
+(291, 12, 'pink  / odorless  / 45 g', 'Active'),
+(292, 12, 'pink  / odorless  / 55 g', 'Active'),
+(293, 12, 'pink  / odorless  / 65 g', 'Active'),
+(294, 12, 'pink  / original  / 25 g', 'Active'),
+(295, 12, 'pink  / original  / 35 g', 'Active'),
+(296, 12, 'pink  / original  / 45 g', 'Active'),
+(297, 12, 'pink  / original  / 55 g', 'Active'),
+(298, 12, 'pink  / original  / 65 g', 'Active'),
+(299, 12, 'green  / odorless  / 25 g', 'Active'),
+(300, 12, 'green  / odorless  / 35 g', 'Active'),
+(301, 12, 'green  / odorless  / 45 g', 'Active'),
+(302, 12, 'green  / odorless  / 55 g', 'Active'),
+(303, 12, 'green  / odorless  / 65 g', 'Active'),
+(304, 12, 'green  / original  / 25 g', 'Active'),
+(305, 12, 'green  / original  / 35 g', 'Active'),
+(306, 12, 'green  / original  / 45 g', 'Active'),
+(307, 12, 'green  / original  / 55 g', 'Active'),
+(308, 12, 'green  / original  / 65 g', 'Active'),
+(309, 12, 'purple  / odorless  / 25 g', 'Active'),
+(310, 12, 'purple  / odorless  / 35 g', 'Active'),
+(311, 12, 'purple  / odorless  / 45 g', 'Active'),
+(312, 12, 'purple  / odorless  / 55 g', 'Active'),
+(313, 12, 'purple  / odorless  / 65 g', 'Active'),
+(314, 12, 'purple  / original  / 25 g', 'Active'),
+(315, 12, 'purple  / original  / 35 g', 'Active'),
+(316, 12, 'purple  / original  / 45 g', 'Active'),
+(317, 12, 'purple  / original  / 55 g', 'Active'),
+(318, 12, 'purple  / original  / 65 g', 'Active');
 
 -- --------------------------------------------------------
 
@@ -872,6 +932,21 @@ CREATE TABLE `tblmodeofpayment` (
 INSERT INTO `tblmodeofpayment` (`modeofpaymentID`, `modeofpaymentDesc`, `modeofpaymentStatus`) VALUES
 (1, 'Cash', 'Active'),
 (2, 'Check', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblnotification`
+--
+
+CREATE TABLE `tblnotification` (
+  `id` int(11) NOT NULL,
+  `tblcustomerID` int(11) NOT NULL,
+  `tblorderID` int(11) NOT NULL,
+  `amountPaid` double NOT NULL,
+  `bankBranch` varchar(450) NOT NULL,
+  `proofPicture` varchar(450) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1488,20 +1563,6 @@ INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `user
 (4, 'airaem', 'admin', 'active', 'customer', 19, NULL, '2017-08-27'),
 (5, 'hongkaisoo', 'admin', 'active', 'customer', 31, NULL, '2017-09-01');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tblvariant_detail`
---
-
-CREATE TABLE `tblvariant_detail` (
-  `variantDetailID` int(11) NOT NULL,
-  `materialID` int(11) NOT NULL,
-  `variantCounter` int(11) NOT NULL,
-  `mat_varID` int(11) NOT NULL,
-  `variantDetailStatus` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Indexes for dumped tables
 --
@@ -1556,9 +1617,7 @@ ALTER TABLE `tblcustomer`
 --
 ALTER TABLE `tblcustomize_request`
   ADD PRIMARY KEY (`customizedID`),
-  ADD KEY `accounttinfoID_idx` (`accountdetailsID`),
-  ADD KEY `cstmfabric_idx` (`customFabricID`),
-  ADD KEY `cstmframework_idx` (`customFrameID`);
+  ADD KEY `accounttinfoID_idx` (`tblcustomerID`);
 
 --
 -- Indexes for table `tblcust_req_images`
@@ -1751,6 +1810,14 @@ ALTER TABLE `tblmat_var`
 --
 ALTER TABLE `tblmodeofpayment`
   ADD PRIMARY KEY (`modeofpaymentID`);
+
+--
+-- Indexes for table `tblnotification`
+--
+ALTER TABLE `tblnotification`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customerid_ref_idx` (`tblcustomerID`),
+  ADD KEY `orderid_ref_idx` (`tblorderID`);
 
 --
 -- Indexes for table `tblonhand`
@@ -1959,14 +2026,6 @@ ALTER TABLE `tbluser`
   ADD KEY `emp_idx` (`userEmpID`);
 
 --
--- Indexes for table `tblvariant_detail`
---
-ALTER TABLE `tblvariant_detail`
-  ADD PRIMARY KEY (`variantDetailID`),
-  ADD KEY `materialID` (`materialID`,`mat_varID`),
-  ADD KEY `mat_varID` (`mat_varID`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -2109,12 +2168,12 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tblmat_actions`
 --
@@ -2139,17 +2198,22 @@ ALTER TABLE `tblmat_inventory`
 -- AUTO_INCREMENT for table `tblmat_type`
 --
 ALTER TABLE `tblmat_type`
-  MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tblmat_var`
 --
 ALTER TABLE `tblmat_var`
-  MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
 --
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
   MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tblnotification`
+--
+ALTER TABLE `tblnotification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblonhand`
 --
@@ -2306,9 +2370,7 @@ ALTER TABLE `tblcheck_details`
 -- Constraints for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
-  ADD CONSTRAINT `cstmUser` FOREIGN KEY (`accountdetailsID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cstmfabric` FOREIGN KEY (`customFabricID`) REFERENCES `tblfabrics` (`fabricID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cstmframework` FOREIGN KEY (`customFrameID`) REFERENCES `tblframeworks` (`frameworkID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cstmUser` FOREIGN KEY (`tblcustomerID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblcust_req_images`
@@ -2404,6 +2466,13 @@ ALTER TABLE `tblmat_deliveries`
 --
 ALTER TABLE `tblmat_var`
   ADD CONSTRAINT `m` FOREIGN KEY (`materialID`) REFERENCES `tblmaterials` (`materialID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblnotification`
+--
+ALTER TABLE `tblnotification`
+  ADD CONSTRAINT `customerid_ref` FOREIGN KEY (`tblcustomerID`) REFERENCES `tblcustomer` (`customerID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderid_ref` FOREIGN KEY (`tblorderID`) REFERENCES `tblorders` (`orderID`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
