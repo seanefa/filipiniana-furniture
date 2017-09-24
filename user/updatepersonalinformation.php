@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "userconnect.php";
 $fn = $_POST["fname"];
 $mn = $_POST["mname"];
@@ -17,8 +18,7 @@ $cn= mysqli_real_escape_string($conn, $cn);
 $email= mysqli_real_escape_string($conn, $email);
 
 if($_FILES["image"]["error"] > 0){
-	echo "Error: NO CHOSEN FILE";
- 	echo"INSERT TO DATABASE FAILED";
+	header("Location: profile.php");
 }
 else{
 	move_uploaded_file($_FILES["image"]["tmp_name"], "pics/userpictures/" . date('Y-m-d') . time() . ".png");
@@ -29,7 +29,7 @@ if($pic=="")
 {
 	$pic = $exist_image;
 }
-$customersql="UPDATE tblcustomer SET customerFirstName='$fn', customerMiddleName='$mn', customerLastName='$ln', customerAddress='$adr', customerContactNum='$cn', customerEmail='$email', customerDP = '$pic'";
+$customersql="UPDATE tblcustomer a join tbluser b SET a.customerFirstName='$fn', a.customerMiddleName='$mn', a.customerLastName='$ln', a.customerAddress='$adr', a.customerContactNum='$cn', a.customerEmail='$email', a.customerDP = '$pic' where b.userCustID = a.cutomerID AND b.userID = " . $_SESSION["userID"] . "";
 
 if($conn->query($customersql)==true)
 {
