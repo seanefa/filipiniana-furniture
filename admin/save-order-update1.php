@@ -31,10 +31,12 @@ foreach ($delete as $a) {
 }
 
 if($ctr>0){
-	header( "Location: fabric-pattern.php?updateSuccess" );
-     } 
-else{
-	header( "Location: fabric-pattern.php?actionFailed" );
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 mysqli_close($conn);
 ?>

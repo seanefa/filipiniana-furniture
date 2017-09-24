@@ -28,12 +28,13 @@ foreach($prods as $a){
 }
 
  if ($flag>0) {
-   header( "Location: product-management.php?newSuccess" );
- 	echo "lo";
- } 
+   $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
  else {
-   header( "Location: product-management.php?actionFailed" );
-}
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 mysqli_close($conn);
 

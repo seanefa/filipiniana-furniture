@@ -20,8 +20,11 @@ if(mysqli_query($conn,$sql)){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabric Texture', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: fabric-texture.php?newSuccess" );
-} else {
-	header( "Location: fabric-texture.php?actionFailed" );
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?>

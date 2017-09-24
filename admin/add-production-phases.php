@@ -7,9 +7,11 @@ $status = "Listed";
 
 $sql = "INSERT INTO `tbl` (``, ``, ``) VALUES ('$', '$', '$')";
 if(mysqli_query($conn,$sql)){
-	header( "Location: production-phases.php?newSuccess" );
-}
-else {
-	header( "Location: production-phases.php?actionFailed" );
-}
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

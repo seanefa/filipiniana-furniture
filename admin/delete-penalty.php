@@ -12,9 +12,11 @@ $temp2 = 9;
 $updateSql = "UPDATE tblpenalty SET penStatus = 'Archived' WHERE penaltyID = '$jsID'";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: penalties.php?deactivateSuccess" );
-}
-else {
-	header( "Location: penalties.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

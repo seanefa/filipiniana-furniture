@@ -68,9 +68,12 @@ if ($flag>0) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Materials', 'Update', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: material-attribute.php?updateSuccess" );
-} else {
-	header( "Location: material-attribute.php?actionFailed" );
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

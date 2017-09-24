@@ -14,9 +14,11 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $updateSql = "UPDATE tblbranches SET branchLocation='$editLocation', branchAddress='$editAddress', branchRemarks='$editRemarks' WHERE branchID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: branches.php?updateSuccess" );
-}
-else {
-	header( "Location: branches.php?actionFailed" );
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+ }
 ?>

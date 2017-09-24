@@ -17,9 +17,12 @@ if (mysqli_query($conn,$sql)) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Unit of Measurement Category', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-    header( "Location: unit-of-measurement-category.php?newSuccess" );
-} else {
-    header( "Location: unit-of-measurement-category.php?actionFailed" );
+    $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

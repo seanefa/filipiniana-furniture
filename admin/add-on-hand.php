@@ -14,9 +14,11 @@ $eQuan = $quan + $row['prodQuantity'];
 $updateSql = "UPDATE tblproduct SET prodQuantity='$eQuan', prodStat = 'On-Hand' WHERE productID='$prodID'";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: product-management.php?updateSuccess" );
-}
-else {
-	header( "Location: product-management.php?actionFailed" );
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

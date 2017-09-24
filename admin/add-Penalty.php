@@ -13,10 +13,12 @@ $remarks = mysqli_real_escape_string($conn,$remarks);
 $sql = "INSERT INTO `tblpenalty` (`penaltyRate`, `penaltyRemarks`, `penStatus`, `penaltyName`, `penaltyRateType`) VALUES ('$pRate', '$remarks','$status','$pName','$type')";
 if($sql){
   if (mysqli_query($conn, $sql)) {
-    header( "Location: penalties.php?newSuccess" );
-  } 
-  else {
-    header( "Location: penalties.php?actionFailed" );
+    $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
   mysqli_close($conn);
 }

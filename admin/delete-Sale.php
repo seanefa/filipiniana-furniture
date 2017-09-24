@@ -12,9 +12,11 @@ $temp2 = 9;
 $updateSql = "UPDATE tblsale_details SET saleStatus = null WHERE saledetailID = '$jsID'";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: saledetails.php?deactivateSuccess" );
-}
-else {
-	header( "Location: saledetails.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

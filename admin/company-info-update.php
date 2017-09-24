@@ -41,11 +41,12 @@ else
 
 if(mysqli_query($conn,$exec))
 {
-	header( "Location: company-information.php?updateSuccess" );
-}
-else
-{
-	header( "Location: company-information.php?actionFailed" );
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 $conn->close();
 ?>

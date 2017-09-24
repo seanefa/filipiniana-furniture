@@ -12,11 +12,13 @@
   $sql = "INSERT INTO `tblbranches` (`branchLocation`, `branchAddress`, `branchRemarks`, `branchStatus`) VALUES ('$location', '$address', '$remarks', '$status')";
   if($sql){
     if (mysqli_query($conn, $sql)) {
-      header( "Location: branches.php?newSuccess" );
-    } 
-    else {
-      header( "Location: branches.php?actionFailed" );
-    }
+      $_SESSION['createSuccess'] = 'Success';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 
     mysqli_close($conn);

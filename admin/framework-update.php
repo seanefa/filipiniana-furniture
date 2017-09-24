@@ -42,8 +42,11 @@ if(mysqli_query($conn,$updateSql)){
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Frameworks', 'Update', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: frameworks.php?updateSuccess" );
-} else {
-	header( "Location: frameworks.php?actionFailed" );
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?>

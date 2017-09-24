@@ -12,11 +12,13 @@ $sql = "INSERT INTO tblprod_inclusions(prodIncQuantity, prodIncDesc, productIncI
 if($sql){
 	if (mysqli_query($conn, $sql)) {
 		echo $iPname;
-    	header( "Location: products.php?newSuccess" );
-	} 
-	else {
-		header( "Location: products.php?actionFailed" );
-	}
+    	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 	mysqli_close($conn);
 }

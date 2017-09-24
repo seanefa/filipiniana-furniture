@@ -8,9 +8,11 @@ $edit = $_POST[''];
 $updateSql = "UPDATE tbl SET ='', ='$' WHERE ID=$id";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: unit-of-measurement.php?updateSuccess" );
-}
-else {
-	header( "Location: unit-of-measurement.php?actionFailed" );
-}
+	$_SESSION['updateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

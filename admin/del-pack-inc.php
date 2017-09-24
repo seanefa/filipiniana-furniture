@@ -11,9 +11,11 @@ $jsID=$_GET['id'];
 include 'dbconnect.php';
 $updateSql = "UPDATE tblpackage_inclusions SET package_incStatus = 'Archived' WHERE package_inclusionID = '$jsID'";
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: packages.php?deactivateSuccess" );
-}
-else {
-	header( "Location: packages.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

@@ -10,9 +10,11 @@ $jsID=$_GET['id'];
 $updateSql = "UPDATE tblmodeofpayment SET modeofpaymentStatus = 'Archived' WHERE modeofpaymentID = '$jsID'";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: mode-of-payment.php?deactivateSuccess" );
-}
-else {
-	header( "Location: mode-of-payment.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

@@ -39,9 +39,12 @@ if (mysqli_query($conn, $sql)) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Fabrics Formed', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: fabrics.php?newSuccess" );
-} else {
-  	header( "Location: fabrics.php?actionFailed" );
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

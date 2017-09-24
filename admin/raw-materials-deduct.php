@@ -27,11 +27,13 @@ mysqli_query($conn,$sql1);
 $sql = "UPDATE tblmat_var SET variantQuantity = '$gt' WHERE variantID = '$id'"; 
 if($sql){
   if (mysqli_query($conn, $sql)) {
-   header( "Location: raw-materials-management.php?newSuccess" );
- } 
+   $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
  else {
-   header( "Location: raw-materials-management.php?actionFailed" );
-}
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
 mysqli_close($conn);
 ?>

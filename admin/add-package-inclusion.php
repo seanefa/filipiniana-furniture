@@ -30,11 +30,13 @@ if(isset($_POST['check'])){
 	if($sql){
 		if (mysqli_query($conn, $sql)) {
 			echo $iPname;
-    		header( "Location: packages.php?newSuccess" );
-		} 
-		else {
-			header( "Location: packages.php?actionFailed" );
-		}
+    		$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 		mysqli_close($conn);
 	}

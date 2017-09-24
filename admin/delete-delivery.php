@@ -20,8 +20,11 @@ if(mysqli_query($conn,$updateSql)){
     $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Delivery Rates', 'Deactivate', '$date', '$logDesc', '$empID')";
     mysqli_query($conn,$logSQL);
     // Logs end here
-	header( "Location: delivery-rates.php?deactivateSuccess" );
-} else {
-    header( "Location: delivery-rates.php?actionFailed" );
+	$_SESSION['deactivateSuccess'] = 'Success';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 ?>

@@ -18,10 +18,12 @@ $status = "exist";
 $sql = "INSERT INTO tblsale_details(saleRate, saleRemarks, saleStartDate, saleEndDate, saleStatus) VALUES('$sRate','$sRemarks','$startDate','$endDate','$status')";
 if($sql){
   if (mysqli_query($conn, $sql)) {
-    header( "Location: saledetails.php?newSuccess" );
-  } 
-  else {
-    header( "Location: saledetails.php?actionFailed" );
+    $_SESSION['createSuccess'] = 'Success';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+  header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 
 

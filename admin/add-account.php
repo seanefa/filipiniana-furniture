@@ -10,10 +10,12 @@ $created = date('d.m.y h:i:s');
 $sql = "INSERT INTO tblaccounts (accUsername, accPassword, dateCreated, accountStatus ) VALUES('$userName','$pass','$created','$status')";
 if($sql){
   if (mysqli_query($conn, $sql)) {
-    header( "Location: accounts.php?newSuccess" );
-  } 
-  else {
-    header( "Location: accounts.php?actionFailed" );
+   $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 
   mysqli_close($conn);

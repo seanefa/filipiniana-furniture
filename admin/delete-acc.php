@@ -5,9 +5,11 @@ include 'dbconnect.php';
 $updateSql = "UPDATE tbluser SET userStatus = null WHERE userID = '$jsID'";
         // Check connection
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: accounts.php?deactivateSuccess" );
-}
-else {
-	header( "Location: accounts.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>

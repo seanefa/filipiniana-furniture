@@ -14,12 +14,13 @@ if($password==$confirm)
 	if($sql)
 	{
 		$_SESSION["userID"] = $row["userID"];
-    	header( "Location: users.php?newSuccess" );
-	}
-	else
-	{
-		header( "Location: users.php?actionFailed" );
-	}
+    	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 }
 else
 {

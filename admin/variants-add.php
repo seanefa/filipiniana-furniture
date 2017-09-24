@@ -106,9 +106,12 @@ if ($flag>0) {
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Variants', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
-	header( "Location: material-variants.php?newSuccess" );
-} else {
-	header( "Location: material-variants.php?actionFailed" );
+	$_SESSION['createSuccess'] = 'Success';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+    header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
 mysqli_close($conn);
 ?>

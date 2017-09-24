@@ -9,11 +9,13 @@ $status = "Listed";
 $sql = "INSERT INTO `tblmaterials` (`materialName`, `materialVarAttribs`, `materialStatus`) VALUES ('$name', '$remarks','$status')";
 if($sql){
   if (mysqli_query($conn, $sql)) {
-   header( "Location: materials.php?newSuccess" );
- } 
+   $_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
  else {
-   header( "Location: materials.php?actionFailed" );
-}
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 
 mysqli_close($conn);
 }

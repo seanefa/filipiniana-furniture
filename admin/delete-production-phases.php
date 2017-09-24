@@ -10,9 +10,11 @@ $jsID=$_GET['id'];
 $updateSql = "UPDATE tbl SET Status = '' WHERE ID = '$jsID'";
 
 if(mysqli_query($conn,$updateSql)){
-	header( "Location: production-phases.php?deactivateSuccess" );
-}
-else {
-	header( "Location: production-phases.php?actionFailed" );
-}
+	$_SESSION['deactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
 ?>
