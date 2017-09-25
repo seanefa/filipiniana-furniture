@@ -73,7 +73,7 @@
 				<h1 class="text-center">Proof of Payment Form</h1> 
 				<div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="content">
-          <form enctype="multipart/form-data" action="send-nudes.php" autocomplete="off" class="form-horizontal" method="post">
+          <form enctype="multipart/form-data" action="send-proof.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
               <legend class="text-success">You can refer to your receipt.</legend>
               <div class="form-group required">
