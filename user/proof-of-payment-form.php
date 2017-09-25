@@ -63,9 +63,9 @@
 				<br>
 				<div class="row">
 					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-						<a href="proof-of-payment-form.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a>&nbsp;
-						<a href="proof-of-payment-form.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
-						<a href="proof-of-payment-form.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
+						<a href="customize.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a>&nbsp;
+						<a href="profile.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
+						<a href="production.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
 					</div>
 				</div>
 			</div>

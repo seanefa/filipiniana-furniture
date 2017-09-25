@@ -64,13 +64,37 @@
 				<div class="row">
 					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
 						<a href="proof-of-payment-form.php"><button class="btn btn-danger"><h6 style="color:white;">Proof of Payment</h6></button></a>&nbsp;
-						<a href="customize.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a>&nbsp;
+						<a href="profile.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
 						<a href="production.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">										<legend><h2>Customize</h2></legend>
+						<form enctype="multipart/form-data" action="send-customized-product.php" autocomplete="off" class="form-horizontal" method="post">
+						  <div class="form-group required">
+							<label for="input-block" class="col-sm-3 control-label">Add Blueprint</label>
+							<div class="col-sm-9">
+							  <input type="file" name="blueprint" class="form-control" required/>
+							</div>
+						  </div>
+						  <div class="form-group required">
+							<label for="input-block" class="col-sm-3 control-label">Description</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" name="description"></textarea>
+							</div>
+						  </div>
+							<div class="buttons">
+							  <div class="pull-right">
+								<input type="submit" class="btn btn-primary" value="Send" name="register">
+							  </div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 			<div class="col-12 col-sm-6 col-md-6 col-lg-7 col-xl-8">
-				<h1 class="text-center">Order Information</h1>
+				<h1 class="text-center">Customized Products</h1>
 			</div>
 		</div>
 	</div>
