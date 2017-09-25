@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session.php";
 include "userconnect.php";
 $un = $_POST["uname"];
 $op = $_POST["opass"];
@@ -16,7 +16,7 @@ $row=$select->fetch_assoc();
 $dbpass=$row["userPassword"];
 
 if(!empty($un)&&empty($op)&&empty($up)&&empty($cp)){
-	$usernamesql="UPDATE tbluser SET username='$un' where userID =1 ";
+	$usernamesql="UPDATE tbluser SET username='$un' where userID = " . $_SESSION["userID"] . "";
 	if($conn->query($usernamesql)==true){
 		echo "<script type='text/javascript'>
 		alert('Successfully Saved');

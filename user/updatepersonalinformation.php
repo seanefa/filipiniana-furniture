@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "session.php";
 include "userconnect.php";
 $fn = $_POST["fname"];
 $mn = $_POST["mname"];
@@ -29,7 +29,7 @@ if($pic=="")
 {
 	$pic = $exist_image;
 }
-$customersql="UPDATE tblcustomer a join tbluser b SET a.customerFirstName='$fn', a.customerMiddleName='$mn', a.customerLastName='$ln', a.customerAddress='$adr', a.customerContactNum='$cn', a.customerEmail='$email', a.customerDP = '$pic' where b.userCustID = a.cutomerID AND b.userID = " . $_SESSION["userID"] . "";
+$customersql="UPDATE tblcustomer a join tbluser b SET a.customerFirstName='$fn', a.customerMiddleName='$mn', a.customerLastName='$ln', a.customerAddress='$adr', a.customerContactNum='$cn', a.customerEmail='$email', a.customerDP = '$pic' where b.userCustID = a.customerID AND b.userID = " . $_SESSION["userID"] . "";
 
 if($conn->query($customersql)==true)
 {
