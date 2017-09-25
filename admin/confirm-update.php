@@ -14,6 +14,43 @@ include 'dbconnect.php';
 <head>
   <title>Update Order</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <script type="text/javascript">
+  var tempPrice = parseInt($('#totalPrice').html());
+  var tempTQuant = parseInt($('#totalQuant').val());
+  var realPrice = 0;
+  var totalPrice =0;
+  var price = 0;
+  var quant = 0;
+  var flag = 0;
+  function sendData(ctr){
+    realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
+    price = parseInt($('#prices'+ctr).val());
+  }
+
+  function passValue(ctr){
+
+    quant = parseInt($('#quant'+ctr).val());
+    var temRice = quant * price;
+    alert(temRice);
+    $('#price'+ctr).html(0);
+    $('#price'+ctr).html(String(quant * realPrice));
+
+    if(flag == 0 ){
+      totalPrice = tempPrice - price;
+      var e = totalPrice +(quant * realPrice);
+      alert(e);
+      $('#totalPrice').html(0);
+      $('#totalPrice').html(String(e));
+      flag = 1;
+    }
+    else if(flag == 1){
+      var tPrice = parseInt($('#totalPrice').html());
+      alert(quant * parseInt($('#prices'+ctr).val()));
+      $('#totalPrice').html(0);
+      $('#totalPrice').html(tPrice+(quant * parseInt($('#prices').val())));
+    }
+  }
+  </script>
 </head>
 <body class ="fix-header fix-sidebar">
   <div id="page-wrapper">
@@ -136,46 +173,10 @@ include 'dbconnect.php';
                                     <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
                                   </tfoot>
                                 </tbody>
-
-                                <script type="text/javascript">
-                                var tempPrice = parseInt($('#totalPrice').html());
-                                var tempTQuant = parseInt($('#totalQuant').val());
-                                var realPrice = 0;
-                                var totalPrice =0;
-                                var price = 0;
-                                var quant = 0;
-                                var flag = 0;
-                                function sendData(ctr){
-                                  realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
-                                  price = parseInt($('#prices'+ctr).val());
-                                }
-
-                                function passValue(ctr){
-
-                                  quant = parseInt($('#quant'+ctr).val());
-                                  var temRice = quant * price;
-                                  alert(temRice);
-                                  $('#price'+ctr).html(0);
-                                  $('#price'+ctr).html(String(quant * realPrice));
-
-                                  if(flag == 0 ){
-                                    totalPrice = tempPrice - price;
-                                    var e = totalPrice +(quant * realPrice);
-                                    alert(e);
-                                    $('#totalPrice').html(0);
-                                    $('#totalPrice').html(String(e));
-                                    flag = 1;
-                                  }
-                                  else if(flag == 1){
-                                    var tPrice = parseInt($('#totalPrice').html());
-                                    alert(quant * parseInt($('#prices'+ctr).val()));
-                                    $('#totalPrice').html(0);
-                                    $('#totalPrice').html(tPrice+(quant * parseInt($('#prices').val())));
-                                  }
-                                }
-                                </script>
-
                               </table>
+                              <div class="panel-footer"><ul class="pager">
+              <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>
+              </div>
                             </form>
                           </div>
                         </div>
@@ -197,15 +198,15 @@ include 'dbconnect.php';
           templates: {
             buttons: function(){
               var options = this.options;
-              return '<div class="panel-footer"><ul class="pager">' +
-              '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>' +
-              '</div>';
+              // return '<div class="panel-footer"><ul class="pager">' +
+              // '<button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="addFab"><i class="fa fa-check"></i> Save</button>' +
+              // '</div>';
             }
           },
           onFinish: function(){
             window.location.href = 'receipt.php?id='+id;
           }
         });
-})();
-</script>
-</html>
+      })();
+      </script>
+      </html>

@@ -230,7 +230,8 @@ $(document).ready(function(){
                                         <td style="text-align: left;">'.$row['productDescription'].'</td>
                                         <td style="text-align: left;">'.$row['ohQuantity'].'</td>');
                                         ?>
-                                        <td  style="text-align: left;"><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1"><i class="ti-plus"></i> Add</button>
+                                        <td  style="text-align: left;">
+                                          <!-- <button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #addOnHand" data-target="#myModal1"><i class="ti-plus"></i> Add</button> -->
 
                                           <button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['productID']?> #deductOnHand" data-target="#myModal1"><i class="ti-close"></i> Deduct</button>
                                         </td>
