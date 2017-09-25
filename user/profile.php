@@ -61,17 +61,17 @@
 					?>
 				</div>
 				<br>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+						<a href="proof-of-payment-form.php"><button class="btn btn-danger"><h6 style="color:white;">Proof of Payment</h6></button></a>&nbsp;
+						<a href="proof-of-payment-form.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a>&nbsp;
+						<a href="proof-of-payment-form.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
+						<a href="proof-of-payment-form.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
+					</div>
+				</div>
 			</div>
 			<div class="col-12 col-sm-6 col-md-6 col-lg-7 col-xl-8" style="border:dotted 3px;">
 				<h1 class="text-center">Anong ilalagay dito?</h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 text-center">
-				<a href="proof-of-payment-form.php"><button class="btn btn-danger"><h6 style="color:white;">Proof of Payment</h6></button></a>&nbsp;
-				<a href="proof-of-payment-form.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a><br><br>
-				<a href="proof-of-payment-form.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
-				<a href="proof-of-payment-form.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
 			</div>
 		</div>
 	</div>

@@ -59,70 +59,81 @@
 					}
 					$conn->close();
 					?>
-					<br>
-					<div class="row">
-						<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-							<a href="proof-of-payment-form.php"><h4 class="text-center">Proof of Payment</h4></a>
-						</div>
-					</div>
 				</div>
 				<br>
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+						<a href="proof-of-payment-form.php"><button class="btn btn-success"><h6 style="color:white;">Customization</h6></button></a>&nbsp;
+						<a href="proof-of-payment-form.php"><button class="btn btn-warning"><h6 style="color:white;">Order Information</h6></button></a>&nbsp;
+						<a href="proof-of-payment-form.php"><button class="btn btn-sky"><h6 style="color:white;">Production Information</h6></button></a>
+					</div>
+				</div>
 			</div>
 			<div class="col-12 col-sm-6 col-md-6 col-lg-7 col-xl-8">
-				<h1 class="text-center">Proof of Payment Form</h1>
-			</div>
-		</div>
-		 <div class="row">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="content">
-          <form enctype="multipart/form-data" action="updatepersonalinformation.php" autocomplete="off" class="form-horizontal" method="post">
+				<h1 class="text-center">Proof of Payment Form</h1> 
+				<div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" id="content">
+          <form enctype="multipart/form-data" action="send-nudes.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
-              <legend>Your Personal Details</legend>
+              <legend class="text-success">You can refer to your receipt.</legend>
               <div class="form-group required">
-                <label for="input-firstname" class="col-sm-2 control-label">Deposited From (Bank Branch)</label>
-                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="First Name" value="<?php echo "" . $row["customerFirstName"];?>" name="fname" required>
+                <label for="input-firstname" class="col-sm-2 control-label">Order #</label>
+                <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+					<select class="form-control" name="orderid">
+						<option disabled>Choose Order</option>
+					<?php
+					include "userconnect.php";
+					$orders = "SELECT * from tblorders";
+					$result = $conn->query($orders);
+					if($result->num_rows>0){
+						while($row=$result->fetch_assoc()){
+							?>
+						<option><?php echo "" . $row["orderID"];?></option>
+						<?php
+						}
+					}
+					$conn->close();
+					?>
+					</select>
+<!--                  <input type="text" class="form-control" id="input-firstname" placeholder="" value="" name="branchcode" required>-->
                 </div>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-middlename" placeholder="Middle Name" value="<?php echo "" . $row["customerMiddleName"];?>" name="mname">
-                </div>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="input-lastname" placeholder="Last Name" value="<?php echo "" . $row["customerLastName"];?>" name="lname" required>
+              </div>
+              <div class="form-group required">
+                <label for="input-firstname" class="col-sm-2 control-label">Swift Code</label>
+                <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                  <input type="text" class="form-control" id="input-firstname" placeholder="" value="" name="branchcode" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">Amount Paid</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="<?php echo "" . $row["customerEmail"];?>" name="email" required>
+                  <input type="text" class="form-control" id="input-email" placeholder="" name="amountpaid" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-telephone" class="col-sm-2 control-label">Date Paid</label>
                 <div class="col-sm-10">
-                  <input type="tel" class="form-control" id="input-telephone" placeholder="Contact" value="<?php echo "" . $row["customerContactNum"];?>" name="number" required>
+                  <input type="date" class="form-control" id="input-telephone" value="" name="datepaid" required>
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-block" class="col-sm-2 control-label">Proof of Payment Picture</label>
+                <label for="input-block" class="col-sm-2 control-label">Photo</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-address" placeholder="e.g. #1255 Saint Francis St., Brgy. Parang, Marikina City" value="<?php echo "" . $row["customerAddress"];?>" name="address" required>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-block" class="col-sm-2 control-label">Picture</label>
-                <div class="col-sm-10">
-                  <input type="file" name="image" class="form-control"/>
-					<input type="hidden" name="exist_image" value="<?php echo "" . $row["customerDP"];?>">
+                  <input type="file" name="receiptphoto" class="" required/>
                 </div>
               </div>
             </fieldset>
             <div class="buttons">
               <div class="pull-right">
-                <input type="submit" class="btn btn-primary" value="Save" name="register" id="">
+                <input type="submit" class="btn btn-primary" value="Save" name="register">
               </div>
             </div>
 			</form>
+			 </div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
 	<?php include "scripts.php";?>
 </body>
 </html>
