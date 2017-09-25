@@ -27,7 +27,7 @@ if($conn->query($sendnukes) === true){
 }
 else{
 	echo "query:" . $sendnukes . "<br>error:" . $conn->error;
-	echo "<br><br> SESSION value: ";
+	echo "<br><br> CustomerID value: ";
 	echo $customerID;
 }
 $conn->close();

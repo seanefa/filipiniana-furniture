@@ -34,7 +34,7 @@ if($conn->query($sendproofofpayment) === true){
 }
 else{
 	echo "query:" . $sendproofofpayment . "<br>error:" . $conn->error;
-	echo "<br><br> SESSION value: ";
+	echo "<br><br> customerID value: ";
 	echo $customerID;
 }
 $conn->close();
