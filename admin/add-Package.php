@@ -43,11 +43,11 @@ if($flag>0){
 	mysqli_query($conn,$logSQL);
 	// Logs end here
     $_SESSION['createSuccess'] = 'Success';
-	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	header( 'Location: packages.php');
 } 
  else {
     $_SESSION['actionFailed'] = 'Failed';
-	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	header( 'Location: packages.php');
   }
 mysqli_close($conn);
 ?>

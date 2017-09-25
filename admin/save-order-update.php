@@ -40,11 +40,11 @@ foreach($selected as $str) {
 
 if($ctr>0){
 	$_SESSION['updateSuccess'] = 'Success';
-	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	header( 'Location: orders.php');
 } 
  else {
     $_SESSION['actionFailed'] = 'Failed';
-	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	header( 'Location: orders.php');
   }
 mysqli_close($conn);
 ?>
