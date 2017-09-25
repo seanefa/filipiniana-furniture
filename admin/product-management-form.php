@@ -14,105 +14,30 @@ $_SESSION['varname'] = $jsID;
 <head>
 </head>
 <body>
-  <!-- New On-Hand Modal -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="newOnHandModal" aria-hidden="true" style="display: none;">
+  <!-- Deduct On-Hand Modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="deductOnHandModal" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="newOnHand">
+      <div class="modal-content" id="deductOnHand">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">New On-Hand Product</h3>
+          <h3 class="modal-title" id="modalProduct">Pull-Out Furniture</h3>
         </div>
         <form action="on-hand.php" method="post">
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
-                <input type="hidden" name="func" value="new">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="cat">
-                        <option value="0">Choose Category</option>
-                        <?php
-                        $sql = "SELECT * FROM tblfurn_category ORDER BY categoryName ASC;";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-                          if($row['categoryStatus']=='Listed'){
-                            echo('<option value='.$row['categoryID'].'>'.$row['categoryName'].'</option>');
-                          }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="_category" id="type" disabled>
-
-
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-
-                    <div class="form-group">
-                      <label class="control-label">Furniture Name</label><span id="x" style="color:red"> *</span>
-                      <select class="form-control" tabindex="1" name="prod" id="products" disabled>
-
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Quantity</label>
-                      <input type="text" id="quan" class="form-control" name="quan" style="text-align:right">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add On-Hand Modal -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="addOnHandModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="addOnHand">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">Add Quantity</h3>
-        </div>
-        <form action="on-hand.php" method="post">
-          <div class="modal-body">
-            <div class="descriptions">
-              <div class="form-body">
-                <input type="hidden" name="func" value="add">
+                <input type="hidden" name="func" value="deduct">
                 <?php
                 include "dbconnect.php";
-                $sql = "SELECT * FROM tblproduct WHERE productID ='$jsID'";
+                $sql = "SELECT * FROM tblproduct a, tblonhand b WHERE a.productID = b.ohProdID and a.productID ='$jsID'";
                 $res = mysqli_query($conn,$sql);
                 $pRow = mysqli_fetch_assoc($res);
+                $count = $pRow['ohQuantity'];
                 ?>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
+                      <h3><b>Furniture Name : </b> <?php echo $pRow['productName']?></h3>
                       <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
                     </div>
                   </div>
@@ -121,81 +46,86 @@ $_SESSION['varname'] = $jsID;
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
-                      <input type="number" id="quan" class="form-control" name="quan" style="text-align:right">
+                      <label class="control-label">For</label><span id="x" style="color:red"> *</span>
+                      <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="reason" id="reason">
+                        <option value="1">Order</option>
+                        <option value="2">Repair</option>
+                        <option value="3">Other</option>
+                      </select>
                     </div>
                   </div>
                 </div>
-
+                <hr>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div id="tblorders">
+                     <table class="table product-overview" id="ordertbl">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center">-</th>
+                          <th>Order ID</th>
+                          <th style="text-align: left">Customer Name</th>
+                          <th style="text-align: right;">Quantity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $ctr = 0;
+                        $sql = "SELECT * FROM tblorders a, tblorder_request b, tblcustomer c WHERE a.orderID = b.tblOrdersID and b.orderProductID = '$jsID' and b.orderRequestStatus = 'Active' and a.custOrderID = c.customerID";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                          if($row['orderStatus']!="Finished"){
+                          $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT); //format ng display ID
+                          echo('<tr>
+                            <td style="text-align: center"><input class="chBox" type="radio"  value='.$row['order_requestID'].' name="check" /></td>
+                            <td style="text-align: left;">'. $orderID .'</td>
+                            <td style="text-align: left;">'.$row['customerLastName'].', '.$row['customerFirstName'].' '.$row['customerMiddleName'].'</td>
+                            <td style="text-align: right;">'.$row['orderQuantity'].'</td>
+                            </tr>');
+                          $ctr++;
+                        } 
+                      }
+                      if($ctr==0){
+                        echo "<tr><td colspan='4' style='text-align:center'>Nothing to show.</td></tr>";
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success waves-effect text-left" id="addBtn"><i class="fa fa-check"></i> Save</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
+                  <input type="text" id="quan" class="form-control" name="quan" style="text-align:right" value="<?php echo $count;?>">
+                  <input type="hidden" id="quanOrig" style="text-align:right" value="<?php echo $count;?>">
+                  <p id="quanError" style="color:red"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Remarks</label>
+                  <textarea id="remText" class="form-control" name="remarks"></textarea>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>
-
-<!-- Deduct On-Hand Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="deductOnHandModal" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="deductOnHand">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct">Deduct Quantity</h3>
-      </div>
-      <form action="on-hand.php" method="post">
-        <div class="modal-body">
-          <div class="descriptions">
-            <div class="form-body">
-              <input type="hidden" name="func" value="deduct">
-              <?php
-              include "dbconnect.php";
-              $sql = "SELECT * FROM tblproduct WHERE productID ='$jsID'";
-              $res = mysqli_query($conn,$sql);
-              $pRow = mysqli_fetch_assoc($res);
-              ?>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <h4><b>Furniture Name:</b> <?php echo $pRow['productName']?></h4>
-                    <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
-                    <input type="number" id="quan" class="form-control" name="quan" style="text-align:right">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Remarks</label>
-                    <textarea id="remText" class="form-control" placeholder="Pull-Out" name="remarks"></textarea>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
 </div>
 </div>
 
@@ -547,20 +477,20 @@ $_SESSION['varname'] = $jsID;
             </div>
 
             <div class="col-md-2">
-                    <label class="control-label">Unit</label><span id="x" style="color:red">
-                    <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
-                      <?php
-                      $sql = "SELECT * FROM tblunitofmeasure;";
-                      $result = mysqli_query($conn, $sql);
-                      while ($row = mysqli_fetch_assoc($result))
-                      {
-                        if($row['unStatus']!='Archived'){
-                          echo('<option value='.$row['unID'].'>'.$row['unUnit'].'</option>');
-                        }
-                      }
-                      ?>
-                    </select> 
-                </div>
+              <label class="control-label">Unit</label><span id="x" style="color:red">
+              <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
+                <?php
+                $sql = "SELECT * FROM tblunitofmeasure;";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($result))
+                {
+                  if($row['unStatus']!='Archived'){
+                    echo('<option value='.$row['unID'].'>'.$row['unUnit'].'</option>');
+                  }
+                }
+                ?>
+              </select> 
+            </div>
 
             <div class="col-md-1">
               <div class="form-group pull-right">

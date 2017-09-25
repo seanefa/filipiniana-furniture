@@ -104,6 +104,16 @@ include 'dbconnect.php';
                     <div class="panel-body">
                       <div class="row" style="margin-top: -30px;">
                         <div class="col-md-6">
+                          <!-- <div class="row">
+                            <div class="form-group">
+                              <label class="control-label" style="text-align: left;">Sort by:</label>
+                              <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="sort" id="sort" style="text-align:right">
+                                <option value="order">Order ID</option>
+                                <option value="name">Customer Name</option>
+                                <option value="name">Customer Name</option>
+                              </select>
+                            </div>
+                          </div> -->
                           <div class="form-group">
                             <h2 class="control-label" style="text-align: left;">Select an Order:</h2>
                             <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order" style="text-align:right">

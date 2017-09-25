@@ -18,7 +18,7 @@ include 'dbconnect.php';
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-<script>
+  <script>
   $(document).ready(function(){ //ON LOAD
     var value = $("#order").val();
     $.ajax({
@@ -49,7 +49,7 @@ include 'dbconnect.php';
    //  else{
    //   $("#del").prop('checked',true);
    // }
-  });
+ });
 
   $(document).ready(function(){//change ng order
     $('#order').change(function(){
@@ -79,6 +79,51 @@ include 'dbconnect.php';
 
 
   $(document).ajaxStop(function(){
+
+
+  $(".chBox").on('change',function(){
+    if($(this).prop("checked")){
+      var relType = $("input[name='check']:checked").val();
+      if(relType=='Delivery'){
+        if(($("#delAdd").val())==""){
+          $('#saveBtn').prop('disabled',true);
+        }
+        else{
+          $('#saveBtn').prop('disabled',false);
+        }
+      }
+      else{
+          $('#saveBtn').prop('disabled',false);
+      }
+    }
+    else{
+      $('#saveBtn').prop('disabled',true);
+    }
+  });
+
+  $('#location').change(function(){
+    var value = $("#location").val();
+    alert(value);
+    $("#delRate").val(value);
+  });
+
+
+  $("#delAdd").on('keyup',function(){
+    var add = $("#delAdd").val();
+    if(add==""){
+      $('#saveBtn').prop('disabled',true);
+    }
+    else{
+      var chbox = $("input[name='check']:checked").val();
+      if(chbox==""){
+        $('#saveBtn').prop('disabled',true);
+
+      }
+      else{
+        $('#saveBtn').prop('disabled',false);
+      }
+    }
+  });
 
   $(document).ready(function(){ //change ng for
     $("input[name='relType']").on('change',function(){
@@ -110,56 +155,19 @@ include 'dbconnect.php';
             $( '#delInfo' ).html(response);
           }
         });
-
-      }
-    });
-  });s
-    $(".chBox").on('change',function(){
-      if($(this).prop("checked")){
-        if(($("#delAdd").val())==""){
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          $('#saveBtn').prop('disabled',false);
-        }
-      }
-      else{
-        $('#saveBtn').prop('disabled',true);
-      }
-    });
-
-    $('#location').change(function(){
-      var value = $("#location").val();
-      $("#delRate").val(value);
-    });
-
-
-    $("#delAdd").on('keyup',function(){
-      var add = $("#delAdd").val();
-      if(add==""){
-        $('#saveBtn').prop('disabled',true);
-      }
-      else{
-        var chbox = $("input[name='check']:checked").val();
-        if(chbox==""){
-          $('#saveBtn').prop('disabled',true);
-
-        }
-        else{
-          $('#saveBtn').prop('disabled',false);
-        }
       }
     });
   });
+});
 
-  $(document).ready(function(){
-    $("#order").select2();
-  });
+$(document).ready(function(){
+  $("#order").select2();
+});
 
-  </script>
+</script>
 
-  <title>New Release</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+<title>New Release</title>
+<link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 
 <body class ="fix-header fix-sidebar">
@@ -223,38 +231,9 @@ include 'dbconnect.php';
                           <div class="panel-body blue-gradient">
                             <h2 style="text-align:center">RELEASE INFORMATION</h2>
                             <hr>
-                            <!-- <div class="row">
-                              <div class="col-md-6 col-md-offset-3" style="text-align: center;">
-                                <div class="form-group">
-                                  <h4><b>For: </b>
-                                    <label class="radio-inline"><input type="radio" id="pick" name="relType" value="Pick-up"/> Pick-up</label>
-                                    <label class="radio-inline"><input type="radio" id="del" name="relType" value="Delivery"/> Delivery</label></h4></div>
-                                  </div>
-                                </div> -->
-                                <div class="row">
-                                  <div id="delInfo"></div>
-                                </div>
-                            <!-- <div class="row">
-                              <div class="col-md-6">
-                                <div class="row">
-                                  <div class="form-group">
-                                    <label class="control-label" style="color: white;">Release Date</label><span id="x" style="color:red"> *</span>
-                                    <input type="date" id="delDate" class="form-control" name="delDate" value="<?php echo $date?>"/> 
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             <div class="row">
-                              <div class="col-md-12">
-                                <div class="row">
-                                  <div class="form-group">
-                                    <label class="control-label" style="color: white;">Remarks</label>
-                                    <textarea name="remarks" class="form-control"></textarea>
-                                    <br>
-                                  </div>
-                                </div>
-                              </div>
-                            </div> -->
+                              <div id="delInfo"></div>
+                            </div>
                             <div class="row" style="margin:10px">
                               <button data-wizard="finish" type="submit" class="btn btn-success waves-effect pull-right" id="saveBtn" disabled><i class="fa fa-check"></i> Save</button>
                             </div>

@@ -12,7 +12,13 @@ $date = date_create($relDate);
 $relDate = date_format($date,"F d, Y");
 
 
-echo '<div class="row"><h4><b>Estimated Release Date: </b> '.$relDate.'</h4></div><br>';
+echo '<h4>
+        <div class="row">
+        <div class="col-md-6"><b>Estimated Release Date: </b></div>
+        <div class="col-md-6"> '. $relDate .'</div>
+        </div>
+        </h4>
+        <br>';
 if($delAdd!="N/A"){
   echo '<div class="row">
                               <div class="col-md-6 col-md-offset-3" style="text-align: center;">

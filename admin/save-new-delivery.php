@@ -9,7 +9,6 @@ $remarks = $_POST['remarks'];
 if($relType=="Pick-up"){
 	$delSQL = "INSERT INTO `tblrelease` (`releaseDate`, `releaseType`, `releaseRemarks`, `releaseStatus`) VALUES ('$delDate', '$relType', '$remarks', 'Released')";
 	if(mysqli_query($conn,$delSQL)){
-		//echo $delSQL . "<br>";
 		$delID = mysqli_insert_id($conn);
 		$x = 0;
 		foreach($ordReq as $order){
@@ -18,20 +17,11 @@ if($relType=="Pick-up"){
 			$sql1 = "UPDATE tblorder_request SET orderRequestStatus = 'Released' WHERE order_requestID = $order";
 			$res1 = mysqli_query($conn,$sql1);
 			finishOrder($order);
-			//echo $detailsSQL. "<br>";
 			$x++;
 		}
-		// echo "<script>
-		// window.location.href='new-release.php';
-		// alert('Successfully saved record.');
-		// </script>";
 		header( "Location: releasing.php?actionSuccess");
 	}
 	else{
-		// echo "<script>
-		// window.location.href='new-release.php';
-		// alert('Record not saved. There are some errors on the data');
-		// </script>";
 		header( "Location: releasing.php?actionFailed" );
 	}
 }
@@ -58,26 +48,13 @@ else{
 		}
 		$delSQL = "INSERT INTO `tbldelivery` (`deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES ('$employee', '$delID', '$delRate', '$delAdd', '$remarks', 'Pending');";
 		if(mysqli_query($conn,$delSQL)){
-			// echo "<script>
-			// window.location.href='new-release.php';
-			// alert('Successfully saved!');
-			// </script>";
-
-		header( "Location: releasings.php?actionSuccess");
+		header( "Location: releasing.php?actionSuccess");
 		}
 		else{
-			// echo "<script>
-			// window.location.href='new-release.php';
-			// alert('Record not saved. There are some errors on the data');
-			// </script>";
 		header( "Location: releasing.php?actionFailed" );
 		}
 	}
 	else{
-		// echo "<script>
-		// window.location.href='new-release.php';
-		// alert('Record not saved. There are some errors on the data');
-		// </script>";
 		header( "Location: releasing.php?actionFailed" );
 	}
 

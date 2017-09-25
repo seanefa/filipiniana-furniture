@@ -87,7 +87,7 @@ echo '</script>';
 
                               ?>
                               <td>
-                                <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="return-form.php?id=<?php echo $row['returnID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
                               </td>
                               <?php echo ('</tr>');
 

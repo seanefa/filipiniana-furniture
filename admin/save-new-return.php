@@ -8,7 +8,7 @@ $assessment = $_POST['assessment'];
 $estDate = $_POST['estDate'];
 $remarks = $_POST['remarks'];
 
-$sql = "INSERT INTO `tblorder_return` (`tblorderReqID`, `dateReturned`, `returnReason`, `returnAssessment`, `returnRemarks`, `returnStatus`) VALUES ('$orderReqs', '$reDate', '$reasons', '$assessment', '$remarks', 'Pending');";
+$sql = "INSERT INTO `tblorder_return` (`tblorderReqID`, `dateReturned`, `returnReason`, `returnAssessment`, `returnRemarks`, `estDateReleased`, `returnStatus`) VALUES ('$orderReqs', '$reDate', '$reasons', '$assessment', '$remarks', '$estDate', 'Pending');";
 if(mysqli_query($conn,$sql)){
 	$sql1 = "UPDATE tblorder_request SET orderRequestStatus = 'Active' WHERE order_requestID = '$orderReqs'";
 	mysqli_query($conn,$sql1);
