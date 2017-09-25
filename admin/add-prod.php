@@ -10,6 +10,8 @@ $design = $_POST['design'];
 $prFabric = 0;
 if(isset($_POST['_fabric'])){
 	$prFabric = $_POST['_fabric'];
+}else{
+	$prFabric = 0;
 }
 
 $prPrice = $_POST['_price'];

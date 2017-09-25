@@ -241,7 +241,7 @@ if (!$conn) {
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer"><span id="notif" style="color:red"></span>
             <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
           </form>
@@ -278,7 +278,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="editname" class="form-control" name="name" value="<?php echo $row['promoName']?>"/> <span id="message"></span>
+                      <input type="text" id="editname" autocomplete="false" class="form-control" name="name" value="<?php echo $row['promoName'];  $_SESSION['tempname'] = $row['promoName'];?>"/> <span id="message"></span>
                     </div>
                   </div>
                 </div>
@@ -492,19 +492,19 @@ if (!$conn) {
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="control-label" style="font-size:18px;">Start Date</label><span id="x" style="color:red"> *</span>
-                          <input type="date" id="startDate" class="form-control" name="start" value="<?php echo $row['promoStartDate']?>"/> </div>
+                          <input type="date" id="startDate" class="form-control" name="start"/><input type="hidden" id="tempdate" value="<?php echo $row['promoStartDate'];?>" /></div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label class="control-label" style="font-size:18px;">End</label><span id="x" style="color:red"> *</span>
-                            <input type="date" id="endDate" class="form-control" name="end" value="<?php echo $row['promoEnd']?>"/>
+                            <input type="date" id="endDate" class="form-control" name="end" /><input type="hidden" id="tempend" value="<?php echo $row['promoEnd'];?>"/>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer"><span id="notif" style="color:red"></span>
                   <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>

@@ -68,7 +68,7 @@ $(document).ready(function(){
         var date = $("#dateRep").val();
         $.ajax({
         type: 'post',
-        url: 'reports-out.php',
+        url: 'inventory-output.php',
         data: {
           id: value, d: date,
         },
@@ -83,7 +83,7 @@ $(document).ready(function(){
         var y = $("#year").val();
         $.ajax({
         type: 'post',
-        url: 'reports-out.php',
+        url: 'inventory-output.php',
         data: {
           id: value, m: m, y:y,
         },
@@ -95,10 +95,9 @@ $(document).ready(function(){
 
       if(value==3){
         var y = $("#year").val();
-        alert(y);
         $.ajax({
         type: 'post',
-        url: 'reports-out.php',
+        url: 'inventory-output.php',
         data: {
           id: value, y : y,
         },

@@ -50,6 +50,52 @@ if (!empty($_SESSION['actionFailed'])) {
 <html lang="en">
 <head>
   <script>
+
+
+    var c1 = 0;
+  var c2 = 0;
+
+  function checkall(id,error,type){
+
+   if(id == 1){
+      if(error != 0){
+        c1 = 1;
+      }else if(error == 0){
+        c1 = 0;
+      }
+   }
+   if(id == 2){
+      if(error != 0){
+        c2 = 1;
+      }else if(error == 0){
+        c2 = 0;
+      }
+   }
+
+   if(c1 == 0 && c2 == 0){
+    if(type == 'new'){
+    $('#saveBtn').prop('disabled',false);
+    $('#notif').html('');
+      }else if(type=='update'){
+        $('#updateBtn').prop('disabled',false);
+        $('#notif').html('');
+      }
+
+
+   }else{
+
+   if(type == 'new'){
+    $('#saveBtn').prop('disabled',true);
+    $('#notif').html('Some Fields have Errors');
+      }else if(type=='update'){
+        $('#updateBtn').prop('disabled',true);
+    $('#notif').html('Some Fields have Errors');
+      }
+
+   }
+
+  }
+
      $(document).ready(function(){
     // Unit Name
     $('body').on('keyup','#unitName',function(){
@@ -83,11 +129,11 @@ if (!empty($_SESSION['actionFailed'])) {
       }
 
         if(flag){
-          $('#saveBtn').prop('disabled',true);
+          checkall(1,1,'new');
           $('#unitName').css('border-color','red');
         }
         else if(!flag){
-          $('#saveBtn').prop('disabled', false);
+          checkall(1,0,'new');
           $('#unitName').css('border-color','limegreen');
         }
       });
@@ -125,11 +171,11 @@ if (!empty($_SESSION['actionFailed'])) {
       }
 
         if(flag){
-          $('#saveBtn').prop('disabled',true);
+          checkall(2,1,'new');
           $('#unitMeasure').css('border-color','red');
         }
         else if(!flag){
-          $('#saveBtn').prop('disabled', false);
+          checkall(2,0,'new');
           $('#unitMeasure').css('border-color','limegreen');
         }
       });
@@ -161,35 +207,35 @@ var flag = true;
       }else{
     $.post('umeasure-ucheck.php',{username : user}, function(data){
      
-     if(data == 'unchanged'){
+    if(data == 'unchanged'){
       error = 0;
        $('#message'+id).html('');
-          $('#updateBtn').prop('disabled',false);
+          //$('#updateBtn').prop('disabled',false);
       $('#edit'+id).css('border-color','black');
      }
      else if(data == 'Already Exist!'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+         // $('#updateBtn').prop('disabled',true);
       $('#message'+id).html(data);
       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
       $('#message'+id).html(data);
       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'No white Space'){
        error++;
 
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
       $('#message'+id).html(data);
       $('#edit'+id).css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message'+id).html('');
-          $('#updateBtn').prop('disabled',true);
+         // $('#updateBtn').prop('disabled',true);
       $('#edit'+id).css('border-color','black');
      }
 
@@ -197,9 +243,20 @@ var flag = true;
      else if(data == 'Good!'){
       error = 0;
        $('#message'+id).html('');
-     $('#updateBtn').prop('disabled',false);
+    // $('#updateBtn').prop('disabled',false);
       $('#edit'+id).css('border-color','limegreen');
      }
+
+      if(error == 0){
+        flag = false;
+        if(!flag){
+          checkall(id,0,'update');
+        }
+        }else{
+          flag = true;
+          checkall(id,1,'update');
+        }
+
 
 
     });

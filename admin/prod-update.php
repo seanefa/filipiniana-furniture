@@ -6,10 +6,12 @@ $id = $_SESSION['varname'];
 
 $fabric = 0;
 
-//if(isset($_POST['_fabric']))
-//{
-//	$fabric = $_POST['_fabric'];
-//}
+if(isset($_POST['_fabric']))
+{
+	$fabric = $_POST['_fabric'];
+}else{
+	$fabric = 0;
+}
 
 $category = $_POST["_category"];
 $type = $_POST["_type"];

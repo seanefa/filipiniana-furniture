@@ -179,25 +179,25 @@ $(document).on('focus','.modal',function () {
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#updateBtn').prop('disabled',true);
+          checkall(2,1,'update');
         }
         else if(mat<0){
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#updateBtn').prop('disabled',true);
+          checkall(2,1,'update');
         }
         else if(mat>5){
           var e = "Input a number not greater than 5";
           $("#error").html(e);
           $('#editrating').css('border-color','red');
-          $('#updateBtn').prop('disabled',true);
+          checkall(2,1,'update');
         }
         else{
           var e = "";
           $("#error").html(e);
           $('#editrating').css('border-color','gray');
-          $('#updateBtn').prop('disabled',false);
+          checkall(2,0,'update');
         }
       });
     });
@@ -211,25 +211,29 @@ $(document).on('focus','.modal',function () {
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#rating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
+          
         }
         else if(mat<0){
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#rating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
+          
         }
         else if(mat>5){
           var e = "Input a number not greater than 5";
           $("#error").html(e);
           $('#rating').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
+          
         }
         else{
           var e = "";
           $("#error").html(e);
           $('#rating').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
+          $('#saveBtn').prop('disabled',false);$('#notif').html('');
+          
         }
       });
     });
@@ -245,7 +249,7 @@ $('body').on('keyup','#fabricTextureName',function(){
       userkey = userkey.slice(userkey.length -1 , userkey.length);
   if(userkey == '\\'){
       $('#fabricTextureNameValidate').html('Symbols not allowed');
-        $('#saveBtn').prop('disabled',true);
+        $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#fabricTextureName').css('border-color','red');
       }else{
   $.post('fab-text-check.php',{fabricTextureName : user}, function(data){ 
@@ -268,11 +272,11 @@ $('body').on('keyup','#fabricTextureName',function(){
     }
 
     if(flag){
-      $('#saveBtn').prop('disabled',true);
+      $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#fabricTextureName').css('border-color','red');
     }
     else if(!flag){
-      $('#saveBtn').prop('disabled', false);
+      $('#saveBtn').prop('disabled', false);$('#notif').html('');
       $('#fabricTextureName').css('border-color','limegreen');
     }
   });
@@ -280,6 +284,51 @@ $('body').on('keyup','#fabricTextureName',function(){
 });
 
 });
+var c1 = 0;
+  var c2 = 0;
+
+  function checkall(id,error,type){
+
+   if(id == 1){
+      if(error != 0){
+        c1 = 1;
+      }else if(error == 0){
+        c1 = 0;
+      }
+   }
+   if(id == 2){
+      if(error != 0){
+        c2 = 1;
+      }else if(error == 0){
+        c2 = 0;
+      }
+   }
+
+   if(c1 == 0 && c2 == 0){
+    if(type == 'new'){
+    $('#saveBtn').prop('disabled',false);
+    $('#notif').html('');
+      }else if(type=='update'){
+        $('#updateBtn').prop('disabled',false);
+        $('#notif').html('');
+      }
+
+
+   }else{
+
+   if(type == 'new'){
+    $('#saveBtn').prop('disabled',true);
+    $('#notif').html('Some Fields have Errors');
+      }else if(type=='update'){
+        $('#updateBtn').prop('disabled',true);
+    $('#notif').html('Some Fields have Errors');
+      }
+
+   }
+
+  }
+
+
 
   $(document).ready(function(){
     var temprem;
@@ -303,7 +352,7 @@ $('body').on('keyup','#fabricTextureName',function(){
 
       if(userkey == '\\'){
         $('#message').html('Symbols not allowed');
-          $('#updateBtn').prop('disabled',false);
+          //$('#updateBtn').prop('disabled',false);
           $('#editname').css('border-color','red');
       }else{
       $.post('fab-text-Ucheck.php',{username : user}, function(data){
@@ -311,32 +360,32 @@ $('body').on('keyup','#fabricTextureName',function(){
         if(data == 'unchanged'){
           error = 0;
           $('#message').html('');
-          $('#updateBtn').prop('disabled',false);
+          //$('#updateBtn').prop('disabled',false);
           $('#editname').css('border-color','black');
         }
         else if(data == 'Already Exist!'){
           error++;
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
           $('#message').html(data);
           $('#editname').css('border-color','red');
         }
         else if(data == 'Symbols not allowed'){
           error++;
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
           $('#message').html(data);
           $('#editname').css('border-color','red');
         }
         else if(data == 'No white Space'){
           error++;
 
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
           $('#message').html(data);
           $('#editname').css('border-color','red');
         }
         else if(data == ''){
           error = 0;
           $('#message').html('');
-          $('#updateBtn').prop('disabled',true);
+          //$('#updateBtn').prop('disabled',true);
           $('#editname').css('border-color','black');
         }
 
@@ -344,8 +393,18 @@ $('body').on('keyup','#fabricTextureName',function(){
         else if(data == 'Good!'){
           error = 0;
           $('#message').html('');
-          $('#updateBtn').prop('disabled',false);
+         // $('#updateBtn').prop('disabled',false);
           $('#editname').css('border-color','limegreen');
+        }
+
+        if(error == 0){
+
+          checkall(1,0,'update');
+
+        }else if(error != 0){
+
+          checkall(1,1,'update');
+
         }
 
 
@@ -457,10 +516,10 @@ $(document).ready(function(){
                           <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Rating <span class="mytooltip tooltip-effect-5">
+                            <th>Rating <span class="mytooltip tooltip-effect-3">
                     <span class="tooltip-item">?</span>
                       <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">'Rating' refers to how<br>smooth or rough<br>a texture is</span>
+                      <span class="tooltip-text">'Rating' refers to how smooth or rough a texture is</span>
                     </span>
                    </span>
                           </th>

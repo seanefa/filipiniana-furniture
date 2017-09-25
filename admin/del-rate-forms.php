@@ -76,8 +76,8 @@ if (!$conn) {
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+            <div class="modal-footer"><span id="notif" style="color:red"></span>
+              <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
             </div>
           </form>
@@ -149,7 +149,7 @@ if (!$conn) {
                       </div>
                     </div>
                   </div>
-                  <div class="modal-footer">
+                  <div class="modal-footer"><span id="notif" style="color:red"></span>
                     <button id="addFab" type="submit" class="btn btn-success waves-effect text-left" disabled><i class="fa fa-check"></i> Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                   </div>

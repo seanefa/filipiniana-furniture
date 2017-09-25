@@ -140,7 +140,7 @@ if (!empty($_SESSION['actionFailed'])) {
     userkey = $(this).val();
       userkey = userkey.slice(userkey.length -1 , userkey.length);
     if(userkey == '\\'){
-        $('#addFab').prop('disabled',true);
+        $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html('Symbols not allowed');
       $('#username').css('border-color','red');
       }else{
@@ -148,27 +148,27 @@ if (!empty($_SESSION['actionFailed'])) {
      
      if(data == 'Already Exist!'){
        
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == 'No white Space'){
   
 
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message').html('');
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('');
       $('#username').css('border-color','black');
      }
 
@@ -176,7 +176,7 @@ if (!empty($_SESSION['actionFailed'])) {
      else if(data == 'Good!'){
       error = 0;
        $('#message').html('');
-     $('#addFab').prop('disabled',false);
+     $('#addFab').prop('disabled',false);$('#notif').html('');
       $('#username').css('border-color','limegreen');
      }
       
@@ -209,7 +209,7 @@ var flag = true;
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#updateBtn').prop('disabled',true);
+        $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html('Symbols not allowed');
       $('#editname').css('border-color','red');
       }else{
@@ -218,32 +218,32 @@ var flag = true;
      if(data == 'unchanged'){
       error = 0;
        $('#message').html('');
-          $('#updateBtn').prop('disabled',false);
+          $('#updateBtn').prop('disabled',false);$('#notif').html('');
       $('#editname').css('border-color','black');
      }
      else if(data == 'Already Exist!'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == 'No white Space'){
        error++;
 
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message').html('');
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('');
       $('#editname').css('border-color','black');
      }
 
@@ -251,7 +251,7 @@ var flag = true;
      else if(data == 'Good!'){
       error = 0;
        $('#message').html('');
-     $('#updateBtn').prop('disabled',false);
+     $('#updateBtn').prop('disabled',false);$('#notif').html('');
       $('#editname').css('border-color','limegreen');
      }
 
@@ -261,6 +261,24 @@ var flag = true;
     }
 
   });
+  $('body').on('change','#select',function(){
+          if($(this).val() == '--'){
+
+
+          $('#updateBtn').prop('disabled',true);
+
+            }
+            else{
+          if(error == 0){
+          $('#updateBtn').prop('disabled',false);
+        }
+        else{
+          $('#updateBtn').prop('disabled',true);
+        }
+        }
+
+
+      });
         $('body').on('change','#_fabric',function(){
           if($(this).val() == '--'){
 
@@ -521,8 +539,8 @@ $(document).ready(function(){
     $("#_fabric").attr('disabled','disabled');  
   }
   
-  $("input[name='design']").on('change',function(){
-    var val = $("input[name='design']:checked").val();
+  $("input[name='_design']").on('change',function(){
+    var val = $("input[name='_design']:checked").val();
     if(val=="3"){
       $("#_fabric").removeAttr('disabled');
       var al = $("#_fabric").val();
@@ -531,6 +549,8 @@ $(document).ready(function(){
       $("#_fabric").attr('disabled','disabled');  
     }
   });
+
+
 });
 });
 

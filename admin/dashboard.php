@@ -502,6 +502,7 @@ include 'dbconnect.php';
           </div>  
         </div>
       </div>
+
       <!-- /.container-fluid -->
       <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
     </div>

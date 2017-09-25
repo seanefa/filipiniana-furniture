@@ -223,7 +223,7 @@ include "dbconnect.php";
   </div>
 </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer"><span id="notif" style="color:red"></span>
   <button type="submit" class="btn btn-success waves-effect text-left" id="addFab" disabled=""><i class="fa fa-check"></i> Save</button>
   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
 
@@ -483,10 +483,10 @@ include "dbconnect.php";
                         {
                           if($row['designStatus']!='Archived'){
                             if($trow['prodDesign']==$row['designID']){
-                              echo '<label class="radio-inline"><input type="radio" name="_design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
+                              echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
                             }
                             else{
-                            echo '<label class="radio-inline"><input type="radio" name="_design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
+                            echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
                           }
                           }
                         }
@@ -556,7 +556,7 @@ include "dbconnect.php";
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="control-label">Dimension Specification</label><span id="x" style="color:red"> *</span>
-                      <textarea type="text" name ="dimensions" rows="4" class="form-control" style="text-align:right" required><?php echo $trow['prodSizeSpecs'];?></textarea>
+                      <textarea type="text" name ="dimensions" rows="4" class="form-control" style="text-align:right" value="<?php echo $trow['prodSizeSpecs'];?>" required></textarea>
                     </div>
                   </div>
                 <!--/span-->
@@ -611,7 +611,7 @@ include "dbconnect.php";
                     </div>
                   </div>
 
-<div class="modal-footer">
+<div class="modal-footer"><span id="notif" style="color:red"></span>
   <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn" disabled=""><i class="fa fa-check"></i> Save</button>
   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
 

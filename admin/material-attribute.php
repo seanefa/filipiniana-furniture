@@ -88,10 +88,12 @@ if (!empty($_SESSION['actionFailed'])) {
 
         if(flag){
           $('#saveBtn').prop('disabled',true);
+          $('#notif').html('Some Fields have Error');
           $('#materialName').css('border-color','red');
         }
         else if(!flag){
           $('#saveBtn').prop('disabled', false);
+          $('#notif').html('');
           $('#materialName').css('border-color','limegreen');
         }
       });
@@ -125,6 +127,8 @@ var userkey = '';
           flag = false;
           error = 0;
         $('#message1').html("");
+
+          $('#notif').html('');
         $('#updateBtn').prop('disabled', false);
       $('#editname').css('border-color','limegreen');
 
@@ -133,6 +137,7 @@ var userkey = '';
         flag = true;
         error++;
         $('#message1').html(data);
+          $('#notif').html('Some Fields have Error');
          $('#updateBtn').prop('disabled',true);
 
       $('#editname').css('border-color','red');
@@ -141,11 +146,13 @@ var userkey = '';
         flag = true;
         error++;
         $('#message1').html(data);
+          $('#notif').html('Some Fields have Error');
          $('#updateBtn').prop('disabled',true);
       $('#editname').css('border-color','red');
       }
       if(data == "unchanged"){
         error = 0;
+        $('#notif').html('');
         $('#message1').html("");
       $('#editname').css('border-color','black')
       }
@@ -153,6 +160,7 @@ var userkey = '';
         flag = true;
         error++;
         $('#message1').html(data);
+          $('#notif').html('Some Fields have Error');
          $('#updateBtn').prop('disabled',true);
 
       $('#editname').css('border-color','red');
@@ -165,6 +173,8 @@ var userkey = '';
   });
          $('body').on('change','#rem',function(){
           if(error == 0){
+
+          $('#notif').html('');
           $('#updateBtn').prop('disabled',false);
         }
 
@@ -174,6 +184,7 @@ var userkey = '';
         if(error == 0){
         flag = false;
         if(!flag){
+          $('#notif').html('');
           $('#updateBtn').prop('disabled',false);
         }
         }

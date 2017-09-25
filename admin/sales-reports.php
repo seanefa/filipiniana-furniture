@@ -135,6 +135,8 @@ $(document).ready(function(){
            oct = $('#10').val();
            nov = $('#11').val();
            dec = $('#12').val();
+
+
            myChart = new Chart(ctx, {
     type: 'bar',
     data: {

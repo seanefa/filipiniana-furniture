@@ -76,11 +76,11 @@ if (!empty($_SESSION['actionFailed'])) {
       }
 
         if(flag){
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
          // $('#attribb').css('border-color','red');
         }
         else if(!flag){
-          $('#saveBtn').prop('disabled', false);
+          $('#saveBtn').prop('disabled', false);$('#notif').html('');
          // $('#attribb').css('border-color','limegreen');
         }
       });
@@ -108,12 +108,12 @@ if (!empty($_SESSION['actionFailed'])) {
       }
 
         if(flag){
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
           $('#description').css('border-color','red');
            $('#descValid').html(data);
         }
         else if(!flag){
-          $('#saveBtn').prop('disabled', false);
+          $('#saveBtn').prop('disabled', false);$('#notif').html('');
           $('#description').css('border-color','limegreen');
            $('#descValid').html("");
         }
@@ -133,7 +133,7 @@ if (!empty($_SESSION['actionFailed'])) {
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-        $('#saveBtn').prop('disabled',true);
+        $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message'+id).html('Symbols not Allowed');
       $('#attrib'+id).css('border-color','red');
       }else{
@@ -142,32 +142,32 @@ if (!empty($_SESSION['actionFailed'])) {
      if(data == 'unchanged'){
       error = 0;
        $('#message'+id).html('');
-          $('#saveBtn').prop('disabled',false);
+          $('#saveBtn').prop('disabled',false);$('#notif').html('');
       $('#attrib'+id).css('border-color','black');
      }
      else if(data == 'Already Exist!'){
        error++;
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message'+id).html(data);
       $('#attrib'+id).css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        error++;
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message'+id).html(data);
       $('#attrib'+id).css('border-color','red');
      }
      else if(data == 'No white Space'){
        error++;
 
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message'+id).html(data);
       $('#attrib'+id).css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message'+id).html('');
-          $('#saveBtn').prop('disabled',true);
+          $('#saveBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#attrib'+id).css('border-color','black');
      }
 
@@ -175,7 +175,7 @@ if (!empty($_SESSION['actionFailed'])) {
      else if(data == 'Good!'){
       error = 0;
        $('#message'+id).html('');
-     $('#saveBtn').prop('disabled',false);
+     $('#saveBtn').prop('disabled',false);$('#notif').html('');
       $('#attrib'+id).css('border-color','limegreen');
      }
 

@@ -438,7 +438,7 @@ include 'dbconnect.php';
                         <div class="form-group">
                           <input type="hidden" name="id" value=<?php echo $row['packageID']?>>
                           <label class="control-label">Name</label><span id="x" style="color:red">*</span>
-                          <input type="text" id="editname" class="form-control" placeholder="Fabulous Package" name="pName" value="<?php echo $row['packageDescription'];?>" required/><span id="message"></span> 
+                          <input type="text" id="editname" class="form-control" placeholder="Fabulous Package" name="pName" value="<?php echo $row['packageDescription']; $_SESSION['tempname'] = $row['packageDescription'];?>" required/><span id="message"></span> 
                         </div>
                       </div>
                       <div class="col-md-6">

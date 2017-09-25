@@ -60,7 +60,7 @@ if (!empty($_SESSION['actionFailed'])) {
     userkey = $(this).val();
       userkey = userkey.slice(userkey.length -1 , userkey.length);
     if(userkey == '\\'){
-       $('#addFab').prop('disabled',true);
+       $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html('Symbols not allowed');
       $('#username').css('border-color','red');
       }else{
@@ -68,27 +68,27 @@ if (!empty($_SESSION['actionFailed'])) {
      
      if(data == 'Already Exist!'){
        
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == 'No white Space'){
   
 
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#username').css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message').html('');
-          $('#addFab').prop('disabled',true);
+          $('#addFab').prop('disabled',true);$('#notif').html('');
       $('#username').css('border-color','black');
      }
 
@@ -96,7 +96,7 @@ if (!empty($_SESSION['actionFailed'])) {
      else if(data == 'Good!'){
       error = 0;
        $('#message').html('');
-     $('#addFab').prop('disabled',false);
+     $('#addFab').prop('disabled',false);$('#notif').html('');
       $('#username').css('border-color','limegreen');
      }
       
@@ -129,7 +129,7 @@ var userkey = '';
       userkey = userkey.slice(userkey.length -1 , userkey.length);
 
       if(userkey == '\\'){
-       $('#updateBtn').prop('disabled',true);
+       $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html('Symbols not allowed');
       $('#editname').css('border-color','red');
       }else{
@@ -138,32 +138,32 @@ var userkey = '';
      if(data == 'unchanged'){
       error = 0;
        $('#message').html('');
-          $('#updateBtn').prop('disabled',false);
+          $('#updateBtn').prop('disabled',false);$('#notif').html('');
       $('#editname').css('border-color','black');
      }
      else if(data == 'Already Exist!'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == 'Symbols not allowed'){
        error++;
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == 'No white Space'){
        error++;
 
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('Some Fields have Error');
       $('#message').html(data);
       $('#editname').css('border-color','red');
      }
      else if(data == ''){
       error = 0;
           $('#message').html('');
-          $('#updateBtn').prop('disabled',true);
+          $('#updateBtn').prop('disabled',true);$('#notif').html('');
       $('#editname').css('border-color','black');
      }
 
@@ -171,7 +171,7 @@ var userkey = '';
      else if(data == 'Good!'){
       error = 0;
        $('#message').html('');
-     $('#updateBtn').prop('disabled',false);
+     $('#updateBtn').prop('disabled',false);$('#notif').html('');
       $('#editname').css('border-color','limegreen');
      }
 
