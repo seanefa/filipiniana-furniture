@@ -181,7 +181,7 @@ background-image: linear-gradient(to top right, #EFDA7D 0%, #E9D4B3 100%);
 /*===================================================================================*/
 /*  Buttons
 /*===================================================================================*/
-.btn-primary { background-color:#000; }
+.btn-primary { background-color:#DDBF5F; }
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { background-color:#999; }
 /*===================================================================================*/
 /*  Footer
