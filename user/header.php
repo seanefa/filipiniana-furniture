@@ -67,57 +67,56 @@
         <!-- Mini Cart Start-->
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="cart">
-            <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="fa fa-shopping-cart fa-2x pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0.00</span></button>
-            <ul class="dropdown-menu">
-              <li>
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/sony_vaio_1-50x75.jpg"></a></td>
-                      <td class="text-left"><a href="product.php">Product</a></td>
-                      <td class="text-right">x 1</td>
-                      <td class="text-right">&#8369 902.00</td>
-                      <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/samsung_tab_1-50x75.jpg"></a></td>
-                      <td class="text-left"><a href="product.php">Product</a></td>
-                      <td class="text-right">x 1</td>
-                      <td class="text-right">&#8369 230.00</td>
-                      <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-              <li>
-                <div>
-                  <table class="table table-bordered">
-                    <tbody>
-                      <tr>
-                        <td class="text-right"><strong>Sub-Total</strong></td>
-                        <td class="text-right">&#8369 940.00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                        <td class="text-right">&#8369 4.00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-right"><strong>VAT (20%)</strong></td>
-                        <td class="text-right">&#8369 188.00</td>
-                      </tr>
-                      <tr>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="fa fa-shopping-cart fa-lg pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0.00</span></button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">My Cart</h4>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/sony_vaio_1-50x75.jpg"></a></td>
+                          <td class="text-left"><a href="product.php">Product</a></td>
+                          <td class="text-right">x 1</td>
+                          <td class="text-right">&#8369 902.00</td>
+                          <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/samsung_tab_1-50x75.jpg"></a></td>
+                          <td class="text-left"><a href="product.php">Product</a></td>
+                          <td class="text-right">x 1</td>
+                          <td class="text-right">&#8369 230.00</td>
+                          <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered">
+                      <tbody>
                         <td class="text-right"><strong>Total</strong></td>
                         <td class="text-right">&#8369 1,132.00</td>
                       </tr>
                     </tbody>
                   </table>
-                  <p class="checkout"><a href="cart.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;&nbsp;&nbsp;<a href="checkout.php" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
                 </div>
-              </li>
-            </ul>
+                <div class="modal-footer">
+                   <a href="cart.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;<a href="checkout.php" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Mini Cart End-->
+      </div>
+      <!-- Mini Cart End-->
         <!-- Logo Start -->
         <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div id="logo"><a href="home.php"><img class="img-responsive" src="image/logo.png" title="Furniture Shop" alt="Furniture Shop" /></a></div>

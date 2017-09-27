@@ -108,6 +108,8 @@ body {
 	color:#222;
 	font-family:'Open Sans', sans-serif;
 	line-height:18px;
+	padding-right:0px !important;
+	margin-right:0px !important;
 }
 body { font-size:12px; }
 legend {
@@ -1483,7 +1485,7 @@ visibility:hidden;
 	height:32px;
 	line-height:15px;
 	padding-left:10px;
-	border-bottom:2px solid #ddd;
+	border-bottom:3px solid #DDBF5F;
 	margin-bottom:20px;
 }
 .product-tab .tabs li {
