@@ -353,7 +353,7 @@ $(document).ready(function(){
                           <thead>
                             <tr>
                               <th>Name</th>
-                              <th>Description</th>
+                              <th class="limitDataWidth">Description</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>

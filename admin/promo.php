@@ -588,7 +588,7 @@ $(document).ready(function(){
                           <thead>
                             <tr>
                               <th>Name</th>
-                              <th>Description</th>
+                              <th class="limitDataWidth">Description</th>
                               <th>Start Date</th>
                               <th>End Date</th>
                               <th class="removeSort">Actions</th>

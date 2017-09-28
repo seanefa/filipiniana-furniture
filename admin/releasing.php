@@ -111,16 +111,23 @@ echo '</script>';
                                 <td>'.$custName.'</td>
                                 <td style="text-align:right">'.$quan.'</td>');
                               if($row['deliveryStatus']=='Pending'){
-                                echo '<td style="background-color:orange; color:white">'.$row['deliveryStatus'].'</td>';
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
+                                </div></td>';
                                 echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Start Delivery'){
-                                echo '<td style="background-color:green; color:white">'.$row['deliveryStatus'].'</td>';echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
+                                </div></td>';
+                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Cancelled'){
-                                echo '<td style="background-color:red; color:white">'.$row['deliveryStatus'].'</td>';echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
+                                </div></td>';
+                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
-
                               ?>
                               <td>
                                 <!-- VIEW -->

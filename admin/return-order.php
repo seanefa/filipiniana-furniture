@@ -76,15 +76,20 @@ echo '</script>';
                                 <td>'.$row['returnReason'].'</td>
                                 <td>'.$row['returnAssessment'].'</td>');
                               if($row['returnStatus']=='Pending'){
-                                echo '<td style="background-color:orange; color:white">'.$row['returnStatus'].'</td>';
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['returnStatus'].'</p></h3>
+                                </div></td>';
                               }
                               if($row['returnStatus']=='Start Delivery'){
-                                echo '<td style="color:green">'.$row['returnStatus'].'</td>';
+                                echo '<td><div class="progress progress-lg">
+                                  <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['returnStatus'].'</p></h3>
+                                </div></td>';
                               }
                               if($row['returnStatus']=='Cancelled'){
-                                echo '<td style="color:red">'.$row['returnStatus'].'</td>';
+                                echo '<td><div class="progress progress-lg">
+                                  <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['returnStatus'].'</p></h3>
+                                </div></td>';
                               }
-
                               ?>
                               <td>
                                 <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="return-form.php?id=<?php echo $row['returnID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>

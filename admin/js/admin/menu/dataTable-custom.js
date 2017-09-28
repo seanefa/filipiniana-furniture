@@ -7,7 +7,7 @@ $(document).ready(function () {
     {
      'bSortable' : false,
      'bSearchable' : false,
-     'aTargets' : [ 'removeSort' ]
+     'aTargets' : [ 'removeSort' ],
    }]
  });
 });

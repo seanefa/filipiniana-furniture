@@ -420,7 +420,7 @@ $(document).ready(function(){
                               <th>Type</th>
                               <th>Pattern</th>
                               <th>Color</th>
-                              <th>Description</th>
+                              <th class="limitDataWidth">Description</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>

@@ -80,7 +80,7 @@ include 'dbconnect.php';
 
   </script>
 
-  <title>New Release</title>
+  <title>New Return</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
 </head>
 
@@ -115,7 +115,7 @@ include 'dbconnect.php';
                             </div>
                           </div> -->
                           <div class="form-group">
-                            <h2 class="control-label" style="text-align: left;">Select an Order:</h2>
+                            <h2 style="font-family: inherit; font-weight: bolder;">Select an Order:</h2>
                             <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order" style="text-align:right">
                               <?php
                               include "dbconnect.php";
@@ -149,7 +149,7 @@ include 'dbconnect.php';
 
                         <div class="col-md-6" > 
                           <div class="panel-body blue-gradient">
-                            <h2 style="text-align:center">RETURN INFORMATION</h2>
+                            <h2 style="text-align:center; font-family: inherit; font-weight: bolder;">RETURN INFORMATION</h2>
                             <hr>
                             <div class="row">
                               <div class="col-md-12">

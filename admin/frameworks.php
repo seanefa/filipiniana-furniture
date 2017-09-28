@@ -390,7 +390,7 @@ $(document).ready(function(){
                               <th>Name</th>
                               <th>Material</th>
                               <th>Design</th>
-                              <th>Remarks</th>
+                              <th class="limitDataWidth">Remarks</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>

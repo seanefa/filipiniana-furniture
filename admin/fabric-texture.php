@@ -481,6 +481,28 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+  // Tooltip only Text
+  $('.questionMarkTooltip').hover(function(){
+          // Hover over code
+          var title = $(this).attr('title');
+          $(this).data('tipText', title).removeAttr('title');
+          $('<p class="tooltipsy"></p>')
+          .text(title)
+          .appendTo('body')
+          .fadeIn('slow');
+  }, function() {
+          // Hover out code
+          $(this).attr('title', $(this).data('tipText'));
+          $('.tooltipsy').remove();
+  }).mousemove(function(e) {
+          var mousex = e.pageX + -20; //Get X coordinates
+          var mousey = e.pageY + -70; //Get Y coordinates
+          $('.tooltipsy')
+          .css({ top: mousey, left: mousex })
+  });
+});
+
 </script>
 </head>
 <body>
@@ -516,13 +538,7 @@ $(document).ready(function(){
                           <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Rating <span class="mytooltip tooltip-effect-3">
-                    <span class="tooltip-item">?</span>
-                      <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">'Rating' refers to how smooth or rough a texture is</span>
-                    </span>
-                   </span>
-                          </th>
+                            <th>Rating<span title="'Rating' refers to how smooth or rough a texture is" class="questionMarkTooltip">&nbsp;?</span></th>
                             <th class="removeSort">Actions</th>
                           </tr>
                         </thead>
