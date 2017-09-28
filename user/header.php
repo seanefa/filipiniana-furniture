@@ -1,6 +1,3 @@
-<?php
-//session_start();
-?>
 <div id="header" class="style2">
   <!-- Top Bar Start-->
   <nav id="top" class="htop">
@@ -65,57 +62,99 @@
     <div class="container">
       <div class="table-container">
         <!-- Mini Cart Start-->
+        <form id="myForm" method="post">
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="cart">
+                                <div class="row" id="allprod">
+                                      <div id="thisIsCart">
+                                      </div>
+
+                                      <div class="row formScroll" id="tblProd">
+
+                                      </div>
+                                    </div>
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span class="fa fa-shopping-cart fa-lg pull-left flip"></span> <span id="cart-total">0 item(s) - &#8369 0.00</span></button>
+            <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge"></span></button>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-              <div class="modal-dialog">
+            <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <div class="panel-heading"> My Cart </div>
+                                          </div>
+                                          <div class="orderconfirm">
+                                            <div class="descriptions">
+                                              <div class="form-body">
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                                                      <div class="panel-body">
+                                                        <div class="table-responsive">
+                                                          <table class="table product-overview" id="cartTbl">
+                                                            <thead>
+                                                              <tr>
+                                                                <!--th>Image</th-->
+                                                                <th style="text-align:left">Furniture</th>
+                                                                <th style="text-align:left">Furniture Name</th>
+                                                                <th style="text-align:left">Furniture Description</th>
+                                                                <th style="text-align:right">Quantity</th>
+                                                                <th style="text-align:right">Total Price</th>
+                                                                <th style="text-align:center">Action</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr>
+                                                                <!--td width="150"><img src="../plugins/images/chair.jpg" alt="No Image Available" width="80"></td-->
+                                                              </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                              <td colspan="3" style="text-align:right"> GRAND TOTAL </td>
+                                                              <td id="totalQ" style="text-align:right">0</td>
+                                                              <td id="totalPrice" style="text-align:right">0</td>
+                                                              <td></td>
+                                                            </tfoot>
+                                                          </table>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button input="theCloseBtn" type="button" class="fcbtn btn btn-warning btn-outline btn-1b wave effect" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
+                                                      <button type="button" id="check-out" class="fcbtn btn btn-success btn-outline btn-1b wave effect" onclick="checkout()"><i class="fa fa fa-shopping-cart"></i> Proceed to Check-Out</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">My Cart</h4>
-                  </div>
-                  <div class="modal-body">
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/sony_vaio_1-50x75.jpg"></a></td>
-                          <td class="text-left"><a href="product.php">Product</a></td>
-                          <td class="text-right">x 1</td>
-                          <td class="text-right">&#8369 902.00</td>
-                          <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><a href="product.php"><img class="img-thumbnail" title="Product" alt="Product" src="image/product/samsung_tab_1-50x75.jpg"></a></td>
-                          <td class="text-left"><a href="product.php">Product</a></td>
-                          <td class="text-right">x 1</td>
-                          <td class="text-right">&#8369 230.00</td>
-                          <td class="text-center"><button class="btn btn-danger btn-xs remove" title="Remove" onClick="" type="button"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table class="table table-bordered">
-                      <tbody>
-                        <td class="text-right"><strong>Total</strong></td>
-                        <td class="text-right">&#8369 1,132.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                   <a href="cart.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;<a href="checkout.php" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
+                                    <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                              <h2 style="text-align:center;"> Successfully added to cart!<br>
+                                              </h2>
+                                              <div class="orderconfirm">
+                                                <div class="descriptions">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
         </div>
       </div>
+    </form>
       <!-- Mini Cart End-->
         <!-- Logo Start -->
         <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12">

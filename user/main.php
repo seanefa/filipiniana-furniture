@@ -42,7 +42,22 @@
             </ul>
               <div class="owl-carousel product_carousel_tab">
                 <?php
-                include "userconnect.php"; 
+                include "userconnect.php";
+
+                $sql1 = "SELECT * FROM tblproduct;";
+                $result1 = mysqli_query($conn,$sql1);
+                 while ($trow = mysqli_fetch_assoc($result1)){
+                  if($trow['prodStat'] != "Archived"){
+                    echo '<input type="hidden" id="package'.$trow['productID'].'" value="0"/>
+                      <input type="hidden" id="product'.$trow['productID'].'" value="'.$trow['productName'].'"/>
+                      <input type="hidden" id="pic'.$trow['productID'].'" value="'.$trow['prodMainPic'].'"/>
+                      <input type="hidden" id="price'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
+                      <input type="hidden" id="size'.$trow['productID'].'" value="'.$trow['productDescription'].'"/>
+                      <input type="hidden" id="uprice'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
+                      <input type="hidden" id="quant'.$trow['productID'].'" value="1"/>';
+                  }
+                }
+
                 $ctr = 0;
                 $sql="SELECT * from tblproduct order by productID desc;";
                 $result = mysqli_query($conn, $sql);
@@ -55,10 +70,13 @@
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
-                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span>
+                       <span class="price-old"> </span></p>
+                      
+
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onclick="btnClick('.$row['productID'].')"><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
@@ -99,7 +117,7 @@
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'" value="'.$row['productID'].'"><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
@@ -130,17 +148,22 @@
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){
-                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
-                  if($row['prodStat'] != "Archived"){
+                  if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="..user/pics/28282-NX18M6.jpg" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
+                      <input type="hidden" id="P_package'.$row['packageID'].'" value="'.$row['packageID'].'"/>
+        <input type="hidden" id="P_product'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
+        <input type="hidden" id="P_price'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
+        <input type="hidden" id="P_size'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
+        <input type="hidden" id="P_uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
+        <input id="P_quant'.$row['packageID'].'" type="hidden" value="1"/>
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onClick="addPackage('.$row['packageID'].');"><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
