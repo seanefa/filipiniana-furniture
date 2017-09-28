@@ -10,16 +10,14 @@ $("document").ready(function(e) {
   else{
      $(".hideMenu").trigger('click');
    }
-  },4000);
-});
-$("document").ready(function() {
-  setTimeout(function() {
-     $(".sidebar").mouseenter(function () {
+
+  $(".sidebar").mouseenter(function () {
       $(".hideMenu").trigger('click');
     });
 
      $(".sidebar").mouseleave(function () {
       $(".hideMenu").trigger('click');
     });
+
   },4000);
 });
