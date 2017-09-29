@@ -101,6 +101,32 @@ else if($type==4){
   </div>';
 }
 
+else if($type==5){
+echo "<option value=''>Choose a material name / brand</option>";
+//$sql = "SELECT * FROM tblmaterials b,    tblmat_var a WHERE mat_varID = '$id'";
+ $sql = "SELECT * FROM tblmaterials WHERE materialType = '$id'";
+ $result = mysqli_query($conn, $sql);
+ while ($row = mysqli_fetch_assoc($result))
+ {
+  if($row['materialStatus']=='Listed'){
+    echo('<option value='.$row['materialID'].'>'.$row['materialName'].'</option>');
+  }
+}
+}
+
+else if($type==6){
+echo "<option value=''>Choose a material variant</option>";
+//$sql = "SELECT * FROM tblmaterials b,    tblmat_var a WHERE mat_varID = '$id'";
+ $sql = "SELECT * FROM tblmat_var WHERE materialID = '$id'";
+ $result = mysqli_query($conn, $sql);
+ while ($row = mysqli_fetch_assoc($result))
+ {
+  if($row['mat_varStatus']=='Active'){
+    echo('<option value='.$row['mat_varID'].'>'.$row['mat_varDescription'].'</option>');
+  }
+}
+}
+
 function desc($iid){
   include "dbconnect.php";
   $sql = "SELECT * FROM tblvariant_desc a, tblmat_var b WHERE b.variantID = a.varMatvarID AND a.varMatvarID = '$iid'";

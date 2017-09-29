@@ -19,7 +19,7 @@ include 'dbconnect.php';
   $(document).ready(function(){
     $('#mat').change(function(){
       var value = $("#mat").val();
-      var drop = 3;
+      var drop = 5;
       $.ajax({
         type: 'post',
         url: 'load-drop-downs.php',
@@ -33,8 +33,26 @@ include 'dbconnect.php';
       });
     });
   });
+      
+    $(document).ready(function(){
+    $('#var').change(function(){
+      var value = $("#var").val();
+      var drop = 6;
+      $.ajax({
+        type: 'post',
+        url: 'load-drop-downs.php',
+        data: {
+          id: value, type : drop,
+        },
+        success: function (response) {
+          $( '#var1' ).html(response);
+          $("#var1").removeAttr('disabled');
+        }
+      });
+    });
+  });
 
-  $(document).ready(function(){
+   /* $(document).ready(function(){
     $('#supplier').change(function(){
       var value = $("#supplier").val();
       var drop = 3;
@@ -50,7 +68,7 @@ include 'dbconnect.php';
         }
       });
     });
-  });
+  }); */
 
 
   $(document).ready(function(){
@@ -76,9 +94,9 @@ include 'dbconnect.php';
 
     $('#addBtn').click(function() {
       var mat = $("#mat").val();
-      var desc = $("#var").val();
+      var name = $("#var").val();
+      var variant = $("#var1").val();
       var quan = $("input[name='quan']").val();
-      var unit = $("#unit").val();
       var error = 0;
       if(isNaN(quan)){
         var e = "Please input a valid number.";
@@ -100,10 +118,18 @@ include 'dbconnect.php';
         error = 0;
       }
 
-      if(desc==""){
+      if(name==""){
         var e = "Please select a material";
         $("#errorMat").html(e);
         $('#var').css('border-color','grey');
+        $('#addBtn').prop('disabled',true);
+        error = 1;
+      }
+        
+      if(variant==""){
+        var e = "Please select a material variant";
+        $("#errorMat1").html(e);
+        $('#var1').css('border-color','grey');
         $('#addBtn').prop('disabled',true);
         error = 1;
       }
@@ -121,7 +147,7 @@ include 'dbconnect.php';
           type: 'post',
           url: 'prod-info-material.php',
           data: {
-            mat: mat, desc : desc, quan : quan, un : unit,
+            mat: mat, name : name, variant : variant, quan : quan,
           },
           success: function (response) {
             $( '#tblMat' ).append(response);
@@ -169,7 +195,7 @@ include 'dbconnect.php';
           <div class="orderconfirm">
             <div class="panel panel-default">
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <form action="" method = "post">
+                <form action="add-material-deliveries.php" method = "post">
                   <input type="hidden" name="orderID" id="orderID" value="<?php echo $jsID?>">
                   <div class="panel-body">
                     <div class="row">
@@ -200,8 +226,8 @@ include 'dbconnect.php';
                           <div class="col-md-3">
                             <div class="form-group">
                               <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                              <select class="form-control" tabindex="1" name="material" id="mat">
-                                <option value="">Choose Material Type</option>
+                              <select class="form-control" tabindex="1" name="material" id="mat" >
+                                  <option value=''>Choose a material</option>
                                 <?php
                                 include "dbconnect.php";
                                 $sql = "SELECT * FROM tblmat_type order by matTypeName;";
@@ -217,16 +243,26 @@ include 'dbconnect.php';
                             </div>
                           </div>
                           
-                          <div class="col-md-6">
+                          <div class="col-md-3">
                             <div class="form-group">
-                              <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
+                              <label class="control-label">Material Name / Brand</label><span id="x" style="color:red"> *</span>
                               <select class="form-control" tabindex="1" name="var" id="var">
                                 <option value="">-</option>
                               </select>
                               <p id="errorMat" style="color:red"></p>
                             </div>
                           </div>
-
+                            
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="control-label">Material Variant</label><span id="x" style="color:red"> *</span>
+                              <select class="form-control" tabindex="1" name="var" id="var1">
+                                <option value="">-</option>
+                              </select>
+                              <p id="errorMat1" style="color:red"></p>
+                            </div>
+                          </div>
+                            
                           <div class="col-md-2">
                             <div class="form-group">
                               <label class="control-label">Quantity (in pcs)</label><span id="x" style="color:red"> *</span>
@@ -252,12 +288,11 @@ include 'dbconnect.php';
                                         <h2>Delivered Materials</h2>
                                         <table class="table color-bordered-table muted-bordered-table display nowrap" id="selectedMaterials">
                                       <thead>
-                                        <tr>
                                           <th style="text-align: left;">Type</th>
                                           <th style="text-align: left;">Material</th>
+                                          <th style="text-align: left;">Material Variant</th>
                                           <th style="text-align: left;">Quantity</th>
-                                          <th style="text-align: left;">Unit</th>
-                                          <th style="text-align: left;">Action</th>                          
+                                          <th style="text-align: left;">Action</th>   
                                         </thead>
                                           <tbody  id="tblMat" style="text-align: left;">
                                           <tr id="hide">
