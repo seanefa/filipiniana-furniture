@@ -37,7 +37,7 @@ function desc($iid){
 echo "<tr id='trowID' class='materialNeed'>
       <td>
       <p>". $matType ."</p>
-      <input type='hidden' class='form-control' id='mattype' name='mattype[]' value='". $mat ."'/>
+      <input type='hidden' class='form-control' id='mattype' name='mattype[]' value='". $matType ."'/>
       </td>
       <td>
       <p >". $matName ."</p>
@@ -46,6 +46,7 @@ echo "<tr id='trowID' class='materialNeed'>
       <td>
       <p >". $matVar ."</p>
       <input type='hidden' class='form-control' id='matvar' name='matvar[]' value='". $matVar ."' />
+      <input type='hidden' class='form-control' id='matvar' name='matvarid[]' value='". $variant ."' />
       <input type='hidden' class='form-control' id='matdesc' name='matdesc[]' value='". $matName ." - ". $matVar ."' />
       </td>
       <td>

@@ -78,19 +78,26 @@ if (!empty($_SESSION['actionFailed'])) {
                               <th>Material</th>
                               <th>Variant Description</th>
                               <th>Quantity</th>
-                              <th>Status</th>
+                                
                               <th class="removeSort">Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <?php
+                            $sql1 = "SELECT * FROM tblmat_inventory b, tblmat_var a, tblmaterials c WHERE b.matVariantID = a.mat_varID AND a.materialID = c.materialID";
+                            $result1 = mysqli_query($conn, $sql1);
+                            while ($row1 = mysqli_fetch_assoc($result1))
+                            {
+                              if($row1['mat_varStatus']=="Active"){
+                                echo('<tr><td>'.$row1['materialName'].'</td><td>'.$row1['mat_varDescription'].'</td>  <td>'.$row1['matVarQuantity'].'</td>');
+                              
+                            ?>
                             <td><button type="button" class="btn btn-warning" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #restock" data-target="#myModal">Restock</button>
 
                               <button type="button" class="btn btn-danger" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row['variantID']?> #deduct" data-target="#myModal">Deduct</button>
                             </td>
+                              <?php echo('</tr>'); }}
+                              ?>
                           </tbody>
                         </table>
                       </div>
