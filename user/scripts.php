@@ -67,6 +67,8 @@ jQuery(document).ready(function() {
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+  
 var q = 0;
   $('body').on('change','#quan',function(){
     q = $('#quan').val();
