@@ -27,7 +27,7 @@ if (!$conn) {
         <div class="modal-body">
           <div class="descriptions">
             <div class="form-body">
-              
+
                 
                 <div class="row">
                 <div class="col-md-12">
@@ -40,7 +40,7 @@ if (!$conn) {
                       while ($row = mysqli_fetch_assoc($result))
                       {
                         if($row['uncategoryStatus']=='Active'){
-                          echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
+                          echo('<option value='.$row['uncategoryName'].'>'.$row['uncategoryName'].'</option>');
                         }
                       }
                       ?>

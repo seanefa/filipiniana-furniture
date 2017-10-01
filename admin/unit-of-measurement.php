@@ -342,6 +342,7 @@ $(document).ready(function(){
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                           <thead>
                             <tr>
+                              <th>Category</th>
                               <th>Name</th>
                               <th>Unit</th>
                               <th class="removeSort">Actions</th>
@@ -356,6 +357,7 @@ $(document).ready(function(){
                               {
                                 if($row['unStatus']=="Active"){
                                   echo('<tr>
+                                    <td>'.$row['unType'].'</td>
                                     <td>'.$row['unType'].'</td>
                                     <td>'.$row['unUnit'].'</td>
                                     '); ?>
