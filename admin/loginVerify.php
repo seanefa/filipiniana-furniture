@@ -17,6 +17,7 @@ while($row = mysqli_fetch_assoc($querystorage))
 			$flag = 1;
 			session_start();
 			$_SESSION["userID"] = $row["userID"];
+			$_SESSION["userType"] = 'admin';
 		}
 	}
 }

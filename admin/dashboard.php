@@ -1,6 +1,6 @@
 <?php
-include "titleHeader.php";
 include "menu.php";
+include "titleHeader.php";
 include 'dbconnect.php';
 ?>
 <!DOCTYPE html>  

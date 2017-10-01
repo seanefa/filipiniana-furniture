@@ -240,7 +240,7 @@ $(document).ready(function(){ //wala lang
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false"><i class='ti-close'></i> Cancel Order</button>
                       </div>
                       <div class="col-md-6 pull-right">
-                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="ti-check"></i> Save Order</button>
+                        <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="ti-check"></i> Save Changes</button>
                       </div>
                   </form>
                 </div>

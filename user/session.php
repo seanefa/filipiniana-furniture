@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["userID"]))
+if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='customer')
 {
   echo "<script>
       window.location.href='login.php';

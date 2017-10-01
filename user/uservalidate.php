@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
 		    		$_SESSION['logged'] = true;
 					$_SESSION['userName'] = $row["userName"];
 					$_SESSION["userID"] = $row["userID"];// Initializing Session
+					$_SESSION["userType"] = 'customer';
 					// $cookieID = $row["userID"];
 					// setcookie($cookieID, time() + (86400 * 30), "/"); // 86400 = 1 day
 					// echo $row['userID'];
