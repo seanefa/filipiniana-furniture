@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id']; 
@@ -8,12 +7,6 @@ $jsID=$_GET['id'];
 
 $_SESSION['varname'] = $jsID;
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
 ?>
 <script>
 function deleteRow(row){
@@ -130,7 +123,7 @@ function deleteRow(row){
                 </select>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
                 <select class="form-control" tabindex="1" name="var" id="var">
@@ -148,7 +141,7 @@ function deleteRow(row){
               </div>
             </div>
 
-            <div class="col-md-2">
+            <!-- <div class="col-md-2">
                     <label class="control-label">Unit</label><span id="x" style="color:red">
                     <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
                       <?php
@@ -162,7 +155,7 @@ function deleteRow(row){
                       }
                       ?>
                     </select> 
-                </div>
+                </div> -->
 
             <div class="col-md-1">
               <div class="form-group pull-right">
@@ -183,7 +176,6 @@ function deleteRow(row){
                             <th style="text-align: left;">Type</th>
                             <th style="text-align: left;">Material</th>
                             <th style="text-align: left;">Quantity</th>
-                            <th style="text-align: left;">Unit</th>
                             <th style="text-align: left;">Action</th>                          
                           </thead>
                           <tbody  id="tblMat" style="text-align: left;">

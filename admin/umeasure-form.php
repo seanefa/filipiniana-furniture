@@ -27,21 +27,7 @@ if (!$conn) {
         <div class="modal-body">
           <div class="descriptions">
             <div class="form-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="unitName" class="form-control" name="uType" required /><span id="message"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Unit</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="unitMeasure" class="form-control" name="uUnit" required/><span id="message1"></span> </div>
-                    </div>
-                  </div>
+              
                 
                 <div class="row">
                 <div class="col-md-12">
@@ -62,6 +48,21 @@ if (!$conn) {
                   </div>
                 </div>
               </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
+                      <input type="text" id="unitName" class="form-control" name="uType" required /><span id="message"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="control-label">Unit</label><span id="x" style="color:red"> *</span>
+                      <input type="text" id="unitMeasure" class="form-control" name="uUnit" required/><span id="message1"></span> </div>
+                    </div>
+                  </div>
                 
               </div>
             </div>

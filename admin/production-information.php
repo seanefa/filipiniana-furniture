@@ -6,43 +6,43 @@ include 'toastr-buttons.php';
 
 if (!empty($_SESSION['createSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastNewSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['createSuccess']);
+  $(document).ready(function () {
+    $("#toastNewSuccess").click();
+  });
+</script>';
+unset($_SESSION['createSuccess']);
 }
 if (!empty($_SESSION['updateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastUpdateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['updateSuccess']);
+  $(document).ready(function () {
+    $("#toastUpdateSuccess").click();
+  });
+</script>';
+unset($_SESSION['updateSuccess']);
 }
 if (!empty($_SESSION['deactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastDeactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['deactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastDeactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['deactivateSuccess']);
 }
 if (!empty($_SESSION['reactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastReactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['reactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastReactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['reactivateSuccess']);
 }
 if (!empty($_SESSION['actionFailed'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastFailed").click();
-          });
-        </script>';
-  unset($_SESSION['actionFailed']);
+  $(document).ready(function () {
+    $("#toastFailed").click();
+  });
+</script>';
+unset($_SESSION['actionFailed']);
 }
 
 ?>
@@ -186,20 +186,20 @@ if (!empty($_SESSION['actionFailed'])) {
 
 
         });
-$('body').on('change','#rem',function(){
-  $('#updateBtn').prop('disabled',false);
+        $('body').on('change','#rem',function(){
+          $('#updateBtn').prop('disabled',false);
 
 
-});
-$('body').on('keyup','#remText',function(){
-  var tem = $(this).val();
-  flag = false;
-  if(!flag){
-    $('#updateBtn').prop('disabled',false);
-  }
-});
+        });
+        $('body').on('keyup','#remText',function(){
+          var tem = $(this).val();
+          flag = false;
+          if(!flag){
+            $('#updateBtn').prop('disabled',false);
+          }
+        });
 
-});
+      });
 
 /*
 $(document).ready(function(){
@@ -312,7 +312,6 @@ $(document).ready(function(){
     var mat = $("#mat").val();
     var desc = $("#var").val();
     var quan = $("input[name='quan']").val();
-    var unit = $("#unit").val();
     var error = 0;
     if(isNaN(quan)){
       var e = "Please input a valid number.";
@@ -350,18 +349,18 @@ $(document).ready(function(){
     }
 
     if(error==0){
-    $("#hide").hide();
-    $.ajax({
-      type: 'post',
-      url: 'prod-info-material.php',
-      data: {
-        mat: mat, desc : desc, quan : quan, un : unit,
-      },
-      success: function (response) {
-       $( '#tblMat' ).append(response);
-     }
-   });
-  }
+      $("#hide").hide();
+      $.ajax({
+        type: 'post',
+        url: 'prod-info-material.php',
+        data: {
+          mat: mat, desc : desc, quan : quan,
+        },
+        success: function (response) {
+         $( '#tblMat' ).append(response);
+       }
+     });
+    }
   });
 
 

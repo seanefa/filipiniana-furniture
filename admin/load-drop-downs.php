@@ -35,17 +35,19 @@ else if($type==2){
   }
 }
 else if($type==3){
-  echo "<option value=''>Choose a material</option>";
+  $ctr = 0;
 //$sql = "SELECT * FROM tblmaterials b,    tblmat_var a WHERE mat_varID = '$id'";
- $sql = "SELECT * FROM tblmat_var a, tblmaterials b, tblmat_type c WHERE c.matTypeID = b.materialType and a.mat_varID = b.materialID and b.materialType = '$id'";
+ $sql = "SELECT * FROM tblmat_var a, tblmaterials b, tblmat_type c WHERE c.matTypeID = b.materialType and a.materialID = b.materialID and b.materialType = '$id'";
  $result = mysqli_query($conn, $sql);
  while ($row = mysqli_fetch_assoc($result))
  {
-  $desc = desc($row['variantID']);
-  $desc =  $desc. '-' . $row['materialName']. '-' . $row['matTypeName'];
-  if($row['variantStatus']=='Listed'){
-    echo('<option value='.$row['variantID'].'>'.$desc.'</option>');
+  if($row['mat_varStatus']=='Active'){
+    echo('<option value='.$row['mat_varID'].'>'.$row['mat_varDescription']. '/ ' . $row['materialName']. '</option>');
+    $ctr++;
   }
+}
+if($ctr==0){    
+  echo('<option value=0>Nothing to show.</option>');
 }
 }
 else if($type==4){

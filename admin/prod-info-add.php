@@ -4,39 +4,27 @@ include 'dbconnect.php';
 
 if(!isset($_POST['prod'])){
 	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
+	window.location.href='production-information.php';
+	alert('Invalid input.');
+	</script>";
 }
 if(!isset($_POST['phase'])){
 	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
+	window.location.href='production-information.php';
+	alert('Invalid input.');
+	</script>";
 }
-if(!isset($_POST['mate'])){
+if(!isset($_POST['matvarid'])){
 	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
+	window.location.href='production-information.php';
+	alert('Invalid input.');
+	</script>";
 }
-if(!isset($_POST['mat_var'])){
+if(!isset($_POST['matquan'])){
 	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
-}
-if(!isset($_POST['quan'])){
-	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
-}
-if(!isset($_POST['unit'])){
-	echo "<script>
-      window.location.href='production-information.php';
-      alert('Invalid input.');
-      </script>";
+	window.location.href='production-information.php';
+	alert('Invalid input.');
+	</script>";
 }
 
 
@@ -44,34 +32,35 @@ if(!isset($_POST['unit'])){
 $prod = $_POST['prod'];
 $phase = $_POST['phase'];
 $status = "Active";
-$mats = $_POST['mate'];
-$desc = $_POST['mat_var'];
-$quan = $_POST['quan'];
-$unit = $_POST['unit'];
+$desc = $_POST['matvarid'];
+$quan = $_POST['matquan'];
 
 $flag=0;
 
-$sql = "INSERT INTO tblprod_info(prodInfoProduct,prodInfoPhase,prodInfoStatus) VALUES('$prod','$phase','$status')";
-mysqli_query($conn,$sql);
-echo $sql . "<br>";
-$flag++;
+$sql = "INSERT INTO tblprod_info (prodInfoProduct, prodInfoPhase, prodInfoStatus) VALUES('$prod','$phase','$status')";
 
-$prodInfoID = mysqli_insert_id($conn);
+if(mysqli_query($conn,$sql)){
+	$prodInfoID = mysqli_insert_id($conn);
 
-$ctr = 0;
+	$ctr = 0;
 
-foreach($mats as $a){
-	$ctr++;
-}
+	foreach($desc as $a){
+		$ctr++;
+	}
 
-for($x=0;$x<$ctr;$x++){
-	$sql1 = "INSERT INTO tblprod_materials(p_prodInfoID, p_matMaterialID, p_matDescID,p_matQuantity,p_matUnit,p_matStatus) VALUES('$prodInfoID','".$mats[$x]."','".$desc[$x]."','".$quan[$x]."','".$unit[$x]."','Active')";
-	echo $sql1 . "<br>";
-	mysqli_query($conn,$sql1);
-	$flag++;
-}
+	for($x=0;$x<$ctr;$x++){
+		$sql1 = "INSERT INTO `filfurnituredb`.`tblprod_materials` (`p_prodInfoID`, `p_matDescID`, `p_matQuantity`, `p_matStatus`) VALUES ('$prodInfoID','".$desc[$x]."','".$quan[$x]."','Active')";
+		echo $sql1 . "<br>";
+		if(mysqli_query($conn,$sql1)){
+			$flag++;
+		}
+		else{
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		}
+	}
 
-if($flag>1){
+	if($flag>1){
 	// Logs start here
 	$sID = mysqli_insert_id($conn); // ID of last input;
 	$date = date("Y-m-d");
@@ -82,10 +71,16 @@ if($flag>1){
 	// Logs end here
 	$_SESSION['createSuccess'] = 'Success';
 	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-} 
- else {
-    $_SESSION['actionFailed'] = 'Failed';
+	} 
+	else {
+		$_SESSION['actionFailed'] = 'Failed';
+		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	}
+}
+else{
+	$_SESSION['actionFailed'] = 'Failed';
 	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-  }
+}
+
 mysqli_close($conn);
 ?>
