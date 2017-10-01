@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2017 at 05:20 PM
+-- Generation Time: Oct 01, 2017 at 11:36 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -40,7 +40,8 @@ INSERT INTO `tblattributes` (`attributeID`, `attributeName`, `attributeStatus`) 
 (8, 'Size', 'Archived'),
 (9, 'Color', 'Active'),
 (10, 'Type', 'Active'),
-(11, 'Weight', 'Active');
+(11, 'Weight', 'Active'),
+(12, 'Dimension', 'Active');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,8 @@ INSERT INTO `tblattribute_measure` (`amID`, `attributeID`, `uncategoryID`, `amSt
 (8, 8, 11, 'Active'),
 (9, 9, 0, 'Active'),
 (10, 10, 0, 'Active'),
-(11, 11, 14, 'Active');
+(11, 11, 14, 'Active'),
+(12, 12, 11, 'Active');
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,7 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (27, 'Shaira', 'Joy', 'Flores', '#1234 Bagong Silangan Veteran QC', '+63 (738) 138-7219', 'shairajhoy@gmail.com', '', 0, 'Active'),
 (28, 'Sheyne', 'Smth', 'Laristan', '#1234 Somewhere Street Brgy. Litex BHQC', '+63 (967) 136-7192', 'sheynelaristan@gmail.com', '', 0, 'Active'),
 (29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', '', 0, 'Active'),
-(30, 'Gendy', 'Lopez', 'Uy', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', '', 0, 'Active'),
+(30, 'Gendy', 'Lopez', 'Ma', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', '', 0, 'Active'),
 (31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', '', 0, 'active');
 
 -- --------------------------------------------------------
@@ -405,8 +407,9 @@ CREATE TABLE `tblfabric_texture` (
 --
 
 INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription`, `textureRating`, `textureStatus`) VALUES
-(13, 'Smooth', 'Smooth', 0, 'Listed'),
-(14, 'Very Smooth', 'Very smooth', 0, 'Listed');
+(13, 'Smooth', 'Smooth', 1, 'Listed'),
+(14, 'Very Smooth', 'Very smooth', 4, 'Listed'),
+(15, 'Smooth 3', 'Very very smooth', 3, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -493,7 +496,8 @@ CREATE TABLE `tblframe_material` (
 --
 
 INSERT INTO `tblframe_material` (`materialID`, `materialName`, `materialRemarks`, `materialStatus`) VALUES
-(1, 'Narra Wood', 'Narra wood is a very sturdy kind of wood', 'Listed');
+(1, 'Narra Wood', 'Narra wood is a very sturdy kind of wood', 'Listed'),
+(2, 'Mahogany Wood', ' Mahogany Woods are amazing type of wood', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -566,7 +570,8 @@ INSERT INTO `tblfurn_type` (`typeID`, `typeName`, `typeDescription`, `typeStatus
 (17, 'Sectional Sofas', ' A huge L shaped couch that takes up most of the living room', 'Listed', 6),
 (18, 'Bar Folding Pantry Table', 'Tables usually found in the kitchen or dining area', 'Listed', 9),
 (19, 'Dining Chair', 'Chairs that surrounds the dining table. Found in the dining area.', 'Listed', 9),
-(20, 'Dining Table', ' Tables for the dining area', 'Listed', 9);
+(20, 'Dining Table', ' Tables for the dining area', 'Listed', 9),
+(21, 'Side Table', ' Table beside the bed', 'Listed', 7);
 
 -- --------------------------------------------------------
 
@@ -595,7 +600,8 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (3, 7, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
 (4, 8, 105000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
 (5, 9, 120000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1),
-(6, 10, 25000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1);
+(6, 10, 25000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1),
+(7, 11, 60000, '2017-09-24', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -726,7 +732,18 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (92, 'Material Type', 'New', '2017-09-23', 'Added new material type Foam, ID = 6', 1),
 (93, 'Materials', 'New', '2017-09-23', 'Added new material Uratex Foam, ID = 13', 1),
 (94, 'Material Variants', 'New', '2017-09-23', 'Added new material variant 13, ID = ', 1),
-(95, 'Material Variants', 'New', '2017-09-23', 'Added new material variant 12, ID = ', 1);
+(95, 'Material Variants', 'New', '2017-09-23', 'Added new material variant 12, ID = ', 1),
+(96, 'Supplier', 'New', '2017-09-25', 'Added new supplier l;efjdor2093729ueij, ID = 18', 1),
+(97, 'Furniture Type', 'New', '2017-09-25', 'Added new furniture type Side Table, ID = 21', 1),
+(98, 'Fabric Texture', 'New', '2017-09-25', 'Added new fabric texture Smooth 3, ID = 15', 1),
+(99, 'Fabric Texture', 'Update', '2017-09-25', 'Updated fabric texture Very Smooth, ID = 14', 1),
+(100, 'Fabric Texture', 'Update', '2017-09-25', 'Updated fabric texture Smooth, ID = 13', 1),
+(101, 'Frame Material', 'New', '2017-09-25', 'Added new frame material Mahogany Wood, ID = 2', 1),
+(102, 'Jobs', 'Update', '2017-09-25', 'Updated job Carpenter, ID = 7', 1),
+(103, 'Employees', 'Update', '2017-09-25', 'Updated employee Aira Barrameda Coronado, ID = 1', 1),
+(104, 'Material Attribute', 'New', '2017-10-01', 'Added new material attribute Dimension, ID = 12', 1),
+(105, 'Unit of Measurement', 'New', '2017-10-01', 'Added new unit of measurement Pieces, ID = 18', 1),
+(106, 'Unit of Measurement', 'New', '2017-10-01', 'Added new unit of measurement Centimeters, ID = 25', 1);
 
 -- --------------------------------------------------------
 
@@ -748,10 +765,15 @@ CREATE TABLE `tblmaterials` (
 --
 
 INSERT INTO `tblmaterials` (`materialID`, `materialType`, `materialName`, `materialMeasurement`, `materialStatus`, `dateCreated`) VALUES
-(10, 1, 'FNC', '', 'Listed', NULL),
+(10, 1, 'Narra Wood', '', 'Listed', NULL),
 (11, 4, 'Liza Varnish', '', 'Listed', NULL),
 (12, 4, 'Mela Varnish', '', 'Listed', NULL),
-(13, 6, 'Uratex Foam', '', 'Listed', NULL);
+(13, 6, 'Uratex Foam', '', 'Listed', NULL),
+(14, 2, 'Lira Leather', '', 'Listed', NULL),
+(15, 2, 'Hyena Cotton', '', 'Listed', NULL),
+(16, 3, 'Boysen Paint', '', 'Listed', NULL),
+(17, 3, 'Canon Paint', '', 'Listed', NULL),
+(18, 5, 'Viola', '', 'Listed', NULL);
 
 -- --------------------------------------------------------
 
@@ -966,9 +988,8 @@ CREATE TABLE `tblonhand` (
 --
 
 INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
-(3, 17, 4, NULL),
-(4, 18, 10, NULL),
-(5, 18, 10, NULL);
+(3, 17, 0, NULL),
+(4, 18, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -978,10 +999,10 @@ INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALU
 
 CREATE TABLE `tblorders` (
   `orderID` int(11) NOT NULL,
-  `receivedbyUserID` int(11) DEFAULT NULL,
+  `receivedbyUserID` int(11) NOT NULL,
   `dateOfReceived` date NOT NULL,
   `dateOfRelease` date NOT NULL,
-  `custOrderID` int(11) NOT NULL,
+  `custOrderID` int(11) DEFAULT NULL,
   `orderPrice` double NOT NULL,
   `orderStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
   `shippingAddress` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
@@ -995,12 +1016,13 @@ CREATE TABLE `tblorders` (
 
 INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateOfRelease`, `custOrderID`, `orderPrice`, `orderStatus`, `shippingAddress`, `orderType`, `orderRemarks`) VALUES
 (1, 1, '2017-08-28', '2017-08-24', 18, 105000, 'Ready for release', '#62 Resolution ', 'Pre-Order', 'An order.'),
-(4, NULL, '2017-08-29', '2017-08-29', 23, 35000, 'Cancelled', 'N/A', 'On-Hand', 'No reason.'),
+(4, 1, '2017-08-29', '2017-08-29', 23, 35000, 'Cancelled', 'N/A', 'On-Hand', 'No reason.'),
 (6, 1, '2017-08-29', '2017-08-29', 21, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
 (7, 1, '2017-08-29', '2017-08-29', 26, 35000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
 (8, 1, '2017-08-29', '2017-08-29', 24, 105000, 'Finished', 'N/A', 'On-Hand', 'An order.'),
 (9, 1, '2017-08-30', '2017-08-31', 19, 120000, 'Ongoing', 'N/A', 'Pre-Order', ''),
-(10, 1, '2017-08-30', '2017-08-30', 30, 25000, 'Pending', 'N/A', 'On-Hand', 'An order.');
+(10, 1, '2017-08-30', '2017-08-30', 30, 0, 'Pending', 'N/A', 'On-Hand', 'An order.'),
+(11, 1, '2017-09-24', '2017-09-24', 24, 60000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.');
 
 -- --------------------------------------------------------
 
@@ -1059,14 +1081,18 @@ CREATE TABLE `tblorder_request` (
 --
 
 INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductID`, `prodUnitPrice`, `orderRemarks`, `orderPackageID`, `orderQuantity`, `orderRequestStatus`) VALUES
-(1, 1, 17, 35000, 0, NULL, 3, 'Ready for release'),
+(1, 1, 17, 35000, 0, NULL, 3, 'Deleted'),
 (3, 6, 17, 35000, 0, NULL, 1, 'Active'),
 (4, 6, 17, 35000, 0, NULL, 1, 'Released'),
 (5, 7, 17, 35000, 0, NULL, 1, 'Released'),
 (6, 8, 17, 35000, 0, NULL, 3, 'Released'),
 (7, 9, 17, 35000, 0, NULL, 2, 'Active'),
 (8, 9, 16, 50000, 0, NULL, 1, 'Active'),
-(9, 10, 18, 25000, 0, NULL, 1, 'Ready for release');
+(9, 10, 18, 25000, 0, NULL, 2, 'Ready for release'),
+(10, 10, 18, 25000, 0, NULL, 1, 'Deleted'),
+(11, 10, 17, 0, 0, NULL, 1, 'Active'),
+(12, 11, 18, 25000, 0, NULL, 1, 'Ready for release'),
+(13, 11, 17, 35000, 0, NULL, 4, 'Ready for release');
 
 -- --------------------------------------------------------
 
@@ -1081,6 +1107,7 @@ CREATE TABLE `tblorder_return` (
   `returnReason` varchar(450) NOT NULL,
   `returnAssessment` varchar(45) NOT NULL,
   `returnRemarks` varchar(450) NOT NULL,
+  `estDateReleased` date NOT NULL,
   `returnStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1088,8 +1115,8 @@ CREATE TABLE `tblorder_return` (
 -- Dumping data for table `tblorder_return`
 --
 
-INSERT INTO `tblorder_return` (`returnID`, `tblorderReqID`, `dateReturned`, `returnReason`, `returnAssessment`, `returnRemarks`, `returnStatus`) VALUES
-(1, 3, '2017-09-22', 'Sira yung tahi yak', 'Repair', 'Tatahiin nalang po', 'Pending');
+INSERT INTO `tblorder_return` (`returnID`, `tblorderReqID`, `dateReturned`, `returnReason`, `returnAssessment`, `returnRemarks`, `estDateReleased`, `returnStatus`) VALUES
+(1, 3, '2017-09-22', 'Nisnis', 'Repair', 'Tatahiin nalang po', '2017-09-30', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1170,9 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (4, 4, '2017-08-29 21:22:19', 10500, 1, 'Paid'),
 (5, 5, '2017-08-30 09:00:32', 60000, 1, 'Paid'),
 (6, 5, '2017-08-30 09:19:40', 5000, 1, 'Paid'),
-(7, 6, '2017-08-30 09:31:31', 2, 2, 'Paid');
+(7, 6, '2017-08-30 09:31:31', 2, 2, 'Paid'),
+(8, 7, '2017-09-24 19:58:16', 165000, 1, 'Paid'),
+(9, 1, '2017-09-27 10:16:09', 25000, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1232,7 +1261,7 @@ CREATE TABLE `tblproduct` (
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
 (16, 7, 13, 9, '1', 0, 'Queen', 'A queen sized bed', 50000, '2017-08-241503588669.png', '', 'Pre-Order'),
 (17, 6, 17, 9, '3', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-08-281503930441.png', ' L16.3â€³ x W16.3â€³ x H36.9â€³', 'Pre-Order'),
-(18, 7, 13, 10, '1', 0, 'Manilenia', '', 25000, '2017-08-301504075842.png', '', 'Pre-Order');
+(18, 7, 13, 10, '1', 0, 'Manilenia', 'An amazing furn', 25000, '2017-08-301504075842.png', '', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -1329,10 +1358,8 @@ CREATE TABLE `tblprod_info` (
 CREATE TABLE `tblprod_materials` (
   `p_matID` int(11) NOT NULL,
   `p_prodInfoID` int(11) NOT NULL,
-  `p_matMaterialID` int(11) NOT NULL,
   `p_matDescID` int(11) NOT NULL,
   `p_matQuantity` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `p_matUnit` varchar(45) CHARACTER SET utf8 NOT NULL,
   `p_matStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1468,7 +1495,8 @@ CREATE TABLE `tblsupplier` (
 INSERT INTO `tblsupplier` (`supplierID`, `supCompName`, `supCompAdd`, `supCompNum`, `supContactPerson`, `supPosition`, `supStatus`) VALUES
 (15, 'FNCENT Trees and Woods Inc.', '1234 Bill Street Batasan Hills Quezon City', '+63 (124) 534-3414', 'Mr. Jung', 'Manager', 'Listed'),
 (16, 'SMENT Fabrics and Prints', '111 Gangnamgu Seoul South Korea', '+63 (999) 414-5004', 'Lee Soo Man', 'Manager', 'Listed'),
-(17, 'AA', '111 Resolution Rd. Batasan Hills Quezon City', '+63 (237) 642-9312', 'Mr. Lee', 'Manager', 'Listed');
+(17, 'AA', '111 Resolution Rd. Batasan Hills Quezon City', '+63 (237) 642-9312', 'Mr. Lee', 'Manager', 'Listed'),
+(18, 'l;efjdor2093729ueij', 'skdjksaljdklwjde1913982938209`o!!22jkeljd', '+63 (922) 938-7812', 'idaskhdkjahsoi', 'u398139817872egwajhzgwHJSW', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -1491,7 +1519,9 @@ INSERT INTO `tblunitofmeasure` (`unID`, `unType`, `unUnit`, `unStatus`) VALUES
 (14, 'Feet', 'ft', 'Active'),
 (15, 'Meter', 'm', 'Active'),
 (16, 'Gram', 'g', 'Active'),
-(17, 'Inch', 'in', 'Active');
+(17, 'Inch', 'in', 'Active'),
+(18, 'Pieces', 'pcs', 'Active'),
+(25, 'Centimeters', 'cm', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1502,7 +1532,6 @@ INSERT INTO `tblunitofmeasure` (`unID`, `unType`, `unUnit`, `unStatus`) VALUES
 CREATE TABLE `tblunitofmeasurement_category` (
   `uncategoryID` int(11) NOT NULL,
   `uncategoryName` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `uncategoryDescription` varchar(50) CHARACTER SET latin1 NOT NULL,
   `uncategoryStatus` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1510,11 +1539,12 @@ CREATE TABLE `tblunitofmeasurement_category` (
 -- Dumping data for table `tblunitofmeasurement_category`
 --
 
-INSERT INTO `tblunitofmeasurement_category` (`uncategoryID`, `uncategoryName`, `uncategoryDescription`, `uncategoryStatus`) VALUES
-(0, 'Description', '', 'Hidden'),
-(11, 'Length', ' Length', 'Active'),
-(13, 'Area', ' ', 'Archived'),
-(14, 'Weight', ' ', 'Active');
+INSERT INTO `tblunitofmeasurement_category` (`uncategoryID`, `uncategoryName`, `uncategoryStatus`) VALUES
+(0, 'Description', 'Hidden'),
+(11, 'Length', 'Active'),
+(13, 'Area', 'Archived'),
+(14, 'Weight', 'Active'),
+(19, 'Amount', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1525,7 +1555,7 @@ INSERT INTO `tblunitofmeasurement_category` (`uncategoryID`, `uncategoryName`, `
 CREATE TABLE `tblunit_cat` (
   `unitcatID` int(11) NOT NULL,
   `unitID` int(11) NOT NULL,
-  `uncategoryID` int(11) NOT NULL,
+  `uncategoryName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `unitcatStatus` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1533,9 +1563,10 @@ CREATE TABLE `tblunit_cat` (
 -- Dumping data for table `tblunit_cat`
 --
 
-INSERT INTO `tblunit_cat` (`unitcatID`, `unitID`, `uncategoryID`, `unitcatStatus`) VALUES
-(20, 16, 14, 'Active'),
-(21, 17, 11, 'Active');
+INSERT INTO `tblunit_cat` (`unitcatID`, `unitID`, `uncategoryName`, `unitcatStatus`) VALUES
+(20, 16, 'Weight', 'Active'),
+(21, 17, 'Length', 'Active'),
+(29, 25, 'Length', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1955,7 +1986,6 @@ ALTER TABLE `tblprod_info`
 ALTER TABLE `tblprod_materials`
   ADD PRIMARY KEY (`p_matID`),
   ADD KEY `prodInfo_idx` (`p_prodInfoID`),
-  ADD KEY `p_mat_idx` (`p_matMaterialID`),
   ADD KEY `p_desc_idx` (`p_matDescID`);
 
 --
@@ -2014,7 +2044,7 @@ ALTER TABLE `tblunitofmeasurement_category`
 --
 ALTER TABLE `tblunit_cat`
   ADD PRIMARY KEY (`unitcatID`),
-  ADD KEY `unitID_idx` (`uncategoryID`),
+  ADD KEY `unitID_idx` (`uncategoryName`),
   ADD KEY `uniofmeasureID_idx` (`unitID`);
 
 --
@@ -2033,12 +2063,12 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tblattributes`
 --
 ALTER TABLE `tblattributes`
-  MODIFY `attributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `attributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tblattribute_measure`
 --
 ALTER TABLE `tblattribute_measure`
-  MODIFY `amID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `amID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tblbank_accounts`
 --
@@ -2103,7 +2133,7 @@ ALTER TABLE `tblemployee`
 -- AUTO_INCREMENT for table `tblemp_job`
 --
 ALTER TABLE `tblemp_job`
-  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblfabrics`
 --
@@ -2118,7 +2148,7 @@ ALTER TABLE `tblfabric_pattern`
 -- AUTO_INCREMENT for table `tblfabric_texture`
 --
 ALTER TABLE `tblfabric_texture`
-  MODIFY `textureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `textureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tblfabric_type`
 --
@@ -2138,7 +2168,7 @@ ALTER TABLE `tblframe_design`
 -- AUTO_INCREMENT for table `tblframe_material`
 --
 ALTER TABLE `tblframe_material`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblfurn_category`
 --
@@ -2153,12 +2183,12 @@ ALTER TABLE `tblfurn_design`
 -- AUTO_INCREMENT for table `tblfurn_type`
 --
 ALTER TABLE `tblfurn_type`
-  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2168,12 +2198,12 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
-  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `tblmat_actions`
 --
@@ -2223,7 +2253,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -2238,7 +2268,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tblorder_return`
 --
@@ -2253,7 +2283,7 @@ ALTER TABLE `tblpackage_inclusions`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2328,22 +2358,22 @@ ALTER TABLE `tblrelease_details`
 -- AUTO_INCREMENT for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
-  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasure`
 --
 ALTER TABLE `tblunitofmeasure`
-  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `tblunitofmeasurement_category`
 --
 ALTER TABLE `tblunitofmeasurement_category`
-  MODIFY `uncategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `uncategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tblunit_cat`
 --
 ALTER TABLE `tblunit_cat`
-  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
@@ -2473,6 +2503,13 @@ ALTER TABLE `tblmat_var`
 ALTER TABLE `tblnotification`
   ADD CONSTRAINT `customerid_ref` FOREIGN KEY (`tblcustomerID`) REFERENCES `tblcustomer` (`customerID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `orderid_ref` FOREIGN KEY (`tblorderID`) REFERENCES `tblorders` (`orderID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblorders`
+--
+ALTER TABLE `tblorders`
+  ADD CONSTRAINT `cust` FOREIGN KEY (`custOrderID`) REFERENCES `tblcustomer` (`customerID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `userID_indx` FOREIGN KEY (`receivedbyUserID`) REFERENCES `tbluser` (`userID`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
