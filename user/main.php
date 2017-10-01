@@ -54,7 +54,7 @@
                       <input type="hidden" id="price'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
                       <input type="hidden" id="size'.$trow['productID'].'" value="'.$trow['productDescription'].'"/>
                       <input type="hidden" id="uprice'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
-                      <input type="hidden" id="quant'.$trow['productID'].'" value="1"/>';
+                      <input type="hidden" id="quant'.$trow['productID'].'" value="1" />';
                   }
                 }
 
@@ -65,24 +65,25 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
-                    echo '<div class="product-thumb clearfix hovereffect card">
+                    echo ('<div class="product-thumb clearfix hovereffect card">
                     <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span>
                        <span class="price-old"> </span></p>
-                      
-
+                      '); ?>
+            
                     </div>
                     <div class="button-group">
-                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onclick="btnClick('.$row['productID'].')"><span>Add to Cart</span></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
+
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
-                  </div>';
+                  </div> <?php
                 }
                 $ctr++;
               }
@@ -116,17 +117,21 @@
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
+                    ';?>
                     <div class="button-group">
-                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onclick="btnClick('.$row['productID'].')" id="'.$row['productID'].'" value="'.$row['productID'].'"><span>Add to Cart</span></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
-                  </div>';
+                  </div><?php echo '';
                 }
                 $ctr++;
               }
+              /*
+<button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
+              */
               ?>
             </div>
         </div>
@@ -162,14 +167,14 @@
         <input type="hidden" id="P_uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
         <input id="P_quant'.$row['packageID'].'" type="hidden" value="1"/>
                     </div>
+                    ';?>
                     <div class="button-group">
-                      <button href="#myModal1" data-toggle="modal" class="btn-primary" type="button" onClick="addPackage('.$row['packageID'].');"><span>Add to Cart</span></button>
-                      <div class="add-to-links">
+                      <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['packageID'] ?>" data-name="<?php echo $row['packageDescription'] ?>" data-summary="Package" data-price="<?php echo $row['packagePrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
-                  </div>';
+                  </div><?php echo'';
                 }
                 $ctr++;
               }

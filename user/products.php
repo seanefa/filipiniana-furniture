@@ -11,6 +11,9 @@
 <body>
 <div class="wrapper-wide">
 <?php include"header.php";?>
+<script type="text/javascript">
+  
+</script>
   <div id="container">
     <div class="container">
       <!-- Breadcrumb Start-->
@@ -66,7 +69,9 @@
           <br />
           <div class="row products-products">
               <?php
-                include "userconnect.php"; 
+                include "userconnect.php";
+
+
                 $ctr = 0;
                 $sql="SELECT * from tblproduct order by productID desc;";
                 $result = mysqli_query($conn, $sql);
@@ -82,18 +87,35 @@
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
+                    ';?>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick="cart.add("42");"><span>Add to Cart</span></button>
+                     <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
                   </div>
-                </div>';
+                </div><?php echo'';
                 }
                 $ctr++;
               }
+
+
+              $sql1 = "SELECT * FROM tblproduct;";
+                $result1 = mysqli_query($conn,$sql1);
+                 while ($trow = mysqli_fetch_assoc($result1)){
+                  if($trow['prodStat'] != "Archived"){
+                    echo '<input type="hidden" id="package'.$trow['productID'].'" value="0"/>
+                      <input type="hidden" id="product'.$trow['productID'].'" value="'.$trow['productName'].'"/>
+                      <input type="hidden" id="pic'.$trow['productID'].'" value="'.$trow['prodMainPic'].'"/>
+                      <input type="hidden" id="price'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
+                      <input type="hidden" id="size'.$trow['productID'].'" value="'.$trow['productDescription'].'"/>
+                      <input type="hidden" id="uprice'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
+                      <input type="hidden" id="quant'.$trow['productID'].'" value="1"/>';
+                  }
+                }
               ?>
             </div>
           </div>

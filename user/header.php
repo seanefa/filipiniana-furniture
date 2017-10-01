@@ -1,3 +1,4 @@
+
 <div id="header" class="style2">
   <!-- Top Bar Start-->
   <nav id="top" class="htop">
@@ -5,6 +6,7 @@
       <div class="row"> <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify"></i></span>
         <div class="pull-left flip left-top">
           <div class="links">
+           
 
             <?php
             include "userconnect.php";
@@ -44,11 +46,13 @@
               echo '<li><h5 style="color:black; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $_SESSION["userName"]; echo '!</span></h5></li>';
               echo '<li><a href="profile.php">My Profile</a></li>';
               echo '<li><a href="logout.php">Logout</a></li>';
+              echo'<input type="hidden" id="logcheck" value="yes" />';
             }
             else
             {
               echo '<li><a href="login.php">Login</a></li>
               <li><a href="register.php">Register</a></li>';
+              echo'<input type="hidden" id="logcheck" value="no" />';
             }
             ?>
           </ul>
@@ -74,7 +78,7 @@
                                       </div>
                                     </div>
             <!-- Trigger the modal with a button -->
-            <button type="button" href="#myCart" data-toggle="modal" id="cart" class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect"><i class="fa fa fa-shopping-cart"></i> MY CART <span class="badge" id="totalBadge"></span></button>
+            <span class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect glyphicon glyphicon-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
 
             <!-- Modal -->
             <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
@@ -98,6 +102,7 @@
                                                                 <th style="text-align:left">Furniture</th>
                                                                 <th style="text-align:left">Furniture Name</th>
                                                                 <th style="text-align:left">Furniture Description</th>
+                                                                <th style="text-align:right">Price</th>
                                                                 <th style="text-align:right">Quantity</th>
                                                                 <th style="text-align:right">Total Price</th>
                                                                 <th style="text-align:center">Action</th>
@@ -151,6 +156,37 @@
                                         </div>
                                       </div>
                                     </div>
+                                    <div style="display: none"><button type="button" id="logthis"></button></div>
+                                    <div id="myModal2" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                              <h2>It looks like you're not logged in.</h2>
+                                              <form method="post" action="">
+                                                 <div class="form-group">
+                                                        <label class="control-label" for="username">Username</label>
+                                                        <input type="text" name="username" value="" placeholder="Username" id="username" class="form-control" />
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label class="control-label" for="input-password">Password</label>
+                                                        <input type="password" name="password" value="" placeholder="Password" id="password" class="form-control" />
+                                                        <br>
+                                                        <h4 style="color: red;"><?php echo $error; ?></h4>
+                                                        <br>
+                                                        <a href="#">Forgotten Password</a></div>
+                                                      <input type="submit" name="submit" value="Login" class="btn btn-primary">
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
 
         </div>
       </div>

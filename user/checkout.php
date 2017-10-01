@@ -262,6 +262,58 @@ function inputValidate(id){
     }
 
   }
+  $(document).ready(function(){
+                $('#ratePick').click(function(){ 
+
+                  if($('#ratePick').is(':checked')){ 
+                    $('#da').prop('disabled',true);
+                    $('#city').prop('disabled',true);
+                    $('#zip').prop('disabled',true);
+                    $('#delloc').prop('disabled',true);
+                    $('#da').val('');
+                    $('#city').val('');
+                    $('#zip').val('');
+                    $('#delloc').val('');
+
+                    $('#dRate').val(0);
+
+                    var x = parseFloat($('#totalPrice').val());
+                    $('#ttp').html('&#8369;'+parseFloat(x));
+                    $('#paydRate').html('&#8369;'+0.00);
+                  }
+
+                });
+$('#rateDel').click(function(){
+  if($('#rateDel').is(':checked')){ 
+    $('#dRate').val(0);
+    $('#da').prop('disabled',false);
+    $('#city').prop('disabled',false);
+    $('#zip').prop('disabled',false);
+    $('#delloc').prop('disabled',false);
+    $('#da').val('');
+    $('#city').val('');
+    $('#zip').val('');
+    $('#delloc').val('');
+  }
+});
+
+
+
+$('#delloc').change(function(){
+  var x = parseFloat($('#totalPrice').val());
+  $('#dRate').val(parseFloat($('#delloc').val()));
+  $('#paydRate').html('&#8369;'+parseFloat($('#delloc').val()));
+  var d = parseFloat($('#delloc').val());
+  var due = x + d;
+  $('#ttp').html('&#8369;'+parseFloat(due));
+});
+});
+
+$(document).ready(function(){
+  var x = parseFloat($('#totalPrice').html());
+  var y = parseFloat($('#dRate').html());
+
+});
 
   function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -269,6 +321,15 @@ function inputValidate(id){
 } 
 
       </script>
+      <?php
+
+      $id = $_SESSION["custID"];
+      $sql = "SELECT * FROM tblcustomer WHERE customerID = '$id';";
+      $result= mysqli_query($conn,$sql);
+      $row = mysqli_fetch_assoc($result);
+
+      ?>
+
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i></a></li>
@@ -278,10 +339,12 @@ function inputValidate(id){
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
+        <form action="" method="post">
         <div id="content" class="col-sm-12">
           <h1 class="title">Checkout</h1>
           <div class="row">
             <div class="col-sm-4">
+              <!--
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><i class="fa fa-sign-in"></i> Create an Account or Login</h4>
@@ -303,7 +366,8 @@ function inputValidate(id){
                             Returning Customer</label>
                         </div>
                   </div>
-              </div>
+              </div>!-->
+              
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><i class="fa fa-user"></i> Your Personal Details</h4>
@@ -313,35 +377,52 @@ function inputValidate(id){
  
     <div class="form-group required">
       <label class="control-label">First Name</label>
-      <input type="text" id="edit1" onkeyup="inputValidate('1')" class="form-control" name="firstn" placeholder="Juan" required/><span id="message1"></span> 
+      <input type="text" id="edit1" onkeyup="inputValidate('1')" class="form-control" name="firstn" placeholder="Juan" value="<?php echo $row['customerFirstName'];?>" required readonly/><span id="message1"></span> 
     </div>
     <div class="form-group required">
       <label class="control-label">Middle Name</label>
-      <input type="text" id="edit2" onkeyup="inputValidate('2')" class="form-control" name="midn" placeholder="Vito"/><span id="message2"></span> 
+      <input type="text" id="edit2" onkeyup="inputValidate('2')" class="form-control" name="midn" placeholder="Vito" value="<?php echo $row['customerMiddleName'];?>" readonly/><span id="message2"></span> 
     </div>
     <div class="form-group required">
       <input type="hidden" name="customerIds" id="customerIds">
       <label class="control-label">Last Name</label>
-      <input type="text" id="edit3" onkeyup="inputValidate('3')" class="form-control" name="lastn" value="" placeholder="de la Cruz" required/><span id="message3"></span>
+      <input type="text" id="edit3" onkeyup="inputValidate('3')" class="form-control" name="lastn" placeholder="de la Cruz" value="<?php echo $row['customerLastName'];?>" readonly required/><span id="message3"></span>
     </div>
                        
     <div class="form-group required">
       <label class="control-label">Address</label>
-      <textarea id="custadd"  class="form-control" name="custadd" placeholder="#123 Brgy. Batasan Hills Quezon City" required></textarea>
+      <textarea id="custadd"  class="form-control" name="custadd" placeholder="#123 Brgy. Batasan Hills Quezon City" required readonly><?php echo $row['customerAddress'];?></textarea>
     </div>
     <div class="form-group required">
       <label class="control-label">Contact Number</label>
-      <input type="number" id="custcont" data-mask="+63 (999) 999-9999" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
+      <input type="text" id="custcont" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" value="<?php echo $row['customerContactNum'];?>" readonly required/>
       <p style="color:red" id="erCon"></p>
     </div>
     <div class="form-group required">
       <label class="control-label">Email</label>
-      <input type="email" id="custemail" onkeyup="validate()" class="form-control" name="custoemail" placeholder="monkeydluffy@gmail.com" required/><span id="messageEmail"></span> 
+      <input type="email" id="custemail" onkeyup="validate()" class="form-control" name="custoemail" placeholder="monkeydluffy@gmail.com" value="<?php echo $row['customerEmail'];?>" readonly required/><span id="messageEmail"></span> 
       <p style="color:red" id="erEmail"></p>
 </div>
                         </fieldset>
                       </div>
               </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"><i class="fa fa-truck"></i> Delivery Method</h4>
+                    </div>
+                      
+                    <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="text-align: center;">
+              <div class="form-group">
+                
+                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
+                  <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label>
+                </div>
+              </div>
+            </div>
+
+
+                  </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><i class="fa fa-book"></i>Delivery Address</h4>
@@ -352,7 +433,7 @@ function inputValidate(id){
              
                   <label class="control-label">Delivery Location</label>
                   <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
-                    <option value="">Choose a Location</option>
+                    <option value="" disabled>Choose a Location</option>
                     <?php
                     $delsql = "SELECT * FROM tbldelivery_rates ORDER BY delLocation;";
                     $delresult = mysqli_query($conn,$delsql);
@@ -391,25 +472,7 @@ function inputValidate(id){
             </div>
             <div class="col-sm-8">
               <div class="row">
-                <div class="col-sm-6">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title"><i class="fa fa-truck"></i> Delivery Method</h4>
-                    </div>
-                      
-                    <div class="row">
-            <div class="col-md-6 col-md-offset-3" style="text-align: center;">
-              <div class="form-group">
-                
-                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
-                  <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label>
-                </div>
-              </div>
-            </div>
-
-
-                  </div>
-                </div>
+                <!--
                 <div class="col-sm-6">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -435,7 +498,7 @@ function inputValidate(id){
                       </div>
                   </div>
                 </div>
-                <!--<div class="col-sm-12">
+                <div class="col-sm-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title"><i class="fa fa-ticket"></i> Use Coupon Code</h4>
@@ -482,10 +545,51 @@ function inputValidate(id){
                                 <td class="text-right">Furniture Price</td>
                               </tr>
                             </thead>
-                            <tbody>
-                                <?php 
+                            <tbody id="checkOut">
+                              <script type="text/javascript">
+                                $(document).ready(function(){
+                                var value = sessionStorage.getItem('item');
+                                var ttp = sessionStorage.getItem('totalPrice');
+                                var ttq = sessionStorage.getItem('totalQuant');
+                                var item = new Array();
+                                item = value.split(',');
 
+                                var numItems = item.length/6;
+                                
+                                
+
+                                var i = 0;
+
+                                var j = 0;
+                                $('#stt').html('&#8369;'+ttp)
+                                $('#ttp').html('&#8369;'+ttp);
+                                $('#ttq').html(''+ttq);
+                                $('#totalPrice').val(ttp);
+
+
+                                while(i != numItems){
+
+                                if(i == 0){
+                                $('#checkOut').append('<tr id="'+item[0]+'"><td class="text-center"><img src="'+item[5]+'" style="height: 100px; width: 105px;" alt="Product" title="'+item[1]+'" class="img-thumbnail"></td><td class="text-left">'+item[1]+'</td><td>'+item[2]+'</td><td style="text-align: right;">'+item[4]+'</td></div><td style="text-align: right;">&#8369;'+item[3]+'</td></tr>');
+                                $('#orders').append('<input type="hidden" name="cart[]" value="'+item[0]+'"/>     <input type="hidden" name="prices[]" value="'+item[3]+'"/>                      <input type="hidden" name="quant[]" value="'+item[4]+'"/>');
+                                }else{
+                                   j = 6 * (i);
+                                  $('#checkOut').append('<tr id="'+item[0+j]+'"><td class="text-center"><img src="'+item[5+j]+'" style="height: 100px; width: 105px;" alt="Product" title="'+item[1+j]+'" class="img-thumbnail"></td><td class="text-left">'+item[1+j]+'</td><td>'+item[2+j]+'</td><td style="text-align: right;">'+item[4+j]+'</td></div><td style="text-align: right;">&#8369;'+item[3+j]+'</td></tr>');
+                                  $('#orders').append('<input type="hidden" name="cart[]" value="'+item[0+j]+'"/>     <input type="hidden" name="prices[]" value="'+item[3+j]+'"/>                      <input type="hidden" name="quant[]" value="'+item[4+j]+'"/>');
+                                }
+
+                                i++;
+                                }
+                              });
+                              </script>
+
+
+                              
+
+
+                                <?php
                   //PRODUCT VARIABLES
+                  /*              
                   $removed = $_POST['removed'];
                   $priceremoved = $_POST['priceremoved'];
                   $quantremoved = $_POST['quantremoved'];
@@ -639,24 +743,26 @@ function inputValidate(id){
 }
 }
 }
+*/
 ?>
                             </tbody>
                             <tfoot>
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Total Quantity:</strong></td>
-                                <td class="text-right"><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.'');?></td>
+                                <td class="text-right" id="ttq"></td>
                               </tr>
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
-                                <td class="text-right">&#8369; <?php echo number_format($totPrice,2); ?></td>
+                                <td class="text-right" id="stt">&#8369;</td>
                               </tr>
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Delivery Rate:</strong></td>
-                                <td class="text-right">&#8369; 0.00</td>
+                                <td class="text-right" id="paydRate">&#8369; 0.00</td>
                               </tr>
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Total:</strong></td>
-                                <td class="text-right">&#8369; <?php echo number_format($totPrice,2); ?></td>
+                                <td class="text-right" id="ttp"></td>
+                                <input id="totalPrice" name="totalPrice" value="" type="hidden"/>
                               </tr>
                             </tfoot>
                           </table>
@@ -664,6 +770,10 @@ function inputValidate(id){
                       </div>
                   </div>
                 </div>
+                <div id="orders">
+                  
+                </div>
+
                 <div class="col-sm-12">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -677,7 +787,7 @@ function inputValidate(id){
                           <span>I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a></span> </label>
                         <div class="buttons">
                           <div class="pull-right">
-                            <input type="button" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                            <button type="submit" class="btn btn-primary" id="button-confirm">Confirm Order</button>
                           </div>
                         </div>
                       </div>
@@ -687,6 +797,7 @@ function inputValidate(id){
             </div>
           </div>
         </div>
+      </form>
         <!--Middle Part End -->
       </div>
     </div>

@@ -1,4 +1,6 @@
-<!-- JS Part Start-->
+<!-- JS Part Start--><?php 
+include "product-form.php";
+?>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js?rev=5.0"></script>
@@ -14,8 +16,12 @@
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="js/myScript.js"></script>
+
+<script src="js/jquery.mycart.js"></script>
+
 <!-- JS Part End-->
-<script>	
+<script>
+
 jQuery(document).ready(function() {		
    jQuery("#slider1").revolution({
       sliderType:"standard",
@@ -51,4 +57,139 @@ jQuery(document).ready(function() {
       gridheight:480
     });		
 });	
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+var q = 0;
+  $('body').on('change','#quan',function(){
+    q = $('#quan').val();
+     if(q <= 0){
+
+      $('#addBtn').attr('data-quantity',0);
+    $('#addBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addBtn').attr('data-quantity',''+q);
+      $('#addBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+
+  $('body').on('keyup','#quan',function(){
+    q = $('#quan').val();
+     if(q <= 0){
+
+      $('#addBtn').attr('data-quantity',0);
+    $('#addBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addBtn').attr('data-quantity',''+q);
+      $('#addBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+});
+
+
+function checkLog(){
+
+var logcheck = $('#logcheck').val();
+
+if(logcheck != 'yes'){
+  alert('You must log in First!');
+  $('#checkoutBtn').prop('class','btn btn-primary');
+  location.href = "login.php";
+}else{
+
+  $('#checkoutBtn').prop('class','btn btn-primary my-cart-checkout');
+  $('#checkoutBtn').click();
+}
+
+}
+
+ var array = [];
+  $(function () {
+
+  var goToCartIcon = function($addTocartBtn){
+    var $cartIcon = $(".my-cart-icon");
+    var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+    $addTocartBtn.prepend($image);
+    var position = $cartIcon.position();
+    $image.animate({
+      top: position.top,
+      left: position.left
+    }, 500 , "linear", function() {
+      $image.remove();
+    });
+  }
+
+  $('.my-cart-btn').myCart({
+    classCartIcon: 'my-cart-icon',
+    classCartBadge: 'my-cart-badge',
+    affixCartIcon: true,
+    checkoutCart: function(products) {
+
+      $.each(products, function(){
+        console.log(this);
+        var obj = this;
+        var keys = Object.keys(obj).map(function (key) { return obj[key]; });
+        var ttp = $('#totalGrand').val();
+        var ttq = $('#totalQuant').val();
+        //alert(ttp);
+
+
+        if(ttp>0){
+        array.push(keys);
+        sessionStorage.setItem('totalQuant',ttq);
+        sessionStorage.setItem('totalPrice',ttp);
+        sessionStorage.setItem('item',array);
+        //id
+        //image
+        //name
+        //price
+        //quantity
+        //summary
+
+          location.href = "checkout.php";
+          
+        }else{
+          alert('Cart is Empty');
+        }
+
+        
+      });
+
+
+
+    },
+    clickOnAddToCart: function($addTocart){
+      goToCartIcon($addTocart);
+    },
+    getDiscountPrice: function(products) {
+      var total = 0;
+      $.each(products, function(){
+        total += this.quantity * this.price;
+      });
+      return total * 0.5;
+    }
+  });
+
+});
 </script>

@@ -50,6 +50,7 @@ if (!empty($_SESSION['actionFailed'])) {
 <html lang="en">
 <head>
   <script>
+    
   $(document).on('focus','.modal',function(){
             // Basic
             $('.dropify').dropify();
