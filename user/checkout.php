@@ -10,11 +10,20 @@
 </head>
 <body>
 <div class="wrapper-wide">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 <?php include"header.php";?>
   <div id="container">
     <div class="container">
       <script type="text/javascript">
 $(document).ready(function(){
+    window.onbeforeunload = function(){
+            return 'Are you sure you want to leave?';
+        };
+
+
       $('#aTendered').on('keyup',function(){
         var mat = $("#aTendered").val();
         var bal = $("#dp").val();
@@ -263,9 +272,11 @@ function inputValidate(id){
 
   }
   $(document).ready(function(){
+    var options = {};
                 $('#ratePick').click(function(){ 
 
-                  if($('#ratePick').is(':checked')){ 
+                  if($('#ratePick').is(':checked')){
+                    $('#paneldel').hide("blind"); 
                     $('#da').prop('disabled',true);
                     $('#city').prop('disabled',true);
                     $('#zip').prop('disabled',true);
@@ -284,7 +295,8 @@ function inputValidate(id){
 
                 });
 $('#rateDel').click(function(){
-  if($('#rateDel').is(':checked')){ 
+  if($('#rateDel').is(':checked')){
+                    $('#paneldel').show("blind");  
     $('#dRate').val(0);
     $('#da').prop('disabled',false);
     $('#city').prop('disabled',false);
@@ -339,7 +351,7 @@ $(document).ready(function(){
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
-        <form action="" method="post">
+        <form action="checkout-order.php" method="post">
         <div id="content" class="col-sm-12">
           <h1 class="title">Checkout</h1>
           <div class="row">
@@ -423,7 +435,7 @@ $(document).ready(function(){
 
 
                   </div>
-              <div class="panel panel-default">
+              <div class="panel panel-default" id="paneldel" style="display: none">
                 <div class="panel-heading">
                   <h4 class="panel-title"><i class="fa fa-book"></i>Delivery Address</h4>
                 </div>
@@ -548,9 +560,10 @@ $(document).ready(function(){
                             <tbody id="checkOut">
                               <script type="text/javascript">
                                 $(document).ready(function(){
-                                var value = sessionStorage.getItem('item');
+
                                 var ttp = sessionStorage.getItem('totalPrice');
                                 var ttq = sessionStorage.getItem('totalQuant');
+                                var value = sessionStorage.getItem('item');
                                 var item = new Array();
                                 item = value.split(',');
 
@@ -581,6 +594,34 @@ $(document).ready(function(){
                                 i++;
                                 }
                               });
+                                $(document).ready(function(){
+
+                                  var pvalue = sessionStorage.getItem('pitem');
+                                var pitem = new Array();
+                                pitem = pvalue.split(',');
+
+                                var pnumItems = pitem.length/6;
+                                
+                                
+                                alert(pnumItems);
+                                var pi = 0;
+
+                                var pj = 0;
+                                while(pi != pnumItems){
+
+                                if(pi == 0){
+                                $('#checkOut').append('<tr id="'+pitem[0]+'"><td class="text-center"><img src="'+pitem[5]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1]+'</td><td>'+pitem[2]+'</td><td style="text-align: right;">'+pitem[4]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3]+'</td></tr>');
+                                $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4]+'"/>');
+                                }else{
+                                   pj = 6 * (pi);
+                                  $('#checkOut').append('<tr id="'+pitem[0+pj]+'"><td class="text-center"><img src="'+pitem[5+pj]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1+pj]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1+pj]+'</td><td>'+pitem[2+pj]+'</td><td style="text-align: right;">'+pitem[4+pj]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3+pj]+'</td></tr>');
+                                  $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0+pj]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3+pj]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4+pj]+'"/>');
+                                }
+
+                                pi++;
+                                }
+
+                                });
                               </script>
 
 
@@ -762,7 +803,7 @@ $(document).ready(function(){
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Total:</strong></td>
                                 <td class="text-right" id="ttp"></td>
-                                <input id="totalPrice" name="totalPrice" value="" type="hidden"/>
+                                <input id="totalPrice" name="totalPrice" type="hidden"/>
                               </tr>
                             </tfoot>
                           </table>
@@ -780,14 +821,14 @@ $(document).ready(function(){
                       <h4 class="panel-title"><i class="fa fa-pencil"></i> Add Comments About Your Order</h4>
                     </div>
                       <div class="panel-body">
-                        <textarea rows="4" class="form-control" id="confirm_comment" name="comments"></textarea>
+                        <textarea rows="4" class="form-control" id="confirm_comment" name="orderremarks"></textarea>
                         <br>
                         <label class="control-label" for="confirm_agree">
                           <input type="checkbox" checked="checked" value="1" required="" class="validate required" id="confirm_agree" name="confirm agree">
                           <span>I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a></span> </label>
                         <div class="buttons">
                           <div class="pull-right">
-                            <button type="submit" class="btn btn-primary" id="button-confirm">Confirm Order</button>
+                            <button type="submit" class="btn btn-primary" id="button-confirm" onclick="sessionStorage.clear();">Confirm Order</button>
                           </div>
                         </div>
                       </div>

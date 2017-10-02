@@ -44,19 +44,7 @@
                 <?php
                 include "userconnect.php";
 
-                $sql1 = "SELECT * FROM tblproduct;";
-                $result1 = mysqli_query($conn,$sql1);
-                 while ($trow = mysqli_fetch_assoc($result1)){
-                  if($trow['prodStat'] != "Archived"){
-                    echo '<input type="hidden" id="package'.$trow['productID'].'" value="0"/>
-                      <input type="hidden" id="product'.$trow['productID'].'" value="'.$trow['productName'].'"/>
-                      <input type="hidden" id="pic'.$trow['productID'].'" value="'.$trow['prodMainPic'].'"/>
-                      <input type="hidden" id="price'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
-                      <input type="hidden" id="size'.$trow['productID'].'" value="'.$trow['productDescription'].'"/>
-                      <input type="hidden" id="uprice'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
-                      <input type="hidden" id="quant'.$trow['productID'].'" value="1" />';
-                  }
-                }
+                
 
                 $ctr = 0;
                 $sql="SELECT * from tblproduct order by productID desc;";
@@ -155,7 +143,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="..user/pics/28282-NX18M6.jpg" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
@@ -169,7 +157,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['packageID'] ?>" data-name="<?php echo $row['packageDescription'] ?>" data-summary="Package" data-price="<?php echo $row['packagePrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
