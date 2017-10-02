@@ -465,10 +465,9 @@ $(document).ready(function(){
      }
    });
   });
-
-
 });
 });
+
 
 
 $(document).ready(function(){
@@ -541,6 +540,7 @@ $(document).ready(function(){
                           <thead>
                             <tr>
                               <th>Furniture Name</th>
+                              <th>Phase Name</th>
                               <th>Furniture Type</th>
                               <th class="removeSort">Materials</th>
                               <th class="removeSort">Action</th>
@@ -550,16 +550,17 @@ $(document).ready(function(){
 
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblprod_info a, tblproduct b, tblfurn_type c WHERE a.prodInfoProduct = b.productID and b.prodTypeID = c.typeID;";
+                            $sql = "SELECT * FROM tblprod_info a, tblproduct b, tblfurn_type c, tblphases d WHERE a.prodInfoProduct = b.productID and b.prodTypeID = c.typeID and a.prodInfoPhase = d.phaseID;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
                               if($row['prodStat']!="Archived" && $row['prodInfoStatus']=="Active"){
 
                                 echo('<td>'. $row['productName'].'</td>
+                                  <td>'.$row['phaseName'] .'</td>
                                   <td>'.$row['typeName'] .'</td>
                                   ');?>
-                                  <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?> #view1" data-target="#myModal"><i class='fa fa-info-circle'></i> View Materials</button></td>
+                                  <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?>&phase=<?php echo $row['prodInfoPhase']?> #view1" data-target="#myModal"><i class='fa fa-info-circle'></i> View Materials</button></td>
                                   <td>
                                     <!-- UPDATE -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
