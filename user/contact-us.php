@@ -21,30 +21,38 @@
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
-        <div id="content" class="col-sm-9">
+        <div id="content" class="col-sm-12">
           <h1 class="title">Contact Us</h1>
-          <h3 class="subtitle">Our Location</h3>
           <div class="row">
-            <div class="col-sm-3"><img src="image/product/store_location-275x180.jpg" alt="MarketShop Template" title="MarketShop Template" class="img-thumbnail" /></div>
-            <div class="col-sm-3"><strong>MarketShop Template</strong><br />
-              <address>
-              Central Square,<br />
-              22 Hoi Wing Road,<br />
-              New Delhi,<br />
-              India
-              </address>
-            </div>
-            <div class="col-sm-3"><strong>Telephone</strong><br>
-              +91 9898989898<br />
-              <br />
-              <strong>Fax</strong><br>
-              +91 9898989898 </div>
-            <div class="col-sm-3"> <strong>Opening Times</strong><br />
-              24X7 Customer Care<br />
-              <br />
-              <strong>Comments</strong><br />
-              This field is for any special notes you would like to tell the customer i.e. Store does not accept cheques. </div>
+            <?php
+    include "userconnect.php";
+    $sql="SELECT * from tblcompany_info";
+    $result=$conn->query($sql);
+    if($result->num_rows>0)
+    {
+      while($row=$result->fetch_assoc())
+      {
+    ?>
+
+          <div class="col-md-3">
+            <img alt="" src="image/logo-small.png" style="display:block;margin:auto;">
           </div>
+          <div class="col-md-3">
+            <p><i class="fa fa-map-pin"></i>&nbsp;&nbsp;Address : <?php echo "" . $row['comp_address'];?></p>
+          </div>
+          <div class="col-md-3">
+            <p><i class="fa fa-phone"></i>&nbsp;&nbsp;Phone : <?php echo "" . $row['comp_num'];?></p>
+          </div>
+          <div class="col-md-3">
+            <p><i class="fa fa-envelope"></i>&nbsp;&nbsp;E-mail : <?php echo "" . $row['comp_email'];?></p>
+          </div>
+<?php
+    }
+  }
+  $conn->close();
+?>
+          </div>
+          <br>
           <form class="form-horizontal">
             <fieldset>
               <h3 class="subtitle">Send us an Email</h3>
@@ -61,7 +69,7 @@
                 </div>
               </div>
               <div class="form-group required">
-                <label class="col-md-2 col-sm-3 control-label" for="input-enquiry">Enquiry</label>
+                <label class="col-md-2 col-sm-3 control-label" for="input-enquiry">Inquiry</label>
                 <div class="col-md-10 col-sm-9">
                   <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control"></textarea>
                 </div>
@@ -74,18 +82,6 @@
             </div>
           </form>
         </div>
-        <aside id="column-right" class="col-sm-3 hidden-xs">
-          <div class="list-group">
-            <h2 class="subtitle">Custom Content</h2>
-            <p>This is a CMS block edited from admin. You can insert any content (HTML, Text, Images) Here. </p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-            <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-          </div>
-          <div class="banner owl-carousel">
-            <div class="item"> <a href="#"><img src="image/banner/small-banner1-265x350.jpg" alt="small banner" class="img-responsive" /></a> </div>
-            <div class="item"> <a href="#"><img src="image/banner/small-banner-265x350.jpg" alt="small banner1" class="img-responsive" /></a> </div>
-          </div>
-        </aside>
         <!--Middle Part End -->
       </div>
     </div>

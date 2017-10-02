@@ -22,16 +22,16 @@
             <h5 class="subtitle">Information</h5>
             <ul>
               <li><a href="about-us.php">About Us</a></li>
-              <li><a href="about-us.php">Delivery Information</a></li>
-              <li><a href="about-us.php">Privacy Policy</a></li>
-              <li><a href="about-us.php">Terms &amp; Conditions</a></li>
+              <li><a href="delivery-information.php">Delivery Information</a></li>
+              <li><a href="privacy-policy.php">Privacy Policy</a></li>
+              <li><a href="terms-condition.php">Terms &amp; Conditions</a></li>
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5 class="subtitle">Customer Care</h5>
             <ul>
               <li><a href="contact-us.php">Contact Us</a></li>
-              <li><a href="#">Returns</a></li>
+              <li><a href="returns.php">Returns</a></li>
               <li><a href="sitemap.php">Site Map</a></li>
               <li><a href="faq.php">Frequently Asked Questions</a></li>
             </ul>
@@ -39,20 +39,21 @@
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5 class="subtitle">Extras</h5>
             <ul>
-              <li><a href="#">Gift Vouchers</a></li>
-              <li><a href="#">Affiliates</a></li>
-              <li><a href="#">Specials</a></li>
               <li><a href="customization.php">Customized Solutions</a></li>
+              <?php 
+              if(isset($_SESSION['logged']) === false)
+                { 
+                 echo '<li><a href="/admin/login.php">Login as Admin</a></li>';
+                }
+              ?>
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5 class="subtitle">My Account</h5>
             <ul>
-              <li><a href="#">My Profile</a></li>
-              <li><a href="#">Order History</a></li>
-              <li><a href="wishlist.php">Wish List</a></li>
-              <li><a href="#">Newsletter</a></li>
-              <li><a href="/admin/login.php">Login as Admin</a></li>
+              <li><a href="account.php">Dashboard</a></li>
+              <li><a href="orders.php">Orders</a></li>
+              <li><a href="wishlists.php">Wishlists</a></li>
             </ul>
           </div>
         </div>

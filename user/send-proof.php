@@ -30,7 +30,7 @@ else{
 $sendproofofpayment = "INSERT into tblnotification(tblcustomerID, amountPaid, bankBranch, proofPicture) values('$customerID', '$ap', '$bc', '$photo')";
 
 if($conn->query($sendproofofpayment) === true){
-	header("Location: profile.php");
+	header("Location: account.php");
 }
 else{
 	echo "query:" . $sendproofofpayment . "<br>error:" . $conn->error;

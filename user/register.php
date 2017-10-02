@@ -123,28 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           </form>
         </div>
         <!--Middle Part End -->
-        <!--Right Part Start -->
-        <!--aside id="column-right" class="col-sm-3 hidden-xs">
-          <h3 class="subtitle">Account</h3>
-          <div class="list-group">
-            <ul class="list-item">
-              <li><a href="login.php">Login</a></li>
-              <li><a href="register.php">Register</a></li>
-              <li><a href="#">Forgotten Password</a></li>
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Address Books</a></li>
-              <li><a href="wishlist.php">Wish List</a></li>
-              <li><a href="#">Order History</a></li>
-              <li><a href="#">Downloads</a></li>
-              <li><a href="#">Reward Points</a></li>
-              <li><a href="#">Returns</a></li>
-              <li><a href="#">Transactions</a></li>
-              <li><a href="#">Newsletter</a></li>
-              <li><a href="#">Recurring payments</a></li>
-            </ul>
-          </div>
-        </aside-->
-        <!--Right Part End -->
       </div>
     </div>
   </div>

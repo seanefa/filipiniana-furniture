@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="image/favicon.ico" rel="icon" />
-<title>Update Profile - Filipiniana Furniture Shop</title>
-<meta name="description" content="Furniture shop">
-<script type="text/javascript" src="js/myScript.js"></script>
-<?php include"css.php";?>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="image/favicon.ico" rel="icon" />
+  <link rel="stylesheet" href="css/myStyle.css">
+  <title>Change Personal Information - Filipiniana Furniture Shop</title>
+  <meta name="description" content="Furniture shop">
+  <script type="text/javascript" src="js/myScript.js"></script>
+  <?php include"css.php";?>
 </head>
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -18,41 +19,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 }
 ?>
-<body>
-<div class="wrapper-wide">
-<?php include"header.php";?>
+<body style="background: #ffffff;">
+  <?php 
+  include "header.php";
+  if(!isset($_SESSION["userID"]))
+  {
+    echo "<script>
+    window.location.href='login.php';
+    alert('You have no access here. You must logged in first.');
+    </script>";
+  }
+  ?>
   <div id="container">
     <div class="container">
-      <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="login.php">Account</a></li>
-        <li><a href="updateinfo.php">Update</a></li>
+        <li><a href="home.php"><i class="fa fa-home"></i></a></li>
+        <li><a href="account.php">My Account</a></li>
+        <li><a href="updateinfo.php">Change Personal Information</a></li>
       </ul>
-      <!-- Breadcrumb End-->
+      <br>
       <div class="row">
-          <h1 class="title">Update Information</h1>
+        <?php include "accountmenu.php"; ?>
         <!--Middle Part Start-->
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="content">
-			<?php include "userconnect.php";
-			$sql="SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
-			$result = $conn->query($sql);
-			if($result->num_rows>0){
-				while($row=$result->fetch_assoc()){
-			?>
+        <div class="col-sm-9" id="content">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="well">
+                  <?php include "userconnect.php";
+      $sql="SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
+      $result = $conn->query($sql);
+      if($result->num_rows>0){
+        while($row=$result->fetch_assoc()){
+      ?>
           <form enctype="multipart/form-data" action="updatepersonalinformation.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset id="account">
-              <legend>Your Personal Details</legend>
-              <!--div style="display: none;" class="form-group required">
-                <label class="col-sm-2 control-label">Customer Group</label>
-                <div class="col-sm-10">
-                  <div class="radio">
-                    <label>
-                      <input type="radio" checked="checked" value="1" name="customer_group_id">
-                      Default</label>
-                  </div>
-                </div>
-              </div-->
+              <legend>Change Personal Information</legend>
               <div class="form-group required">
                 <label for="input-firstname" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
@@ -66,106 +67,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="<?php echo "" . $row["customerEmail"];?>" name="email" required>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-telephone" class="col-sm-2 control-label">Contact</label>
+                <label for="input-telephone" class="col-sm-2 control-label">Contact Number</label>
                 <div class="col-sm-10">
                   <input type="tel" class="form-control" id="input-telephone" placeholder="Contact" value="<?php echo "" . $row["customerContactNum"];?>" name="number" required>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-block" class="col-sm-2 control-label">Address</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-address" placeholder="e.g. #1255 Saint Francis St., Brgy. Parang, Marikina City" value="<?php echo "" . $row["customerAddress"];?>" name="address" required>
                 </div>
               </div>
               <div class="form-group required">
                 <label for="input-block" class="col-sm-2 control-label">Picture</label>
                 <div class="col-sm-10">
                   <input type="file" name="image" class="form-control"/>
-					<input type="hidden" name="exist_image" value="<?php echo "" . $row["customerDP"];?>">
+          <input type="hidden" name="exist_image" value="<?php echo "" . $row["customerDP"];?>">
                 </div>
               </div>
             </fieldset>
-            <div class="buttons">
-              <div class="pull-right">
-                <input type="submit" class="btn btn-primary" value="Save" name="register" id="">
+              <div style="text-align: center;">
+                <a href="account.php" class="btn btn-info">CANCEL</a>
+                <input type="submit" class="btn btn-primary" value="SAVE" name="register" id="">
+              </div>
+      </form>
+      <?php
+        }
+      }
+      ?>
+                </div>
               </div>
             </div>
-			</form>
-			  </div>
-			<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-				<form action="updateaccountinformation.php" autocomplete="off" class="form-horizontal" method="post">
-            <fieldset>
-              <legend>Your Account&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
-              <div class="form-group required">
-                <label for="input-password" class="col-sm-3 control-label">Username</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="input-username" placeholder="Username" value="<?php echo "" . $row["userName"];?>" name="uname" required>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-password" class="col-sm-3 control-label">Old Password</label>
-                <div class="col-sm-9">
-                  <input type="password" class="form-control" id="input-password-old" placeholder="Old Password" value="" name="opass">
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-password" class="col-sm-3 control-label">Password</label>
-                <div class="col-sm-9">
-                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass">
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-confirm" class="col-sm-3 control-label">Confirm Password</label>
-                <div class="col-sm-9">
-                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass">
-                </div>
-              </div>
-            </fieldset>
-            <div class="buttons">
-              <div class="pull-right">
-                <input type="submit" class="btn btn-primary" value="Save" name="register" id="">
-              </div>
-            </div>
-          </form>
-			<?php
-				}
-			}
-			?>
+          </div>
         </div>
         <!--Middle Part End -->
-        <!--Right Part Start -->
-        <!--aside id="column-right" class="col-sm-3 hidden-xs">
-          <h3 class="subtitle">Account</h3>
-          <div class="list-group">
-            <ul class="list-item">
-              <li><a href="login.php">Login</a></li>
-              <li><a href="register.php">Register</a></li>
-              <li><a href="#">Forgotten Password</a></li>
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Address Books</a></li>
-              <li><a href="wishlist.php">Wish List</a></li>
-              <li><a href="#">Order History</a></li>
-              <li><a href="#">Downloads</a></li>
-              <li><a href="#">Reward Points</a></li>
-              <li><a href="#">Returns</a></li>
-              <li><a href="#">Transactions</a></li>
-              <li><a href="#">Newsletter</a></li>
-              <li><a href="#">Recurring payments</a></li>
-            </ul>
-          </div>
-        </aside-->
-        <!--Right Part End -->
       </div>
     </div>
+    <?php include"footer.php";?>
   </div>
-<?php include"footer.php";?>
-</div>
-<?php include"scripts.php";?>
+  <!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
+  <?php include "scripts.php";?>
 </body>
 </html>
