@@ -1,6 +1,10 @@
 <?php
   include 'scripts.php';
   include 'css.php';
+  include 'userconnect.php';
+
+  
+
 ?>
  <!-- Main Menu Start-->
     <nav id="menu" class="navbar">
@@ -11,66 +15,43 @@
             <li><a class="home_link" title="Home" href="home.php">Home</a></li>
             <li class="mega-menu dropdown"><a href="products.php">Products</a>
               <div class="dropdown-menu">
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
+                <?php
+                       $sql = "SELECT * from tblfurn_category;";
+                      $result = mysqli_query($conn,$sql);
+
+                      if($result){
+                  while($row = mysqli_fetch_assoc($result)){
+                    
+                    if($row['categoryStatus'] == 'Listed'){
+
+                      $id = $row['categoryID'];
+
+                      $xsql = "SELECT * from tblfurn_type where typeCategoryID = '$id';";
+                      $xresult = mysqli_query($conn,$xsql);
+
+                    echo''?>
+                    <div class="column col-lg-2 col-md-3"><a href="category.php?id=<?php echo 'C'.$row['categoryID']?>"><?php echo $row['categoryName']?></a>
                   <div>
                     <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
+                      <?php
+                      while($xrow = mysqli_fetch_assoc($xresult)){
+                        if($xrow['typeStatus'] == 'Listed'){
+                        ?> 
+                        <li><a href="category.php?id=<?php echo 'T'.$xrow['typeID']?>""><?php echo $xrow['typeName']; ?></a></li>
+                        <?php 
+                        }
+                      }
+                      ?>
                     </ul>
                   </div>
-                </div>
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
-                  <div>
-                    <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
-                  <div>
-                    <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
-                  <div>
-                    <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
-                  <div>
-                    <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="column col-lg-2 col-md-3"><a href="category.php">Sub Category</a>
-                  <div>
-                    <ul>
-                      <li><a href="category.php">New Sub Category</a></li>
-                      <li><a href="category.php">New Sub Category</a></li>
-                    </ul>
-                  </div>
-                </div>
               </div>
+                    <?php echo '';
+                    
+                    }
+                  }
+} 
+                ?>
+                
             </li>
             <li class="mega-menu dropdown"><a href="packages.php">Packages</a>
 <!--

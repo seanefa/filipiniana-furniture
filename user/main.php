@@ -54,7 +54,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo ('<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -99,7 +99,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -143,17 +143,11 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href=""><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
-                      <input type="hidden" id="P_package'.$row['packageID'].'" value="'.$row['packageID'].'"/>
-        <input type="hidden" id="P_product'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
-        <input type="hidden" id="P_price'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
-        <input type="hidden" id="P_size'.$row['packageID'].'" value="'.$row['packageDescription'].'"/>
-        <input type="hidden" id="P_uprice'.$row['packageID'].'" value="'.$row['packagePrice'].'"/>
-        <input id="P_quant'.$row['packageID'].'" type="hidden" value="1"/>
                     </div>
                     ';?>
                     <div class="button-group">

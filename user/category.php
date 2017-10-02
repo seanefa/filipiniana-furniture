@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php 
+  
+  include "userconnect.php";
+  $thisID = $_GET['id'];
+  $catID ='';
+  $typeID = '';
+  $ttlesql = '';
+  if(substr($thisID,0,1) == 'C'){
+    $catID = substr($thisID,1);
+    $ttlesql = "SELECT * FROM tblfurn_category where categoryID = '$catID';";
+
+  }else if(substr($thisID,0,1) == 'T'){
+    $typeID = substr($thisID,1);
+    $ttlesql = "SELECT * FROM tblfurn_type where typeID = '$typeID';";
+
+  }
+  $ttlresult = mysqli_query($conn,$ttlesql);
+
+  $ttlerow = mysqli_fetch_assoc($ttlresult);
+
+  
+?>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>Products - Filipiniana Furniture Shop</title>
+<title><?php if(substr($thisID,0,1) == "C"){ echo $ttlerow['categoryName']; }else if(substr($thisID,0,1) == "T"){ echo $ttlerow['typeName']; }?> - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>
@@ -19,13 +41,13 @@
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="products.php">Products</a></li>
+        <li><a href="products.php"><?php if(substr($thisID,0,1) == "C"){ echo $ttlerow['categoryName']; }else if(substr($thisID,0,1) == "T"){ echo $ttlerow['typeName']; }?></a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
-          <h1 class="title">Products</h1>
+          <h1 class="title"><?php if(substr($thisID,0,1) == "C"){ echo $ttlerow['categoryName']; }else if(substr($thisID,0,1) == "T"){ echo $ttlerow['typeName']; }?></h1>
           
           <div class="product-filter">
             <div class="row">
@@ -70,10 +92,10 @@
           <div class="row products-products">
               <?php
                 include "userconnect.php";
-
-
-                $ctr = 0;
-                $sql="SELECT * from tblproduct order by productID desc;";
+                 if(substr($thisID,0,1) == "C"){ 
+ 
+                  $ctr = 0;
+                $sql="SELECT * from tblproduct where prodCatID = '$catID' order by productID desc;";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){
@@ -102,20 +124,42 @@
                 $ctr++;
               }
 
-
-              $sql1 = "SELECT * FROM tblproduct;";
-                $result1 = mysqli_query($conn,$sql1);
-                 while ($trow = mysqli_fetch_assoc($result1)){
-                  if($trow['prodStat'] != "Archived"){
-                    echo '<input type="hidden" id="package'.$trow['productID'].'" value="0"/>
-                      <input type="hidden" id="product'.$trow['productID'].'" value="'.$trow['productName'].'"/>
-                      <input type="hidden" id="pic'.$trow['productID'].'" value="'.$trow['prodMainPic'].'"/>
-                      <input type="hidden" id="price'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
-                      <input type="hidden" id="size'.$trow['productID'].'" value="'.$trow['productDescription'].'"/>
-                      <input type="hidden" id="uprice'.$trow['productID'].'" value="'.$trow['productPrice'].'"/>
-                      <input type="hidden" id="quant'.$trow['productID'].'" value="1"/>';
                   }
+
+                 else if(substr($thisID,0,1) == "T"){ 
+                  $ctr = 0;
+                $sql="SELECT * from tblproduct where prodTypeID = '$typeID' order by productID desc;";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)){
+                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
+                  if($row['prodStat'] != "Archived"){
+                    echo ' <div class="product-layout product-list col-xs-12">
+                    <div class="product-thumb">
+                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:405px; width:270;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <br>
+                    <div class="caption">
+                      <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
+                    </div>
+                    ';?>
+                    <div class="button-group">
+                     <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      
+                      <div class="add-to-links">
+                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div><?php echo'';
                 }
+                $ctr++;
+              }
+
+                }
+
+                
               ?>
             </div>
           </div>
