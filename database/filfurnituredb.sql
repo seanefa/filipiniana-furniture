@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2017 at 11:36 AM
+-- Generation Time: Oct 02, 2017 at 02:17 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -743,7 +743,14 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (103, 'Employees', 'Update', '2017-09-25', 'Updated employee Aira Barrameda Coronado, ID = 1', 1),
 (104, 'Material Attribute', 'New', '2017-10-01', 'Added new material attribute Dimension, ID = 12', 1),
 (105, 'Unit of Measurement', 'New', '2017-10-01', 'Added new unit of measurement Pieces, ID = 18', 1),
-(106, 'Unit of Measurement', 'New', '2017-10-01', 'Added new unit of measurement Centimeters, ID = 25', 1);
+(106, 'Unit of Measurement', 'New', '2017-10-01', 'Added new unit of measurement Centimeters, ID = 25', 1),
+(107, 'Material Variants', 'New', '2017-10-01', 'Added new material variant 16, ID = ', 1),
+(108, 'Material Variants', 'New', '2017-10-01', 'Added new material variant 15, ID = ', 1),
+(109, 'Material Variants', 'New', '2017-10-01', 'Added new material variant 18, ID = ', 1),
+(110, 'Material Variants', 'New', '2017-10-01', 'Added new material variant 18, ID = ', 1),
+(111, 'Production Information', 'New', '2017-10-01', 'Added new production information 18, ID = 6', 1),
+(112, 'Production Information', 'New', '2017-10-02', 'Added new production information 18, ID = 8', 1),
+(113, 'Production Information', 'Deactivate', '2017-10-02', 'Deactivated production information , ID = 1', 1);
 
 -- --------------------------------------------------------
 
@@ -933,7 +940,16 @@ INSERT INTO `tblmat_var` (`mat_varID`, `materialID`, `mat_varDescription`, `mat_
 (315, 12, 'purple  / original  / 35 g', 'Active'),
 (316, 12, 'purple  / original  / 45 g', 'Active'),
 (317, 12, 'purple  / original  / 55 g', 'Active'),
-(318, 12, 'purple  / original  / 65 g', 'Active');
+(318, 12, 'purple  / original  / 65 g', 'Active'),
+(319, 16, 'White  / Odorless ', 'Active'),
+(320, 16, 'Brown  / Odorless ', 'Active'),
+(321, 15, 'Red  / Soft ', 'Active'),
+(322, 15, 'Yellow Green  / Soft ', 'Active'),
+(323, 18, 'Brown ', 'Active'),
+(324, 18, 'Light-Brown ', 'Active'),
+(325, 18, '20 ', 'Active'),
+(326, 18, '50 ', 'Active'),
+(327, 18, '150 ', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1349,6 +1365,14 @@ CREATE TABLE `tblprod_info` (
   `prodInfoStatus` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblprod_info`
+--
+
+INSERT INTO `tblprod_info` (`prodInfoID`, `prodInfoProduct`, `prodInfoPhase`, `prodInfoStatus`) VALUES
+(1, 18, 1, 'Active'),
+(2, 18, 3, 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -1362,6 +1386,20 @@ CREATE TABLE `tblprod_materials` (
   `p_matQuantity` varchar(250) CHARACTER SET utf8 NOT NULL,
   `p_matStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblprod_materials`
+--
+
+INSERT INTO `tblprod_materials` (`p_matID`, `p_prodInfoID`, `p_matDescID`, `p_matQuantity`, `p_matStatus`) VALUES
+(1, 1, 321, '2', 'Active'),
+(2, 1, 263, '2', 'Active'),
+(3, 1, 319, '2', 'Active'),
+(4, 1, 323, '2', 'Active'),
+(5, 1, 326, '2', 'Active'),
+(6, 1, 257, '2', 'Active'),
+(7, 2, 263, '3', 'Active'),
+(8, 2, 322, '3', 'Active');
 
 -- --------------------------------------------------------
 
@@ -2133,7 +2171,7 @@ ALTER TABLE `tblemployee`
 -- AUTO_INCREMENT for table `tblemp_job`
 --
 ALTER TABLE `tblemp_job`
-  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblfabrics`
 --
@@ -2198,7 +2236,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
@@ -2233,7 +2271,7 @@ ALTER TABLE `tblmat_type`
 -- AUTO_INCREMENT for table `tblmat_var`
 --
 ALTER TABLE `tblmat_var`
-  MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
+  MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 --
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
@@ -2248,7 +2286,7 @@ ALTER TABLE `tblnotification`
 -- AUTO_INCREMENT for table `tblonhand`
 --
 ALTER TABLE `tblonhand`
-  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tblorders`
 --
@@ -2323,12 +2361,12 @@ ALTER TABLE `tblprod_images`
 -- AUTO_INCREMENT for table `tblprod_info`
 --
 ALTER TABLE `tblprod_info`
-  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblprod_materials`
 --
 ALTER TABLE `tblprod_materials`
-  MODIFY `p_matID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `p_matID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblpromos`
 --
