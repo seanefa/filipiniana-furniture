@@ -402,8 +402,8 @@ function inputValidate(id){
                                   }
                                   else{
                                     $('#isBool').attr('value','existing');
-                                    $('#saveBtn').attr('type',"button");
-                                    $('#saveBtn').attr('onclick',"location.href='receipt.php';");
+                                    $('#saveBtn').attr('type',"submit");
+                                    //$('#saveBtn').attr('onclick',"location.href='add-customer.php';");
                                     $('#customerIds').attr('value',id);
                                     $('#edit3').attr('value',$('#lstName'+id+'').val());
                                     $('#edit3').html($('#lstName'+id+'').val());
