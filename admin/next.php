@@ -21,6 +21,7 @@ if(isset($_GET['id'])){
 <html lang="en">
 <head>
   <title>Check-Out</title>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
     $(document).ready(function(){
       $('#aTendered').on('keyup',function(){
