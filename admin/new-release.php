@@ -192,7 +192,8 @@ $(document).ready(function(){
                         <div class="col-md-6">
                           <div class="form-group">
                             <h2 style="font-family: inherit; font-weight: bolder;">Select an Order:</h2>
-                            <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="order" id="order" style="text-align:right">
+                            <select class="form-control" tabindex="1" name="order" id="order" style="text-align:right">
+                              <option value=""></option>
                               <?php
                               include "dbconnect.php";
                              // $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID NOT IN(SELECT orderID FROM tblorders a, tblorder_request b, tbldelivery_details c WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID) ORDER BY orderID;";
