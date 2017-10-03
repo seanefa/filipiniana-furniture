@@ -16,7 +16,7 @@ $sql = "INSERT INTO `tblmat_deliveries` (`supplierID`, `totalQuantity`, `mat_del
 mysqli_query($conn, $sql);
 
 $id = mysqli_insert_id($conn);
-
+ 
 $sql1 = "INSERT INTO `tblmat_deliverydetails` (`del_matDelID`, `del_matVarID`, `del_quantity`, `del_remarks`) VALUES ('$id', '$varid','$quan','$status')";
 mysqli_query($conn, $sql1);
 $flag++;

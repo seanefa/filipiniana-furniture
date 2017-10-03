@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "menu.php";
 include 'dbconnect.php';
 session_start(); 
@@ -119,7 +119,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Remarks</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="remText" class="form-control" placeholder="Pull-Out" name="remarks">
+                      <input type="text" id="remarks" class="form-control" placeholder="Pull-Out" name="remarks">
                     </div>
                   </div>
                 </div>
