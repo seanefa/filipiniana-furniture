@@ -1,5 +1,5 @@
 <?php
-include "dbconnect.php";
+include "dbconnect.php"; 
 $mat = $_POST["mat"];
 $name = $_POST["name"];	
 $variant = $_POST["variant"];	

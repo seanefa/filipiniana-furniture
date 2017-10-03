@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 include "menu.php";
 include 'dbconnect.php';
-session_start();
+session_start(); 
 if(isset($GET['id'])){
   $jsID = $_GET['id']; 
 }

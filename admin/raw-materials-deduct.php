@@ -2,7 +2,7 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-
+ 
 $varid = $_SESSION['varid'];
 $quan = $_POST['quan1'];
 $flag=0;

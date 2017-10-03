@@ -1,7 +1,7 @@
 <?php
 include "dbconnect.php";
 
-$mat = $_POST["mat"];
+$mat = $_POST["mat"]; 
 $name = $_POST["desc"];	
 $quan = $_POST["quan"];
 

@@ -1,7 +1,7 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-
+ 
 $sup = $_POST['supplier'];
 $quantity = $_POST['matquan'];
 $varnt = $_POST['matvar'];

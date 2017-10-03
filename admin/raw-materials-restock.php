@@ -1,7 +1,7 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-
+ 
 $varid = $_SESSION['varid'];
 $sup = $_POST['supplier'];
 /*$pcs = $_POST['pcs'];
