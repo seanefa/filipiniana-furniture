@@ -26,7 +26,7 @@ include "menu.php";
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <a  id="tempbtn" class="btn btn-lg btn-info pull-right" href="new-production.php" aria-expanded="false" style="margin-right: 20px;color:white"><i class="ti-plus"></i> New</a>
+                <a  id="tempbtn" class="btn btn-lg btn-info pull-right" href="new-production.php" aria-expanded="false" style="margin-right: 20px;color:white"><i class="ti-plus"></i> New Production</a>
                 <li role="presentation" class="active">
                   <a role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="fa fa-check-square-o"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
@@ -64,7 +64,6 @@ include "menu.php";
                                       $result = mysqli_query($conn, $sql);
                                       while ($row = mysqli_fetch_assoc($result))
                                       {
-                                        if($row['orderType']=="Pre-Order"){
                                           $orderID = "OR" . str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
                                           $production = production($row['orderID']);
                                           echo(' 
@@ -106,8 +105,7 @@ include "menu.php";
                                                 </div>
                                               </div>
                                             </form>
-                                            '); 
-                                        }
+                                            ');
                                       }   
                                       function production($id){
                                         include "dbconnect.php";

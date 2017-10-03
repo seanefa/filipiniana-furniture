@@ -520,9 +520,9 @@ $(document).ready(function(){
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="prod-form.php" data-remote="prod-info-form.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
-                <li role="presentation" class="active" >
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-info"></i>&nbsp;<span id="archiveTitle" style="display: none;">Archived</span>&nbsp;<?php echo $titlePage?></a>
+                <a id="tempbtn" class="btn btn-lg btn-info pull-right" href="ordering.php?id=order" aria-expanded="false" style="margin-right: 20px; color:white"><span class="btn-label" style="color:white"><i class="ti-plus"></i></span>New</a>
+                <li role="presentation" class="active">
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-check-box"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
@@ -531,18 +531,21 @@ $(document).ready(function(){
             </div>
             <div class="tab-content">
               <!-- CATEGORY -->
+
               <div role="tabpanel" class="tab-pane fade active in" id="job">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
                     <div class="row">
+                      <h2>List of Returned Furniture</h2>
                       <div class="table-responsive" id="mainTable">
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblProducts">
                           <thead>
                             <tr>
+                              <th>ORDER ID</th>
                               <th>Furniture Name</th>
-                              <th>Phase Name</th>
-                              <th>Furniture Type</th>
-                              <th class="removeSort">Materials</th>
+                              <th>Return Reason</th>
+                              <th>Assessment</th>
+                              <th>Status</th>
                               <th class="removeSort">Action</th>
                             </tr>
                           </thead>
@@ -550,24 +553,27 @@ $(document).ready(function(){
 
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblprod_info a, tblproduct b, tblfurn_type c, tblphases d WHERE a.prodInfoProduct = b.productID and b.prodTypeID = c.typeID and a.prodInfoPhase = d.phaseID;";
+                            $sql = "SELECT * FROM tblorder_return a, tblorder_request b, tblproduct c WHERE b.order_requestID = a.tblorderReqID and b.orderProductID = c.productID;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                              if($row['prodStat']!="Archived" && $row['prodInfoStatus']=="Active"){
-
-                                echo('<td>'. $row['productName'].'</td>
-                                  <td>'.$row['phaseName'] .'</td>
-                                  <td>'.$row['typeName'] .'</td>
-                                  ');?>
-                                  <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?>&phase=<?php echo $row['prodInfoPhase']?> #view1" data-target="#myModal"><i class='fa fa-info-circle'></i> View Materials</button></td>
-                                  <td>
-                                    <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
-                                    <!-- DELETE -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['prodInfoID']?> #delete" data-target="#myModal"><i class='ti-close'></i> Deactivate</button>
-                                  </td>
-                                  <?php echo ('</tr>');
+                              if($row['returnStatus']=="Pending"){
+                                echo('
+                                  <td>'. $row['tblOrdersID'].'</td>
+                                  <td>'. $row['productName'].'</td>
+                                  <td>'.$row['returnReason'] .'</td>
+                                  <td>'.$row['returnAssessment'] .'</td>
+                                  <td>'.$row['returnStatus'] .'</td>
+                                  <td>');
+                                    echo '<button type="button" class="btn btn-info" data-toggle="modal" href="return-production-form.php" data-remote="return-production-form.php?id='.$row["returnID"] .'#view1" data-target="#myModal"><i class="fa fa-info-circle"></i> View </button>';
+                                    if($row['returnStatus']=='Pending'){
+                                      echo '<a type="button" class="btn btn-primary" href="returned-production-start.php?id='.$row["tblorderReqID"].'&returnID='.$row['returnID'].'" style="color:white"><i class="fa fa-info-circle" style="color:white"></i> Start Production</a>';
+                                    }
+                                    else{
+                                      echo '<button type="button" class="btn btn-info" data-toggle="modal" href="return-production-form.php" data-remote="return-production-form.php?id='. $row["tblorderReqID"] . '#view1" data-target="#myModal"><i class="fa fa-info-circle"></i> Production Details</button>';
+                                    }
+                                  echo '</td>';
+                                  echo ('</tr>');
                                 }
                               }
                               ?>
@@ -584,42 +590,6 @@ $(document).ready(function(){
                           </table>
                         </div>
                       </div>
-
-                      <div id="archiveTable">
-                        <div class="table-responsive"> 
-                          <table class="table color-bordered-table muted-bordered-table dataTable display">
-                            <thead>
-                              <tr>
-                                <th>Furniture Name</th>
-                                <th>Furniture Type</th>
-                                <th class="removeSort">Materials</th>
-                                <th class="removeSort">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php
-                              include "dbconnect.php";
-                              $sql = "SELECT * FROM tblprod_info a, tblproduct b, tblfurn_type c WHERE a.prodInfoProduct = b.productID and b.prodTypeID = c.typeID;";
-                              $result = mysqli_query($conn, $sql);
-                              while ($row = mysqli_fetch_assoc($result))
-                              {
-                                if($row['prodInfoStatus']=="Archived"){
-
-                                  echo('<td>'. $row['productName'].'</td>
-                                    <td>'.$row['typeName'] .'</td>
-                                    ');?>
-                                    <td><button type="button" class="btn btn-info" data-toggle="modal" href="prod-info-form.php" data-remote="prod-info-form.php?id=<?php echo $row['productID']?> #view1" data-target="#myModal"><i class='fa fa-info-circle'></i> View Materials</button></td>
-                                    <td>
-                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Production+Information&amp;id=<?php echo $row['prodInfoID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
-                                   </td>
-                                   <?php echo ('</tr>');
-                                 }
-                               }
-                               ?>
-                             </tbody>
-                           </table>
-                         </div>
-                       </div>
                      </div>
                    </div>
                  </div>

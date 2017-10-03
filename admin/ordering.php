@@ -7,9 +7,9 @@ $jsID = $_GET['id'];
 }
 $jsID=$_GET['id'];
 $_SESSION['varname'] = $jsID;*/
-$existingOrder = 0;
+$orderType = 0;
 if(isset($_GET['id'])){
-  $existingOrder = $_GET['id']; 
+  $orderType = $_GET['id']; 
 }
 ?>
 <!DOCTYPE html>  
@@ -149,7 +149,7 @@ $(this).show();
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                       <div class="panel-body">
                         <form id="myForm" method="post">
-                          <input type="hidden" name="updateOrder" id="updateOrder" value="<?php echo $existingOrder?>">
+                          <input type="hidden" name="orderType" id="orderType" value="<?php echo $orderType?>">
                           <div class="col-md-12">
 
                             <div class="tab-content">
@@ -941,10 +941,14 @@ function checkout(){
   else if(qCtr > 0){
     var result = confirm("This action cannot be undone. Do you want to proceed?");
     if(result){
-      var value = $("#updateOrder").val();
+      var value = $("#orderType").val();
       if(value!=0){
         $('#check-out').attr('type','submit');
         $('#myForm').attr('action','confirm-update.php');
+      }
+      if(value=='order'){
+        $('#check-out').attr('type','submit');
+        $('#myForm').attr('action','confirm-order.php');
       }
       else{
         if(num_of_product == 0){

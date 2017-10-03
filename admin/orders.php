@@ -6,43 +6,43 @@ include 'toastr-buttons.php';
 
 if (!empty($_SESSION['createSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastNewSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['createSuccess']);
+  $(document).ready(function () {
+    $("#toastNewSuccess").click();
+  });
+</script>';
+unset($_SESSION['createSuccess']);
 }
 if (!empty($_SESSION['updateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastUpdateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['updateSuccess']);
+  $(document).ready(function () {
+    $("#toastUpdateSuccess").click();
+  });
+</script>';
+unset($_SESSION['updateSuccess']);
 }
 if (!empty($_SESSION['deactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastDeactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['deactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastDeactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['deactivateSuccess']);
 }
 if (!empty($_SESSION['reactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastReactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['reactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastReactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['reactivateSuccess']);
 }
 if (!empty($_SESSION['actionFailed'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastFailed").click();
-          });
-        </script>';
-  unset($_SESSION['actionFailed']);
+  $(document).ready(function () {
+    $("#toastFailed").click();
+  });
+</script>';
+unset($_SESSION['actionFailed']);
 }
 
 ?>
@@ -50,7 +50,7 @@ if (!empty($_SESSION['actionFailed'])) {
 <html lang="en">
 <head>
   <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
 
 var value = $("#selectCat").val(); // on load
 
@@ -232,10 +232,16 @@ function getDates($id){
 }
 function getName($id){
   include "dbconnect.php";
-  $sql = "SELECT * FROM tblcustomer WHERE customerID='$id'";
-  $result = mysqli_query($conn,$sql);
-  $row = mysqli_fetch_assoc($result);
-  $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
+  $name = "";
+  if($id==0){
+    $name = "M A N A G E M E N T";
+  }
+  else{
+    $sql = "SELECT * FROM tblcustomer WHERE customerID='$id'";
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
+  }
   return $name;
 }               
 
@@ -284,19 +290,19 @@ function getName($id){
 </div>
 
 <script>
-  $(document).on('hidden.bs.modal', function (e) {
-    var target = $(e.target);
-    target.removeData('bs.modal')
-    .find(".clearable-content").html('');
-  });
+$(document).on('hidden.bs.modal', function (e) {
+  var target = $(e.target);
+  target.removeData('bs.modal')
+  .find(".clearable-content").html('');
+});
 </script>
 
 <script>
-  $(document).on('hidden.bs.modal', function (e) {
-    var target = $(e.target);
-    target.removeData('bs.modal')
-    .find(".clearable-content").html('');
-  });
+$(document).on('hidden.bs.modal', function (e) {
+  var target = $(e.target);
+  target.removeData('bs.modal')
+  .find(".clearable-content").html('');
+});
 </script>
 
 <!-- Editable -->
@@ -305,11 +311,11 @@ function getName($id){
 <script src="../plugins/bower_components/tiny-editable/mindmup-editabletable.js"></script>
 <script src="../plugins/bower_components/tiny-editable/numeric-input-example.js"></script>
 <script>
-  $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
-  $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-  $(document).ready(function(){
-    $('#editable-datatable').DataTable();
-  });
+$('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+$('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+$(document).ready(function(){
+  $('#editable-datatable').DataTable();
+});
 </script>
 </body>
 </html>

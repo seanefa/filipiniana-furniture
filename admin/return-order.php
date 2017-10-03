@@ -74,8 +74,14 @@ echo '</script>';
                               echo('<td>'.$orderID.'</td>
                                 <td>'.$custName.'</td>
                                 <td>'.$row['returnReason'].'</td>
-                                <td>'.$row['returnAssessment'].'</td>');
+                                <td>'.$row['returnAssessment'].'</td>'
+                                );
                               if($row['returnStatus']=='Pending'){
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['returnStatus'].'</p></h3>
+                                </div></td>';
+                              }
+                              if($row['returnStatus']=='Production Ongoing'){
                                 echo '<td><div class="progress progress-lg" style="border-radius:20px;">
                                   <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['returnStatus'].'</p></h3>
                                 </div></td>';
