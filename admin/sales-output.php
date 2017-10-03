@@ -74,7 +74,8 @@ if($id==1){
      dom: "Bfrtip",
      buttons: [
      "copy", "csv", "excel", "pdf", "print"
-     ]
+     ],
+     footer: true
    });
   });
   </script>';
