@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "menu.php";
 include 'dbconnect.php';
 session_start(); 
@@ -6,11 +6,11 @@ if(isset($GET['id'])){
   $jsID = $_GET['id']; 
 }
 $jsID=$_GET['id'];
-
+  
 $_SESSION['varid'] = $jsID;
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-
+  
 // Check connection
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
@@ -19,7 +19,7 @@ if (!$conn) {
 <!DOCTYPE>
 <html>
 <head>
-</head>
+</head>  
 <body>
   <!-- Restock Raw Materials -->
   <div class="modal fade" tabindex="-1" role="dialog" id="restockRawMaterialModal" aria-hidden="true" style="display: none;">
@@ -33,7 +33,7 @@ if (!$conn) {
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
-
+  
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
