@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="image/favicon.ico" rel="icon" />
-<title>Production - Filipiniana Furniture Shop</title>
-<meta name="description" content="Furniture shop">
-<?php include"css.php";?>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="image/favicon.ico" rel="icon" />
+  <link rel="stylesheet" href="css/myStyle.css">
+  <title>Profile - Filipiniana Furniture Shop</title>
+  <meta name="description" content="Furniture shop">
+  <script type="text/javascript" src="js/myScript.js"></script>
+  <?php include"css.php";?>
 </head>
-<body>
-<div class="wrapper-wide">
-<?php include"header.php";?>
+<body style="background: #ffffff;">
+  <?php 
+  include "header.php";
+  if(!isset($_SESSION["userID"]))
+  {
+    echo "<script>
+    window.location.href='login.php';
+    alert('You have no access here. You must logged in first.');
+    </script>";
+  }
+  ?>
   <div id="container">
     <div class="container">
-      <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
-        <li><a href="index.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="login.php">Account</a></li>
+        <li><a href="home.php"><i class="fa fa-home"></i></a></li>
         <li><a href="production.php">Production</a></li>
       </ul>
-      <!-- Breadcrumb End-->
+      <br>
       <div class="row">
+        <?php include "accountmenu.php"; ?>
         <!--Middle Part Start-->
-        <div id="content" class="col-sm-9">
-          <h1 class="title">Production</h1>
+        <div class="col-sm-9" id="content">
+          <h2>Production</h2>
           <div class="row">
-
+            <div class="col-sm-12">
+              <div class="well">
+                
+              </div>
+            </div>
           </div>
         </div>
         <!--Middle Part End -->
       </div>
     </div>
   </div>
-<?php include"footer.php";?>
-</div>
-<?php include"scripts.php";?>
+  <?php include"footer.php";?>
+  <!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
+  <?php include "scripts.php";?>
 </body>
 </html>

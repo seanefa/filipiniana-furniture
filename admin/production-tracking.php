@@ -26,7 +26,7 @@ include "menu.php";
           <div class="panel panel-info">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" data-target="#myModal" href="production-forms.php" data-remote="production-forms.php #new" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+                <a  id="tempbtn" class="btn btn-lg btn-info pull-right" href="new-production.php" aria-expanded="false" style="margin-right: 20px;color:white"><i class="ti-plus"></i> New</a>
                 <li role="presentation" class="active">
                   <a role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="fa fa-check-square-o"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>

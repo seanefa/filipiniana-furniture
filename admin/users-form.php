@@ -48,7 +48,7 @@ if (!$conn) {
                             {
                               if($row['empStatus']=='Active')
 							                {
-                                echo('<option value=' . $row['empID'] . '>' . $row['empLastName'] . ', ' . $row['empMidName'] . ' ' . $row['empFirstName'] . '</option>');
+                                echo('<option value=' . $row['empID'] . '>' . $row['empLastName'] . ', ' . $row['empFirstName'] . ' ' . $row['empMidName'] . '</option>');
                               }
                             }
                             ?>

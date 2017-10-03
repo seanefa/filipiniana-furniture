@@ -96,10 +96,16 @@
                 <li><a href="#">Special Offers</a></li>
                 <li><a href="login.php">My Account</a>
                   <ul>
-                    <li><a href="#">Account Information</a></li>
-                    <li><a href="#">Password</a></li>
-                    <li><a href="#">Address Book</a></li>
-                    <li><a href="#">Order History</a></li>
+                    <li><a href="account.php">Account Dashboard</a></li>
+                    <li><a href="addressbook.php">Address Book</a></li>
+                    <li><a href="customization.php">Customization</a></li>
+                    <li><a href="orders.php">Orders</a></li>
+                    <li><a href="updateinfo.php">Personal Information</a></li>
+                    <li><a href="production.php">Production Information</a></li>
+                    <li><a href="proof-of-payment-form.php">Proof of Payment</a></li>
+                    <li><a href="returns.php">Returns</a></li>
+                    <li><a href="reviews.php">Reviews</a></li>
+                    <li><a href="wishlists.php">Wishlists</a></li>
                   </ul>
                 </li>
                 <li><a href="cart.php">Shopping Cart</a></li>
@@ -108,9 +114,9 @@
                 <li><a href="#">Information</a>
                   <ul class="sitemap">
                     <li><a href="about-us.php">About Us</a></li>
-                    <li><a href="about-us.php">Delivery Information</a></li>
-                    <li><a href="about-us.php">Privacy Policy</a></li>
-                    <li><a href="about-us.php">Terms &amp; Conditions</a></li>
+                    <li><a href="delivery-information.php">Delivery Information</a></li>
+                    <li><a href="privacy-policy.php">Privacy Policy</a></li>
+                    <li><a href="terms-condition.php">Terms &amp; Conditions</a></li>
                     <li><a href="contact-us">Contact Us</a></li>
                   </ul>
                 </li>

@@ -3,7 +3,7 @@
    and sends account confirmation email message
  */
 
-// Set session variables to be used on profile.php page
+// Set session variables to be used on account.php page
 $_SESSION['userEmail'] = $_POST['email'];
 $_SESSION['customerFirstName'] = $_POST['firstname'];
 $_SESSION['customerMiddleName'] = $_POST['middlename'];
@@ -57,7 +57,7 @@ else { // Email doesn't already exist in a database, proceed...
 
         mail( $to, $subject, $message_body );
 */
-        header("location: profile.php"); 
+        header("location: account.php"); 
 
     }
 

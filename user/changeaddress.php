@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="image/favicon.ico" rel="icon" />
   <link rel="stylesheet" href="css/myStyle.css">
-  <title>Customization - Filipiniana Furniture Shop</title>
+  <title>Change Personal Information - Filipiniana Furniture Shop</title>
   <meta name="description" content="Furniture shop">
   <script type="text/javascript" src="js/myScript.js"></script>
   <?php include"css.php";?>
@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <div class="container">
       <ul class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="customization.php">Customization</a></li>
+        <li><a href="addressbook.php">Address Book</a></li>
+        <li><a href="changeaddress.php">Change Address</a></li>
       </ul>
       <br>
       <div class="row">
@@ -50,27 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       if($result->num_rows>0){
         while($row=$result->fetch_assoc()){
       ?>
-                <form enctype="multipart/form-data" action="send-customized-product.php" autocomplete="off" class="form-horizontal" method="post">
-            <fieldset>
-              <legend>Customization&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
+          <form enctype="multipart/form-data" action="updateaddress.php" autocomplete="off" class="form-horizontal" method="post">
+            <fieldset id="account">
+              <legend>Change Address</legend>
               <div class="form-group required">
-        <label for="input-block" class="col-sm-3 control-label">Add Blueprint</label>
-        <div class="col-sm-8">
-          <input type="file" name="blueprint" class="form-control" required/>
-        </div>
-        </div>
-        <div class="form-group required">
-        <label for="input-block" class="col-sm-3 control-label">Description</label>
-        <div class="col-sm-8">
-          <textarea class="form-control" name="description"></textarea>
-        </div>
-        </div>
+                <label for="input-block" class="col-sm-2 control-label">Complete Address</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="input-address" placeholder="e.g. #1255 Saint Francis St., Brgy. Parang, Marikina City" value="<?php echo "" . $row["customerAddress"];?>" name="address" required>
+                </div>
+              </div>
             </fieldset>
               <div style="text-align: center;">
                 <a href="account.php" class="btn btn-info">CANCEL</a>
                 <input type="submit" class="btn btn-primary" value="SAVE" name="register" id="">
               </div>
-          </form>
+      </form>
       <?php
         }
       }

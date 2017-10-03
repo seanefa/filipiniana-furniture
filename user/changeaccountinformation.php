@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link href="image/favicon.ico" rel="icon" />
 	<link rel="stylesheet" href="css/myStyle.css">
-	<title>Proof of Payment - Filipiniana Furniture Shop</title>
+	<title>Change Account Information - Filipiniana Furniture Shop</title>
 	<meta name="description" content="Furniture shop">
 	<script type="text/javascript" src="js/myScript.js"></script>
 	<?php include"css.php";?>
@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="home.php"><i class="fa fa-home"></i></a></li>
-        		<li><a href="proof-of-payment-form.php">Proof of Payment</a></li>
+				<li><a href="account.php">My Account</a></li>
+				<li><a href="changeaccountinformation.php">Change Account Information</a></li>
 			</ul>
 			<br>
 			<div class="row">
@@ -50,54 +51,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			if($result->num_rows>0){
 				while($row=$result->fetch_assoc()){
 			?>
-			          <form enctype="multipart/form-data" action="send-proof.php" autocomplete="off" class="form-horizontal" method="post">
+          <form action="updateaccountinformation.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset>
-              <legend>Proof of Payment Form&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
-              <p class="text-success" style="text-align: center;">You can refer to your receipt.</p>
+              <legend>Change Account Information&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
               <div class="form-group required">
-                <label for="input-firstname" class="col-sm-2 control-label">Order #</label>
-                <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-					<select class="form-control" name="orderid">
-						<option disabled>Choose Order</option>
-					<?php
-					include "userconnect.php";
-					$orders = "SELECT * from tblorders";
-					$result = $conn->query($orders);
-					if($result->num_rows>0){
-						while($row=$result->fetch_assoc()){
-							?>
-						<option><?php echo "" . $row["orderID"];?></option>
-						<?php
-						}
-					}
-					$conn->close();
-					?>
-					</select>
-<!--                  <input type="text" class="form-control" id="input-firstname" placeholder="" value="" name="branchcode" required>-->
+                <label for="input-password" class="col-sm-3 control-label">Username</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="input-username" placeholder="Username" value="<?php echo "" . $row["userName"];?>" name="uname" required>
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-firstname" class="col-sm-2 control-label">Swift Code</label>
-                <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                  <input type="text" class="form-control" id="input-firstname" placeholder="" value="" name="branchcode" required>
+                <label for="input-password" class="col-sm-3 control-label">Old Password</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="input-password-old" placeholder="Old Password" value="" name="opass">
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-email" class="col-sm-2 control-label">Amount Paid</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-email" placeholder="" name="amountpaid" required>
+                <label for="input-password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="upass">
                 </div>
               </div>
               <div class="form-group required">
-                <label for="input-telephone" class="col-sm-2 control-label">Date Paid</label>
-                <div class="col-sm-10">
-                  <input type="date" class="form-control" id="input-telephone" value="" name="datepaid" required>
-                </div>
-              </div>
-              <div class="form-group required">
-                <label for="input-block" class="col-sm-2 control-label">Photo</label>
-                <div class="col-sm-10">
-                  <input type="file" name="receiptphoto" class="" required/>
+                <label for="input-confirm" class="col-sm-3 control-label">Confirm Password</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass">
                 </div>
               </div>
             </fieldset>
@@ -105,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               	<a href="account.php" class="btn btn-info">CANCEL</a>
                 <input type="submit" class="btn btn-primary" value="SAVE" name="register" id="">
               </div>
-			</form>
+          </form>
 			<?php
 				}
 			}

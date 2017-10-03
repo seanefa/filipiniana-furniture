@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>About Us - Filipiniana Furniture Shop</title>
+<title>Privacy Policy - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>
@@ -16,13 +16,13 @@
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="about-us.php">About Us</a></li>
+        <li><a href="privacy-policy.php">Privacy Policy</a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
-          <h1 class="title">About Us</h1>
+          <h1 class="title">Privacy Policy</h1>
           <div class="row">
             <div class="col-sm-12">
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat.</p>
