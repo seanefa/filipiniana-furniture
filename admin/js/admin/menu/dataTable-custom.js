@@ -11,21 +11,3 @@ $(document).ready(function () {
    }]
  });
 });
-
-$(document).ready(function () {
-  $('#reportsTable').DataTable( {
-    dom: 'Bfrtip',
-    buttons: [
-    'copy', 'csv', 'excel', 'pdf', 'print'
-    ]
-  });
-});
-
-/*<![CDATA[
-jQuery(function($) { 'use strict';
-  $("#printReceipt").find('.print-link').on('click', function() {
-      //Print ele2 with default options
-      $.print("#printReceipt");
-    });
-});
-]]>*/
