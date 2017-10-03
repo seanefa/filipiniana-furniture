@@ -1,50 +1,26 @@
 <?php
 include "titleHeader.php";
 include "menu.php";
-//session_start();
-/*if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-if (isset($_GET['newSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastNewSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-else if (isset($_GET['updateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastUpdateSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-else if (isset($_GET['deactivateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastDeactivateSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-
 <script>
+var dateArray = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var jan = 0;
+var feb = 0;
+var mar = 0;
+var apr = 0;
+var may = 0;
+var jun = 0;
+var jul = 0;
+var aug = 0;
+var sep = 0;
+var oct = 0;
+var nov = 0;
+var dec = 0;
+
 $(document).ready(function(){
     $('#frequency').change(function(){
       var value = $("#frequency").val();
@@ -58,7 +34,6 @@ $(document).ready(function(){
           $( '#range' ).html(response);
         }
       });
-
     });//end change
 
     $("#gen").on('click',function(){
@@ -81,6 +56,8 @@ $(document).ready(function(){
       if(value==2){
         var m = $("#month").val();
         var y = $("#year").val();
+
+
         $.ajax({
         type: 'post',
         url: 'inventory-output.php',
@@ -89,6 +66,7 @@ $(document).ready(function(){
         },
         success: function (response) {
           $( '#reportsOut' ).html(response);
+           
         }
       });
       }
@@ -103,23 +81,77 @@ $(document).ready(function(){
         },
         success: function (response) {
           $( '#reportsOut' ).html(response);
+           jan = $('#01').val();
+           feb = $('#02').val();
+           mar = $('#03').val();
+           apr = $('#04').val();
+           may = $('#05').val();
+           jun = $('#06').val();
+           jul = $('#07').val();
+           aug = $('#08').val();
+           sep = $('#09').val();
+           oct = $('#10').val();
+           nov = $('#11').val();
+           dec = $('#12').val();
+
+          myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+          labels: dateArray,
+          datasets: [{
+          label: 'Inventory Report',
+          data: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)'
+          ],
+          borderWidth: 1
+              }]
+          },
+          options: {
+          responsive: true
+            }
+        });
         }
       });
       }
-
     });
   });
   </script>
+  <script src="plugins/bower_components/Chart.js/Chart.js"></script>
+  <script src="plugins/bower_components/Chart.js/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" ></script>
 </head>
 <body>
   <!-- Preloader -->
 <!--div class="preloader">
 <div class="cssload-speeding-wheel"></div>
 </div-->
-<!-- Toast Notification -->
-<button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-<button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-<button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
 <div id="page-wrapper">
   <div class="container-fluid">
     <div class="row">
@@ -158,31 +190,55 @@ $(document).ready(function(){
                     <div id="range">
                     <div class="col-md-3">
                       <input type="date" id="dateRep" name ="dateRep" class="form-control" required/>
+                      
+
                     </div>
                   </div>
                     <div class="col-md-3">
                       <button type="button" id="gen" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i>&nbsp;Generate</button>
                     </div>
-                  </div>
-                  <br>
-                  <div class="row" id="reportsOut">
-                    <div class="table-responsive"> 
-                      <table class="table color-bordered-table muted-bordered-table display" id="reportsTable">
-                        <thead>
-                          <tr>
-                            <th style="text-align: left;">Material ID</th>
-                            <th style="text-align: left;">Starting Quantity</th>
-                            <th style="text-align: left;">Used(Till Now)</th>
-                            <th style="text-align: left;">Available</th>
-                            <th style="text-align: left;">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody style="text-align: left;">
-
-                        </tbody>
-                      </table>
+                    <br><br>
+                      <div class="sttabs tabs-style-flip" style="margin-top: 40px;">
+                    <nav>
+                      <ul>
+                        <li><h3><a href="#myChart" class="ti-layout"><span> Table View</span></a></h3></li>
+                        <li><h3><a href="#myTable" class="ti-bar-chart"><span> Chart View</span></a></h3></li>
+                      </ul>
+                    </nav>
+                    <div class="content-wrap text-center" style="margin-top: -10px;">
+                    <section id="myTable">
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="barchart">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                          <div class="row" id="reportsOut">
+                            <h2 style="text-align: center;">PLEASE SELECT FREQUENCY AND DATE TO GENERATE REPORT</h2>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+                        </div>
+                    </section>
+                    <section >
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="barchart">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                              <div class="row" id="reportsChart">
+                                <div class="col-md-12">
+                                <h2>BAR GRAPH</h2>
+                                <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                    </div>
+                    </div>
                     </div>
                   </div>
+                  <br>
                 </div>
               </div>
             </div>
@@ -206,13 +262,51 @@ $(document).ready(function(){
   </div>
 </div>
 
-<script>
-$(document).on('hidden.bs.modal', function (e) {
-  var target = $(e.target);
-  target.removeData('bs.modal')
-  .find(".clearable-content").html('');
+<script type="text/javascript">
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: dateArray,
+        datasets: [{
+            label: 'Inventory Report',
+            ddata: [jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio : true
+    }
 });
 </script>
-
 </body>
 </html>

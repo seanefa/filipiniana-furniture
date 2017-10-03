@@ -18,7 +18,7 @@ if($id==1){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -59,7 +59,25 @@ if($id==1){
   <input type="hidden" value="'.$tPrice.'" id="totalPrice"/>
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
 }
 else if($id==2){
@@ -76,7 +94,7 @@ else if($id==2){
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$m' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -119,7 +137,25 @@ else if($id==2){
   <td id="totalPrice" style="text-align:right;"><b>'. "&#8369; ". number_format($tPrice,2).'</b></td>
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
   
  
@@ -139,7 +175,7 @@ $tpriceArray = array();
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table display' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -186,7 +222,25 @@ $tpriceArray = array();
   <input type="hidden" value="'.$tPrice.'" id="totalPrice"/>
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
    while($tpriceArraylength != 0){
     echo'<input type="hidden" value="'.$tpriceArray[$tpriceArraylength-1].'" id="'.$dateArray[$tpriceArraylength-1].'"/>';

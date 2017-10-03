@@ -15,7 +15,7 @@ if($id==1){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -59,7 +59,25 @@ if($id==1){
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
 }
 else if($id==2){
@@ -74,7 +92,7 @@ else if($id==2){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -118,7 +136,25 @@ else if($id==2){
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
 }
 
@@ -133,7 +169,7 @@ else if($id==3){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table queriesDataTable display nowrap' id='reportsTable'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -177,7 +213,25 @@ else if($id==3){
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }],
+     dom: "Bfrtip",
+     buttons: [
+     "copy", "csv", "excel", "pdf", "print"
+     ]
+   });
+  });
+  </script>';
   }
 }
 
@@ -254,5 +308,4 @@ else if($id==3){
                                 return "Not fully paid";
                               }
                             }
-
 ?>

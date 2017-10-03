@@ -1,49 +1,11 @@
 <?php
 include "titleHeader.php";
 include "menu.php";
-//session_start();
-/*if(isset($GET['id'])){
-$jsID = $_GET['id']; 
-}
-$jsID=$_GET['id'];
-$_SESSION['varname'] = $jsID;*/
 include 'dbconnect.php';
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-if (isset($_GET['newSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastNewSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-else if (isset($_GET['updateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastUpdateSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-else if (isset($_GET['deactivateSuccess']))
-{
-  echo  '<script>';
-  echo '$(document).ready(function () {';
-    echo 'document.getElementById("toastDeactivateSuccess").click();';
-    echo '});';
-echo '</script>';
-}
-
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-
 <script>
 var dateArray = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 var jan = 0;
@@ -59,7 +21,6 @@ var oct = 0;
 var nov = 0;
 var dec = 0;
 
-
 $(document).ready(function(){
     $('#frequency').change(function(){
       var value = $("#frequency").val();
@@ -73,9 +34,6 @@ $(document).ready(function(){
           $( '#range' ).html(response);
         }
       });
-
-      
-
     });//end change
 
     $("#gen").on('click',function(){
@@ -123,7 +81,7 @@ $(document).ready(function(){
         },
         success: function (response) {
           $( '#reportsOut' ).html(response);
-          jan = $('#01').val();
+           jan = $('#01').val();
            feb = $('#02').val();
            mar = $('#03').val();
            apr = $('#04').val();
@@ -136,53 +94,51 @@ $(document).ready(function(){
            nov = $('#11').val();
            dec = $('#12').val();
 
-
-           myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: dateArray,
-        datasets: [{
-            label: 'Sales Report',
-            data: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-      responsive: true
-    }
-});
+          myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+          labels: dateArray,
+          datasets: [{
+          label: 'Sales Report',
+          data: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)',
+              'rgba(255,99,132,1)'
+          ],
+          borderWidth: 1
+              }]
+          },
+          options: {
+          responsive: true
+            }
+        });
         }
       });
       }
-
     });
   });
   </script>
@@ -190,18 +146,12 @@ $(document).ready(function(){
   <script src="plugins/bower_components/Chart.js/Chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" ></script>
-
-
 </head>
 <body>
   <!-- Preloader -->
 <!--div class="preloader">
 <div class="cssload-speeding-wheel"></div>
 </div-->
-<!-- Toast Notification -->
-<button class="tst1" id="toastNewSuccess" style="display: none;"></button>
-<button class="tst2" id="toastUpdateSuccess" style="display: none;"></button>
-<button class="tst3" id="toastDeactivateSuccess" style="display: none;"></button>
 <div id="page-wrapper">
   <div class="container-fluid">
     <div class="row">
@@ -261,23 +211,10 @@ $(document).ready(function(){
                         <div role="tabpanel" class="tab-pane fade active in" id="barchart">
                           <div class="panel-wrapper collapse in" aria-expanded="true">
                             <div class="panel-body">
-                          <div class="row" id="reportsOut">
-                            <div class="table-responsive"> 
-                              <table class="table color-bordered-table muted-bordered-table display" id="reportsTable">
-                                <thead>
-                                  <tr>
-                                    <th style="text-align: left;">Order ID</th>
-                                    <th style="text-align: left;">Customer Name</th>
-                                    <th style="text-align: left;">Amount Due</th>
-                                    <th style="text-align: left;">Amount Paid</th>
-                                    <th style="text-align: left;">Remaining Balance</th>
-                                  </tr>
-                                </thead>
-                                <tbody style="text-align: left;">
-
-                                </tbody>
-                              </table>
-                            </div>
+                          <div class="row">
+                            <div id="reportsOut">
+                            <h2 style="text-align: center;">PLEASE SELECT FREQUENCY AND DATE TO GENERATE REPORT</h2>
+                          </div>
                           </div>
                           </div>
                           </div>
@@ -290,12 +227,10 @@ $(document).ready(function(){
                           <div class="panel-wrapper collapse in" aria-expanded="true">
                             <div class="panel-body">
                               <div class="row" id="reportsChart">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                 <h2>BAR GRAPH</h2>
-                                <canvas id="myChart" width="1380" height="1020"></canvas>
+                                <canvas id="myChart"></canvas>
                                 </div>
-                                <div class="col-md-6">
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -303,7 +238,7 @@ $(document).ready(function(){
                     </section>
                     </div>
                     </div>
-                      </div>
+                    </div>
                   </div>
                   <br>
                 </div>
@@ -329,24 +264,15 @@ $(document).ready(function(){
   </div>
 </div>
 
-<script>
-$(document).on('hidden.bs.modal', function (e) {
-  var target = $(e.target);
-  target.removeData('bs.modal')
-  .find(".clearable-content").html('');
-});
-</script>
 <script type="text/javascript">
 var ctx = document.getElementById("myChart").getContext('2d');
-
-
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: dateArray,
         datasets: [{
             label: 'Sales Report',
-            ddata: [jun,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
+            ddata: [jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(255, 99, 132, 0.2)',
@@ -383,8 +309,6 @@ var myChart = new Chart(ctx, {
       maintainAspectRatio : true
     }
 });
-
 </script>
-
 </body>
 </html>
