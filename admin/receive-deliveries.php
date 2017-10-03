@@ -145,7 +145,7 @@ include 'dbconnect.php';
         $("#hide").hide();
         $.ajax({
           type: 'post',
-          url: 'prod-info-material.php',
+          url: 'raw-material-info-table.php',
           data: {
             mat: mat, name : name, variant : variant, quan : quan,
           },

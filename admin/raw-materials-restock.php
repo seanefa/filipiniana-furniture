@@ -2,13 +2,53 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-$id = $_SESSION['varname'];
+$varid = $_SESSION['varid'];
 $sup = $_POST['supplier'];
-$pcs = $_POST['pcs'];
+/*$pcs = $_POST['pcs'];
 
-$box = $_POST['box'];
+$box = $_POST['box'];*/
+$quan = $_POST['quan'];
+$status = "Listed";
+$flag=0;
 
-if($box==0){
+
+$sql = "INSERT INTO `tblmat_deliveries` (`supplierID`, `totalQuantity`, `mat_deliveryRemarks`, `mat_deliveryStatus`) VALUES ('$sup', '$quan','$status','$status')";
+mysqli_query($conn, $sql);
+
+$id = mysqli_insert_id($conn);
+
+$sql1 = "INSERT INTO `tblmat_deliverydetails` (`del_matDelID`, `del_matVarID`, `del_quantity`, `del_remarks`) VALUES ('$id', '$varid','$quan','$status')";
+mysqli_query($conn, $sql1);
+$flag++;
+
+$sql2 = "SELECT * FROM tblmat_inventory WHERE matVariantID = '$varid'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_assoc($result2);
+
+$added = $row2['matVarQuantity'] + $quan;
+$sql4 = "UPDATE `tblmat_inventory` SET `matVarQuantity`='$added' WHERE `matVariantID`='$varid'";
+mysqli_query($conn, $sql4);
+$flag++;
+
+
+if ($flag>0) {
+	// Logs start here
+	$sID = mysqli_insert_id($conn); // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new material ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Restock', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
+
+/*if($box==0){
 	$box = 1;
 }
 
@@ -48,8 +88,8 @@ if($sql){
  } 
  else {
    header( "Location: raw-materials-management.php?actionFailed" );
-}
+}*/
 
 mysqli_close($conn);
-}
+
 ?>

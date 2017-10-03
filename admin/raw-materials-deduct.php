@@ -2,38 +2,36 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-$id = $_SESSION['varname'];
-$q = $_POST['quantity'];
-$rem = $_POST['remarks'];
 
-$matname = "";
-$sql = "SELECT * FROM tblmat_var a, tblmaterials b WHERE a.mat_varID = b.materialID AND variantID ='$id'";
-$result = mysqli_query($conn,$sql);
-while($row = mysqli_fetch_assoc($result)){
-	$matname = $row['variantDescription'] .' '. $row['materialName'];
-	$quan = $row['variantQuantity'];
+$varid = $_SESSION['varid'];
+$quan = $_POST['quan1'];
+$flag=0;
 
-}
+$sql2 = "SELECT * FROM tblmat_inventory WHERE matVariantID = '$varid'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_assoc($result2);
 
+$added = $row2['matVarQuantity'] - $quan;
+$sql4 = "UPDATE `tblmat_inventory` SET `matVarQuantity`='$added' WHERE `matVariantID`='$varid'";
+mysqli_query($conn, $sql4);
+$flag++;
 
-$gt = $quan - $q;
-$desc = "Deducted " . $q . " pcs of " . $matname .". ".$rem.".";
-$date = date("Y/m/d"); 
-
-$sql1 = "INSERT INTO .`tblinventory_logs` (`inLogDescription`, `inLogDate`) VALUES ('$desc', '$date')";
-
-mysqli_query($conn,$sql1);
-
-$sql = "UPDATE tblmat_var SET variantQuantity = '$gt' WHERE variantID = '$id'"; 
-if($sql){
-  if (mysqli_query($conn, $sql)) {
-   $_SESSION['createSuccess'] = 'Success';
+if ($flag>0) {
+	// Logs start here
+	$sID = mysqli_insert_id($conn); // ID of last input;
+	$date = date("Y-m-d");
+	$logDesc = "Added new material ".$name.", ID = " .$sID;
+	$empID = $_SESSION['userID'];
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Restock', 'New', '$date', '$logDesc', '$empID')";
+	mysqli_query($conn,$logSQL);
+	// Logs end here
+	$_SESSION['createSuccess'] = 'Success';
 	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 } 
  else {
     $_SESSION['actionFailed'] = 'Failed';
 	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
   }
-}
+
 mysqli_close($conn);
 ?>

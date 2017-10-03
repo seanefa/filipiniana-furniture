@@ -7,7 +7,8 @@ if(isset($GET['id'])){
 }
 $jsID=$_GET['id'];
 
-$_SESSION['varname'] = $jsID;
+$_SESSION['varid'] = $jsID;
+
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
@@ -58,7 +59,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="remText" class="form-control" name="quantity">
+                      <input type="text" id="quan" class="form-control" name="quan" style="text-align: right">
                     </div>
                   </div>
                 </div>
@@ -109,7 +110,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="remText" class="form-control" name="quantity">
+                      <input type="text" id="quan1" class="form-control" name="quan1">
                     </div>
                   </div>
                 </div>

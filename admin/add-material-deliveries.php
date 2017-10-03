@@ -53,7 +53,7 @@ if ($flag>0) {
 	$date = date("Y-m-d");
 	$logDesc = "Added new frame material ".$name.", ID = " .$sID;
 	$empID = $_SESSION['userID'];
-	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Frame Material', 'New', '$date', '$logDesc', '$empID')";
+	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Deliveries', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);
 	// Logs end here
 	$_SESSION['createSuccess'] = 'Success';
