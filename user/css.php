@@ -10,4 +10,5 @@
 <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">
 <link rel="stylesheet" type="text/css" href="revolution/css/navigation.css">
 <link rel="stylesheet" type="text/css" href="css/hover.css" />
+<link rel="stylesheet" type="text/css" href="js/toast-master/css/jquery.toast.css" />
 <!-- CSS Part End-->

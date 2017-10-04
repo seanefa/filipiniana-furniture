@@ -207,3 +207,21 @@ background-image: linear-gradient(to top right, #EFDA7D 0%, #E9D4B3 100%);
     padding-right: 50px;
     padding-left: 50px;
 }
+
+/*Jquery toaster*/
+.jq-icon-info {
+  background-color: #3C8CE4;
+  color: #ffffff;
+}
+.jq-icon-success {
+  background-color: #336600;
+  color: #ffffff;
+}
+.jq-icon-error {
+  background-color: #DF5349;
+  color: #ffffff;
+}
+.jq-icon-warning {
+  background-color: #FF9E50;
+  color: #ffffff;
+}

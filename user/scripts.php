@@ -16,6 +16,7 @@ include "product-form.php";
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="js/myScript.js"></script>
+<script type="text/javascript" src="js/toastr.js"></script>
 
 <script src="js/jquery.mycart.js"></script>
 

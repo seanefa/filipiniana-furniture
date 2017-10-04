@@ -110,11 +110,18 @@ if($isBool=="existing"){ //EXISTING
 
 
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
-   echo "<br>inv: " . $inv;
-   mysqli_query($conn,$inv);
+   
+
+   if (mysqli_query($conn,$inv)){
    $invID = mysqli_insert_id($conn);
-   echo "Error: " . $inv . "<br>" . mysqli_error($conn);
-   header( "Location: home.php");
+  $_SESSION['createSuccess'] = 'Success';
+  header( 'Location: home.php');
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+  header( 'Location: home.php');
+  }
+
 /*
    if($mop==1){
     $tendered = $_POST['aTendered'];
