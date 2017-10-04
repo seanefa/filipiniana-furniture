@@ -166,36 +166,9 @@
                                         </div>
                                       </div>
                                     </div>
+
                                     <div style="display: none"><button type="button" id="logthis"></button></div>
-                                    <div id="myModal2" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                                      <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                          <!-- Modal content -->
-                                          <div class="modal-content">
-                                            <div class="modal-body">
-                                              <h2>It looks like you're not logged in.</h2>
-                                              <form method="post" action="">
-                                                 <div class="form-group">
-                                                        <label class="control-label" for="username">Username</label>
-                                                        <input type="text" name="username" value="" placeholder="Username" id="username" class="form-control" />
-                                                      </div>
-                                                      <div class="form-group">
-                                                        <label class="control-label" for="input-password">Password</label>
-                                                        <input type="password" name="password" value="" placeholder="Password" id="password" class="form-control" />
-                                                        <br>
-                                                        <h4 style="color: red;"><?php echo $error; ?></h4>
-                                                        <br>
-                                                        <a href="#">Forgotten Password</a></div>
-                                                      <input type="submit" name="submit" value="Login" class="btn btn-primary">
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                                    
 
 
         </div>

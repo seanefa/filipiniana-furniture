@@ -162,7 +162,7 @@ var logcheck = $('#logcheck').val();
 if(logcheck != 'yes'){
   alert('You must log in First!');
   $('#checkoutBtn').prop('class','btn btn-primary');
-  location.href = "login.php";
+  location.href = "login.php"; 
 }else{
 
   $('#checkoutBtn').prop('class','btn btn-primary my-cart-checkout');

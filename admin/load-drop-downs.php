@@ -8,7 +8,7 @@ if($type==1){
   $ctr = 0;
   $sql = "SELECT * FROM tblfurn_type WHERE typeCategoryID = '$id' ORDER BY typeName ASC";
   $res = mysqli_query($conn,$sql);
-      echo('<option value="">Select A Type</option>');
+      echo('<option value="" disabled>Select A Type</option>');
   while($row = mysqli_fetch_assoc($res)){
     if($row['typeStatus']=='Listed'){
       echo('<option value='.$row['typeID'].'>'.$row['typeName'].'</option>');
@@ -16,7 +16,7 @@ if($type==1){
     $ctr++;
   }
   if($ctr==0){
-      echo('<option value="0">Nothing to show</option>');
+      echo('<option value="0" disabled>Nothing to show</option>');
   }
 }
 else if($type==2){
@@ -31,7 +31,7 @@ else if($type==2){
     $ctr++;
   }
   if($ctr==0){
-      echo('<option value="0">Nothing to show</option>');
+      echo('<option value="0" disabled>Nothing to show</option>');
   }
 }
 else if($type==3){
@@ -47,7 +47,7 @@ else if($type==3){
   }
 }
 if($ctr==0){    
-  echo('<option value=0>Nothing to show.</option>');
+  echo('<option value=0 disabled>Nothing to show.</option>');
 }
 }
 else if($type==4){

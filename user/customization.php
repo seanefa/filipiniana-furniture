@@ -8,6 +8,7 @@
   <title>Customization - Filipiniana Furniture Shop</title>
   <meta name="description" content="Furniture shop">
   <script type="text/javascript" src="js/myScript.js"></script>
+  <script type="text/javascript" src="js/dropzone.js"></script>
   <?php include"css.php";?>
 </head>
 <?php 
@@ -50,13 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       if($result->num_rows>0){
         while($row=$result->fetch_assoc()){
       ?>
-                <form enctype="multipart/form-data" action="send-customized-product.php" autocomplete="off" class="form-horizontal" method="post">
+
             <fieldset>
+              <div class="form-group">
               <legend>Customization&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
+              <form enctype="multipart/form-data" action="send-customized-product.php" autocomplete="off" class="btn btn-primary dropzone">
+                  
+          </form>
+          <form  id="my-awesome-dropzone"></form>
+        </div>
               <div class="form-group required">
         <label for="input-block" class="col-sm-3 control-label">Add Blueprint</label>
         <div class="col-sm-8">
-          <input type="file" name="blueprint" class="form-control" required/>
         </div>
         </div>
         <div class="form-group required">
@@ -68,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </fieldset>
               <div style="text-align: center;">
                 <a href="account.php" class="btn btn-info">CANCEL</a>
-                <input type="submit" class="btn btn-primary" value="SAVE" name="register" id="">
+                <input type="submit" class="btn btn-success" value="SAVE" name="register" id="">
               </div>
-          </form>
       <?php
         }
       }

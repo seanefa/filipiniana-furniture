@@ -1,0 +1,22 @@
+{
+  "name": "jquery-timeliner",
+  "version": "1.0.0",
+  "description": "Vertical timeline UI based on jQuery and supporting multiple templates",
+  "main": "dist/jquery-timeliner.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furqanaziz/jquery-timeliner.git"
+  },
+  "keywords": [
+    "timeline"
+  ],
+  "author": "Furqan Aziz <furqan.dvlcloud@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/furqanaziz/jquery-timeliner/issues"
+  },
+  "homepage": "https://github.com/furqanaziz/jquery-timeliner#readme"
+}

@@ -44,7 +44,7 @@ $ordertype = "Pre-Order";
 $selected = $_POST['cart'];
 $selectedQuant = $_POST['quant'];
 $selectedPrice = $_POST['prices'];
-$totalPrice = $_POST['totalPrice'];
+$totalPrice = $_POST['tPrice'];
 $employee = 1;
 
 //PACKAGE VARIABLES
@@ -56,13 +56,14 @@ $P_selectedPrice = $_POST['P_prices'];
 $_SESSION['P_cart'] = $P_selected;
 $_SESSION['P_quant'] = $P_selectedQuant;
 $_SESSION['P_price'] = $P_selectedPrice;
+//$totalPrice = $_SESSION['total_price'];
 //
 
 
 $_SESSION['cart'] = $selected;
 $_SESSION['quant'] = $selectedQuant;
 $_SESSION['price'] = $selectedPrice;
-$_SESSION['totalPrice'] = $totalPrice;
+//$_SESSION['totalPrice'] = $totalPrice;
 $sample = 'Pending';
 
 $mop = 1;

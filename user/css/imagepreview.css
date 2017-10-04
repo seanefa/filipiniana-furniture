@@ -1,0 +1,122 @@
+#mainform{
+width:960px;
+margin:30px auto;
+padding-top:20px;
+font-family:'Droid Sans',sans-serif
+}
+#mainform h2{
+margin-left:95px
+}
+#innerdiv{
+float:left;
+width:60%;
+height:575px;
+padding:10px 30px 30px
+}
+#formdiv{
+background-color:#fff;
+color:#123456;
+box-shadow:0 1px 1px 1px gray;
+width:480px;
+margin:50px 0 0;
+height:300px
+}
+h3{
+margin-top:0;
+color:#fff;
+background-color:#1CC32B;
+text-align:center;
+width:100%;
+height:50px;
+padding-top:30px
+}
+input[type=submit]{
+background-color:#1CC32B;
+border:1px solid #fff;
+font-weight:700;
+font-size:18px;
+color:#fff;
+width:150px;
+height:30px;
+border-radius:3px;
+padding:2px;
+box-shadow:0 1px 1px 0 #a9a9a9;
+margin-left:20px
+}
+#form{
+width:43%;
+float:left
+}
+#preview{
+height:180px;
+width:180px;
+text-align:center;
+margin:20px;
+display:none
+}
+.pre{
+margin-right:20px;
+font-size:13px
+}
+#previewimg{
+height:140px;
+width:140px;
+float:left;
+padding:8px;
+border:1px solid #e4d3c3;
+margin-bottom:5px
+}
+#file{
+opacity:0;
+width:115px;
+height:115px
+}
+#upload{
+width:115px;
+height:115px;
+background-image:url(abc.png);
+background-repeat:no-repeat;
+margin-left:35px;
+box-shadow:0 0 10px grey;
+background-position:5px
+}
+#message{
+width:100%;
+font-size:14px;
+color:#123456;
+margin-top:-90px;
+float:left;
+margin:15px
+}
+#message span{
+color:red;
+font-size:15px
+}
+#detail{
+line-height:20px;
+float:left;
+width:270px;
+font-size:14px
+}
+ul{
+margin-left:-25px
+}
+#textmessage{
+float:right;
+width:50%;
+margin:15px 85px 0 0
+}
+div#img{
+width:200px;
+height:200px
+}
+#imageupload{
+width:150px;
+height:150px
+}
+#deleteimg{
+cursor:pointer;
+float:right;
+margin-top:-175px;
+margin-right:10px
+}

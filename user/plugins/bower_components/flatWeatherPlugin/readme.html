@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flat Weather Plugin Examples</title>
+
+		<!-- include weather css and make sure the font folder is one folder above your css -->
+		<link href="css/flatWeatherPlugin.css" rel="stylesheet">
+		<!-- include jquery -->
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<!-- include flatWeatherPlugin -->
+		<script src="js/jquery.flatWeatherPlugin.js"></script>
+		
+		<script>	
+		$(document).ready(function() {
+
+
+			//partial view, 2 days of forcast only
+			var example = $("#example").flatWeatherPlugin({
+			  location: "Boston, MA", //city and region *required 
+			  country: "USA",         //country *required 
+			  //optional:
+			  api: "openweathermap", //default: openweathermap (openweathermap or yahoo)
+			  //apikey: "your-api-key",   //optional api key for openweather
+			  view : "partial", //default: full (partial, full, simple, today or forecast)
+			  displayCityNameOnly : true, //default: false (true/false) if you want to display only city name
+			  forecast: 4, //default: 5 (0 -5) how many days you want forecast
+			  render: true, //default: true (true/false) if you want plugin to generate markup
+			  loadingAnimation: true //default: true (true/false) if you want plugin to show loading animation
+			  //units : "metric" or "imperial" default: "auto"
+			});
+
+
+
+			//ex.1 default options. full view, openweathermap weather
+			var example1 = $("#example-1").flatWeatherPlugin({
+				location: "Waterloo, ON",
+				country: "Canada",
+			});
+
+
+
+			//ex.2 simple view, city name only, yahoo weather
+			var example2 = $("#example-2").flatWeatherPlugin({
+				location: "Toronto, ON",
+				country: "Canada",
+				api: "yahoo",
+				view : "simple"
+			});
+
+
+
+			//ex.3 today only detailed view
+			var example3 = $("#example-3").flatWeatherPlugin({
+				location: "San Francisco, CA",
+				country: "USA",
+				api: "yahoo",
+				view : "today",
+				displayCityNameOnly : true,
+
+			});
+			
+
+
+			//ex.4 forecast only view, no loading animation from yahoo weather
+			var example4 = $("#example-4").flatWeatherPlugin({
+				location: "New York, NY",
+				country: "USA",
+				api: "yahoo",
+				view : "forecast",
+				loadingAnimation : false,
+				units : "metric"
+			});
+
+
+
+			//ex.5 Auto Refresh example
+			var example5 = $("#example-5").flatWeatherPlugin({
+				//first intilize the plugin per normal
+				location: "Malmo",
+				country: "Sweden",
+				view : "simple",
+			});
+
+			//then setup an interval to make repeat calls to fetchWeather 
+			var intervalID = window.setInterval(function() {
+				example5.flatWeatherPlugin('fetchWeather').then(success, fail);				
+			}, 2*60*1000); //call every two minutes
+
+			//then handle the success and fail states of the fetchWeather promise
+			function success(data) {
+				example5.flatWeatherPlugin('render', data);
+			} 
+
+			function fail(data) {
+				example5.flatWeatherPlugin('error', data);
+			} 
+
+
+
+			//ex.6 for custom output call with render: false
+			var custom_example = $("#example-6").flatWeatherPlugin({
+				location: "London",
+				country: "UK",
+				api: "openweathermap",
+				render : false //the plugin will not generate any markup
+			});
+
+			//then manually call 'fetchWeather' which returns a jquery promise when complete
+			//which contains the weather data in the format listed below
+			custom_example.flatWeatherPlugin('fetchWeather').then(function(data){
+				//you can then do whatever you want with the data, such as display just a portion
+				$("<h2/>", {"class" : "wi wi"+data.today.code}).text(" " + data.city).appendTo(custom_example);
+				$("<p/>").html(data.today.temp.now + "&#176;C, " + data.today.desc ).appendTo(custom_example);
+			});
+
+
+		});
+		</script>
+
+		<style>
+		
+			#example {
+				width: 360px;
+				background: #e74c3c;
+				padding: 10px;
+				margin: 0 20px 20px 0;
+			}
+
+
+			#example-1 {
+				width: 350px;
+				background: #1abc9c;
+			}
+
+			#example-2 {
+				width: 240px;
+				background: #9b59b6;
+				font-size: 13px;
+			}
+
+			#example-3 {
+				width: 300px;
+				background: #2ecc71;
+			}
+
+			#example-4 {
+				width: 330px;
+				background: #34495e;
+			}
+
+			#example-5 {
+				width: 240px;
+				background: #e74c3c;
+			}
+
+			#example-6 {
+				width: 250px;
+				background: #f1c40f;
+			}
+
+			/* styling for this page only, ignore */
+
+			body { font-family: sans-serif; background: #ecf0f1; color:#fff; padding: 0; margin: 0;}
+			.docs {background: #95a5a6; }
+			.docs .wrap {width: 100%; max-width: 940px; margin: 0 auto; padding: 20px 0 40px 0; }
+			.docs h1 {padding: 0; margin: 0; font-size: 24px; padding:10px 0 20px; color: #EEE; text-align: center; }
+			.docs span:before {display: block; font-size: 128px; padding: 30px 0 0 0; text-align: center; color: #FFF;
+				  text-shadow: 4px 4px 0 #95a5a6, 8px 8px 0 #7f8c8d;
+			}
+			.docs a:link {color: #2980b9;}
+			.docs a:visited {color: #8e44ad;}
+			.docs a:hover {color: #3498db;}
+			.docs p {padding: 10px 0; margin: 0; width: 540px; font-size: 16px; line-height: 1.3; color: #444; float: right;}
+			.docs small, .docs ol {width: 540px; float: right; font-size: 14px; color: #555; padding: 2px 0;}
+			.docs ol {width: 520px; margin: 0;}
+			.docs ol li {padding: 0  0 2px 0;}
+			#examples {	width: 100%; max-width: 960px; margin: 0 auto; padding: 10px 0; }
+
+			.sample {width: 100%; overflow: hidden; } 
+			#examples .sample {border-bottom: 1px solid #dce0e1; padding: 0 0 30px 0; margin: 30px 0 0 0;}
+			.sample > div {float: left; margin: 0 10px; padding: 10px; border-radius: 1px; }
+			.sample pre {float: right; width: 560px; margin: 0;}
+			code.hljs {padding: 0 20px; border-radius: 1px;}
+
+			footer {text-align: center; color: #AAA; padding-bottom: 10px;}
+			footer a {color: #666;}
+			footer a:hover {color: #3498db;}
+
+
+		</style>
+
+		<script src="src/highlight.pack.js"></script>
+		<link href="src/github.css" rel="stylesheet">
+		<script>hljs.initHighlightingOnLoad();</script>
+
+	</head>
+	<body>
+
+<div class="docs">
+	<div class="wrap">
+		<span class="wi wi801"></span>
+		<h1>Flat Weather jQuery Plugin </h1>
+
+		<div class="sample">
+			<div id="example"></div>
+			<p><strong>Flat Weather</strong> is an easy to use jQuery plugin that supports switching between two different weather API sources (<a href="http://openweathermap.org/">OpenWeatherMap.org</a> or <a href="https://developer.yahoo.com/weather/">Yahoo</a>)<sup>1</sup> without changing any of your front-end code. </p>
+
+			<p> The code is well-documented and small, with its only external dependency being jQuery, which makes it easy to deploy and extend. The plugin comes with an attractive flat UI css stylesheet, and uses the <a href="http://erikflowers.github.io/weather-icons/">weather icons</a><sup>2</sup> font to provide attractive and scalable visuals. As you can see from the examples below, there are plenty of display options that will let you customize the widget for your particular application without forcing you read the source. Responsive css keeps it looking good across desktop and mobile.</p>
+
+			<p>Don't like any of the default styles? Build your own markup with our uniform data API, which bridges the gap between the Yahoo and OpenWeather APIs and presents a simple and consistent JSON object to interact with. See <a href="#example-6">example 6 below</a> for more details.</p>
+
+			<small>Notes:</small>
+			<ol>
+				<li>OpenWeatherMap has better location support, so we recommend using it by default.</li>
+				<li>Be sure to place the /fonts folder one level above the path to the flatWeatherPlugin.css file.</li>
+			</ol>
+
+		</div>
+<pre><code class="html">
+&lt;head&gt;
+  &lt;!-- include flatWeatherPlugin.css and copy the font folder to one folder above your /css folder --&gt;
+  &lt;link href=&quot;path/to/css/flatWeatherPlugin.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;!-- include a copy of jquery (if you haven't already) --&gt;
+  &lt;script src=&quot;path/to/js/jquery-2.1.1.min.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- include flatWeatherPlugin --&gt;
+  &lt;script src=&quot;path/to/js/jquery.flatWeatherPlugin.js&quot;&gt;&lt;/script&gt;  
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  $(document).ready(function() {
+
+	//Setup the plugin, see readme for more examples
+	var example = $("#example").flatWeatherPlugin({
+	  location: "Boston, MA", //city and region *required 
+	  country: "USA",         //country *required 
+	  //optional:
+	  api: "openweathermap", //default: openweathermap (openweathermap or yahoo)
+	  //apikey: "your-api-key",   //optional api key for openweather
+	  view : "partial", //default: full (partial, full, simple, today or forecast)
+	  displayCityNameOnly : true, //default: false (true/false) if you want to display only city name
+	  forecast: 4, //default: 5 (0 -5) how many days you want forecast
+	  render: true, //default: true (true/false) if you want plugin to generate markup
+	  loadingAnimation: true //default: true (true/false) if you want plugin to show loading animation
+	  //units : "metric" or "imperial" default: "auto"
+	});
+
+  });
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- have a target for where you want it shown --&gt;
+  &lt;div id=&quot;example&quot;&gt;&lt;/div&gt;
+
+&lt;/body&gt;
+
+</code></pre>
+
+
+	</div>
+</div>
+
+
+<div id="examples">
+
+<div class="sample">
+<div id="example-1"></div>
+<pre><code class="javascript">
+//ex. all default options. full view, openweathermap weather
+var example1 = $("#example-1").flatWeatherPlugin({
+	location: "Waterloo, ON",
+	country: "Canada",
+});
+
+</code></pre>
+</div>
+
+<div class="sample">
+<div id="example-2"></div>
+<pre><code class="javascript">
+//ex. simple view, openweathermap weather
+var example2 = $("#example-2").flatWeatherPlugin({
+	location: "Toronto, ON",
+	country: "Canada",
+	api: "yahoo",
+	view : "simple"
+});
+
+</code></pre>
+</div>
+
+<div class="sample">
+<div id="example-3"></div>
+<pre><code class="javascript">
+//today only detailed view and display city name only, 
+var example3 = $("#example-3").flatWeatherPlugin({
+	location: "San Francisco, CA",
+	country: "USA",
+	api: "yahoo",
+	displayCityNameOnly : true,
+	view : "today",
+});
+			
+</code></pre>
+</div>
+
+<div class="sample">
+<div id="example-4"></div>
+<pre><code class="javascript">
+//forecast only view, no loading animation from yahoo weather
+//**force metric units**
+var example4 = $("#example-4").flatWeatherPlugin({
+	location: "New York, NY",
+	country: "USA",
+	api: "yahoo",
+	view : "forecast",
+	loadingAnimation : false,
+	units : "metric", //force metric units 
+});
+
+</code></pre>
+</div>
+
+
+<div class="sample">
+<div id="example-5"></div>
+<pre><code class="javascript">
+//ex. Auto Refresh example
+var example5 = $("#example-5").flatWeatherPlugin({
+  //first intilize the plugin per normal
+  location: "Malmo",
+  country: "Sweden",
+  view : "simple",
+});
+
+//then setup an interval to make repeat calls to fetchWeather 
+var intervalID = window.setInterval(function() {
+  example5.flatWeatherPlugin('fetchWeather').then(success, fail);
+}, 2*60*1000); //call every two minutes
+
+//then handle the success and fail states of the fetchWeather promise
+function success(data) {
+  example5.flatWeatherPlugin('render', data);
+} 
+
+function error(data) {
+  example5.flatWeatherPlugin('error', data);
+} 
+
+</code></pre>
+</div>
+
+
+
+<div class="sample">
+<div id="example-6"></div>
+<pre><code class="javascript">
+//for custom output call with render: false
+var custom_example = $("#example-6").flatWeatherPlugin({
+	location: "London",
+	country: "UK",
+	api: "openweathermap",
+	render : false //the plugin will not generate any markup
+});
+
+//then manually call 'fetchWeather' which returns a jquery promise
+//when complete, result contains the weather data
+custom_example.flatWeatherPlugin('fetchWeather')
+  .then(function(data){
+    console.log(data);
+    //you can then do whatever you want with the data
+    //such as generate your own custom markup
+    $("&lt;h2/&gt;", {"class" : "wi wi"+data.today.code})
+      .text(" " + data.city)
+      .appendTo(custom_example);
+    $("&lt;p/&gt;").html(data.today.temp.now + "&#176;C, " + data.today.desc )
+      .appendTo(custom_example);
+});
+
+/* //Data object from fetchWeather looks like this:
+{
+  location : String, //as returned back from api
+  today : {
+  	temp : {
+  		//temperatures are in units requested from api
+  		now : Number, ex. 18 
+  		min : Number, ex. 24
+  		max : Number ex. 12
+  	},
+  	desc : String, ex. "Partly Cloudy"
+  	code : Number, ex. "801" used by css font, see css.
+  	wind : {
+  		speed : 4, //either km/h or mph
+  		deg : Number, //direction in degrees from North
+  	},
+  	pressure : Number, //barometric pressure
+  	humidity : Number, //% humidity
+  	sunrise : Time,
+  	sunset : Time,
+  	day :  String,  
+
+  },
+  forecast : [
+  //array
+  	{
+  		Day: String, 
+  		code:Number, 
+  		desc: String, 
+  		temp : {min:number, max:number}
+  		}
+  	]
+}
+*/
+
+</code></pre>
+</div>
+
+
+</div>
+
+<footer>
+	<p>- Flat Weather Plugin -</p>
+	<p>open source <a href="https://github.com/erikflowers/weather-icons">weather icons</a> licensed under <a href="http://scripts.sil.org/OFL">SIL OFL 1.1</a></p>
+</footer>
+
+		
+	</body>
+</html>

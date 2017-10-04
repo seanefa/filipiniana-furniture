@@ -288,7 +288,7 @@ function inputValidate(id){
 
                     $('#dRate').val(0);
 
-                    var x = parseFloat($('#totalPrice').val());
+                    var x = parseFloat($('#tPrice').val());
                     $('#ttp').html('&#8369;'+parseFloat(x));
                     $('#paydRate').html('&#8369;'+0.00);
                   }
@@ -312,7 +312,7 @@ $('#rateDel').click(function(){
 
 
 $('#delloc').change(function(){
-  var x = parseFloat($('#totalPrice').val());
+  var x = parseFloat($('#tPrice').val());
   $('#dRate').val(parseFloat($('#delloc').val()));
   $('#paydRate').html('&#8369;'+parseFloat($('#delloc').val()));
   var d = parseFloat($('#delloc').val());
@@ -322,7 +322,7 @@ $('#delloc').change(function(){
 });
 
 $(document).ready(function(){
-  var x = parseFloat($('#totalPrice').html());
+  var x = parseFloat($('#tPrice').html());
   var y = parseFloat($('#dRate').html());
 
 });
@@ -577,7 +577,7 @@ $(document).ready(function(){
                                 $('#stt').html('&#8369;'+ttp)
                                 $('#ttp').html('&#8369;'+ttp);
                                 $('#ttq').html(''+ttq);
-                                $('#totalPrice').val(ttp);
+                                $('#tPrice').val(ttp);
 
 
                                 while(i != numItems){
@@ -803,7 +803,7 @@ $(document).ready(function(){
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Total:</strong></td>
                                 <td class="text-right" id="ttp"></td>
-                                <input id="totalPrice" name="totalPrice" type="hidden"/>
+                                <input id="tPrice" name="tPrice" type="hidden"/>
                               </tr>
                             </tfoot>
                           </table>

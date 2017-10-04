@@ -15,12 +15,7 @@ include('uservalidate.php');
 <div class="wrapper-wide">
 <?php 
 include"header.php";
-if(isset($_SESSION["userID"]))
-{
-  echo "<script>
-      window.location.href='home.php';
-      </script>";
-}
+
 ?>
   <div id="container">
     <div class="container">

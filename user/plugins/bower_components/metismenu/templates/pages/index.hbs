@@ -1,0 +1,269 @@
+---
+title: index
+layout: home
+---
+<div class="container">
+{{#markdown}}
+
+## Getting started
+### Install
+Install with [npm](https://www.npmjs.com/):
+
+```sh
+$ npm install --save metismenu
+```
+
+Install with [bower](https://bower.io/)
+
+```sh
+$ bower install metismenu --save
+```
+
+Install with [composer](https://getcomposer.org/)
+
+```sh
+$ composer require onokumus/metismenu:dev-master
+```
+
+### Download
+[download](https://github.com/onokumus/metisMenu/archive/master.zip)
+
+### TypeScript type definitions
+
+Install metismenu TypeScript definition file
+```bash
+$ npm install --save-dev @types/metismenu
+```
+
+## Usage
+
+1. Include metismenu StyleSheet
+
+  ```html
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css">
+  ```
+  OR
+
+  ```html
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.metismenu/2.7.0/metisMenu.min.css">
+  ```
+
+2. Include jQuery
+
+  ```html
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  ```
+  OR
+
+  ```html
+  <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js"></script>
+  ```
+
+3. Include metisMenu plugin's code
+
+  ```html
+  <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
+  ```
+  OR
+
+  ```html
+  <script src="//cdn.jsdelivr.net/jquery.metismenu/2.7.0/metisMenu.min.js"></script>
+  ```
+
+4. Add class `metismenu` to unordered list
+
+  ```html
+  <ul class="metismenu" id="menu">
+
+  </ul>
+  ```
+5. Make expand/collapse controls accessible
+
+  > Be sure to add `aria-expanded` to the element `a` and the following `ul`. This attribute explicitly defines the current state of the collapsible element to screen readers and similar assistive technologies. If the collapsible element is closed by default, it should have a value of `aria-expanded="false"`. If you've set the collapsible element's parent `li` element to be open by default using the `active` class, set `aria-expanded="true"` on the control instead. The plugin will automatically toggle this attribute based on whether or not the collapsible element has been opened or closed.
+
+  ```html
+  <ul class="metismenu" id="menu">
+    <li class="active">
+      <a href="#" aria-expanded="true">Menu 1</a>
+      <ul aria-expanded="true">
+      ...
+      </ul>
+    </li>
+    <li>
+      <a href="#" aria-expanded="false">Menu 2</a>
+      <ul aria-expanded="false">
+      ...
+      </ul>
+    </li>
+    ...
+    </ul>
+  ```
+6. Arrow Options
+
+  > add `has-arrow` class to `a` element
+
+  ```html
+  <ul class="metismenu" id="menu">
+  <li class="active">
+    <a class="has-arrow" href="#" aria-expanded="true">Menu 1</a>
+    <ul aria-expanded="true">
+    ...
+    </ul>
+  </li>
+  <li>
+    <a class="has-arrow" href="#" aria-expanded="false">Menu 2</a>
+    <ul aria-expanded="false">
+    ...
+    </ul>
+  </li>
+  ...
+  </ul>
+  ```
+
+7. Call the plugin:
+
+  ```javascript
+    $("#menu").metisMenu();
+  ```
+
+### Stopping list opening on certain elements
+Setting aria-disabled="true" in the `<a>` element as shown will stop metisMenu opening the menu for that particular list. This can be changed dynamically and will be obeyed correctly:
+
+```html
+<a href="#" aria-expanded="false" aria-disabled="true">List 1</a>
+```
+
+## Options
+
+#### toggle
+Type: `Boolean`
+Default: `true`
+
+For auto collapse support.
+
+```javascript
+ $("#menu").metisMenu({
+   toggle: false
+ });
+```
+
+#### dispose
+Type: `String`
+Default: `null`
+
+For stop and destroy metisMenu.
+
+```javascript
+ $("#menu").metisMenu('dispose');
+```
+
+#### activeClass
+Type: `String`
+Default: `active`
+
+```javascript
+ $("#menu").metisMenu({
+   activeClass: 'active'
+ });
+```
+
+#### collapseClass
+Type: `String`
+Default: `collapse`
+
+```javascript
+ $("#menu").metisMenu({
+   collapseClass: 'collapse'
+ });
+```
+
+#### collapseInClass
+Type: `String`
+Default: `in`
+
+```javascript
+ $("#menu").metisMenu({
+   collapseInClass: 'in'
+ });
+```
+
+#### collapsingClass
+Type: `String`
+Default: `collapsing`
+
+```javascript
+ $("#menu").metisMenu({
+   collapsingClass: 'collapsing'
+ });
+```
+
+#### preventDefault
+Type: `Boolean`
+Default: `true`
+
+>Prevents or allows dropdowns' onclick events after expanding/collapsing.
+
+  ```javascript
+   $("#menu").metisMenu({
+     preventDefault: false
+   });
+  ```
+
+*since from version 2.7.0*
+
+#### triggerElement
+Type: `jQuery selector`
+Default: `a`
+
+```javascript
+ $("#menu").metisMenu({
+   triggerElement: '.nav-link' // bootstrap 4
+ });
+```
+
+#### parentTrigger
+Type: `jQuery selector`
+Default: `li`
+
+```javascript
+ $("#menu").metisMenu({
+   parentTrigger: '.nav-item' // bootstrap 4
+ });
+```
+
+#### subMenu
+Type: `jQuery selector`
+Default: `ul`
+
+```javascript
+ $("#menu").metisMenu({
+   subMenu: '.nav.flex-column' // bootstrap 4
+ });
+```
+
+## Events
+
+|**Event Type**      |**Description**|
+|--------------|--------------|
+|show.metisMenu    |This event fires immediately when the `_show` instance method is called.|
+|shown.metisMenu   |This event is fired when a collapse `ul` element has been made visible to the user (will wait for CSS transitions to complete).|
+|hide.metisMenu    |This event is fired immediately when the `_hide` method has been called. |
+|hidden.metisMenu  |This event is fired when a collapse `ul` element has been hidden from the user (will wait for CSS transitions to complete).|
+
+## Testing
+```sh
+$ npm install
+$ grunt serve
+```
+
+
+
+{{/markdown}}
+
+
+</div>
+<script>
+  $(function () {
+    $('table').addClass('table table-bordered table-striped');
+  });
+</script>
