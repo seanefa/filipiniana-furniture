@@ -47,6 +47,14 @@ $(document).ready(function(){
     });
    });
  });
+
+ function deleteRow(row){
+    var result = confirm("Remove Material?");
+    if(result){
+      var i=row.parentNode.parentNode.rowIndex;
+      document.getElementById('selectedMaterials').deleteRow(i);
+    }
+  }
   </script>
 </head>
 <body class ="fix-header fix-sidebar">

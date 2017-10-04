@@ -11,11 +11,24 @@ if($type==0){
 	$dateStart = date_format($dateStart,"Y-m-d");
 	$handler = $_POST['handler'];
 	$remarks = $_POST['remarks'];
+	$desc = $_POST['matvarid'];
+	$quan = $_POST['matquan'];
 
 	$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks',prodStatus= 
 	'Ongoing' WHERE prodHistID = '$phaseID'";
 
 	if(mysqli_query($conn,$sql)){
+		for($x=0;$x<$ctr;$x++){
+		$sql1 = "INSERT INTO `tblprodphase_materials` (`pphID`, `pph_matDescID`, `pph_matQuan`, `pph_matStatus`) VALUES ('$phaseID','".$desc[$x]."','".$quan[$x]."','Active')";
+		echo $sql1 . "<br>";
+		if(mysqli_query($conn,$sql1)){
+			$flag++;
+		}
+		else{
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		}
+	}
 		echo $sql . "<br>";
 		echo "<script>
 		window.location.href='production-tracking-details.php?id=".$orderID."';

@@ -49,7 +49,7 @@ if(mysqli_query($conn,$sql)){
 	}
 
 	for($x=0;$x<$ctr;$x++){
-		$sql1 = "INSERT INTO `filfurnituredb`.`tblprod_materials` (`p_prodInfoID`, `p_matDescID`, `p_matQuantity`, `p_matStatus`) VALUES ('$prodInfoID','".$desc[$x]."','".$quan[$x]."','Active')";
+		$sql1 = "INSERT INTO `tblprod_materials` (`p_prodInfoID`, `p_matDescID`, `p_matQuantity`, `p_matStatus`) VALUES ('$prodInfoID','".$desc[$x]."','".$quan[$x]."','Active')";
 		echo $sql1 . "<br>";
 		if(mysqli_query($conn,$sql1)){
 			$flag++;
