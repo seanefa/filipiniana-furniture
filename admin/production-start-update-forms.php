@@ -65,6 +65,8 @@ function deleteRow(row){
           $res = mysqli_query($conn,$sql);
           $row = mysqli_fetch_assoc($res);
           $prodDesign = $row['prodDesign'];
+          $prodID = $row['productID'];
+          $prodName = $row['productName'];
           ?>
           <div class="modal-body">
             <div class="descriptions">
@@ -80,6 +82,7 @@ function deleteRow(row){
                       <div role="tabpanel" class="tab-pane fade active in" id="job">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
                           <div class="panel-body">
+                            <h4><b>Materials for <?php echo $prodName?></b></h4>
                             <div class="row">
                               <div class="table-responsive">
                                 <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="selectedMaterials">
@@ -92,7 +95,9 @@ function deleteRow(row){
                                     </thead>
                                     <tbody  id="tblMat" style="text-align: left;">
                                       <?php
-                                      $sql = "SELECT * FROM tblprod_info a, tblprod_materials b,tblmaterials c, tblmat_var d,tblmat_type e WHERE a.prodInfoID = b.p_prodInfoID and a.prodInfoPhase = '$phase' and b.p_matStatus != 'Archived' and b.p_matDescID = d.mat_varID and d.materialID = c.materialID and e.matTypeID = c.materialType";
+                                      //$sql = "SELECT * FROM tblprod_info a, tblprod_materials b,tblmaterials c, tblmat_var d,tblmat_type e,tblproduct f WHERE a.prodInfoID = b.p_prodInfoID and a.prodInfoPhase = '$phase' and b.p_matStatus != 'Archived' and b.p_matDescID = d.mat_varID and d.materialID = c.materialID and e.matTypeID = c.materialType and f.productID = a.prodInfoProduct and a.prodInfoProduct = '$prodID'";
+                                      $sql = "SELECT * FROM tblprod_info a, tblprod_materials b,tblmaterials c, tblmat_var d,tblmat_type e,tblproduct f WHERE a.prodInfoID = b.p_prodInfoID and a.prodInfoPhase = '$phase' and b.p_matStatus != 'Archived' and b.p_matDescID = d.mat_varID and d.materialID = c.materialID and e.matTypeID = c.materialType and f.productID = a.prodInfoProduct and a.prodInfoProduct = '$prodID';";
+                                      $ctr = 0;
                                       $res = mysqli_query($conn,$sql);
                                       while($row = mysqli_fetch_assoc($res)){
                                         if($row['p_matStatus']!="Archived"){
@@ -111,9 +116,13 @@ function deleteRow(row){
                                           <input type='text' class='col-lg-4' maxlength='5' size='5' id='matquan' style='text-align:right;' name='matquan[]' value='". $row['p_matQuantity'] ."'/>
                                           </td>";
                                           echo '<td><input id="removeBtn" type="button" onclick="deleteRow(this)" class="btn btn-danger" value="X"/></td></tr>';
-
+                                          $ctr++;
                               //<input type='hidden' class='form-control' name='quan[]' value='". $row['p_matQuantity']  ."'/>
-                                        }}
+                                        }
+                                      }
+                                      if($ctr==0){
+                                        echo "<tr><td colspan='4' style='text-align:center'>No available data yet.</td></tr>";
+                                      }
 
                                         function desc($iid){
                                           include "dbconnect.php";
@@ -136,7 +145,7 @@ function deleteRow(row){
                                         </div>
                                         </div>
                                         </div>
-
+                                        <hr>
                                         <div class="row">
                                         <div class="col-md-12">
                                         <label class="control-label">Date Started: </label>
