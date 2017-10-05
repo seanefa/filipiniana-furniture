@@ -47,10 +47,15 @@ if (!$conn) {
                             while ($row = mysqli_fetch_assoc($result))
                             {
                               if($row['empStatus']=='Active')
-							                {
-                                echo('<option value=' . $row['empID'] . '>' . $row['empLastName'] . ', ' . $row['empFirstName'] . ' ' . $row['empMidName'] . '</option>');
+							  {
+							?>
+							  <option value="<?php echo "" . $row["empID"];?>">
+								  <?php echo "" . $row["empLastName"] . ", " . $row["empFirstName"] . " " . $row["empMidName"];?>
+							  </option>
+							<?php
                               }
                             }
+							$conn->close();
                             ?>
                           </select>
                         </div>

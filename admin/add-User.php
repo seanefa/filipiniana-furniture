@@ -19,8 +19,8 @@ if($password==$confirm)
 	{
 		$_SESSION["userID"] = $row["userID"];
 		$_SESSION['createSuccess'] = 'Success';
-		//header( 'Location: ' . $_SERVER['HTTP_REFERER'] . ''); 
-		header("Location: users.php");
+		header( 'Location: ' . $_SERVER['HTTP_REFERER'] . ''); 
+		//header("Location: users.php");
 	}
 	else 
 	{
