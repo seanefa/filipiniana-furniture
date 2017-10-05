@@ -103,7 +103,6 @@ include 'dbconnect.php';
 
   $('#location').change(function(){
     var value = $("#location").val();
-    alert(value);
     $("#delRate").val(value);
   });
 
@@ -191,7 +190,7 @@ $(document).ready(function(){
                       <div class="row" style="margin-top: -30px;">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <h2 style="font-family: inherit; font-weight: bolder;">Select an Order:</h2>
+                            <h2 style="font-family: inherit; font-weight: bolder;">Search an Order:</h2>
                             <select class="form-control" tabindex="1" name="order" id="order" style="text-align:right">
                               <option value=""></option>
                               <?php

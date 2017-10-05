@@ -76,16 +76,32 @@ unset($_SESSION['actionFailed']);
 
   $(document).ready(function(){
     $('#myModal1').on('shown.bs.modal',function(){
+      var value = $("#reason").val();
+        if(value==1){
+          $("#tblorders").show();
+          $("#warning").hide();
+        }
+        else if(value==2){
+          $("#tblorders").hide();
+          $("#warning").show();
+        }
+        else{
+          $("#tblorders").hide();
+          $("#warning").hide();
+        }
       $('#reason').change(function() {
         var value = $("#reason").val();
         if(value==1){
           $("#tblorders").show();
+          $("#warning").hide();
         }
         else if(value==2){
           $("#tblorders").hide();
+          $("#warning").show();
         }
         else{
           $("#tblorders").hide();
+          $("#warning").hide();
         }
       });
 

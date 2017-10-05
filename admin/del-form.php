@@ -39,8 +39,13 @@ $jsID = $_GET['id'];
                 $add = $row['deliveryAddress'];
                 $rem = $row['deliveryRemarks'];
                 $emp = $row['deliveryEmpAssigned'];
+                $status = $row['deliveryStatus'];
+
+                $date = new DateTime();
+                $date = date_format($date, "Y-m-d");
                 ?>
 
+                <input type="hidden" id="stat" value="<?php echo $status?>">
                 <div class="row" id="ch">
                   <div class="col-md-12">
                     <h4><input type="checkbox" name="finPhase" id="finPhase" value="finish"/>
@@ -50,6 +55,31 @@ $jsID = $_GET['id'];
                 </div>
                 <br>
                 <div id="updateDel">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label class="control-label">Date </label><span id="x" style="color:red"> *</span>
+                      <input type="date" id="dateCh" name="dateCh" class="form-control" value="<?php echo $date;?>"/> 
+                    </div> 
+                    </div> 
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Delivery Status</label><span id="x" style="color:red"> *</span>
+                        <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="status">
+                          <?php
+                          include "dbconnect.php";
+                          $sql = "SELECT * FROM tbldelivery_status";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            echo('<option value='.$row['statusName'].'>'.$row['statusName'].'</option>');
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -58,6 +88,25 @@ $jsID = $_GET['id'];
                       </div>
                     </div>
                   </div>
+
+                  <!-- <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Delivery Status</label><span id="x" style="color:red"> *</span>
+                        <select class="form-control" data-placeholder="Choose a Fabric" tabindex="1" name="status">
+                          <?php
+                          include "dbconnect.php";
+                          $sql = "SELECT * FROM tbldelivery_status";
+                          $result = mysqli_query($conn, $sql);
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            echo('<option value='.$row['statusName'].'>'.$row['statusName'].'</option>');
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div> -->
 
                   <div class="row">
                     <div class="col-md-12">
@@ -113,7 +162,7 @@ $jsID = $_GET['id'];
                   <div class="row">
                     <div class="col-md-12">
                       <label class="control-label">Date Delivered: </label><span id="x" style="color:red"> *</span>
-                      <input type="date" id="dateFinish" name="dateFinish" class="form-control"/> 
+                      <input type="date" id="dateFinish" name="dateFinish" class="form-control" value="<?php echo $date;?>"/> 
 
                     </div> 
                   </div>
@@ -150,40 +199,47 @@ $jsID = $_GET['id'];
       <div class="modal-content" id="view">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">Delivery History: <?php echo $jsID. $oID . $pr;?></h3>
+          <h3 class="modal-title" id="modalProduct">Delivery History</h3>
         </div> 
         <div class="modal-body">
           <div class="row">
-            <h3>Product Name:<?php echo $pr;?></h3>
           </div>
           <div class="row">
             <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table">
                 <thead>
                   <tr>
-                    <th style="text-align: center;">Order ID</th>
-                    <th style="text-align: center;">Cutomer Name</th>
-                    <th style="text-align: center;">Furniture Name</th>
                     <th style="text-align: center;">Date</th>
-                    <th style="text-align: center;">Status</th>
+                    <th style="text-align: center;">Employee</th>
                     <th style="text-align: center;">Remarks</th>
+                    <th style="text-align: center;">Status</th>
                   </tr>
                 </thead>
                 <tbody style="text-align: center;">
                   <tr>
                     <?php
                     include "dbconnect.php";
-                    $sql = "SELECT * FROM tbldelivery a inner join tblorder_request b on b.order_requestID = a.deliveryOrdReq inner join tblorders c on c.orderID = b.tblOrdersID inner join tblproduct d on d.productID = b.orderProductID  inner join tblcustomer e on e.customerID = c.custOrderID";
+                    $ctr = 0;
+                    //$sql = "SELECT * FROM tbldelivery a inner join tblorder_request b on b.order_requestID = a.deliveryOrdReq inner join tblorders c on c.orderID = b.tblOrdersID inner join tblproduct d on d.productID = b.orderProductID  inner join tblcustomer e on e.customerID = c.custOrderID";
+                    $sql = "SELECT * FROM tbldelivery_history a, tbldelivery b, tblemployee c WHERE a.delHist_recID = b.deliveryID and b.deliveryID = '$jsID' and a.delHistDeliveryMan = c.empID";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result))
                     {
-                      echo('<td>'. $row['orderID'] .'</td>
-                        <td>'.$row['customerLastName'].', '.$row['customerFirstName'].'</td>
-                        <td>'.$row['productName'].'</td>
-                        <td>'.$row['dateOfRelease'].'</td>
-                        <td>'.$row['deliveryStatus'].'</td>
-                        <td>'.$row['deliveryRemarks'].'</td></tr>
+
+                      $date = date_create($row['delHistDate']);
+                      $date = date_format($date,"F d, Y");
+
+                      echo('
+                        <tr><td>'. $date .'</td>
+                        <td>'.$row['empFirstName'].' '.$row['empLastName'].'</td>
+                        <td>'.$row['delHistRemarks'].'</td>
+                        <td>'.$row['delHistStatus'].'</td>
+                        </tr>
                         ');
+                      $ctr++;
+                    }
+                    if($ctr==0){
+                      echo('<tr><td colspan="4">No available data</td></tr>');
 
                     }
                     ?>
@@ -193,7 +249,6 @@ $jsID = $_GET['id'];
             </div>
           </div>
           <div class="modal-footer">
-            <a href="delete-modeofpayment.php?id=<?php echo $jsID;?>" type="button" role="button" class="btn btn-danger waves-effect text-left">Confirm</a>
             <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -225,8 +280,8 @@ $jsID = $_GET['id'];
 
                   <div class="row">
                     <div class="col-md-12">
-                      <h4 style="text-align:center"> You can no longer edit the delivery information once you issue a delivery receipt and the delivery will proceed with the information available.</h4>
-                      <h4 style="text-align:center"> Do you wish to continue?</h4>
+                      <h4 style="text-align:center"> Issueing a delivery receipt is done on the actual deivery day therefore the system will take today's date as the delivery date and the status for this delivery record will be 'Start Delivery'.</h4>
+                      <h4 style="text-align:center"> Continue?</h4>
                     </div>
                   </div>
                 </div>

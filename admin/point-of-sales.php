@@ -763,7 +763,7 @@ function inputValidate(id){
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group"><h4><b>For:</b> 
-                        <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
+                        <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up" checked/> Pick-up</label>
                         <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label></h4>
                       </div>
                     </div>

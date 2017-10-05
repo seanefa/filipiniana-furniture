@@ -69,8 +69,13 @@ if (mysqli_query($conn, $pssql)) {
     echo $paysql . "<br>";
     mysqli_query($conn,$paysql);
     $receiptID = mysqli_insert_id($conn);
-    header( "Location: receipt.php?id=".$receiptID);
-
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+  echo "<script>
+      window.location.href='point-of-sales.php';
+      alert('Record Saved.');
+      </script>";
   }
   else if($mop==2){
     $number = $_POST['cNumber'];
@@ -84,7 +89,14 @@ if (mysqli_query($conn, $pssql)) {
     echo $ch . "<br>";
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     mysqli_query($conn,$ch);
-    header( "Location: receipt.php?id=".$pdID);
+    // header( "Location: receipt.php?id=".$pdID);
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+  echo "<script>
+      window.location.href='point-of-sales.php';
+      alert('Record Saved.');
+      </script>";
   }
 }
 else{

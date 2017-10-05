@@ -1,4 +1,5 @@
 <?php
+include "titleHeader.php";
 $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
 //session_start();
@@ -115,7 +116,7 @@ include 'dbconnect.php';
                             </div>
                           </div> -->
                           <div class="form-group">
-                            <h2 style="font-family: inherit; font-weight: bolder;">Select an Order:</h2>
+                            <h2 style="font-family: inherit; font-weight: bolder;">Search an Order:</h2>
                             <select class="form-control" tabindex="1" name="order" id="order" style="text-align:right">
                               <option value=""></option>
                               <?php

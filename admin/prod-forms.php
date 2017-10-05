@@ -130,14 +130,14 @@ include "dbconnect.php";
                       <label class="control-label">Framework</label><span id="x" style="color:red"> *</span>
                       <select class="form-control" data-placeholder="Choose a Framework" tabindex="1" name="_framework" id="framework">
                         <?php
-                        $sql = "SELECT * FROM tblframeworks order by frameworkName;";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-                          if($row['frameworkStatus']=='Listed'){
-                            echo('<option value='.$row['frameworkID'].'>'.$row['frameworkName'].'</option>');
-                          }
-                        }
+                        // $sql = "SELECT * FROM tblframeworks order by frameworkName;";
+                        // $result = mysqli_query($conn, $sql);
+                        // while ($row = mysqli_fetch_assoc($result))
+                        // {
+                        //   if($row['frameworkStatus']=='Listed'){
+                        //     echo('<option value='.$row['frameworkID'].'>'.$row['frameworkName'].'</option>');
+                        //   }
+                        // }
                         ?>
                       </select>
                     </div>

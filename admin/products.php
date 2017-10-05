@@ -581,6 +581,22 @@ $(document).ready(function(){
       }
       });
     });
+
+  $('#type').change(function() {
+    var value = $("#type").val();
+    var drop = 7;
+    $.ajax({
+      type: 'post',
+      url: 'load-drop-downs.php',
+      data: {
+        id: value, type : drop,
+      },
+      success: function (response) {
+       $( '#framework' ).html(response);
+      }
+      });
+    });
+
 });
 });
 

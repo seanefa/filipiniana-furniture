@@ -118,7 +118,15 @@ if($isBool == "new"){
     echo $paysql . "<br>";
     mysqli_query($conn,$paysql);
     $receiptID = mysqli_insert_id($conn);
-    header( "Location: receipt.php?id=".$receiptID);
+    //header( "Location: receipt.php?id=".$receiptID);
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='orders.php';
+      alert('Record Saved.');
+      </script>";
 
   }
   else if($mop==2){
@@ -132,7 +140,16 @@ if($isBool == "new"){
     $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
     echo $ch . "<br>";
     mysqli_query($conn,$ch);
-    header( "Location: receipt.php?id=".$pdID);
+    //header( "Location: receipt.php?id=".$pdID);
+
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$pdID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='orders.php';
+      alert('Record Saved.');
+      </script>";
   }
 }
 else {
@@ -187,7 +204,16 @@ else if($isBool=="existing"){ //EXISTING
     mysqli_query($conn,$paysql);
     $receiptID = mysqli_insert_id($conn);
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    header( "Location: receipt.php?id=".$receiptID);
+    //header( "Location: receipt.php?id=".$receiptID);
+
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='orders.php';
+      alert('Record Saved.');
+      </script>";
 
   }
   else if($mop==2){
@@ -202,7 +228,16 @@ else if($isBool=="existing"){ //EXISTING
     echo $ch . "<br>";
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     mysqli_query($conn,$ch);
-    header( "Location: receipt.php?id=".$pdID);
+    //header( "Location: receipt.php?id=".$pdID);
+
+    echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$pdID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='orders.php';
+      alert('Record Saved.');
+      </script>";
   }
 
 }

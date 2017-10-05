@@ -10,6 +10,15 @@ if(isset($_POST['finPhase'])){
 	$sql1 = "UPDATE `tbldelivery` SET `deliveryDate`='$delDate', `deliveryRemarks`='$rem', `deliveryStatus`='Delivered' WHERE `deliveryID`='$recID'";
 	if(mysqli_query($conn,$sql1)){
 		finishRelease($recID);
+
+		$sql = "SELECT * FROM tbldelivery WHERE deliveryID = '$recID'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		$emp = $row['deliveryEmpAssigned'];
+
+		$delHistSQL = "INSERT INTO `tbldelivery_history` (`delHist_recID`, `delHistDate`, `delHistDeliveryMan`, `delHistRemarks`, `delHistStatus`) VALUES ('$recID', '$delDate', '$emp', '$rem', 'Finish');";
+		mysqli_query($conn,$delHistSQL);
+
 		header("Location: releasing.php?actionSuccess");
 	}
 	else{
@@ -20,8 +29,14 @@ else{
 	$emp = $_POST['emp'];
 	$rem = $_POST['rem'];
 	$add = $_POST['delAdd'];
-	$sql1 = "UPDATE `tbldelivery` SET `deliveryEmpAssigned`='$emp', `deliveryAddress`='$add', `deliveryRemarks`='$rem', `deliveryStatus`='Pending' WHERE `deliveryID`='$recID'";
+	$status = $_POST['status'];
+	$date = $_POST['dateCh'];
+
+	$sql1 = "UPDATE `tbldelivery` SET `deliveryEmpAssigned`='$emp', `deliveryAddress`='$add', `deliveryRemarks`='$rem', `deliveryStatus`='$status' WHERE `deliveryID`='$recID'";
+
 	if(mysqli_query($conn,$sql1)){
+		$delHistSQL = "INSERT INTO `tbldelivery_history` (`delHist_recID`, `delHistDate`, `delHistDeliveryMan`, `delHistRemarks`, `delHistStatus`) VALUES ('$recID', '$date', '$emp', '$rem', '$status');";
+		mysqli_query($conn,$delHistSQL);
 		header("Location: releasing.php?actionSuccess");
 	}
 	else{

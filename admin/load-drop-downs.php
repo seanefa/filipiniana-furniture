@@ -128,6 +128,17 @@ echo "<option value=''>Choose a material variant</option>";
   }
 }
 }
+else if($type==7){
+echo "<option value=''>Select Framework</option>";
+ $sql = "SELECT * FROM tblframeworks WHERE frameworkFurnType = '$id' order by frameworkName;";
+ $result = mysqli_query($conn, $sql);
+ while ($row = mysqli_fetch_assoc($result))
+ {
+   if($row['frameworkStatus']=='Listed'){
+     echo('<option value='.$row['frameworkID'].'>'.$row['frameworkName'].'</option>');
+   }
+ }
+}
 
 function desc($iid){
   include "dbconnect.php";

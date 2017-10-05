@@ -55,10 +55,9 @@ $_SESSION['varname'] = $jsID;
                     </div>
                   </div>
                 </div>
-                <hr>
+                <div id="tblorders">
                 <div class="row">
                   <div class="col-md-12">
-                    <div id="tblorders">
                      <table class="table product-overview" id="ordertbl">
                       <thead>
                         <tr>
@@ -96,6 +95,9 @@ $_SESSION['varname'] = $jsID;
               </div>
             </div>
             <hr>
+            <div id="warning">
+              <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
+            </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">

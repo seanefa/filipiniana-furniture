@@ -1,12 +1,13 @@
-
 <?php
 set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
+$id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <head>
+  <title>INV<?php echo $orderID = str_pad($id, 6, '0', STR_PAD_LEFT)?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <?php 

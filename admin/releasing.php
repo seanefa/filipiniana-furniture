@@ -41,10 +41,10 @@ echo '</script>';
   });
    $('#myModal').on('shown.bs.modal',function(){
     var val = $("#stat").val();
-      if(val=="Start Delivery"){
-        $('#finishDel').show();
-        $('#updateDel').hide();
-        $('#finPhase').prop("checked",true);
+      if(val!="Start Delivery"){
+        $('#finishDel').hide();
+        $('#updateDel').show();
+        $('#finPhase').prop("checked",false);
         $('#ch').addClass("disabledbutton");
       }
   });
@@ -114,25 +114,28 @@ echo '</script>';
                                 echo '<td><div class="progress progress-lg" style="border-radius:20px;">
                                   <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
                                 </div></td>';
-                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Start Delivery'){
                                 echo '<td><div class="progress progress-lg" style="border-radius:20px;">
                                   <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
                                 </div></td>';
-                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
                               }
                               if($row['deliveryStatus']=='Cancelled'){
                                 echo '<td><div class="progress progress-lg" style="border-radius:20px;">
                                   <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
                                 </div></td>';
-                                echo '<input type="hidden" id="stat" value="'.$row['deliveryStatus'].'">';
+                              }
+                              if($row['deliveryStatus']=='On-Hold'){
+                                echo '<td><div class="progress progress-lg" style="border-radius:20px;">
+                                  <h3 class="progress-bar progress-bar-danger active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><p style="margin:6px;">'.$row['deliveryStatus'].'</p></h3>
+                                </div></td>';
                               }
                               ?>
                               <td>
                                 <!-- VIEW -->
                                 <!--<button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?oID=<?php echo $row['order_requestID']?>&amd;smth=<?php echo $row['productID'] ?>&amp;id=<?php echo $row['deliveryID']?> #update" data-target="#myModal">Update</button>-->
                                 <button type="button" class="btn btn-success" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #update" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #view" data-target="#myModal"><i class="fa fa-info-circle"></i> View History</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" href="del-form.php" data-remote="del-form.php?id=<?php echo $row['deliveryID']?> #delRec" data-target="#myModal"><i class="ti-receipt"></i> Delivery Receipt</button>
                               </td>
                               <?php echo ('</tr>');

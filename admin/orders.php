@@ -185,7 +185,7 @@ echo ('<tr>
 
   <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="ti-pencil-alt"></span> Update</a>
 
-  <a class="btn btn-success" style="color:white;" href="bill.php?id='. $row['orderID'].'"><span class=" ti-receipt"></span> Bill</a>
+  <a class="btn btn-success" style="color:white;" href="redirect-bill.php?id='. $row['orderID'].'"><span class=" ti-receipt"></span> Bill</a>
 
   </td>
   </tr>

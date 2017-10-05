@@ -1,4 +1,6 @@
 <?php
+
+include "titleHeader.php";
 session_start();
 if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
 {
@@ -274,7 +276,7 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
           </li>
           <li><a href="javascript:void(0)" class="waves-effect">Production<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level animated fadeIn">
-              <li><a href="raw-materials-management.php">Raw Materials Management</a></li>
+              <li><a href="raw-materials-management.php">Raw Materials Monitoring</a></li>
               <li><a href="production-tracking.php">Production Tracking</a></li>
             </ul>
           </li>

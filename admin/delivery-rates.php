@@ -298,7 +298,7 @@ $(document).ready(function(){
                                   echo('<tr><td>'.$branch.'</td>
                                     <td>'.$row['delLocation'].'</td>
                                     <td>'.$row['delRateType'].'</td>
-                                    <td style="text-align: right;"><small>&#8369;</small>'.$row['delRate'].'</td>'); 
+                                    <td style="text-align: right;"><small>&#8369;</small> '.$row['delRate'].' </td>'); 
                                     ?>
                                     <td>
                                       <!-- UPDATE -->

@@ -48,6 +48,12 @@ else{
 		}
 		$delSQL = "INSERT INTO `tbldelivery` (`deliveryEmpAssigned`, `deliveryReleaseID`, `deliveryRate`, `deliveryAddress`, `deliveryRemarks`, `deliveryStatus`) VALUES ('$employee', '$delID', '$delRate', '$delAdd', '$remarks', 'Pending');";
 		if(mysqli_query($conn,$delSQL)){
+			
+		$delID = mysqli_insert_id($conn); //id ng record;
+
+		$delHistSQL = "INSERT INTO `tbldelivery_history` (`delHist_recID`, `delHistDate`, `delHistDeliveryMan`, `delHistRemarks`, `delHistStatus`) VALUES ('$delID', '$delDate', '$employee', '$remarks', 'Pending');";
+		mysqli_query($conn,$delHistSQL);
+
 		header( "Location: releasing.php?actionSuccess");
 		}
 		else{

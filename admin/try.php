@@ -1,4 +1,8 @@
 <?php
+echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+
 include "titleHeader.php";
 include "menu.php";
 include "dbconnect.php";
