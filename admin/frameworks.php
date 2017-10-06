@@ -56,6 +56,8 @@ if (!empty($_SESSION['actionFailed'])) {
     <script src="js/literallycanvas.js"></script>
   <script type="text/javascript"></script>
   <link href="css/literallycanvas.css" rel="stylesheet">
+   <link href="plugins/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
   <script>
   $(document).ready(function(){
     // Unit Name

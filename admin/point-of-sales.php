@@ -1214,6 +1214,8 @@ function inputValidate(id){
                   $('#aTendered').prop('disabled',false);
                   Math.round($('#aTendered').val( xTotal));
                   Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
+                  
+                  $('#totalBadge').html(String(totalQuant));
 
                 }
                 else{
