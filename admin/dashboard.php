@@ -7,7 +7,7 @@ include 'dbconnect.php';
 <html lang="en">
 <head>
 <script>
-    var divs = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6"];
+    var divs = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6", "Menu7"];
     var visibleDivId = null;
     function toggleVisibility(divId) {
       if(visibleDivId === divId) {
@@ -394,6 +394,75 @@ include 'dbconnect.php';
             </div>
           </div>
 
+          <div id="Menu7" style="display: none;">
+            <h3>
+              <ul class="nav customtab2 nav-tabs" role="tablist">
+                <li role="presentation" class="active" >
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-face-smile"></i>&nbsp;Customers Monitoring</a>
+                </li>
+              </ul>
+            </h3>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">      
+                    <div class="row">
+                      <div class="table-responsive"> 
+                        <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Address</th>
+                              <th>Contact Number</th>
+                              <th>Email</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+							  <?php
+                  include "dbconnect.php";
+                  $sql = "SELECT * FROM tblcustomer WHERE customerStatus='active' OR customerStatus='Active' order by customerID;";
+
+                  $result = mysqli_query($conn, $sql);
+                  if($result){
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                                  $custID = str_pad($row['customerID'], 6, '0', STR_PAD_LEFT); //format ng display ID
+                                  $custLName = $row['customerLastName'];
+                                  $custFName = $row['customerFirstName'];
+                                  $custMName = $row['customerMiddleName'];
+                                  $custAddress = $row['customerAddress'];
+                                  $custNumber = $row['customerContactNum'];
+                                  $custEmail = $row['customerEmail'];
+                                  echo ('
+                                    <tr>
+                                    <td style="text-align:left">' . $custID . '</td>
+                                    <td style="text-align:left">' . $custLName . ", " . $custFName . " " . $custMName . '</td>
+                                    <td style="text-align:left">' . $custAddress . '</td>
+                                    <td style="text-align:center">' . $custNumber . '</td>
+                                    <td style="text-align:center">' . $custEmail . '</td>
+                                    <td style="text-align:left">
+									
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['customerID']. ' #orderReqaccept"><i class="ti-pencil-alt"></i> Update</button>
+
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['customerID'].' #orderReqreject"><i class="ti-close"></i> Deactivate</button> 
+                                    </td>
+                                    </tr>
+                                    ');
+          }     
+        }   
+        ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           </div>
         </div>
 
@@ -447,6 +516,11 @@ include 'dbconnect.php';
       </div>
 
       <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
+       <div class="panel panel-info">
+        <div class="tab-content">
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
+        </div>
+      </div>  
        <div class="panel panel-info">
         <div class="tab-content">
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">NOTIFICATIONS</button>

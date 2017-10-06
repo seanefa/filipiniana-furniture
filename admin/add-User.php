@@ -5,7 +5,7 @@ include 'dbconnect.php';
 $username=$_POST["_username"];
 $password=$_POST["_password"];
 $confirm=$_POST["_confirm"];
-$employee=$_POST["_employee"];
+$employee=$_POST["_employee"]	;
 
 $datapool="SELECT * from tbluser";
 $result=$conn->query($datapool);
