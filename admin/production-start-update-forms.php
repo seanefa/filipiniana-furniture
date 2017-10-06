@@ -325,7 +325,7 @@ function deleteRow(row){
 
                                                 <div class="row">
                                                   <div class="table-responsive">
-                                                    <table class="table display table-bordered table-hover" id="tblProducts">
+                                                    <table class="table display nowrap" id="tblProducts">
                                                       <thead>
                                                         <tr>
                                                           <th style="text-align: left;">Phase Name</th>
