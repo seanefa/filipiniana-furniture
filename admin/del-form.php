@@ -206,7 +206,7 @@ $jsID = $_GET['id'];
           </div>
           <div class="row">
             <div class="table-responsive">
-              <table class="table color-bordered-table muted-bordered-table">
+              <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th style="text-align: center;">Date</th>
@@ -247,9 +247,6 @@ $jsID = $_GET['id'];
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
