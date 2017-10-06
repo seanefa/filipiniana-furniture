@@ -299,9 +299,9 @@ $_SESSION['varname'] = $jsID;
           <div class="descriptions">
 
             <div class="row">
-              <div class="col-md-6" style="text-align:left;">
+              <div class="col-md-6">
                 <h3 style="text-align:center;"><label class="control-label">Customer Information</label></h3>
-                <h5 style="margin-left: 95px;"><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
+                <h5 style="text-align: left;"><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
                   <p><b>Address: </b><?php echo $row['customerAddress']?></p>
                   <p><b>Contact Number: </b><?php echo $row['customerContactNum']?></p>
                   <p><b>Email Address: </b><?php echo $row['customerEmail']?></p>
@@ -309,10 +309,10 @@ $_SESSION['varname'] = $jsID;
                 </h5>
               </div>
 
-              <div class="col-md-6" style="text-align:left;">
+              <div class="col-md-6">
                 <h3 style="text-align:center;"> <label class="control-label">Payment Information</label></h3>
                 
-                <table class="table">
+                <table class="table table-bordered table-hover">
                   <tr>
                     <td><b>Total Amount Due: </b></td>
                     <td>&#8369; <?php echo number_format($row['orderPrice'])?></td>
@@ -354,7 +354,7 @@ $_SESSION['varname'] = $jsID;
                     <div class="row">
                       <div class="table-responsive">
                         <h3 style="text-align:center;"><label class="control-label">Orders</label></h3>
-                        <table class="table product-overview" id="cartTbl">
+                        <table class="table product-overview table-bordered table-hover" id="cartTbl">
                           <thead>
                             <th style="text-align:left">Furniture Name</th>
                             <th style="text-align:left">Furniture Description</th>
@@ -384,8 +384,7 @@ $_SESSION['varname'] = $jsID;
                             ?>
                           </tbody>
                           <tfoot style="text-align:right;">
-                            <td></td>
-                            <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                            <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
                             <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
                             <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
                           </tfoot>
