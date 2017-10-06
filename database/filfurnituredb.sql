@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2017 at 08:34 PM
+-- Generation Time: Oct 06, 2017 at 06:59 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -1129,7 +1129,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (13, 1, '2017-10-02', '2017-10-18', 29, 100000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
 (16, 1, '2017-10-03', '2017-11-04', 0, 25000, 'Pending', 'For management', 'Management Order', 'Waley'),
 (17, 1, '2017-10-04', '2017-10-04', 31, 25000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', ''),
-(18, 1, '2017-10-04', '2017-10-04', 31, 105000, 'Archived', 'N/A. This order is for pick-up', 'Pre-Order', ''),
+(18, 1, '2017-10-04', '2017-10-04', 31, 105000, 'Ongoing', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (19, 1, '2017-10-04', '2017-10-04', 31, 50000, 'Archived', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (20, 1, '2017-10-04', '2017-10-04', 31, 35000, 'Archived', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (21, 1, '2017-10-04', '2017-10-04', 31, 35000, 'Archived', 'N/A. This order is for pick-up', 'Pre-Order', ''),
@@ -1223,6 +1223,28 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 (25, 25, 18, 25000, 0, NULL, 1, 'Released'),
 (26, 26, 18, 25000, 0, NULL, 1, 'Released'),
 (27, 27, 18, 25000, 0, NULL, 1, 'Released');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblorder_requestcnt`
+--
+
+CREATE TABLE `tblorder_requestcnt` (
+  `orreq_cntID` int(11) NOT NULL,
+  `orreq_ID` int(11) NOT NULL,
+  `orreq_quantity` int(11) NOT NULL,
+  `orreq_prodFinish` int(11) DEFAULT NULL,
+  `orreq_returned` int(11) DEFAULT NULL,
+  `orreq_released` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblorder_requestcnt`
+--
+
+INSERT INTO `tblorder_requestcnt` (`orreq_cntID`, `orreq_ID`, `orreq_quantity`, `orreq_prodFinish`, `orreq_returned`, `orreq_released`) VALUES
+(1, 18, 3, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1437,7 +1459,10 @@ INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `prodStartDat
 (35, 7, NULL, NULL, NULL, 'Ongoing'),
 (36, 3, NULL, NULL, NULL, 'Ongoing'),
 (37, 13, NULL, NULL, NULL, 'Ongoing'),
-(38, 12, NULL, NULL, NULL, 'Ongoing');
+(38, 12, NULL, NULL, NULL, 'Ongoing'),
+(39, 18, NULL, NULL, NULL, 'Finished'),
+(40, 18, '2017-10-18', NULL, NULL, 'Ongoing'),
+(41, 18, NULL, NULL, NULL, 'Ongoing');
 
 -- --------------------------------------------------------
 
@@ -1486,7 +1511,22 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (123, 37, 5, NULL, NULL, NULL, NULL, 'Pending'),
 (124, 38, 1, NULL, NULL, NULL, NULL, 'Pending'),
 (125, 38, 2, NULL, NULL, NULL, NULL, 'Pending'),
-(126, 38, 5, NULL, NULL, NULL, NULL, 'Pending');
+(126, 38, 5, NULL, NULL, NULL, NULL, 'Pending'),
+(127, 39, 1, 1, '2017-10-19', '2017-10-18', ' sss', 'Finished'),
+(128, 39, 2, 1, '2017-10-19', '2017-10-19', ' aaa', 'Finished'),
+(129, 39, 3, 1, '2017-10-20', '2017-10-11', ' aaa', 'Finished'),
+(130, 39, 4, 1, '2017-10-20', '2017-10-19', ' aaa', 'Finished'),
+(131, 39, 5, 1, '2017-10-20', '2017-10-25', ' aaaaa', 'Finished'),
+(132, 40, 1, 1, '2017-10-18', '2017-10-19', ' aaa', 'Finished'),
+(133, 40, 2, NULL, NULL, NULL, NULL, 'Pending'),
+(134, 40, 3, NULL, NULL, NULL, NULL, 'Pending'),
+(135, 40, 4, NULL, NULL, NULL, NULL, 'Pending'),
+(136, 40, 5, NULL, NULL, NULL, NULL, 'Pending'),
+(137, 41, 1, NULL, NULL, NULL, NULL, 'Pending'),
+(138, 41, 2, NULL, NULL, NULL, NULL, 'Pending'),
+(139, 41, 3, NULL, NULL, NULL, NULL, 'Pending'),
+(140, 41, 4, NULL, NULL, NULL, NULL, 'Pending'),
+(141, 41, 5, NULL, NULL, NULL, NULL, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -2125,6 +2165,12 @@ ALTER TABLE `tblorder_request`
   ADD KEY `pack_idx` (`orderPackageID`);
 
 --
+-- Indexes for table `tblorder_requestcnt`
+--
+ALTER TABLE `tblorder_requestcnt`
+  ADD PRIMARY KEY (`orreq_cntID`);
+
+--
 -- Indexes for table `tblorder_return`
 --
 ALTER TABLE `tblorder_return`
@@ -2534,6 +2580,11 @@ ALTER TABLE `tblorder_customization`
 ALTER TABLE `tblorder_request`
   MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
+-- AUTO_INCREMENT for table `tblorder_requestcnt`
+--
+ALTER TABLE `tblorder_requestcnt`
+  MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `tblorder_return`
 --
 ALTER TABLE `tblorder_return`
@@ -2577,12 +2628,12 @@ ALTER TABLE `tblproduct`
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
