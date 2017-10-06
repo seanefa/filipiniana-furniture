@@ -102,6 +102,7 @@
       }
     }
     var updatePoduct = function(id, quantity) {
+	
       var productIndex = getIndexOfProduct(id);
       if(productIndex < 0){
         return false;

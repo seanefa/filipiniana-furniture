@@ -75,7 +75,7 @@
                   if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-layout product-list col-xs-12">
                     <div class="product-thumb">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/28282-NX18M6.jpg" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
@@ -85,7 +85,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['packageID'] ?>" data-name="<?php echo $row['packageDescription'] ?>" data-summary="Package" data-price="<?php echo $row['packagePrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
+                      <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['packageID'] ?>" data-name="<?php echo $row['packageDescription'] ?>" data-summary="Package" data-price="<?php echo $row['packagePrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>

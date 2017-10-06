@@ -107,7 +107,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
@@ -143,7 +143,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href=""><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-package.php?id='.$row['packageID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
@@ -152,10 +152,12 @@
                     ';?>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
+                  </div>
                   </div><?php echo'';
                 }
                 $ctr++;
@@ -190,7 +192,8 @@
                       <h2><a href="view-product.php" style="color:white;">'.$row['promoDescription'].'</a></h2>
                       </div>
                     </div>
-                  </div>';
+                  </div>
+                  ';
                 }
                 $ctr++;
               }

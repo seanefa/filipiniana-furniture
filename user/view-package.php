@@ -5,7 +5,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>Product - Filipiniana Furniture Shop</title>
+<title>Package - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>
@@ -16,8 +16,8 @@
       <!-- Breadcrumb Start-->
       <ul class="breadcrumb">
         <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="index.php" itemprop="url"><span itemprop="title"><i class="fa fa-home"></i></span></a></li>
-        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="products.php" itemprop="url"><span itemprop="title">Products</span></a></li>
-        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="view-product.php" itemprop="url"><span itemprop="title">Product</span></a></li>
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="products.php" itemprop="url"><span itemprop="title">Package</span></a></li>
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="view-product.php" itemprop="url"><span itemprop="title">Package</span></a></li>
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
@@ -29,10 +29,11 @@ include "userconnect.php";
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM tblproduct where productID = '$id'";
+$sql = "SELECT * FROM tblpackages where packageID = '$id'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
 
+/*
                   $frameID = $row['prodFrameworkID'];
                   $fabricID = $row['prodFabricID'];
                   $catID = $row['prodCatID'];
@@ -53,6 +54,7 @@ $catrow = mysqli_fetch_assoc($catresult);
 $typeSql = "SELECT * from tblfurn_type where typeID = '$typeID'";
 $typeresult = mysqli_query($conn,$typeSql);
 $typerow = mysqli_fetch_assoc($typeresult);
+*/
 
 
 
@@ -61,10 +63,10 @@ $typerow = mysqli_fetch_assoc($typeresult);
 
 ?>
           <div itemscope itemtype="http://schema.org/Product">
-            <h1 class="title" itemprop="name"><?php echo $row['productName']; ?></h1>
+            <h1 class="title" itemprop="name"><?php echo $row['packageDescription']; ?></h1>
             <div class="row product-info">
               <div class="col-sm-4">
-                <div class="image"><img class="img-responsive" style="height: 520px;width: 320px;" itemprop="image" id="zoom_01" src="../admin/plugins/images/<?php echo $row['prodMainPic']; ?>" title="Product" alt="image/product/macbook_air_1-350x525.jpg" data-zoom-image="../admin/plugins/images/<?php echo $row['prodMainPic']; ?>" /> </div>
+                <div class="image"><img class="img-responsive" style="height: 520px;width: 320px;" itemprop="image" id="zoom_01" src="../admin/plugins/images/2017-08-241503568724.png" title="Product" alt="image/product/macbook_air_1-350x525.jpg" data-zoom-image="../admin/plugins/images/2017-08-241503568724.png" /> </div>
                 <!--
                 <div class="center-block text-center"><span class="zoom-gallery"><i class="fa fa-search"></i> Click image for Gallery</span></div>
                 <div class="image-additional" id="gallery_01"> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_1-600x900.jpg" data-image="image/product/macbook_air_1-350x525.jpg" title="Product"> <img src="image/product/macbook_air_1-66x99.jpg" title="Product" alt = "Product"/></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_4-600x900.jpg" data-image="image/product/macbook_air_4-350x525.jpg" title="Product"><img src="image/product/macbook_air_4-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_2-600x900.jpg" data-image="image/product/macbook_air_2-350x525.jpg" title="Product"><img src="image/product/macbook_air_2-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_3-600x900.jpg" data-image="image/product/macbook_air_3-350x525.jpg" title="Product"><img src="image/product/macbook_air_3-66x99.jpg" title="Product" alt="Product" /></a> </div>
@@ -72,13 +74,54 @@ $typerow = mysqli_fetch_assoc($typeresult);
               </div>
               <div class="col-sm-8">
                 <ul class="list-unstyled description">
-                  <li><b>Product Code:</b> <span itemprop="mpn">Product <?php echo $row['productID']; ?></span></li>
+                  <li><b>Package Code:</b> <span itemprop="mpn">Package <?php echo $row['packageID']; ?></span></li>
                   <li><b>Availability:</b> <span class="instock">In Stock</span></li>
                 </ul>
                 <ul class="price-box">
-                  <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">&#8369 <?php echo $row['productPrice']; ?><span itemprop="availability" content="In Stock"></span></span></li>
+                  <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">&#8369 <?php echo $row['packagePrice']; ?><span itemprop="availability" content="In Stock"></span></span></li>
                   <li></li>
                 </ul>
+                <div class="form-body">
+                  <div class="row">
+                    <div class="form-group">
+                      <h4>Package Inclusions</h4>
+                      <table class="table color-bordered-table muted-bordered-table" id="tblCategories">
+                        <thead>
+
+                          <th style="text-align: center;">Furniture</th>
+                          <th style="text-align: center;">Furniture Type</th>
+                          <th style="text-align: center;">Furniture Name</th>
+                          <th style="text-align: center;">Furniture Price</th>
+                        </thead>
+                        <tbody style="text-align: center;">
+                          <tr>
+                            <?php
+                            $sql1 = "SELECT * FROM tblpackages where packageID = $id;";
+                            $result1 = mysqli_query($conn, $sql1);
+                            $row1 = mysqli_fetch_assoc($result1);
+
+                            $sqls = "SELECT * from tblpackages a inner join tblpackage_inclusions b on a.packageID = b.package_incID inner join tblproduct c on c.productID = b.product_incID inner join tblfurn_type d on d.typeID = c.prodTypeID WHERE a.packageID = '$id';";
+                            $results = mysqli_query($conn, $sqls);
+                            while ($rows = mysqli_fetch_assoc($results))
+                            {
+                              if($rows['package_incStatus'] == 'Listed'){
+                              echo ('
+                                <td><a href="view-product.php?id='.$rows['productID'].'"><img src="../admin/plugins/images/'.$rows['prodMainPic'].'" style="height: 100px; width: 105px;" alt="Product" title="'.$rows['productName'].'" class="img-thumbnail"></a></td>
+                                <td>'.$rows['typeName'].'</td>
+                                <td>'.$rows['productName'].'</td>
+                                <td><small>&#8369;</small>'.$rows['productPrice'].'</td>
+                                ');?>
+                              <?php echo ('</tr>');
+                            }
+                            }
+                            ?>
+                          </tr>
+                        </tbody>
+                        
+                      </table>
+                    </div>
+                  </div>
+                </div>
                 <div id="product">
                   <div class="cart">
                     <div>
@@ -89,7 +132,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
                         <a class="qtyBtn mines" href="javascript:void(0);">-</a>
                         <div class="clear"></div>
                       </div>
-                      <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal">Add to Cart</button>
+                      <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1"   data-dismiss="modal">Add to Cart</button>
                     </div>
                     <div>
                       <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
@@ -110,15 +153,14 @@ $typerow = mysqli_fetch_assoc($typeresult);
                 <br>
                 <ul class="nav nav-tabs">
               <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
-              <li><a href="#tab-specification" data-toggle="tab">Specification</a></li>
               <li><a href="#tab-review" data-toggle="tab">Reviews (2)</a></li>
             </ul>
             <div class="tab-content">
               <div itemprop="description" id="tab-description" class="tab-pane active">
                 <div>
-                  <h4><p><a><?php echo $catrow['categoryName'];?></a> ,  <a><?php echo $typerow['typeName'];?></a></p></h4>
+                  <h4><p><a><?php //echo $catrow['categoryName'];?></a> ,  <a><?php //echo $typerow['typeName'];?></a></p></h4>
                   
-                  <p><?php echo $row['productDescription']; ?></p>
+                  <p><?php //echo $row['productDescription']; ?></p>
                 </div>
               </div>
               <div id="tab-specification" class="tab-pane">
@@ -133,7 +175,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
                   </thead>
                   <tbody>
                     <tr>
-                      <td><?php echo $framerow['frameworkName'];?></td>
+                      <td><?php //echo $framerow['frameworkName'];?></td>
                     </tr>
                   </tbody>
                   </table>
@@ -145,7 +187,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
                   </thead>
                   <tbody>
                     <tr>
-                      <td><?php echo $fabricrow['fabricName'];?></td>
+                      <td><?php //echo $fabricrow['fabricName'];?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -226,28 +268,30 @@ $typerow = mysqli_fetch_assoc($typeresult);
               <?php
                 include "userconnect.php"; 
                 $ctr = 0;
-                $sql="SELECT * from tblproduct where productID != '$id' order by productID desc;";
+                $sql="SELECT * from tblpackages where packageID != '$id' order by packageID desc;";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){
-                  if($row['prodTypeID']==""){$row['productDescription']="________________";}
-                  if($row['prodStat'] != "Archived"){
+                  
+                  if($row['packageID']==""){$row['packageDescription']="________________";}
+                  if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php?id='.$row['packageID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
-                      <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
-                      <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
+                      <h4><a href="view-product.php?id='.$row['packageID'].'">'.substr($row['packageDescription'], 0,20).'</a></h4>
+                      <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
                   </div><?php echo '';
+
                 }
                 $ctr++;
               }
