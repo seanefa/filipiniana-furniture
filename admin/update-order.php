@@ -182,7 +182,7 @@ $(document).ready(function(){ //wala lang
                       </div>
                       </div>
 
-                    <div class="row">
+                    <div class="row" style="border: 2px solid #989898;">
                       <div class="col-md-12">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
                             <form action="save-order-update1.php" method = "post">
@@ -236,10 +236,10 @@ $(document).ready(function(){ //wala lang
                               </table>
                             </div>
                         </div>
-                      <div class="col-md-6">
+                      <div class="col-md-6" style="padding-bottom: 10px;">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $id;?>' #cancelOrder" aria-expanded="false"><i class='ti-close'></i> Cancel Order</button>
                       </div>
-                      <div class="col-md-6 pull-right">
+                      <div class="col-md-6 pull-right" style="padding-bottom: 10px;">
                         <button type="submit" class="btn btn-success waves-effect pull-right" id="addFab" aria-expanded="false"><i class="ti-check"></i> Save Changes</button>
                       </div>
                   </form>
