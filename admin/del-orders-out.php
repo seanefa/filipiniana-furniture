@@ -14,6 +14,7 @@ echo '<thead>
   $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$id'";
   $res = mysqli_query($conn,$sql1);
   while($row = mysqli_fetch_assoc($res)){
+    if($row['orderRequestStatus']!='Deleted'){
     echo '<tr>';
     if($row['orderRequestStatus']=="Ready for release"){
       echo '<td style="text-align:center"><input class="chBox" type="checkbox"  value='.$row['order_requestID'].' name="check[]" /></td>';
@@ -34,6 +35,6 @@ echo '<thead>
     $delAdd = $row['shippingAddress'];
     //echo '<input type="hidden" id="typeOfRel" name="typeOfRel" value="'.$delAdd.'">';
   }
-  
+  }
 echo '</tbody>';
 ?>

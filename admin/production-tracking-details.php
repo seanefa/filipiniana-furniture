@@ -131,10 +131,15 @@ $(document).ready(function(){
                             <?php
                             $isFinish = 0;
                             include "dbconnect.php";
-                            $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
+                            //$sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
+                            $sql = "SELECT * FROM tblorders c, tblproduction a, tblorder_request b, tblproduct d WHERE c.orderID = b.tblOrdersID and b.order_requestID = a.productionOrderReq and c.orderID = '$id' and b.orderRequestStatus!='Archived' and b.orderProductID = d.productID";
                             $res = mysqli_query($conn,$sql);
                             while($row = mysqli_fetch_assoc($res)){
+                              $isFirst = 0;
+                              $isFinish = 0;
 
+                              $prodRec = str_pad($row['productionID'], 8, '0', STR_PAD_LEFT); //format ng display ID
+                              $prodRec = "#" . $prodRec; //format ng display ID
                               echo '
                               <div class="col-md-12">
                               <div class="panel panel-info" style="margin-top: -20px;">
@@ -144,11 +149,11 @@ $(document).ready(function(){
                               <div class="panel-body"><div class="row">
                               <div class="col-md-12">
                               <div class="col-md-6">
-                              <h2 style="margin-top: -20px;">'.$row['productName'].'</h2>
+                              <h2 style="margin-top: -20px; color:black"><b>'. $prodRec .' - '.$row['productName'].'</b></h2>
                               </div>
                               <div class="col-md-6">';
 
-                              echo '<h2 class="pull-right" style="margin-top: -20px;"><a data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$row['order_requestID'].' #history"><i class="ti-menu-alt pull-right" style="margin-left: 20px; margin-top:5px;"></i></a>Production History</h2>
+                              echo '<h2 class="pull-right" style="margin-top: -20px;"><a data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$row['productionID'].' #history"><i class="ti-menu-alt pull-right" style="margin-left: 20px; margin-top:5px;"></i></a>Production History</h2>
 
                               <h2></h2>
                               </div>
@@ -166,8 +171,8 @@ $(document).ready(function(){
                                             <div class="col-md-12">
                                               <?php
                                               include "dbconnect.php";
-                                              $ordReqID = $row['order_requestID'];
-                                              $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and c.order_requestID = '$ordReqID';";
+                                              $productionID = $row['productionID'];
+                                              $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and b.productionID = '$productionID'";
                                               $prResult = mysqli_query($conn,$pSQL);
                                               $ctr = mysqli_num_rows($prResult);
                                               $isFirst = 0;
@@ -186,7 +191,7 @@ $(document).ready(function(){
                                                     $isFinish = 0;
                                                   }
                                                   if($isFirst==0){
-                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&phase='.$pRow['prodPhase'].'&orderReq='.$pRow['order_requestID'].' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&phase='.$pRow['prodPhase'].'&orderReq='.$pRow['order_requestID'].'&first=yes #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>
