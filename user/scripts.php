@@ -18,6 +18,7 @@ include "product-form.php";
 <script type="text/javascript" src="js/myScript.js"></script>
 <script type="text/javascript" src="js/toast-master/js/jquery.toast.js"></script>
 <script type="text/javascript" src="js/toastr.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script src="js/jquery.mycart.js"></script>
 
