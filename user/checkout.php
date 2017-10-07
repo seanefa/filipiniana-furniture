@@ -18,10 +18,8 @@
   <div id="container">
     <div class="container">
       <script type="text/javascript">
-$(document).ready(function(){
-    window.onbeforeunload = function(){
-            return 'Are you sure you want to leave?';
-        };
+
+        $(document).ready(function(){
 
 
       $('#aTendered').on('keyup',function(){
@@ -475,8 +473,9 @@ $(document).ready(function(){
             </div>
                           <div class="checkbox">
                             <label>
-                              <input type="checkbox" checked="checked" value="1" name="shipping_address">
+                             <!-- <input type="checkbox" checked="checked" value="1" name="shipping_address">
                               My delivery and billing addresses are the same.</label>
+                            -->
                           </div>
                         </fieldset>
                       </div>
@@ -560,12 +559,42 @@ $(document).ready(function(){
                             <tbody id="checkOut">
                               <script type="text/javascript">
                                 $(document).ready(function(){
-
-                                var ttp = sessionStorage.getItem('totalPrice');
+                                  var ttp = sessionStorage.getItem('totalPrice');
                                 var ttq = sessionStorage.getItem('totalQuant');
+                                  var pvalue = sessionStorage.getItem('pitem');
+                                var pitem = new Array();
+                                if(pvalue != null){
+                                pitem = pvalue.split(',');
+                                }
+
+                                var pnumItems = pitem.length/6;
+                                
+                                var pi = 0;
+
+                                var pj = 0;
+                                if(pnumItems != 0){
+                                while(pi != pnumItems){
+
+                                if(pi == 0){
+                                $('#checkOut').append('<tr id="'+pitem[0]+'"><td class="text-center"><img src="'+pitem[5]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1]+'</td><td>'+pitem[2]+'</td><td style="text-align: right;">'+pitem[4]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3]+'</td></tr>');
+                                $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4]+'"/>');
+                                }else{
+                                   pj = 6 * (pi);
+                                  $('#checkOut').append('<tr id="'+pitem[0+pj]+'"><td class="text-center"><img src="'+pitem[5+pj]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1+pj]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1+pj]+'</td><td>'+pitem[2+pj]+'</td><td style="text-align: right;">'+pitem[4+pj]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3+pj]+'</td></tr>');
+                                  $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0+pj]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3+pj]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4+pj]+'"/>');
+                                }
+
+                                pi++;
+                                }
+                                }
+                                else{
+
+                                
                                 var value = sessionStorage.getItem('item');
                                 var item = new Array();
+                                if(value != null){
                                 item = value.split(',');
+                                }
 
                                 var numItems = item.length/6;
                                 
@@ -593,35 +622,13 @@ $(document).ready(function(){
 
                                 i++;
                                 }
+                                }
+
+
+
+
+
                               });
-                                $(document).ready(function(){
-
-                                  var pvalue = sessionStorage.getItem('pitem');
-                                var pitem = new Array();
-                                pitem = pvalue.split(',');
-
-                                var pnumItems = pitem.length/6;
-                                
-                                
-                                alert(pnumItems);
-                                var pi = 0;
-
-                                var pj = 0;
-                                while(pi != pnumItems){
-
-                                if(pi == 0){
-                                $('#checkOut').append('<tr id="'+pitem[0]+'"><td class="text-center"><img src="'+pitem[5]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1]+'</td><td>'+pitem[2]+'</td><td style="text-align: right;">'+pitem[4]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3]+'</td></tr>');
-                                $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4]+'"/>');
-                                }else{
-                                   pj = 6 * (pi);
-                                  $('#checkOut').append('<tr id="'+pitem[0+pj]+'"><td class="text-center"><img src="'+pitem[5+pj]+'" style="height: 100px; width: 105px;" alt="Product" title="'+pitem[1+pj]+'" class="img-thumbnail"></td><td class="text-left">'+pitem[1+pj]+'</td><td>'+pitem[2+pj]+'</td><td style="text-align: right;">'+pitem[4+pj]+'</td></div><td style="text-align: right;">&#8369;'+pitem[3+pj]+'</td></tr>');
-                                  $('#orders').append('<input type="hidden" name="P_cart[]" value="'+pitem[0+pj]+'"/>     <input type="hidden" name="P_prices[]" value="'+pitem[3+pj]+'"/>                      <input type="hidden" name="P_quant[]" value="'+pitem[4+pj]+'"/>');
-                                }
-
-                                pi++;
-                                }
-
-                                });
                               </script>
 
 

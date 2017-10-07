@@ -20,6 +20,10 @@
             </script>
             <?php
             include "userconnect.php";
+            
+
+            session_start();
+
             $sql="SELECT * from tblcompany_info";
             $result=$conn->query($sql);
             if($result->num_rows>0){
@@ -49,8 +53,7 @@
 
             // $sql = "SELECT * FROM tbluser where userID = '$user'";
             // $result = mysqli_query($conn, $sql);
-            // $row = mysqli_fetch_assoc($result); 
-            session_start();
+            // $row = mysqli_fetch_assoc($result);
             if(isset($_SESSION['logged']) === true)
             { 
               echo '<li><h5 style="color:black; padding-left:5px; padding-right:5px; font-family:inherit; font-weight:600;">Welcome,&nbsp;<span style="text-transform: uppercase;">'; echo $_SESSION["userName"]; echo '!</span></h5></li>';
@@ -88,7 +91,7 @@
                                       </div>
                                     </div>
             <!-- Trigger the modal with a button -->
-            <span class="fcbtn btn-lg btn-info btn-outline btn-1e wave effect glyphicon glyphicon-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+            
 
             <!-- Modal -->
             <div id="myCart" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
@@ -145,7 +148,9 @@
                                         </div>
                                       </div>
                                     </div>
-
+                                    <div style="display: none">
+                                    <button type="button" id="checkcheckout" data-toggle="modal" href="#myModal2"></button>
+                                  </div>
                                     <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
                                       <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -153,6 +158,29 @@
                                           <div class="modal-content">
                                             <div class="modal-body">
                                               <h2 style="text-align:center;"> Successfully added to cart!<br>
+                                              </h2>
+                                              <div class="orderconfirm">
+                                                <div class="descriptions">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+
+                                    <div id="myModal2" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <div class="modal-body">
+                                              <h2 style="text-align:center;">Order Saved!<br>
                                               </h2>
                                               <div class="orderconfirm">
                                                 <div class="descriptions">

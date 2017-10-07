@@ -66,7 +66,7 @@ if (!empty($_SESSION['actionFailed'])) {
     }
   }
   function insRow(rows,catName,prodName,prodPrice){
-    alert(rows+','+catName+','+prodName+','+prodPrice);
+    //alert(rows+','+catName+','+prodName+','+prodPrice);
     $('#addrowID'+rows).hide(); 
     $('#checkThisAgain'+rows).attr('name','addis[]'); 
 

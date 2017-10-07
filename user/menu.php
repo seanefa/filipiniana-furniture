@@ -88,6 +88,7 @@
                      <li class="mega-menu dropdown"> <a href="customization.php">Customization</a></li>';
               }
             ?>
+            <span class="fcbtn btn-lg glyphicon glyphicon-shopping-cart my-cart-icon pull-right" title="My Cart"><span class="badge badge-notify my-cart-badge"></span></span>
           </ul>
         </div>
       </div>
