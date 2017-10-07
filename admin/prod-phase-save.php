@@ -42,7 +42,7 @@ if($type==0){
 		}
 		echo $sql . "<br>";
 		echo "<script>
-		window.l.href='production-tracking-details.php?id=".$orderID."';
+		window.location.href='production-tracking-details.php?id=".$orderID."';
 		alert('Production started');
 		</script>";
 	}
@@ -64,7 +64,7 @@ else{
 			finishOrderReq($phaseID);
 			orderRequestCnt($phaseID);
 			echo "<script>
-			window.l.href='production-tracking-details.php?id=".$orderID."';
+			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production in this phase is finished');
 			</script>";
 			//echo $sql . "<br>";
@@ -86,7 +86,7 @@ else{
 			finishProduction($phaseID);
 			echo $sql;
 			echo "<script>
-			window.l.href='production-tracking-details.php?id=".$orderID."';
+			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production updated');
 			</script>";
 		}
