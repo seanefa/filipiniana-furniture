@@ -39,6 +39,13 @@ $pr = $_GET['smth'];
 
 $_SESSION['varname'] = $jsID;
 
+
+
+$date = new DateTime();
+$dateToday = date_format($date, "Y-m-d");
+
+$estDate = date('Y-m-d', strtotime("+2 days"));
+
 ?>
 <!DOCTYPE>
 <html>
@@ -59,22 +66,23 @@ $_SESSION['varname'] = $jsID;
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="startproduction">
         <div class="modal-header">
+          <?php
+          $sql = "SELECT * FROM tblproduction_phase a, tblorder_request b, tblproduct c,tblphases d WHERE d.phaseID = a.prodPhase and a.prodHistID = '$pID' and b.orderProductID = c.productID and a.prodPhase = '$phase' and b.order_requestID = '$orderReq' and b.orderProductID = c.productID;";
+          $res = mysqli_query($conn,$sql);
+          $row = mysqli_fetch_assoc($res);
+          $prodDesign = $row['prodDesign'];
+          $prodID = $row['productID'];
+          $prodName = $row['productName'];
+          $productionPhase = $row['phaseName']
+          ?>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct">Start Production</h3>
+          <h3 class="modal-title" id="modalProduct">Start Production Phase : <b><?php echo $productionPhase?></b></h3>
         </div>
         <form action="prod-phase-save.php" method = "post">
           <input type="hidden" name="type" value="0">
           <input type="hidden" name="first" value="<?php echo $first?>">
           <input type="hidden" name="orderID" value="<?php echo $jsID?>">
           <input type="hidden" name="phaseID" value="<?php echo $pID?>">
-          <?php
-          $sql = "SELECT * FROM tblproduction_phase a, tblorder_request b, tblproduct c WHERE a.prodHistID = '$pID' and b.orderProductID = c.productID and a.prodPhase = '$phase' and b.order_requestID = '$orderReq' and b.orderProductID = c.productID;";
-          $res = mysqli_query($conn,$sql);
-          $row = mysqli_fetch_assoc($res);
-          $prodDesign = $row['prodDesign'];
-          $prodID = $row['productID'];
-          $prodName = $row['productName'];
-          ?>
           <div class="modal-body">
             <div class="descriptions">
               <div class="form-body">
@@ -120,7 +128,7 @@ $_SESSION['varname'] = $jsID;
                                           <input type='hidden' class='form-control' id='matvar' name='matvarid[]' value='". $row['mat_varID'] ."' />
                                           </td>
                                           <td>
-                                          <input type='text' class='col-lg-4' maxlength='5' size='5' id='matquan' style='text-align:right;' name='matquan[]' value='". $row['p_matQuantity'] ."'/>
+                                          <input type='number' class='col-lg-4' maxlength='5' size='5' id='matquan' style='text-align:right;' name='matquan[]' value='". $row['p_matQuantity'] ."'/>
                                           </td>";
                                           echo '<td><input id="removeBtn" type="button" onclick="deleteRow(this)" class="btn btn-danger" value="X"/></td></tr>';
                                           $ctr++;
@@ -145,16 +153,17 @@ $_SESSION['varname'] = $jsID;
                       <div class="col-md-6">
                         <div class="col-md-12">
                         <label class="control-label">Date Started: </label>
-                          <input type="date" id="dateStart" name ="dateStart" class="form-control" required/> 
+                          <input type="date" id="dateStart" name ="dateStart" class="form-control" value="<?php echo $dateToday?>" required/> 
                         </div>
+                        <p id="startError" style="color:red"></p>
                       </div> 
                       <div class="col-md-6">
                         <div class="col-md-12">
                         <label class="control-label">Estimated Date Finish</label>
-                          <input type="date" id="estStart" name ="estStart" class="form-control" required/> 
+                          <input type="date" id="estDate" name ="estDate" class="form-control" value="<?php echo $estDate?>" required/> 
                         </div>
+                        <p id="estError" style="color:red"></p>
                       </div>
-
                     </div>
                     <br>
                     <div class="row">
@@ -176,6 +185,7 @@ $_SESSION['varname'] = $jsID;
                             ?>
                           </select>
                         </div>
+                        <p id="hError" style="color:red"></p>
                       </div> 
                     </div>
                     <br>
@@ -191,7 +201,7 @@ $_SESSION['varname'] = $jsID;
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+                <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn" disabled><i class="fa fa-check"></i> Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
               </div>                
             </form>
@@ -222,19 +232,25 @@ $_SESSION['varname'] = $jsID;
                       </div>
                       <hr>
                       <div id="update">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <label class="control-label">Date Started: </label>
-                            <div class="col-md-10 pull-right">
-                              <input type="date" id="dateStart" name ="dateStart" class="form-control"/> 
-                            </div>
-                          </div> 
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="col-md-12">
+                        <label class="control-label">Date Started: </label>
+                          <input type="date" id="dateStart" name ="dateStart" class="form-control" value="<?php echo $dateToday?>" required/> 
                         </div>
+                      </div> 
+                      <div class="col-md-6">
+                        <div class="col-md-12">
+                        <label class="control-label">Estimated Date Finish</label>
+                          <input type="date" id="estDate" name ="estDate" class="form-control" value="<?php echo $estDate?>" required/> 
+                        </div>
+                      </div>
+                    </div>
                         <br>
                         <div class="row">
                           <div class="col-md-12">
-                            <label class="control-label">Handler: </label>
-                            <div class="col-md-10 pull-right">
+                            <div class="col-md-12">
+                            <label class="control-label">Handler</label>
                               <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                                 <option value="">Select Employee Handler</option>
                                 <?php
@@ -255,8 +271,8 @@ $_SESSION['varname'] = $jsID;
                         <br>
                         <div class="row">
                           <div class="col-md-12">
+                            <div class="col-md-12">
                             <label class="control-label">Remarks: </label>
-                            <div class="col-md-10 pull-right">
                               <textarea rows="4" id="Uremarks" name ="remarks" class="form-control"> </textarea>
                             </div>
                           </div> 
@@ -266,8 +282,8 @@ $_SESSION['varname'] = $jsID;
                       <div id="finish">
                         <div class="row">
                           <div class="col-md-12">
+                            <div class="col-md-12">
                             <label class="control-label">Date Finished: </label>
-                            <div class="col-md-10 pull-right">
                               <input type="date" id="dateFinish" name="dateFinish" class="form-control"/> 
                             </div>
                           </div> 
@@ -275,8 +291,8 @@ $_SESSION['varname'] = $jsID;
                         <br>
                         <div class="row">
                           <div class="col-md-12">
+                            <div class="col-md-12">
                             <label class="control-label">Remarks: </label>
-                            <div class="col-md-10 pull-right">
                               <textarea rows="4" id="remarks" name ="remarks" class="form-control"> </textarea>
                             </div>
                           </div> 

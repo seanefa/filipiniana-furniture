@@ -48,6 +48,78 @@ if(isset($_GET['id'])){
   });
  });
 
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
+    $("#estDate").on('change',function(){
+      allValidation();
+      // var est = new Date($("#estDate").val());
+      // var start = new Date($("#dateStart").val());
+      // if(start>est){
+      //   var e = "Estimated date must not be earlier than the Start Date";
+      //   $("#estError").html(e);
+      //   $('#estDate').css('border-color','red');
+      // }
+      // else{
+      //   var e = "";
+      //   $("#estError").html(e);
+      //   $('#estDate').css('border-color','grey');
+      // }
+    });
+  });
+ });
+
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
+    $("#handler").on('change',function(){
+      allValidation();
+    });
+  });
+ });
+
+
+  function allValidation(){
+    var h = $("#handler").val();
+    var est = new Date($("#estDate").val());
+    var start = new Date($("#dateStart").val());
+    var ctr = 0;
+    if(start>est){
+      var e = "Estimated date must not be earlier than the Start Date";
+      $("#estError").html(e);
+      $('#estDate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+      ctr = 0;
+    }
+    else{
+      var e = "";
+      $("#estError").html(e);
+      $('#estDate').css('border-color','grey');
+      $('#saveBtn').prop('disabled',false);
+      ctr++;
+    }
+
+
+    if(h!=""){
+      var e = "";
+      $("#hError").html(e);
+      $('#handler').css('border-color','grey');
+      ctr++;
+    }
+    else{
+      var e = "Please select a handler";
+      $("#hError").html(e);
+      $('#handler').css('border-color','red');
+    }
+
+    if(ctr==2){
+      $('#saveBtn').prop('disabled',false);
+    }
+    else{
+      $('#saveBtn').prop('disabled',true);
+    }
+
+
+  }
+
   function deleteRow(row){
     var result = confirm("Remove Material?");
     if(result){
@@ -100,6 +172,7 @@ if(isset($_GET['id'])){
                               $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
                               $result = mysqli_query($conn,$sql);
                               $row = mysqli_fetch_assoc($result);
+                              $orderPrice = $row['orderPrice'];
                               ?>
                               <h5>
                                 <table class="table">
@@ -122,34 +195,44 @@ if(isset($_GET['id'])){
                                 </table>
                               </h5>
                             </div>
-                            
+
                             <div class="col-md-6">
-                              <h2>Customer Information</h2>
-                              <?php
-                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
-                              $result = mysqli_query($conn,$sql);
-                              $row = mysqli_fetch_assoc($result);
-                              ?>
-                              <h5>
-                                <table class="table">
+                              <h3> <label class="control-label">Payment History</label></h3>
+                              <table class="table color-bordered-table">
+                                <thead>
+                                  <th style="text-align:left"><b>Date Paid</b></th>
+                                  <th style="text-align:left"><b>Mode of Payment</b></th>
+                                  <th style="text-align:right"><b>Amount Paid</b></th>
+                                </thead>
+                                <tbody>
+                                  <?php
+                                  $down = 0;
+                                  $bal = 0;
+                                  $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$id'";
+                                  $res = mysqli_query($conn,$sql);
+                                  $tpay = 0;
+                                  while($trow = mysqli_fetch_assoc($res)){
+                                    $date = date_create($trow['dateCreated']);
+                                    $date = date_format($date,"F d, Y");
+                                    $tpay = $tpay + $trow['amountPaid'];
+                                    echo '<tr><td>'.$date.'</td>
+                                    <td>'.$trow['modeofpaymentDesc'].'</td>
+                                    <td style="text-align:right;">&#8369; '.number_format($trow['amountPaid'],2).'</td>
+                                    </tr>';
+                                  }
+                                  $down = $tpay;
+                                  $bal = $orderPrice - $down;
+                                  ?>
                                   <tr>
-                                    <td><b>Name</b></td>
-                                    <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
+                                    <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+                                    <td style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($down,2)?></span></strong></mark></td>
                                   </tr>
                                   <tr>
-                                    <td><b>Address</b></td>
-                                    <td><?php echo $row['customerAddress'];?></td>
+                                    <td colspan="2" style="text-align:right;"><b> REMAINING BALANCE</b></td>
+                                    <td style="text-align:right; color:red;"><mark style="text-align:right; color:red;"><strong><span>&#8369;&nbsp;<?php echo number_format($bal,2)?></span></strong></mark></td>
                                   </tr>
-                                  <tr>
-                                    <td><b>Contact Number</b></td>
-                                    <td><?php echo $row['customerContactNum'];?></td>
-                                  </tr>
-                                  <tr>
-                                    <td><b>Email Address</b></td>
-                                    <td><?php echo $row['customerEmail'];?></td>
-                                  </tr>
-                                </table>
-                              </h5>
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
