@@ -16,7 +16,7 @@ if(isset($_GET['id'])){
   $(document).ready(function(){
    $('#myModal').on('shown.bs.modal',function(){
     $('#finish').hide();
-     $("#finPhase").on('change',function(){
+    $("#finPhase").on('change',function(){
       if($(this).prop("checked")){
         $('#finish').show();
         $('#update').hide();
@@ -31,13 +31,13 @@ if(isset($_GET['id'])){
         $('#remarks').val("");
       }
     });
-   });
+  });
  });
 
-$(document).ready(function(){
+  $(document).ready(function(){
    $('#myModal').on('shown.bs.modal',function(){
     $('#materials').hide();
-     $("#matQuantity").on('change',function(){
+    $("#matQuantity").on('change',function(){
       if($(this).prop("checked")){
         $('#materials').show();
       }
@@ -45,10 +45,10 @@ $(document).ready(function(){
         $('#materials').hide();
       }
     });
-   });
+  });
  });
 
- function deleteRow(row){
+  function deleteRow(row){
     var result = confirm("Remove Material?");
     if(result){
       var i=row.parentNode.parentNode.rowIndex;
@@ -92,34 +92,65 @@ $(document).ready(function(){
                   <div class="row">
                     <div class="descriptions">
                       <div class="form-body">
-                        <h2>Customer Information</h2>
-                        <?php
-                        $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
-                        $result = mysqli_query($conn,$sql);
-                        $row = mysqli_fetch_assoc($result);
-                        ?>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <h5>
-                              <table class="table">
-                                <tr>
-                                  <td><b>Name</b></td>
-                                  <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Address</b></td>
-                                  <td><?php echo $row['customerAddress'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Contact Number</b></td>
-                                  <td><?php echo $row['customerContactNum'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Email Address</b></td>
-                                  <td><?php echo $row['customerEmail'];?></td>
-                                </tr>
-                              </table>
-                            </h5>
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <h2>Customer Information</h2>
+                              <?php
+                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              ?>
+                              <h5>
+                                <table class="table">
+                                  <tr>
+                                    <td><b>Name</b></td>
+                                    <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Address</b></td>
+                                    <td><?php echo $row['customerAddress'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Contact Number</b></td>
+                                    <td><?php echo $row['customerContactNum'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Email Address</b></td>
+                                    <td><?php echo $row['customerEmail'];?></td>
+                                  </tr>
+                                </table>
+                              </h5>
+                            </div>
+                            
+                            <div class="col-md-6">
+                              <h2>Customer Information</h2>
+                              <?php
+                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              ?>
+                              <h5>
+                                <table class="table">
+                                  <tr>
+                                    <td><b>Name</b></td>
+                                    <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Address</b></td>
+                                    <td><?php echo $row['customerAddress'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Contact Number</b></td>
+                                    <td><?php echo $row['customerContactNum'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Email Address</b></td>
+                                    <td><?php echo $row['customerEmail'];?></td>
+                                  </tr>
+                                </table>
+                              </h5>
+                            </div>
                           </div>
                         </div>
                         <br>
@@ -206,7 +237,7 @@ $(document).ready(function(){
                                                 if($pRow['prodStatus']=="Finished"){
                                                   $isFinish = 1;
                                                   $isFirst = 1;
-                                                 echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
+                                                  echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
                                                   <div class="thumbnail">
                                                   <img height="115px" width="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
@@ -246,7 +277,9 @@ $(document).ready(function(){
                                               ?>
 
                                             </div>
-                                                                                  </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -261,9 +294,7 @@ $(document).ready(function(){
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <?php
+          <?php
           } //end ng while sa order reqs
           ?>
         </div>

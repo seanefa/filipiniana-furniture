@@ -142,18 +142,25 @@ $_SESSION['varname'] = $jsID;
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
+                        <div class="col-md-12">
                         <label class="control-label">Date Started: </label>
-                        <div class="col-md-10 pull-right">
                           <input type="date" id="dateStart" name ="dateStart" class="form-control" required/> 
                         </div>
                       </div> 
+                      <div class="col-md-6">
+                        <div class="col-md-12">
+                        <label class="control-label">Estimated Date Finish</label>
+                          <input type="date" id="estStart" name ="estStart" class="form-control" required/> 
+                        </div>
+                      </div>
+
                     </div>
                     <br>
                     <div class="row">
                       <div class="col-md-12">
-                        <label class="control-label">Handler: </label>
-                        <div class="col-md-10 pull-right">
+                        <div class="col-md-12">
+                        <label class="control-label">Handler</label>
                           <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                             <option value="">Select Employee Handler</option>
                             <?php
@@ -174,8 +181,8 @@ $_SESSION['varname'] = $jsID;
                     <br>
                     <div class="row">
                       <div class="col-md-12">
+                        <div class="col-md-12">
                         <label class="control-label">Remarks: </label>
-                        <div class="col-md-10 pull-right">
                           <textarea rows="4" id="remarks" name ="remarks" class="form-control"> </textarea>
                         </div>
                       </div> 

@@ -18,7 +18,16 @@ if($mop==1){
 	echo $paysql . "<br>";
 	mysqli_query($conn,$paysql);
 	$receiptID = mysqli_insert_id($conn);
-	header( "Location: receipt2.php?id=".$receiptID);
+	//header( "Location: receipt.php?id=".$receiptID);
+
+	echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='collections.php';
+      alert('Record Saved.');
+      </script>";
 
 }
 else if($mop==2){
@@ -32,7 +41,16 @@ else if($mop==2){
 	$ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
 	echo $ch . "<br>";
 	mysqli_query($conn,$ch);
-	header( "Location: receipt2.php?id=".$pdID);
+	//header( "Location: receipt.php?id=".$pdID);
+	echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$pdID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='collections.php';
+      alert('Record Saved.');
+      </script>";
+
 }
 mysqli_close($conn);
 ?>
