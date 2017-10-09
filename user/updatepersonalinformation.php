@@ -8,6 +8,11 @@ $cn = $_POST["number"];
 $exist_image = $_POST["exist_image"];
 $pic = "";
 
+$getdata = "SELECT * from tblcustomer where customerStatus = 'Active'";
+$datapool = $conn->query($getdata);
+$row = $datapool->fetch_assoc();
+
+
 $fn= mysqli_real_escape_string($conn, $fn);
 $mn= mysqli_real_escape_string($conn, $mn);
 $ln= mysqli_real_escape_string($conn, $ln);
@@ -17,8 +22,8 @@ if($_FILES["image"]["error"] > 0){
 	header("Location: account.php");
 }
 else{
-	move_uploaded_file($_FILES["image"]["tmp_name"], "pics/userpictures/" . date('Y-m-d') . time() . ".png");
- 	$pic = date('Y-m-d') . time() . ".png";
+	move_uploaded_file($_FILES["image"]["tmp_name"], "pics/userpictures/" . $row["customerID"] . ".png");
+ 	$pic = $row["customerID"] . ".png";
 	header("Location: account.php");
 }
 if($pic=="")

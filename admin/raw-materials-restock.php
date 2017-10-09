@@ -24,6 +24,7 @@ $flag++;
 $sql2 = "SELECT * FROM tblmat_inventory WHERE matVariantID = '$varid'";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_assoc($result2);
+$sID = mysqli_insert_id($conn);
 
 $added = $row2['matVarQuantity'] + $quan;
 $sql4 = "UPDATE `tblmat_inventory` SET `matVarQuantity`='$added' WHERE `matVariantID`='$varid'";
@@ -33,9 +34,12 @@ $flag++;
 
 if ($flag>0) {
 	// Logs start here
-	$sID = mysqli_insert_id($conn); // ID of last input;
+	$sql5 = "SELECT * FROM tblmat_var WHERE mat_varID = '$varid'";
+    $result5 = mysqli_query($conn, $sql5);
+    $row5 = mysqli_fetch_assoc($result5);
+	 // ID of last input;
 	$date = date("Y-m-d");
-	$logDesc = "Added new material ".$name.", ID = " .$sID;
+	$logDesc = "Added stocks on raw materials ".$row5['mat_varDescription'].", ID = " .$sID;
 	$empID = $_SESSION['userID'];
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Restock', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);

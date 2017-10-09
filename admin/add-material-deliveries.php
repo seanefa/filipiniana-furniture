@@ -25,6 +25,7 @@ $varlen = count($varnt);
 for($i = 0; $i < $varlen; $i++) {
     $sql1 = "INSERT INTO `tblmat_deliverydetails` (`del_matDelID`, `del_matVarID`, `del_quantity`, `del_remarks`) VALUES ('$id', '$varid[$i]','$quantity[$i]','$status')";
     mysqli_query($conn, $sql1);
+	$sID = mysqli_insert_id($conn);
     $flag++;
 }
 
@@ -47,11 +48,15 @@ for($i = 0; $i < $varlen; $i++) {
     
 }
 
+$sql5 = "SELECT * FROM tblsupplier WHERE supplierID = '$sup'";
+    $result5 = mysqli_query($conn, $sql5);
+    $row5 = mysqli_fetch_assoc($result5);
+
 if ($flag>0) {
 	// Logs start here
-	$sID = mysqli_insert_id($conn); // ID of last input;
+	// ID of last input;
 	$date = date("Y-m-d");
-	$logDesc = "Added new frame material ".$name.", ID = " .$sID;
+	$logDesc = "Added new deliveries from supplier ".$row5['supCompName'].", ID = " .$sID;
 	$empID = $_SESSION['userID'];
 	$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Material Deliveries', 'New', '$date', '$logDesc', '$empID')";
 	mysqli_query($conn,$logSQL);

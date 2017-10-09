@@ -422,7 +422,7 @@ include 'dbconnect.php';
                           <tbody>
 							  <?php
                   include "dbconnect.php";
-                  $sql = "SELECT * FROM tblcustomer WHERE customerStatus='active' OR customerStatus='Active' order by customerID;";
+                  $sql = "SELECT * FROM tblcustomer WHERE customerStatus='active' AND customerStatus='Active' order by customerID;";
 
                   $result = mysqli_query($conn, $sql);
                   if($result){
@@ -444,9 +444,9 @@ include 'dbconnect.php';
                                     <td style="text-align:center">' . $custEmail . '</td>
                                     <td style="text-align:left">
 									
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['customerID']. ' #orderReqaccept"><i class="ti-pencil-alt"></i> Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateCustomerModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID']. ' "><i class="ti-pencil-alt"></i> Update</button>
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['customerID'].' #orderReqreject"><i class="ti-close"></i> Deactivate</button> 
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID'] . ' "><i class="ti-close"></i> Deactivate</button> 
                                     </td>
                                     </tr>
                                     ');
