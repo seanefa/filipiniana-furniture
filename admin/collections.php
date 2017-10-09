@@ -96,6 +96,7 @@ if (!empty($_SESSION['actionFailed'])) {
                                 $get_name = orderCon($row['orderID']);
                                 $bal = getBal($row['orderID'], $row['orderPrice']);
                                 $paymentStat = getStat($row['orderID'], $row['orderPrice']);
+                                if($bal!=0){
                                 echo ('
                                   <tr>
                                   <td>'.$orderID.'</td>
@@ -110,6 +111,7 @@ if (!empty($_SESSION['actionFailed'])) {
                                   </td>
                                   </tr>
                                   ');
+                                  }
                               }     
                             }
                             /*<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #payment">&#8369; Payment</button>*/

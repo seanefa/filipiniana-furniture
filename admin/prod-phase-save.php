@@ -11,8 +11,14 @@ if(isset($_POST['dateFinish'])){
 }
 
 if($type==0){
+	if(!isset($_POST['mattype'])){
+		$_SESSION['actionFailed'] = 'Failed';
+		header( 'l: ' . $_SERVER['HTTP_REFERER']);
+	}
 	$dateStart = date_create($_POST['dateStart']);
 	$dateStart = date_format($dateStart,"Y-m-d");
+	$estDate = date_create($_POST['estDate']);
+	$estDate = date_format($estDate,"Y-m-d");
 	$handler = $_POST['handler'];
 	$remarks = $_POST['remarks'];
 	$desc = $_POST['matvarid'];
@@ -26,7 +32,7 @@ if($type==0){
 	}
 
 	$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks',prodStatus= 
-	'Ongoing' WHERE prodHistID = '$phaseID'";
+	'Ongoing' , prodEstDate = '$estDate' WHERE prodHistID = '$phaseID'";
 
 	if(mysqli_query($conn,$sql)){
 		for($x=0;$x<$ctr;$x++){
@@ -42,7 +48,7 @@ if($type==0){
 		}
 		echo $sql . "<br>";
 		echo "<script>
-		window.l.href='production-tracking-details.php?id=".$orderID."';
+		window.location.href='production-tracking-details.php?id=".$orderID."';
 		alert('Production started');
 		</script>";
 	}
@@ -64,7 +70,7 @@ else{
 			finishOrderReq($phaseID);
 			orderRequestCnt($phaseID);
 			echo "<script>
-			window.l.href='production-tracking-details.php?id=".$orderID."';
+			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production in this phase is finished');
 			</script>";
 			//echo $sql . "<br>";
@@ -74,19 +80,24 @@ else{
 		}
 	}
 	else{
+		if(!isset($_POST['mattype'])){
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'l: ' . $_SERVER['HTTP_REFERER']);
+		}
 		$dateStart = date_create($_POST['dateStart']);
 		$dateStart = date_format($dateStart,"Y-m-d");
+		$estDate = date_create($_POST['estDate']);
+		$estDate = date_format($estDate,"Y-m-d");
 		$handler = $_POST['handler'];
 		$remarks = $_POST['remarks'];
 
-		$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks', prodStatus= 
-		'Ongoing' WHERE prodHistID = '$phaseID'";
+		$sql = "UPDATE tblproduction_phase SET prodEmp = '$handler', prodDateStart = '$dateStart', prodRemarks='$remarks', prodStatus= 'Ongoing' , prodEstDate = '$estDate' WHERE prodHistID = '$phaseID'";
 
 		if(mysqli_query($conn,$sql)){
 			finishProduction($phaseID);
 			echo $sql;
 			echo "<script>
-			window.l.href='production-tracking-details.php?id=".$orderID."';
+			window.location.href='production-tracking-details.php?id=".$orderID."';
 			alert('Production updated');
 			</script>";
 		}

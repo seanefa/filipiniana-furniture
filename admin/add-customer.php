@@ -36,7 +36,7 @@ $payment = $_POST['aTendered'];
 $_SESSION['payment'] = $payment;
 
 $date = new DateTime();
-$orderdaterec = $date->format('Y-m-d H:i:s');;
+$orderdaterec = $date->format('Y-m-d H:i:s');
 $orderdatepick = $_POST['pidate'];
 $orderstat = "Pending";
 $ordertype = "Pre-Order";

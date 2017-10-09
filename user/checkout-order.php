@@ -1,7 +1,6 @@
 <?php
 include 'userconnect.php';
 session_start();
-
 $custid = "";
 
 if(isset($_SESSION['custID'])){
@@ -38,7 +37,7 @@ $_SESSION['payment'] = $payment;
 $date = new DateTime();
 $orderdaterec = $date->format('Y-m-d H:i:s');;
 $orderdatepick = $orderdaterec;
-$orderstat = "Pending";
+$orderstat = "WFA";
 $ordertype = "Pre-Order";
 
 $selected = $_POST['cart'];
@@ -58,7 +57,6 @@ $_SESSION['P_quant'] = $P_selectedQuant;
 $_SESSION['P_price'] = $P_selectedPrice;
 //$totalPrice = $_SESSION['total_price'];
 //
-
 
 $_SESSION['cart'] = $selected;
 $_SESSION['quant'] = $selectedQuant;

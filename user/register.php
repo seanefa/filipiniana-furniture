@@ -104,12 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <fieldset>
               <legend>Newsletter</legend>
               <div class="form-group required">
+                <div class="g-recaptcha pull-right" data-sitekey="6Ld4ijMUAAAAAL1AtLFjYMZPzteuwd4l6VUDvfGz"></div>
                 <label class="col-sm-2 control-label">I want to receive exclusive offers by e-mail</label>
-                <div class="col-sm-10">
+                <div class="col-sm-5">
 <!--                  <input type="checkbox" id="_cbxNewsletter" value="1" name="newsletter">-->
 					<label>Yes</label>&nbsp;<input type="radio" name="newsletter" value="1" checked><br>
 					<label>No</label>&nbsp;<input type="radio" name="newsletter" value="0">
-                  <br>
                 </div>
               </div>
             </fieldset>

@@ -411,7 +411,6 @@ include 'dbconnect.php';
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                           <thead>
                             <tr>
-                              <th>ID</th>
                               <th>Name</th>
                               <th>Address</th>
                               <th>Contact Number</th>
@@ -437,7 +436,6 @@ include 'dbconnect.php';
                                   $custEmail = $row['customerEmail'];
                                   echo ('
                                     <tr>
-                                    <td style="text-align:left">' . $custID . '</td>
                                     <td style="text-align:left">' . $custLName . ", " . $custFName . " " . $custMName . '</td>
                                     <td style="text-align:left">' . $custAddress . '</td>
                                     <td style="text-align:center">' . $custNumber . '</td>

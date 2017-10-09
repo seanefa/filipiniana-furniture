@@ -16,7 +16,9 @@ include "product-form.php";
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
 <script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="js/myScript.js"></script>
+<script type="text/javascript" src="js/toast-master/js/jquery.toast.js"></script>
 <script type="text/javascript" src="js/toastr.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script src="js/jquery.mycart.js"></script>
 
@@ -69,6 +71,7 @@ jQuery(document).ready(function() {
 <script type="text/javascript">
 
 $(document).ready(function(){
+
   
 var q = 0;
 $('#addBtn').attr('data-quantity',q);
@@ -218,7 +221,7 @@ if(logcheck != 'yes'){
           alert('Cart is Empty');
         }
         }
-        else{ //package
+        else if(obj.id.toString().charAt(0) == 'P'){ //package
 
           var pkeys = Object.keys(obj).map(function (key) { return obj[key]; });
         

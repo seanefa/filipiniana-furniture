@@ -290,53 +290,72 @@ $_SESSION['varname'] = $jsID;
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct" style="text-align:center;">ORDER ID: <?php echo $orderID = str_pad($jsID, 6, '0', STR_PAD_LEFT);?></h3>
         </div>
-        <?php
-        $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$jsID'";
-        $result = mysqli_query($conn,$sql);
-        $row = mysqli_fetch_assoc($result);
-        ?>
         <div class="modal-body">
           <div class="descriptions">
 
             <div class="row">
               <div class="col-md-6">
                 <h3 style="text-align:center;"><label class="control-label">Customer Information</label></h3>
-                <h5 style="text-align: left;"><p><b>Name: </b><?php echo $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName']?></p>
-                  <p><b>Address: </b><?php echo $row['customerAddress']?></p>
-                  <p><b>Contact Number: </b><?php echo $row['customerContactNum']?></p>
-                  <p><b>Email Address: </b><?php echo $row['customerEmail']?></p>
-                  <p><b>Remarks: </b><?php echo $row['orderRemarks']?></p>
+                <?php
+                $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$jsID'";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+                $orderPrice = $row['orderPrice'];
+                ?>
+                <h5>
+                  <table class="table">
+                    <tr>
+                      <td><b>Name</b></td>
+                      <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
+                    </tr>
+                    <tr>
+                      <td><b>Address</b></td>
+                      <td><?php echo $row['customerAddress'];?></td>
+                    </tr>
+                    <tr>
+                      <td><b>Contact Number</b></td>
+                      <td><?php echo $row['customerContactNum'];?></td>
+                    </tr>
+                    <tr>
+                      <td><b>Email Address</b></td>
+                      <td><?php echo $row['customerEmail'];?></td>
+                    </tr>
+                  </table>
                 </h5>
               </div>
 
               <div class="col-md-6">
-                <h3 style="text-align:center;"> <label class="control-label">Payment Information</label></h3>
-                
-                <table class="table table-bordered table-hover">
-                  <tr>
-                    <td><b>Total Amount Due: </b></td>
-                    <td>&#8369; <?php echo number_format($row['orderPrice'])?></td>
-                  </tr>
-                  <?php
-                  $down = 0;
-                  $bal = 0;
-                  $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$jsID'";
-                  $res = mysqli_query($conn,$sql);
-                  $tpay = 0;
-                  while($trow = mysqli_fetch_assoc($res)){
-                    $tpay = $tpay + $trow['amountPaid'];
-                  }
-                  $down = $tpay;
-                  $bal = $row['orderPrice'] - $down;
-                  ?>
-                  <tr>
-                    <td><b>Downpayment:  </b></td>
-                    <td>&#8369; <?php echo number_format($down,2)?></td>
-                  </tr>
-                  <tr>
-                    <td><b>Remaining Balance: </b></td>
-                    <td>&#8369; <?php echo number_format($bal,2)?></td>
-                  </tr>
+                <h3 style="text-align:center;"> <label class="control-label">Payment History</label></h3>
+                <table class="table color-bordered-table">
+                  <thead>
+                    <th style="text-align:left"><b>Date Paid</b></th>
+                    <th style="text-align:left"><b>Mode of Payment</b></th>
+                    <th style="text-align:right"><b>Amount Paid</b></th>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $down = 0;
+                    $bal = 0;
+                    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$jsID'";
+                    $res = mysqli_query($conn,$sql);
+                    $tpay = 0;
+                    while($trow = mysqli_fetch_assoc($res)){
+                      $date = date_create($trow['dateCreated']);
+                      $date = date_format($date,"F d, Y");
+                      $tpay = $tpay + $trow['amountPaid'];
+                      echo '<tr><td>'.$date.'</td>
+                      <td>'.$trow['modeofpaymentDesc'].'</td>
+                      <td style="text-align:right;">&#8369; '.number_format($trow['amountPaid'],2).'</td>
+                      </tr>';
+                    }
+                    $down = $tpay;
+                    $bal = $orderPrice - $down;
+                    ?>
+                    <tr>
+                      <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+                      <td style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($down,2)?></span></strong></mark></td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <?php
@@ -384,9 +403,21 @@ $_SESSION['varname'] = $jsID;
                             ?>
                           </tbody>
                           <tfoot style="text-align:right;">
+                          <tr>
                             <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
                             <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-                            <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
+                            <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" style="text-align:right;"><b> TOTAL AMOUNT PAID</b></td>
+                            <td></td>
+                            <td style="text-align:right;">&#8369;&nbsp;<?php echo number_format($down,2)?></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3" style="text-align:right;"><b> REMAINING BALANCE</b></td>
+                            <td></td>
+                            <td style="text-align:right; color:red;"><mark style="text-align:right; color:red;"><strong><span>&#8369;&nbsp;<?php echo number_format($bal,2)?></span></strong></mark></td>
+                          </tr>
                           </tfoot>
                         </table>
                       </div>

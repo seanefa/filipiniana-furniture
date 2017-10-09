@@ -13,10 +13,16 @@ if(isset($_GET['id'])){
   <title>Production Details</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
+  
+  function redirectJob(){
+    var hist = $("#histID").val();
+    window.open("job-ticket.php?id="+hist, "_blank");
+  }
+
   $(document).ready(function(){
    $('#myModal').on('shown.bs.modal',function(){
     $('#finish').hide();
-     $("#finPhase").on('change',function(){
+    $("#finPhase").on('change',function(){
       if($(this).prop("checked")){
         $('#finish').show();
         $('#update').hide();
@@ -31,13 +37,13 @@ if(isset($_GET['id'])){
         $('#remarks').val("");
       }
     });
-   });
+  });
  });
 
-$(document).ready(function(){
+  $(document).ready(function(){
    $('#myModal').on('shown.bs.modal',function(){
     $('#materials').hide();
-     $("#matQuantity").on('change',function(){
+    $("#matQuantity").on('change',function(){
       if($(this).prop("checked")){
         $('#materials').show();
       }
@@ -45,10 +51,82 @@ $(document).ready(function(){
         $('#materials').hide();
       }
     });
-   });
+  });
  });
 
- function deleteRow(row){
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
+    $("#estDate").on('change',function(){
+      allValidation();
+      // var est = new Date($("#estDate").val());
+      // var start = new Date($("#dateStart").val());
+      // if(start>est){
+      //   var e = "Estimated date must not be earlier than the Start Date";
+      //   $("#estError").html(e);
+      //   $('#estDate').css('border-color','red');
+      // }
+      // else{
+      //   var e = "";
+      //   $("#estError").html(e);
+      //   $('#estDate').css('border-color','grey');
+      // }
+    });
+  });
+ });
+
+  $(document).ready(function(){
+   $('#myModal').on('shown.bs.modal',function(){
+    $("#handler").on('change',function(){
+      allValidation();
+    });
+  });
+ });
+
+
+  function allValidation(){
+    var h = $("#handler").val();
+    var est = new Date($("#estDate").val());
+    var start = new Date($("#dateStart").val());
+    var ctr = 0;
+    if(start>est){
+      var e = "Estimated date must not be earlier than the Start Date";
+      $("#estError").html(e);
+      $('#estDate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+      ctr = 0;
+    }
+    else{
+      var e = "";
+      $("#estError").html(e);
+      $('#estDate').css('border-color','grey');
+      $('#saveBtn').prop('disabled',false);
+      ctr++;
+    }
+
+
+    if(h!=""){
+      var e = "";
+      $("#hError").html(e);
+      $('#handler').css('border-color','grey');
+      ctr++;
+    }
+    else{
+      var e = "Please select a handler";
+      $("#hError").html(e);
+      $('#handler').css('border-color','red');
+    }
+
+    if(ctr==2){
+      $('#saveBtn').prop('disabled',false);
+    }
+    else{
+      $('#saveBtn').prop('disabled',true);
+    }
+
+
+  }
+
+  function deleteRow(row){
     var result = confirm("Remove Material?");
     if(result){
       var i=row.parentNode.parentNode.rowIndex;
@@ -92,34 +170,76 @@ $(document).ready(function(){
                   <div class="row">
                     <div class="descriptions">
                       <div class="form-body">
-                        <h2>Customer Information</h2>
-                        <?php
-                        $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
-                        $result = mysqli_query($conn,$sql);
-                        $row = mysqli_fetch_assoc($result);
-                        ?>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <h5>
-                              <table class="table">
-                                <tr>
-                                  <td><b>Name</b></td>
-                                  <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Address</b></td>
-                                  <td><?php echo $row['customerAddress'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Contact Number</b></td>
-                                  <td><?php echo $row['customerContactNum'];?></td>
-                                </tr>
-                                <tr>
-                                  <td><b>Email Address</b></td>
-                                  <td><?php echo $row['customerEmail'];?></td>
-                                </tr>
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <h2>Customer Information</h2>
+                              <?php
+                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              $orderPrice = $row['orderPrice'];
+                              ?>
+                              <h5>
+                                <table class="table">
+                                  <tr>
+                                    <td><b>Name</b></td>
+                                    <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Address</b></td>
+                                    <td><?php echo $row['customerAddress'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Contact Number</b></td>
+                                    <td><?php echo $row['customerContactNum'];?></td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Email Address</b></td>
+                                    <td><?php echo $row['customerEmail'];?></td>
+                                  </tr>
+                                </table>
+                              </h5>
+                            </div>
+
+                            <div class="col-md-6">
+                              <h3> <label class="control-label">Payment History</label></h3>
+                              <table class="table color-bordered-table">
+                                <thead>
+                                  <th style="text-align:left"><b>Date Paid</b></th>
+                                  <th style="text-align:left"><b>Mode of Payment</b></th>
+                                  <th style="text-align:right"><b>Amount Paid</b></th>
+                                </thead>
+                                <tbody>
+                                  <?php
+                                  $down = 0;
+                                  $bal = 0;
+                                  $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$id'";
+                                  $res = mysqli_query($conn,$sql);
+                                  $tpay = 0;
+                                  while($trow = mysqli_fetch_assoc($res)){
+                                    $date = date_create($trow['dateCreated']);
+                                    $date = date_format($date,"F d, Y");
+                                    $tpay = $tpay + $trow['amountPaid'];
+                                    echo '<tr><td>'.$date.'</td>
+                                    <td>'.$trow['modeofpaymentDesc'].'</td>
+                                    <td style="text-align:right;">&#8369; '.number_format($trow['amountPaid'],2).'</td>
+                                    </tr>';
+                                  }
+                                  $down = $tpay;
+                                  $bal = $orderPrice - $down;
+                                  ?>
+                                  <tr>
+                                    <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+                                    <td style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($down,2)?></span></strong></mark></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="2" style="text-align:right;"><b> REMAINING BALANCE</b></td>
+                                    <td style="text-align:right; color:red;"><mark style="text-align:right; color:red;"><strong><span>&#8369;&nbsp;<?php echo number_format($bal,2)?></span></strong></mark></td>
+                                  </tr>
+                                </tbody>
                               </table>
-                            </h5>
+                            </div>
                           </div>
                         </div>
                         <br>
@@ -206,7 +326,7 @@ $(document).ready(function(){
                                                 if($pRow['prodStatus']=="Finished"){
                                                   $isFinish = 1;
                                                   $isFirst = 1;
-                                                 echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
+                                                  echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
                                                   <div class="thumbnail">
                                                   <img height="115px" width="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
@@ -219,6 +339,8 @@ $(document).ready(function(){
                                                 }
 
                                                 if($pRow['prodStatus']=="Ongoing"){
+                                                  echo "<input type='hidden' id='histID' value='".$pRow['prodHistID']."'>";
+                                                  echo "<input type='hidden' id='oID' value='".$id."'>";
                                                   echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
                                                   <div class="thumbnail">
@@ -227,10 +349,14 @@ $(document).ready(function(){
                                                   <div class="pro-img-overlay">';
                                                   if($isFinish==1){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob()" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                   // echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
                                                     $isFinish = 0;
                                                   }
                                                   if($isFirst==0){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob()" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                    //echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>
@@ -263,9 +389,7 @@ $(document).ready(function(){
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <?php
+          <?php
           } //end ng while sa order reqs
           ?>
         </div>

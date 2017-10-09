@@ -98,7 +98,7 @@ include "menu.php";
                                                 }
                                                 if($row['orderStatus']=="Pending"){
                                                   echo '<div class="progress progress-lg" style="margin-top:15px;">
-                                                          <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$row['orderStatus'].'<br>'.$production.'</h3>
+                                                          <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$row['orderStatus'].'<br></h3>
                                                         </div>';
                                                 }
                                                 echo ('                                                 
@@ -110,18 +110,16 @@ include "menu.php";
                                       function production($id){
                                         include "dbconnect.php";
                                         $rowCount = 0;
-                                        $sql = "SELECT * from tblorder_request WHERE orderRequestStatus!='Archived' and tblOrdersID = '$id'";
-                                        $res = mysqli_query($conn,$sql);
-                                        $rowCount = mysqli_num_rows($res);
-
                                         $finProduction = 0;
-                                        $sql = "SELECT * FROM tblproduction a, tblorder_request b WHERE a.productionOrderReq = b.order_requestID and b.tblOrdersID = '$id';";
-                                        $res = mysqli_query($conn,$sql);
-                                        while($row = mysqli_fetch_assoc($res)){
-                                          if($row['productionStatus']=='Finished'){
+                                        $sql2 = "SELECT * FROM tblproduction b, tblorder_request c, tblorders a WHERE b.productionOrderReq = c.order_requestID and a.orderID = c.tblOrdersID and a.orderID = '$id' GROUP BY productionID;";
+                                        $res2 = mysqli_query($conn,$sql2);
+                                        while($row2 = mysqli_fetch_assoc($res2)){
+                                          $rowCount++;
+                                          if($row2['productionStatus']=='Finished'){
                                             $finProduction++;
                                           }
                                         }
+
                                         $output = $finProduction . " finished out of " . $rowCount;
                                         return($output);
                                       }      

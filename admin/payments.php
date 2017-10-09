@@ -15,10 +15,19 @@ $orderdaterec = $date->format('Y-m-d H:i:s');
 if($mop==1){
 	$tendered = $_POST['aTendered'];
 	$paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$tendered', '$mop', 'Paid');";
-	echo $paysql . "<br>";
+	//echo $paysql . "<br>";
 	mysqli_query($conn,$paysql);
 	$receiptID = mysqli_insert_id($conn);
-	header( "Location: receipt2.php?id=".$receiptID);
+	//header( "Location: receipt.php?id=".$receiptID);
+
+	echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$receiptID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='collections.php';
+      alert('Record Saved.');
+      </script>";
 
 }
 else if($mop==2){
@@ -26,13 +35,22 @@ else if($mop==2){
 	$amount = $_POST['cAmount'];
 	$remarks = $_POST['remarks'];
 	$paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
-	echo $paysql . "<br>";
+	//echo $paysql . "<br>";
 	mysqli_query($conn,$paysql);
 	$pdID = mysqli_insert_id($conn);
 	$ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
-	echo $ch . "<br>";
+	//echo $ch . "<br>";
 	mysqli_query($conn,$ch);
-	header( "Location: receipt2.php?id=".$pdID);
+	//header( "Location: receipt.php?id=".$pdID);
+	echo '<script type="text/javascript">
+        window.open("receipt.php?id='.$pdID.'","_blank")
+        </script>';
+
+    echo "<script>
+      window.location.href='collections.php';
+      alert('Record Saved.');
+      </script>";
+
 }
 mysqli_close($conn);
 ?>

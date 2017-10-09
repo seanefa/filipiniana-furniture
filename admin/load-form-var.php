@@ -16,7 +16,7 @@ if($recID==1){
     }
     else{
         array_push($placeholder,$row1['uncategoryName']);
-        array_push($units,$row1['uncategoryID']);
+        array_push($units,$row1['uncategoryName']);
         $x = $x + 1;
         
     }
@@ -29,7 +29,7 @@ if($recID==1){
         echo('<br><br><select class="form-control" tabindex="1" name="unid'.$i.'" id="unid'.$i.'">');
         $sql1="SELECT * FROM tblunit_cat a, tblunitofmeasure b WHERE a.unitID=b.unID ";
         foreach ($units as $a){
-            $sql2= $sql1 . "AND a.uncategoryID='$a'";
+            $sql2= $sql1 . "AND a.uncategoryName='$a'";
         }
         $sql3 = $sql2 . ";";
         $result1 = mysqli_query($conn, $sql3);
