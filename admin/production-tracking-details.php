@@ -13,6 +13,12 @@ if(isset($_GET['id'])){
   <title>Production Details</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
+  
+  function redirectJob(){
+    var hist = $("#histID").val();
+    window.open("job-ticket.php?id="+hist, "_blank");
+  }
+
   $(document).ready(function(){
    $('#myModal').on('shown.bs.modal',function(){
     $('#finish').hide();
@@ -333,6 +339,8 @@ if(isset($_GET['id'])){
                                                 }
 
                                                 if($pRow['prodStatus']=="Ongoing"){
+                                                  echo "<input type='hidden' id='histID' value='".$pRow['prodHistID']."'>";
+                                                  echo "<input type='hidden' id='oID' value='".$id."'>";
                                                   echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
                                                   <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
                                                   <div class="thumbnail">
@@ -341,10 +349,14 @@ if(isset($_GET['id'])){
                                                   <div class="pro-img-overlay">';
                                                   if($isFinish==1){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob()" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                   // echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
                                                     $isFinish = 0;
                                                   }
                                                   if($isFirst==0){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob()" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                    //echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>
