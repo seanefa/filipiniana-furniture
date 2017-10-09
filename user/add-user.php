@@ -105,7 +105,7 @@ if($cf==$pw)
 		        $mail->addReplyTo('filfurnitures@gmail.com', 'Filipiniana Furniture');
 
 		        // Add a recipient
-		        $mail->addAddress('filfurnitures@gmail.com');
+		        $mail->addAddress($em);
 
 		        // Set email format to HTML
 		        $mail->isHTML(true);
