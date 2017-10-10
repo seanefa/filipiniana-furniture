@@ -50,6 +50,11 @@ unset($_SESSION['actionFailed']);
 <html lang="en">
 <head>
   <script>
+
+  function redirectBill(id){
+    window.open("bill.php?id="+id, "_blank");
+  }
+
   $(document).ready(function(){
 
 var value = $("#selectCat").val(); // on load
@@ -174,6 +179,7 @@ $get_name = getName($row['custOrderID']);
 $production_stat = getStatus($row['orderID']);
 $date = date_create($row['dateOfRelease']);
 $dates = date_format($date,"F d, Y");
+echo "<input type='hidden' id='orderID' value='".$row['orderID']."'/>";
 echo ('<tr>
   <td style="text-align:left">'.$orderID.'</td>
   <td style="text-align:left">'.$get_name.'</td>
@@ -185,7 +191,7 @@ echo ('<tr>
 
   <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="ti-pencil-alt"></span> Update</a>
 
-  <a class="btn btn-success" style="color:white;" href="redirect-bill.php?id='. $row['orderID'].'"><span class=" ti-receipt"></span> Bill</a>
+  <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
 
   </td>
   </tr>

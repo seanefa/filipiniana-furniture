@@ -32,6 +32,12 @@ if(isset($_GET['first'])){
   $first = $_GET['first'];
 }
 
+$pack = "0";
+if(isset($_GET['pack'])){
+  echo $_GET['pack'];
+  $pack = $_GET['pack'];
+}
+
 $jsID = $_GET['id']; 
 $oID = $_GET['oID'];
 $pr = $_GET['smth'];
@@ -67,13 +73,28 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
       <div class="modal-content" id="startproduction">
         <div class="modal-header">
           <?php
-          $sql = "SELECT * FROM tblproduction_phase a, tblorder_request b, tblproduct c,tblphases d WHERE d.phaseID = a.prodPhase and a.prodHistID = '$pID' and b.orderProductID = c.productID and a.prodPhase = '$phase' and b.order_requestID = '$orderReq' and b.orderProductID = c.productID;";
-          $res = mysqli_query($conn,$sql);
-          $row = mysqli_fetch_assoc($res);
-          $prodDesign = $row['prodDesign'];
-          $prodID = $row['productID'];
-          $prodName = $row['productName'];
-          $productionPhase = $row['phaseName']
+          $prodDesign = "";
+          $prodID = "";
+          $prodName = "";
+          $productionPhase = "";
+          if($pack==1){
+            $sql = "SELECT * FROM tblproduction_phase a, tblpackage_orderreq b, tblproduct c,tblphases d WHERE d.phaseID = a.prodPhase and a.prodHistID = '$pID' and b.por_prID = c.productID and a.prodPhase = '$phase' and b.por_ID = '$orderReq';";
+            $res = mysqli_query($conn,$sql);
+            $row = mysqli_fetch_assoc($res);
+            $prodDesign = $row['prodDesign'];
+            $prodID = $row['productID'];
+            $prodName = $row['productName'];
+            $productionPhase = $row['phaseName'];
+          }
+          else{
+            $sql = "SELECT * FROM tblproduction_phase a, tblorder_request b, tblproduct c,tblphases d WHERE d.phaseID = a.prodPhase and a.prodHistID = '$pID' and b.orderProductID = c.productID and a.prodPhase = '$phase' and b.order_requestID = '$orderReq' and b.orderProductID = c.productID;";
+            $res = mysqli_query($conn,$sql);
+            $row = mysqli_fetch_assoc($res);
+            $prodDesign = $row['prodDesign'];
+            $prodID = $row['productID'];
+            $prodName = $row['productName'];
+            $productionPhase = $row['phaseName'];
+          }
           ?>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title" id="modalProduct">Start Production Phase : <b><?php echo $productionPhase?></b></h3>
@@ -152,14 +173,14 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                     <div class="row">
                       <div class="col-md-6">
                         <div class="col-md-12">
-                        <label class="control-label">Date Started: </label>
+                          <label class="control-label">Date Started: </label>
                           <input type="date" id="dateStart" name ="dateStart" class="form-control" value="<?php echo $dateToday?>" required/> 
                         </div>
                         <p id="startError" style="color:red"></p>
                       </div> 
                       <div class="col-md-6">
                         <div class="col-md-12">
-                        <label class="control-label">Estimated Date Finish</label>
+                          <label class="control-label">Estimated Date Finish</label>
                           <input type="date" id="estDate" name ="estDate" class="form-control" value="<?php echo $estDate?>" required/> 
                         </div>
                         <p id="estError" style="color:red"></p>
@@ -169,7 +190,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                     <div class="row">
                       <div class="col-md-12">
                         <div class="col-md-12">
-                        <label class="control-label">Handler</label>
+                          <label class="control-label">Handler</label>
                           <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                             <option value="">Select Employee Handler</option>
                             <?php
@@ -192,7 +213,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                     <div class="row">
                       <div class="col-md-12">
                         <div class="col-md-12">
-                        <label class="control-label">Remarks: </label>
+                          <label class="control-label">Remarks: </label>
                           <textarea rows="4" id="remarks" name ="remarks" class="form-control"> </textarea>
                         </div>
                       </div> 
@@ -221,6 +242,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
               <input type="hidden" name="type" value="1">
               <input type="hidden" name="orderID" value="<?php echo $jsID?>">
               <input type="hidden" name="phaseID" value="<?php echo $pID?>">
+              <input type="hidden" name="pack" value="<?php echo $pack?>">
               <div class="modal-body">
                 <div class="descriptions">
                   <div class="form-body">
@@ -232,25 +254,25 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                       </div>
                       <hr>
                       <div id="update">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="col-md-12">
-                        <label class="control-label">Date Started: </label>
-                          <input type="date" id="dateStart" name ="dateStart" class="form-control" value="<?php echo $dateToday?>" required/> 
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="col-md-12">
+                              <label class="control-label">Date Started: </label>
+                              <input type="date" id="dateStart" name ="dateStart" class="form-control" value="<?php echo $dateToday?>"/> 
+                            </div>
+                          </div> 
+                          <div class="col-md-6">
+                            <div class="col-md-12">
+                              <label class="control-label">Estimated Date Finish</label>
+                              <input type="date" id="estDate" name ="estDate" class="form-control" value="<?php echo $estDate?>"/> 
+                            </div>
+                          </div>
                         </div>
-                      </div> 
-                      <div class="col-md-6">
-                        <div class="col-md-12">
-                        <label class="control-label">Estimated Date Finish</label>
-                          <input type="date" id="estDate" name ="estDate" class="form-control" value="<?php echo $estDate?>" required/> 
-                        </div>
-                      </div>
-                    </div>
                         <br>
                         <div class="row">
                           <div class="col-md-12">
                             <div class="col-md-12">
-                            <label class="control-label">Handler</label>
+                              <label class="control-label">Handler</label>
                               <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                                 <option value="">Select Employee Handler</option>
                                 <?php
@@ -272,7 +294,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                         <div class="row">
                           <div class="col-md-12">
                             <div class="col-md-12">
-                            <label class="control-label">Remarks: </label>
+                              <label class="control-label">Remarks: </label>
                               <textarea rows="4" id="Uremarks" name ="remarks" class="form-control"> </textarea>
                             </div>
                           </div> 
@@ -283,7 +305,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                         <div class="row">
                           <div class="col-md-12">
                             <div class="col-md-12">
-                            <label class="control-label">Date Finished: </label>
+                              <label class="control-label">Date Finished: </label>
                               <input type="date" id="dateFinish" name="dateFinish" class="form-control"/> 
                             </div>
                           </div> 
@@ -292,7 +314,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                         <div class="row">
                           <div class="col-md-12">
                             <div class="col-md-12">
-                            <label class="control-label">Remarks: </label>
+                              <label class="control-label">Remarks: </label>
                               <textarea rows="4" id="remarks" name ="remarks" class="form-control"> </textarea>
                             </div>
                           </div> 
@@ -326,9 +348,16 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                 <?php 
                 $orderID = $jsID;
                 $productionID = $pID;
-                $sql = "SELECT * from tblorder_request a, tblproduct b, tblproduction c WHERE a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and c.productionID = '$productionID' and a.order_requestID = c.productionOrderReq";
-                $res = mysqli_query($conn,$sql);
-                $row = mysqli_fetch_assoc($res);
+                if($pack==0){
+                  $sql = "SELECT * from tblorder_request a, tblproduct b, tblproduction c WHERE a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and c.productionID = '$productionID' and a.order_requestID = c.productionOrderReq";
+                  $res = mysqli_query($conn,$sql);
+                  $row = mysqli_fetch_assoc($res);
+                }
+                else{
+                  $sql = "SELECT * from tblorder_request a, tblproduct b, tblproduction c, tblpackage_orderreq d WHERE a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and c.productionID = '$productionID' and d.por_ID = c.productionPackReq";
+                  $res = mysqli_query($conn,$sql);
+                  $row = mysqli_fetch_assoc($res);
+                }
                 ?>
                 <div class="modal-body">
                   <div class="descriptions">
@@ -355,38 +384,80 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                               </thead>
                               <?php
                               include "dbconnect.php";
-                              $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and b.productionID = '$productionID'";
-                              $pRes = mysqli_query($conn,$pSQL);
-                              while($pRow = mysqli_fetch_assoc($pRes)){
-                                $dateStart = "N/A";
-                                $temp = $pRow['prodDateStart'];
-                                if($temp!=""){
-                                  $dateStart = date_create($pRow['prodDateStart']);
-                                  $dateStart = date_format($dateStart,"F d, Y");
+
+                              if($pack==1){
+
+                                $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblpackage_orderreq c, tblphases d 
+                                WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID 
+                                and b.productionPackReq = c.por_ID and b.productionID = '$productionID'";
+                                $pRes = mysqli_query($conn,$pSQL);
+                                while($pRow = mysqli_fetch_assoc($pRes)){
+                                  $dateStart = "N/A";
+                                  $temp = $pRow['prodDateStart'];
+                                  if($temp!=""){
+                                    $dateStart = date_create($pRow['prodDateStart']);
+                                    $dateStart = date_format($dateStart,"F d, Y");
+                                  }
+
+                                  $dateEnd = "N/A";
+                                  $temp = $pRow['prodDateEnd'];
+                                  if($temp!=""){
+                                    $dateEnd = date_create($pRow['prodDateEnd']);
+                                    $dateEnd = date_format($dateEnd,"F d, Y");
+                                  }
+
+                                  $empName = getName($pRow['prodEmp']);
+
+                                  $remarks = "N/A";
+                                  $temp = $pRow['prodRemarks'];
+                                  if($temp!=""){
+                                    $remarks = $pRow['prodRemarks'];
+                                  }
+                                  echo "<tr>
+                                  <td>".$pRow['phaseName']."</td>
+                                  <td>".$empName."</td>
+                                  <td>".$dateStart."</td>
+                                  <td>".$dateEnd."</td>
+                                  <td>".$pRow['prodStatus']."</td>
+                                  <td>".$remarks."</td>
+                                  </tr>";
                                 }
 
-                                $dateEnd = "N/A";
-                                $temp = $pRow['prodDateEnd'];
-                                if($temp!=""){
-                                  $dateEnd = date_create($pRow['prodDateEnd']);
-                                  $dateEnd = date_format($dateEnd,"F d, Y");
-                                }
+                              }
+                              else{
+                                $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and b.productionID = '$productionID'";
+                                $pRes = mysqli_query($conn,$pSQL);
+                                while($pRow = mysqli_fetch_assoc($pRes)){
+                                  $dateStart = "N/A";
+                                  $temp = $pRow['prodDateStart'];
+                                  if($temp!=""){
+                                    $dateStart = date_create($pRow['prodDateStart']);
+                                    $dateStart = date_format($dateStart,"F d, Y");
+                                  }
 
-                                $empName = getName($pRow['prodEmp']);
+                                  $dateEnd = "N/A";
+                                  $temp = $pRow['prodDateEnd'];
+                                  if($temp!=""){
+                                    $dateEnd = date_create($pRow['prodDateEnd']);
+                                    $dateEnd = date_format($dateEnd,"F d, Y");
+                                  }
 
-                                $remarks = "N/A";
-                                $temp = $pRow['prodRemarks'];
-                                if($temp!=""){
-                                  $remarks = $pRow['prodRemarks'];
+                                  $empName = getName($pRow['prodEmp']);
+
+                                  $remarks = "N/A";
+                                  $temp = $pRow['prodRemarks'];
+                                  if($temp!=""){
+                                    $remarks = $pRow['prodRemarks'];
+                                  }
+                                  echo "<tr>
+                                  <td>".$pRow['phaseName']."</td>
+                                  <td>".$empName."</td>
+                                  <td>".$dateStart."</td>
+                                  <td>".$dateEnd."</td>
+                                  <td>".$pRow['prodStatus']."</td>
+                                  <td>".$remarks."</td>
+                                  </tr>";
                                 }
-                                echo "<tr>
-                                <td>".$pRow['phaseName']."</td>
-                                <td>".$empName."</td>
-                                <td>".$dateStart."</td>
-                                <td>".$dateEnd."</td>
-                                <td>".$pRow['prodStatus']."</td>
-                                <td>".$remarks."</td>
-                                </tr>";
                               }
                               function getName($id){
                                 include "dbconnect.php";

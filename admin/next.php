@@ -23,148 +23,148 @@ if(isset($_GET['id'])){
   <title>Check-Out</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
-    $(document).ready(function(){
-      $('#aTendered').on('keyup',function(){
-        var mat = $("#aTendered").val();
-        var bal = $("#dp").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
+  $(document).ready(function(){
+    $('#aTendered').on('keyup',function(){
+      var mat = $("#aTendered").val();
+      var bal = $("#dp").val();
+      if(isNaN(mat)){
+        var e = "Please input a valid number.";
+        $("#error").html(e);
+        $('#aTendered').css('border-color','red');
+        $('#saveBtn').prop('disabled',true);
+      }
+      else if(mat<0){
+        var e = "Numbers less than 0 are not allowed";
+        $("#error").html(e);
+        $('#aTendered').css('border-color','red');
+        $('#saveBtn').prop('disabled',true);
+      }
+      else if(mat==""){
+        var e = "";
+        var change = 0.00;
+        $("#dChange").val(change);
+        $("#error").html(e);
+        $('#aTendered').css('border-color','gray');
+        $('#saveBtn').prop('disabled',true);
+      }
+        else if(mat<bal){ //if may malaki diba? hahaha
+          var change = mat - bal;
+          var e = "The payment has exceeded the amount due";
           $("#error").html(e);
           $('#aTendered').css('border-color','red');
           $('#saveBtn').prop('disabled',true);
         }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#error").html(e);
-          $('#aTendered').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat==""){
+        else{
           var e = "";
-          var change = 0.00;
+          var change = mat - bal;
+          var change = change + ".00";
           $("#dChange").val(change);
           $("#error").html(e);
           $('#aTendered').css('border-color','gray');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<bal){ //if may malaki diba? hahaha
-            var change = mat - bal;
-            var e = "The payment has exceeded the amount due";
-            $("#error").html(e);
-            $('#aTendered').css('border-color','red');
-            $('#saveBtn').prop('disabled',true);
-          }
-          else{
-            var e = "";
-            var change = mat - bal;
-            var change = change + ".00";
-            $("#dChange").val(change);
-            $("#error").html(e);
-            $('#aTendered').css('border-color','gray');
-            $('#saveBtn').prop('disabled',false);
-
-          }
-
-      });
-  });
-
-
-  $(document).ready(function(){
-      $('#cNum').on('keyup',function(){
-        var mat = $("#cNum").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          $("#cNumError").html(e);
-          $('#cNum').css('border-color','gray');
           $('#saveBtn').prop('disabled',false);
+
         }
 
       });
+});
+
+
+$(document).ready(function(){
+  $('#cNum').on('keyup',function(){
+    var mat = $("#cNum").val();
+    if(isNaN(mat)){
+      var e = "Please input a valid number.";
+      $("#cNumError").html(e);
+      $('#cNum').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else if(mat<0){
+      var e = "Numbers less than 0 are not allowed";
+      $("#cNumError").html(e);
+      $('#cNum').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else{
+      var e = "";
+      $("#cNumError").html(e);
+      $('#cNum').css('border-color','gray');
+      $('#saveBtn').prop('disabled',false);
+    }
+
   });
+});
 
-  $(document).ready(function(){
-      $('#cAmount').on('keyup',function(){
-        var mat = $("#cAmount").val();
-        if(isNaN(mat)){
-          var e = "Please input a valid number.";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else if(mat<0){
-          var e = "Numbers less than 0 are not allowed";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          $("#cAmountError").html(e);
-          $('#cAmount').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-        }
+$(document).ready(function(){
+  $('#cAmount').on('keyup',function(){
+    var mat = $("#cAmount").val();
+    if(isNaN(mat)){
+      var e = "Please input a valid number.";
+      $("#cAmountError").html(e);
+      $('#cAmount').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else if(mat<0){
+      var e = "Numbers less than 0 are not allowed";
+      $("#cAmountError").html(e);
+      $('#cAmount').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else{
+      var e = "";
+      $("#cAmountError").html(e);
+      $('#cAmount').css('border-color','gray');
+      $('#saveBtn').prop('disabled',false);
+    }
 
-      });
   });
+});
 
-  $(document).ready(function(){
-    $("#check").hide();
-    $("#mop").on('change',function(){
-      var val = $("#mop").val();
-      if(val==1){
-        $("#check").hide();
-        $("#cash").show();
-        $("#cNum").val("");
-        $("#cAmount").val("");
-      }
-      else if(val==2){
-        $("#cash").hide();
-        $("#check").show();
-        $("#aTendered").val("");
+$(document).ready(function(){
+  $("#check").hide();
+  $("#mop").on('change',function(){
+    var val = $("#mop").val();
+    if(val==1){
+      $("#check").hide();
+      $("#cash").show();
+      $("#cNum").val("");
+      $("#cAmount").val("");
+    }
+    else if(val==2){
+      $("#cash").hide();
+      $("#check").show();
+      $("#aTendered").val("");
 //$("#dChange").val("0");
 }
 });
+});
+
+$(document).ready(function(){
+
+  $("#selectCust").hide();
+  $("#existCust").on('change',function(){
+    if($(this).prop("checked")){
+      $("#selectCust").show();
+    }
+    else{
+      $("#selectCust").hide();
+    }
   });
+});
 
-  $(document).ready(function(){
-
-    $("#selectCust").hide();
-    $("#existCust").on('change',function(){
-      if($(this).prop("checked")){
-        $("#selectCust").show();
-      }
-      else{
-        $("#selectCust").hide();
-      }
-    });
-  });
-
-  $(document).ready(function(){
-    $("#custcont").on('keyup',function(){
-      var val = $("#custcont").val(); 
-      if(isNaN(val)){
-        var e = "Please input a number";
-        $('#erCon').html(e);
-            $('#custcont').css('border-color','red');
-      }
-      else if(val<0){
-        var e = "Please input a valid number";
-        $('#erCon').html(e);
-            $('#custcont').css('border-color','red');
-      }
-      else{
+$(document).ready(function(){
+  $("#custcont").on('keyup',function(){
+    var val = $("#custcont").val(); 
+    if(isNaN(val)){
+      var e = "Please input a number";
+      $('#erCon').html(e);
+      $('#custcont').css('border-color','red');
+    }
+    else if(val<0){
+      var e = "Please input a valid number";
+      $('#erCon').html(e);
+      $('#custcont').css('border-color','red');
+    }
+    else{
       var t = 0;
       $.ajax({
         type: 'post',
@@ -183,20 +183,20 @@ if(isset($_GET['id'])){
         }
       });
     }
-    });
   });
+});
 
-  $(document).ready(function(){
-    $("#custemail").on('keyup',function(){
-      var val = $("#custemail").val(); 
-      var t = 1;
-      $.ajax({
-        type: 'post',
-        url: 'next-validation.php',
-        data: {
-          id: val, t : t,
-        },
-        success: function (response) {
+$(document).ready(function(){
+  $("#custemail").on('keyup',function(){
+    var val = $("#custemail").val(); 
+    var t = 1;
+    $.ajax({
+      type: 'post',
+      url: 'next-validation.php',
+      data: {
+        id: val, t : t,
+      },
+      success: function (response) {
 // We get the element having id of display_info and put the response inside it
 $( '#erEmail').html(response);
 if(response!=""){
@@ -207,64 +207,64 @@ else{
 }
 }
 });
-    });
-
-
-
-
-
-  });
-  $(document).ready(function(){
-    $('#frequency').change(function(){
-      var value = $("#frequency").val();
-      $.ajax({
-        type: 'post',
-        url: 'reports-drop.php',
-        data: {
-          id: value,
-        },
-        success: function (response) {
-          $( '#range' ).html(response);
-        }
-      });
-
-    });
   });
 
-  var flag = true;
+
+
+
+
+});
+$(document).ready(function(){
+  $('#frequency').change(function(){
+    var value = $("#frequency").val();
+    $.ajax({
+      type: 'post',
+      url: 'reports-drop.php',
+      data: {
+        id: value,
+      },
+      success: function (response) {
+        $( '#range' ).html(response);
+      }
+    });
+
+  });
+});
+
+var flag = true;
 function inputValidate(id){
-    var user = $('#edit'+id).val();
-    
-    userkey = $('#edit'+id).val();
-    userkey = userkey.slice(userkey.length -1 , userkey.length);
+  var user = $('#edit'+id).val();
 
-      if(userkey == '\\'){
-        $('#saveBtn').prop('disabled',true);
-      $('#message'+id).html('Symbols not Allowed');
-      $('#edit'+id).css('border-color','red');
-      }else{
+  userkey = $('#edit'+id).val();
+  userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+  if(userkey == '\\'){
+    $('#saveBtn').prop('disabled',true);
+    $('#message'+id).html('Symbols not Allowed');
+    $('#edit'+id).css('border-color','red');
+  }else{
     $.post('next-check.php',{username : user}, function(data){
-     
+
      if(data == 'Symbols not allowed'){
        flag = true;
-          $('#saveBtn').prop('disabled',true);
-      $('#message'+id).html(data);
-      $('#edit'+id).css('border-color','red');
+       $('#saveBtn').prop('disabled',true);
+       $('#message'+id).html(data);
+       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'White space not allowed'){
        flag = true
 
-          $('#saveBtn').prop('disabled',true);
-      $('#message'+id).html(data);
-      $('#edit'+id).css('border-color','red');
+       $('#saveBtn').prop('disabled',true);
+       $('#message'+id).html(data);
+       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'good'){
       flag = false;
-       $('#message'+id).html('');
-     $('#saveBtn').prop('disabled',false);
+      $('#message'+id).html('');
+      $('#saveBtn').prop('disabled',false);
       $('#edit'+id).css('border-color','limegreen');
-     }
-    });
+    }
+  });
   }
 
   if(!flag){
@@ -276,29 +276,29 @@ function inputValidate(id){
     $('#nextMessage').css('color','red');
   }
 
-  }
+}
 
-  function validate(){
-    var val = $('#custemail').val();
-    if(validateEmail(val)){
-      $('#custemail').css('border-color','limegreen');
-       $('#messageEmail').html(''); 
+function validate(){
+  var val = $('#custemail').val();
+  if(validateEmail(val)){
+    $('#custemail').css('border-color','limegreen');
+    $('#messageEmail').html(''); 
     $('#saveBtn').prop('disabled',false);
-    }else{
-       $('#custoemail').css('border-color','red');
-       $('#messageEmail').html('Email not valid'); 
-    $('#saveBtn').prop('disabled',true);
-    }
+  }else{
+   $('#custoemail').css('border-color','red');
+   $('#messageEmail').html('Email not valid'); 
+   $('#saveBtn').prop('disabled',true);
+ }
 
-  }
+}
 
-  function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 } 
 
 
-  </script>
+</script>
 </head>
 <body class ="fix-header fix-sidebar">
   <!-- Preloader -->
@@ -528,7 +528,7 @@ function inputValidate(id){
                   $priceremovearray = array();
                   $quantremovearray = array();
 
-                   $tempPrice = 0;
+                  $tempPrice = 0;
                   $tempQuant = 0;
                   //
 
@@ -542,7 +542,7 @@ function inputValidate(id){
                   $P_selectedQuant = $_POST['P_quant'];
                   $P_selectedPrice = $_POST['P_price'];
 
-                   $P_tempPrice = 0;
+                  $P_tempPrice = 0;
                   $P_tempQuant = 0;
                   $P_ctr = 0;
                   $P_pCtr = 0;
@@ -553,150 +553,147 @@ function inputValidate(id){
                   $P_priceremovearray = array();
                   $P_quantremovearray = array();
 
-                 
+
 
                   $totPrice = $_POST['totalPrice'];
                   $totQuant = $_POST['totalQuant'];
                   //
 
                   ///DISPLAY PACKGAGEGE
-                  if($P_selected[0] == 0){
+                  if($P_selected[0] != 0){
 
                   }
                   else{
-                  foreach ($P_removed as $P_removedItem) {
-                    array_push($P_removearray, $P_removedItem);
-                  }
-                  foreach ($P_priceremoved as $P_priceremovedItem) {
-                    array_push($P_priceremovearray, $P_priceremovedItem);
-                  }
-                  foreach ($P_quantremoved as $P_quantremovedItem) {
-                    array_push($P_quantremovearray, $P_quantremovedItem);
-                  }
-
-                  foreach ($P_selectedQuant as $P_itemQuant) {
-                    if(!in_array($P_itemQuant, $P_quantremovearray)){
-                      $P_tempQuant =+ $P_itemQuant;
-                      array_push($P_quantarray,$P_itemQuant);
+                    foreach ($P_removed as $P_removedItem) {
+                      array_push($P_removearray, $P_removedItem);
                     }
-                    else{
+                    foreach ($P_priceremoved as $P_priceremovedItem) {
+                      array_push($P_priceremovearray, $P_priceremovedItem);
                     }
-                  } 
-                  foreach ($P_selectedPrice as $P_itemPrice) {
-                    if(!in_array($P_itemPrice, $P_priceremovearray)){
-                      $P_tempPrice =+ $P_itemPrice;
-                      array_push($P_pricearray,$P_itemPrice);
+                    foreach ($P_quantremoved as $P_quantremovedItem) {
+                      array_push($P_quantremovearray, $P_quantremovedItem);
                     }
-                    else{
+
+                    foreach ($P_selectedQuant as $P_itemQuant) {
+                      if(!in_array($P_itemQuant, $P_quantremovearray)){
+                        $P_tempQuant =+ $P_itemQuant;
+                        array_push($P_quantarray,$P_itemQuant);
+                      }
+                    } 
+                    foreach ($P_selectedPrice as $P_itemPrice) {
+                      if(!in_array($P_itemPrice, $P_priceremovearray)){
+                        $P_tempPrice =+ $P_itemPrice;
+                        array_push($P_pricearray,$P_itemPrice);
+                      }
                     }
-                  }
-                  foreach ($P_selected as $P_items) {
-                    if(!in_array($P_items, $P_removearray)){
-                      $sql = "SELECT * FROM tblpackages where packageID = '$P_items';";
-                      $result = mysqli_query($conn, $sql);
 
-                      if($result){
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $P_ctr++; 
-                          $P_pCtr++;                            
-                          echo ('
-                            <tr>
-                            <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
+                    foreach ($P_selected as $P_items) {
+                      if(!in_array($P_items, $P_removearray)){
+                        $sql = "SELECT * FROM tblpackages where packageID = '$P_items';";
+                        $result = mysqli_query($conn, $sql);
+                        if($result){
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            $P_ctr++; 
+                            $P_pCtr++;                            
+                            echo ('
+                              <tr>
+                              <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
 
-                            <td>PACKAGE '); ?><button type="button" class="btn btn-info " data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id=<?php echo $row['packageID']; ?> #view" data-target="#myModal">
-                            <span class='glyphicon glyphicon-eye-open'></span> View</button> <?php echo('</td>
-
-                            <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
-                            <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
-                            <td id="price'.$P_ctr.'"style="text-align: right;">&#8369; '.number_format($P_pricearray[$P_pCtr-1],2).'<input id="price'.$P_ctr.'" name="P_prices[]" value="'.$P_pricearray[$P_pCtr-1].'" type="hidden"/></td>');
-      echo'</tr>';   
-    }
-  }
-}
-}
-}
+                              <td>PACKAGE ');
+                                echo '<button type="button" class="btn btn-info " data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$row['packageID']. '#view" data-target="#myModal">
+                              <span class="glyphicon glyphicon-eye-open"></span> View</button>';
+                              echo('</td>
+                                <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
+                                <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
+                                <td id="price'.$P_ctr.'"style="text-align: right;">&#8369; '.number_format($P_pricearray[$P_pCtr-1],2).'<input id="price'.$P_ctr.'" name="P_prices[]" value="'.$P_pricearray[$P_pCtr-1].'" type="hidden"/></td>');
+                              echo'</tr>';   
+                            }
+                          }
+                        }
+                      }
+                    }
 
 
                   //
 
-  if($selected[0] != 0){
-                  foreach ($removed as $removedItem) {
-                    array_push($removearray, $removedItem);
-                  }
-                  foreach ($priceremoved as $priceremovedItem) {
-                    array_push($priceremovearray, $priceremovedItem);
-                  }
-                  foreach ($quantremoved as $quantremovedItem) {
-                    array_push($quantremovearray, $quantremovedItem);
-                  }
+                    if($selected[0] != 0){
+                      foreach ($removed as $removedItem) {
+                        array_push($removearray, $removedItem);
+                      }
+                      foreach ($priceremoved as $priceremovedItem) {
+                        array_push($priceremovearray, $priceremovedItem);
+                      }
+                      foreach ($quantremoved as $quantremovedItem) {
+                        array_push($quantremovearray, $quantremovedItem);
+                      }
 
-                  foreach ($selectedQuant as $itemQuant) {
-                    if(!in_array($itemQuant, $quantremovearray)){
-                      $tempQuant =+ $itemQuant;
-                      array_push($quantarray,$itemQuant);
+                      foreach ($selectedQuant as $itemQuant) {
+                        if(!in_array($itemQuant, $quantremovearray)){
+                          $tempQuant =+ $itemQuant;
+                          array_push($quantarray,$itemQuant);
+                        }
+                        else{
+                        }
+                      } 
+                      foreach ($selectedPrice as $itemPrice) {
+                        if(!in_array($itemPrice, $priceremovearray)){
+                          $tempPrice =+ $itemPrice;
+                          array_push($pricearray,$itemPrice);
+                        }
+                        else{
+                        }
+                      }
+                      foreach ($selected as $items) {
+                        if(!in_array($items, $removearray)){
+                          $sql = "SELECT * FROM tblproduct where productID = '$items';";
+                          $result = mysqli_query($conn, $sql);
+                          if($result){
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $ctr++; 
+                              $pCtr++;                            
+                              echo ('
+                                <tr>
+                                <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
+                                <td>'.$row['productDescription'].'</td>
+                                <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                                <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
+                                <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
+                              echo'</tr>';   
+                            }
+                          }
+                        }
+                      }
                     }
-                    else{
-                    }
-                  } 
-                  foreach ($selectedPrice as $itemPrice) {
-                    if(!in_array($itemPrice, $priceremovearray)){
-                      $tempPrice =+ $itemPrice;
-                      array_push($pricearray,$itemPrice);
-                    }
-                    else{
-                    }
+                    ?>
+
+                    <tfoot>
+                      <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                      <td style="text-align: right;"><b><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></b></td>
+                      <td style="text-align: right;"><b>&#8369; <?php echo number_format($totPrice,2); ?></b></td>
+                      <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
+                    </tfoot>
+                  </tbody>
+
+                  <script type="text/javascript">
+                  var tempPrice = parseInt($('#totalPrice').html());
+                  var tempTQuant = parseInt($('#totalQuant').val());
+                  var realPrice = 0;
+                  var totalPrice =0;
+                  var price = 0;
+                  var quant = 0;
+                  var flag = 0;
+                  function sendData(ctr){
+                    realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
+                    price = parseInt($('#prices'+ctr).val());
                   }
-                  foreach ($selected as $items) {
-                    if(!in_array($items, $removearray)){
-                      $sql = "SELECT * FROM tblproduct where productID = '$items';";
-                      $result = mysqli_query($conn, $sql);
-                      if($result){
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $ctr++; 
-                          $pCtr++;                            
-                          echo ('
-                            <tr>
-                            <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
-                            <td>'.$row['productDescription'].'</td>
-                            <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
-                            <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
-                            <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
-      echo'</tr>';   
-    }
-  }
-}
-}
-}
-?>
 
-<tfoot>
-  <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-  <td style="text-align: right;"><b><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></b></td>
-  <td style="text-align: right;"><b>&#8369; <?php echo number_format($totPrice,2); ?></b></td>
-  <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
-</tfoot>
-</tbody>
+                  function passValue(ctr){
 
-<script type="text/javascript">
-var tempPrice = parseInt($('#totalPrice').html());
-var tempTQuant = parseInt($('#totalQuant').val());
-var realPrice = 0;
-var totalPrice =0;
-var price = 0;
-var quant = 0;
-var flag = 0;
-function sendData(ctr){
-  realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
-  price = parseInt($('#prices'+ctr).val());
-}
-
-function passValue(ctr){
-
-  quant = parseInt($('#quant'+ctr).val());
-  var temRice = quant * price;
-  alert(temRice);
-  $('#price'+ctr).html(0);
-  $('#price'+ctr).html(String(quant * realPrice));
+                    quant = parseInt($('#quant'+ctr).val());
+                    var temRice = quant * price;
+                    alert(temRice);
+                    $('#price'+ctr).html(0);
+                    $('#price'+ctr).html(String(quant * realPrice));
 
 //total Score
 
@@ -724,13 +721,19 @@ else if(flag == 1){
   <div class="col-md-8">
     <div class="form-group">
       <label class="control-label">Order Remarks</label>
-      <textarea name="orderremarks" id="orderremarks" class="form-control"></textarea>
+      <textarea name="orderremarks" id="orderremarks" class="form-control">An order.</textarea>
     </div>
   </div>
+  <?php
+  $date = new DateTime();
+  $dateToday = date_format($date, "Y-m-d");
+
+  $estDate = date('Y-m-d', strtotime("+25 days"));
+  ?>
   <div class="col-md-4">
     <div class="form-group">
-      <label class="control-label">Pick up/Delivery Date</label>
-      <input type="date" id="pdate" class="form-control" name="pidate" required/> 
+      <label class="control-label">Pick up/Delivery Date</label><span id="x" style="color:red"> *</span>
+      <input type="date" id="pdate" class="form-control" name="pidate" value="<?php echo $estDate?>" required/> 
     </div>
   </div>
 </div>
@@ -771,8 +774,8 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
           <div class="row">
             <div class="col-md-6 col-md-offset-3" style="text-align: center;">
               <div class="form-group">
-                <h4><b>For:</b> 
-                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
+                <h4><b>For </b> <span id="x" style="color:red"> *</span>
+                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up" checked/> Pick-up</label>
                   <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label></h4>
                 </div>
               </div>
@@ -842,31 +845,31 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                   }
 
                 });
-$('#rateDel').click(function(){
-  if($('#rateDel').is(':checked')){ 
-    $('#dRate').val(0);
-    $('#da').prop('disabled',false);
-    $('#city').prop('disabled',false);
-    $('#zip').prop('disabled',false);
-    $('#delloc').prop('disabled',false);
-    $('#da').val('');
-    $('#city').val('');
-    $('#zip').val('');
-    $('#delloc').val('');
-  }
-});
+                $('#rateDel').click(function(){
+                  if($('#rateDel').is(':checked')){ 
+                    $('#dRate').val(0);
+                    $('#da').prop('disabled',false);
+                    $('#city').prop('disabled',false);
+                    $('#zip').prop('disabled',false);
+                    $('#delloc').prop('disabled',false);
+                    $('#da').val('');
+                    $('#city').val('');
+                    $('#zip').val('');
+                    $('#delloc').val('');
+                  }
+                });
 
 
 
-$('#delloc').change(function(){
-  var x = parseFloat($('#totalPrice').val());
-  $('#dRate').val(parseFloat($('#delloc').val()));
-  $('#paydRate').val(parseFloat($('#delloc').val()));
-  var d = parseFloat($('#delloc').val());
-  var due = x + d;
-  $('#amountDue').val(parseFloat(due));
-});
-});
+                $('#delloc').change(function(){
+                  var x = parseFloat($('#totalPrice').val());
+                  $('#dRate').val(parseFloat($('#delloc').val()));
+                  $('#paydRate').val(parseFloat($('#delloc').val()));
+                  var d = parseFloat($('#delloc').val());
+                  var due = x + d;
+                  $('#amountDue').val(parseFloat(due));
+                });
+              });
 
 $(document).ready(function(){
   var x = parseFloat($('#totalPrice').html());
@@ -915,15 +918,15 @@ $(document).ready(function(){
 
           <div class="row">
             <div class="col-md-12">
-              
-            <div class="form-group">
-              <label class="control-label">Downpayment
-                <h6><em> Downpayment must be 50% of the total order price</em></h6></label>
-                <input type="text" style="text-align:right;" class="form-control" value="<?php echo "Php " . number_format($totPrice * .5,2); ?>" readonly/>
-                <input type="hidden" id="dp" value="<?php $dp = $totPrice * .5; echo $dp;?>" readonly/>
+
+              <div class="form-group">
+                <label class="control-label">Downpayment
+                  <h6><em> Downpayment must be 50% of the total order price</em></h6></label>
+                  <input type="text" style="text-align:right;" class="form-control" value="<?php echo "Php " . number_format($totPrice * .5,2); ?>" readonly/>
+                  <input type="hidden" id="dp" value="<?php $dp = $totPrice * .5; echo $dp;?>" readonly/>
+                </div>
               </div>
             </div>
-          </div>
           </div>
           <div class="col-md-6">
             <div class="col-md-12"> 

@@ -2,9 +2,50 @@
 $activePage = basename($_SERVER['PHP_SELF'],".php");
 include "menu.php";
 include 'dbconnect.php';
+include 'toastr-buttons.php';
 $id = 0;
 if(isset($_GET['id'])){
   $id = $_GET['id']; 
+}
+if (!empty($_SESSION['createSuccess'])) {
+  echo  '<script>
+  $(document).ready(function () {
+    $("#toastNewSuccess").click();
+  });
+</script>';
+unset($_SESSION['createSuccess']);
+}
+if (!empty($_SESSION['updateSuccess'])) {
+  echo  '<script>
+  $(document).ready(function () {
+    $("#toastUpdateSuccess").click();
+  });
+</script>';
+unset($_SESSION['updateSuccess']);
+}
+if (!empty($_SESSION['deactivateSuccess'])) {
+  echo  '<script>
+  $(document).ready(function () {
+    $("#toastDeactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['deactivateSuccess']);
+}
+if (!empty($_SESSION['reactivateSuccess'])) {
+  echo  '<script>
+  $(document).ready(function () {
+    $("#toastReactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['reactivateSuccess']);
+}
+if (!empty($_SESSION['actionFailed'])) {
+  echo  '<script>
+  $(document).ready(function () {
+    $("#toastFailed").click();
+  });
+</script>';
+unset($_SESSION['actionFailed']);
 }
 ?>
 <!DOCTYPE html>  
@@ -13,10 +54,9 @@ if(isset($_GET['id'])){
   <title>Production Details</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
-  
-  function redirectJob(){
-    var hist = $("#histID").val();
-    window.open("job-ticket.php?id="+hist, "_blank");
+
+  function redirectJob(id){
+    window.open("job-ticket.php?id="+id, "_blank");
   }
 
   $(document).ready(function(){
@@ -357,6 +397,153 @@ if(isset($_GET['id'])){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob()" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
                                                     //echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
+                                                    $isFirst = 1;
+                                                  }
+                                                  echo '</div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="progress progress-md" style="margin-top:15px;">
+                                                  <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
+                                                  </div>';
+                                                }
+                                                
+                                              }
+                                              ?>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+          } //end ng while sa order reqs
+          ?>
+
+          <!--PACKAGE BITCHES-->
+          <?php
+          $isFinish = 0;
+          include "dbconnect.php";
+
+                            //$sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
+        $sql = "SELECT * FROM tblpackage_orderreq e,tblorders c, tblproduction a, tblorder_request b, tblproduct d, tblpackages f
+WHERE  a.productionPackReq = e.por_ID and e.por_prID = d.productID and b.orderRequestStatus!='Archived'
+and c.orderID = b.tblOrdersID and b.order_requestID = e.por_orReqID and 
+b.orderPackageID = f.packageID and c.orderID = '$id';";
+          $res = mysqli_query($conn,$sql);
+          while($row = mysqli_fetch_assoc($res)){
+            $isFirst = 0;
+            $isFinish = 0;
+
+                              $prodRec = str_pad($row['productionID'], 8, '0', STR_PAD_LEFT); //format ng display ID
+                              $prodRec = "#" . $prodRec; //format ng display ID
+                              echo '
+                              <div class="col-md-12">
+                              <div class="panel panel-info" style="margin-top: -20px;">
+                              <div class="tab-content thumbnail">
+                              <div role="tabpanel" class="tab-pane fade active in" id="job">
+                              <div class="panel-wrapper collapse in" aria-expanded="true">
+                              <div class="panel-body"><div class="row">
+                              <div class="col-md-12">
+                              <div class="col-md-6">
+                              <h2 style="margin-top: -20px; color:black"><b>'. $prodRec .' - '.$row['productName'].'</b></h2>
+                              </div>
+                              <div class="col-md-6">';
+
+                              echo '<h2 class="pull-right" style="margin-top: -20px;"><a data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$row['productionID'].'&pack=1 #history"><i class="ti-menu-alt pull-right" style="margin-left: 20px; margin-top:5px;"></i></a>Production History</h2>
+
+                              <h2></h2>
+                              </div>
+                              </div>
+                            </div>';?>
+
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="panel panel-info" style="margin-top: -20px;">
+                                  <div class="tab-content thumbnail">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="job">
+                                      <div class="panel-wrapper collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                          <div class="row">
+                                            <div class="col-md-12">
+                                              <?php
+                                              include "dbconnect.php";
+                                              $productionID = $row['productionID'];
+                                              $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d, tblpackage_orderreq e WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionPackReq = e.por_ID and e.por_orReqID = c.order_requestID and b.productionID = '$productionID'";
+                                              $prResult = mysqli_query($conn,$pSQL);
+                                              $ctr = mysqli_num_rows($prResult);
+                                              $isFirst = 0;
+                                              $isFirst = 0;
+                                              while($pRow = mysqli_fetch_assoc($prResult)){
+
+                                                if($pRow['prodStatus']=="Pending"){
+                                                  echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
+                                                  <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
+                                                  <div class="thumbnail">
+                                                  <div class="product-img">
+                                                  <img height="115px" width="115px" style="filter:gray; -webkit-filter: grayscale(1); filter: grayscale(1);" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  <div class="pro-img-overlay">';
+                                                  if($isFinish==1){
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&phase='.$pRow['prodPhase'].'&orderReq='.$pRow['por_ID'].'&pack=1 #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                    $isFinish = 0;
+                                                  }
+                                                  if($isFirst==0){
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&phase='.$pRow['prodPhase'].'&orderReq='.$pRow['por_ID'].'&first=yes&pack=1 #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>';
+                                                    $isFirst = 1;
+                                                  }
+                                                  echo '</div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="progress progress-md" style="margin-top:15px;">
+                                                  <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
+                                                  </div>';
+                                                }
+
+                                                if($pRow['prodStatus']=="Finished"){
+                                                  $isFinish = 1;
+                                                  $isFirst = 1;
+                                                  echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
+                                                  <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
+                                                  <div class="thumbnail">
+                                                  <img height="115px" width="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  </div>
+                                                  <div class="progress progress-md" style="margin-top:15px;">
+                                                  <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar">'.$pRow['prodStatus'].'</h3>
+                                                  </div>
+                                                  </div>';
+
+                                                }
+
+                                                if($pRow['prodStatus']=="Ongoing"){
+                                                  echo "<input type='hidden' id='oID' value='".$id."'>";
+                                                  echo '<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
+                                                  <h4 style="text-align:center;">'.$pRow['phaseName'].'</h4>
+                                                  <div class="thumbnail">
+                                                  <div class="product-img">
+                                                  <img height="115px" width="115px" src="plugins/production/'.$pRow['phaseIcon'].'" alt="Unavailable">
+                                                  <div class="pro-img-overlay">';
+                                                  if($isFinish==1){
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&pack=1 #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                    $isFinish = 0;
+                                                  }
+                                                  if($isFirst==0){
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&pack=1 #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>

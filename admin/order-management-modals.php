@@ -400,6 +400,50 @@ $_SESSION['varname'] = $jsID;
                               $tPrice = $row['orderPrice'];
                               $tQuan = $tQuan + $row['orderQuantity'];
                             }
+
+                            // $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblpackages c WHERE c.packageID = a.orderPackageID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
+                            // $res = mysqli_query($conn,$sql1);
+                            // while($row = mysqli_fetch_assoc($res)){
+                            //   echo '<tr>
+                            //   <td>'.$row['packageDescription'].'</td>
+                            //   <td></td>
+                            //   <td style="text-align:right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
+                            //   <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+                            //   $tPrice = $row['orderQuantity'] * $row['packagePrice'];
+                            //   $tPrice =  number_format($tPrice,2);
+                            //   echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
+                            //   $tPrice = $row['orderPrice'];
+                            //   $tQuan = $tQuan + $row['orderQuantity'];
+                            // }
+
+                            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblpackages c WHERE c.packageID = a.orderPackageID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
+                            $res = mysqli_query($conn,$sql1);
+                            while($row = mysqli_fetch_assoc($res)){
+                              $orReqID = $row['order_requestID'];
+                              echo '<tr>
+                              <td>'.$row['packageDescription'].'</td>
+                              <td>PACKAGE</td>
+                              <td style="text-align:right;">Php  '.number_format($row['packagePrice'],2).'</td>
+                              <td style="text-align:center">'.$row['orderQuantity'].'</td>';
+                              $tPrice = $row['orderQuantity'] * $row['packagePrice'];
+                              $tPrice =  number_format($tPrice,2);
+                              echo '<td style="text-align:right;">Php  '.$tPrice.'</td></tr>';
+                              $tPrice = $row['orderPrice'];
+                              $orReqID = $row['order_requestID'];
+                              $sql3 = "SELECT * FROM tblpackage_orderreq a, tblproduct b WHERE a.por_prID = b.productID and a.por_orReqID = '$orReqID'";
+                              $res3 = mysqli_query($conn,$sql3);
+                              while($row3 = mysqli_fetch_assoc($res3)){
+                                echo '<tr>
+                              <td style="text-align:right;"> - '.$row3['productName'].'</td>
+                              <td>'.$row3['productDescription'].'</td>
+                              <td style="text-align:right;"></td>';
+                              $tQuan = $tQuan + $row['orderQuantity'] * 1;
+                              echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
+                              <td style="text-align:right;"></td></tr>';
+
+                              }
+                            }
+
                             ?>
                           </tbody>
                           <tfoot style="text-align:right;">
