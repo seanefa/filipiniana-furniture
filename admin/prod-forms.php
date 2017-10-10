@@ -247,7 +247,7 @@ include "dbconnect.php";
       <?php
 
 
-      $tsql = "SELECT * FROM tblproduct WHERE productID = $jsID;";
+      $tsql = "SELECT * FROM tblproduct a, tblfurn_design b WHERE a.prodDesign = b.designID and a.productID = $jsID;";
       $tresult = mysqli_query($conn,$tsql);
       $trow = mysqli_fetch_assoc($tresult);
       $framework = $trow['prodFrameworkID'];
@@ -295,7 +295,7 @@ include "dbconnect.php";
                                                 <tbody >
                                                     <tr>
                                                         <td style="text-align:left">Design</td>
-                                                        <td style="text-align:left"><?php echo $trow['prodDesign'];?> </td>
+                                                        <td style="text-align:left"><?php echo $trow['designName'];?> </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="text-align:left">Category</td>

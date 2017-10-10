@@ -49,6 +49,11 @@ if (!empty($_SESSION['actionFailed'])) {
 <!DOCTYPE html>  
 <html lang="en">
 <head>
+  <script>
+   function redirectBill(id){
+    window.open("bill.php?id="+id, "_blank");
+  }
+  </script>
 </head>
 <body>
   <div id="page-wrapper">
@@ -105,7 +110,7 @@ if (!empty($_SESSION['actionFailed'])) {
                                   <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>
                                   <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
 
-                                   <a class="btn btn-info" style="color:white;" href="redirect-bill-col.php?id='. $row['orderID'].'"><span class="ti-receipt"></span>  Bill </a>
+                                     <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
 
                                    <a class="btn btn-success" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
                                   </td>

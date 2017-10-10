@@ -113,7 +113,7 @@ if($isBool=="existing"){ //EXISTING
    if (mysqli_query($conn,$inv)){
    $invID = mysqli_insert_id($conn);
   $_SESSION['createSuccess'] = 'Success';
-  header( 'Location: home.php');
+  header( 'Location: account.php');
 } 
  else {
     $_SESSION['actionFailed'] = 'Failed';

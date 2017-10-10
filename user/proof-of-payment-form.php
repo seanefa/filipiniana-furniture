@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		alert('You have no access here. You must logged in first.');
 		</script>";
 	}
+  else{
+    $id = $_SESSION["userID"];
+    $_SESSION["ID"] = $id;
+  }
 	?>
 	<div id="container">
 		<div class="container">
@@ -52,6 +56,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			?>
 			          <form enctype="multipart/form-data" action="send-proof.php" autocomplete="off" class="form-horizontal" method="post">
             <fieldset>
+            	<div class="col-md-12">
+						<div class="row">
+							<div class="table-responsive">          
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th>Order #</th>
+											<th>Placed On</th>
+											<th>Total</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+
+									
+										
+					include "userconnect.php";
+										$id = $_SESSION["userID"];
+
+										$usql = "SELECT * FROM tbluser where userID = '$id';";
+										$uresult = mysqli_query($conn,$usql);
+										$urow = mysqli_fetch_assoc($uresult);
+
+										$uid = $urow['userCustID'];
+
+										$sqls = "SELECT * FROM tblorders where custOrderID = '$uid';";
+										$sresult = mysqli_query($conn,$sqls);
+
+										while($srow = mysqli_fetch_assoc($sresult)){
+
+
+										?>
+
+										<tr>
+											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
+											<td><?php echo $srow['dateOfReceived'];?></td>
+											<td>₱ <?php echo $srow['orderPrice'];?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+										</tr>
+
+										<?php
+										}
+
+										?>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
               <legend>Proof of Payment Form&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
               <p class="text-success" style="text-align: center;">You can refer to your receipt.</p>
               <div class="form-group required">
@@ -60,17 +115,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 					<select class="form-control" name="orderid">
 						<option disabled>Choose Order</option>
 					<?php
-					include "userconnect.php";
-					$orders = "SELECT * from tblorders";
-					$result = $conn->query($orders);
-					if($result->num_rows>0){
-						while($row=$result->fetch_assoc()){
+					$id = $_SESSION["userID"];
+
+										$usql = "SELECT * FROM tbluser where userID = '$id';";
+										$uresult = mysqli_query($conn,$usql);
+										$urow = mysqli_fetch_assoc($uresult);
+
+										$uid = $urow['userCustID'];
+
+										$sqls = "SELECT * FROM tblorders where custOrderID = '$uid';";
+										$sresult = mysqli_query($conn,$sqls);
+
+
+						while($srow = mysqli_fetch_assoc($sresult)){
 							?>
-						<option><?php echo "" . $row["orderID"];?></option>
+						<option><?php echo "" . $srow["orderID"];?></option>
 						<?php
 						}
-					}
-					$conn->close();
+					
 					?>
 					</select>
 <!--                  <input type="text" class="form-control" id="input-firstname" placeholder="" value="" name="branchcode" required>-->
@@ -85,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">Amount Paid</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-email" placeholder="" name="amountpaid" required>
+                  <input type="number" min="0" class="form-control" id="input-email" placeholder="" name="amountpaid" required>
                 </div>
               </div>
               <div class="form-group required">

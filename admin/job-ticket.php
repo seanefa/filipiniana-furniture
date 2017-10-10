@@ -1,12 +1,12 @@
 <?php
 $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
-$orID = "OR". $or;
+$orID = "JT". $or;
 
-// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
-// require_once "dompdf/autoload.inc.php";
-// use Dompdf\Dompdf;
-// ob_start();
+set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
+require_once "dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,10 +49,33 @@ $row = mysqli_fetch_assoc($res);
     <div class="col-xs-6">
       <?php
       include "dbconnect.php";
-      $sql = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d, tblorders e, tblproduct f WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and a.prodHistID = '$id' and c.tblOrdersID = e.orderID";
-      //$sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$orderID'";
+      $sql = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d, tblorders e WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and a.prodHistID = '$id' and c.tblOrdersID = e.orderID";
       $res = mysqli_query($conn,$sql);
-      $custRow = mysqli_fetch_assoc($res);
+      $rrow = mysqli_fetch_assoc($res);
+      $orderID = $rrow['orderID'];
+      $order_requestID = $rrow['order_requestID'];
+      $phaseName = $rrow['phaseName'];
+      $handler = $rrow['prodEmp'];
+
+      $date = date_create($rrow['prodDateStart']);
+      $dateStart = date_format($date,"F d, Y");
+
+      $edate = date_create($rrow['prodEstDate']);
+      $estDate = date_format($edate,"F d, Y");
+
+
+      //$sql1 = "SELECT * FROM tblproduct a, tblorder_request b, tblfabric c, tblframework d WHERE a.productID = b.orderProductID and b.order_requestID = '$order_requestID' and ";
+      $sql1 = "SELECT * FROM tblproduct a, tblfabrics b, tblframeworks c, tblfurn_type d, tblfurn_category e, tblorder_request f, tblfurn_design g WHERE a.prodDesign = g.designID and a.prodFabricID = b.fabricID and a.prodFrameworkID = c.frameworkID and a.prodTypeID = d.typeID and a. prodCatID = e.categoryID and a.productID = f.orderProductID and f.order_requestID = '$order_requestID'";
+      $sql1res = mysqli_query($conn,$sql1);
+      $prow = mysqli_fetch_assoc($sql1res);
+
+      $sql2 = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$orderID'";
+      $sql2 = mysqli_query($conn,$sql2);
+      $custRow = mysqli_fetch_assoc($sql2);
+
+      $or = str_pad($orderID, 6, '0', STR_PAD_LEFT);
+      $orID = "OR". $or;
+
       $date  = date("F d, Y");
       ?>
       <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">Date:&nbsp;<b>
@@ -60,29 +83,78 @@ $row = mysqli_fetch_assoc($res);
         ?>
       </b></p>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-6">
+        <h2>
+        <?php echo $orID;?> - 
+        <?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?>
+      </h2>
+      </div>
     </div>
-    <br>
+  </div>
     <div class="row">
-      <div class="col-xs-12">
-       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">CUSTOMER INFORMATION</span>
-       <br>
-       <div class="table-responsive">
+    <div class="col-xs-12">
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PRODUCTION INFORMATION</span>
+      <br>
+      <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table">
           <tr>
-            <td>Name</td>
-            <td><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td>Date Start</td>
+            <td><?php echo $dateStart?></td>
           </tr>
           <tr>
-            <td>Address</td>
-            <td><?php echo $custRow['customerAddress'];?></td>
+            <td>Handler</td>
+            <td>
+            <?php 
+              $sql = "SELECT * FROM tblemployee WHERE empID = '$handler'";
+              $res = mysqli_query($conn,$sql);
+              $row = mysqli_fetch_assoc($res);
+              echo $row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'];
+              ?>
+          </td>
           </tr>
           <tr>
-            <td>Contact Number</td>
-            <td><?php echo $custRow['customerContactNum'];?></td>
+            <td>Estimated Date Finish</td>
+            <td><?php echo $estDate;?></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+     <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">FURNITURE INFORMATION</span>
+     <br>
+     <div class="table-responsive">
+      <table class="table color-bordered-table muted-bordered-table">
+        <tr>
+          <td>Name</td>
+          <td><?php echo $prow['productName']?></td>
+        </tr>
+        <tr>
+          <td>Category</td>
+          <td> <?php echo $prow['categoryName'];?> </td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><?php echo $prow['typeName'];?> </td>
+          <tr>
+            <td>Design</td>
+            <td><?php echo $prow['designName'];?></td>
           </tr>
           <tr>
-            <td>Email Address</td>
-            <td><?php echo $custRow['customerEmail'];?></td>
+            <td>Fabric</td>
+            <td><?php echo $prow['fabricName'];?></td>
+          </tr>
+          <tr>
+            <td>Framework</td>
+            <td><?php echo $prow['frameworkName'];?></td>
+          </tr>
+          <tr>
+            <td>Dimension Specification</td>
+            <td><?php echo $prow['prodSizeSpecs'];?></td>
           </tr>
         </table>
       </div>
@@ -91,17 +163,15 @@ $row = mysqli_fetch_assoc($res);
   <br>
   <div class="row">
     <div class="col-xs-12">
-      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PARTICULARS</span>
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">MATERIALS ISSUED : <mark><?php echo $phaseName?></mark></span>
       <br>
       <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table">
           <thead>
             <tr>
-              <th>Furniture Name</th>
-              <th>Furniture Description</th>
-              <th style="text-align:right;">Unit Price</th>
+              <th>Type</th>
+              <th>Material</th>
               <th style="text-align:right;">Quantity</th>
-              <th style="text-align:right;">Total Price</th>
             </tr>
           </thead>
           <tbody>
@@ -109,128 +179,30 @@ $row = mysqli_fetch_assoc($res);
             include "dbconnect.php";
             $tQuan = 0;
             $tPrice = 0;
-
-            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblpackages c WHERE c.packageID = a.orderPackageID and b.orderID = a.tblOrdersID and b.orderID = '$orderID'";
+            $sql1 = "SELECT * FROM tblprodphase_materials a, tblmat_var b, tblmat_type c, tblmaterials d WHERE a.pph_matDescID = b.mat_varID and b.materialID = d.materialID and d.materialType = c.matTypeID and a.pphID = '$id'";
             $res = mysqli_query($conn,$sql1);
             while($row = mysqli_fetch_assoc($res)){
-              echo '<tr>
-              <td>'.$row['packageDescription'].'</td>
-              <td>PACKAGE</td>
-              <td style="text-align:right;">Php  '.number_format($row['packagePrice'],2).'</td>
-              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-              $tPrice = $row['orderQuantity'] * $row['packagePrice'];
-              $tPrice =  number_format($tPrice,2);
-              echo '<td style="text-align:right;">Php  '.$tPrice.'</td></tr>';
-              $tPrice = $row['orderPrice'];
-              $tQuan = $tQuan + $row['orderQuantity'];
-            }
-
-            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$orderID'";
-            $res = mysqli_query($conn,$sql1);
-            while($row = mysqli_fetch_assoc($res)){
-              echo '<tr>
-              <td>'.$row['productName'].'</td>
-              <td>'.$row['productDescription'].'</td>
-              <td style="text-align:right;">Php  '.number_format($row['productPrice'],2).'</td>
-              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-              $tPrice = $row['orderQuantity'] * $row['productPrice'];
-              $tPrice =  number_format($tPrice,2);
-              echo '<td style="text-align:right;">Php  '.$tPrice.'</td></tr>';
-              $tPrice = $row['orderPrice'];
-              $tQuan = $tQuan + $row['orderQuantity'];
+              echo "<tr>
+                    <td>".$row['matTypeName']."</td>
+                    <td>".$row['mat_varDescription']."/ ".$row['materialName']."</td>
+                    <td style='text-align:right;'>".$row['pph_matQuan']."</td>
+                    </tr>";
             }
             ?>
-            <tr style="text-align:right;">
-              <td></td>
-              <td colspan="2" style="text-align:right;"><b>GRAND TOTAL:</b></td>
-              <td id="totalQ"><?php echo $tQuan?></td>
-              <td id="totalPrice"><?php echo "Php  ". number_format($tPrice,2)?></td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div> 
   </div>
   <br>
-
-
-  <div class="row">
-    <div class="col-xs-12">
-      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
-      <br>
-      <div class="table-responsive">
-        <table class="table color-bordered-table muted-bordered-table">
-          <?php
-          $down = 0;
-          $bal = 0;
-          $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$orderID'";
-          $res = mysqli_query($conn,$sql);
-          $tpay = 0;
-          while($trow = mysqli_fetch_assoc($res)){
-            $tpay = $tpay + $trow['amountPaid'];
-          }
-          $down = $tpay;
-          $bal = $tPrice - $down;
-          $or = str_pad($orderID, 6, '0', STR_PAD_LEFT);
-          if($bal==0){
-            echo "<tr>
-            <td>FULL payment for</td>
-            <td style='color:blue'>ORDER ID: ".$or."</td>
-            </tr>";
-          }
-          else{
-            echo "<tr>
-            <td>PARTIAL payment for</td>
-            <td style='color:blue'>ORDER ID: ".$or."</td>
-            </tr>";
-          }
-
-          ?>
-            <?php
-            include "dbconnect.php";
-            $sql = "SELECT * FROM tblpayment_details a, tblmodeofpayment b WHERE b.modeofpaymentID = a.mopID and a.payment_detailsID = '$id'";
-            $res = mysqli_query($conn,$sql);
-            $trow = mysqli_fetch_assoc($res);
-            $payment = $trow['amountPaid'];
-            ?>
-          <tr>
-            <td>Mode of Payment</td>
-            <td><?php echo $trow['modeofpaymentDesc']?></td>
-          </tr>
-          <tr>
-            <td>Amount</td>
-            <td>Php <?php echo number_format($payment,2)?></td>
-          </tr>
-          <tr>
-            <td>Remaining Balance:</td>
-            <td>Php <?php echo number_format($bal,2)?></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
   <br>
-  <div class="col-md-6 pull-right">
-    <b><i>Issued By:</i></b>
-    <br>
-    <br>
-    <span >_____________________________________</span>
-    <br>
-    <h4><b>Authorized Signature</b></h4>
-  </div>
-  <br><br>
-  <div class="row">
-    <div class="col-md-12">
-      <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
-    </div>
-  </div>
 </body>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 <?php
-// $html = ob_get_clean();
-// $dompdf = new DOMPDF();
-// $dompdf->load_html($html);
-// $dompdf->render();
-// $dompdf->stream($orID, array("Attachment" => 0));
+$html = ob_get_clean();
+$dompdf = new DOMPDF();
+$dompdf->load_html($html);
+$dompdf->render();
+$dompdf->stream($orID, array("Attachment" => 0));
 ?>

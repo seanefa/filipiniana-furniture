@@ -37,7 +37,7 @@ include 'dbconnect.php';
       
       <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
         <div class="row">
-          <div class="panel panel-info" style="height: 500px;">
+          <div class="panel panel-info">
             <div id="Menu1">
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
@@ -398,7 +398,7 @@ include 'dbconnect.php';
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active" >
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-face-smile"></i>&nbsp;Customers Monitoring</a>
+                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-face-smile"></i>&nbsp;Customer Monitoring</a>
                 </li>
               </ul>
             </h3>
@@ -516,14 +516,18 @@ include 'dbconnect.php';
       <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
        <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
-        </div>
-      </div>  
-       <div class="panel panel-info">
-        <div class="tab-content">
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">NOTIFICATIONS</button>
         </div>
       </div>  
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
+         <div class="panel panel-info">
+          <div class="tab-content">
+            <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">

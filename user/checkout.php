@@ -270,6 +270,7 @@ function inputValidate(id){
 
   }
   $(document).ready(function(){
+
     var options = {};
                 $('#ratePick').click(function(){ 
 
@@ -289,6 +290,9 @@ function inputValidate(id){
                     var x = parseFloat($('#tPrice').val());
                     $('#ttp').html('&#8369;'+parseFloat(x));
                     $('#paydRate').html('&#8369;'+0.00);
+                    var tem = $('#temporaryPrice').val();
+
+                     $('#tPrice').val(tem);
                   }
 
                 });
@@ -311,7 +315,10 @@ $('#rateDel').click(function(){
 
 $('#delloc').change(function(){
   var x = parseFloat($('#tPrice').val());
+  var total = parseFloat($('#tPrice').val());
   $('#dRate').val(parseFloat($('#delloc').val()));
+  var value = parseFloat($('#dRate').val());
+  $('#tPrice').val(total + value);
   $('#paydRate').html('&#8369;'+parseFloat($('#delloc').val()));
   var d = parseFloat($('#delloc').val());
   var due = x + d;
@@ -425,8 +432,8 @@ $(document).ready(function(){
             <div class="col-md-6 col-md-offset-3" style="text-align: center;">
               <div class="form-group">
                 
-                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up"/> Pick-up</label>
-                  <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery"/> Delivery</label>
+                  <label class="radio-inline"><input type="radio" id="ratePick" name="type" value="Pick-up" checked required/> Pick-up</label>
+                  <label class="radio-inline"><input type="radio" id="rateDel" name="type" value="Delivery" required/> Delivery</label>
                 </div>
               </div>
             </div>
@@ -439,7 +446,7 @@ $(document).ready(function(){
                 </div>
                   <div class="panel-body">
                         <fieldset id="address" class="required">
-              <div class="deliveryDetails">
+              <div class="deliveryDetails required">
              
                   <label class="control-label">Delivery Location</label>
                   <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
@@ -563,6 +570,15 @@ $(document).ready(function(){
                                 var ttq = sessionStorage.getItem('totalQuant');
                                   var pvalue = sessionStorage.getItem('pitem');
                                 var pitem = new Array();
+
+
+                                $('#stt').html('&#8369;'+ttp)
+                                $('#ttp').html('&#8369;'+ttp);
+                                $('#ttq').html(''+ttq);
+                                $('#vat').html('&#8369;'+ttp*.12);
+                                $('#tPrice').val(ttp);
+                                $('#temporaryPrice').val(ttp);
+
                                 if(pvalue != null){
                                 pitem = pvalue.split(',');
                                 }
@@ -603,10 +619,6 @@ $(document).ready(function(){
                                 var i = 0;
 
                                 var j = 0;
-                                $('#stt').html('&#8369;'+ttp)
-                                $('#ttp').html('&#8369;'+ttp);
-                                $('#ttq').html(''+ttq);
-                                $('#tPrice').val(ttp);
 
 
                                 while(i != numItems){
@@ -800,6 +812,10 @@ $(document).ready(function(){
                                 <td class="text-right" id="ttq"></td>
                               </tr>
                               <tr>
+                                <td class="text-right" colspan="4"><strong>Value Added Tax:</strong></td>
+                                <td class="text-right" id="vat">&#8369;</td>
+                              </tr>
+                              <tr>
                                 <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
                                 <td class="text-right" id="stt">&#8369;</td>
                               </tr>
@@ -811,6 +827,7 @@ $(document).ready(function(){
                                 <td class="text-right" colspan="4"><strong>Total:</strong></td>
                                 <td class="text-right" id="ttp"></td>
                                 <input id="tPrice" name="tPrice" type="hidden"/>
+                                <input id="temporaryPrice" type="hidden"/>
                               </tr>
                             </tfoot>
                           </table>

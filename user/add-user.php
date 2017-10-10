@@ -56,7 +56,7 @@ if($cf==$pw)
 
 	  			// HTML email starts here
 	            $subject    = "Greetings from Filipiniana Furniture!";
-	      		$text_message    = "Hello $fn $ln, <br /><br /> Your account details are as follows: <br /> Username: $un <br /> Password: $pw";
+	      		$text_message    = "Hello $fn $ln, <br /><br /> Your account details are as follows: <br /> Username: $un <br /><br>Click this <a href='http://localhost:8000/user/confirm-account.php?id=".$last_id." '>Link</a> to Activate your Account<br>";
 	      		$mail->AddEmbeddedImage('image/logo.png', 'logoimg');      
 	  
 				$message  = "<html><body>";
@@ -105,7 +105,7 @@ if($cf==$pw)
 		        $mail->addReplyTo('filfurnitures@gmail.com', 'Filipiniana Furniture');
 
 		        // Add a recipient
-		        $mail->addAddress('filfurnitures@gmail.com');
+		        $mail->addAddress($em);
 
 		        // Set email format to HTML
 		        $mail->isHTML(true);
