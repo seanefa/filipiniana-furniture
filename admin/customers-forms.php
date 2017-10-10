@@ -44,27 +44,7 @@ if (!$conn) {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Customer Name</label><span id="x" style="color:red"> *</span>
-                                <select id="select" class="form-control" tabindex="1" name="job">
-                                  <?php
-                                  include "dbconnect.php";
-                                  $sql = "SELECT * FROM tblcustomer order by customerID;";
-                                  $result = mysqli_query($conn, $sql);
-                                  while ($row = mysqli_fetch_assoc($result))
-                                  {
-                                    if($row['customerStatus']=='Active'){
-                                      if ($trow["userEmpID"] == $row['empID'])
-                                      {
-                                        echo('<option value='.$row['empID'].'" selected="selected">'.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
-                                      }
-                                      else
-                                      {
-                                      echo('<option value='.$row['empID'].'>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</option>');
-                                      }
-
-                                    }
-                                  }
-                                  ?>
-                                </select>
+								  <input type="text" name="_name" value="<?php echo "" . $trow["customerLastName"] . ", " . $trow["customerFirstName"] . " " . $trow["customerMidName"];?>">
                               </div>
                             </div>
                           </div>
