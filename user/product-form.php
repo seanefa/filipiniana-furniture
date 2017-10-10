@@ -43,15 +43,16 @@
             	<h2 class="m-b-0 m-t-0" style="text-align: center;"><?php echo $trow['productName'];?></h2>
                 	<hr>
                     <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="white-box text-center"> <img style="height:280px; width:200;" src="../admin/plugins/images/<?php echo $trow['prodMainPic']; ?>" alt="<?php echo $trow['prodMainPic']; ?>" class="img-responsive"/> </div>
+                        </div>
                         <div class="col-lg-2 col-md-2 col-sm-2">
 							<h4 class="box-title m-t-40">Description</h4>
                          	<p><?php echo $trow['productDescription'];?></p>
                         	<h4 class="m-t-40">Price</h4>
                          	<h2 class="text-success" style="font-weight: bold;">&#8369;<?php echo number_format($trow['productPrice']);?></h2>
                         </div>
-                    	<div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="white-box text-center"> <img style="height:280px; width:200;" src="pics/'<?php echo $trow['prodMainPic'] ?>'" alt="unavailable" class="img-responsive"/> </div>
-                        </div>
+                    	
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <h3 class="box-title">General Info</h3>
                                         <div class="table-responsive">

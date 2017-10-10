@@ -208,14 +208,31 @@
     if(!$("#" + idCartModal).length) {
       $('body').append(
         '<div class="modal fade" id="' + idCartModal + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
-        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-dialog modal-lg" role="document">' +
         '<div class="modal-content">' +
         '<div class="modal-header">' +
         '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
         '<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</h4>' +
         '</div>' +
         '<div class="modal-body">' +
-        '<table class="table table-hover table-responsive" id="' + idCartTable + '"></table>' +
+		'<table class="table table-hover table-responsive">'+
+		'<tr>'+
+		'<td></td>'+
+		'<td class="text-center"><strong>Product</strong></td>'+
+		'<td class="text-left"><strong>Unit Price</strong></td>'+
+		'<td><strong>Quantity</strong></td>'+
+		'<td><strong>Total Price</strong></td>'+
+		'</tr>'+
+		'</table>' +
+        '<table class="table table-hover table-responsive" id="' + idCartTable + '">'+
+		'<tr>'+
+		'<td class="text-center"><strong>Product</strong></td>'+
+		'<td></td>'+
+		'<td>Unit Price</td>'+
+		'<td>Quantity</td>'+
+		'<td>Total Price</td>'+
+		'</tr>'+
+		'</table>' +
         '</div>' +
         '<div class="modal-footer">' +
         '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
@@ -236,7 +253,7 @@
         var total = this.quantity * this.price;
         $cartTable.append(
           '<tr title="' + this.summary + '" data-id="' + this.id + '" data-price="' + this.price + '">' +
-          '<td class="text-center" style="width: 30px;"><img width="30px" height="30px" src="' + this.image + '"/></td>' +
+          '<td class="text-center" style="width: 30px;"><img width="80px" height="100px" src="' + this.image + '"/></td>' +
           '<td>' + this.name + '</td>' +
           '<td title="Unit Price">' + options.currencySymbol + MathHelper.getRoundedNumber(this.price) + '</td>' +
           '<td title="Quantity"><input type="number" min="1" style="width: 70px;" class="' + classProductQuantity + '" value="' + this.quantity + '"/></td>' +
