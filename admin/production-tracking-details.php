@@ -243,7 +243,7 @@ unset($_SESSION['actionFailed']);
                             </div>
 
                             <div class="col-md-6">
-                              <h3> <label class="control-label">Payment History</label></h3>
+                              <h2>Payment History</h2>
                               <table class="table color-bordered-table">
                                 <thead>
                                   <th style="text-align:left"><b>Date Paid</b></th>

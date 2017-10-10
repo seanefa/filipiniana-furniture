@@ -303,7 +303,7 @@ $_SESSION['varname'] = $jsID;
                 $orderPrice = $row['orderPrice'];
                 ?>
                 <h5>
-                  <table class="table">
+                  <table class="table table-bordered table-hover">
                     <tr>
                       <td><b>Name</b></td>
                       <td><?php echo $row['customerFirstName'].' '.$row['customerMiddleName'].'  '.$row['customerLastName'];?></td>
@@ -326,7 +326,7 @@ $_SESSION['varname'] = $jsID;
 
               <div class="col-md-6">
                 <h3 style="text-align:center;"> <label class="control-label">Payment History</label></h3>
-                <table class="table color-bordered-table">
+                <table class="table table-bordered table-hover">
                   <thead>
                     <th style="text-align:left"><b>Date Paid</b></th>
                     <th style="text-align:left"><b>Mode of Payment</b></th>

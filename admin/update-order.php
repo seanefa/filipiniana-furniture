@@ -182,7 +182,7 @@ $(document).ready(function(){ //wala lang
                       </div>
                       </div>
 
-                    <div class="row" style="border: 2px solid #989898;">
+                    <div class="row" style="border: 2px solid #E4E7EA;">
                       <div class="col-md-12">
                         <div class="panel-wrapper collapse in" aria-expanded="true">
                             <form action="save-order-update1.php" method = "post">

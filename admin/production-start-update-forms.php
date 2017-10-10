@@ -363,16 +363,16 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                   <div class="descriptions">
                     <div class="form-body">
                       <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                           <div class="form-group">
-                            <h3 class="control-label"><b>Furniture Name:</b> <?php echo $row['productName']?></h3>
+                            <h3 style="text-align: center;">Furniture Name:<br><?php echo $row['productName']?></h3>
                           </div>
                         </div>
                       </div>
 
                       <div class="row">
                         <div class="table-responsive">
-                          <table class="table display nowrap" id="tblProducts">
+                          <table class="table table-bordered table-hover" id="tblProducts">
                             <thead>
                               <tr>
                                 <th style="text-align: left;">Phase Name</th>
