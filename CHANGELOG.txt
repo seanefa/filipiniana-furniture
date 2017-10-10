@@ -81,3 +81,53 @@ josefpls
 * Improved image update.
 * Added user session.
 * Improved dashboard and menu.
+
+22/09/2017
+* Improved raw materials.
+* Improved regex.
+
+23/09/2017
+* Improved Point of Sales.
+* Improved ordering.
+* Added error handling.
+
+24/09/2017
+* Improved notification.
+
+25/09/2017
+* Improved update information.
+* Fixed maintenance.
+* Added send proof.
+* Fixed location header.
+
+28/09/2017
+* Minor UI changes.
+* Fixed menubar.
+
+30/09/2017
+* Improved raw materials management.
+
+01/10/2017
+* Improved sessions.
+
+02/10/2017
+* Improved ordering.
+* Improved my account.
+
+03/10/2017
+* Improved raw material management.
+* Improved reports.
+* Fixed logo & icons.
+
+06/10/2017
+* Minor bug fixes.
+* Added package viewing for customer.
+
+07/10/2017
+* Added customer maintenance.
+* Added reCAPTCHA.
+
+10/10/2017
+* Added email confirmation.
+* Major changes on admin.
+* Added reCAPTCHA validation.
