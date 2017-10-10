@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <div class="col-sm-12" id="content">
           <h1 class="title">Register Account</h1>
           <p>If you already have an account with us, please login at the <a href="login.php">Login Page</a>.</p>
-          <form action="add-user.php" method="post" autocomplete="off" class="form-horizontal" method="post">
+          <form action="add-user.php" method="post" autocomplete="off" onsubmit="check_if_capcha_is_filled" class="form-horizontal" method="post">
             <fieldset id="account">
               <legend>Your Personal Details</legend>
               <!--div style="display: none;" class="form-group required">
@@ -104,7 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <fieldset>
               <legend>Newsletter</legend>
               <div class="form-group required">
-                <div class="g-recaptcha pull-right" data-sitekey="6Ld4ijMUAAAAAL1AtLFjYMZPzteuwd4l6VUDvfGz"></div>
+                <div id="captc" class="g-recaptcha pull-right" data-callback="capcha_filled"
+   data-expired-callback="capcha_expired" data-sitekey="6Ld4ijMUAAAAAL1AtLFjYMZPzteuwd4l6VUDvfGz"></div>
+                <span id="capmsg" style="color: red;"></span>
                 <label class="col-sm-2 control-label">I want to receive exclusive offers by e-mail</label>
                 <div class="col-sm-5">
 <!--                  <input type="checkbox" id="_cbxNewsletter" value="1" name="newsletter">-->
@@ -115,9 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </fieldset>
             <div class="buttons">
               <div class="pull-right">
-                <input type="checkbox" value="1" name="agree" id="_cbxPolicy">
+                <input type="checkbox" value="1" name="agree" id="_cbxPolicy" required>
                 &nbsp;I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a> &nbsp;
-                <input type="submit" class="btn btn-primary" value="Register" name="register" id="_btnRegister" disabled>
+                <input onclick="validate()" class="btn btn-primary" value="Register" name="register" id="_btnRegister">
               </div>
             </div>
           </form>
@@ -129,5 +131,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <?php include"footer.php";?>
 </div>
 <?php include"scripts.php";?>
+<script type="text/javascript">
+  var allowSubmit = false;
+
+function validate(){
+
+if(allowSubmit == false){
+
+  $('#_btnRegister').prop('type','');
+  alert('check captcha first');
+
+}
+
+}
+
+
+  function capcha_filled () {
+    allowSubmit = true;
+    $('#_btnRegister').prop('type','submit');
+    $('#capmsg').html('');
+}
+function capcha_expired () {
+    allowSubmit = false;
+}
+
+var onloadCallback = function() {
+    grecaptcha.render('captc', {
+      'sitekey' : '6Ld4ijMUAAAAAL1AtLFjYMZPzteuwd4l6VUDvfGz',
+      'callback': capcha_filled,
+      'expired-callback': capcha_expired,
+    });
+  };
+
+  function check_if_capcha_is_filled (e) {
+    if(allowSubmit) return true;
+    e.preventDefault();
+    alert('Fill in the capcha!');
+}
+
+
+
+</script>
 </body>
 </html>
