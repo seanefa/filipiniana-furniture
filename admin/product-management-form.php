@@ -37,7 +37,7 @@ $_SESSION['varname'] = $jsID;
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <h3><b>Furniture Name : </b> <?php echo $pRow['productName']?></h3>
+                      <h3 style="text-align: center;">Furniture Name:<br><?php echo $pRow['productName']?></h3>
                       <input type="hidden" name="name" value="<?php echo $pRow['productID']?>"><span id="message"></span>
                     </div>
                   </div>
@@ -99,7 +99,7 @@ $_SESSION['varname'] = $jsID;
               <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
                   <input type="text" id="quan" class="form-control" name="quan" style="text-align:right" value="<?php echo $count;?>">
@@ -107,17 +107,13 @@ $_SESSION['varname'] = $jsID;
                   <p id="quanError" style="color:red"></p>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label">Remarks</label>
                   <textarea id="remText" class="form-control" name="remarks"></textarea>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -174,47 +170,35 @@ $_SESSION['varname'] = $jsID;
               </div>
               <hr>
               <div class="row">
-                <div class="col-md-12" style="border:1px solid">
-                  <div class="form-group">
-                    <div class="row" id="checkbox">
-                      <div class="col-md-12">
-                        <h4><input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?</h4>
-                      </div>
+                <div class="col-md-12"">
+                    <div id="checkbox">
+                        <h4 style="text-align: center;">
+                          <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
+                        </h4>
                     </div>
+                </div>
+                  <div class="row">
                     <div id="selection">
-                      <h4>Select Products</h4>
-<!--<div class="row">
-<div class="col-md-6">
-<label class="radio-inline"><input type="radio" name="from" value="Category"/>Product Category</label>
-<label class="radio-inline"><input type="radio" name="from" value="Type"/>Product Type</label>
-<label class="radio-inline"><input type="radio" name="from" value="Name"/>Product Name</label>
-</div>
-</div>-->
-<div class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd">
-        <?php
-        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
-        $res = mysqli_query($conn,$sql);
-        while($row = mysqli_fetch_assoc($res)){
-          if($row['prodStat']!='Archived'){
-            echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
-          }
-        }
-        ?>
-      </select>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
+                      <h4 style="text-align: center;">Select Products</h4>
+                      <div class="col-md-6 col-md-offset-3">
+                        <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
+                          <?php
+                          $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                          $res = mysqli_query($conn,$sql);
+                          while($row = mysqli_fetch_assoc($res)){
+                            if($row['prodStat']!='Archived'){
+                              echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
 <div class="modal-footer">
   <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
