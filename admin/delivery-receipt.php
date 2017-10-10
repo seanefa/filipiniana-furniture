@@ -207,6 +207,20 @@ $orderID = $orRoq['orderID'];
   <div class="row">
     <div class="col-md-12">
       <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
+        
+      <p><?php 
+        session_start();
+        include "dbconnect.php"; 
+        $datepr = date("Y-m-d");
+        $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
+          $result5 = mysqli_query($conn, $sql5);
+          while ($row5 = mysqli_fetch_assoc($result5))
+          { 
+            if($row5['userStatus']=="Active" && $row5['userType']=="admin")
+			{
+              echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
+            }
+          }  ?></p>
     </div>
   </div>
 </body>

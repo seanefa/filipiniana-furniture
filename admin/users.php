@@ -130,7 +130,8 @@ $(document).ready(function(){
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['userStatus']=="Active" && $row['userType']=="admin"){
+                                if($row['userStatus']=="Active" && $row['userType']=="admin")
+								{
                                   echo('<tr><td>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</td>');
                                   //$job = jName($row['empID']);
                                   echo ('<td>'.$row['userType'].'</td>
@@ -142,7 +143,9 @@ $(document).ready(function(){
                                     <!-- DELETE -->
                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="users-form.php" data-remote="users-form.php?id=<?php echo $row['userID'];?> #delete" data-target="#myModal" ><i class="ti-close"></i>  Deactivate</button>
                                   </td>
-                                  <?php echo('</tr>');} }
+                                  <?php echo('</tr>');
+								}
+							  }
                                   /* function jName($id){
                                     include "dbconnect.php";
                                     $sql = "SELECT * from tbljobs WHERE jobID = '$id'";

@@ -43,7 +43,7 @@ if (!$conn) {
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label class="control-label">Employee Name</label><span id="x" style="color:red"> *</span>
+                                <label class="control-label">Customer Name</label><span id="x" style="color:red"> *</span>
                                 <select id="select" class="form-control" tabindex="1" name="job">
                                   <?php
                                   include "dbconnect.php";
