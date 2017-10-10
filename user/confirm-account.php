@@ -21,7 +21,7 @@
 
   echo $id;
 
-  $sql="UPDATE tbluser SET confirmedUser= 1 where userCustID = ".$id ."";
+  $sql="UPDATE tbluser SET confirmedUser = 1 where userCustID = ".$id ."";
   $result = mysqli_query($conn,$sql);
 
 

@@ -18,7 +18,7 @@
         <div id="content" class="col-sm-12">
           <p class="text-center lead">Your account is not yet Confirmed!<br>
             Confirm your email first then log in! </p>
-          <div class="buttons text-center"> <a href="login.php">Log in</a> </div>
+          <div class="buttons text-center"> <a class="btn btn-primary btn-lg" href="home.php">Continue</a> </div>
         </div>
         <!--Middle Part End -->
       </div>
