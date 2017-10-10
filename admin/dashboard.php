@@ -516,14 +516,18 @@ include 'dbconnect.php';
       <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
        <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
-        </div>
-      </div>  
-       <div class="panel panel-info">
-        <div class="tab-content">
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">NOTIFICATIONS</button>
         </div>
       </div>  
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
+         <div class="panel panel-info">
+          <div class="tab-content">
+            <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
