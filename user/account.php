@@ -129,6 +129,8 @@
 					</div>
 					<hr>
 					<h2>Recent Orders</h2>
+					<br>
+					<h6><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a></h>
 					<div class="col-md-12">
 						<div class="row">
 							<div class="table-responsive">          
@@ -143,21 +145,38 @@
 										</tr>
 									</thead>
 									<tbody>
+										<?php
+
+									include "userconnect.php";
+										$id = $_SESSION["userID"];
+
+										$usql = "SELECT * FROM tbluser where userID = '$id';";
+										$uresult = mysqli_query($conn,$usql);
+										$urow = mysqli_fetch_assoc($uresult);
+
+										$uid = $urow['userCustID'];
+
+										$sqls = "SELECT * FROM tblorders where custOrderID = '$uid';";
+										$sresult = mysqli_query($conn,$sqls);
+										
+
+										while($srow = mysqli_fetch_assoc($sresult)){
+
+
+										?>
+
 										<tr>
-											<td style="color:#1A9CB7;">1</td>
-											<td>09/09/2017</td>
-											<td>₱ 55487.00</td>
-											<td><span style="color: green;">Delivered</span><br>
-											Delivered on 12/09/2017</td>
-											<td><a href="#" style="color:#1A9CB7;">TRACK MY SHIPMENT</a> <a href="" class="pull-right" style="color:#1A9CB7;">RETURN</a></td>
+											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
+											<td><?php echo $srow['dateOfReceived'];?></td>
+											<td>₱ <?php echo $srow['orderPrice'];?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Order</a></td>
 										</tr>
-										<tr>
-											<td style="color:#1A9CB7;">2</td>
-											<td>09/04/2017</td>
-											<td>₱ 10187.00</td>
-											<td>Closed</td>
-											<td><a href="#" style="color:#1A9CB7;">TRACK MY SHIPMENT</a></td>
-										</tr>
+
+										<?php
+										}
+
+										?>
 
 									</tbody>
 								</table>

@@ -35,9 +35,59 @@
 					<h2>My Orders</h2>
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="well">
-								
+							<div class="col-md-12">
+						<div class="row">
+							<div class="table-responsive">          
+								<table class="table table-hover table-striped">
+									<thead>
+										<tr>
+											<th>Order #</th>
+											<th>Placed On</th>
+											<th>Total</th>
+											<th>Status</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+
+									include "userconnect.php";
+										$id = $_SESSION["userID"];
+
+										$usql = "SELECT * FROM tbluser where userID = '$id';";
+										$uresult = mysqli_query($conn,$usql);
+										$urow = mysqli_fetch_assoc($uresult);
+
+										$uid = $urow['userCustID'];
+
+										$sqls = "SELECT * FROM tblorders where custOrderID = '$uid';";
+										$sresult = mysqli_query($conn,$sqls);
+										
+
+										while($srow = mysqli_fetch_assoc($sresult)){
+
+
+										?>
+
+										<tr>
+											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
+											<td><?php echo $srow['dateOfReceived'];?></td>
+											<td>₱ <?php echo $srow['orderPrice'];?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td><a type="button" data-toggle="modal" data-target="#myModal	" href="order-management-modals.php" data-remote="order-management-modals.php?id='<?php echo $srow['orderID'];?>' #orderReqview">View <i class="fa fa-info-circle"></i></a></td>
+											<td><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a> <a href="" class="pull-right" style="color:#1A9CB7;">RETURN</a></td>
+										</tr>
+
+										<?php
+										}
+
+										?>
+
+									</tbody>
+								</table>
 							</div>
+						</div>
+					</div>
 						</div>
 					</div>
 				</div>
