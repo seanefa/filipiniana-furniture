@@ -25,6 +25,7 @@ if (isset($_POST['submit'])) {
 		$row = mysqli_fetch_assoc($result);
 		// If result matched $username and $password, table row must be 1 row
 		if($count==1){
+			if($row['confirmedUser'] == 1){
 					session_start();
 		    		$_SESSION['logged'] = true;
 					$_SESSION['userName'] = $row["userName"];
@@ -36,6 +37,9 @@ if (isset($_POST['submit'])) {
 					// echo $row['userID'];
 					// echo $username;
 					header("location: home.php"); // Redirecting To Other Page
+					}else{
+						header("location: account-confirm.php");
+					}
 		}
 		else{
 		    $error = "Username or Password is invalid";

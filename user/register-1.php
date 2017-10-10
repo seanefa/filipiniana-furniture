@@ -16,9 +16,8 @@
       <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
-          <h1 class="title-404 text-center">404</h1>
-          <p class="text-center lead">Sorry!<br>
-            The page you requested cannot be found! </p>
+          <p class="text-center lead">Activate your Account!<br>
+            A confirmation link has been send to your Email! </p>
           <div class="buttons text-center"> <a class="btn btn-primary btn-lg" href="home.php">Continue</a> </div>
         </div>
         <!--Middle Part End -->
