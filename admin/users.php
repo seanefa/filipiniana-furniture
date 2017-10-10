@@ -130,13 +130,16 @@ $(document).ready(function(){
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['userStatus']=="Active" && $row['userType']=="admin")
+                                if($row['userStatus']=="Active" && $row['userType']=="Admin")
 								{
-                                  echo('<tr><td>'.$row['empLastName'].', '.$row['empMidName'].' '.$row['empFirstName'].'</td>');
-                                  //$job = jName($row['empID']);
-                                  echo ('<td>'.$row['userType'].'</td>
-                                  <td>'.$row['userName'].'</td>
-                                  <td>'.$row['dateCreated'].'</td>'); ?>
+							  ?>
+							  	<tr>
+									<td>
+										<?php echo "" . $row["empLastName"] . ", " . $row["empFirstName"] . " " . $row["empMidName"];?>
+									</td>
+									<td><?php echo "" . $row["userType"];?></td>
+									<td><?php echo "" . $row["userName"];?></td>
+									<td><?php echo "" . $row["dateCreated"];?></td>
                                   <td>
                                     <!-- UPDATE -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" href="users-form.php" data-remote="users-form.php?id=<?php echo $row['userID'];?> #update" data-target="#myModal" ><i class="ti-pencil-alt"></i>  Update</button>
