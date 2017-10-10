@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2017 at 05:10 PM
+-- Generation Time: Oct 10, 2017 at 08:34 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -80,6 +80,14 @@ CREATE TABLE `tblbank_accounts` (
   `accountStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
   `accountRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblbank_accounts`
+--
+
+INSERT INTO `tblbank_accounts` (`accountID`, `accountName`, `accountNumber`, `accountStatus`, `accountRemarks`) VALUES
+(1, 'Aira Barrameda', '201402207MN0', 'Active', 'Landbank'),
+(2, 'Sean Lester Efa', '201728127NB0', 'Active', 'BDO');
 
 -- --------------------------------------------------------
 
@@ -184,7 +192,10 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (28, 'Sheyne', 'Smth', 'Laristan', '#1234 Somewhere Street Brgy. Litex BHQC', '+63 (967) 136-7192', 'sheynelaristan@gmail.com', '', 0, 'Active'),
 (29, 'Roselyn', 'M', 'Melgar', '#1234 Taas na Street BHQC', '+63 (972) 713-8731', 'binastedsikuya@gmail.com', '', 0, 'Active'),
 (30, 'Gendy', 'Lopez', 'Ma', '329 San jose st. buenlag east mangaldan, pangasinan', '+63 (935) 366-7068', 'gendylopez08@gmail.com', '', 0, 'Active'),
-(31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', '', 0, 'active');
+(31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', '', 0, 'active'),
+(32, 'Sehun', 'Broken', 'Oh', '#872 Tralala Stree BHQC', '0923987238', 'hongkaira@gmail.com', '', 1, 'active'),
+(33, 'Jongin', '', 'Kim', '#111 Gangnamgu Ksoohearteu Seoul', '09827389101', 'hongkaira@gmail.com', '', 1, 'active'),
+(34, 'Kyungsoo', '', 'Do', '#9837 Alalalala', '0923972148', 'hongkaira@yahoo.com', '', 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -676,7 +687,8 @@ INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssu
 (33, 40, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
 (34, 41, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
 (35, 42, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(36, 43, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1);
+(36, 43, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
+(37, 44, 35000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -862,7 +874,8 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (147, 'Order', 'New', '2017-10-10', 'New order #OR000040', 1),
 (148, 'Order', 'New', '2017-10-10', 'New order #OR000041', 1),
 (149, 'Order', 'New', '2017-10-10', 'New order #OR000042', 1),
-(150, 'Order', 'New', '2017-10-10', 'New order #OR000043', 1);
+(150, 'Order', 'New', '2017-10-10', 'New order #OR000043', 1),
+(151, 'Order', 'New', '2017-10-10', 'New order #OR000044', 1);
 
 -- --------------------------------------------------------
 
@@ -1138,7 +1151,8 @@ CREATE TABLE `tblmodeofpayment` (
 
 INSERT INTO `tblmodeofpayment` (`modeofpaymentID`, `modeofpaymentDesc`, `modeofpaymentStatus`) VALUES
 (1, 'Cash', 'Active'),
-(2, 'Check', 'Active');
+(2, 'Check', 'Active'),
+(3, 'Deposit Slip', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1151,9 +1165,18 @@ CREATE TABLE `tblnotification` (
   `tblcustomerID` int(11) NOT NULL,
   `tblorderID` int(11) NOT NULL,
   `amountPaid` double NOT NULL,
+  `datePaid` date NOT NULL,
   `bankBranch` varchar(450) NOT NULL,
-  `proofPicture` varchar(450) NOT NULL
+  `proofPicture` varchar(450) NOT NULL,
+  `notifStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblnotification`
+--
+
+INSERT INTO `tblnotification` (`id`, `tblcustomerID`, `tblorderID`, `amountPaid`, `datePaid`, `bankBranch`, `proofPicture`, `notifStatus`) VALUES
+(1, 34, 44, 25000, '2017-10-10', 'BDO', '2017-10-101507655702.png', 'Confirmed');
 
 -- --------------------------------------------------------
 
@@ -1237,7 +1260,8 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (40, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
 (41, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
 (42, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(43, 1, '2017-10-10', '2017-11-04', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.');
+(43, 1, '2017-10-10', '2017-11-04', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.'),
+(44, 1, '2017-10-10', '2017-10-10', 34, 35000, 'WFA', 'N/A. This order is for pick-up', 'Pre-Order', '');
 
 -- --------------------------------------------------------
 
@@ -1339,7 +1363,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 (42, 42, 18, 25000, 0, NULL, 1, 'Active'),
 (43, 42, 16, 0, 0, NULL, 1, 'Active'),
 (44, 42, 17, 0, 0, NULL, 1, 'Active'),
-(45, 43, NULL, 90000, 0, 0, 1, 'Active');
+(45, 43, NULL, 90000, 0, 0, 1, 'Active'),
+(46, 44, 17, 35000, 0, NULL, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1501,7 +1526,8 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (30, 33, '2017-10-10 10:36:17', 57500, 1, 'Paid'),
 (31, 34, '2017-10-10 10:36:39', 57500, 1, 'Paid'),
 (32, 35, '2017-10-10 10:40:13', 57500, 1, 'Paid'),
-(33, 36, '2017-10-10 10:51:37', 45000, 1, 'Paid');
+(33, 36, '2017-10-10 10:51:37', 45000, 1, 'Paid'),
+(34, 37, '2017-10-10 20:21:23', 25000, 3, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -2063,7 +2089,10 @@ CREATE TABLE `tbluser` (
 INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `userType`, `userCustID`, `userEmpID`, `dateCreated`, `confirmedUser`) VALUES
 (1, 'eyembisi', 'admin', 'Active', 'admin', NULL, 1, '2017-08-24', NULL),
 (4, 'airaem', 'admin', 'active', 'customer', 19, NULL, '2017-08-27', NULL),
-(5, 'hongkaisoo', 'admin', 'active', 'customer', 31, NULL, '2017-09-01', NULL);
+(5, 'hongkaisoo', 'admin', 'active', 'customer', 31, NULL, '2017-09-01', NULL),
+(6, 'kuyasehun', 'kuyasehun', 'active', 'customer', 32, NULL, '2017-10-10', NULL),
+(7, 'kuyajongin', 'kuyajongin', 'active', 'customer', 33, NULL, '2017-10-10', NULL),
+(8, 'kuyaksoo', 'kuyaksoo', 'active', 'customer', 34, NULL, '2017-10-10', 1);
 
 --
 -- Indexes for dumped tables
@@ -2592,7 +2621,7 @@ ALTER TABLE `tblattribute_measure`
 -- AUTO_INCREMENT for table `tblbank_accounts`
 --
 ALTER TABLE `tblbank_accounts`
-  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblbranches`
 --
@@ -2612,7 +2641,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -2717,7 +2746,7 @@ ALTER TABLE `tblfurn_type`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2727,7 +2756,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
@@ -2772,12 +2801,12 @@ ALTER TABLE `tblmat_var`
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
-  MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblnotification`
 --
 ALTER TABLE `tblnotification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblonhand`
 --
@@ -2787,7 +2816,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -2802,7 +2831,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `tblorder_requestcnt`
 --
@@ -2827,7 +2856,7 @@ ALTER TABLE `tblpackage_orderreq`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
@@ -2932,7 +2961,7 @@ ALTER TABLE `tblunit_cat`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --

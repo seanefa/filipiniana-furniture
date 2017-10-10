@@ -32,7 +32,7 @@ else{
 	$photo = date("Y-m-d") . time() . ".png";
 }
 
-$sendproofofpayment = "INSERT into tblnotification(tblcustomerID,tblorderID, amountPaid, bankBranch, proofPicture) values('$customerID','$oi', '$ap', '$bc', '$photo')";
+$sendproofofpayment = "INSERT into tblnotification(tblcustomerID,tblorderID, amountPaid, datePaid, bankBranch, proofPicture, notifStatus) values('$customerID','$oi', '$ap', '$dp', $bc', '$photo','Pending')";
 
 if($conn->query($sendproofofpayment) === true){
 	header("Location: account.php");
