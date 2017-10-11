@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2017 at 08:34 PM
+-- Generation Time: Oct 11, 2017 at 05:26 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -78,16 +78,17 @@ CREATE TABLE `tblbank_accounts` (
   `accountName` varchar(100) CHARACTER SET utf8 NOT NULL,
   `accountNumber` varchar(50) CHARACTER SET utf8 NOT NULL,
   `accountStatus` varchar(45) CHARACTER SET utf8 NOT NULL,
-  `accountRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL
+  `accountRemarks` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `bankLink` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblbank_accounts`
 --
 
-INSERT INTO `tblbank_accounts` (`accountID`, `accountName`, `accountNumber`, `accountStatus`, `accountRemarks`) VALUES
-(1, 'Aira Barrameda', '201402207MN0', 'Active', 'Landbank'),
-(2, 'Sean Lester Efa', '201728127NB0', 'Active', 'BDO');
+INSERT INTO `tblbank_accounts` (`accountID`, `accountName`, `accountNumber`, `accountStatus`, `accountRemarks`, `bankLink`) VALUES
+(1, 'Aira Barrameda', '201402207MN0', 'Active', 'Landbank', ''),
+(2, 'Sean Lester Efa', '201728127NB0', 'Active', 'BDO', '');
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,8 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (31, 'M', 'A', 'C', '#62 Resolution Street Batasan Hills Quezon City', '09726827318', 'hh@yahoo.com', '', 0, 'active'),
 (32, 'Sehun', 'Broken', 'Oh', '#872 Tralala Stree BHQC', '0923987238', 'hongkaira@gmail.com', '', 1, 'active'),
 (33, 'Jongin', '', 'Kim', '#111 Gangnamgu Ksoohearteu Seoul', '09827389101', 'hongkaira@gmail.com', '', 1, 'active'),
-(34, 'Kyungsoo', '', 'Do', '#9837 Alalalala', '0923972148', 'hongkaira@yahoo.com', '', 1, 'active');
+(34, 'Kyungsoo', '', 'Do', '#9837 Alalalala', '0923972148', 'hongkaira@yahoo.com', '', 1, 'active'),
+(35, 'Junmyeon', '', 'Kim', '#762 tralalalal', '09287428', 'hongkaira@gmail.com', '', 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1199,7 @@ CREATE TABLE `tblonhand` (
 
 INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
 (3, 17, 6, NULL),
-(4, 18, 6, NULL);
+(4, 18, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1235,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (11, 1, '2017-09-24', '2017-09-24', 24, 60000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
 (12, 1, '2017-10-02', '2017-10-18', 28, 100000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
 (13, 1, '2017-10-02', '2017-10-18', 29, 100000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
-(16, 1, '2017-10-03', '2017-11-04', 0, 25000, 'Ready for release', 'For management', 'Management Order', 'Waley'),
+(16, 1, '2017-10-03', '2017-11-04', 0, 25000, 'Finished', 'For management', 'Management Order', 'Waley'),
 (17, 1, '2017-10-04', '2017-10-04', 31, 25000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (18, 1, '2017-10-04', '2017-10-04', 31, 105000, 'Ongoing', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (19, 1, '2017-10-04', '2017-10-04', 31, 50000, 'Ongoing', 'N/A. This order is for pick-up', 'Pre-Order', ''),
@@ -1246,20 +1248,20 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (26, 1, '2017-10-05', '2017-10-05', 27, 25000, 'Finished', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
 (27, 1, '2017-10-05', '2017-10-05', 27, 25000, 'Finished', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
 (28, 1, '2017-10-10', '2017-10-11', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'a'),
-(29, 1, '2017-10-10', '2017-10-31', 28, 115000, 'Pending', 'N/A', 'Pre-Order', 'a'),
-(30, 1, '2017-10-10', '2017-10-12', 22, 90000, 'Pending', 'N/A', 'Pre-Order', 'a'),
-(31, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(32, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(33, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(34, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(35, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(36, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(37, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(38, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(39, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(40, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(41, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
-(42, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
+(29, 1, '2017-10-10', '2017-10-31', 28, 115000, 'Archived', 'N/A', 'Pre-Order', 'a'),
+(30, 1, '2017-10-10', '2017-10-12', 22, 90000, 'Archived', 'N/A', 'Pre-Order', 'a'),
+(31, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(32, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(33, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(34, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(35, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(36, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(37, 1, '2017-10-10', '2017-11-04', 23, 90000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(38, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(39, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(40, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(41, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
+(42, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
 (43, 1, '2017-10-10', '2017-11-04', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.'),
 (44, 1, '2017-10-10', '2017-10-10', 34, 35000, 'WFA', 'N/A. This order is for pick-up', 'Pre-Order', '');
 
@@ -1386,8 +1388,9 @@ CREATE TABLE `tblorder_requestcnt` (
 --
 
 INSERT INTO `tblorder_requestcnt` (`orreq_cntID`, `orreq_ID`, `orreq_quantity`, `orreq_prodFinish`, `orreq_returned`, `orreq_released`) VALUES
-(1, 18, 3, 1, 0, 0),
-(2, 16, 1, 1, 0, 0);
+(1, 18, 3, 0, 0, 1),
+(2, 16, 1, 0, 0, 1),
+(3, 6, 3, 0, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -1678,7 +1681,7 @@ INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `productionPa
 (40, 18, NULL, '2017-10-18', NULL, NULL, 'Ongoing'),
 (41, 18, NULL, '2017-10-10', NULL, NULL, 'Ongoing'),
 (42, 19, NULL, NULL, NULL, NULL, 'Ongoing'),
-(43, 16, NULL, '2017-10-10', '2017-10-12', NULL, 'Finished'),
+(43, 16, NULL, '2017-10-10', '2017-10-11', NULL, 'Finished'),
 (44, 0, 1, NULL, '2017-10-12', NULL, 'Finished'),
 (45, 0, 2, NULL, NULL, NULL, 'Ongoing');
 
@@ -1740,7 +1743,7 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (133, 40, 2, 1, '2017-10-07', '2017-10-09', NULL, ' ', 'Finished'),
 (134, 40, 3, 1, '2017-10-19', '2017-10-12', NULL, ' ', 'Finished'),
 (135, 40, 4, 1, '2017-10-10', '2017-10-12', '2017-10-12', ' ', 'Finished'),
-(136, 40, 5, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(136, 40, 5, 1, '2017-10-11', NULL, '2017-10-13', ' ', 'Ongoing'),
 (137, 41, 1, 1, '2017-10-10', NULL, '2017-10-12', ' aaa', 'Pending'),
 (138, 41, 2, NULL, NULL, NULL, NULL, NULL, 'Pending'),
 (139, 41, 3, NULL, NULL, NULL, NULL, NULL, 'Pending'),
@@ -1751,7 +1754,7 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (144, 42, 5, NULL, NULL, NULL, NULL, NULL, 'Pending'),
 (145, 43, 1, 1, '2017-10-10', '2017-10-11', '2017-10-12', ' ', 'Finished'),
 (146, 43, 2, 1, '2017-10-10', '2017-10-11', '2017-10-12', ' aa', 'Finished'),
-(147, 43, 5, 1, '2017-10-10', '2017-10-12', '2017-10-12', 'q', 'Finished'),
+(147, 43, 5, 1, '2017-10-10', '2017-10-11', '2017-10-12', ' ', 'Finished'),
 (148, 44, 1, 1, '2017-10-10', '2017-10-10', '2017-10-12', ' ', 'Finished'),
 (149, 44, 2, 1, '2017-10-10', '2017-10-11', '2017-10-12', '', 'Finished'),
 (150, 44, 5, 1, '2017-10-10', '2017-10-12', '2017-10-12', ' ', 'Finished'),
@@ -1926,7 +1929,7 @@ INSERT INTO `tblpull_out` (`pulloutID`, `pullout_fID`, `pullout_Date`, `pullout_
 CREATE TABLE `tblrelease` (
   `releaseID` int(11) NOT NULL,
   `releaseDate` datetime NOT NULL,
-  `releaseType` int(11) NOT NULL,
+  `releaseType` varchar(50) NOT NULL,
   `releaseRemarks` varchar(450) DEFAULT NULL,
   `releaseStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1936,14 +1939,22 @@ CREATE TABLE `tblrelease` (
 --
 
 INSERT INTO `tblrelease` (`releaseID`, `releaseDate`, `releaseType`, `releaseRemarks`, `releaseStatus`) VALUES
-(1, '2017-09-11 00:00:00', 0, '', 'Released'),
-(2, '2017-09-11 00:00:00', 0, 'TBD', 'Released'),
-(3, '2017-09-11 00:00:00', 0, 'PICKED UP', 'Released'),
-(4, '2017-10-05 00:00:00', 0, '', 'Released'),
-(5, '2017-10-05 00:00:00', 0, '', 'Released'),
-(6, '2017-10-05 00:00:00', 0, '', 'Released'),
-(7, '2017-10-05 00:00:00', 0, '', 'Released'),
-(8, '2017-10-05 00:00:00', 0, '', 'Released');
+(1, '2017-09-11 00:00:00', '0', '', 'Released'),
+(2, '2017-09-11 00:00:00', '0', 'TBD', 'Released'),
+(3, '2017-09-11 00:00:00', '0', 'PICKED UP', 'Released'),
+(4, '2017-10-05 00:00:00', '0', '', 'Released'),
+(5, '2017-10-05 00:00:00', '0', '', 'Released'),
+(6, '2017-10-05 00:00:00', '0', '', 'Released'),
+(7, '2017-10-05 00:00:00', '0', '', 'Released'),
+(8, '2017-10-05 00:00:00', '0', '', 'Released'),
+(9, '2017-10-11 00:00:00', '0', '', 'Released'),
+(10, '2017-10-11 00:00:00', '0', '', 'Released'),
+(11, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(12, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(13, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(14, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(15, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(16, '2017-10-11 00:00:00', 'Pick-up', '', 'Released');
 
 -- --------------------------------------------------------
 
@@ -1966,7 +1977,8 @@ INSERT INTO `tblrelease_details` (`rel_detailsID`, `tblreleaseID`, `rel_orderReq
 (1, 1, 5, 1),
 (2, 2, 6, 3),
 (3, 3, 3, 1),
-(4, 3, 4, 1);
+(4, 3, 4, 1),
+(5, 16, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -2092,7 +2104,8 @@ INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `user
 (5, 'hongkaisoo', 'admin', 'active', 'customer', 31, NULL, '2017-09-01', NULL),
 (6, 'kuyasehun', 'kuyasehun', 'active', 'customer', 32, NULL, '2017-10-10', NULL),
 (7, 'kuyajongin', 'kuyajongin', 'active', 'customer', 33, NULL, '2017-10-10', NULL),
-(8, 'kuyaksoo', 'kuyaksoo', 'active', 'customer', 34, NULL, '2017-10-10', 1);
+(8, 'kuyaksoo', 'kuyaksoo', 'active', 'customer', 34, NULL, '2017-10-10', 1),
+(9, 'kuyasuho', 'kuyasuho', 'active', 'customer', 35, NULL, '2017-10-11', NULL);
 
 --
 -- Indexes for dumped tables
@@ -2641,7 +2654,7 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
@@ -2836,7 +2849,7 @@ ALTER TABLE `tblorder_request`
 -- AUTO_INCREMENT for table `tblorder_requestcnt`
 --
 ALTER TABLE `tblorder_requestcnt`
-  MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblorder_return`
 --
@@ -2931,12 +2944,12 @@ ALTER TABLE `tblpull_out`
 -- AUTO_INCREMENT for table `tblrelease`
 --
 ALTER TABLE `tblrelease`
-  MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tblrelease_details`
 --
 ALTER TABLE `tblrelease_details`
-  MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblsupplier`
 --
@@ -2961,7 +2974,7 @@ ALTER TABLE `tblunit_cat`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
