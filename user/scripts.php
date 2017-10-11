@@ -24,9 +24,7 @@ include "product-form.php";
 
 <!-- JS Part End-->
 <script>
-$(window).unload(function(){
-  localStorage.clear();
-});
+
 
 
 jQuery(document).ready(function() {		
