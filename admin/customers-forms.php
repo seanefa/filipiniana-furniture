@@ -43,8 +43,16 @@ if (!$conn) {
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label class="control-label">Customer Name</label><span id="x" style="color:red"> *</span>
-								  <input type="text" name="_name" value="<?php echo "" . $trow["customerLastName"] . ", " . $trow["customerFirstName"] . " " . $trow["customerMidName"];?>">
+                                <label class="control-label">First Name</label><span id="x" style="color:red"> *</span>
+								  <input type="text" name="customer_fname" value="<?php echo "" . $trow["customerFirstName"];?>">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label class="control-label">Middle Name</label><span id="x" style="color:red"> *</span>
+								  <input type="text" name="customer_mname" value="<?php echo "" . $trow["customerMidName"];?>">
                               </div>
                             </div>
                           </div>
