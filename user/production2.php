@@ -42,6 +42,7 @@
 						<div class="descriptions">
 							<?php
 							$isFinish = 0;
+								$id = 20;
                             include "userconnect.php";
                             $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
                             $res = mysqli_query($conn,$sql);
@@ -145,7 +146,7 @@
 																						<?php  
                                                   											if($isFinish==1){
 																						?>
-																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id=<?php echo "" . $id;?> &pID= <?php echo "" . $pRow['prodHistID'];?> #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
+																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id=<?php echo "" . $id;?> &pID= <?php echo "" . $pRow['prodHistID'];?>  	#updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
 																						<?php
 																						$isFinish = 0;
 																						  }

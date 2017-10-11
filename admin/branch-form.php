@@ -44,7 +44,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Address</label>
-                      <input type="text" id="branchName" class="form-control" placeholder="Address" name="address" required>
+						<textarea class="form-control" plaseholder="Address" name="address" required></textarea>
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <input type="text" id="branchName" class="form-control" placeholder="Remarks" name="remarks">
+						<textarea class="form-control" name="remarks" required></textarea>
                     </div>
                   </div>
                 </div>
@@ -67,7 +67,6 @@ if (!$conn) {
         </div>
       </div>
     </div>
-  </div>
   <!-- /.modal -->
   <!-- Update Branch Modal -->
   <div class="modal fade" tabindex="-1" role="dialog" id="updateBranchModal" aria-hidden="true" style="display: none;">
@@ -118,8 +117,6 @@ if (!$conn) {
             <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
-        </div>
-
       </form>
     </div>
   </div>
@@ -141,6 +138,7 @@ if (!$conn) {
         </div>
       </div>
     </div>
-  </div>
+	  </div>
+	</div>
 </body>
 </html>

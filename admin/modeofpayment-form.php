@@ -47,12 +47,10 @@ if (!$conn) {
                  <input type="submit" class="btn btn-success waves-effect text-left" value="Save">
                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                </div>
-             </div>
            </form>
        </div>
      </div>
    </div>
- </div>
  <!-- /.modal -->
  <!-- Update Mode of Payment Modal -->
  <div class="modal fade" tabindex="-1" role="dialog" id="updateModeofPaymentModal" aria-hidden="true" style="display: none;">
