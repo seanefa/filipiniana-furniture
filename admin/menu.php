@@ -306,7 +306,6 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
             </ul>
           </li>
           <li><a href="users.php">Users</a></li>
-          <li><a href="mode-of-payment.php">Mode of Payment</a></li>
           <li><a href="penalties.php">Penalties</a></li>
 
           <li><a href="javascript:void(0)" class="waves-effect">Defaults<span class="fa arrow"></span></a>
@@ -314,6 +313,7 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
               <li><a href="default-downpayment.php">Default Downpayment</a></li>
               <li><a href="phases.php">Production Phases</a></li>
               <li><a href="javascript:void(0)">Product Design Phases</a></li>
+          	<li><a href="mode-of-payment.php">Mode of Payment</a></li>
             </ul>
           </li>
         </ul>
