@@ -53,7 +53,8 @@
                               <div class="tab-content thumbnail">
                               <div role="tabpanel" class="tab-pane fade active in" id="job">
                               <div class="panel-wrapper collapse in" aria-expanded="true">
-                              <div class="panel-body"><div class="row">
+                              <div class="panel-body">
+							  <div class="row">
                               <div class="col-md-12">
                               <div class="col-md-6">
                               <h2 style="margin-top: -20px;">'.$row['productName'].'</h2>
