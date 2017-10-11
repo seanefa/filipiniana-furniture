@@ -6,7 +6,8 @@
 <link href="image/favicon.ico" rel="icon" />
 <title>Check Out - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
-<?php include"css.php";?>
+<?php include"css.php";
+?>
 </head>
 <body>
 <div class="wrapper-wide">
