@@ -31,7 +31,7 @@ if (!$conn) {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 class="modal-title" id="modalProduct">Update Customer</h3>
               </div>
-              <form action="user-update.php" method="post" role="form">
+              <form action="customer-update.php" method="post" role="form">
                 <div class="modal-body">
                   <div class="descriptions">
                     <?php
@@ -59,21 +59,31 @@ if (!$conn) {
                             <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
-                              <label class="control-label">Username</label><span id="x" style="color:red"> *</span>
-                              <input type="text" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                              <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
+                              <input type="text" class="form-control" name="customer_lname" value="<?php echo "" . $trow["customerLastName"];?>" required/><span id="messagefirst"></span></div>
                             </div>
                           </div>
                             <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                <label class="control-label">Password</label><span id="x" style="color:red"> *</span>
-                                <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
-                              </div>
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                <label class="control-label">Confirm Password</label><span id="x" style="color:red"> *</span>
-                                <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
-                              </div>
+                            	<div class="col-md-12">
+                              		<div class="form-group">
+                                		<label class="control-label">Address</label><span id="x" style="color:red"> *</span>
+										<textarea name="customer_address" class="form-control" value="<?php echo "" . $trow["customerAddress"];?>"></textarea>
+									</div>
+                              	</div>
+							</div>
+							<div class="row">
+                            	<div class="col-md-6">
+                              		<div class="form-group">
+                                		<label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
+                                		<input type="text" class="form-control" name="customer_contactnum" value="<?php echo "" . $trow["customerContactNum"]?>" required/><span id="messagefirst"></span>
+									</div>
+                              	</div>
+                            	<div class="col-md-6">
+                              		<div class="form-group">
+                                		<label class="control-label">Email</label><span id="x" style="color:red"> *</span>
+                                		<input type="text" class="form-control" name="customer_email" value="<?php echo "" . $trow["customerEmail"];?>" required/><span id="messagefirst"></span>
+									</div>
+                              	</div>
                             </div>
                           </div>
                         </div>
