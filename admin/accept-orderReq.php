@@ -285,7 +285,7 @@ $message .= '
 		        $mail->addReplyTo('filfurnitures@gmail.com', 'Filipiniana Furniture');
 
 		        // Add a recipient
-		        $mail->addAddress('znotsukaima@gmail.com');
+		        $mail->addAddress($em);
 
 		        // Set email format to HTML
 		        $mail->isHTML(true);
@@ -305,11 +305,10 @@ $message .= '
 		            echo 'Message has been sent';
 		        }
 
-
-
 	echo '<script type="text/javascript">';
 	header( "Location: orders.php" );
 	echo 'alert("SUCCESSFULLY ACCEPT ORDER!")';
 	echo '</script>';
+	
 }
 ?>

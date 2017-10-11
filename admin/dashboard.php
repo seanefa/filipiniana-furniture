@@ -527,14 +527,27 @@ echo ('
 <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
   <div class="panel panel-info">
     <div class="tab-content">
-      <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">PAYMENT NOTIFICATIONS</button>
+      <?php 
+
+      $sql = "SELECT * FROM tblnotification a, tblorders b, tblcustomer c WHERE b.orderID = a.tblorderID and a.tblcustomerID = c.customerID and a.notifStatus = 'Pending'";
+                              $res = mysqli_query($conn,$sql);
+
+      ?>
+      <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">PAYMENT NOTIFICATIONS<br><?php echo mysqli_num_rows($res); ?></button>
     </div>
   </div>  
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS</button>
+          <?php
+
+          $sql = "SELECT * FROM tblcustomer WHERE customerStatus='active' AND customerStatus='Active' order by customerID;";
+
+                  $result = mysqli_query($conn, $sql);
+
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu7');">CUSTOMERS<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>
     </div>
@@ -544,7 +557,14 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu2');">ORDER REQUEST<br>0</button>
+          <?php
+
+          $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
+
+                              $result = mysqli_query($conn, $sql);
+
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu2');">ORDER REQUEST<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>
     </div>
@@ -554,7 +574,7 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMER REQUEST<br>0</button>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION REQUEST<br>0</button>
         </div>
       </div>  
     </div>
@@ -564,7 +584,14 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu4');">BALANCES<br>0</button>
+          <?php
+
+          $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
+
+                      $result = mysqli_query($conn, $sql);
+
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu4');">BALANCES<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>  
     </div>
@@ -574,7 +601,14 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu5');">ORDER PRODUCTION<br>0</button>
+          <?php
+
+           $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
+
+                  $result = mysqli_query($conn, $sql);
+
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu5');">ORDER PRODUCTION<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>  
     </div>
