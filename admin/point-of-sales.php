@@ -805,7 +805,7 @@ function inputValidate(id){
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label">Delivery Rate</label>
-                          <input type="number" style="text-align:right;" id="dRate" class="form-control" name="ln" value='0' readonly/>
+                          <input type="number" style="text-align:right;" id="dRate" class="form-control" name="ln" value='0'/>
                         </div>
                       </div>
                     </div>

@@ -24,6 +24,7 @@ $_SESSION['Pprice'] = $selectedPrice;
 $_SESSION['PtotalPrice'] = $totalPrice;
 $sample = 'paid';
 
+$delRate = $_POST['dRate'];
 $ordershipadd  = "N/A";
 
 if(isset($_POST['deladd'])){
@@ -60,7 +61,7 @@ if (mysqli_query($conn, $pssql)) {
     }
 
 
-    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
+    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";
     echo "<br>inv: " . $inv;
     mysqli_query($conn,$inv);
     $invID = mysqli_insert_id($conn);

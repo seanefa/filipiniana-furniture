@@ -20,6 +20,8 @@ $addrss = $_POST['custadd'];
 $cont = $_POST['custocont'];
 $emailadd = $_POST['custoemail'];
 
+$delRate = $_POST['paydRate'];
+
 $ordershipadd  = "N/A";
 
 if(isset($_POST['deladd'])){
@@ -125,7 +127,7 @@ if($isBool == "new"){
 
 
 
-   $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";//waley pa yung delrate and penalty. :()
+   $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";//waley pa yung delrate and penalty. :()
 
    //echo "<br>inv: " . $inv;
    mysqli_query($conn,$inv);
@@ -185,6 +187,8 @@ else {
 
 else if($isBool=="existing"){ //EXISTING
 
+   $sql = "UPDATE tblcustomer SET customerLastName='$ln',customerFirstName = '$fn',customerMiddleName='$mn',customerAddress='$addrss', customerContactNum='$cont',customerEmail='$emailadd' WHERE customerID = '$custid'";
+   mysqli_query($conn,$sql);
 
   echo "<br>EXISTING ";
 
@@ -231,7 +235,7 @@ else if($isBool=="existing"){ //EXISTING
     }
 
 
-    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
+    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";
    //echo "<br>inv: " . $inv;
     mysqli_query($conn,$inv);
     $invID = mysqli_insert_id($conn);

@@ -5,7 +5,7 @@ include "menu.php";
 $arrayPrice = array();
 $prod = array();
 
-$jsID = "";
+
 
 if(isset($_POST['id'])){
   $jsID = $_POST['id']; 

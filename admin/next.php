@@ -151,40 +151,40 @@ $(document).ready(function(){
   });
 });
 
-$(document).ready(function(){
-  $("#custcont").on('keyup',function(){
-    var val = $("#custcont").val(); 
-    if(isNaN(val)){
-      var e = "Please input a number";
-      $('#erCon').html(e);
-      $('#custcont').css('border-color','red');
-    }
-    else if(val<0){
-      var e = "Please input a valid number";
-      $('#erCon').html(e);
-      $('#custcont').css('border-color','red');
-    }
-    else{
-      var t = 0;
-      $.ajax({
-        type: 'post',
-        url: 'next-validation.php',
-        data: {
-          id: val, t : t,
-        },
-        success: function (response) {
-          $( '#erCon').html(response);
-          if(response!=""){
-            $('#custcont').css('border-color','red');
-          }
-          else{
-            $('#custcont').css('border-color','black');
-          }
-        }
-      });
-    }
-  });
-});
+// $(document).ready(function(){
+//   $("#custcont").on('keyup',function(){
+//     var val = $("#custcont").val(); 
+//     if(isNaN(val)){
+//       var e = "Please input a number";
+//       $('#erCon').html(e);
+//       $('#custcont').css('border-color','red');
+//     }
+//     else if(val<0){
+//       var e = "Please input a valid number";
+//       $('#erCon').html(e);
+//       $('#custcont').css('border-color','red');
+//     }
+//     else{
+//       var t = 0;
+//       $.ajax({
+//         type: 'post',
+//         url: 'next-validation.php',
+//         data: {
+//           id: val, t : t,
+//         },
+//         success: function (response) {
+//           $( '#erCon').html(response);
+//           if(response!=""){
+//             $('#custcont').css('border-color','red');
+//           }
+//           else{
+//             $('#custcont').css('border-color','black');
+//           }
+//         }
+//       });
+//     }
+//   });
+// });
 
 $(document).ready(function(){
   $("#custemail").on('keyup',function(){
@@ -408,17 +408,17 @@ function validateEmail(email) {
                                     $('#customerIds').attr('value',id);
                                     $('#edit3').attr('value',$('#lstName'+id+'').val());
                                     $('#edit3').html($('#lstName'+id+'').val());
-                                    $('#edit3').attr('readonly',true);
+                                    $('#edit3').attr('readonly',false);
                                     $('#edit1').attr('value',$('#firstName'+id+'').val());
-                                    $('#edit1').attr('readonly',true);
+                                    $('#edit1').attr('readonly',false);
                                     $('#edit2').attr('value',$('#midName'+id+'').val());
-                                    $('#edit2').attr('readonly',true);
+                                    $('#edit2').attr('readonly',false);
                                     $('#custadd').val($('#address'+id+'').val());
-                                    $('#custadd').attr('readonly',true);
+                                    $('#custadd').attr('readonly',false);
                                     $('#custcont').attr('value',$('#contact'+id+'').val());
-                                    $('#custcont').attr('readonly',true);
+                                    $('#custcont').attr('readonly',false);
                                     $('#custemail').attr('value',$('#email'+id+'').val());
-                                    $('#custemail').attr('readonly',true);
+                                    $('#custemail').attr('readonly',false);
                                   }
                                 });
 });
@@ -463,7 +463,7 @@ function validateEmail(email) {
   <div class="col-md-6">
     <div class="form-group">
       <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
-      <input type="number" id="custcont" data-mask="+63 (999) 999-9999" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
+      <input type="text" id="custcont" data-mask="+63 (999) 999-9999" class="form-control" name="custocont" style="text-align:right" placeholder="09993387065" required/>
       <p style="color:red" id="erCon"></p>
     </div>
   </div>
@@ -560,7 +560,7 @@ function validateEmail(email) {
                   //
 
                   ///DISPLAY PACKGAGEGE
-                  if($P_selected[0] != 0){
+                  if(!$P_selected[0] != 0){
 
                   }
                   else{
@@ -594,14 +594,14 @@ function validateEmail(email) {
                         if($result){
                           while ($row = mysqli_fetch_assoc($result)) {
                             $P_ctr++; 
-                            $P_pCtr++;                            
+                            $P_pCtr++;
+                            $pID = $row['packageID'];                
                             echo ('
                               <tr>
                               <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
 
                               <td>PACKAGE ');
-                                echo '<button type="button" class="btn btn-info " data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$row['packageID']. '#view" data-target="#myModal">
-                              <span class="glyphicon glyphicon-eye-open"></span> View</button>';
+                              echo '<button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$pID.' #view" data-target="#myModal"><i class="fa fa-info-circle"></i> View</button>';
                               echo('</td>
                                 <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
                                 <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
@@ -837,8 +837,8 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                     $('#city').val('');
                     $('#zip').val('');
                     $('#delloc').val('');
-
                     $('#dRate').val(0);
+                    $('#paydRate').val(0);
 
                     var x = parseFloat($('#totalPrice').val());
                     $('#amountDue').val(parseFloat(x));
@@ -911,7 +911,7 @@ $(document).ready(function(){
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Delivery Rate</label>
-                <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate" readonly/>
+                <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate"/>
               </div>
             </div>
           </div>
