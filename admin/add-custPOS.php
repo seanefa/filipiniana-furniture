@@ -24,7 +24,7 @@ $_SESSION['Pprice'] = $selectedPrice;
 $_SESSION['PtotalPrice'] = $totalPrice;
 $sample = 'paid';
 
-$ordershipadd  = "N/A. This order is for pick-up";
+$ordershipadd  = "N/A";
 
 if(isset($_POST['deladd'])){
   $add = $_POST['deladd'];
@@ -51,88 +51,91 @@ if (mysqli_query($conn, $pssql)) {
     $unitPrice = unitPrice($str);
     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Ready for release')"; 
     mysqli_query($conn,$sql1);
-    onHandUpdate($str,$selectedQuant[$ctr]);
-    echo "<br>sql1: " . $sql1;
-    $ctr++;
-  }
+    $orReqID = mysqli_insert_id($conn);
+    $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID',".$selectedQuant[$ctr].";";
+      mysqli_query($conn,$sql3);
+      onHandUpdate($str,$selectedQuant[$ctr]);
+      echo "<br>sql1: " . $sql1;
+      $ctr++;
+    }
 
 
-  $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
-  echo "<br>inv: " . $inv;
-  mysqli_query($conn,$inv);
-  $invID = mysqli_insert_id($conn);
-  echo "Error: " . $inv . "<br>" . mysqli_error($conn);
+    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
+    echo "<br>inv: " . $inv;
+    mysqli_query($conn,$inv);
+    $invID = mysqli_insert_id($conn);
+    echo "Error: " . $inv . "<br>" . mysqli_error($conn);
 
-  if($mop==1){
-    $tendered = $_POST['aTendered'];
-    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
-    echo $paysql . "<br>";
-    mysqli_query($conn,$paysql);
-    $receiptID = mysqli_insert_id($conn);
-    echo '<script type="text/javascript">
-        window.open("receipt.php?id='.$receiptID.'","_blank")
-        </script>';
-  echo "<script>
+    if($mop==1){
+      $tendered = $_POST['aTendered'];
+      $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
+      echo $paysql . "<br>";
+      mysqli_query($conn,$paysql);
+      $receiptID = mysqli_insert_id($conn);
+      echo '<script type="text/javascript">
+      window.open("receipt.php?id='.$receiptID.'","_blank")
+      </script>';
+      echo "<script>
       window.location.href='point-of-sales.php';
       alert('Record Saved.');
       </script>";
-  }
-  else if($mop==2){
-    $number = $_POST['cNumber'];
-    $amount = $_POST['cAmount'];
-    $remarks = $_POST['remarks'];
-    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
-    echo $paysql . "<br>";
-    mysqli_query($conn,$paysql);
-    $pdID = mysqli_insert_id($conn);
-    $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
-    echo $ch . "<br>";
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    mysqli_query($conn,$ch);
+    }
+    else if($mop==2){
+      $number = $_POST['cNumber'];
+      $amount = $_POST['cAmount'];
+      $remarks = $_POST['remarks'];
+      $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
+      echo $paysql . "<br>";
+      mysqli_query($conn,$paysql);
+      $pdID = mysqli_insert_id($conn);
+      $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
+      echo $ch . "<br>";
+      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      mysqli_query($conn,$ch);
     // header( "Location: receipt.php?id=".$pdID);
-    echo '<script type="text/javascript">
-        window.open("receipt.php?id='.$receiptID.'","_blank")
-        </script>';
-  echo "<script>
+      echo '<script type="text/javascript">
+      window.open("receipt.php?id='.$receiptID.'","_blank")
+      </script>';
+      echo "<script>
       window.location.href='point-of-sales.php';
       alert('Record Saved.');
       </script>";
+    }
   }
-}
-else{
+  else{
   //echo "Error: " . $pssql . "<br>" . mysqli_error($conn);
-  echo "<script>
-      window.location.href='point-of-sales.php';
-      alert('Record not saved. There are some errors on the data');
-      </script>";
+    echo "<script>
+    window.location.href='point-of-sales.php';
+    alert('Record not saved. There are some errors on the data');
+    </script>";
 
-}
-
-function unitPrice($id){
-  include "dbconnect.php";
-  $price = 0;
-  $sql = "SELECT * from tblproduct WHERE productID = '$id'";
-  $res = mysqli_query($conn,$sql);
-  while($row = mysqli_fetch_assoc($res)){
-    $price = $row['productPrice'];
   }
-  return $price;
-}
 
-function onHandUpdate($id,$qnt){
-  include "dbconnect.php";
-  $quant = 0;
-  $sql = "SELECT * from tblonhand WHERE ohProdID = '$id'";
-  $res = mysqli_query($conn,$sql);
-  while($row = mysqli_fetch_assoc($res)){
-    $quant = $row['ohQuantity'];
+  function unitPrice($id){
+    include "dbconnect.php";
+    $price = 0;
+    $sql = "SELECT * from tblproduct WHERE productID = '$id'";
+    $res = mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_assoc($res)){
+      $price = $row['productPrice'];
+    }
+    return $price;
   }
-  $quant = $quant - $qnt;
-  $uSQL = "UPDATE tblonhand SET ohQuantity = '$quant' WHERE ohProdID = '$id';";
-  mysqli_query($conn,$uSQL);
-  echo "quant " . $quant . "<br>";
-}
 
-mysqli_close($conn);
+  function onHandUpdate($id,$qnt){
+    include "dbconnect.php";
+    $quant = 0;
+    $sql = "SELECT * from tblonhand WHERE ohProdID = '$id'";
+    $res = mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_assoc($res)){
+      $quant = $row['ohQuantity'];
+    }
+    $quant = $quant - $qnt;
+    $uSQL = "UPDATE tblonhand SET ohQuantity = '$quant' WHERE ohProdID = '$id';";
+    mysqli_query($conn,$uSQL);
+    echo "quant " . $quant . "<br>";
+  }
 
-?>
+  mysqli_close($conn);
+
+  ?>
