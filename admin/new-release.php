@@ -196,7 +196,7 @@ $(document).ready(function(){
                               <?php
                               include "dbconnect.php";
                              // $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID NOT IN(SELECT orderID FROM tblorders a, tblorder_request b, tbldelivery_details c WHERE c.del_orderReqID = b.order_requestID and b.tblOrdersID = a.orderID) ORDER BY orderID;";
-                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderStatus !='Finished' ORDER BY orderID;";
+                              $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderStatus !='Finished' and b.orderStatus = 'Ongoing' ORDER BY orderID;";
                               $result = mysqli_query($conn,$sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {

@@ -11,7 +11,7 @@ echo '<thead>
   $tQuan = 0;
   $tPrice = 0;
 
-  $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$id'";
+  $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c,tblorder_requestcnt d WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$id' and d.orreq_ID = a.order_requestID";
   $res = mysqli_query($conn,$sql1);
   while($row = mysqli_fetch_assoc($res)){
     if($row['orderRequestStatus']!='Deleted'){
@@ -26,7 +26,7 @@ echo '<thead>
     <td>'.$row['orderRequestStatus'].'</td>
     <td style="text-align:right;">
     <select class="form-control" name="quan[]" style="text-align:right">';
-    $num = $row['orderQuantity'];
+    $num = $row['orreq_prodFinish'];
     for($x=1;$x<=$num;$x++){
       echo '<option value='.$x.'><h3 style="text-align:right" size:"1">'.$x.'</h3></option>';
     }

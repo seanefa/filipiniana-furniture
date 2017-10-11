@@ -193,7 +193,19 @@ $row = mysqli_fetch_assoc($res);
         </table>
       </div>
     </div> 
-  </div>
+  </div><p><?php 
+        session_start();
+        include "dbconnect.php"; 
+        $datepr = date("Y-m-d");
+        $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
+          $result5 = mysqli_query($conn, $sql5);
+          while ($row5 = mysqli_fetch_assoc($result5))
+          { 
+            if($row5['userStatus']=="Active" && $row5['userType']=="admin")
+      {
+              echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
+            }
+          }  ?></p>
   <br>
   <br>
 </body>

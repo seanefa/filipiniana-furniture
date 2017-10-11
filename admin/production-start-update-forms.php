@@ -306,7 +306,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                           <div class="col-md-12">
                             <div class="col-md-12">
                               <label class="control-label">Date Finished: </label>
-                              <input type="date" id="dateFinish" name="dateFinish" class="form-control"/> 
+                              <input type="date" id="dateFinish" name="dateFinish" class="form-control" value="<?php echo $dateToday?>/> 
                             </div>
                           </div> 
                         </div>

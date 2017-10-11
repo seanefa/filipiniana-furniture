@@ -50,7 +50,7 @@ echo '<table class="table product-overview">
 <tbody>';
   $tQuan = 0;
   $tPrice = 0;
-  $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c, tblrelease_details d, tblrelease e WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$id' and a.order_requestID = d.rel_orderReqID and d.tblreleaseID = e.releaseID";
+  $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c, tblrelease_details d, tblrelease e, tblorder_requestcnt f WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$id' and a.order_requestID = d.rel_orderReqID and d.tblreleaseID = e.releaseID and f.orreq_ID = a.order_requestID";
   $res = mysqli_query($conn,$sql1);
   while($row = mysqli_fetch_assoc($res)){
     $date = new DateTime($row['releaseDate']);
@@ -59,7 +59,7 @@ echo '<table class="table product-overview">
     echo '<td>'.$row['productName'].'</td>
     <td>'.$row['orderRequestStatus'].'</td>
     <td style="text-align:right;">'.$date.'</td>
-    <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+    <td style="text-align:right;">'.$row['orreq_released'].'</td>';
   }
 echo '</tbody>
       </table>
