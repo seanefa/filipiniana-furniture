@@ -21,6 +21,55 @@
       </ul>
       <!-- Breadcrumb End-->
       <div class="row">
+        <script type="text/javascript">
+            
+            $(document).ready(function(){
+
+  
+var q = 0;
+$('#addPBtn').attr('data-quantity',q);
+  $('body').on('change','#input-quantity',function(){
+  
+    q = $('#input-quantity').val();
+     if(q <= 0){
+
+      $('#addPBtn').attr('data-quantity',0);
+    $('#addPBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addPBtn').attr('data-quantity',''+q);
+      $('#addPBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+
+  $('body').on('keyup','#input-quantity',function(){
+    q = $('#input-quantity').val();
+     if(q <= 0){
+
+      $('#addPBtn').attr('data-quantity',0);
+    $('#addPBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addPBtn').attr('data-quantity',''+q);
+      $('#addPBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+});
+
+
+        </script>
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
           <?php
@@ -84,12 +133,11 @@ $typerow = mysqli_fetch_assoc($typeresult);
                     <div>
                       <div class="qty">
                         <label class="control-label" for="input-quantity">Qty</label>
-                        <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
-                        <a class="qtyBtn plus" href="javascript:void(0);">+</a><br />
-                        <a class="qtyBtn mines" href="javascript:void(0);">-</a>
+                        <input type="number" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
+                        
                         <div class="clear"></div>
                       </div>
-                      <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal">Add to Cart</button>
+                      <button id="addPBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
                     </div>
                     <div>
                       <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
@@ -267,6 +315,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
 <!-- JS Part Start-->
 <?php include"scripts.php";?>
 <script type="text/javascript">
+  
 // Elevate Zoom for Product Page image
 $("#zoom_01").elevateZoom({
 	gallery:'gallery_01',

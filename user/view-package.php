@@ -62,6 +62,55 @@ $typerow = mysqli_fetch_assoc($typeresult);
 
 
 ?>
+<script type="text/javascript">
+            
+            $(document).ready(function(){
+
+  
+var q = 0;
+$('#addPBtn').attr('data-quantity',q);
+  $('body').on('change','#input-quantity',function(){
+  
+    q = $('#input-quantity').val();
+     if(q <= 0){
+
+      $('#addPBtn').attr('data-quantity',0);
+    $('#addPBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addPBtn').attr('data-quantity',''+q);
+      $('#addPBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+
+  $('body').on('keyup','#input-quantity',function(){
+    q = $('#input-quantity').val();
+     if(q <= 0){
+
+      $('#addPBtn').attr('data-quantity',0);
+    $('#addPBtn').prop('disabled',true);
+      $('#message').html('Input Quantity');
+      $('#message').css('color','red');
+      
+      
+    }else{
+      $('#addPBtn').attr('data-quantity',''+q);
+      $('#addPBtn').prop('disabled',false);
+      $('#message').html('');
+    }
+
+
+  });
+});
+
+
+        </script>
           <div itemscope itemtype="http://schema.org/Product">
             <h1 class="title" itemprop="name"><?php echo $row['packageDescription']; ?></h1>
             <div class="row product-info">
@@ -127,12 +176,12 @@ $typerow = mysqli_fetch_assoc($typeresult);
                     <div>
                       <div class="qty">
                         <label class="control-label" for="input-quantity">Qty</label>
-                        <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
-                        <a class="qtyBtn plus" href="javascript:void(0);">+</a><br />
-                        <a class="qtyBtn mines" href="javascript:void(0);">-</a>
+                        <input type="number" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
+                        
+
                         <div class="clear"></div>
                       </div>
-                      <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1"   data-dismiss="modal">Add to Cart</button>
+                      <button id="addPBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1"   data-dismiss="modal">Add to Cart</button>
                     </div>
                     <div>
                       <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
