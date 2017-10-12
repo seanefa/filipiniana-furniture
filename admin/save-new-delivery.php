@@ -1,6 +1,7 @@
 <?php
 include "dbconnect.php";
 $relType = $_POST['relType'];
+$orID = $_POST['orID'];
 $ordReq = $_POST['check'];
 $quan = $_POST['quan'];
 $delDate = $_POST['delDate'];
@@ -46,6 +47,8 @@ if($relType=="Pick-up"){
 			$x++;
 		}
 		header( "Location: releasing.php?actionSuccess");
+		$invSQL = "UPDATE tblinvoicedetails SET invDelrateID = '0' WHERE invorderID = '$orID'";
+		mysqli_query($conn,$invSQL);
 	}
 	else{
 		header( "Location: releasing.php?actionFailed" );
@@ -110,6 +113,9 @@ else{
 	else{
 		header( "Location: releasing.php?actionFailed" );
 	}
+
+	$invSQL = "UPDATE tblinvoicedetails SET invDelrateID = '$delRate' WHERE invorderID = '$orID'";
+	mysqli_query($conn,$invSQL);
 }
 else{
 	header( "Location: releasing.php?actionFailed" );

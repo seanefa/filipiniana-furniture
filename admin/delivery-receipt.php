@@ -4,10 +4,10 @@ $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "DR". $or;
 
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -173,15 +173,15 @@ $orderID = $orRoq['orderID'];
             </tr>
             <tr style="text-align:right;">
               <td></td>
-              <td colspan="2" style="text-align:right;"><b>REMAINING BALANCE:</b></td>
-              <td></td>
-              <td style="color:red"><?php echo "Php  ". number_format($bal,2)?></td>
-            </tr>
-            <tr style="text-align:right;">
-              <td></td>
               <td colspan="2" style="text-align:right;"><b>DELIVERY RATE:</b></td>
               <td></td>
               <td><?php echo "Php  ". number_format($delRate,2)?></td>
+            </tr>
+            <tr style="text-align:right;">
+              <td></td>
+              <td colspan="2" style="text-align:right;"><b>REMAINING BALANCE:</b></td>
+              <td></td>
+              <td style="color:red"><?php echo "Php  ". number_format($bal,2)?></td>
             </tr>
             <tr style="text-align:right;">
               <td></td>
@@ -227,9 +227,9 @@ $orderID = $orRoq['orderID'];
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 <?php
-$html = ob_get_clean();
-$dompdf = new DOMPDF();
-$dompdf->load_html($html);
-$dompdf->render();
-$dompdf->stream($orID, array("Attachment" => 0));
+// $html = ob_get_clean();
+// $dompdf = new DOMPDF();
+// $dompdf->load_html($html);
+// $dompdf->render();
+// $dompdf->stream($orID, array("Attachment" => 0));
 ?>

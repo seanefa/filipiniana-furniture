@@ -1,4 +1,5 @@
 <?php
+session_start();
 set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
@@ -123,12 +124,12 @@ $row = mysqli_fetch_assoc($res);
               $res3 = mysqli_query($conn,$sql3);
               while($row3 = mysqli_fetch_assoc($res3)){
                 echo '<tr>
-              <td style="text-align:right;"> - '.$row3['productName'].'</td>
-              <td>'.$row3['productDescription'].'</td>
-              <td style="text-align:right;"></td>';
-              $tQuan = $tQuan + $row['orderQuantity'] * 1;
-              echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
-              <td style="text-align:right;"></td></tr>';
+                <td style="text-align:right;"> - '.$row3['productName'].'</td>
+                <td>'.$row3['productDescription'].'</td>
+                <td style="text-align:right;"></td>';
+                $tQuan = $tQuan + $row['orderQuantity'] * 1;
+                echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
+                <td style="text-align:right;"></td></tr>';
 
               }
             }
@@ -162,41 +163,47 @@ $row = mysqli_fetch_assoc($res);
   <br>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT HISTORY</span>
       <br>
-      <table class="table color-bordered-table">
-        <thead>
-          <th style="text-align:left">Date Paid</th>
-          <th style="text-align:left">Mode of Payment</th>
-          <th style="text-align:right">Amount Paid</th>
-        </thead>
-        <tbody>
-          <?php
-          $down = 0;
-          $bal = 0;
-          $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$id'";
-          $res = mysqli_query($conn,$sql);
-          $tpay = 0;
-          while($trow = mysqli_fetch_assoc($res)){
-            $date = date_create($trow['dateCreated']);
-            $date = date_format($date,"F d, Y");
-            $tpay = $tpay + $trow['amountPaid'];
-            echo '<tr><td>'.$date.'</td>
-            <td>'.$trow['modeofpaymentDesc'].'</td>
-            <td style="text-align:right;">Php '.number_format($trow['amountPaid'],2).'</td>
-            </tr>';
-          }
-          $down = $tpay;
-          $bal = $tPrice - $down;
-          ?>
-          <tr>
-            <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
-            <td style="text-align:right;"><mark><strong><span>Php <?php echo number_format($down,2)?></span></strong></mark></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="table-responsive">
+        <table class="table color-bordered-table">
+          <thead>
+            <tr>
+              <th style="text-align:left">Date Paid</th>
+              <th style="text-align:left">Mode of Payment</th>
+              <th style="text-align:right">Amount Paid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $down = 0;
+            $bal = 0;
+            $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$id'";
+            $res = mysqli_query($conn,$sql);
+            $tpay = 0;
+            while($trow = mysqli_fetch_assoc($res)){
+              $date = date_create($trow['dateCreated']);
+              $date = date_format($date,"F d, Y");
+              $tpay = $tpay + $trow['amountPaid'];
+              echo '<tr>
+              <td>'.$date.'</td>
+              <td>'.$trow['modeofpaymentDesc'].'</td>
+              <td style="text-align:right;">Php '.number_format($trow['amountPaid'],2).'</td>
+              </tr>';
+            }
+            $down = $tpay;
+            $bal = $tPrice - $down;
+            ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+              <td style="text-align:right;"><mark><strong><span>Php <?php echo number_format($down,2)?></span></strong></mark></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
 
     <?php
@@ -205,22 +212,33 @@ $row = mysqli_fetch_assoc($res);
     $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
+    $delFee = 0;
+    $penFee = 0;
     while($trow = mysqli_fetch_assoc($res)){
       $tpay = $tpay + $trow['amountPaid'];
+      $delFee = $trow['invDelrateID'];
+      $penFee = $trow['invPenID'];
     }
     $down = $tpay;
+    $tPrice = $tPrice + $delFee + $penFee;
     $bal = $tPrice - $down;
     ?>
-
-    <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
       <br>
       <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
           <tr>
-            <td>Total Amount Due:</td>
+            <td>Total Order Price</td>
             <td>Php <?php echo number_format($tPrice,2)?></td>
+          </tr>
+          <tr>
+            <td>Delivery Rate</td>
+            <td>Php <?php echo number_format($delFee,2)?></td>
+          </tr>
+          <tr>
+            <td>Penalty Fee:</td>
+            <td>Php <?php echo number_format($penFee,2)?></td>
           </tr>
           <tr>
             <td>Amount Paid</td>
@@ -232,25 +250,25 @@ $row = mysqli_fetch_assoc($res);
           </tr>
         </table>
       </div>
-        <p><?php 
-        session_start();
-        include "dbconnect.php"; 
-        $datepr = date("Y-m-d");
-        $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
-          $result5 = mysqli_query($conn, $sql5);
-          while ($row5 = mysqli_fetch_assoc($result5))
-          { 
-            if($row5['userStatus']=="Active" && $row5['userType']=="admin")
-			{
-              echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
-            }
-          }  ?></p>
     </div>
   </div>
-
+  <p>
+    <?php 
+    include "dbconnect.php"; 
+    $datepr = date("Y-m-d");
+    $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
+    $result5 = mysqli_query($conn, $sql5);
+    while ($row5 = mysqli_fetch_assoc($result5))
+    { 
+      if($row5['userStatus']=="Active" && $row5['userType']=="admin")
+      {
+        echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
+      }
+    }  
+    ?>
+  </p>
 </body> 
 </html>
-
 <?php
 $html = ob_get_clean();
 $dompdf = new DOMPDF();

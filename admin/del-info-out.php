@@ -12,6 +12,7 @@ $date = date_create($relDate);
 $relDate = date_format($date,"F d, Y");
 
 
+echo '<input type="hidden" name="orID" value="'.$id.'"/>';
 echo '<h4>
         <div class="row">
         <div class="col-md-6"><b>Estimated Release Date: </b></div>

@@ -82,6 +82,8 @@ if (!empty($_SESSION['actionFailed'])) {
                               <th>Order ID</th>
                               <th>Customer Name</th>
                               <th style="text-align:right">Order Price</th>
+                              <th style="text-align:right">Delivery Fee</th>
+                              <th style="text-align:right">Penalty Fee</th>
                               <th style="text-align:right">Remaining Balance</th>
                               <th class="removeSort" style="text-align:left">Actions</th>
                             </tr>
@@ -89,7 +91,7 @@ if (!empty($_SESSION['actionFailed'])) {
                           <tbody>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders WHERE orderStatus != 'Archived' order by orderID ;";
+                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' order by orderID ;";
 
                             $result = mysqli_query($conn, $sql);
                             if($result){
@@ -107,6 +109,8 @@ if (!empty($_SESSION['actionFailed'])) {
                                   <td>'.$orderID.'</td>
                                   <td>'.$get_name.'</td>
                                   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
+                                  <td style="text-align:right">&#8369; '.number_format($row['invDelrateID'],2).'</td>
+                                  <td style="text-align:right">&#8369; '.number_format($row['invPenID'],2).'</td>
                                   <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>
                                   <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
 
@@ -161,12 +165,17 @@ if (!empty($_SESSION['actionFailed'])) {
                               include "dbconnect.php";
                               $down = 0;
                               $bal = 0;
+                              $delFee = 0;
+                              $penFee = 0;
                               $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
                               $res = mysqli_query($conn,$sql);
                               $tpay = 0;
                               while($trow = mysqli_fetch_assoc($res)){
                                 $tpay = $tpay + $trow['amountPaid'];
+                                $delFee = $trow['invDelrateID'];
+                                $penFee = $trow['invPenID'];
                               }
+                              $tpay = $tpay + $delFee + $penFee;
                               $down = $tpay;
                               $bal = $price - $down;
                             return $bal;

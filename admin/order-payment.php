@@ -172,8 +172,10 @@ $(document).ready(function(){
                                 $tQuan = 0;
                                 $tPrice = 0;
 
-                                $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
+                                $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c, tblinvoicedetails d WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID' and d.invorderID = b.orderID";
                                 $res = mysqli_query($conn,$sql1);
+                                $delFee = 0;
+                                $penFee = 0;
                                 while($row = mysqli_fetch_assoc($res)){
                                   echo '<tr>
                                   <td>'.$row['productName'].'</td>
@@ -185,17 +187,88 @@ $(document).ready(function(){
                                   echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                                   $tPrice = $row['orderPrice'];
                                   $tQuan = $tQuan + $row['orderQuantity'];
+                                  $delFee = $row['invDelrateID'];
+                                  $penFee = $row['invPenID'];
                                 }
+                                $grandTotal = $tPrice + $delFee + $penFee;
                                 ?>
                               </tbody>
                               <tfoot style="text-align:right;">
+                              <tr>
+                                <td></td>
+                                <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL ORDER PRICE</b></td>
+                                <td style="text-align:right;"><mark><strong><span><?php echo $tQuan?></span></bold></mark></td>
+                                <td id="totalPrice" style="text-align:right;"><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> DELIVERY FEE</b></td>
+                                <td style="text-align:right;"></td>
+                                <td id="totalPrice" style="text-align:right;"><strong><span>&#8369;&nbsp;<?php echo number_format($delFee,2)?></span></strong></td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> PENALTY FEE</b></td>
+                                <td style="text-align:right;"></td>
+                                <td id="totalPrice" style="text-align:right;"><strong><span>&#8369;&nbsp;<?php echo number_format($penFee,2)?></span></strong></td>
+                              </tr>
+                                <tr>
                                 <td></td>
                                 <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> GRAND TOTAL</b></td>
-                                <td id="totalQ" style="text-align:right;"><mark><strong><span><?php echo $tQuan?></span></bold></mark></td>
-                                <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
+                                <td id="totalQ" style="text-align:right;"></td>
+                                <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($grandTotal,2)?></span></strong></mark></td>
+                              </tr>
                               </tfoot>
                             </table>
                           </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-info">
+          <div class="panel-heading"><a href="#" data-perform="panel-collapse">VIEW PAYMENT HISTORY</a>
+            <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a></div>
+          </div>
+          <div class="panel-wrapper collapse" aria-expanded="true">
+            <div class="panel-body">
+             
+              <div class="row">
+                <table class="table color-bordered-table">
+                  <thead>
+                    <th style="text-align:left">Date Paid</th>
+                    <th style="text-align:left">Mode of Payment</th>
+                    <th style="text-align:right">Amount Paid</th>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $down = 0;
+                    $bal = 0;
+                    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$jsID'";
+                    $res = mysqli_query($conn,$sql);
+                    $tpay = 0;
+                    while($trow = mysqli_fetch_assoc($res)){
+                      $date = date_create($trow['dateCreated']);
+                      $date = date_format($date,"F d, Y");
+                      $tpay = $tpay + $trow['amountPaid'];
+                      echo '<tr><td>'.$date.'</td>
+                      <td>'.$trow['modeofpaymentDesc'].'</td>
+                      <td style="text-align:right;">&#8369; '.number_format($trow['amountPaid'],2).'</td>
+                      </tr>';
+                    }
+                    $down = $tpay;
+                    $bal = $tPrice - $down;
+                    ?>
+                    <tr>
+                      <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+                      <td style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($down,2)?></span></strong></mark></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
                         </div>
                         <div class="col-md-4"> 
                           <div class="panel-wrapper collapse in" aria-expanded="true">
@@ -288,55 +361,6 @@ $(document).ready(function(){
     </div>
     <!-- /.container-fluid -->
     <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
-
-
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="panel panel-info">
-          <div class="panel-heading"><a href="#" data-perform="panel-collapse">VIEW PAYMENT HISTORY</a>
-            <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a></div>
-          </div>
-          <div class="panel-wrapper collapse" aria-expanded="true">
-            <div class="panel-body">
-             
-              <div class="row">
-                <table class="table color-bordered-table">
-                  <thead>
-                    <th style="text-align:left">Date Paid</th>
-                    <th style="text-align:left">Mode of Payment</th>
-                    <th style="text-align:right">Amount Paid</th>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $down = 0;
-                    $bal = 0;
-                    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$jsID'";
-                    $res = mysqli_query($conn,$sql);
-                    $tpay = 0;
-                    while($trow = mysqli_fetch_assoc($res)){
-                      $date = date_create($trow['dateCreated']);
-                      $date = date_format($date,"F d, Y");
-                      $tpay = $tpay + $trow['amountPaid'];
-                      echo '<tr><td>'.$date.'</td>
-                      <td>'.$trow['modeofpaymentDesc'].'</td>
-                      <td style="text-align:right;">&#8369; '.number_format($trow['amountPaid'],2).'</td>
-                      </tr>';
-                    }
-                    $down = $tpay;
-                    $bal = $tPrice - $down;
-                    ?>
-                    <tr>
-                      <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
-                      <td style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($down,2)?></span></strong></mark></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <!-- /#page-wrapper -->
 </div>
