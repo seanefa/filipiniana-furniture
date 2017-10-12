@@ -60,7 +60,8 @@ include "menu.php";
                                     <?php
                                       include "dbconnect.php";
                                       //$sql = "SELECT * FROM tblproduction a inner join tblorder_request b on b.order_requestID = a.productionOrderReq inner join tblorders c on c.orderID = b.tblOrdersID inner join tblproduct d on d.productID = b.orderProductID";
-                                      $sql = "SELECT * FROM tblorders WHERE orderStatus!='Ready for release' AND orderStatus!='Archived' AND orderStatus!='Rejected' AND orderStatus!='finished' AND orderStatus!='WFA' AND orderType!='Pre-Order' order by orderID;";
+                                      $sql = "SELECT * FROM tblorders WHERE orderStatus!='Ready for release' AND orderStatus!='Archived' AND orderStatus!='Rejected' AND orderStatus!='finished' AND orderStatus!='WFA' AND orderType='Pre-Order' order by orderID;";
+                                      //$sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' OR orderStatus='Ongoing' order by orderID;";
                                       $result = mysqli_query($conn, $sql);
                                       while ($row = mysqli_fetch_assoc($result))
                                       {

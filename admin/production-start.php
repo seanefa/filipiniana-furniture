@@ -1,6 +1,15 @@
 <?php
 include "dbconnect.php";
 $orderID = $_GET['id'];
+
+// $sql1 = "SELECT * from tblorder_request a, tblorders b, tblproduct c WHERE a.tblOrdersID = b.orderID and c.productID = a.orderProductID and b.orderID = '$orderID'";
+// $res = mysqli_query($conn,$sql1);
+// $row = mysqli_fetch_assoc($)
+
+// $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c, tblmodeofpayment d WHERE c.orderID = a.invorderID and d.modeofpaymentID = b.mopID and a.invoiceID = b.invID and c.orderID = '$orderID'";
+// $res = mysqli_query
+
+
 $sql1 = "SELECT * from tblorder_request a, tblorders b, tblproduct c WHERE a.tblOrdersID = b.orderID and c.productID = a.orderProductID and b.orderID = '$orderID'";
 $res = mysqli_query($conn,$sql1);
 while($row1 = mysqli_fetch_assoc($res)){
@@ -55,10 +64,10 @@ while($row = mysqli_fetch_assoc($res)){
 $sql = "UPDATE tblorders SET orderStatus = 'Ongoing' WHERE orderID = '$orderID'";
 mysqli_query($conn,$sql);
 
-// echo '<script type="text/javascript">';
-// $loc = "Location: production-tracking-details.php?id=". $orderID;
-// header($loc); 
-// echo '</script>';
+echo '<script type="text/javascript">';
+$loc = "Location: production-tracking-details.php?id=". $orderID;
+header($loc); 
+echo '</script>';
 
 
 

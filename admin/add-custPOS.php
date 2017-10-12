@@ -10,7 +10,7 @@ $_SESSION['payment'] = $payment;
 $date = new DateTime();
 $orderdaterec = $date->format('Y-m-d H:i:s');;
 $orderdatepick = $orderdaterec;
-$orderstat = "Pending"; 
+$orderstat = "Ready for release"; 
 $ordertype = "On-Hand";
 
 $selected = $_POST['Pcart'];
