@@ -18,7 +18,7 @@ if($id==1){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -70,12 +70,7 @@ if($id==1){
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ],
-     footer: true
+     }]
    });
   });
   </script>';
@@ -95,7 +90,7 @@ else if($id==2){
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$m' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -149,11 +144,7 @@ else if($id==2){
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ]
+     }]
    });
   });
   </script>';
@@ -176,7 +167,7 @@ $tpriceArray = array();
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
@@ -214,6 +205,7 @@ $tpriceArray = array();
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   <td></td>
@@ -225,6 +217,10 @@ $tpriceArray = array();
   </table>
   </div>
   <script>
+  function redirectPrint(id){
+    window.open("sales-reports-print.php?id="+id, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -234,11 +230,7 @@ $tpriceArray = array();
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ]
+     }]
    });
   });
   </script>';
@@ -291,11 +283,4 @@ $ctr = 0;
   return $priceArray;
   
 }
-
-
-
-
-
-
-
 ?>

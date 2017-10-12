@@ -15,7 +15,7 @@ if($id==1){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -70,11 +70,7 @@ if($id==1){
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ]
+     }]
    });
   });
   </script>';
@@ -92,7 +88,7 @@ else if($id==2){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -147,11 +143,7 @@ else if($id==2){
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ]
+     }]
    });
   });
   </script>';
@@ -169,7 +161,7 @@ else if($id==3){
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
-    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsTable reportsOut'>
+    <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
     <th>Order ID</th>
@@ -209,12 +201,17 @@ else if($id==3){
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
   </div>
   <script>
+  function redirectPrint(id){
+    window.open("order-report-print.php?id="+id, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -224,11 +221,7 @@ else if($id==3){
       {
        "bSortable" : false,
        "aTargets" : [ "removeSort" ]
-     }],
-     dom: "Bfrtip",
-     buttons: [
-     "copy", "csv", "excel", "pdf", "print"
-     ]
+     }]
    });
   });
   </script>';
