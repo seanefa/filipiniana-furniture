@@ -11,7 +11,7 @@
   <?php include"css.php";?>
 </head>
 <body style="background: #ffffff;">
-  <?php 
+  <?php
   include "header.php";
   if(!isset($_SESSION["userID"]))
   {
@@ -41,12 +41,12 @@
 					<div class="col-sm-12">
 						<div class="descriptions">
 							<?php
-							$isFinish = 0;
+							  $isFinish = 0;
 								$id = 20;
-                            include "userconnect.php";
-                            $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
-                            $res = mysqli_query($conn,$sql);
-                            while($row = mysqli_fetch_assoc($res))
+                include "userconnect.php";
+                $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
+                $res = mysqli_query($conn,$sql);
+                while($row = mysqli_fetch_assoc($res))
 							{
 							?>
 							<div class="col-md-12">
@@ -107,7 +107,7 @@
 																							if($isFirst==0){
 																						?>
 																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='<?php echo "" . $id;?>' &pID= '<?php echo "" . $pRow['prodHistID'];?>' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> First </button>;
-                                                    									<?php echo "" . $isFirst = 1;
+                                            <?php echo "" . $isFirst = 1;
 																							}
 																						?>
 																							  </div>
@@ -119,7 +119,6 @@
 																							  </div>
 																						<?php
 																							}
-																							  
 																						if($pRow['prodStatus']=="Finished"){
 																						$isFinish = 1;
 																						$isFirst = 1;
@@ -143,14 +142,14 @@
 																						  <div class="product-img">
 																						  <img height="115px" width="115px" src="plugins/production/<?php echo "" . $pRow['phaseIcon'];?>" alt="Unavailable">
 																						  <div class="pro-img-overlay">
-																						<?php  
+																						<?php
                                                   											if($isFinish==1){
 																						?>
 																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id=<?php echo "" . $id;?> &pID= <?php echo "" . $pRow['prodHistID'];?>  	#updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
 																						<?php
 																						$isFinish = 0;
 																						  }
-																						  if($isFirst==0){	  
+																						  if($isFirst==0){
 																						?>
 																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='<?php echo "" . $id;?>' &pID= '<?php echo "" . $pRow['prodHistID'];?>' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
 																						<?php
@@ -166,7 +165,7 @@
 																							  </div>
 																						<?php
 																						 }
-                                                
+
                                               											}
 																						?>
 																		  			</div>

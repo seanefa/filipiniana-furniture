@@ -9,13 +9,13 @@
 <script type="text/javascript" src="js/myScript.js"></script>
 <?php include"css.php";?>
 </head>
-<?php 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (isset($_POST['register'])) { //user registering
-        
+
         require 'process-registration.php';
-        
+
     }
 }
 ?>
@@ -70,8 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-telephone" class="col-sm-2 control-label">Contact</label>
                 <div class="col-sm-10">
-                  <input type="text" data-mask="+63 (999) 999-9999"  class="form-control" id="input-telephone" placeholder="Contact" value="" name="number" required>
-                  
+                  <input type="text" data-mask="+63 (999) 999-9999"  class="form-control" id="input-telephone" value="" name="number" required>
                 </div>
               </div>
               <div class="form-group required">
