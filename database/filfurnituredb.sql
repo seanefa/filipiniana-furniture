@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2017 at 07:53 PM
+-- Generation Time: Oct 12, 2017 at 07:24 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -278,7 +278,8 @@ INSERT INTO `tbldelivery_history` (`delHistID`, `delHist_recID`, `delHistDate`, 
 (1, 2, '2017-10-05', 1, '', 'Pending'),
 (2, 1, '2017-10-06', 1, '', 'Start Delivery'),
 (3, 1, '2017-10-05', 1, '', 'Pending'),
-(8, 1, '2017-10-05', 1, NULL, 'Start Delivery');
+(8, 1, '2017-10-05', 1, NULL, 'Start Delivery'),
+(9, 1, '2017-10-12', 1, NULL, 'Start Delivery');
 
 -- --------------------------------------------------------
 
@@ -659,43 +660,44 @@ CREATE TABLE `tblinvoicedetails` (
 --
 
 INSERT INTO `tblinvoicedetails` (`invoiceID`, `invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES
-(1, 1, 105000, '2017-08-28', 'Pending', 'Initial Invoice', 1, 1),
-(2, 6, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
-(3, 7, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
-(4, 8, 105000, '2017-08-29', 'Pending', 'Initial Invoice', 1, 1),
-(5, 9, 120000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1),
-(6, 10, 25000, '2017-08-30', 'Pending', 'Initial Invoice', 1, 1),
-(7, 11, 60000, '2017-09-24', 'Pending', 'Initial Invoice', 1, 1),
-(8, 12, 100000, '2017-10-02', 'Pending', 'Initial Invoice', 1, 1),
-(9, 13, 100000, '2017-10-02', 'Pending', 'Initial Invoice', 1, 1),
-(10, 17, 25000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(11, 18, 105000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(12, 19, 50000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(13, 20, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(14, 21, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(15, 22, 25000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(16, 23, 50000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(17, 24, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 1, 1),
-(18, 25, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 1, 1),
-(19, 26, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 1, 1),
-(20, 27, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 1, 1),
-(21, 28, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(22, 29, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(23, 30, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(24, 31, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(25, 32, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(26, 33, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(27, 34, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(28, 35, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(29, 36, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(30, 37, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(31, 38, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(32, 39, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(33, 40, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(34, 41, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(35, 42, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(36, 43, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1),
-(37, 44, 35000, '2017-10-10', 'Pending', 'Initial Invoice', 1, 1);
+(1, 1, 105000, '2017-08-28', 'Pending', 'Initial Invoice', 0, 0),
+(2, 6, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 0, 0),
+(3, 7, 35000, '2017-08-29', 'Pending', 'Initial Invoice', 0, 0),
+(4, 8, 105000, '2017-08-29', 'Pending', 'Initial Invoice', 0, 0),
+(5, 9, 120000, '2017-08-30', 'Pending', 'Initial Invoice', 0, 0),
+(6, 10, 25000, '2017-08-30', 'Pending', 'Initial Invoice', 0, 0),
+(7, 11, 60000, '2017-09-24', 'Pending', 'Initial Invoice', 0, 0),
+(8, 12, 100000, '2017-10-02', 'Pending', 'Initial Invoice', 0, 0),
+(9, 13, 100000, '2017-10-02', 'Pending', 'Initial Invoice', 0, 0),
+(10, 17, 25000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(11, 18, 105000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(12, 19, 50000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(13, 20, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(14, 21, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(15, 22, 25000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(16, 23, 50000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(17, 24, 35000, '2017-10-04', 'Pending', 'Initial Invoice', 0, 0),
+(18, 25, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 0, 0),
+(19, 26, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 0, 0),
+(20, 27, 25000, '2017-10-05', 'Pending', 'Initial Invoice', 0, 0),
+(21, 28, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(22, 29, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(23, 30, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(24, 31, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(25, 32, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(26, 33, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(27, 34, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(28, 35, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(29, 36, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(30, 37, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(31, 38, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(32, 39, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(33, 40, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(34, 41, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(35, 42, 115000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(36, 43, 90000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(37, 44, 35000, '2017-10-10', 'Pending', 'Initial Invoice', 0, 0),
+(38, 46, 25000, '2017-10-12', 'Pending', 'Initial Invoice', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -883,7 +885,8 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (149, 'Order', 'New', '2017-10-10', 'New order #OR000042', 1),
 (150, 'Order', 'New', '2017-10-10', 'New order #OR000043', 1),
 (151, 'Order', 'New', '2017-10-10', 'New order #OR000044', 1),
-(152, 'Order', 'New', '2017-10-11', 'New management order #OR000045', 1);
+(152, 'Order', 'New', '2017-10-11', 'New management order #OR000045', 1),
+(153, 'Order', 'New', '2017-10-12', 'New order #OR000046', 1);
 
 -- --------------------------------------------------------
 
@@ -1239,7 +1242,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (9, 1, '2017-08-30', '2017-08-31', 19, 120000, 'Ongoing', 'N/A', 'Pre-Order', ''),
 (10, 1, '2017-08-30', '2017-08-30', 30, 0, 'Archived', 'N/A', 'On-Hand', 'An order.'),
 (11, 1, '2017-09-24', '2017-09-24', 24, 60000, 'Pending', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
-(12, 1, '2017-10-02', '2017-10-18', 28, 100000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
+(12, 1, '2017-10-02', '2017-10-18', 28, 100000, 'Ongoing', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
 (13, 1, '2017-10-02', '2017-10-18', 29, 100000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', 'a'),
 (16, 1, '2017-10-03', '2017-11-04', 0, 25000, 'Finished', 'For management', 'Management Order', 'Waley'),
 (17, 1, '2017-10-04', '2017-10-04', 31, 25000, 'Pending', 'N/A. This order is for pick-up', 'Pre-Order', ''),
@@ -1252,7 +1255,7 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (24, 1, '2017-10-04', '2017-10-04', 31, 35000, 'Archived', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (25, 1, '2017-10-05', '2017-10-05', 25, 25000, 'Finished', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
 (26, 1, '2017-10-05', '2017-10-05', 27, 25000, 'Finished', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
-(27, 1, '2017-10-05', '2017-10-05', 27, 25000, 'Ongoing', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
+(27, 1, '2017-10-05', '2017-10-05', 27, 25000, 'Finished', 'N/A. This order is for pick-up', 'On-Hand', 'An order.'),
 (28, 1, '2017-10-10', '2017-10-11', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'a'),
 (29, 1, '2017-10-10', '2017-10-31', 28, 115000, 'Archived', 'N/A', 'Pre-Order', 'a'),
 (30, 1, '2017-10-10', '2017-10-12', 22, 90000, 'Archived', 'N/A', 'Pre-Order', 'a'),
@@ -1270,7 +1273,8 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (42, 1, '2017-10-10', '2017-11-04', 25, 115000, 'Archived', 'N/A', 'Pre-Order', 'An order.'),
 (43, 1, '2017-10-10', '2017-11-04', 27, 90000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.'),
 (44, 1, '2017-10-10', '2017-10-10', 34, 35000, 'WFA', 'N/A. This order is for pick-up', 'Pre-Order', ''),
-(45, 1, '2017-10-11', '2017-10-20', 0, 25000, 'Pending', 'For management', 'Management Order', '');
+(45, 1, '2017-10-11', '2017-10-20', 0, 25000, 'Pending', 'For management', 'Management Order', ''),
+(46, 1, '2017-10-12', '2017-11-06', 35, 25000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.');
 
 -- --------------------------------------------------------
 
@@ -1354,7 +1358,7 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 (24, 24, 17, 35000, 0, NULL, 1, 'Active'),
 (25, 25, 18, 25000, 0, NULL, 1, 'Released'),
 (26, 26, 18, 25000, 0, NULL, 1, 'Released'),
-(27, 27, 18, 25000, 0, NULL, 1, 'Ready for release'),
+(27, 27, 18, 25000, 0, NULL, 1, 'Released'),
 (28, 29, 18, 25000, 0, NULL, 1, 'Active'),
 (29, 30, NULL, 90000, 0, 0, 1, 'Active'),
 (30, 31, NULL, 90000, 0, 0, 1, 'Active'),
@@ -1374,7 +1378,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 (44, 42, 17, 0, 0, NULL, 1, 'Active'),
 (45, 43, NULL, 90000, 0, 0, 1, 'Active'),
 (46, 44, 17, 35000, 0, NULL, 1, 'Active'),
-(47, 45, 18, 25000, 0, NULL, 1, 'Active');
+(47, 45, 18, 25000, 0, NULL, 1, 'Active'),
+(48, 46, 18, 25000, 0, NULL, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1402,7 +1407,7 @@ INSERT INTO `tblorder_requestcnt` (`orreq_cntID`, `orreq_ID`, `orreq_quantity`, 
 (4, 25, 1, 0, 0, 1),
 (5, 5, 1, 0, 0, 1),
 (6, 26, 1, 0, 0, 1),
-(7, 27, 1, 1, 0, 0);
+(7, 27, 1, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1516,7 +1521,7 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (5, 5, '2017-08-30 09:00:32', 60000, 1, 'Paid'),
 (6, 5, '2017-08-30 09:19:40', 5000, 1, 'Paid'),
 (7, 6, '2017-08-30 09:31:31', 2, 2, 'Paid'),
-(8, 7, '2017-09-24 19:58:16', 165000, 1, 'Paid'),
+(8, 7, '2017-09-24 19:58:16', 50000, 1, 'Paid'),
 (9, 1, '2017-09-27 10:16:09', 25000, 1, 'Paid'),
 (10, 8, '2017-10-02 15:22:17', 50000, 1, 'Paid'),
 (11, 9, '2017-10-02 15:24:31', 50000, 1, 'Paid'),
@@ -1542,7 +1547,8 @@ INSERT INTO `tblpayment_details` (`payment_detailsID`, `invID`, `dateCreated`, `
 (31, 34, '2017-10-10 10:36:39', 57500, 1, 'Paid'),
 (32, 35, '2017-10-10 10:40:13', 57500, 1, 'Paid'),
 (33, 36, '2017-10-10 10:51:37', 45000, 1, 'Paid'),
-(34, 37, '2017-10-10 20:21:23', 25000, 3, 'Paid');
+(34, 37, '2017-10-10 20:21:23', 25000, 3, 'Paid'),
+(35, 38, '2017-10-12 19:15:10', 12500, 1, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1570,8 @@ CREATE TABLE `tblpenalty` (
 --
 
 INSERT INTO `tblpenalty` (`penaltyID`, `penaltyName`, `penaltyRateType`, `penaltyRate`, `penaltyRemarks`, `penStatus`) VALUES
-(1, 'Storage Fee', 'Amount', 500, 'Overdue Orders', 'Active');
+(1, 'Storage Fee', 'Amount', 500, '', 'Active'),
+(2, 'Cancellation Fee', 'Amount', 500, NULL, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1695,7 +1702,10 @@ INSERT INTO `tblproduction` (`productionID`, `productionOrderReq`, `productionPa
 (42, 19, NULL, NULL, NULL, NULL, 'Ongoing'),
 (43, 16, NULL, '2017-10-10', '2017-10-11', NULL, 'Finished'),
 (44, 0, 1, NULL, '2017-10-12', NULL, 'Finished'),
-(45, 0, 2, NULL, NULL, NULL, 'Ongoing');
+(45, 0, 2, NULL, NULL, NULL, 'Ongoing'),
+(46, 14, NULL, NULL, NULL, NULL, 'Ongoing'),
+(47, 14, NULL, NULL, NULL, NULL, 'Ongoing'),
+(48, 48, NULL, NULL, NULL, NULL, 'Ongoing');
 
 -- --------------------------------------------------------
 
@@ -1774,7 +1784,16 @@ INSERT INTO `tblproduction_phase` (`prodHistID`, `prodID`, `prodPhase`, `prodEmp
 (152, 45, 2, NULL, NULL, NULL, NULL, NULL, 'Pending'),
 (153, 45, 3, NULL, NULL, NULL, NULL, NULL, 'Pending'),
 (154, 45, 4, NULL, NULL, NULL, NULL, NULL, 'Pending'),
-(155, 45, 5, NULL, NULL, NULL, NULL, NULL, 'Pending');
+(155, 45, 5, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(156, 46, 1, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(157, 46, 2, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(158, 46, 5, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(159, 47, 1, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(160, 47, 2, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(161, 47, 5, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(162, 48, 1, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(163, 48, 2, NULL, NULL, NULL, NULL, NULL, 'Pending'),
+(164, 48, 5, NULL, NULL, NULL, NULL, NULL, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1969,7 +1988,8 @@ INSERT INTO `tblrelease` (`releaseID`, `releaseDate`, `releaseType`, `releaseRem
 (16, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
 (17, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
 (18, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
-(19, '2017-10-11 00:00:00', 'Pick-up', '', 'Released');
+(19, '2017-10-11 00:00:00', 'Pick-up', '', 'Released'),
+(20, '2017-10-12 00:00:00', 'Pick-up', '', 'Released');
 
 -- --------------------------------------------------------
 
@@ -1995,7 +2015,8 @@ INSERT INTO `tblrelease_details` (`rel_detailsID`, `tblreleaseID`, `rel_orderReq
 (4, 3, 4, 1),
 (5, 16, 18, 1),
 (6, 17, 25, 1),
-(8, 19, 26, 1);
+(8, 19, 26, 1),
+(9, 20, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -2696,7 +2717,7 @@ ALTER TABLE `tbldelivery`
 -- AUTO_INCREMENT for table `tbldelivery_history`
 --
 ALTER TABLE `tbldelivery_history`
-  MODIFY `delHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `delHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbldelivery_rates`
 --
@@ -2781,7 +2802,7 @@ ALTER TABLE `tblfurn_type`
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
-  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
@@ -2791,7 +2812,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
@@ -2851,7 +2872,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -2866,7 +2887,7 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tblorder_requestcnt`
 --
@@ -2891,12 +2912,12 @@ ALTER TABLE `tblpackage_orderreq`
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
-  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
 ALTER TABLE `tblpenalty`
-  MODIFY `penaltyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `penaltyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblphases`
 --
@@ -2921,12 +2942,12 @@ ALTER TABLE `tblproduct`
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
-  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
-  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
@@ -2966,12 +2987,12 @@ ALTER TABLE `tblpull_out`
 -- AUTO_INCREMENT for table `tblrelease`
 --
 ALTER TABLE `tblrelease`
-  MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `tblrelease_details`
 --
 ALTER TABLE `tblrelease_details`
-  MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblsupplier`
 --
