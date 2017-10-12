@@ -300,7 +300,7 @@ unset($_SESSION['actionFailed']);
                               $isFinish = 0;
 
                               $prodRec = str_pad($row['productionID'], 8, '0', STR_PAD_LEFT); //format ng display ID
-                              $prodRec = "#" . $prodRec; //format ng display ID
+                              $prodRec = "#" . $prodRec; 
                               echo '
                               <div class="col-md-12">
                               <div class="panel panel-info" style="margin-top: -20px;">
