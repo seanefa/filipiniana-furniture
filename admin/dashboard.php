@@ -657,7 +657,7 @@ echo ('
                               $res = mysqli_query($conn,$sql);
 
       ?>
-      <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">PAYMENT NOTIFICATIONS<br><?php echo mysqli_num_rows($res); ?></button>
+      <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">PAYMENT<br>NOTIFICATIONS<br><?php echo mysqli_num_rows($res); ?></button>
     </div>
   </div>
   <div class="row">
@@ -705,7 +705,7 @@ echo ('
                $result = mysqli_query($conn, $sql);
 
           ?>
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION REQUEST<br><?php echo mysqli_num_rows($result); ?></button>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION<br>REQUEST<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>
     </div>
