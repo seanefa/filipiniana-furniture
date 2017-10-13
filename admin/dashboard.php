@@ -455,8 +455,6 @@ echo ('
   <td style="text-align:left">
 
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="customers-forms.php" data-remote="customers-forms.php?id=' . $row['customerID']. ' #update"><i class="ti-pencil-alt"></i> Update</button>
-
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID'] . ' "><i class="ti-close"></i> Deactivate</button>
   </td>
   </tr>
   ');
