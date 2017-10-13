@@ -43,10 +43,10 @@
 							<?php
 							  $isFinish = 0;
 								$id = 20;
-                include "userconnect.php";
-                $sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
-                $res = mysqli_query($conn,$sql);
-                while($row = mysqli_fetch_assoc($res))
+                			include "userconnect.php";
+                			$sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
+                			$res = mysqli_query($conn,$sql);
+                			while($row = mysqli_fetch_assoc($res))
 							{
 							?>
 							<div class="col-md-12">

@@ -259,6 +259,9 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
               <li><a href="delivery-rates.php">Delivery Rates</a></li>
             </ul>
           </li>
+			
+			<li><a href="discounts.php" class="waves-effect">Discounts</a>
+          </li>
         </ul>
       </li>
 
