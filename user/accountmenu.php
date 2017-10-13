@@ -1,6 +1,6 @@
 <!--Right Part Start -->
 <aside id="column-left" class="col-sm-3 hidden-xs">
-	<?php 
+	<?php
 	include "userconnect.php";
 	$sql = "SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 	$result = $conn->query($sql);
@@ -9,6 +9,8 @@
 		while($row=$result->fetch_assoc())
 		{
 			?>
+			<img class="img-responsive" src="pics/userpictures/<?php echo "" . $row["customerDP"];?>">
+			<br>
 			<h3 class="subtitle"><?php echo "" . $row["customerFirstName"] . " " . substr($row["customerMiddleName"],0,1)?>.<?php echo "" . " " . $row["customerLastName"];?></h3>
 			<?php
 		}
