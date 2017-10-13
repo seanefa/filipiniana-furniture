@@ -454,7 +454,47 @@ function inputValidate(id){
   function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-} 
+}
+
+function removeQuant(id,quant){
+    quant = parseInt(quant);
+    var productQuantity = parseInt($('#ribbon'+id).val());
+    var origQuant = $('#origribbon'+id).val();
+
+    if(quant > productQuantity){
+      return false;
+    }else if(quant <= productQuantity){
+      productQuantity = productQuantity - quant;
+       $('#rib'+id).html('');
+      $('#rib'+id).html(productQuantity+'  ON-HAND');
+      $('#ribbon'+id).val(productQuantity);
+      return true;
+    }
+
+
+
+}
+function addQuant(id,quant){
+    quant = parseInt(quant);
+    var productQuantity = parseInt($('#ribbon'+id).val());
+    var origQuant = $('#origribbon'+id).val();
+    
+    if(origQuant < (quant + productQuantity)){
+     
+      return false;
+    }else if(origQuant >= (quant + productQuantity)){
+
+      productQuantity = productQuantity + quant;
+
+       $('#rib'+id).html('');
+      $('#rib'+id).html(productQuantity+'  ON-HAND');
+      $('#ribbon'+id).val(productQuantity);
+      return true;
+    }
+
+
+
+}
 
 //
 </script>
@@ -933,6 +973,7 @@ function inputValidate(id){
                     var xTotal;
 
                     function deleteRow(row){
+                      var xid = $('#id'+row.value).val();
                       var qunatityy = parseInt($('#quants'+row.value).val());
                       var x = totalQuant - parseInt($('#quants'+row.value).val());
                       var y = tempPrice - parseInt($('#prices'+row.value).val());
@@ -958,6 +999,7 @@ function inputValidate(id){
                       }
 
                       else{
+                        if(addQuant(xid,result)){
                         if(qunatityy != 0){
                           var remover = qunatityy;
                           var a = parseInt($('#prices'+row.value).val());
@@ -1046,7 +1088,11 @@ function inputValidate(id){
                     
 
                   }
+                }else{
+
                 }
+                }
+
 
 
 
@@ -1054,6 +1100,7 @@ function inputValidate(id){
               }
                  ////////             ADD OF PRODUCTS TO CART ///////////////
                  function addRow(row){
+                   var xid = $('#id'+row.value).val();
                   var qunatityy = parseInt($('#quants'+row.value).val());
                   var x = totalQuant - parseInt($('#quants'+row.value).val());
                   var y = tempPrice - parseInt($('#prices'+row.value).val());
@@ -1076,6 +1123,7 @@ function inputValidate(id){
                     return;
                   }
                   else{
+                    if(removeQuant(xid,result)){
                     if(qunatityy != 0){
                       var remover = qunatityy;
                       var a = parseInt($('#prices'+row.value).val());
@@ -1125,6 +1173,15 @@ function inputValidate(id){
                       Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
                       
                     }
+                          }else{
+                      var ribs = $('#ribbon'+id).val();
+                      //if prod quant < input quant
+                      if(ribs != 0){
+                      alert('There are only '+ribs+'.');
+                    }else{
+                      alert('There no more available product.');
+                    }
+                  }
                   }
 
 
@@ -1140,7 +1197,7 @@ function inputValidate(id){
                  tempPrice = parseInt($('#totalPrice').text().slice());
                  var quant =parseInt($('#quant'+id).val());
 
-
+                 if(removeQuant(id,quant)){
                  totalQuant = parseInt($('#totalQ').text());
                  var tP = $('#price'+id).val().toString();
                  var price =parseInt(tP.replace(',',''));
@@ -1268,6 +1325,17 @@ function inputValidate(id){
                   $('#'+id).attr('href','');
                 }
               }
+            }else{
+              $('#'+id).attr('data-toggle','');
+                  $('#'+id).attr('href','');
+              var ribs = $('#ribbon'+id).val();
+              //if prod quant < input quant
+              if(ribs != 0){
+              alert('There are only '+ribs+'.');
+            }else{
+              alert('There no more available product.');
+            }
+            }
             }
 
 

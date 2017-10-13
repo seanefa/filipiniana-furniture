@@ -30,7 +30,7 @@ if($id=="On-Hand"){
 			</div>
 			<h3 class="box-title m-b-0">'.substr($row['productName'], 0,20).'</h3>
 			<div class="product-text">
-			<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;">'.$oQuan.'  ON-HAND</span></div>
+			<div class="ribbon"><span style="font-weight:bolder; font-family:inherit;" id="rib'.$row['productID'].'">'.$oQuan.'  ON-HAND</span></div>
 			<label>Price</label>
 			<br>
 			<span style="color:green; font-weight:600;">&#8369;'.number_format($row['productPrice'],2).'</span>
@@ -42,6 +42,8 @@ if($id=="On-Hand"){
 			echo '<option value='.$x.'><h3 style="text-align:right" size:"1">'.$x.'</h3></option>';
 			}
 			echo ('</select>
+	<input type="hidden" id="origribbon'.$row['productID'].'" value="'.$oQuan.'"/>
+	<input type="hidden" id="ribbon'.$row['productID'].'" value="'.$oQuan.'"/>
 	<input type="hidden" id="product'.$row['productID'].'" value="'.$row['productName'].'"/>
 	<input type="hidden" id="price'.$row['productID'].'" value="'.$row['productPrice'].'"/>
 	<input type="hidden" id="size'.$row['productID'].'" value="'.$row['productDescription'].'"/>
