@@ -15899,8 +15899,34 @@ background-image: linear-gradient(to bottom, #cfe7fa 0%, #6393c1 100%);
   color:#fff;
   font-size:12px Arial;
 }
-
 .limitDataWidth{
   width:150px; 
   word-wrap:break-word;
 }
+.clockdate-wrapper {
+    max-width:550px;
+    width:100%;
+    text-align:center;
+    border-radius:5px;
+    margin:0 auto;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+#clock{
+    font-family: inherit;
+    font-size:20px;
+    text-shadow:0px 0px 1px #fff;
+    color:#fff;
+}
+#clock span {
+    color:white;
+    text-shadow:1px 1px 2px #333;
+    font-size:12px;
+    position:relative;
+}
+#date {
+    text-shadow:3px 1px 1px #333;
+    letter-spacing:2px;
+    font-size:12px;
+    font-family:inherit;
+    color:#fff;

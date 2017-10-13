@@ -82,7 +82,7 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
   ga('send', 'pageview');
   </script-->
 </head>
-<body class ="fix-header fix-sidebar">
+<body class ="fix-header fix-sidebar" onload="startTime()">
   <!-- Preloader -->
 <!--div class="preloader">
   <div class="cssload-speeding-wheel"></div>
@@ -123,6 +123,12 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
           $conn->close();
           ?></span></a></div>
       <ul class="nav navbar-top-links navbar-left hidden-xs">
+        <div id="clockdate">
+          <div class="clockdate-wrapper">
+            <div id="clock"></div>
+            <div id="date"></div>
+          </div>
+        </div>
         <li><a href="javascript:void(0)" class="hideMenu open-close hidden-xs waves-effect waves-light hidden"><i class="icon-arrow-left-circle ti-menu" hidden></i></a></li>
         <li>
 
@@ -411,6 +417,8 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
   <!-- Auto Hide Menu -->
   <script src="js/admin/menu/auto-hide-menu.js"></script>  
   <!-- Weather Plugin -->
-  <!--script src="plugins/bower_components/flatWeatherPlugin/js/jquery.flatWeatherPlugin.min.js"></script--> 
+  <!--script src="plugins/bower_components/flatWeatherPlugin/js/jquery.flatWeatherPlugin.min.js"></script-->
+  <!-- Clock -->
+  <script src="js/admin/menu/clock.js"></script>  
 </body>
 </html>
