@@ -3,15 +3,15 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master")
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
-$id = $_GET['id'];
+$year = $_GET['year'];
 ?>
 <!DOCTYPE html>
 <head>
-  <title><?php echo $orderID = $id?></title>
+  <title><?php echo $orderID = $year?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <?php 
-$id = $_GET['id'];
+$year = $_GET['year'];
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
@@ -38,7 +38,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- ANNUAL INVENTORY REPORT -</p>
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- ANNUAL PRODUCTION REPORT -</p>
         </div>
       </div>
     </div>
@@ -47,12 +47,12 @@ $row = mysqli_fetch_assoc($res);
         <div style="text-align: center;">
           <?php
           include "dbconnect.php";
-          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$year'";
           $res = mysqli_query($conn,$sql);
           $custRow = mysqli_fetch_assoc($res);
           ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $id; echo $orderID;
-          $inventoryReportID = "AnnualInventoryReport". $orderID;?></span>
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $year; echo $orderID;
+          $productionReportID = "AnnualProductionReport". $orderID;?></span>
         </div>
       </div>
     </div>
@@ -108,15 +108,16 @@ $row = mysqli_fetch_assoc($res);
   $tpriceArraylength = count($tpriceArray);
   $dateArray = array("01","02","03","04","05","06","07","08","09","10","11","12");
 
+  if($ctr==0){
+    echo "<td colspan='8' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
+    echo "</tbody>";
+  }
+  else{
     echo '
   </tbody>
   </table>
   </div>
   <script>
-  function redirectPrint(id){
-    window.open("inventory-report-print.php?id="+id, "_blank");
-  }
-
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -130,7 +131,7 @@ $row = mysqli_fetch_assoc($res);
    });
   });
   </script>';
-  
+  }
    while($tpriceArraylength != 0){
     echo'<input type="hidden" value="'.$tpriceArray[$tpriceArraylength-1].'" id="'.$dateArray[$tpriceArraylength-1].'"/>';
     $tpriceArraylength--;
@@ -141,8 +142,8 @@ function getAllYeardata(){
 
   include "dbconnect.php";
 
-  $id = $_GET['id'];
-  $orderID = $id;
+  $year = $_GET['year'];
+  $orderID = $year;
   $dateArray = array("01","02","03","04","05","06","07","08","09","10","11","12");
   $y = $orderID;
   $priceArray = array();
@@ -186,7 +187,7 @@ $ctr = 0;
     <?php
     $down = 0;
     $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$year'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
     while($trow = mysqli_fetch_assoc($res)){
@@ -222,5 +223,5 @@ $ctr = 0;
   $dompdf = new DOMPDF();
   $dompdf->load_html($html);
   $dompdf->render();
-  $dompdf->stream($inventoryReportID, array("Attachment" => 0));
+  $dompdf->stream($productionReportID, array("Attachment" => 0));
   ?>

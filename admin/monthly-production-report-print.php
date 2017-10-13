@@ -134,7 +134,7 @@ $row = mysqli_fetch_assoc($res);
           $custRow = mysqli_fetch_assoc($res);
           ?>
           <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $monthYear; echo $orderID;
-          $salesReportID = "MonthlySalesReport". $orderID;?></span>
+          $productionReportID = "MonthlyProductionReport". $orderID;?></span>
         </div>
       </div>
     </div>
@@ -156,11 +156,13 @@ $row = mysqli_fetch_assoc($res);
     <thead>
   <tr>
   <th>Product ID</th>
-  <th>Date Sold</th>
+  <th>Date</th>
   <th>Product Name</th>
-  <th style='text-align:right'>Product Price</th>
-  <th style='text-align:right'>Quantity Ordered</th>
-  <th style='text-align:right'>Total</th>
+  <th>Material ID</th>
+  <th>Starting Quantity</th>
+  <th>Used(Till Now)</th>
+  <th>Available</th>
+  <th>Status</th>
   </tr>
   </thead>
   <tbody>";
@@ -175,25 +177,24 @@ $row = mysqli_fetch_assoc($res);
     echo ('<tr><td>'.$prodID.'</td>
       <td>'.$date.'</td>
       <td>'.$row['productName'].'</td>
-      <td style="text-align:right">Php '.number_format($row['productPrice'],2).'</td>
-      <td style="text-align:right">'.$row['quan'].' pcs</td>
-      <td style="text-align:right">Php '.number_format($total,2).'</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
       </tr>'); 
   $ctr++;
   }
     echo '
   </tbody>
-  <tfoot style="text-align:right;">
-  <td></td>
-  <td colspan="3" style="text-align:right;"><b> GRAND TOTAL:</b></td>
-  <td id="totalQ" style="text-align:right;"><b> '. $tQuan.' pcs</b></td>
-  <td id="totalPrice" style="text-align:right;"><b>'. "Php ". number_format($tPrice,2).'</b></td>
-  </tfoot>
   </table>
   </div>
   <script>
-
   $(document).ready(function () {
+  function redirectPrint(m,y){
+    window.open("monthly-production-report-print.php?month="+m+"&year="+y, "_blank");
+  }
+
     var table = $(".reportsDataTable").DataTable({
       "order": [],
       "pageLength": 5,
@@ -251,5 +252,5 @@ $row = mysqli_fetch_assoc($res);
   $dompdf = new DOMPDF();
   $dompdf->load_html($html);
   $dompdf->render();
-  $dompdf->stream($salesReportID, array("Attachment" => 0));
+  $dompdf->stream($productionReportID, array("Attachment" => 0));
   ?>

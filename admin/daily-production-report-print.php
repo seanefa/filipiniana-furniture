@@ -4,8 +4,23 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
 
+$day = $_GET['day'];
 $month = $_GET['month'];
 $year = $_GET['year'];
+
+function ordinal_suffix($num){
+    $num = $num % 100; // protect against large numbers
+    if($num < 11 || $num > 13){
+         switch($num % 10){
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+        }
+    }
+    return 'th';
+}
+
+$dayWithSuffix = ordinal_suffix($day);
 
 if($month == 1){
   $month = 'January';
@@ -44,16 +59,17 @@ if($month == 12){
   $month = 'December';
 }
 
-$monthYear = $month . $year;
+$dates =  $day . $dayWithSuffix . $month . $year;
 
 ?>
 <!DOCTYPE html>
 <head>
-  <title><?php echo $orderID = $monthYear?></title>
+  <title><?php echo $orderID = $dates?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <?php
 
+$day = $_GET['day'];
 $month = $_GET['month'];
 $year = $_GET['year'];
 
@@ -120,7 +136,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- MONTHLY SALES REPORT -</p>
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- DAILY PRODUCTION REPORT -</p>
         </div>
       </div>
     </div>
@@ -133,66 +149,73 @@ $row = mysqli_fetch_assoc($res);
           $res = mysqli_query($conn,$sql);
           $custRow = mysqli_fetch_assoc($res);
           ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $monthYear; echo $orderID;
-          $salesReportID = "MonthlySalesReport". $orderID;?></span>
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $dates; echo $orderID;
+          $productionReportID = "DailyProductionReport". $orderID;?></span>
         </div>
       </div>
     </div>
 
     <br>
     <?php
-    $m = $_GET['month'];
-  $y = $_GET['year'];
+      $date = $dates;
+  $newDate = new DateTime($date);
+  $resultDate = $newDate->format('Y-m-d');
+  $explodeDate = explode('-',$resultDate);
+
+  $y = "";
+  $m = "";
+  $d = "";
+
+  $y = $explodeDate[0];
+  $m = $explodeDate[1];
+  $d = $explodeDate[2];
+
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
 
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$m' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
+  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and c.dateOfReceived = '$resultDate' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
-  echo "<div class='table-responsive'>
+  echo "
+  <div class='table-responsive'>
     <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
   <th>Product ID</th>
-  <th>Date Sold</th>
   <th>Product Name</th>
-  <th style='text-align:right'>Product Price</th>
-  <th style='text-align:right'>Quantity Ordered</th>
-  <th style='text-align:right'>Total</th>
-  </tr>
+  <th>Product Description</th>
+  <th>Material ID</th>
+  <th>Starting Quantity</th>
+  <th>Used(Till Now)</th>
+  <th>Available</th>
+  <th>Status</th>
+</tr>
   </thead>
   <tbody>";
   while ($row = mysqli_fetch_assoc($result)){
-    $date = date_create($row['dateOfReceived']);
-    $date = date_format($date,"F d,Y");
     $prodID = str_pad($row['productID'], 6, '0', STR_PAD_LEFT);
     $total = $row['quan'] * $row['productPrice'];
     $tQuan += $row['quan'];
     $tPrice += $total;
-
     echo ('<tr><td>'.$prodID.'</td>
-      <td>'.$date.'</td>
       <td>'.$row['productName'].'</td>
-      <td style="text-align:right">Php '.number_format($row['productPrice'],2).'</td>
-      <td style="text-align:right">'.$row['quan'].' pcs</td>
-      <td style="text-align:right">Php '.number_format($total,2).'</td>
+      <td>'.$row['productDescription'].'</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
       </tr>'); 
   $ctr++;
   }
-    echo '
-  </tbody>
-  <tfoot style="text-align:right;">
-  <td></td>
-  <td colspan="3" style="text-align:right;"><b> GRAND TOTAL:</b></td>
-  <td id="totalQ" style="text-align:right;"><b> '. $tQuan.' pcs</b></td>
-  <td id="totalPrice" style="text-align:right;"><b>'. "Php ". number_format($tPrice,2).'</b></td>
-  </tfoot>
+
+    echo '    
+     </tbody>
   </table>
   </div>
   <script>
-
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -207,9 +230,7 @@ $row = mysqli_fetch_assoc($res);
   });
   </script>';
   
- 
     ?>
-
     <br>
 
     <?php
@@ -251,5 +272,5 @@ $row = mysqli_fetch_assoc($res);
   $dompdf = new DOMPDF();
   $dompdf->load_html($html);
   $dompdf->render();
-  $dompdf->stream($salesReportID, array("Attachment" => 0));
+  $dompdf->stream($productionReportID, array("Attachment" => 0));
   ?>

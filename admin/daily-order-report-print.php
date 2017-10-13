@@ -3,15 +3,113 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master")
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
-$id = $_GET['id'];
+
+$day = $_GET['day'];
+$month = $_GET['month'];
+$year = $_GET['year'];
+
+function ordinal_suffix($num){
+    $num = $num % 100; // protect against large numbers
+    if($num < 11 || $num > 13){
+         switch($num % 10){
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+        }
+    }
+    return 'th';
+}
+
+$dayWithSuffix = ordinal_suffix($day);
+
+if($month == 1){
+  $month = 'January';
+}
+if($month == 2){
+  $month = 'February';
+}
+if($month == 3){
+  $month = 'March';
+}
+if($month == 4){
+  $month = 'April';
+}
+if($month == 5){
+  $month = 'May';
+}
+if($month == 6){
+  $month = 'June';
+}
+if($month == 7){
+  $month = 'July';
+}
+if($month == 8){
+  $month = 'August';
+}
+if($month == 9){
+  $month = 'September';
+}
+if($month == 10){
+  $month = 'October';
+}
+if($month == 11){
+  $month = 'November';
+}
+if($month == 12){
+  $month = 'December';
+}
+
+$dates =  $day . $dayWithSuffix . $month . $year;
+
 ?>
 <!DOCTYPE html>
 <head>
-  <title><?php echo $orderID = $id?></title>
+  <title><?php echo $orderID = $dates?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<?php 
-$id = $_GET['id'];
+<?php
+
+$day = $_GET['day'];
+$month = $_GET['month'];
+$year = $_GET['year'];
+
+if($month == 1){
+  $month = 'January';
+}
+if($month == 2){
+  $month = 'February';
+}
+if($month == 3){
+  $month = 'March';
+}
+if($month == 4){
+  $month = 'April';
+}
+if($month == 5){
+  $month = 'May';
+}
+if($month == 6){
+  $month = 'June';
+}
+if($month == 7){
+  $month = 'July';
+}
+if($month == 8){
+  $month = 'August';
+}
+if($month == 9){
+  $month = 'September';
+}
+if($month == 10){
+  $month = 'October';
+}
+if($month == 11){
+  $month = 'November';
+}
+if($month == 12){
+  $month = 'December';
+}
+
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
@@ -38,7 +136,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- ANNUAL ORDER REPORT -</p>
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- DAILY ORDER REPORT -</p>
         </div>
       </div>
     </div>
@@ -47,25 +145,38 @@ $row = mysqli_fetch_assoc($res);
         <div style="text-align: center;">
           <?php
           include "dbconnect.php";
-          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$month'";
           $res = mysqli_query($conn,$sql);
           $custRow = mysqli_fetch_assoc($res);
           ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $id; echo $orderID;
-          $orderReportID = "AnnualOrderReport". $orderID;?></span>
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $dates; echo $orderID;
+          $orderReportID = "DailyOrderReport". $orderID;?></span>
         </div>
       </div>
     </div>
 
     <br>
     <?php
-    $y = $orderID;
+      $date = $dates;
+  $newDate = new DateTime($date);
+  $resultDate = $newDate->format('Y-m-d');
+  $explodeDate = explode('-',$resultDate);
+
+  $y = "";
+  $m = "";
+  $d = "";
+
+  $y = $explodeDate[0];
+  $m = $explodeDate[1];
+  $d = $explodeDate[2];
+
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
-  $sql = "SELECT * FROM tblorders WHERE orderStatus!='Archived' and year(dateOfReceived) = '$y' order by orderID;";
+
+  $sql = "SELECT * FROM tblorders WHERE orderStatus!='Archived' and dateOfReceived = '$resultDate' order by orderID;";
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
@@ -103,14 +214,28 @@ $row = mysqli_fetch_assoc($res);
       ');
   $ctr++;
   }
-      echo '
-  </tbody>
+    echo '
+     </tbody>
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
-  </div>';
+  </div>
+  <script>
+  $(document).ready(function () {
+    var table = $(".reportsDataTable").DataTable({
+      "order": [],
+      "pageLength": 5,
+      "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+      "aoColumnDefs" : [
+      {
+       "bSortable" : false,
+       "aTargets" : [ "removeSort" ]
+     }]
+   });
+  });
+  </script>';
 
-                            function pCount($id){
+  function pCount($id){
                               include "dbconnect.php";
                               $cnt = 0;
                               $sql = "SELECT COUNT(*) AS NO FROM tblorder_request WHERE tblOrdersID ='$id'";
@@ -183,14 +308,14 @@ $row = mysqli_fetch_assoc($res);
                                 return "Not fully paid";
                               }
                             }
+  
     ?>
-
     <br>
 
     <?php
     $down = 0;
     $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$month'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
     while($trow = mysqli_fetch_assoc($res)){
@@ -217,7 +342,6 @@ $row = mysqli_fetch_assoc($res);
         }  ?></p>
       </div>
     </div>
-
   </body> 
   </html>
 

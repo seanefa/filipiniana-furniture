@@ -4,13 +4,24 @@ $id = $_POST['id'];
 
 if($id==1){
   $date = $_POST['d'];
-  $date = date_create($date);
-  $date = date_format($date,"Y-m-d");
+  $newDate = new DateTime($date);
+  $resultDate = $newDate->format('Y-m-d');
+  $explodeDate = explode('-',$resultDate);
+
+  $y = "";
+  $m = "";
+  $d = "";
+
+  $y = $explodeDate[0];
+  $m = $explodeDate[1];
+  $d = $explodeDate[2];
+
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
+
   $sql = "SELECT * FROM tblorders WHERE orderStatus!='Archived' and dateOfReceived = '$date' order by orderID;";
   $result = mysqli_query($conn, $sql);
   echo "
@@ -55,12 +66,17 @@ if($id==1){
   }
   else{
     echo '
-  </tbody>
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$d.','.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
+     </tbody>
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
   </div>
   <script>
+  function redirectPrint(d,m,y){
+    window.open("daily-order-report-print.php?day="+d+"&month="+m+"&year="+y, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -128,12 +144,17 @@ else if($id==2){
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   </tfoot>
   </table>
   </div>
   <script>
+  function redirectPrint(month,year){
+    window.open("monthly-order-report-print.php?month="+month+"&year="+year, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -208,8 +229,8 @@ else if($id==3){
   </table>
   </div>
   <script>
-  function redirectPrint(id){
-    window.open("order-report-print.php?id="+id, "_blank");
+  function redirectPrint(year){
+    window.open("annual-order-report-print.php?year="+year, "_blank");
   }
 
   $(document).ready(function () {

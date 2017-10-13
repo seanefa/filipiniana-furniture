@@ -4,32 +4,25 @@ $id = $_POST['id'];
 
 if($id==1){
   $date = $_POST['d'];
-  $dates = $_POST['d'];
-  $dates = date_create($dates);
-  $dates = date_format($dates,"Y-m-d");
+  $newDate = new DateTime($date);
+  $resultDate = $newDate->format('Y-m-d');
+  $explodeDate = explode('-',$resultDate);
 
-//   $new_date = date('Y-m-d', $date);
+  $y = "";
+  $m = "";
+  $d = "";
 
-// $time = strtotime($_POST['d']);
-// if ($time != false){
-//   $new_date = date('Y-m-d', $time);
-//   echo $new_date;
-// echo '<script>
-//     alert('.$new_date.');
-//   </script>';
-// }
-// else{
-//    echo 'Invalid Date: ' . $_POST['d'];
-//   // fix it.
-// }
+  $y = $explodeDate[0];
+  $m = $explodeDate[1];
+  $d = $explodeDate[2];
+
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
- 
 
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and c.dateOfReceived = '$dates' GROUP BY b.orderProductID order by quan DESC;";
+  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and c.dateOfReceived = '$date' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
@@ -65,7 +58,7 @@ if($id==1){
   }
   else{
     echo '
-     <button type="button" class="btn btn-info" onclick="redirectPrint(new Date('.$date.'))" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$d.','.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   <td></td>
@@ -77,10 +70,8 @@ if($id==1){
   </table>
   </div>
   <script>
-  function redirectPrint(date){
-    date1 = Date.parse(date);
-    alert(date1);
-    window.open("daily-sales-report-print.php?date="+date, "_blank");
+  function redirectPrint(d,m,y){
+    window.open("daily-sales-report-print.php?day="+d+"&month="+m+"&year="+y, "_blank");
   }
 
   $(document).ready(function () {
@@ -157,7 +148,6 @@ else if($id==2){
   </div>
   <script>
   function redirectPrint(m,y){
-    //alert(m + y);
     window.open("monthly-sales-report-print.php?month="+m+"&year="+y, "_blank");
   }
 

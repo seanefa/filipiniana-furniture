@@ -3,15 +3,97 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master")
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
-$id = $_GET['id'];
+
+$month = $_GET['month'];
+$year = $_GET['year'];
+
+if($month == 1){
+  $month = 'January';
+}
+if($month == 2){
+  $month = 'February';
+}
+if($month == 3){
+  $month = 'March';
+}
+if($month == 4){
+  $month = 'April';
+}
+if($month == 5){
+  $month = 'May';
+}
+if($month == 6){
+  $month = 'June';
+}
+if($month == 7){
+  $month = 'July';
+}
+if($month == 8){
+  $month = 'August';
+}
+if($month == 9){
+  $month = 'September';
+}
+if($month == 10){
+  $month = 'October';
+}
+if($month == 11){
+  $month = 'November';
+}
+if($month == 12){
+  $month = 'December';
+}
+
+$monthYear = $month . $year;
+
 ?>
 <!DOCTYPE html>
 <head>
-  <title><?php echo $orderID = $id?></title>
+  <title><?php echo $orderID = $monthYear?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<?php 
-$id = $_GET['id'];
+<?php
+
+$month = $_GET['month'];
+$year = $_GET['year'];
+
+if($month == 1){
+  $month = 'January';
+}
+if($month == 2){
+  $month = 'February';
+}
+if($month == 3){
+  $month = 'March';
+}
+if($month == 4){
+  $month = 'April';
+}
+if($month == 5){
+  $month = 'May';
+}
+if($month == 6){
+  $month = 'June';
+}
+if($month == 7){
+  $month = 'July';
+}
+if($month == 8){
+  $month = 'August';
+}
+if($month == 9){
+  $month = 'September';
+}
+if($month == 10){
+  $month = 'October';
+}
+if($month == 11){
+  $month = 'November';
+}
+if($month == 12){
+  $month = 'December';
+}
+
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
@@ -38,7 +120,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- ANNUAL PRODUCTION REPORT -</p>
+          <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- MONTHLY SALES REPORT -</p>
         </div>
       </div>
     </div>
@@ -47,29 +129,27 @@ $row = mysqli_fetch_assoc($res);
         <div style="text-align: center;">
           <?php
           include "dbconnect.php";
-          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$month'";
           $res = mysqli_query($conn,$sql);
           $custRow = mysqli_fetch_assoc($res);
           ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $id; echo $orderID;
-          $productionReportID = "AnnualProductionReport". $orderID;?></span>
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $monthYear; echo $orderID;
+          $salesReportID = "MonthlySalesReport". $orderID;?></span>
         </div>
       </div>
     </div>
 
     <br>
     <?php
-    $y = $orderID;
+     $m = $_GET['month'];
+  $y = $_GET['year'];
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
 
-  $tpriceArray = array();
-  $tpriceArray = getAllYeardata();
-
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID";
+  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$m' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
     <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
@@ -93,6 +173,7 @@ $row = mysqli_fetch_assoc($res);
     $total = $row['quan'] * $row['productPrice'];
     $tQuan += $row['quan'];
     $tPrice += $total;
+
     echo ('<tr><td>'.$prodID.'</td>
       <td>'.$date.'</td>
       <td>'.$row['productName'].'</td>
@@ -104,24 +185,11 @@ $row = mysqli_fetch_assoc($res);
       </tr>'); 
   $ctr++;
   }
-
-  $tpriceArraylength = count($tpriceArray);
-  $dateArray = array("01","02","03","04","05","06","07","08","09","10","11","12");
-
-  if($ctr==0){
-    echo "<td colspan='8' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
-    echo "</tbody>";
-  }
-  else{
     echo '
-  </tbody>
+     </tbody>
   </table>
   </div>
   <script>
-  function redirectPrint(id){
-    window.open("production-report-print.php?id="+id, "_blank");
-  }
-
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -135,55 +203,9 @@ $row = mysqli_fetch_assoc($res);
    });
   });
   </script>';
-  }
-   while($tpriceArraylength != 0){
-    echo'<input type="hidden" value="'.$tpriceArray[$tpriceArraylength-1].'" id="'.$dateArray[$tpriceArraylength-1].'"/>';
-    $tpriceArraylength--;
-  }
-
-
-function getAllYeardata(){
-
-  include "dbconnect.php";
-
-  $id = $_GET['id'];
-  $orderID = $id;
-  $dateArray = array("01","02","03","04","05","06","07","08","09","10","11","12");
-  $y = $orderID;
-  $priceArray = array();
-
-  $ctrDate = 0;
   
-  while($ctrDate != 12){
-    $tQuan = 0;
-    $temp = 0;
-    $tPrice = 0;
-    $ctr = 0;
-
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$dateArray[$ctrDate]' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
-  $result = mysqli_query($conn, $sql);
-
-if($result){
-  while ($row = mysqli_fetch_assoc($result)){
-    $prodID = str_pad($row['productID'], 6, '0', STR_PAD_LEFT);
-    $total = $row['quan'] * $row['productPrice'];
-    $tQuan += $row['quan'];
-    $tPrice += $total; 
-    $ctr++;
-  }
-  array_push($priceArray, $tPrice);
-}
-else{
-  $tPrice = 0;
-  array_push($priceArray, $tPrice);
-}
-
-$ctrDate++;
-$ctr = 0;
-  }
-  return $priceArray;
   
-}
+ 
     ?>
 
     <br>
@@ -191,7 +213,7 @@ $ctr = 0;
     <?php
     $down = 0;
     $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$month'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
     while($trow = mysqli_fetch_assoc($res)){
@@ -227,5 +249,5 @@ $ctr = 0;
   $dompdf = new DOMPDF();
   $dompdf->load_html($html);
   $dompdf->render();
-  $dompdf->stream($productionReportID, array("Attachment" => 0));
+  $dompdf->stream($salesReportID, array("Attachment" => 0));
   ?>

@@ -4,8 +4,18 @@ $id = $_POST['id'];
 
 if($id==1){
   $date = $_POST['d'];
-  $date = date_create($date);
-  $date = date_format($date,"Y-m-d");
+  $newDate = new DateTime($date);
+  $resultDate = $newDate->format('Y-m-d');
+  $explodeDate = explode('-',$resultDate);
+
+  $y = "";
+  $m = "";
+  $d = "";
+
+  $y = $explodeDate[0];
+  $m = $explodeDate[1];
+  $d = $explodeDate[2];
+
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
@@ -52,10 +62,14 @@ if($id==1){
   }
   else{
     echo '
-  </tbody>
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$d.','.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
+     </tbody>
   </table>
   </div>
   <script>
+  function redirectPrint(d,m,y){
+    window.open("daily-inventory-report-print.php?day="+d+"&month="+m+"&year="+y, "_blank");
+  }
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -122,10 +136,15 @@ else if($id==2){
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   </table>
   </div>
   <script>
+  function redirectPrint(m,y){
+    window.open("monthly-inventory-report-print.php?month="+m+"&year="+y, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -205,8 +224,8 @@ else if($id==3){
   </table>
   </div>
   <script>
-  function redirectPrint(id){
-    window.open("inventory-report-print.php?id="+id, "_blank");
+  function redirectPrint(year){
+    window.open("annual-inventory-report-print.php?year="+year, "_blank");
   }
 
   $(document).ready(function () {
