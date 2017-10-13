@@ -116,7 +116,7 @@ if (!empty($_SESSION['actionFailed'])) {
 
                                      <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
 
-                                   <a class="btn btn-success" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                   <a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
                                   </td>
                                   </tr>
                                   ');
