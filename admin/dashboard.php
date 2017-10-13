@@ -539,6 +539,7 @@ function production($id){
       </li>
     </ul>
   </h3>
+	<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="newsletter-form.php" data-remote="newsletter-form.php? #new"><i class="ti-email"></i> New Letter</button>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
       <div class="panel-wrapper collapse in" aria-expanded="true">
