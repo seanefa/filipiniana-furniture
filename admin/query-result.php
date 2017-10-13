@@ -284,6 +284,62 @@ else if($id=="5"){ // loyal customer
 
 } 
 
+else if($id=="7"){ // loyal customer
+	$ctr = 0;
+	$sql = "SELECT * FROM tbllogs a join tbluser b where a.userID = b.userID";
+	$result = mysqli_query($conn, $sql);
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
+	<thead>
+	<tr>
+	<th>Date</th>
+	<th>Action</th>
+	<th>Category</th>
+	<th>Description</th>
+	<th>Actor</th>
+	</tr>
+	</thead>
+	<tbody>";
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$ctr++;
+		echo ('
+			<tr>
+				<td>' . $row['userName'] . '</td>
+				<td>' . $row['date'] . '</td>
+				<td>'. $row['action'] . '</td>
+				<td>' . $row['category'] . '</td>
+				<td>' . $row['description'] . '</td>
+			</tr>'); 
+	}
+	if($ctr==0){
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
+		echo "</tbody>";
+	}
+	else{
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
+	}
+
+} 
+
 function getBal($id){
 	include "dbconnect.php";
 	$down = 0;
