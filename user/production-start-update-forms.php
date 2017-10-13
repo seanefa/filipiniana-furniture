@@ -1,6 +1,6 @@
 <?php
 include "menu.php";
-include 'dbconnect.php';
+include 'userconnect.php';
 session_start();
 
 
@@ -194,7 +194,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                           <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                             <option value="">Select Employee Handler</option>
                             <?php
-                            include "dbconnect.php";
+                            include "userconnect.php";
                             $sql = "SELECT * FROM tblemployee order by empFirstName;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
@@ -276,7 +276,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                               <select class="form-control" data-placeholder="Select Employee Handler" tabindex="1" name="handler" id="handler">
                                 <option value="">Select Employee Handler</option>
                                 <?php
-                                include "dbconnect.php";
+                                include "userconnect.php";
                                 $sql = "SELECT * FROM tblemployee order by empFirstName;";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result))
@@ -383,7 +383,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                 <th style="text-align: left;">Remarks</th>
                               </thead>
                               <?php
-                              include "dbconnect.php";
+                              include "userconnect.php";
 
                               if($pack==1){
 
@@ -460,7 +460,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                 }
                               }
                               function getName($id){
-                                include "dbconnect.php";
+                                include "userconnect.php";
                                 $name = "";
                                 $sql = "SELECT * FROM tblemployee  WHERE empID = '$id';";
                                 $result = mysqli_query($conn, $sql);

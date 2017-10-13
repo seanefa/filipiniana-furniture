@@ -1,204 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link href="image/favicon.ico" rel="icon" />
-  <link rel="stylesheet" href="css/myStyle.css">
-  <title>Profile - Filipiniana Furniture Shop</title>
-  <meta name="description" content="Furniture shop">
-  <script type="text/javascript" src="js/myScript.js"></script>
-  <?php include"css.php";?>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="image/favicon.ico" rel="icon" />
+	<link rel="stylesheet" href="css/myStyle.css">
+	<title>Profile - Filipiniana Furniture Shop</title>
+	<meta name="description" content="Furniture shop">
+	<script type="text/javascript" src="js/myScript.js"></script>
+	<?php include"css.php";?>
+	<script>
+
+		function loadProdInfo(id){
+			$.ajax({
+				type: 'post',
+				url: 'prod-info-output.php',
+				data: {
+					id: id,
+				},
+				success: function (response) {
+					$( '#displayProd' ).html(response);
+				}
+			});
+		}
+	$(document).ready(function(){
+	});
+	</script>
 </head>
 <body style="background: #ffffff;">
-  <?php
-  include "header.php";
-  if(!isset($_SESSION["userID"]))
-  {
-    echo "<script>
-    window.location.href='login.php';
-    alert('You have no access here. You must logged in first.');
-    </script>";
-  }
-  ?>
-  <div id="container">
-    <div class="container">
-      <ul class="breadcrumb">
-        <li><a href="home.php"><i class="fa fa-home"></i></a></li>
-        <li><a href="production.php">Production</a></li>
-      </ul>
-      <br>
-      <div class="row">
-        <?php include "accountmenu.php"; ?>
-        <!--Middle Part Start-->
-        <div class="col-sm-9" id="content">
-          <h2>Production</h2>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="well">
-                <div class="row">
-                <h2 style="margin-left:2%;">Order Information</h2>
-					<div class="col-sm-12">
-						<div class="descriptions">
-							<?php
-							  $isFinish = 0;
-								$id = 20;
-                			include "userconnect.php";
-                			$sql = "SELECT * from tblorder_request a, tblproduct b, tblorders c WHERE c.orderID='$id' and a.orderProductID = b.productID and a.orderRequestStatus!='Archived' and a.tblOrdersID = '$id'";
-                			$res = mysqli_query($conn,$sql);
-                			while($row = mysqli_fetch_assoc($res))
-							{
-							?>
-							<div class="col-md-12">
-								<div class="panel panel-info" style="margin-top: 0px;">
-									<div class="tab-content thumbnail">
-										<div role="tabpanel" class="tab-pane fade active in" id="job">
-											<div class="panel-wrapper collapse in" aria-expanded="true">
-												<div class="panel-body">
-													<div class="row">
-														<div class="col-md-12">
-                              								<div class="col-md-6">
-																<h2 style="margin-top: -20px;"><?php echo "" . $row['productName'];?></h2>
-															</div>
-															<div class="col-md-6">
-																<h2 class="pull-right" style="margin-top: -20px;">
-																	<a data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id=<?php echo "" . $id;?> &pID=<?php echo "" . $row['order_requestID'];?> #history">
-																		<i class="ti-menu-alt pull-right" style="margin-left: 20px; margin-top:5px;"></i>
-																	</a>
-																	Production History
-																</h2>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-12">
-															<div class="panel panel-info">
-															  	<div class="tab-content thumbnail">
-																	<div role="tabpanel" class="tab-pane fade active in" id="job">
-																  		<div class="panel-wrapper collapse in" aria-expanded="true">
-																			<div class="panel-body">
-																	  			<div class="row">
-																					<div class="col-md-12">
-																						<?php
-																						  $ordReqID = $row['order_requestID'];
+	<?php
+	include "header.php";
+	if(!isset($_SESSION["userID"]))
+	{
+		echo "<script>
+		window.location.href='login.php';
+		alert('You have no access here. You must logged in first.');
+		</script>";
+	}
+	$cID = $_SESSION["userID"];
+	echo $cID;
+	?>
+	<div id="container">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="home.php"><i class="fa fa-home"></i></a></li>
+				<li><a href="production.php">Production</a></li>
+			</ul>
+			<br>
+			<div class="row">
+				<?php include "accountmenu.php"; ?>
+				<!--Middle Part Start-->
+				<div class="col-sm-9" id="content">
+					<h2>Production</h2>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="well">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="descriptions">
+											<div class="row">
+												<div class="col-md-12">
+													<h2>List of Orders</h2>
+													<table class="table color-bordered-table">
+														<thead>
+															<th style="text-align:left"><b>ORDER ID</b></th>
+															<th style="text-align:left"><b>Date Ordered</b></th>
+															<th style="text-align:right"><b>Status</b></th>
+															<th style="text-align:right"><b>Action</b></th>
+														</thead>
+														<tbody>
+															<?php
+															include "userconnect.php";
+															$down = 0;
+															$bal = 0;
+															$sql = "SELECT * FROM tblorders a, tblcustomer b, tbluser c WHERE c.userCustID = b.customerID and b.customerID = a.custOrderID and c.userID = '$cID' and orderStatus != 'Finished' and orderStatus!='Archived'";
+															$res = mysqli_query($conn,$sql);
+															while($trow = mysqli_fetch_assoc($res)){
+																$date = date_create($trow['dateOfReceived']);
+																$date = date_format($date,"F d, Y");
+																echo '<tr>
+																<td>'.$date.'</td>
+																<td>'.$date.'</td>
+																<td style="text-align:right">'.$trow['orderStatus'].'</td>
+																<td style="text-align:right"><button type="button" class="btn btn-primary" onclick="loadProdInfo('.$trow['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> View </button></td>
+																</tr>';
+															}
+															?>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h2 style="margin-left:2%;">Production Information</h2>
+													<div id="displayProd">
 
-																						  $pSQL = "SELECT * FROM tblproduction_phase a, tblproduction b, tblorder_request c, tblphases d WHERE b.productionID = a.prodID and a.prodPhase = d.phaseID and b.productionOrderReq = c.order_requestID and c.order_requestID = '$ordReqID';";
-																						  $prResult = mysqli_query($conn,$pSQL);
-																						  $ctr = mysqli_num_rows($prResult);
-																						  $isFirst = 0;
-																						  $isFirst = 0;
-																						  while($pRow = mysqli_fetch_assoc($prResult)){
-
-																							if($pRow['prodStatus']=="Pending"){
-																						?>
-																						<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
-																						  <h4 style="text-align:center;"><?php echo "" . $pRow['phaseName'];?></h4>
-																						  <div class="thumbnail">
-																						  <div class="product-img">
-																						  <img height="115px" width="115px" style="filter:gray; -webkit-filter: grayscale(1); filter: grayscale(1);" src="plugins/production/<?php echo "" . $pRow['phaseIcon'];?>" alt="Unavailable">
-																						  <div class="pro-img-overlay">
-																						<?php
-																							if($isFinish==1){
-																						?>
-																							 <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='<?php echo "" . $id;?>' &pID = '<?php echo "" . $pRow['prodHistID'];?>' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Start </button>
-																						<?php
-																								$isFinish = 0;
-																							}
-																							if($isFirst==0){
-																						?>
-																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='<?php echo "" . $id;?>' &pID= '<?php echo "" . $pRow['prodHistID'];?>' #startproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> First </button>;
-                                            <?php echo "" . $isFirst = 1;
-																							}
-																						?>
-																							  </div>
-																							  </div>
-																							  </div>
-																							  <div class="progress progress-md" style="margin-top:15px;">
-																							  <h3 class="progress-bar progress-bar-warning active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><?php echo "" . $pRow['prodStatus'];?></h3>
-																							  </div>
-																							  </div>
-																						<?php
-																							}
-																						if($pRow['prodStatus']=="Finished"){
-																						$isFinish = 1;
-																						$isFirst = 1;
-																						?>
-																						<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
-																						  <h4 style="text-align:center;"><?php echo "" . $pRow['phaseName'];?></h4>
-																						  <div class="thumbnail">
-																						  <img height="115px" width="115px" src="plugins/production/<?php echo "" . $pRow['phaseIcon'];?>" alt="Unavailable">
-																						  </div>
-																						  <div class="progress progress-md" style="margin-top:15px;">
-																						  <h3 class="progress-bar progress-bar-success active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><?php echo "" . pRow['prodStatus'];?></h3>
-																						  </div>
-																						  </div>
-																						<?php
-																							}
-																							if($pRow['prodStatus']=="Ongoing"){
-																						?>
-																						<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="margin-right:27px;">
-																						  <h4 style="text-align:center;"><?php echo "" . $pRow['phaseName'];?></h4>
-																						  <div class="thumbnail">
-																						  <div class="product-img">
-																						  <img height="115px" width="115px" src="plugins/production/<?php echo "" . $pRow['phaseIcon'];?>" alt="Unavailable">
-																						  <div class="pro-img-overlay">
-																						<?php
-                                                  											if($isFinish==1){
-																						?>
-																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id=<?php echo "" . $id;?> &pID= <?php echo "" . $pRow['prodHistID'];?>  	#updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
-																						<?php
-																						$isFinish = 0;
-																						  }
-																						  if($isFirst==0){
-																						?>
-																							  <button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='<?php echo "" . $id;?>' &pID= '<?php echo "" . $pRow['prodHistID'];?>' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>
-																						<?php
-																							$isFirst = 1;
-                                                  											}
-																						?>
-																							  </div>
-																							  </div>
-																							  </div>
-																							  <div class="progress progress-md" style="margin-top:15px;">
-																							  <h3 class="progress-bar progress-bar-info active progress-bar-striped" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%; font-family:system-ui;" role="progressbar"><?php echo "" . $pRow['prodStatus'];?></h3>
-																							  </div>
-																							  </div>
-																						<?php
-																						 }
-
-                                              											}
-																						?>
-																		  			</div>
-																				</div>
-																	  		</div>
-																		</div>
-																  	</div>
-																</div>
-															</div>
-														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+
+									</div>	
 								</div>
 							</div>
-							<?php
-							}
-							?>
 						</div>
 					</div>
-                </div>
-              </div>
-            </div>
-          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal content -->
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
+
         </div>
-        <!--Middle Part End -->
       </div>
     </div>
   </div>
-  <?php include"footer.php";?>
-  <!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
-  <?php include "scripts.php";?>
+</div>
+	<?php include"footer.php";?>
+	<!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
+	<?php include "scripts.php";?>
 </body>
 </html>
