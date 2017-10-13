@@ -4,17 +4,32 @@ $id = $_POST['id'];
 
 if($id==1){
   $date = $_POST['d'];
-  $date = date_create($date);
-  $date = date_format($date,"Y-m-d");
+  $dates = $_POST['d'];
+  $dates = date_create($dates);
+  $dates = date_format($dates,"Y-m-d");
+
+//   $new_date = date('Y-m-d', $date);
+
+// $time = strtotime($_POST['d']);
+// if ($time != false){
+//   $new_date = date('Y-m-d', $time);
+//   echo $new_date;
+// echo '<script>
+//     alert('.$new_date.');
+//   </script>';
+// }
+// else{
+//    echo 'Invalid Date: ' . $_POST['d'];
+//   // fix it.
+// }
   $tempSQL = '';
   $tempID = "";
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
-
  
 
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and c.dateOfReceived = '$date' GROUP BY b.orderProductID order by quan DESC;";
+  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and c.dateOfReceived = '$dates' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
   echo "
   <div class='table-responsive'>
@@ -50,6 +65,7 @@ if($id==1){
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint(new Date('.$date.'))" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   <td></td>
@@ -61,6 +77,12 @@ if($id==1){
   </table>
   </div>
   <script>
+  function redirectPrint(date){
+    date1 = Date.parse(date);
+    alert(date1);
+    window.open("daily-sales-report-print.php?date="+date, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -84,8 +106,6 @@ else if($id==2){
   $tQuan = 0;
   $tPrice = 0;
   $ctr = 0;
-
-   
 
   $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and month(c.dateOfReceived) = '$m' and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID order by quan DESC;";
   $result = mysqli_query($conn, $sql);
@@ -125,6 +145,7 @@ else if($id==2){
   }
   else{
     echo '
+     <button type="button" class="btn btn-info" onclick="redirectPrint('.$m.','.$y.')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> PRINT REPORT </button>
   </tbody>
   <tfoot style="text-align:right;">
   <td></td>
@@ -135,6 +156,11 @@ else if($id==2){
   </table>
   </div>
   <script>
+  function redirectPrint(m,y){
+    //alert(m + y);
+    window.open("monthly-sales-report-print.php?month="+m+"&year="+y, "_blank");
+  }
+
   $(document).ready(function () {
     var table = $(".reportsDataTable").DataTable({
       "order": [],
@@ -217,8 +243,8 @@ $tpriceArray = array();
   </table>
   </div>
   <script>
-  function redirectPrint(id){
-    window.open("sales-reports-print.php?id="+id, "_blank");
+  function redirectPrint(y){
+    window.open("annual-sales-report-print.php?year="+y, "_blank");
   }
 
   $(document).ready(function () {
