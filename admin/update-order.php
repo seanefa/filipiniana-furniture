@@ -18,16 +18,29 @@ if(isset($_GET['id'])){
   <script>
 
   $(document).ready(function () {
-    calculateSum();
+   
     $(".quan").each(function () {
       $(this).keyup(function () {
-        var qnt = calculateSum();
-        qnt = qnt - parseInt($('#totalQ').val()) +1;
+        qnt = $(this).val();
+        calculateSum();
+       
         var id = $(this).attr('id');
-        getPrice(id,qnt);
+        uprice(id);
+       
       });
     });
   });
+
+    function uprice(id){
+        id = id.replace('existQ','');
+        var tPrice = parseInt($('#uprice'+id).val());
+        var tQuant = parseInt($('#existQ'+id).val());
+        tPrice = tPrice * tQuant;
+        $('#thisPrice'+id).val(tPrice);
+         calculatePrice(tPrice);
+       
+    }
+  
 
 
 $(document).ready(function(){
@@ -48,17 +61,30 @@ $(document).ready(function(){
         sum += parseFloat(this.value);
       }
     });
-    return sum;
-    $("#totalQ").val(sum.toFixed(2));
+
+    $("#totalQ").html(sum);
   }
 
-  function getPrice(id,qnt){
-    id = id.replace('existQ','',id);
-    var uprice = parseInt($('#uprice'+id).val());
-    var total = uprice * qnt;
-    $('#thisPrice'+id).val(total.toFixed(2));
-    var tprice = parseInt($('#totalPrice').val());
-    $('#totalPrice').val(tprice + total);
+  function calculateTotal() {
+    var tot = 0;
+    $(".priced").each(function () {
+      if (!isNaN($(this).val()) && $(this).val().length != 0) {
+        tot += parseFloat(this.value);
+      }
+    });
+    return tot;
+  }
+
+var price = 0;
+  function calculatePrice(val) {
+    price = val;
+    if(val < price){
+      price = price - val;
+    }else if(price < val){
+      price = price + val;
+    }
+      $('#totalPrice').html(calculateTotal());
+  
   }
 
 /*
@@ -227,10 +253,10 @@ $(document).ready(function(){ //wala lang
                                     <td>'.$row['productDescription'].'</td>
                                     <td style="text-align:right;">&#8369; '.number_format($row['productPrice'],2).'<input type="hidden" style="text-align:right" class="uprice" id="uprice'.$row['order_requestID'].'" value="'.$row['productPrice'].'"/></td>
                                     <td style="text-align:right; class="quantity">
-                                    <input id="existQ'.$row['order_requestID'].'" type="number" size="1" style="text-align:right" class="quan" name="quan[]" value="'.$row['orderQuantity'].'" /></td>';
+                                    <input id="existQ'.$row['order_requestID'].'" type="number" size="1" min="0" style="text-align:right" class="quan" name="quan[]" value="'.$row['orderQuantity'].'" /></td>';
                                     $tPrice1 = $row['orderQuantity'] * $row['productPrice'];
-                                    $tPrice =  number_format($tPrice1,2);
-                                    echo '<td style="text-align:right;" class="prices">&#8369;  <input type="text" style="text-align:right; border:none" disabled value="'.$tPrice.'" id="thisPrice'.$row['order_requestID'].'"/> 
+                                    $tPrice =  $tPrice1;
+                                    echo '<td style="text-align:right;" class="prices">&#8369;  <input type="text" style="text-align:right;" class="priced" name="priced[]" border:none" readonly value="'.$tPrice.'" id="thisPrice'.$row['order_requestID'].'"/> 
                                     <input type="hidden" id="price"  value="'.$tPrice1.'" /></td>';
                                     $tPrice = $row['orderPrice'];
                                     $tQuan = $tQuan + $row['orderQuantity'];
@@ -241,8 +267,8 @@ $(document).ready(function(){ //wala lang
                                 </tbody>
                                 <tfoot style="text-align:right;">
                                   <td colspan="3" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> GRAND TOTAL</b></td>
-                                  <td style="text-align:right;"><mark><strong><span id="totalQ"><?php echo $tQuan?></span></bold></mark></td>
-                                  <td style="text-align:right;"><mark><strong><span name="tPrice" id="totalPrice">&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
+                                  <td style="text-align:right;"><mark><strong><span id="totalQ"><?php echo $tQuan;?></span></bold></mark></td>
+                                  <td style="text-align:right;"><mark><strong><span name="tPrice" id="totalPrice"><?php echo $tPrice;?></span></strong></mark></td>
                                   <td></td>
                                 </tfoot>
                               </table>

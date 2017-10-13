@@ -187,7 +187,18 @@ echo ('<tr>
   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">'.$production_stat.'</td>
   <td style="text-align:left">');
-  if($row['orderStatus']=="Cancelled"){
+  if($row['orderStatus']=="Ongoing"){
+    echo ('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
+
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #cancelOrder" aria-expanded="false"><i class="ti-close"></i> Cancel Order</button>
+
+  <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
+
+  </td>
+  </tr>
+  ');
+  }
+  else if($row['orderStatus']=="Cancelled"){
     echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
     <a class="btn btn-primary" style="color:white;" href="return-payment.php?id='. $row['orderID'].'">&#8369; Return Payment </a></td></tr>';
   }
