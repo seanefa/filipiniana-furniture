@@ -171,6 +171,14 @@ function getName($id){
   $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
   return $name;
 }
+function getuserID($id){
+  include "dbconnect.php";
+  $sql = "SELECT * FROM tbluser WHERE userID='$id'";
+  $result = mysqli_query($conn,$sql);
+  $row = mysqli_fetch_assoc($result);
+  $name = $row['userCustID'];
+  return $name;
+}
 ?>
 </tbody>
 </table>
@@ -199,36 +207,35 @@ function getName($id){
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                 <thead>
                   <tr>
-                    <th>Order ID</th>
+                    <th>Request ID</th>
                     <th>Customer Name</th>
                     <th>Request Date</th>
-                    <th>Total Quantity</th>
-                    <th>Total Price</th>
                     <th class="removeSort">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php  $sql = "SELECT * FROM tblcustomize_request WHERE customStatus='WFA' order by customizedID;";
+
+                      $result = mysqli_query($conn, $sql);
+                      if($result){
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+
+                        
+                          ?>
                   <tr>
-                    <td>2</td>
-                    <td>Dela Cruz, Celia</td>
-                    <td>03-08-2017</td>
-                    <td>3</td>
-                    <td>&#8369; 33,000</td>
+                    <td><?php echo $row['customizedID'];?></td>
+                    <td><?php echo getName(getuserID($row['tblcustomerID']));?></td>
+                    <td><?php echo $row['dateRequest'];?></td>
                     <td>
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button>
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button>
                     </td>
                     </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Garcia, Amanda</td>
-                      <td>03-10-2017</td>
-                      <td>1</td>
-                      <td>&#8369; 25,000</td>
-                      <td>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button></td>
-                      </tr>
+                    <?php 
+                    }
+                  }
+                          ?>
                     </tbody>
                   </table>
                 </div>
@@ -573,7 +580,14 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION REQUEST<br>0</button>
+           <?php
+
+          $sql = "SELECT * FROM tblcustomize_request WHERE customStatus='WFA' order by customizedID;";
+
+               $result = mysqli_query($conn, $sql);
+
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION REQUEST<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>
     </div>
