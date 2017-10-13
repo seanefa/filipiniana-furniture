@@ -213,7 +213,7 @@
 											<td style="color:#1A9CB7;"><?php echo $rid;?></td>
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
-											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat == 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $srow['orderStatus']; };?></td>
 											<?php if($srow['orderStatus'] != 'WFA'){ ?>
 											<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Order</a></td>
 										</tr>

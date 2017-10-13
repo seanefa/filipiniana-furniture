@@ -146,9 +146,17 @@ $typerow = mysqli_fetch_assoc($typeresult);
                     </div>
                   </div>
                 </div>
+                <?php
+                include "userconnect.php";
+                $sqlr = "SELECT * FROM tblreview where tblproductID = '$id'";
+                $resultr = mysqli_query($conn,$sqlr);
+                $numberofreview = mysqli_num_rows($resultr);
+
+                ?>
+
                 <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                   <meta itemprop="ratingValue" content="0" />
-                  <p><span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <a onClick="&#8369 ('a[href=\'#tab-review\']').trigger('click'); return false;" href=""><span itemprop="reviewCount">1 reviews</span></a> / <a onClick="&#8369 ('a[href=\'#tab-review\']').trigger('click'); return false;" href="">Write a review</a></p>
+                  <p><span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <a href=""><span itemprop="reviewCount"><?php echo $numberofreview;?> review(s)</span></a> / <a href="">Write a review</a></p>
                 </div>
                 <hr>
                 <!-- AddThis Button BEGIN -->
@@ -159,7 +167,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
                 <ul class="nav nav-tabs">
               <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
               <li><a href="#tab-specification" data-toggle="tab">Specification</a></li>
-              <li><a href="#tab-review" data-toggle="tab">Reviews (2)</a></li>
+              <li><a href="#tab-review" data-toggle="tab">Reviews (<?php echo $numberofreview;?>)</a></li>
             </ul>
             <div class="tab-content">
               <div itemprop="description" id="tab-description" class="tab-pane active">
@@ -203,33 +211,61 @@ $typerow = mysqli_fetch_assoc($typeresult);
                 <form class="form-horizontal">
                   <div id="review">
                     <div>
+                      <?php
+                      function getCustomer($id){
+
+                      include "userconnect.php";
+                $sql = "SELECT * FROM tblcustomer where customerID = '$id';";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+                $value = $row['customerLastName'].','.$row['customerFirstName'].' '.$row['customerMiddleName'];
+                return $value;
+
+                      }
+
+                $sqlr = "SELECT * FROM tblreview where tblproductID = '$id'";
+                $resultr = mysqli_query($conn,$sqlr);
+                $numberofreview = mysqli_num_rows($resultr);
+
+                
+                while($row = mysqli_fetch_assoc($resultr)){
+                  $customer = getCustomer($row['tblcustomerID']);
+                ?>
                       <table class="table table-striped table-bordered">
                         <tbody>
                           <tr>
-                            <td style="width: 50%;"><strong><span>Airabells</span></strong></td>
-                            <td class="text-right"><span>20/01/2016</span></td>
+                            <td style="width: 50%;"><strong><span><?php echo $customer;?></span></strong></td>
+                            <td class="text-right"><span><?php echo $row['reviewDate'];?></span></td>
                           </tr>
                           <tr>
-                            <td colspan="2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <td colspan="2"><p><?php echo $row['reviewDescription'];?></p>
+                              <?php  if($row['reviewRating']==5){?>
                               <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div></td>
+                                <?php } //5 star ?>
+                                <?php  if($row['reviewRating']==4){?>
+                              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                                <?php } //4 star ?>
+                                <?php  if($row['reviewRating']==3){?>
+                              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                                <?php } //3 star ?>
+                                <?php  if($row['reviewRating']==2){?>
+                              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                                <?php } //2 star ?>
+                                <?php  if($row['reviewRating']==1){?>
+                              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                                <?php } //1 star ?>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
-                      <table class="table table-striped table-bordered">
-                        <tbody>
-                          <tr>
-                            <td style="width: 50%;"><strong><span>Elayski</span></strong></td>
-                            <td class="text-right"><span>20/01/2016</span></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <?php
+
+                      }
+
+                      ?>
                     </div>
-                    <div class="text-right"></div>
                   </div>
+                  <div style="display: none">
                   <h2>Write a review</h2>
                   <div class="form-group required">
                     <div class="col-sm-12">
@@ -264,6 +300,7 @@ $typerow = mysqli_fetch_assoc($typeresult);
                       <button class="btn btn-primary" id="button-review" type="button">Continue</button>
                     </div>
                   </div>
+                </div>
                 </form>
               </div>
             </div>
