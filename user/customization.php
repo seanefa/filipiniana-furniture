@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href="image/favicon.ico" rel="icon" />
   <link rel="stylesheet" href="css/myStyle.css">
+  <link rel="stylesheet" href="dist/dropzone.css">
+  <script src="dist/dropzone.js"></script>
   <title>Customization - Filipiniana Furniture Shop</title>
   <meta name="description" content="Furniture shop">
   <?php include"css.php";?>
@@ -40,6 +42,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <?php include "accountmenu.php"; ?>
         <!--Middle Part Start-->
         <div class="col-sm-9" id="content">
+          <h2>Customized Product Request</h2>
+          <br>
+          <div class="col-md-12">
+          
+            <div class="row">
+              <div class="table-responsive">          
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Request #</th>
+                      <th>Placed On</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+
+                  include "userconnect.php";
+                    $id = $_SESSION["userID"];
+
+                    $usql = "SELECT * FROM tbluser where userID = '$id';";
+                    $uresult = mysqli_query($conn,$usql);
+                    $urow = mysqli_fetch_assoc($uresult);
+
+                    $uid = $urow['userID'];
+
+                    $sqls = "SELECT * FROM tblcustomize_request where tblcustomerID = '$uid';";
+                    $sresult = mysqli_query($conn,$sqls);
+                    
+
+                    while($srow = mysqli_fetch_assoc($sresult)){
+                    $rid = str_pad($srow['customizedID'], 6, '0', STR_PAD_LEFT);
+
+                    ?>
+
+                    <tr>
+                      <td style="color:#1A9CB7;"><?php echo $rid;?></td>
+                      <td><?php echo $srow['dateRequest'];?></td>
+                      <td><?php $stat = $srow['customStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+                      <?php if($srow['customStatus'] != 'WFA'){ ?>
+                      <td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Order</a></td>
+                    </tr>
+
+                    <?php
+                    }else{
+                      echo '<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
+                    }
+                    }
+
+                    ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-sm-12">
               <div class="well">
@@ -48,160 +107,105 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $result = $conn->query($sql);
       if($result->num_rows>0){
         while($row=$result->fetch_assoc()){
+          }
+        }
       ?>
+      <script type="text/javascript">
+        var check = false;
+        var arrays = [];
+        $(document).ready(function(){
+
+        $('#saveBtn').on('click',function(){
+          var desc = $('#custdesc').val();
+      if(desc != ''){
+        check = true;
+    }else{
+      check = false;
+      alert('Please Input Description.');
+    }
+  });
+         });
+
+        Dropzone.options.myAwesomeDropzone = {
+  paramName: "file", // The name that will be used to transfer the file
+  maxFilesize: 2, //mb
+  maxFiles: 4, // number of files
+  addRemoveLinks: true,
+  accept: function(file, done) {
+
+    
+    $('#saveBtn').on('click',function(){
+     
+      if(check){
+        arrays.push(file.name);
+      done();
+    }
+
+   });
+  },
+   queuecomplete: function (file) {
+    var desc = $('#custdesc').val();
+
+    $.ajax({
+        type: 'post',
+        url: 'add-cust-req.php',
+        data: {
+          arr: JSON.stringify(arrays), descr: desc,
+        },
+        success: function (response) {
+          
+        }
+      });
+    $('#my-awesome-dropzone').hide('blind');
+         $('#hidethistoo').hide('blind');
+         $('#savedDiv').show('blind');
+      }
+
+
+};
+
+
+      </script>
 
             <fieldset>
               <div class="form-group">
-              <legend>Customization&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
+              <legend><h4>Customization</h4>&nbsp;<i><small class="text-danger" id="_lblAccountMsg"></small></i></legend>
 
         </div>
               <div class="form-group required">
-        <label for="input-block" class="col-sm-3 control-label">Add Blueprint</label>
         <div class="col-sm-12">
-          <!-- Fine Uploader New/Modern CSS file
-    ====================================================================== -->
-    <link href="fine-uploader/fine-uploader-new.css" rel="stylesheet">
+          <div id="savedDiv" style="display: none; text-align: center;">
+            <h5>Request Saved</h5><br><h6>Wait for Approval of the admin</h6><br>
+            <a class="btn btn-primary" href="account.php">Continue</a>
+          </div>
+          <div action="upload.php"
+              class="dropzone"
+              id="my-awesome-dropzone" method="post" style="border: 2px solid #ccc; background-color: #f8f8f8; height: 50%; width: 100%;">
+        <h4>Description</h4>
+              <textarea id="custdesc" class="form-control" style="width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;" required></textarea>
+              <br>
+      </div>
 
-    <!-- Fine Uploader JS file
-    ====================================================================== -->
-    <script src="fine-uploader/fine-uploader.js"></script>
-
-    <!-- Fine Uploader Thumbnails template w/ customization
-    ====================================================================== -->
-    <script type="text/template" id="qq-template-manual-trigger">
-        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
-            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
-                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
-            </div>
-            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
-                <span class="qq-upload-drop-area-text-selector"></span>
-            </div>
-            <div class="buttons">
-                <div class="qq-upload-button-selector qq-upload-button">
-                    <div>Select files</div>
-                </div>
-                <button type="button" id="trigger-upload" class="btn btn-primary">
-                    <i class="icon-upload icon-white"></i> Upload
-                </button>
-            </div>
-            <span class="qq-drop-processing-selector qq-drop-processing">
-                <span>Processing dropped files...</span>
-                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
-            </span>
-            <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
-                <li>
-                    <div class="qq-progress-bar-container-selector">
-                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
-                    </div>
-                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
-                    <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
-                    <span class="qq-upload-file-selector qq-upload-file"></span>
-                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
-                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
-                    <span class="qq-upload-size-selector qq-upload-size"></span>
-                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
-                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
-                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
-                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
-                </li>
-            </ul>
-
-            <dialog class="qq-alert-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Close</button>
-                </div>
-            </dialog>
-
-            <dialog class="qq-confirm-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
-                </div>
-            </dialog>
-
-            <dialog class="qq-prompt-dialog-selector">
-                <div class="qq-dialog-message-selector"></div>
-                <input type="text">
-                <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
-                    <button type="button" class="qq-ok-button-selector">Ok</button>
-                </div>
-            </dialog>
-        </div>
-    </script>
-
-    <style>
-        #trigger-upload {
-            color: white;
-            background-color: #00ABC7;
-            font-size: 14px;
-            padding: 7px 20px;
-            background-image: none;
-        }
-
-        #fine-uploader-manual-trigger .qq-upload-button {
-            margin-right: 15px;
-        }
-
-        #fine-uploader-manual-trigger .buttons {
-            width: 36%;
-        }
-
-        #fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
-            width: 60%;
-        }
-    </style>
-
-    <title>Fine Uploader Manual Upload Trigger Demo</title>
-</head>
-    <!-- Fine Uploader DOM Element
-    ====================================================================== -->
-    <div id="fine-uploader-manual-trigger"></div>
-
-    <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
-    ====================================================================== -->
-    <script>
-        var manualUploader = new qq.FineUploader({
-            element: document.getElementById('fine-uploader-manual-trigger'),
-            template: 'qq-template-manual-trigger',
-            request: {
-                endpoint: '/fine-uploader/upl'
-            },
-            validation: {
-                allowedExtensions: ['jpeg', 'jpg', 'txt','png'],
-                itemLimit: 3,
-                sizeLimit: 1151200 // 50 kB = 50 * 1024 bytes
-            },
-            thumbnails: {
-                placeholders: {
-                    waitingPath: 'fine-uploader/placeholders/waiting-generic.png',
-                    notAvailablePath: 'fine-uploader/placeholders/not_available-generic.png'
-                }
-            },
-            autoUpload: true,
-            debug: true
-        });
-
-        qq(document.getElementById("trigger-upload")).attach("click", function() {
-            manualUploader.uploadStoredFiles();
-        });
-    </script>
-          
     </div>
 
         </div>
         
-            </fieldset>
-              <div style="text-align: center;">
+            </fieldset><br>
+            
+              
+
+              <div id="hidethistoo" style="text-align: center;">
                 <a href="account.php" class="btn btn-info">CANCEL</a>
-                <input type="submit" class="btn btn-success" value="SAVE" name="register" id="">
+                <input type="submit" class="btn btn-success" value="SAVE" name="register" id="saveBtn">
               </div>
-      <?php
-        }
-      }
-      ?>
+      
                 </div>
               </div>
             </div>

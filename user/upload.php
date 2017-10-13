@@ -1,11 +1,27 @@
 <?php
+session_start();
 
+$ds = DIRECTORY_SEPARATOR;  //1
+ 
+$storeFolder = 'upl';   //2
+$date = date("Y-m-d");
+$time = time();
 
-$allowedExtensions = array("jpeg", "jpg", "bmp", "png");
-$sizeLimit = 10 * 1024 * 1024;
-$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
-$result = $uploader->handleUpload('user/uploads/'); //folder for uploaded files
-echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+//$desc = $_POST[''];
+ 
+if (!empty($_FILES)) {
+     
+    $tempFile = $_FILES['file']['tmp_name'];          //3             
+      
+    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
 
+    
+
+    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
+   
+   	move_uploaded_file($tempFile,$targetFile); //6
+	    
+     
+}
 
 ?>
