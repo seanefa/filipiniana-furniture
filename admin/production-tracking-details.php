@@ -56,7 +56,7 @@ unset($_SESSION['actionFailed']);
   <script>
 
   function redirectJob(id){
-    window.open("job-ticket.php?id="+id, "_blank");
+    window.open("job-order.php?id="+id, "_blank");
   }
 
 
@@ -390,14 +390,14 @@ unset($_SESSION['actionFailed']);
                                                   <div class="pro-img-overlay">';
                                                   if($isFinish==1){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
-                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
-                                                   // echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Order </button>';
+                                                   // echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Order</a>';
                                                     $isFinish = 0;
                                                   }
                                                   if($isFirst==0){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].' #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
-                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
-                                                    //echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Ticket</a>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Order` </button>';
+                                                    //echo '<a class="btn btn-info" style="color:white;" href="redirect-jt.php?id='. $pRow['prodHistID'].'&oID='.$id.'"><span class="ti-receipt"></span>  Job Order</a>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>
@@ -539,12 +539,12 @@ b.orderPackageID = f.packageID and c.orderID = '$id';";
                                                   <div class="pro-img-overlay">';
                                                   if($isFinish==1){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&pack=1 #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
-                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Order </button>';
                                                     $isFinish = 0;
                                                   }
                                                   if($isFirst==0){
                                                     echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" data-toggle="modal" data-target="#myModal" href="production-start-update-forms.php" data-remote="production-start-update-forms.php?id='.$id.'&pID='.$pRow['prodHistID'].'&pack=1 #updateproduction" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Update </button>';
-                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Ticket </button>';
+                                                    echo '<button type="button" class="fcbtn btn btn-outline btn-success btn-1f col-md-12" onclick="redirectJob('.$pRow['prodHistID'].')" style="text-align:center;"><span class="glyphicon glyphicon-edit"></span> Job Order </button>';
                                                     $isFirst = 1;
                                                   }
                                                   echo '</div>
