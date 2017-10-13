@@ -38,6 +38,7 @@ if (!$conn) {
                     $trow = mysqli_fetch_assoc($tresult);
                     ?>
                     <div class="form-body">
+						<input type="hidden" name="customer_id" value="<?php echo "" . $trow["customerID"];?>">
                           <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
