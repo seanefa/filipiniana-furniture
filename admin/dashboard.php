@@ -144,33 +144,91 @@ echo ('
 
 
 function pCount($id){
-  include "dbconnect.php";
-  $cnt = 0;
-  $sql = "SELECT * FROM tblorder_request WHERE tblOrdersID ='$id'";
-  $result = mysqli_query($conn,$sql);
-  while($row = mysqli_fetch_assoc($result)){
-    $cnt = $cnt + $row['orderQuantity'];
-  }
-  return $cnt;
-}
-function getDates($id){
-  include "dbconnect.php";
+                              include "dbconnect.php";
+                              $cnt = 0;
+                              $sql = "SELECT COUNT(*) AS NO FROM tblorder_request WHERE tblOrdersID ='$id'";
+                              $result = mysqli_query($conn,$sql);
+                              while($row = mysqli_fetch_assoc($result)){
+                                $cnt = $row['NO'];
+                              }
+                              return $cnt;
+                            }
+                            function getDates($id){
+                              include "dbconnect.php";
 
-  $sql = "SELECT * FROM tblorders WHERE orderID='$id'";
-  $result = mysqli_query($conn,$sql);
-  $row = mysqli_fetch_assoc($result);
-  $date = date_create($row['dateOfReceived']);
-  $dates = date_format($date,"F d, Y");
-  return $dates;
-}
-function getName($id){
-  include "dbconnect.php";
-  $sql = "SELECT * FROM tblcustomer WHERE customerID='$id'";
-  $result = mysqli_query($conn,$sql);
-  $row = mysqli_fetch_assoc($result);
-  $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
-  return $name;
-}
+                              $sql = "SELECT * FROM tblorders WHERE orderID='$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              $dates = $row['dateOfReceived'];
+                              return $dates;
+                            }
+                            function orderCon($id){
+                              include "dbconnect.php";
+                              $sql = "SELECT * FROM tblorders WHERE orderID='$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              $dates = $row['custOrderID'];
+                              return getName($dates);
+                            }
+
+                            function getName($id){
+                              include "dbconnect.php";
+
+                              $sql = "SELECT * FROM tblcustomer WHERE customerID='$id'";
+                              $result = mysqli_query($conn,$sql);
+                              $row = mysqli_fetch_assoc($result);
+                              $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
+                              return $name;
+                            }    
+                            function getBal($id,$price){
+                              include "dbconnect.php";
+                              $down = 0;
+                              $bal = 0;
+                              $delFee = 0;
+                              $status = 0;
+                              $penFee = 0;
+                              $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+                              $res = mysqli_query($conn,$sql);
+                              $tpay = 0;
+                              while($trow = mysqli_fetch_assoc($res)){
+                                $tpay = $tpay + $trow['amountPaid'];
+                                $price = $trow['balance'];
+                                $delFee = $trow['invDelrateID'];
+                                $penFee = $trow['invPenID'];
+                                $status = $trow['orderStatus'];
+                              }
+                              if($status=="Cancelled"){
+                                $bal = 0;
+                              }
+                              else{
+                              $p = $price + $delFee + $penFee;
+                              $down = $tpay;
+                              $bal = $p - $down;
+                            }
+                            return $bal;
+                            }    
+                            function getStat($id,$price){
+                              include "dbconnect.php";
+                              $down = 0;
+                              $bal = 0;
+                              $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+                              $res = mysqli_query($conn,$sql);
+                              $tpay = 0;
+                              while($trow = mysqli_fetch_assoc($res)){
+                                $tpay = $tpay + $trow['amountPaid'];
+                              }
+                              $down = $tpay;
+                              $bal = $price - $down;
+                              if($bal==$price){
+                                return "No downpayment";
+                              }
+                              else if($bal==0){
+                                return "Paid";
+                              }
+                              else{
+                                return "Not fully paid";
+                              }
+                            }
 function getuserID($id){
   include "dbconnect.php";
   $sql = "SELECT * FROM tbluser WHERE userID='$id'";
@@ -263,45 +321,55 @@ function getuserID($id){
                   <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
                     <thead>
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Request Date</th>
-                        <th>Total Quantity</th>
-                        <th>Price</th>
-                        <th class="removeSort" style="text-align:left">Actions</th>
+                              <th>Order ID</th>
+                              <th>Customer Name</th>
+                              <th style="text-align:right">Order Price</th>
+                              <th style="text-align:right">Remaining Balance</th>
+                              <th class="removeSort" style="text-align:left">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      include "dbconnect.php";
-                      $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
 
-                      $result = mysqli_query($conn, $sql);
-                      if($result){
-                        while ($row = mysqli_fetch_assoc($result))
-                        {
-$orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT); //format ng display ID
-$count_prod = pCount($row['orderID']);
-$get_date = getDates($row['orderID']);
-$get_name = getName($row['custOrderID']);
-echo ('
-  <tr>
-  <td style="text-align:left">'.$orderID.'</td>
-  <td style="text-align:left">'.$get_name.'</td>
-  <td style="text-align:left">'.$get_date.'</td>
-  <td style="text-align:center">'.$count_prod.'</td>
-  <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
-  <td style="text-align:left">
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button>
+                     $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' order by orderID ;";
 
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
+                     $result = mysqli_query($conn, $sql);
+                            if($result){
+                              while ($row = mysqli_fetch_assoc($result))
+                              {
+                                $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                                $count_prod = pCount($row['custOrderID']);
+                                $get_date = getDates($row['orderID']);
+                                $get_name = orderCon($row['orderID']);
+                                $bal = getBal($row['orderID'], $row['orderPrice']);
+                                $paymentStat = getStat($row['orderID'], $row['orderPrice']);
+                                if($bal!=0){
+                                echo ('
+                                  <tr>
+                                  <td>'.$orderID.'</td>
+                                  <td>'.$get_name.'</td>
+                                  <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
+                                  <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>
+                                  <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button>
-  </td>
-  </tr>
-  ');
-}
-}
+                                     <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>');
+                                  if($row['orderStatus']=="Cancelled"){
+                                   echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                  </td>
+                                  </tr>
+                                  ');
+                                 }
+                                 else{
+                                  echo ('<a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                  </td>
+                                  </tr>
+                                  ');
+                                 }
+                                  }
+                              }     
+                            }
+
+
 ?>
 </tbody>
 </table>
@@ -331,44 +399,77 @@ echo ('
                 <thead>
                   <tr>
                     <th>Order ID</th>
-                    <th>Customer Name</th>
-                    <th>Request Date</th>
-                    <th>Total Quantity</th>
-                    <th>Price</th>
+                    <th>Order Status</th>
+                    <th>Production</th>
                     <th class="removeSort" style="text-align:left">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   include "dbconnect.php";
-                  $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
-
-                  $result = mysqli_query($conn, $sql);
+                 $sql = "SELECT * FROM tblorders WHERE orderStatus!='Ready for release' AND orderStatus!='Archived' AND orderStatus!='Rejected' AND orderStatus!='finished' AND orderStatus!='WFA' AND orderType='Pre-Order' order by orderID;";
+                 $result = mysqli_query($conn, $sql);
                   if($result){
                     while ($row = mysqli_fetch_assoc($result))
                     {
-$orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT); //format ng display ID
-$count_prod = pCount($row['orderID']);
-$get_date = getDates($row['orderID']);
-$get_name = getName($row['custOrderID']);
+$orderID = "OR" . str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+$production = production($row['orderID']);
+ if($row['orderStatus']=='Pending'){
 echo ('
   <tr>
   <td style="text-align:left">'.$orderID.'</td>
-  <td style="text-align:left">'.$get_name.'</td>
-  <td style="text-align:left">'.$get_date.'</td>
-  <td style="text-align:center">'.$count_prod.'</td>
-  <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
+  <td style="text-align:left">'.$row['orderStatus'].'</td>
+  <td style="text-align:left">'.$production.'</td>
   <td style="text-align:left">
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button>
-
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
-
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button>
+  <a class="btn btn-success" href="production-start.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/> 
+  </td>
+  </tr>
+  ');
+}
+else if($row['orderStatus']=='Ongoing'){
+echo ('
+  <tr>
+  <td style="text-align:left">'.$orderID.'</td>
+  <td style="text-align:left">'.$row['orderStatus'].'</td>
+  <td style="text-align:left">'.$production.'</td>
+  <td style="text-align:left">
+  <a class="btn btn-primary" href="production-tracking-details.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
+  </td>
+  </tr>
+  ');
+}
+else if($row['orderStatus']=='Cancelled'){
+echo ('
+  <tr>
+  <td style="text-align:left">'.$orderID.'</td>
+  <td style="text-align:left">'.$row['orderStatus'].'</td>
+  <td style="text-align:left">'.$production.'</td>
+  <td style="text-align:left">
+  <a class="btn btn-primary" href="production-tracking-details.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">View Details</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
   </td>
   </tr>
   ');
 }
 }
+}
+
+
+function production($id){
+                                        include "dbconnect.php";
+                                        $rowCount = 0;
+                                        $finProduction = 0;
+                                        $sql2 = "SELECT * FROM tblproduction b, tblorder_request c, tblorders a WHERE b.productionOrderReq = c.order_requestID and a.orderID = c.tblOrdersID and a.orderID = '$id' GROUP BY productionID;";
+                                        $res2 = mysqli_query($conn,$sql2);
+                                        while($row2 = mysqli_fetch_assoc($res2)){
+                                          $rowCount++;
+                                          if($row2['productionStatus']=='Finished'){
+                                            $finProduction++;
+                                          }
+                                        }
+
+                                        $output = $finProduction . " finished out of " . $rowCount;
+                                        return($output);
+                                      }   
 ?>
 </tbody>
 </table>
@@ -398,11 +499,28 @@ echo ('
                 <thead>
                   <tr>
                     <th>Material</th>
-                    <th>Action</th>
+                              <th>Variant Description</th>
+                              <th>Quantity</th>
+                                
+                              <th class="removeSort">Action</th>
                   </tr>
                 </thead>
                 <tbody>
+<?php
+                            $sql1 = "SELECT * FROM tblmat_inventory b, tblmat_var a, tblmaterials c WHERE b.matVariantID = a.mat_varID AND a.materialID = c.materialID";
+                            $result1 = mysqli_query($conn, $sql1);
+                            while ($row1 = mysqli_fetch_assoc($result1))
+                            {
+                              if($row1['mat_varStatus']=="Active"){
+                                echo('<tr><td>'.$row1['materialName'].'</td><td>'.$row1['mat_varDescription'].'</td>  <td>'.$row1['matVarQuantity'].'</td>');
+                              
+                            ?>
+                            <td><button type="button" class="btn btn-warning" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #restock" data-target="#myModal">Restock</button>
 
+                              <button type="button" class="btn btn-danger" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #deduct" data-target="#myModal">Deduct</button>
+                            </td>
+                              <?php echo('</tr>'); }}
+                              ?>
                 </tbody>
               </table>
             </div>
@@ -599,7 +717,7 @@ echo ('
         <div class="tab-content">
           <?php
 
-          $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
+          $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' order by orderID ;";
 
                       $result = mysqli_query($conn, $sql);
 
@@ -616,7 +734,7 @@ echo ('
         <div class="tab-content">
           <?php
 
-           $sql = "SELECT * FROM tblorders WHERE orderStatus='WFA' order by orderID;";
+             $sql = "SELECT * FROM tblorders WHERE orderStatus!='Ready for release' AND orderStatus!='Archived' AND orderStatus!='Rejected' AND orderStatus!='finished' AND orderStatus!='WFA' AND orderType='Pre-Order' order by orderID;";
 
                   $result = mysqli_query($conn, $sql);
 
@@ -631,7 +749,11 @@ echo ('
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
         <div class="tab-content">
-          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu6');">MATERIALS<br>MONITORING<br>0</button>
+          <?php
+          $sql1 = "SELECT * FROM tblmat_inventory b, tblmat_var a, tblmaterials c WHERE b.matVariantID = a.mat_varID AND a.materialID = c.materialID";
+                            $result1 = mysqli_query($conn, $sql1);
+          ?>
+          <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu6');">MATERIALS<br>MONITORING<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
       </div>
     </div>
