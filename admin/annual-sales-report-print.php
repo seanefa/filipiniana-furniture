@@ -3,15 +3,15 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master")
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();
-$id = $_GET['id'];
+$year = $_GET['year'];
 ?>
 <!DOCTYPE html>
 <head>
-  <title><?php echo $orderID = $id?></title>
+  <title><?php echo $orderID = $year?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <?php 
-$id = $_GET['id'];
+$year = $_GET['year'];
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
@@ -47,11 +47,11 @@ $row = mysqli_fetch_assoc($res);
         <div style="text-align: center;">
           <?php
           include "dbconnect.php";
-          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$id'";
+          $sql = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$year'";
           $res = mysqli_query($conn,$sql);
           $custRow = mysqli_fetch_assoc($res);
           ?>
-          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $id; echo $orderID;
+          <span style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;"><?php $orderID = $year; echo $orderID;
           $salesReportID = "AnnualSalesReport". $orderID;?></span>
         </div>
       </div>
@@ -59,7 +59,7 @@ $row = mysqli_fetch_assoc($res);
 
     <br>
     <?php
-    $y = $orderID;
+    $y = $_GET['year'];
     $tempSQL = '';
     $tempID = "";
     $tQuan = 0;
@@ -125,8 +125,8 @@ $row = mysqli_fetch_assoc($res);
 
       include "dbconnect.php";
 
-      $id = $_GET['id'];
-      $orderID = $id;
+      $year = $_GET['year'];
+      $orderID = $year;
       $dateArray = array("01","02","03","04","05","06","07","08","09","10","11","12");
       $y = $orderID;
       $priceArray = array();
@@ -171,7 +171,7 @@ $row = mysqli_fetch_assoc($res);
     <?php
     $down = 0;
     $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$year'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
     while($trow = mysqli_fetch_assoc($res)){
