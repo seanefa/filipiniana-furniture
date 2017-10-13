@@ -187,7 +187,7 @@ echo ('<tr>
   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">'.$production_stat.'</td>
   <td style="text-align:left">');
-  if($row['orderStatus']=="Ongoing"){
+  if(($row['orderStatus']=="Ongoing") || ($row['orderStatus']=="ready for release")){
     echo ('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
 
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #cancelOrder" aria-expanded="false"><i class="ti-close"></i> Cancel</button>
