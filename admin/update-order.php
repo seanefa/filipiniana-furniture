@@ -29,6 +29,18 @@ if(isset($_GET['id'])){
     });
   });
 
+
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $("#penaltyForm").hide();
+  var val = $("#status").val();
+  if(val=="Ongoing"){
+    $("#penaltyForm").show();
+  }
+});
+});
+
+
   function calculateSum() {
     var sum = 0;
     $(".quan").each(function () {
@@ -260,7 +272,7 @@ $(document).ready(function(){ //wala lang
 </div>
 
 <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <!-- Modal content -->
       <div class="modal-content clearable-content">

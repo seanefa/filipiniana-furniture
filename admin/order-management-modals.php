@@ -434,12 +434,12 @@ $_SESSION['varname'] = $jsID;
                               $res3 = mysqli_query($conn,$sql3);
                               while($row3 = mysqli_fetch_assoc($res3)){
                                 echo '<tr>
-                              <td style="text-align:right;"> - '.$row3['productName'].'</td>
-                              <td>'.$row3['productDescription'].'</td>
-                              <td style="text-align:right;"></td>';
-                              $tQuan = $tQuan + $row['orderQuantity'] * 1;
-                              echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
-                              <td style="text-align:right;"></td></tr>';
+                                <td style="text-align:right;"> - '.$row3['productName'].'</td>
+                                <td>'.$row3['productDescription'].'</td>
+                                <td style="text-align:right;"></td>';
+                                $tQuan = $tQuan + $row['orderQuantity'] * 1;
+                                echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
+                                <td style="text-align:right;"></td></tr>';
 
                               }
                             }
@@ -447,21 +447,21 @@ $_SESSION['varname'] = $jsID;
                             ?>
                           </tbody>
                           <tfoot style="text-align:right;">
-                          <tr>
-                            <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                            <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-                            <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
-                          </tr>
-                          <tr>
-                            <td colspan="3" style="text-align:right;"><b> TOTAL AMOUNT PAID</b></td>
-                            <td></td>
-                            <td style="text-align:right;">&#8369;&nbsp;<?php echo number_format($down,2)?></td>
-                          </tr>
-                          <tr>
-                            <td colspan="3" style="text-align:right;"><b> REMAINING BALANCE</b></td>
-                            <td></td>
-                            <td style="text-align:right; color:red;"><mark style="text-align:right; color:red;"><strong><span>&#8369;&nbsp;<?php echo number_format($bal,2)?></span></strong></mark></td>
-                          </tr>
+                            <tr>
+                              <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                              <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
+                              <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align:right;"><b> TOTAL AMOUNT PAID</b></td>
+                              <td></td>
+                              <td style="text-align:right;">&#8369;&nbsp;<?php echo number_format($down,2)?></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align:right;"><b> REMAINING BALANCE</b></td>
+                              <td></td>
+                              <td style="text-align:right; color:red;"><mark style="text-align:right; color:red;"><strong><span>&#8369;&nbsp;<?php echo number_format($bal,2)?></span></strong></mark></td>
+                            </tr>
                           </tfoot>
                         </table>
                       </div>
@@ -643,71 +643,97 @@ $_SESSION['varname'] = $jsID;
           <h3 class="modal-title">Cancel Order</h3>
         </div>
         <form action="order-cancel.php" method="post">
+          <?php
+          include "dbconnect.php";
+          $status = "";
+          $sql = "SELECT * FROM tblorders WHERE orderID = $jsID";
+          if($result = mysqli_query($conn,$sql)){
+            while($row = mysqli_fetch_assoc($result)){
+              $status = $row['orderStatus'];
+            }
+          }
+          else{
+            echo "Error" . mysqli_error($conn);
+          }
+          ?>
           <input type="hidden" name="id" value="<?php echo $jsID?>">
+          <input type="hidden" name="status" id="status" value="<?php echo $status?>">
           <div class="modal-body">
-            <div class="row">
+            <div class="row" id="penaltyForm">
               <div class="col-md-12">
-               <h5>Note: The production of the ordered furniture will continue, however you can still stop the production on the Production Tracking Tab. The downpayment will be given back to the customer deducting the storage fee once the furniture is sold</h5></div>
-             </div>
-             <div class="row">
-              <div class="col-md-12">
-                <h4>Any reasons?</h4>
-                <textarea class="form-control" name="reason"></textarea>
-              </div>
+                <div class="form-group">
+                  <label class="control-label">Cancellation Fee </label><span id="x" style="color:red"> *</span>
+                  <input type="number" class="form-control" name="penFee" value="0" style="text-align: right"/>
+                </div>
+                 <h5 style="color: red">
+                  ** This order record is already undergoing production and cancelling an order requires a fee.
+                </h5>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="submit" role="button" class="btn btn-danger waves-effect text-left"><i class='ti-check'></i> Cancel Order</button>
-            <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><i class='ti-close'></i> Cancel</button>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Any reasons?</h4>
+              <textarea class="form-control" name="reason"></textarea>
+            </div>
           </div>
-        </form>
+          <div class="row">
+            <div class="col-md-12">
+             <h5 style="color: green">Note: The production of the ordered furniture will continue, however you can still stop the production on the Production Tracking Tab. The downpayment will be given back to the customer deducting the storage fee once the furniture is sold</h5></div>
+           </div>
+         </div>
+         <div class="modal-footer">
+          <button type="submit" role="button" class="btn btn-danger waves-effect text-left"><i class='ti-check'></i> Cancel Order</button>
+          <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><i class='ti-close'></i> Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="viewCustRequest">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="descriptions">
+
+          <p>asdas</p>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="viewCustRequest">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+<div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="acceptCustRequest">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="descriptions">
+
+          <p>asdas</p>
+
         </div>
-
-        <div class="modal-body">
-          <div class="descriptions">
-
-            <p>asdas</p>
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-
-  <div class="modal fade" tabindex="-1" role="dialog" id="newCategoryModal" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" id="acceptCustRequest">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modalProduct" style="text-align:center;"></h3>
-        </div>
-
-        <div class="modal-body">
-          <div class="descriptions">
-
-            <p>asdas</p>
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
 </body>
 </html>

@@ -91,7 +91,7 @@ if (!empty($_SESSION['actionFailed'])) {
                           <tbody>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' order by orderID ;";
+                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' order by orderID ;";
 
                             $result = mysqli_query($conn, $sql);
                             if($result){
@@ -114,12 +114,19 @@ if (!empty($_SESSION['actionFailed'])) {
                                   <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>
                                   <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
 
-                                     <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
-
-                                   <a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                     <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>');
+                                  if($row['orderStatus']=="Cancelled"){
+                                   echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
                                   </td>
                                   </tr>
                                   ');
+                                 }
+                                 else{
+                                  echo ('<a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                  </td>
+                                  </tr>
+                                  ');
+                                 }
                                   }
                               }     
                             }
@@ -166,18 +173,26 @@ if (!empty($_SESSION['actionFailed'])) {
                               $down = 0;
                               $bal = 0;
                               $delFee = 0;
+                              $status = 0;
                               $penFee = 0;
                               $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
                               $res = mysqli_query($conn,$sql);
                               $tpay = 0;
                               while($trow = mysqli_fetch_assoc($res)){
                                 $tpay = $tpay + $trow['amountPaid'];
+                                $price = $trow['balance'];
                                 $delFee = $trow['invDelrateID'];
                                 $penFee = $trow['invPenID'];
+                                $status = $trow['orderStatus'];
                               }
-                              $tpay = $tpay + $delFee + $penFee;
+                              if($status=="Cancelled"){
+                                $bal = 0;
+                              }
+                              else{
+                              $p = $price + $delFee + $penFee;
                               $down = $tpay;
-                              $bal = $price - $down;
+                              $bal = $p - $down;
+                            }
                             return $bal;
                             }    
                             function getStat($id,$price){

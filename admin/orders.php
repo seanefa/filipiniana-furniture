@@ -168,7 +168,7 @@ $('#selectType').on("change",function() {
                           <tbody>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' order by orderID;";
+                            $sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' OR orderStatus='Ongoing' OR orderStatus='Cancelled' order by orderID;";
 
                             $result = mysqli_query($conn, $sql);
                             if($result){
@@ -186,8 +186,13 @@ echo ('<tr>
   <td style="text-align:left">'.$dates.'</td>
   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">'.$production_stat.'</td>
-  <td style="text-align:left">
-  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
+  <td style="text-align:left">');
+  if($row['orderStatus']=="Cancelled"){
+    echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
+    <a class="btn btn-primary" style="color:white;" href="return-payment.php?id='. $row['orderID'].'">&#8369; Return Payment </a></td></tr>';
+  }
+  else{
+  echo ('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
 
   <a class="btn btn-info" style="color:white;" href="update-order.php?id='. $row['orderID'].'"><span class="ti-pencil-alt"></span> Update</a>
 
@@ -196,6 +201,7 @@ echo ('<tr>
   </td>
   </tr>
   ');
+}
 }     
 }    
 //<button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderUpdate"><span class="glyphicon glyphicon-edit"></span> Update</button>

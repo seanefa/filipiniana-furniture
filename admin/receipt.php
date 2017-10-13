@@ -1,8 +1,8 @@
 <?php
+session_start();
 $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "OR". $or;
-
 // set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
 // require_once "dompdf/autoload.inc.php";
 // use Dompdf\Dompdf;
@@ -13,6 +13,13 @@ $orID = "OR". $or;
 <head>
   <title><?php echo $orID?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php 
     
@@ -249,7 +256,6 @@ $orderID = $orRoq['orderID'];
     <div class="col-md-12">
       <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
       <p><?php 
-        session_start();
         include "dbconnect.php"; 
         $datepr = date("Y-m-d");
         $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";

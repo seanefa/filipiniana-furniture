@@ -151,7 +151,7 @@ $(document).ready(function(){
               <div role="tabpanel" class="tab-pane fade active in">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
-                    <form action="payments.php" method = "post">
+                    <form action="save-return-payment.php" method = "post">
                       <input type="hidden" name="orderID" id="orderID" value="<?php echo $jsID?>">
 
                       <div class="row" style="margin-top: -30px;">
@@ -226,6 +226,8 @@ $(document).ready(function(){
                             </table>
                           </div>
 
+                      <input type="hidden" name="paid" value="<?php echo $grandTotal?>">
+
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-info">
@@ -294,11 +296,11 @@ $(document).ready(function(){
                               }
 
                               $p = $price + $delFee + $penFee;
-                              // $down = $tpay;
-                              // $bal = $p - $down;
-
                               $down = $tpay;
-                              $bal = $p - $down;
+                              $bal = $down - $p;
+                              
+                              // $down = $tpay;
+                              // $bal = $tPrice - $down;
                               ?>
                               <h4 style="font-weight: bolder;">Amount Due <span class="pull-right" id="sideAmountDue" style="color: #e50000"> &#8369; <?php echo number_format($bal,2)?></span></h4>
                               <hr>
@@ -318,7 +320,7 @@ $(document).ready(function(){
                               <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                    <label class="control-label" style="font-weight: bolder;">Amount Paid</label><span id="x" style="color:red"> *</span>
+                                    <label class="control-label" style="font-weight: bolder;">Amount</label><span id="x" style="color:red"> *</span>
                                     <input type="text" style="text-align:right;" id="aTendered" class="form-control" name="aTendered"/>
                                     <p id="error"></p>
                                   </div>
