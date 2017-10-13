@@ -1,7 +1,7 @@
 <?php
 $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
-$orID = "JT". $or;
+$orID = "JO". $or;
 
 set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
 require_once "dompdf/autoload.inc.php";
@@ -41,7 +41,7 @@ $row = mysqli_fetch_assoc($res);
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div style="text-align: center;">
-        <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- J O B T I C K E T -</p>
+        <p style="text-align: center; font-family: inherit; font-weight: bolder; font-size: 20px;">- J O B O R D E R -</p>
       </div>
     </div>
   </div>
