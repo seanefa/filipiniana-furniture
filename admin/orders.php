@@ -190,7 +190,7 @@ echo ('<tr>
   if($row['orderStatus']=="Ongoing"){
     echo ('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewOrder" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #cancelOrder" aria-expanded="false"><i class="ti-close"></i> Cancel Order</button>
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #cancelOrder" aria-expanded="false"><i class="ti-close"></i> Cancel</button>
 
   <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>
 
@@ -302,6 +302,18 @@ function getName($id){
 
 <div id="custRequest" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
   <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-content clearable-content">
+        <div class="modal-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-content clearable-content">
         <div class="modal-body">

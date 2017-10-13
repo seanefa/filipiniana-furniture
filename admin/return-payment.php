@@ -194,7 +194,10 @@ $(document).ready(function(){
                                   $status = $row['orderStatus'];
                                 }
                                 $grandTotal = $balance + $delFee + $penFee;
+
                                 ?>
+
+                      <input type="text" name="paid" value="<?php echo $grandTotal?>">
                               </tbody>
                               <tfoot style="text-align:right;">
                               <tr>
@@ -226,7 +229,6 @@ $(document).ready(function(){
                             </table>
                           </div>
 
-                      <input type="hidden" name="paid" value="<?php echo $grandTotal?>">
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">

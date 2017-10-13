@@ -9,31 +9,29 @@ $res = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($res);
 $invID = $row['invoiceID'];
 
+$uOrSQL = "UPDATE tblorders SET orderStatus = 'Pending', orderType = 'Management Order' WHERE orderID = '$orderID'";
+mysqli_query($conn,$uOrSQL);
+
+echo $invID;
+echo $paid;
 $mop = $_POST['mop'];
 $date = new DateTime();
 $orderdaterec = $date->format('Y-m-d H:i:s');
 
-	$tendered = $_POST['aTendered'];
-	$sql = "SELECT * FROM tblpayment_details WHERE invID = '$invID'";
-	$res = mysqli_query($conn,$sql);
-	$paid = 0;
-	while($row = mysqli_fetch_assoc($res)){
-		$sqlU = "UPDATE * tblpayment_details SET paymentStatus = 'Returned' WHERE '" . $row['payment_detailsID']. "'";
-		mysqli_query($conn,$sqlU);
-	}
+$sqlU = "UPDATE tblpayment_details SET paymentStatus = 'Returned' WHERE invID = '$invID'";
+if(!mysqli_query($conn,$sqlU)){
+	echo "Error" . mysqli_error($conn);
+}
 
-	$paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$paid', '$mop', 'Paid');";
-	//echo $paysql . "<br>";
-	mysqli_query($conn,$paysql);
-	$receiptID = mysqli_insert_id($conn);
-	//header( "Location: receipt.php?id=".$receiptID);
-	paidInvoice($invID);
+$paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$paid', '$mop', 'Paid');";
+mysqli_query($conn,$paysql);
+$receiptID = mysqli_insert_id($conn);
 	echo '<script type="text/javascript">
-	window.open("receipt.php?id='.$receiptID.'","_blank")
+	window.open("return-receipt.php?id='.$receiptID.'","_blank")
 	</script>';
 
 	echo "<script>
-	window.location.href='collections.php';
+	window.location.href='orders.php';
 	alert('Record Saved.');
 	</script>";
 
