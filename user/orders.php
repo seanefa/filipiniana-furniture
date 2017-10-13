@@ -73,7 +73,7 @@
 											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
-											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat == 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
 											<td></td>
 											<td><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a> <a href="" class="pull-right" style="color:#1A9CB7;">RETURN</a></td>
 										</tr>

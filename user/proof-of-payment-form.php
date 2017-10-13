@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 											<th>Order #</th>
 											<th>Placed On</th>
 											<th>Total</th>
+											<th>Balance</th>
 											<th>Status</th>
 										</tr>
 									</thead>
@@ -85,16 +86,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 										$sqls = "SELECT * FROM tblorders where custOrderID = '$uid';";
 										$sresult = mysqli_query($conn,$sqls);
 
+										
+
+										
+										
+
 										while($srow = mysqli_fetch_assoc($sresult)){
-
-
+										$orderid = $srow['orderID'];
+										$isql = "SELECT * FROM tblinvoicedetails where invorderID = '$orderid';";
+										$iresult = mysqli_query($conn,$isql);
+										$irow = mysqli_fetch_assoc($iresult);
 										?>
 
 										<tr>
 											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
-											<td><?php $stat = $srow['orderStatus']; if($stat = 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td>₱ <?php echo $irow['balance'];?></td>
+											<td><?php $stat = $srow['orderStatus']; if($stat == 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
 										</tr>
 
 										<?php

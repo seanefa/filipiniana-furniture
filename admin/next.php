@@ -781,10 +781,10 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
               </div>
             </div>
 
-            <div class="deliveryDetails">
+            <div class="deliveryDetails"  id="displayAddress" style="display: none">
               <div class="row">
                 <div class="col-md-6">
-                  <label class="control-label">Delivery Location</label>
+                  <label class="control-label">Delivery Location</label><span id="x" style="color:red"> *</span>
                   <select id="delloc" style="height:40px;" class="form-control" data-placeholder="Choose Delivery Location" tabindex="1" name="delloc" disabled> 
                     <option value="">Choose a Location</option>
                     <?php
@@ -798,7 +798,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">Delivery Rate</label>
+                    <label class="control-label">Delivery Rate</label><span id="x" style="color:red"> *</span>
                     <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
                   </div>
                 </div>
@@ -806,7 +806,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="control-label">Delivery Address</label>
+                    <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
                     <div class="row">
                       <div class="col-md-5">
                         <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
@@ -826,9 +826,10 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
             <div class="row">
               <script type="text/javascript">
               $(document).ready(function(){
-                $('#ratePick').click(function(){ 
+                $('#ratePick').click(function(){
 
                   if($('#ratePick').is(':checked')){ 
+                    $('#displayAddress').hide('blind');
                     $('#da').prop('disabled',true);
                     $('#city').prop('disabled',true);
                     $('#zip').prop('disabled',true);
@@ -847,6 +848,8 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                 });
                 $('#rateDel').click(function(){
                   if($('#rateDel').is(':checked')){ 
+
+                    $('#displayAddress').show('blind');
                     $('#dRate').val(0);
                     $('#da').prop('disabled',false);
                     $('#city').prop('disabled',false);
