@@ -3,7 +3,7 @@ include "titleHeader.php";
 include "menu.php";
 include 'dbconnect.php';
 ?>
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <script>
@@ -49,9 +49,9 @@ function hideNonVisibleDivs() {
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
                   <div class="panel-wrapper collapse in" aria-expanded="true">
-                    <div class="panel-body">      
+                    <div class="panel-body">
                       <div class="row">
-                        <div class="table-responsive"> 
+                        <div class="table-responsive">
                           <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                             <thead>
                               <tr>
@@ -97,7 +97,7 @@ function hideNonVisibleDivs() {
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
                   <div class="panel-wrapper collapse in" aria-expanded="true">
-                    <div class="panel-body">      
+                    <div class="panel-body">
                       <div class="row">
                         <div class="table-responsive">
                           <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
@@ -132,15 +132,15 @@ echo ('
   <td style="text-align:center">'.$count_prod.'</td>
   <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button> 
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><i class="fa fa-info-circle"></i> View</button>
 
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button> 
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button>
   </td>
   </tr>');
-}     
-}   
+}
+}
 
 
 function pCount($id){
@@ -170,8 +170,8 @@ function getName($id){
   $row = mysqli_fetch_assoc($result);
   $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
   return $name;
-}               
-?> 
+}
+?>
 </tbody>
 </table>
 </div>
@@ -193,7 +193,7 @@ function getName($id){
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
       <div class="panel-wrapper collapse in" aria-expanded="true">
-        <div class="panel-body">      
+        <div class="panel-body">
           <div class="row">
             <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
@@ -215,8 +215,9 @@ function getName($id){
                     <td>3</td>
                     <td>&#8369; 33,000</td>
                     <td>
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button> 
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button></td>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button>
+                    </td>
                     </tr>
                     <tr>
                       <td>5</td>
@@ -225,7 +226,7 @@ function getName($id){
                       <td>1</td>
                       <td>&#8369; 25,000</td>
                       <td>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button> 
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button></td>
                       </tr>
                     </tbody>
@@ -249,7 +250,7 @@ function getName($id){
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
           <div class="panel-wrapper collapse in" aria-expanded="true">
-            <div class="panel-body">      
+            <div class="panel-body">
               <div class="row">
                 <div class="table-responsive">
                   <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
@@ -284,17 +285,17 @@ echo ('
   <td style="text-align:center">'.$count_prod.'</td>
   <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button> 
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button>
 
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button> 
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button>
   </td>
   </tr>
   ');
-}     
-}   
-?> 
+}
+}
+?>
 </tbody>
 </table>
 </div>
@@ -316,7 +317,7 @@ echo ('
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
       <div class="panel-wrapper collapse in" aria-expanded="true">
-        <div class="panel-body">      
+        <div class="panel-body">
           <div class="row">
             <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
@@ -351,17 +352,17 @@ echo ('
   <td style="text-align:center">'.$count_prod.'</td>
   <td>&#8369;'.number_format($row['orderPrice'],2).'</td>
   <td style="text-align:left">
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button> 
+  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqview"><i class="fa fa-info-circle"></i> View</button>
 
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqaccept"><i class="ti-check"></i> Accept</button>
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button> 
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #orderReqreject"><i class="ti-close"></i> Reject</button>
   </td>
   </tr>
   ');
-}     
-}   
-?> 
+}
+}
+?>
 </tbody>
 </table>
 </div>
@@ -383,9 +384,9 @@ echo ('
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
       <div class="panel-wrapper collapse in" aria-expanded="true">
-        <div class="panel-body">      
+        <div class="panel-body">
           <div class="row">
-            <div class="table-responsive"> 
+            <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                 <thead>
                   <tr>
@@ -416,9 +417,9 @@ echo ('
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade active in" id="fabrics">
       <div class="panel-wrapper collapse in" aria-expanded="true">
-        <div class="panel-body">      
+        <div class="panel-body">
           <div class="row">
-            <div class="table-responsive"> 
+            <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                 <thead>
                   <tr>
@@ -453,14 +454,14 @@ echo ('
   <td style="text-align:center">' . $custEmail . '</td>
   <td style="text-align:left">
 
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateCustomerModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID']. ' "><i class="ti-pencil-alt"></i> Update</button>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="customers-forms.php" data-remote="customers-forms.php?id=' . $row['customerID']. ' #update"><i class="ti-pencil-alt"></i> Update</button>
 
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID'] . ' "><i class="ti-close"></i> Deactivate</button> 
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id=' . $row['customerID'] . ' "><i class="ti-close"></i> Deactivate</button>
   </td>
   </tr>
   ');
-}     
-}   
+}
+}
 ?>
 </tbody>
 </table>
@@ -520,14 +521,14 @@ echo ('
 </div>
 </div>
 </div>
-</div>  
+</div>
 </div> -->
 </div>
 
 <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
   <div class="panel panel-info">
     <div class="tab-content">
-      <?php 
+      <?php
 
       $sql = "SELECT * FROM tblnotification a, tblorders b, tblcustomer c WHERE b.orderID = a.tblorderID and a.tblcustomerID = c.customerID and a.notifStatus = 'Pending'";
                               $res = mysqli_query($conn,$sql);
@@ -535,7 +536,7 @@ echo ('
       ?>
       <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu1');">PAYMENT NOTIFICATIONS<br><?php echo mysqli_num_rows($res); ?></button>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12" style="margin-top: -35px;">
       <div class="panel panel-info">
@@ -576,7 +577,7 @@ echo ('
         <div class="tab-content">
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu3');">CUSTOMIZATION REQUEST<br>0</button>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 
@@ -593,7 +594,7 @@ echo ('
           ?>
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu4');">BALANCES<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 
@@ -610,7 +611,7 @@ echo ('
           ?>
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu5');">ORDER PRODUCTION<br><?php echo mysqli_num_rows($result); ?></button>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 
@@ -620,7 +621,7 @@ echo ('
         <div class="tab-content">
           <button class="fcbtn btn btn-outline btn-info btn-lg btn-block btn-1c" onclick="toggleVisibility('Menu6');">MATERIALS<br>MONITORING<br>0</button>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 
@@ -651,7 +652,7 @@ $(document).on('hidden.bs.modal', function (e) {
 });
 </script>
 
-<!--script>  
+<!--script>
 $(document).ready(function() {
 //ex.2 simple view, city name only, yahoo weather
 var example2 = $("#flatWeather").flatWeatherPlugin({

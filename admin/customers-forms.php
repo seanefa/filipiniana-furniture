@@ -1,7 +1,5 @@
 <?php
-include "menu.php";
 include 'dbconnect.php';
-session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id'];
 }
@@ -41,48 +39,45 @@ if (!$conn) {
                     ?>
                     <div class="form-body">
                           <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                               <div class="form-group">
                                 <label class="control-label">First Name</label><span id="x" style="color:red"> *</span>
-								  <input type="text" name="customer_fname" value="<?php echo "" . $trow["customerFirstName"];?>">
+								                <input type="text" class="form-control" name="customer_fname" value="<?php echo "" . $trow["customerFirstName"];?>">
                               </div>
                             </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                               <div class="form-group">
                                 <label class="control-label">Middle Name</label><span id="x" style="color:red"> *</span>
-								  <input type="text" name="customer_mname" value="<?php echo "" . $trow["customerMidName"];?>">
+								                <input type="text" class="form-control" name="customer_mname" value="<?php echo "" . $trow["customerMiddleName"];?>">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
+                                <input type="text" class="form-control" name="customer_lname" value="<?php echo "" . $trow["customerLastName"];?>" required/><span id="messagefirst"></span>
                               </div>
                             </div>
                           </div>
                             <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <label class="control-label">Last Name</label><span id="x" style="color:red"> *</span>
-                              <input type="text" class="form-control" name="customer_lname" value="<?php echo "" . $trow["customerLastName"];?>" required/><span id="messagefirst"></span></div>
-                            </div>
-                          </div>
-                            <div class="row">
-                            	<div class="col-md-12">
+                            	 <div class="col-md-12">
                               		<div class="form-group">
                                 		<label class="control-label">Address</label><span id="x" style="color:red"> *</span>
-										<textarea name="customer_address" class="form-control" value="<?php echo "" . $trow["customerAddress"];?>"></textarea>
-									</div>
-                              	</div>
-							</div>
-							<div class="row">
+										                <textarea name="customer_address" class="form-control" required><?php echo "" . $trow["customerAddress"];?></textarea>
+									                </div>
+                                </div>
+							              </div>
+                            <div class="row">
                             	<div class="col-md-6">
                               		<div class="form-group">
                                 		<label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
                                 		<input type="text" class="form-control" name="customer_contactnum" value="<?php echo "" . $trow["customerContactNum"]?>" required/><span id="messagefirst"></span>
-									</div>
+									                         </div>
                               	</div>
                             	<div class="col-md-6">
                               		<div class="form-group">
                                 		<label class="control-label">Email</label><span id="x" style="color:red"> *</span>
                                 		<input type="text" class="form-control" name="customer_email" value="<?php echo "" . $trow["customerEmail"];?>" required/><span id="messagefirst"></span>
-									</div>
+									                         </div>
                               	</div>
                             </div>
                           </div>

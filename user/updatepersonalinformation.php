@@ -22,8 +22,8 @@ if($_FILES["image"]["error"] > 0){
 	header("Location: account.php");
 }
 else{
-	move_uploaded_file($_FILES["image"]["tmp_name"], "pics/userpictures/" . $row["customerID"] . ".png");
- 	$pic = $row["customerID"] . ".png";
+	move_uploaded_file($_FILES["image"]["tmp_name"], "pics/userpictures/" . $fn . $mn . $ln . ".png");
+ 	$pic = $fn . $mn . $ln . ".png";
 	header("Location: account.php");
 }
 if($pic=="")
