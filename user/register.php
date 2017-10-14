@@ -70,6 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 </div>
               </div>
               <script type="text/javascript">
+
+                $(document).ready(function(){
+                  $('#telNumber').mask('(000) 000-0000');
+
+                });
+
                 var c1 = 0;
                 var c2 = 0;
                 function checkAll(c,check){
@@ -164,14 +170,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       });
                     });
 
+                    $('#input-password').on('keyup', function(){
+                      var passw= this.value;
+                      var confi = $('#input-conf').val();
+                      $.ajax({
+        type: 'post',
+        url: 'check-password.php',
+        data: {
+          pass: passw, conf: confi,
+        },
+        success: function (response) {
+          if(response ==''){
+            $('#messagepass').html('');
+            $('#messagepass').prop('class','glyphicon glyphicon-ok');
+             $('#messagepass').prop('style','color: green;');
+            $('#input-password').css('border-color','green');
+             $('#input-conf').css('border-color','green');
+          }else{
+            $('#messagepass').prop('class','');
+            $('#messagepass').prop('style','color: red;');
+            $('#input-password').css('border-color','red');
+            $('#input-conf').css('border-color','red');
+            $('#messagepass').html(response);
+            
+          }
+        }
+      });
+                    });
+
+                    $('#input-confirm').on('keyup', function(){
+                      var confr = this.value;
+                      var passw = $('#input-password').val();
+                      $.ajax({
+        type: 'post',
+        url: 'check-password.php',
+        data: {
+          conf: confr, pass: passw,
+        },
+        success: function (response) {
+          if(response ==''){
+            $('#messagepass').html('');
+            $('#messagepass').prop('class','glyphicon glyphicon-ok');
+             $('#messagepass').prop('style','color: green;');
+            $('#input-password').css('border-color','green');
+             $('#input-conf').css('border-color','green');
+          }else{
+            $('#messagepass').prop('class','');
+            $('#messagepass').prop('style','color: red;');
+            $('#input-password').css('border-color','red');
+            $('#input-conf').css('border-color','red');
+            $('#messagepass').html(response);
+            
+          }
+        }
+      });
+                    });
+
 
 
 
                   });
                   
-                  $('#telNumber').mask('(000) 000-0000');
-
-});
+                  
               </script>
               <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
@@ -182,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-telephone" class="col-sm-2 control-label">Contact</label>
                 <div class="col-sm-10">
-                  <input type="number" data-mask="+63 (999) 999-9999" class="form-control" name="number" id='telNumber' required/>
+                  <input type="number" class="form-control" name="number" id='telNumber' required/>
                 </div>
               </div>
               <div class="form-group required">
@@ -367,7 +427,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" min="4" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required>
+                  <input type="password" min="4" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required><span id="messagepass"></span>
                 </div>
               </div>
               <div class="form-group required">

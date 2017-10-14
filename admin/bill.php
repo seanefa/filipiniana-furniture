@@ -227,8 +227,8 @@ $row = mysqli_fetch_assoc($res);
       $penFee = $trow['invPenID'];
     }
     $down = $tpay;
-    $tPrice = $tPrice + $delFee + $penFee;
-    $bal = $tPrice - $down;
+    $tPrice1 = $tPrice + $delFee + $penFee;
+    $bal = $tPrice1 - $down;
     ?>
     <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>

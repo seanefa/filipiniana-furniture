@@ -246,7 +246,7 @@ function addOnHand($id){
 
 function changeStat($id){
 	include "dbconnect.php";
-	$uSQL = "UPDATE tblorder_request SET orderRequestStatus = 'Finished'";
+	$uSQL = "UPDATE tblorder_request SET orderRequestStatus = 'Finished' WHERE tblOrdersID = $id";
 	mysqli_query($conn,$uSQL);
 	return 0;
 } 
