@@ -77,7 +77,7 @@ include "menu.php";
                                                 <img height="115px" src="plugins/images/furnitureicon.png" alt="Unavailable">');
                                             if($row['orderStatus']=='Pending'){
                                               echo ('<div class="pro-img-overlay">
-                                                    <a class="btn btn-primary" href="production-start.php?id='.$row['orderID'].'" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/> 
+                                                    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="production-trackin-modals.php" data-remote="production-trackin-modals.php?id='. $row['orderID'].' #viewInfo" style="font-family:inherit; margin-top:25px; color:white;">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/> 
                                                   </div>
                                                 </div>');
                                             }
