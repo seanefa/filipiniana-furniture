@@ -245,7 +245,6 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                               $over = date('Y-m-d',strtotime($dateRel."+ 7 days"));
                               $date = new DateTime();
                               $dateToday = date_format($date, "Y-m-d");
-                              //$dateToday = strtotime(date("Y-m-d"));
                               if(($dateToday > $over) && ($pen==0)){
                                 // echo $dateToday . '<br>';
                                 // echo $over. '<br>';
