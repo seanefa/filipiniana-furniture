@@ -52,23 +52,23 @@ if (!empty($_SESSION['actionFailed'])) {
   <script>
   function checkOnlyOne(b){
 
-var x = document.getElementsByClassName('daychecks');
-var i;
+  var x = document.getElementsByClassName('check');
+  var i;
 
-for (i = 0; i < x.length; i++) {
-  if(x[i].value != b) x[i].checked = false;
-}
-}
+  for (i = 0; i < x.length; i++) {
+    if(x[i].value != b) x[i].checked = false;
+  }
+  }
 
   $(document).ready(function(){
   $("#manual").hide();
-  $('#aut').change(function(){
+  $('#autoCheck').change(function(){
     if($(this).prop("checked")) {
       $('#automatic').show();
       $("#manual").hide();
     }
   });
-  $('#man').change(function(){
+  $('#manualCheck').change(function(){
     if($(this).prop("checked")) {
       $('#manual').show();
       $("#automatic").hide();
@@ -100,8 +100,8 @@ for (i = 0; i < x.length; i++) {
                     <div class="form-group" style="text-align:center;">
                      <label class="control-label">Choose Backup Option</label>
                       <br>
-                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Automatic" id="aut" checked/>Automatic&nbsp;&nbsp;&nbsp;
-                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Manual" id="man" />Manual&nbsp;&nbsp;&nbsp;
+                      <input class="check" onclick="checkOnlyOne(this.value);" type="radio" id="autoCheck" checked/>Automatic&nbsp;&nbsp;&nbsp;
+                      <input class="check" onclick="checkOnlyOne(this.value);" type="radio" id="manualCheck" />Manual&nbsp;&nbsp;&nbsp;
 
                   </div>
                 </div>
@@ -126,15 +126,15 @@ for (i = 0; i < x.length; i++) {
                   </div>
                 </div>
               </div>
-
-               <div id = "manual">
-                <div class="row">
-                  <div class="col-md-7 pull-right" style="margin-right:30px;">
-                    <button type="submit" class="btn btn-success" onclick="RunFile()"><i class="ti-check"></i> Backup Now</button>
+              <form action="../database/myphp-backup.php" target="_blank" method="get">
+                 <div id = "manual">
+                  <div class="row">
+                    <div class="col-md-7 pull-right" style="margin-right:30px;">
+                      <button type="submit" class="btn btn-success"><i class="ti-check"></i> Backup Now</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-
+              </form>
                 </div>
               </div>
             </div>
