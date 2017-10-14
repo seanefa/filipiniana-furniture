@@ -31,7 +31,7 @@ if (!$conn) {
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Content</label><span id="x" style="color:red"> *</span>
-					  <textarea type="text" id="materialName" class="form-control" name="news_content" required></textarea>
+					           <textarea type="text" id="materialName" class="form-control" name="news_content" rows="7" required></textarea>
                   </div>
                 </div>
               </div>

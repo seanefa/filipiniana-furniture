@@ -23,8 +23,6 @@ $orID = "OR". $or;
 </head>
 <?php 
 
-
-
 $id = $_GET['id'];
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
@@ -191,19 +189,21 @@ $orderID = $orRoq['orderID'];
     <?php
     $down = 0;
     $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$orderID'";
     $res = mysqli_query($conn,$sql);
     $tpay = 0;
     $delFee = 0;
     $penFee = 0;
+    $price = 0;
     while($trow = mysqli_fetch_assoc($res)){
       $tpay = $tpay + $trow['amountPaid'];
+      $price = $tPrice;
       $delFee = $trow['invDelrateID'];
       $penFee = $trow['invPenID'];
     }
     $down = $tpay;
-    $tPrice1 = $tPrice + $delFee + $penFee;
-    $bal = $tPrice - $down;
+    $tPrice1 = $price + $delFee + $penFee;
+    $bal = $tPrice1 - $down;
     ?>
     <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
@@ -226,15 +226,11 @@ $orderID = $orRoq['orderID'];
             <td>Grand Total</td>
             <td>Php <?php echo number_format($tPrice1,2)?></td>
           </tr>
-          <tr>
-            <td>Remaining Balance:</td>
-            <td style="color:red">Php <?php echo number_format($bal,2)?></td>
-          </tr>
         </table>
       </div>
     </div>
     <div class="col-xs-6">
-      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;"></span>
       <br>
       <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table">
@@ -248,7 +244,7 @@ $orderID = $orRoq['orderID'];
             $tpay = $tpay + $trow['amountPaid'];
           }
           $down = $tpay;
-          $bal = $tPrice - $down;
+          $bal = $tPrice1 - $down;
           $or = str_pad($orderID, 6, '0', STR_PAD_LEFT);
           if($bal==0){
             echo "<tr>

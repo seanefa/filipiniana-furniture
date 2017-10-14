@@ -11,12 +11,14 @@ $status = "Listed";
 $flag=0;
 $total = 0;
 
+$date = new DateTime();
+$orderdaterec = $date->format('Y-m-d H:i:s');
+
 foreach($quantity as $a){
     $total = $total + $a;
 }
 
-
-$sql = "INSERT INTO `tblmat_deliveries` (`supplierID`, `totalQuantity`, `mat_deliveryRemarks`, `mat_deliveryStatus`) VALUES ('$sup', '$total','$status','$status')";
+$sql = "INSERT INTO `tblmat_deliveries` (`supplierID`, `totalQuantity`, `dateSupplied`, `mat_deliveryRemarks`, `mat_deliveryStatus`) VALUES ('$sup', '$total','$orderdaterec','$status','$status')";
 mysqli_query($conn, $sql);
 
 $id = mysqli_insert_id($conn);
