@@ -86,10 +86,6 @@
                     ';?>
                     <div class="button-group">
                       <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['packageID'] ?>" data-name="<?php echo $row['packageDescription'] ?>" data-summary="Package" data-price="<?php echo $row['packagePrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div>
                 </div><?php echo '';

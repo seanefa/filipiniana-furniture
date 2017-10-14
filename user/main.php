@@ -65,11 +65,6 @@
                     </div>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
-
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div> <?php
                 }
@@ -108,10 +103,6 @@
                     ';?>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div><?php echo '';
                 }
@@ -152,10 +143,6 @@
                     ';?>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div>
                   </div><?php echo'';

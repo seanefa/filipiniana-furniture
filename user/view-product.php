@@ -139,11 +139,6 @@ $typerow = mysqli_fetch_assoc($typeresult);
                       </div>
                       <button id="addPBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
                     </div>
-                    <div>
-                      <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
-                      <br />
-                      <button type="button" class="wishlist" onClick=""><i class="fa fa-exchange"></i> Compare this Product</button>
-                    </div>
                   </div>
                 </div>
                 <?php
@@ -327,10 +322,6 @@ $typerow = mysqli_fetch_assoc($typeresult);
                     ';?>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div><?php echo '';
                 }

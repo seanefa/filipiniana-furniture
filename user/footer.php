@@ -53,7 +53,6 @@
             <ul>
               <li><a href="account.php">Dashboard</a></li>
               <li><a href="orders.php">Orders</a></li>
-              <li><a href="wishlists.php">Wishlists</a></li>
             </ul>
           </div>
         </div>

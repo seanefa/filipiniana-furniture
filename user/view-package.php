@@ -183,11 +183,6 @@ $('#addPBtn').attr('data-quantity',q);
                       </div>
                       <button id="addPBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1"   data-dismiss="modal">Add to Cart</button>
                     </div>
-                    <div>
-                      <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
-                      <br />
-                      <button type="button" class="wishlist" onClick=""><i class="fa fa-exchange"></i> Compare this Product</button>
-                    </div>
                   </div>
                 </div>
                 <?php
@@ -370,10 +365,6 @@ $('#addPBtn').attr('data-quantity',q);
                     ';?>
                     <div class="button-group">
                       <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
-                      <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
-                      </div>
                     </div>
                   </div><?php echo '';
 

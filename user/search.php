@@ -190,10 +190,6 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -209,10 +205,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick="cart.add('31');"><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -229,10 +222,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -249,10 +239,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -268,10 +255,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -290,10 +274,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -310,10 +291,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -329,10 +307,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -350,10 +325,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -371,10 +343,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -391,10 +360,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -411,10 +377,7 @@
                   </div>
                   <div class="button-group">
                     <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                    <div class="add-to-links">
-                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
-                      <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i> <span>Compare this Product</span></button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

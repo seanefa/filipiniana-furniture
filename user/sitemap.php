@@ -105,7 +105,6 @@
                     <li><a href="proof-of-payment-form.php">Proof of Payment</a></li>
                     <li><a href="returns.php">Returns</a></li>
                     <li><a href="reviews.php">Reviews</a></li>
-                    <li><a href="wishlists.php">Wishlists</a></li>
                   </ul>
                 </li>
                 <li><a href="cart.php">Shopping Cart</a></li>
