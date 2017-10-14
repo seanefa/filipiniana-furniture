@@ -165,8 +165,6 @@
               ?>
             </div>
         </div>
-        </div>
-    </div>
       <!--Middle Part End-->
       <div class="row">
         <!--Middle Part Start-->
