@@ -1,6 +1,6 @@
 <?php
 include "titleHeader.php";
-include "menu.php";  
+include "menu.php";
 include 'dbconnect.php';
 include 'toastr-buttons.php';
 

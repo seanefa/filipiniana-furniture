@@ -70,6 +70,18 @@ class Restore_Database {
     protected function initializeDatabase() {
         try {
             $conn = mysqli_connect($this->host, $this->username, $this->passwd, $this->dbName);
+            $query = "DROP DATABASE filfurnituredb";
+            $res = mysqli_query($conn,$query);
+
+            if($res == true)
+            {
+                echo "Query successfully executed. Tables deleted<br>";
+            }
+            else
+            {
+                die("Problem in execution<br>".mysqli_connect_error());
+            }
+
             if (mysqli_connect_errno()) {
                 throw new Exception('ERROR connecting database: ' . mysqli_connect_error());
                 die();
@@ -129,9 +141,10 @@ class Restore_Database {
                             if (preg_match('/;$/', $line)) {
                                 // execute query
                                 if(mysqli_query($this->conn, $sql)) {
+                                     mysqli_query($this->conn,'SET FOREIGN_KEY_CHECKS = 0;'); 
                                     if (preg_match('/^CREATE TABLE `([^`]+)`/i', $sql, $tableName)) {
                                         $this->obfPrint("Table succesfully created: `" . $tableName[1] . "`");
-                                    }
+                                    } 
                                     $sql = '';
                                 } else {
                                     throw new Exception("ERROR: SQL execution error: " . mysqli_error($this->conn));
@@ -270,7 +283,7 @@ if (php_sapi_name() != "cli") {
 
 if($result=='OK'){
     echo'<script>
-    alert("DATABASE RESTORE COMPLETE!");
+    alert("DATABASE RESTORATION COMPLETE!");
     </script>';
 }
 if($result=='KO'){
