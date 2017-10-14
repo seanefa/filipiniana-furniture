@@ -34,29 +34,26 @@ include 'dbconnect.php';
 
  $(document).ready(function(){
   $('#aTendered').on('keyup',function(){
-    var mat = $("#aTendered").val();
-    var bal = $("#balance").val();
+    var mat = parseInt($("#aTendered").val());
+    var bal = parseInt($("#balance").val());
+    var ctr = 0;
     if(isNaN(mat)){
-      var e = "Please input a valid number.";
-      $("#error").html(e);
-      $('#aTendered').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      ctr = 1;
     }
     else if(mat<0){
-      var e = "Numbers less than 0 are not allowed";
-      $("#error").html(e);
-      $('#aTendered').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      ctr = 1;
+    }
+    else if(mat>bal){
+      ctr = 1;
     }
     else if(mat==""){
-      var e = "";
-      var change = 0.00;
-      $("#dChange").val(change);
-      $("#error").html(e);
-      $('#aTendered').css('border-color','gray');
-      $('#saveBtn').prop('disabled',true);
+      ctr = 0;
     }
     else{
+      ctr = 0;
+    }
+
+    if(ctr==0){
       var e = "";
       var change = mat - bal;
       var change = change + ".00";
@@ -64,17 +61,15 @@ include 'dbconnect.php';
       $("#error").html(e);
       $('#aTendered').css('border-color','gray');
       $('#saveBtn').prop('disabled',false);
-      
     }
+    else{
+      var e = "Invalid input";
+      $("#dChange").val(change);
+      $("#error").html(e);
+      $('#aTendered').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
 
-        /*
-          if(mat>bal){ //if may malaki diba? hahaha
-            var e = "";
-            var e = "Please input a valid number.";
-            $("#error").html(e);
-            $('#aTendered').css('border-color','red');
-            $('#saveBtn').prop('disabled',true);
-          }*/
+    }
 
         });
 });

@@ -146,7 +146,7 @@ $(document).ready(function(){
               <div role="tabpanel" class="tab-pane fade active in">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                   <div class="panel-body">
-                    <form action="payments.php" method = "post">
+                    <form action="save-order-penalty.php" method = "post">
                       <input type="hidden" name="orderID" id="orderID" value="<?php echo $jsID?>">
 
                       <div class="row" style="margin-top: -30px;">
@@ -206,8 +206,16 @@ $(document).ready(function(){
                                 <td id="totalPrice" style="text-align:right;"><strong><span>&#8369;&nbsp;<?php echo number_format($delFee,2)?></span></strong></td>
                               </tr>
                               <tr>
-                                <td></td>
-                                <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> PENALTY FEE</b></td>
+                                <?php
+                                include "dbconnect.php";
+                                $sqlP = "SELECT * FROM tblpenalty where penaltyID = '1'";
+                                $resP = mysqli_query($conn,$sqlP);
+                                $rowP = mysqli_fetch_assoc($resP);
+                                $penName = $rowP['penaltyName'];
+                                ?>
+                                <td style="text-align:left">PENALTY</td>
+                                <td style="text-align:left"><?php echo $penName;?></td>
+                                <td style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> PENALTY FEE</b></td>
                                 <td style="text-align:right;"></td>
                                 <td id="totalPrice" style="text-align:right;"><strong><span>&#8369;&nbsp;<?php echo number_format($penFee,2)?></span></strong></td>
                               </tr>
@@ -296,56 +304,16 @@ $(document).ready(function(){
                               $bal = $p - $down;
                               ?>
                               <h4 style="font-weight: bolder;">Amount Due <span class="pull-right" id="sideAmountDue" style="color: #e50000"> &#8369; <?php echo number_format($bal,2)?></span></h4>
+                              <p style="color:red; background:">Payment for this order is overdue.</p>
                               <hr>
-                              <label class="control-label" style="font-weight: bolder;">Mode of Payment:</label>
-                              <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="mop" id="mop">
-                               <?php
-                               $delsql = "SELECT * FROM tblmodeofpayment;";
-                               $delresult = mysqli_query($conn,$delsql);
-                               while($delrow = mysqli_fetch_assoc($delresult)){
-                                echo('<option value="'.$delrow['modeofpaymentID'].'">'.$delrow['modeofpaymentDesc'].'</option>');
-                              }
-                              ?>
-                            </select>
-                            <hr>
                             <input type="hidden" id="balance" value="<?php echo $bal?>">
                             <div id="cash">
                               <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                    <label class="control-label" style="font-weight: bolder;">Amount Paid</label><span id="x" style="color:red"> *</span>
+                                    <label class="control-label" style="font-weight: bolder;">Penalty Fee</label><span id="x" style="color:red"> *</span>
                                     <input type="text" style="text-align:right;" id="aTendered" class="form-control" name="aTendered"/>
                                     <p id="error" style="color:red"></p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div id="check">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label class="control-label" style="font-weight: bolder;">Check Number</label><span id="x" style="color:red"> *</span>
-                                    <input type="text" style="text-align:right;" id="cNum" class="form-control" name="cNumber"/>
-                                    <p id="cNumError"></p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label class="control-label" style="font-weight: bolder;">Amount</label><span id="x" style="color:red"> *</span>
-                                    <input type="text" id="cAmount" style="text-align:right;" class="form-control" name="cAmount"/> 
-                                    <p id="cAmountError"></p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label class="control-label" style="font-weight: bolder;">Remarks</label>
-                                    <textarea style="text-align:right;" class="form-control" name="remarks"></textarea> 
-                                    <p id="cAmountError"></p>
                                   </div>
                                 </div>
                               </div>

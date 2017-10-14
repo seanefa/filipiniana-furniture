@@ -45,6 +45,11 @@ if (!empty($_SESSION['actionFailed'])) {
   unset($_SESSION['actionFailed']);
 }
 
+$date = new DateTime();
+$dateToday = date_format($date, "Y-m-d");
+
+$estDate = date('Y-m-d', strtotime("+2 days"));
+
 ?>
 <!DOCTYPE html>  
 <html lang="en">
@@ -91,7 +96,7 @@ if (!empty($_SESSION['actionFailed'])) {
                           <tbody>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' order by orderID ;";
+                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' AND a.orderStatus != 'Cancelled' AND a.orderType!='Management Order' order by orderID ;";
 
                             $result = mysqli_query($conn, $sql);
                             if($result){
@@ -103,6 +108,7 @@ if (!empty($_SESSION['actionFailed'])) {
                                 $get_name = orderCon($row['orderID']);
                                 $bal = getBal($row['orderID'], $row['orderPrice']);
                                 $paymentStat = getStat($row['orderID'], $row['orderPrice']);
+                                $overDue = isOverDue($row['orderID'],$row['invPenID']);
                                 if($bal!=0){
                                 echo ('
                                   <tr>
@@ -111,12 +117,19 @@ if (!empty($_SESSION['actionFailed'])) {
                                   <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
                                   <td style="text-align:right">&#8369; '.number_format($row['invDelrateID'],2).'</td>
                                   <td style="text-align:right">&#8369; '.number_format($row['invPenID'],2).'</td>
-                                  <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>
-                                  <td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
+                                  <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>');
+                                  if($overDue){
+                                    echo ('<td><a class="btn btn-info" style="color:white;" href="order-penalty.php?id='. $row['orderID'].'">&#8369; Add Penalty </a>
+                                  </td>
+                                  </tr>
+                                  ');
 
+                                  }
+                                  else{
+                                  echo ('<td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
                                      <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>');
                                   if($row['orderStatus']=="Cancelled"){
-                                   echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                                   echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'" >&#8369; Payment </a>
                                   </td>
                                   </tr>
                                   ');
@@ -127,6 +140,8 @@ if (!empty($_SESSION['actionFailed'])) {
                                   </tr>
                                   ');
                                  }
+
+                                  }
                                   }
                               }     
                             }
@@ -215,6 +230,29 @@ if (!empty($_SESSION['actionFailed'])) {
                               }
                               else{
                                 return "Not fully paid";
+                              }
+                            }
+
+                            function isOverDue($id,$pen){
+                              include "dbconnect.php";
+                              $dateRel = 0;
+                              $sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
+                              $res = mysqli_query($conn,$sql);
+                              while($row = mysqli_fetch_assoc($res)){
+                                $dateRel = $row['dateOfRelease'];
+                              }
+                              // echo $dateRel . '<br>';
+                              $over = date('Y-m-d',strtotime($dateRel."+ 7 days"));
+                              $date = new DateTime();
+                              $dateToday = date_format($date, "Y-m-d");
+                              //$dateToday = strtotime(date("Y-m-d"));
+                              if(($dateToday > $over) && ($pen==0)){
+                                // echo $dateToday . '<br>';
+                                // echo $over. '<br>';
+                                return true;
+                              }
+                              else{
+                                return false;
                               }
                             }
                             ?> 
