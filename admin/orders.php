@@ -117,6 +117,16 @@ $('#selectCat').on("change",function() {
   }
 });
 
+$(document).ready(function(){
+ $('#myModal').on('shown.bs.modal',function(){
+  $("#penaltyForm").hide();
+  var val = $("#status").val();
+  if(val=="Ongoing"){
+    $("#penaltyForm").show();
+  }
+});
+});
+
 $('#selectType').on("change",function() {
   var value = $("#selectType").val();
   alert(value);
@@ -384,6 +394,7 @@ return $bal;
                         include "dbconnect.php";
                         //$sql = "SELECT * FROM tblorders WHERE orderStatus= 'Pending' AND orderStatus='Ongoing' AND orderStatus='Ready for release'";
                         $sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' OR orderStatus='Ongoing' OR orderStatus='Ready for release' order by orderID";
+                        $ctr = 0;
                         $res = mysqli_query($conn,$sql);
                         while($row = mysqli_fetch_assoc($res)){
                           $dateRel = $row['dateOfRelease'];
@@ -413,9 +424,13 @@ return $bal;
                             <td>'.$row['orderStatus'].'</td>
                             <td style="text-align:right">'.$dates.'</td>
                             <td style="text-align:right">'.$numberDays.' days</td></tr>';
+                            $ctr++;
                           }
-                            
+
                           }
+                        }
+                        if($ctr==0){
+                          echo "<tr><td colspan='5' style='text-align:right'>Nothing to show.</td></tr>";
                         }
                         ?>
                       </tbody>

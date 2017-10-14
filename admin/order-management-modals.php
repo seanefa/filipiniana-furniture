@@ -652,8 +652,9 @@ $_SESSION['varname'] = $jsID;
               $status = $row['orderStatus'];
             }
           }
-          else{
-            echo "Error" . mysqli_error($conn);
+          $overDue = isOverDue($jsID);
+          if($overDue){
+            $status = "";
           }
           ?>
           <input type="hidden" name="id" value="<?php echo $jsID?>">
@@ -734,6 +735,36 @@ $_SESSION['varname'] = $jsID;
     </div>
   </div>
 </div>
+
+<?php 
+
+function isOverDue($id){
+  include "dbconnect.php";
+  $sql = "SELECT * FROM tblorders WHERE orderID = $id";
+  $res = mysqli_query($conn,$sql);
+  while($row = mysqli_fetch_assoc($res)){
+    $dateRel = $row['dateOfRelease'];
+    $over = date('Y-m-d',strtotime($dateRel."+ 40 days"));
+    $date = new DateTime();
+    $dateToday = date_format($date, "Y-m-d");
+    if($dateToday > $over){
+      $date = date_create($row['dateOfRelease']);
+      $dates = date_format($date,"F d, Y");
+      $endTimeStamp = strtotime($dateToday);
+      $startTimeStamp = strtotime($dateRel);
+      $timeDiff = abs($endTimeStamp - $startTimeStamp);
+      $numberDays = $timeDiff/86400; 
+      $numberDays = intval($numberDays);
+        //echo '5';
+      return true;
+    }
+    else{
+        //echo '6';
+      return false;
+    }
+  }
+}
+?>
 
 </body>
 </html>
