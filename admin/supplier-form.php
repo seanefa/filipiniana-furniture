@@ -51,7 +51,7 @@ if (!$conn) {
                   <div class="form-group">
                     <label class="control-label">Contact Number</label><span id="x" style="color:red"> *</span>
                     <input type="text" data-mask="+63 (999) 999-9999" class="form-control" name="telnum" required>
-                    </select>
+                    
                   </div>
                 </div>
               </div>

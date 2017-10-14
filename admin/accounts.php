@@ -192,6 +192,18 @@ if (!empty($_SESSION['actionFailed'])) {
                     </div>
                   </div>
                   <!-- /.modal -->
+                  <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-content clearable-content">
+            <div class="modal-body">
+
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
                   <!-- Delete Account Modal -->
                   <div class="modal fade" tabindex="-1" role="dialog" id="deleteAccountModal" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">

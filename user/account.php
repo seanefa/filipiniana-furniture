@@ -296,5 +296,17 @@
 	<?php include"footer.php";?>
 	<!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
 	<?php include "scripts.php";?>
+	<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-content clearable-content">
+            <div class="modal-body">
+
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
 </body>
 </html>

@@ -8,6 +8,12 @@
 <meta name="description" content="Furniture shop">
 <script type="text/javascript" src="js/myScript.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+  <link href="css/select2.min.css" rel="stylesheet">
+   <link href="css/select2.css" rel="stylesheet">
+  <script src="js/select2.min.js"></script>
+  <script src="js/select2.js"></script>
+  <script src="js/maskmaster/src/jquery.mask.js"></script>
 <script src="jquery.geocomplete.js"></script>
 <?php include"css.php";?>
 </head>
@@ -159,7 +165,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     });
 
 
+
+
                   });
+                  
+                  $('#telNumber').mask('(000) 000-0000');
+
+});
               </script>
               <div class="form-group required">
                 <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
@@ -170,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <div class="form-group required">
                 <label for="input-telephone" class="col-sm-2 control-label">Contact</label>
                 <div class="col-sm-10">
-                  <input type="text" data-mask="+63 (999) 999-9999"  class="form-control" id="input-telephone" name="number" required>
+                  <input type="number" data-mask="+63 (999) 999-9999" class="form-control" name="number" id='telNumber' required/>
                 </div>
               </div>
               <div class="form-group required">

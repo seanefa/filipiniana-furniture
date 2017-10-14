@@ -74,7 +74,10 @@
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
 											<td><?php $stat = $srow['orderStatus']; if($stat == 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
-											<td></td>
+											<td>
+												<?php echo '<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #viewInfo">View</a>';
+												?>
+											</td>
 											<td><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a> <a href="" class="pull-right" style="color:#1A9CB7;">RETURN</a></td>
 										</tr>
 
@@ -95,6 +98,18 @@
 			</div>
 		</div>
 	</div>
+	<div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-content clearable-content">
+            <div class="modal-body">
+
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
 	<?php include"footer.php";?>
 	<!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
 	<?php include "scripts.php";?>
