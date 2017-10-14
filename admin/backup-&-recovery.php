@@ -52,7 +52,7 @@ if (!empty($_SESSION['actionFailed'])) {
   <script>
   function checkOnlyOne(b){
 
-  var x = document.getElementsByClassName('check');
+  var x = document.getElementsByClassName('daychecks');
   var i;
 
   for (i = 0; i < x.length; i++) {
@@ -62,13 +62,13 @@ if (!empty($_SESSION['actionFailed'])) {
 
   $(document).ready(function(){
   $("#manual").hide();
-  $('#autoCheck').change(function(){
+  $('#aut').change(function(){
     if($(this).prop("checked")) {
       $('#automatic').show();
       $("#manual").hide();
     }
   });
-  $('#manualCheck').change(function(){
+  $('#man').change(function(){
     if($(this).prop("checked")) {
       $('#manual').show();
       $("#automatic").hide();
@@ -100,8 +100,8 @@ if (!empty($_SESSION['actionFailed'])) {
                     <div class="form-group" style="text-align:center;">
                      <label class="control-label">Choose Backup Option</label>
                       <br>
-                      <input class="check" onclick="checkOnlyOne(this.value);" type="radio" id="autoCheck" checked/>Automatic&nbsp;&nbsp;&nbsp;
-                      <input class="check" onclick="checkOnlyOne(this.value);" type="radio" id="manualCheck" />Manual&nbsp;&nbsp;&nbsp;
+                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Automatic" id="aut" checked/>Automatic&nbsp;&nbsp;&nbsp;
+                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Manual" id="man" />Manual&nbsp;&nbsp;&nbsp;
 
                   </div>
                 </div>
