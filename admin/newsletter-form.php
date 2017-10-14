@@ -28,13 +28,7 @@ if (!$conn) {
             <div class="form-body">
 
               <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label class="control-label">Date</label><span id="x" style="color:red"> *</span>
-					  <input type="date" class="form-control" name="news_date" value="" required>
-                  </div>
-                </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Content</label><span id="x" style="color:red"> *</span>
 					  <textarea type="text" id="materialName" class="form-control" name="news_content" required></textarea>
