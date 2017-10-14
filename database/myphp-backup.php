@@ -319,11 +319,20 @@ $backupDatabase->obfPrint('Backup result: ' . $result, 1);
 if (php_sapi_name() != "cli") {
     echo '</div>';
 
-echo'<script>
+if($result=='OK'){
+    echo'<script>
     alert("DATABASE BACKUP COMPLETE!");
+    </script>';
+}
+if($result=='KO'){
+    echo'<script>
+    alert("OOPS, SOMETHING WENT WRONG!");
+    </script>';
+}
+
+echo'<script>
     window.setTimeout(function() {
         window.close();
-        alert("Check database folder to see backup file.");
-      }, 8000);
+      }, 5000);
     </script>';
 }

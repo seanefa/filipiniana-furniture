@@ -98,11 +98,10 @@ if (!empty($_SESSION['actionFailed'])) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" style="text-align:center;">
-                     <label class="control-label">Choose Backup Option</label>
+                     <label class="control-label">Select Database Backup & Recovery Option</label>
                       <br>
                       <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Automatic" id="aut" checked/>Automatic&nbsp;&nbsp;&nbsp;
                       <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Manual" id="man" />Manual&nbsp;&nbsp;&nbsp;
-
                   </div>
                 </div>
 
@@ -122,19 +121,23 @@ if (!empty($_SESSION['actionFailed'])) {
                 </div>
                 <div class="row">
                   <div class="pull-right">
-                    <button type="submit" class="btn btn-success"><i class="ti-check"></i> Backup</button>
+                    <button type="submit" class="btn btn-success"><i class="ti-check"></i> Save</button>
                   </div>
                 </div>
               </div>
-              <form action="../database/myphp-backup.php" target="_blank" method="get">
                  <div id = "manual">
                   <div class="row">
                     <div class="col-md-7 pull-right" style="margin-right:30px;">
-                      <button type="submit" class="btn btn-success"><i class="ti-check"></i> Backup Now</button>
+                      <form action="../database/myphp-backup.php" target="_blank" method="get">
+                        <button type="submit" class="btn btn-success"><i class="ti-check"></i> Backup Now</button>
+                      </form>
+                      <br>
+                      <form action="../database/myphp-restore.php" target="_blank" method="get">
+                        <button type="submit" class="btn btn-success"><i class="ti-check"></i> Restore Now</button>
+                      </form>
                     </div>
                   </div>
                 </div>
-              </form>
                 </div>
               </div>
             </div>
