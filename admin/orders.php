@@ -181,7 +181,8 @@ $('#selectType').on("change",function() {
                           <tbody>
                             <?php
                             include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders WHERE orderStatus='Pending' OR orderStatus='Ongoing' OR orderStatus='Ready for release' OR orderStatus='Cancelled' order by orderID;";
+                            //$sql = "SELECT * FROM tblorders WHERE orderStatus!='Archived' OR orderStatus!='Ongoing' OR orderStatus='Ready for release' OR orderStatus='Cancelled' AND orderType!='On-Hand' order by orderID;";
+                            $sql = "SELECT * FROM tblorders WHERE orderStatus!='Archived' AND orderStatus!='Finished' AND orderStatus!='WFA' AND orderType!='On-Hand' order by orderID;";
 
                             $result = mysqli_query($conn, $sql);
                             if($result){
