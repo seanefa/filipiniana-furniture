@@ -22,9 +22,9 @@ $orID = "OR". $or;
   </script>
 </head>
 <?php 
-    
 
-    
+
+
 $id = $_GET['id'];
 include "dbconnect.php";
 $sql = "SELECT * FROM tblcompany_info";
@@ -148,12 +148,12 @@ $orderID = $orRoq['orderID'];
               $res3 = mysqli_query($conn,$sql3);
               while($row3 = mysqli_fetch_assoc($res3)){
                 echo '<tr>
-              <td style="text-align:right;"> - '.$row3['productName'].'</td>
-              <td>'.$row3['productDescription'].'</td>
-              <td style="text-align:right;"></td>';
-              $tQuan = $tQuan + $row['orderQuantity'] * 1;
-              echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
-              <td style="text-align:right;"></td></tr>';
+                <td style="text-align:right;"> - '.$row3['productName'].'</td>
+                <td>'.$row3['productDescription'].'</td>
+                <td style="text-align:right;"></td>';
+                $tQuan = $tQuan + $row['orderQuantity'] * 1;
+                echo '<td style="text-align:right">'.$row['orderQuantity'] * 1 .'</td>
+                <td style="text-align:right;"></td></tr>';
 
               }
             }
@@ -188,7 +188,52 @@ $orderID = $orRoq['orderID'];
 
 
   <div class="row">
-    <div class="col-xs-12">
+    <?php
+    $down = 0;
+    $bal = 0;
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+    $res = mysqli_query($conn,$sql);
+    $tpay = 0;
+    $delFee = 0;
+    $penFee = 0;
+    while($trow = mysqli_fetch_assoc($res)){
+      $tpay = $tpay + $trow['amountPaid'];
+      $delFee = $trow['invDelrateID'];
+      $penFee = $trow['invPenID'];
+    }
+    $down = $tpay;
+    $tPrice1 = $tPrice + $delFee + $penFee;
+    $bal = $tPrice - $down;
+    ?>
+    <div class="col-xs-6">
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
+      <br>
+      <div class="table-responsive">
+        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+          <tr>
+            <td>Total Order Price</td>
+            <td>Php <?php echo number_format($tPrice,2)?></td>
+          </tr>
+          <tr>
+            <td>Delivery Rate</td>
+            <td>Php <?php echo number_format($delFee,2)?></td>
+          </tr>
+          <tr>
+            <td>Penalty Fee:</td>
+            <td>Php <?php echo number_format($penFee,2)?></td>
+          </tr>
+          <tr>
+            <td>Grand Total</td>
+            <td>Php <?php echo number_format($tPrice1,2)?></td>
+          </tr>
+          <tr>
+            <td>Remaining Balance:</td>
+            <td style="color:red">Php <?php echo number_format($bal,2)?></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
       <br>
       <div class="table-responsive">
@@ -219,13 +264,13 @@ $orderID = $orRoq['orderID'];
           }
 
           ?>
-            <?php
-            include "dbconnect.php";
-            $sql = "SELECT * FROM tblpayment_details a, tblmodeofpayment b WHERE b.modeofpaymentID = a.mopID and a.payment_detailsID = '$id'";
-            $res = mysqli_query($conn,$sql);
-            $trow = mysqli_fetch_assoc($res);
-            $payment = $trow['amountPaid'];
-            ?>
+          <?php
+          include "dbconnect.php";
+          $sql = "SELECT * FROM tblpayment_details a, tblmodeofpayment b WHERE b.modeofpaymentID = a.mopID and a.payment_detailsID = '$id'";
+          $res = mysqli_query($conn,$sql);
+          $trow = mysqli_fetch_assoc($res);
+          $payment = $trow['amountPaid'];
+          ?>
           <tr>
             <td>Mode of Payment</td>
             <td><?php echo $trow['modeofpaymentDesc']?></td>
@@ -256,17 +301,17 @@ $orderID = $orRoq['orderID'];
     <div class="col-md-12">
       <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
       <p><?php 
-        include "dbconnect.php"; 
-        $datepr = date("Y-m-d");
-        $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
-          $result5 = mysqli_query($conn, $sql5);
-          while ($row5 = mysqli_fetch_assoc($result5))
-          { 
-            if($row5['userStatus']=="Active" && $row5['userType']=="admin")
-			{
-              echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
-            }
-          }  ?></p>
+      include "dbconnect.php"; 
+      $datepr = date("Y-m-d");
+      $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
+      $result5 = mysqli_query($conn, $sql5);
+      while ($row5 = mysqli_fetch_assoc($result5))
+      { 
+        if($row5['userStatus']=="Active" && $row5['userType']=="admin")
+        {
+          echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
+        }
+      }  ?></p>
     </div>
   </div>
 </body>
