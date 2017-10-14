@@ -357,6 +357,8 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
           	<li><a href="mode-of-payment.php">Mode of Payment</a></li>
             </ul>
           </li>
+
+          <li><a href="backup-&-recovery.php">Backup & Recovery</a></li>
         </ul>
       </li>
 
