@@ -87,20 +87,16 @@ $orderID = $orRoq['orderID'];
        <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table">
           <tr>
-            <td>Name</td>
-            <td><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td><b>Name</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td><b>Contact Number</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerContactNum'];?></td>
           </tr>
           <tr>
-            <td>Address</td>
-            <td><?php echo $custRow['customerAddress'];?></td>
-          </tr>
-          <tr>
-            <td>Contact Number</td>
-            <td><?php echo $custRow['customerContactNum'];?></td>
-          </tr>
-          <tr>
-            <td>Email Address</td>
-            <td><?php echo $custRow['customerEmail'];?></td>
+            <td><b>Address</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerAddress'];?></td>
+            <td><b>Email Address</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerEmail'];?></td>
           </tr>
         </table>
       </div>
@@ -195,11 +191,22 @@ $orderID = $orRoq['orderID'];
     $delFee = 0;
     $penFee = 0;
     $price = 0;
+    $discount = "";
     while($trow = mysqli_fetch_assoc($res)){
       $tpay = $tpay + $trow['amountPaid'];
       $price = $tPrice;
       $delFee = $trow['invDelrateID'];
       $penFee = $trow['invPenID'];
+      $discount = $trow['invDiscount'];
+    }
+    if($discount!=""){
+      $disc = $discount;
+      $disc = $discount / 100;
+      $minus = $price * $disc;
+      $price = $price - $minus;
+    }
+    else{
+      $discount = 0;
     }
     $down = $tpay;
     $tPrice1 = $price + $delFee + $penFee;
@@ -211,20 +218,28 @@ $orderID = $orRoq['orderID'];
       <div class="table-responsive">
         <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
           <tr>
-            <td>Total Order Price</td>
-            <td>Php <?php echo number_format($tPrice,2)?></td>
+            <td>Order Price</td>
+            <td style="text-align:right">Php <?php echo number_format($tPrice,2);?></td>
+          </tr>
+          <tr>
+            <td>Discount</td>
+            <td style="text-align:right"><?php echo $discount;?> %</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td style="text-align:right">Php <?php echo number_format($price,2);?></td>
           </tr>
           <tr>
             <td>Delivery Rate</td>
-            <td>Php <?php echo number_format($delFee,2)?></td>
+            <td style="text-align:right">Php <?php echo number_format($delFee,2)?></td>
           </tr>
           <tr>
             <td>Penalty Fee:</td>
-            <td>Php <?php echo number_format($penFee,2)?></td>
+            <td style="text-align:right">Php <?php echo number_format($penFee,2)?></td>
           </tr>
           <tr>
             <td>Grand Total</td>
-            <td>Php <?php echo number_format($tPrice1,2)?></td>
+            <td style="text-align:right">Php <?php echo number_format($tPrice1,2)?></td>
           </tr>
         </table>
       </div>
@@ -296,7 +311,11 @@ $orderID = $orRoq['orderID'];
   <div class="row">
     <div class="col-md-12">
       <p>"This Document is not Valid for Claiming Input Taxes"<br>This Official Receipt shall be valid for five(5) years from the dateof ATP.</p>
-      <p><?php 
+    </div>
+  </div>
+</body>
+<footer>
+        <p><?php 
       include "dbconnect.php"; 
       $datepr = date("Y-m-d");
       $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
@@ -307,10 +326,9 @@ $orderID = $orRoq['orderID'];
         {
           echo('Printed By: '.$row5['empFirstName'].' '.$row5['empMidName'].' '.$row5['empLastName'].'     ['.$datepr.']');
         }
-      }  ?></p>
-    </div>
-  </div>
-</body>
+      }  ?>
+    </p>
+    <footer>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 <?php

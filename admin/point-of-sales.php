@@ -8,6 +8,39 @@ include 'dbconnect.php';
 <body class ="fix-header fix-sidebar">
   <head>
     <script>
+
+    $(document).ready(function(){
+      $('#aTendered').on('change',function(){
+        var mat = parseInt($("#aTendered").val());
+        var bal = $("#sideAmountDue").html();
+        if(mat==bal){
+          var e = "";
+          $("#error").html(e);
+          $('#aTendered').css('border-color','gray');
+          $('#submitBtn').prop('disabled',false);
+        }
+        else{
+          var e = "Please input a valid number.";
+          $("#error").html(e);
+          $('#aTendered').css('border-color','red');
+          $('#submitBtn').prop('disabled',true);
+        }
+      });
+    });
+
+    $(document).ready(function(){
+      $("#discounts").on('change',function(){
+        var val = parseFloat($("#discounts").val());
+        $("#discountPer").val(val);
+        var oPrice = parseFloat($("#grandTotal").val());
+        alert(oPrice);
+        var p = val / 100;
+        var minus = oPrice * p;
+        var nPrice = oPrice - minus;
+        $("#sideAmountDue").html(nPrice);
+        $("#aTendered").val(nPrice);
+      });
+    });
     
     var added_new_cust = false;
 
@@ -117,75 +150,75 @@ function addnewCust(){
   var conts= $('#edit5').val();
   var emails = $('#edit6').val();
   
-if(lName == ""){
-  
-  $('#edit1').css('border-color','red');
-}
-else{
-  $('#edit1').css('border-color','limegreen');
-}
-if(mName == ""){
-  $('#edit2').css('border-color','red');
-}
-else{
-  $('#edit2').css('border-color','limegreen');
-}
-if(fName == ""){
-  $('#edit3').css('border-color','red');
-}
-else{
-  $('#edit3').css('border-color','limegreen');
-}
-if(addrs == ""){
-  $('#edit4').css('border-color','red');
-}
-else{
-  $('#edit4').css('border-color','limegreen');
-}
-if(conts == ""){
-  $('#edit5').css('border-color','red');
-}
-else{
-  $('#edit5').css('border-color','limegreen');
-}
-if(emails == ""){
-  $('#edit6').css('border-color','red');
-}
-else{
-  $('#edit6').css('border-color','limegreen');
-}
+  if(lName == ""){
+
+    $('#edit1').css('border-color','red');
+  }
+  else{
+    $('#edit1').css('border-color','limegreen');
+  }
+  if(mName == ""){
+    $('#edit2').css('border-color','red');
+  }
+  else{
+    $('#edit2').css('border-color','limegreen');
+  }
+  if(fName == ""){
+    $('#edit3').css('border-color','red');
+  }
+  else{
+    $('#edit3').css('border-color','limegreen');
+  }
+  if(addrs == ""){
+    $('#edit4').css('border-color','red');
+  }
+  else{
+    $('#edit4').css('border-color','limegreen');
+  }
+  if(conts == ""){
+    $('#edit5').css('border-color','red');
+  }
+  else{
+    $('#edit5').css('border-color','limegreen');
+  }
+  if(emails == ""){
+    $('#edit6').css('border-color','red');
+  }
+  else{
+    $('#edit6').css('border-color','limegreen');
+  }
 
 
 
-if(lName != "" && fName != "" && mName !=  "" && addrs != "" && conts != "" && emails != ""){
-  $.ajax({
-    type: 'post',
-    url: 'add-new-cust.php',
-    data: {
-      ln: lName, fn: fName, mn: mName, addr: addrs, cont: conts, email: emails, 
-    },
-    success: function (response){
-      $('#msg').html(response);
-      $('#myModal').modal('hide');
-      $.ajax({
-        type: 'post',
-        url: 'POS-load-customer.php',
-        data: {
+  if(lName != "" && fName != "" && mName !=  "" && addrs != "" && conts != "" && emails != ""){
+    $.ajax({
+      type: 'post',
+      url: 'add-new-cust.php',
+      data: {
+        ln: lName, fn: fName, mn: mName, addr: addrs, cont: conts, email: emails, 
+      },
+      success: function (response){
+        $('#msg').html(response);
+        $('#myModal').modal('hide');
+        $.ajax({
+          type: 'post',
+          url: 'POS-load-customer.php',
+          data: {
 
-        },
-        success: function (response) {
-          $('#savedCustomer').empty().append(response);
-        }
-      });
-    }
-  });
-   added_new_cust = true; 
-}
-else if(error != 0){
-  alert('Fill up the required fields');
-}
+          },
+          success: function (response) {
+            $('#savedCustomer').empty().append(response);
+          }
+        });
+      }
+    });
+    added_new_cust = true; 
+  }
+  else if(error != 0){
+    alert('Fill up the required fields');
+  }
 
- 
+
 
 
 }
@@ -395,38 +428,38 @@ $(document).ready(function(){
 //new customer validation
 var flag = true;
 function inputValidate(id){
-    var user = $('#edit'+id).val();
-    
-    userkey = $('#edit'+id).val();
-    userkey = userkey.slice(userkey.length -1 , userkey.length);
+  var user = $('#edit'+id).val();
 
-      if(userkey == '\\'){
-        $('#saveCustBtn').prop('disabled',true);
-      $('#message'+id).html('Symbols not Allowed');
-      $('#edit'+id).css('border-color','red');
-      }else{
+  userkey = $('#edit'+id).val();
+  userkey = userkey.slice(userkey.length -1 , userkey.length);
+
+  if(userkey == '\\'){
+    $('#saveCustBtn').prop('disabled',true);
+    $('#message'+id).html('Symbols not Allowed');
+    $('#edit'+id).css('border-color','red');
+  }else{
     $.post('pos-check.php',{username : user}, function(data){
-     
+
      if(data == 'Symbols not allowed'){
        flag = true;
-          $('#saveCustBtn').prop('disabled',true);
-      $('#message'+id).html(data);
-      $('#edit'+id).css('border-color','red');
+       $('#saveCustBtn').prop('disabled',true);
+       $('#message'+id).html(data);
+       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'White space not allowed'){
        flag = true
 
-          $('#saveCustBtn').prop('disabled',true);
-      $('#message'+id).html(data);
-      $('#edit'+id).css('border-color','red');
+       $('#saveCustBtn').prop('disabled',true);
+       $('#message'+id).html(data);
+       $('#edit'+id).css('border-color','red');
      }
      else if(data == 'good'){
       flag = false;
-       $('#message'+id).html('');
-     $('#saveCustBtn').prop('disabled',false);
+      $('#message'+id).html('');
+      $('#saveCustBtn').prop('disabled',false);
       $('#edit'+id).css('border-color','limegreen');
-     }
-    });
+    }
+  });
   }
 
   if(!flag){
@@ -435,62 +468,62 @@ function inputValidate(id){
     $('#saveCustBtn').prop('disabled',true);
   }
 
-  }
+}
 
-  function validate(id){
-    var val = $('#edit'+id).val();
-    if(validateEmail(val)){
-      $('#edit'+id).css('border-color','limegreen');
-       $('#message'+id).html(''); 
+function validate(id){
+  var val = $('#edit'+id).val();
+  if(validateEmail(val)){
+    $('#edit'+id).css('border-color','limegreen');
+    $('#message'+id).html(''); 
     $('#saveCustBtn').prop('disabled',false);
-    }else{
-       $('#edit'+id).css('border-color','red');
-       $('#message'+id).html('Email not valid'); 
-    $('#saveCustBtn').prop('disabled',true);
-    }
+  }else{
+   $('#edit'+id).css('border-color','red');
+   $('#message'+id).html('Email not valid'); 
+   $('#saveCustBtn').prop('disabled',true);
+ }
 
-  }
+}
 
-  function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }
 
 function removeQuant(id,quant){
-    quant = parseInt(quant);
-    var productQuantity = parseInt($('#ribbon'+id).val());
-    var origQuant = $('#origribbon'+id).val();
+  quant = parseInt(quant);
+  var productQuantity = parseInt($('#ribbon'+id).val());
+  var origQuant = $('#origribbon'+id).val();
 
-    if(quant > productQuantity){
-      return false;
-    }else if(quant <= productQuantity){
-      productQuantity = productQuantity - quant;
-       $('#rib'+id).html('');
-      $('#rib'+id).html(productQuantity+'  ON-HAND');
-      $('#ribbon'+id).val(productQuantity);
-      return true;
-    }
+  if(quant > productQuantity){
+    return false;
+  }else if(quant <= productQuantity){
+    productQuantity = productQuantity - quant;
+    $('#rib'+id).html('');
+    $('#rib'+id).html(productQuantity+'  ON-HAND');
+    $('#ribbon'+id).val(productQuantity);
+    return true;
+  }
 
 
 
 }
 function addQuant(id,quant){
-    quant = parseInt(quant);
-    var productQuantity = parseInt($('#ribbon'+id).val());
-    var origQuant = $('#origribbon'+id).val();
-    
-    if(origQuant < (quant + productQuantity)){
-     
-      return false;
-    }else if(origQuant >= (quant + productQuantity)){
+  quant = parseInt(quant);
+  var productQuantity = parseInt($('#ribbon'+id).val());
+  var origQuant = $('#origribbon'+id).val();
 
-      productQuantity = productQuantity + quant;
+  if(origQuant < (quant + productQuantity)){
 
-       $('#rib'+id).html('');
-      $('#rib'+id).html(productQuantity+'  ON-HAND');
-      $('#ribbon'+id).val(productQuantity);
-      return true;
-    }
+    return false;
+  }else if(origQuant >= (quant + productQuantity)){
+
+    productQuantity = productQuantity + quant;
+
+    $('#rib'+id).html('');
+    $('#rib'+id).html(productQuantity+'  ON-HAND');
+    $('#ribbon'+id).val(productQuantity);
+    return true;
+  }
 
 
 
@@ -773,32 +806,6 @@ function addQuant(id,quant){
           <div role="tabpanel" class="tab-pane fade active in" id="job">
             <div class="panel-wrapper collapse in" aria-expanded="true">
               <div class="panel-body">
-                <div class="row" style="background-color: #FCF8E3;">
-                  <h4>Items In Cart:<span class="pull-right" id="sideItemsInCart"></span></h4>
-                </div>
-                <hr>
-                <!--<div class="row" style="background-color: #FCF8E3;">
-                  <h4>Sub-Total: &#8369; <span class="pull-right" id="sideSubtotal"></span></h4>
-                </div>-->
-                <div class="row" style="background-color: #DFF0D8;">
-                  <h4 style="color: #335E05; font-weight: bold;">Sub-Total: &#8369; <span class="pull-right" id="sideTotal"></span></h4>
-                </div>
-                <hr>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="panel panel-info" style="margin-top: -15px;">
-        <div class="tab-content thumbnail">
-          <!-- CATEGORY -->
-          <div role="tabpanel" class="tab-pane fade active in" id="job">
-            <div class="panel-wrapper collapse in" aria-expanded="true">
-              <div class="panel-body">
                 <div class="descriptions">
                   <div class="row">
                     <div class="col-md-12">
@@ -812,19 +819,19 @@ function addQuant(id,quant){
                   <div class="deliveryDetails" id="deliveryDetails" style="display: none;">
                     <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
                     <div class="row">
-                          <div class="col-md-6">
-                            <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
-                          </div>
-                          <div class="col-md-6">
-                            <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
-                          </div>
+                      <div class="col-md-6">
+                        <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
+                      </div>
                     </div><br>
                     <div class="row">
-                        <div class="col-md-12">
-                          <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
+                      <div class="col-md-12">
+                        <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
                       </div>
                     </div>
-<br>
+                    <br>
                     <div class="row">
                       <div class="col-md-8">
                         <div class="form-group">
@@ -856,22 +863,79 @@ function addQuant(id,quant){
           </div>
         </div>
       </div>
+
+      <div class="panel panel-info" style="margin-top: -15px;">
+        <div class="tab-content thumbnail">
+          <!-- CATEGORY -->
+          <div role="tabpanel" class="tab-pane fade active in" id="job">
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+              <div class="panel-body">
+                <div class="row" style="background-color: #FCF8E3;">
+                  <h4>Items In Cart:<span class="pull-right" id="sideItemsInCart"></span></h4>
+                </div>
+                <hr>
+                <!--<div class="row" style="background-color: #FCF8E3;">
+                  <h4>Sub-Total: &#8369; <span class="pull-right" id="sideSubtotal"></span></h4>
+                </div>-->
+                <div class="row" style="background-color: #DFF0D8;">
+                  <h4 style="color: #335E05; font-weight: bold;">Sub-Total: &#8369; <span class="pull-right" id="sideTotal"></span></h4>
+                  <input type="hidden" id="grandTotal" value="0"/>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="panel panel-info" style="margin-top: -15px;">
         <div class="tab-content thumbnail">
           <div role="tabpanel" class="tab-pane fade active in" id="job">
             <div class="panel-wrapper collapse in" aria-expanded="true">
               <div class="panel-body">
                 <h4>Amount Due: &#8369;<span class="pull-right" id="sideAmountDue"></span></h4>
-                <hr><b>Mode of Payment:</b>
-                <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="mop" id="mop">
-                 <?php
-                 $delsql = "SELECT * FROM tblmodeofpayment;";
-                 $delresult = mysqli_query($conn,$delsql);
-                 while($delrow = mysqli_fetch_assoc($delresult)){
-                  echo('<option value="'.$delrow['modeofpaymentID'].'">'.$delrow['modeofpaymentDesc'].'</option>');
-                }
-                ?>
-              </select>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Discounts</label>
+                      <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="discounts" id="discounts">
+                        <option value="0">None</option>
+                        <?php
+                        $delsql = "SELECT * FROM tbldiscounts WHERE discountStatus = 'Active'";
+                        $delresult = mysqli_query($conn,$delsql);
+                        while($delrow = mysqli_fetch_assoc($delresult)){
+                          echo('<option value="'.$delrow['discountPercentage'].'">'.$delrow['discountName'].'</option>');
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label" style="color:white">Percentage</label>
+                      <div class="input-group">
+                        <div class="input-group-addon"><small> % </small></div>
+                        <input style="text-align:right;" id="discountPer" name="discountPercent" class="form-control" value="0" readonly/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="control-label">Mode of Payment:</label>
+                      <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="mop" id="mop">
+                       <?php
+                       $delsql = "SELECT * FROM tblmodeofpayment;";
+                       $delresult = mysqli_query($conn,$delsql);
+                       while($delrow = mysqli_fetch_assoc($delresult)){
+                        echo('<option value="'.$delrow['modeofpaymentID'].'">'.$delrow['modeofpaymentDesc'].'</option>');
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <hr>
               <input type="hidden" id="balance" value="<?php echo $bal?>">
               <div id="cash">
@@ -928,7 +992,7 @@ function addQuant(id,quant){
                 <div class="row">
                   <div class="row">
                     <div class="col-md-5 pull-right">
-                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()"><i class="ti-check"></i> Save & Print</button>
+                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()" disabled><i class="ti-check"></i> Save & Print</button>
                     </div>
                   </div>
                 </div>
@@ -1000,12 +1064,12 @@ function addQuant(id,quant){
 
                       else{
                         if(addQuant(xid,result)){
-                        if(qunatityy != 0){
-                          var remover = qunatityy;
-                          var a = parseInt($('#prices'+row.value).val());
-                          var b = parseInt($('#quants'+row.value).val());
+                          if(qunatityy != 0){
+                            var remover = qunatityy;
+                            var a = parseInt($('#prices'+row.value).val());
+                            var b = parseInt($('#quants'+row.value).val());
 
-                          var totalP= $('#totalPrice').html();
+                            var totalP= $('#totalPrice').html();
                       totalP=totalP.replace(/\,/g,''); //deletes comma
                       totalP=parseInt(totalP,10);
 
@@ -1091,45 +1155,45 @@ function addQuant(id,quant){
                 }else{
 
                 }
-                }
-
-
-
-
-
               }
+
+
+
+
+
+            }
                  ////////             ADD OF PRODUCTS TO CART ///////////////
                  function addRow(row){
                    var xid = $('#id'+row.value).val();
-                  var qunatityy = parseInt($('#quants'+row.value).val());
-                  var x = totalQuant - parseInt($('#quants'+row.value).val());
-                  var y = tempPrice - parseInt($('#prices'+row.value).val());
-                  var result;
+                   var qunatityy = parseInt($('#quants'+row.value).val());
+                   var x = totalQuant - parseInt($('#quants'+row.value).val());
+                   var y = tempPrice - parseInt($('#prices'+row.value).val());
+                   var result;
 
-                  result = parseInt(prompt('Add how many products?'));
-                  if(result == null || isNaN(result) ||  result == 0 || result < 0) {
+                   result = parseInt(prompt('Add how many products?'));
+                   if(result == null || isNaN(result) ||  result == 0 || result < 0) {
 
                     if(result == 0){
-                      alert('Input a number');
+                      alert('Input a Number');
                     }
                     else if(isNaN(result)){
-                      alert('Input a number');
+                      alert('Input a Number');
                     }
 
                     else if(result < 0){
-                      alert('Input positive number');
+                      alert('Input Positive number');
 
                     }
                     return;
                   }
                   else{
                     if(removeQuant(xid,result)){
-                    if(qunatityy != 0){
-                      var remover = qunatityy;
-                      var a = parseInt($('#prices'+row.value).val());
-                      var b = parseInt($('#quants'+row.value).val());
+                      if(qunatityy != 0){
+                        var remover = qunatityy;
+                        var a = parseInt($('#prices'+row.value).val());
+                        var b = parseInt($('#quants'+row.value).val());
 
-                      var totalP= $('#totalPrice').html();
+                        var totalP= $('#totalPrice').html();
                       totalP=totalP.replace(/\,/g,''); //deletes comma
                       totalP=parseInt(totalP,10);
 
@@ -1173,15 +1237,15 @@ function addQuant(id,quant){
                       Math.round($('#dChange').val(xTotal - $('#aTendered').val()));
                       
                     }
-                          }else{
-                      var ribs = $('#ribbon'+id).val();
+                  }else{
+                    var ribs = $('#ribbon'+id).val();
                       //if prod quant < input quant
                       if(ribs != 0){
-                      alert('There are only '+ribs+'.');
-                    }else{
-                      alert('There no more available product.');
+                        alert('There are only '+ribs+'.');
+                      }else{
+                        alert('There no more available product.');
+                      }
                     }
-                  }
                   }
 
 
@@ -1198,21 +1262,21 @@ function addQuant(id,quant){
                  var quant =parseInt($('#quant'+id).val());
 
                  if(removeQuant(id,quant)){
-                 totalQuant = parseInt($('#totalQ').text());
-                 var tP = $('#price'+id).val().toString();
-                 var price =parseInt(tP.replace(',',''));
-                 price = price * quant;
-                 tempPrice = tempPrice+price;
-                 totalQuant = totalQuant+quant;
-                 xTotal = tempPrice;
+                   totalQuant = parseInt($('#totalQ').text());
+                   var tP = $('#price'+id).val().toString();
+                   var price =parseInt(tP.replace(',',''));
+                   price = price * quant;
+                   tempPrice = tempPrice+price;
+                   totalQuant = totalQuant+quant;
+                   xTotal = tempPrice;
 
 
-                 if(isInArray(id,idArray)){
+                   if(isInArray(id,idArray)){
 
-                  if(quant > 0){
-                    $('#quant'+id).val(0);
-                    $('#'+id).attr('data-toggle','modal');
-                    $('#'+id).attr('href','#myModal1');
+                    if(quant > 0){
+                      $('#quant'+id).val(0);
+                      $('#'+id).attr('data-toggle','modal');
+                      $('#'+id).attr('href','#myModal1');
 
                     //price parser
                     var priced= $('#prices'+id+'').val();
@@ -1302,6 +1366,7 @@ function addQuant(id,quant){
 
 
                   $('#totalPrice').html(String(tempPrice));
+                  $('#grandTotal').val(tempPrice);
                   $('#totalQ').html(String(totalQuant));
                   $('#totalBadge').html(String(totalQuant));
                   $('#sideItemsInCart').html(
@@ -1327,89 +1392,89 @@ function addQuant(id,quant){
               }
             }else{
               $('#'+id).attr('data-toggle','');
-                  $('#'+id).attr('href','');
+              $('#'+id).attr('href','');
               var ribs = $('#ribbon'+id).val();
               //if prod quant < input quant
               if(ribs != 0){
-              alert('There are only '+ribs+'.');
-            }else{
-              alert('There no more available product.');
-            }
-            }
-            }
-
-
-            $(document).ready(function(){
-              var x,y;
-
-              $('#ratePick').click(function(){ 
-
-                if($('#ratePick').is(':checked')){ 
-                  $('#da').prop('disabled',true);
-                  $('#city').prop('disabled',true);
-                  $('#state').prop('disabled',true);
-                  $('#zip').prop('disabled',true);
-                  $('#delloc').prop('disabled',true);
-                  $('#da').val('');
-                  $('#city').val('');
-                  $('#state').val('');
-                  $('#zip').val('');
-                  $('#delloc').val('');
-
-                  $('#dRate').val(0);
-
-                  if($('#aTendered').val() < (x)){
-                   Math.round($('#aTendered').val( (x)+d));
-                 }
-                 else if($('#aTendered').val() >= (x)){
-                  var e = parseInt($('#aTendered').val());
-                  Math.round($('#dChange').val((x-$('#aTendered').val())+d));
-                }
+                alert('There are only '+ribs+'.');
+              }else{
+                alert('There no more available product.');
               }
-
-            });
-              $('#rateDel').click(function(){
-                if($('#rateDel').is(':checked')){ 
-                  $('#dRate').val(0);
-                  $('#da').prop('disabled',false);
-                  $('#city').prop('disabled',false);
-                  $('#state').prop('disabled',false);
-                  $('#zip').prop('disabled',false);
-                  $('#delloc').prop('disabled',false);
-                  $('#da').val('');
-                  $('#city').val('');
-                  $('#state').val('');
-                  $('#zip').val('');
-                  $('#delloc').val('');
-
-                  if($('#aTendered').val() < (x)){
-                   Math.round($('#aTendered').val( (x)+d));
-                 }
-                 else if($('#aTendered').val() >= (x)){
-                  var e = parseInt($('#aTendered').val());
-                  Math.round($('#aTendered').val((x-$('#aTendered').val())+d));
-                }
-              }
-            });
+            }
+          }
 
 
+          $(document).ready(function(){
+            var x,y;
 
-              $('#delloc').change(function(){
-                var y =  parseInt($('#aTendered').val());
-                Math.round($('#aTendered').val( xTotal));
-                $('#dRate').val(parseInt($('#delloc').val()));
-                var d = parseInt($('#dRate').val());
+            $('#ratePick').click(function(){ 
 
-                if($('#aTendered').val() < (xTotal)){
-                 Math.round($('#aTendered').val( (xTotal)+d));
-                 Math.round($('#dChange').val($('#aTendered').val( (x)+d)));
+              if($('#ratePick').is(':checked')){ 
+                $('#da').prop('disabled',true);
+                $('#city').prop('disabled',true);
+                $('#state').prop('disabled',true);
+                $('#zip').prop('disabled',true);
+                $('#delloc').prop('disabled',true);
+                $('#da').val('');
+                $('#city').val('');
+                $('#state').val('');
+                $('#zip').val('');
+                $('#delloc').val('');
+
+                $('#dRate').val(0);
+
+                if($('#aTendered').val() < (x)){
+                 Math.round($('#aTendered').val( (x)+d));
                }
-               else if($('#aTendered').val() >= (xTotal / 2)){
+               else if($('#aTendered').val() >= (x)){
                 var e = parseInt($('#aTendered').val());
-                Math.round($('#aTendered').val((xTotal-$('#aTendered').val())+d));
+                Math.round($('#dChange').val((x-$('#aTendered').val())+d));
               }
-            });
-            });
+            }
+
+          });
+            $('#rateDel').click(function(){
+              if($('#rateDel').is(':checked')){ 
+                $('#dRate').val(0);
+                $('#da').prop('disabled',false);
+                $('#city').prop('disabled',false);
+                $('#state').prop('disabled',false);
+                $('#zip').prop('disabled',false);
+                $('#delloc').prop('disabled',false);
+                $('#da').val('');
+                $('#city').val('');
+                $('#state').val('');
+                $('#zip').val('');
+                $('#delloc').val('');
+
+                if($('#aTendered').val() < (x)){
+                 Math.round($('#aTendered').val( (x)+d));
+               }
+               else if($('#aTendered').val() >= (x)){
+                var e = parseInt($('#aTendered').val());
+                Math.round($('#aTendered').val((x-$('#aTendered').val())+d));
+              }
+            }
+          });
+
+
+
+            $('#delloc').change(function(){
+              var y =  parseInt($('#aTendered').val());
+              Math.round($('#aTendered').val( xTotal));
+              $('#dRate').val(parseInt($('#delloc').val()));
+              var d = parseInt($('#dRate').val());
+
+              if($('#aTendered').val() < (xTotal)){
+               Math.round($('#aTendered').val( (xTotal)+d));
+               Math.round($('#dChange').val($('#aTendered').val( (x)+d)));
+             }
+             else if($('#aTendered').val() >= (xTotal / 2)){
+              var e = parseInt($('#aTendered').val());
+              Math.round($('#aTendered').val((xTotal-$('#aTendered').val())+d));
+            }
+          });
+          });
 
 $(document).ready(function(){
   var y =  parseInt($('#aTendered').val());

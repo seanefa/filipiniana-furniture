@@ -13,6 +13,8 @@ $orderdatepick = $orderdaterec;
 $orderstat = "Ready for release"; 
 $ordertype = "On-Hand";
 
+$discount = $_POST['discountPercent'];
+
 $selected = $_POST['Pcart'];
 $selectedQuant = $_POST['Pquant'];
 $selectedPrice = $_POST['Pprice'];
@@ -38,7 +40,6 @@ $mop = $_POST['mop'];
 $employee = $_SESSION['userID'];
 $remarks = "An order.";
 
-
 $pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
 echo "<br>pssql" . $pssql;
 
@@ -61,7 +62,7 @@ if (mysqli_query($conn, $pssql)) {
     }
 
 
-    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";
+    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`,`invDiscount`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '0','$discount');";
     echo "<br>inv: " . $inv;
     mysqli_query($conn,$inv);
     $invID = mysqli_insert_id($conn);
