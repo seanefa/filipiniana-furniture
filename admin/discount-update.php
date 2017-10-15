@@ -10,11 +10,13 @@ $updatediscount = "UPDATE tbldiscounts SET discountName='$discountname', discoun
 
 if($conn->query($updatediscount) === true)
 {
-	header("Location: discounts.php");
+  	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 }
 else
 {
-	echo "Query: " . $updatediscount . "<br> Error: " . $conn->error();
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 }
 $conn->close();
 ?>

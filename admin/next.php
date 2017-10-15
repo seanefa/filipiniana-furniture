@@ -24,48 +24,43 @@ if(isset($_GET['id'])){
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
   $(document).ready(function(){
-    $('#aTendered').on('keyup',function(){
-      var mat = $("#aTendered").val();
-      var bal = $("#dp").val();
-      if(isNaN(mat)){
-        var e = "Please input a valid number.";
-        $("#error").html(e);
-        $('#aTendered').css('border-color','red');
-        $('#saveBtn').prop('disabled',true);
-      }
-      else if(mat<0){
-        var e = "Numbers less than 0 are not allowed";
-        $("#error").html(e);
-        $('#aTendered').css('border-color','red');
-        $('#saveBtn').prop('disabled',true);
-      }
-      else if(mat==""){
+    $('#aTendered').on('change',function(){
+      var mat = parseInt($("#aTendered").val());
+      var bal = $("#newAmountDue").val();
+      var dp = $("#downPay").val();
+      if((mat>=dp) && (mat<=bal)){
         var e = "";
-        var change = 0.00;
-        $("#dChange").val(change);
         $("#error").html(e);
         $('#aTendered').css('border-color','gray');
-        $('#saveBtn').prop('disabled',true);
+        $('#saveBtn').prop('disabled',false);
       }
-        else if(mat<bal){ //if may malaki diba? hahaha
-          var change = mat - bal;
-          var e = "The payment has exceeded the amount due";
+      else{
+          var e = "Please input a valid number.";
           $("#error").html(e);
           $('#aTendered').css('border-color','red');
           $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          var change = mat - bal;
-          var change = change + ".00";
-          $("#dChange").val(change);
-          $("#error").html(e);
-          $('#aTendered').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-
-        }
-
-      });
+      }
+      // else{
+      //   if(isNaN(mat)){
+      //     var e = "Please input a valid number.";
+      //     $("#error").html(e);
+      //     $('#aTendered').css('border-color','red');
+      //     $('#saveBtn').prop('disabled',true);
+      //   }
+      //   else if(mat<0){
+      //     var e = "Numbers less than 0 are not allowed";
+      //     $("#error").html(e);
+      //     $('#aTendered').css('border-color','red');
+      //     $('#saveBtn').prop('disabled',true);
+      //   }
+      //   else if(mat==""){
+      //     var e = "";
+      //     $("#error").html(e);
+      //     $('#aTendered').css('border-color','red');
+      //     $('#saveBtn').prop('disabled',true);
+      //   }
+      // }
+    });
 });
 
 
@@ -119,6 +114,78 @@ $(document).ready(function(){
   });
 });
 
+
+//DISCOUNTS
+
+$(document).ready(function(){
+  $("#discounts").on('change',function(){
+    var val = parseFloat($("#discounts").val());
+    $("#discountPer").val(val);
+    var oPrice = parseFloat($("#orPrice").val());
+    var dRate = parseFloat($("#paydRate").val());
+    var down = parseFloat($("#downPercent").val());
+    var p = val / 100;
+    var minus = oPrice * p;
+    var nPrice = oPrice - minus;
+    var due = nPrice + dRate;
+    var newDown = nPrice * down;
+    var newDown = nPrice - newDown;
+    $("#tADue").val(due);
+    $("#newAmountDue").val(nPrice);
+    $("#downPay").val(newDown);
+    $("#aTendered").val(newDown);
+  });
+});
+
+$(document).ready(function(){
+  $("#paydRate").on('keyup',function(){
+    var val = parseFloat($("#paydRate").val());
+    var oPrice = parseFloat($("#newAmountDue").val());
+    var newPrice = oPrice + val;
+    $("#tADue").val(newPrice);
+  });
+});
+
+
+$(document).ready(function(){
+  $('#paydRate').on('keyup',function(){
+    var mat = parseFloat($("#paydRate").val());
+    if(isNaN(mat)){
+      var e = "Please input a valid number.";
+      $("#error").html(e);
+      $('#paydRate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else if(mat<0){
+      var e = "Numbers less than 0 are not allowed";
+      $("#error").html(e);
+      $('#paydRate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else if(mat==""){
+      var e = "";
+      $("#error").html(e);
+      $('#paydRate').val(0);
+      $('#paydRate').css('border-color','gray');
+      $('#saveBtn').prop('disabled',true);
+    }
+    else{
+      var e = "";
+      $("#error").html(e);
+      $('#paydRate').css('border-color','gray');
+      $('#saveBtn').prop('disabled',false);
+    }
+  });
+});
+
+$(document).ready(function(){
+  $('#dRate').on('change',function(){
+    var mat = parseInt($("#dRate").val());
+    $("#paydRate").val(mat);
+  });
+});
+
+
 $(document).ready(function(){
   $("#check").hide();
   $("#mop").on('change',function(){
@@ -133,9 +200,8 @@ $(document).ready(function(){
       $("#cash").hide();
       $("#check").show();
       $("#aTendered").val("");
-//$("#dChange").val("0");
-}
-});
+    }
+  });
 });
 
 $(document).ready(function(){
@@ -601,99 +667,99 @@ function validateEmail(email) {
                               <td><input id="cart'.$P_ctr.'" name="P_cart[]" value="'.$P_items.'" type="hidden"/>'. $row['packageDescription'].'</td>
 
                               <td>PACKAGE ');
-                              echo '<button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$pID.' #view" data-target="#myModal"><i class="fa fa-info-circle"></i> View</button>';
-                              echo('</td>
-                                <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
-                                <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
-                                <td id="price'.$P_ctr.'"style="text-align: right;">&#8369; '.number_format($P_pricearray[$P_pCtr-1],2).'<input id="price'.$P_ctr.'" name="P_prices[]" value="'.$P_pricearray[$P_pCtr-1].'" type="hidden"/></td>');
-                              echo'</tr>';   
-                            }
+                            echo '<button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$pID.' #view" data-target="#myModal"><i class="fa fa-info-circle"></i> View</button>';
+                            echo('</td>
+                              <td style="text-align: right;">&#8369; '.number_format($row['packagePrice'],2).'</td>
+                              <td style="text-align: right;">'.$P_quantarray[$P_ctr-1].'<input id="quant'.$P_ctr.'" name="P_quant[]" value="'.$P_quantarray[$P_ctr-1].'" type="hidden"/></td>
+                              <td id="price'.$P_ctr.'"style="text-align: right;">&#8369; '.number_format($P_pricearray[$P_pCtr-1],2).'<input id="price'.$P_ctr.'" name="P_prices[]" value="'.$P_pricearray[$P_pCtr-1].'" type="hidden"/></td>');
+                            echo'</tr>';   
                           }
                         }
                       }
                     }
+                  }
 
 
                   //
 
-                    if($selected[0] != 0){
-                      foreach ($removed as $removedItem) {
-                        array_push($removearray, $removedItem);
-                      }
-                      foreach ($priceremoved as $priceremovedItem) {
-                        array_push($priceremovearray, $priceremovedItem);
-                      }
-                      foreach ($quantremoved as $quantremovedItem) {
-                        array_push($quantremovearray, $quantremovedItem);
-                      }
+                  if($selected[0] != 0){
+                    foreach ($removed as $removedItem) {
+                      array_push($removearray, $removedItem);
+                    }
+                    foreach ($priceremoved as $priceremovedItem) {
+                      array_push($priceremovearray, $priceremovedItem);
+                    }
+                    foreach ($quantremoved as $quantremovedItem) {
+                      array_push($quantremovearray, $quantremovedItem);
+                    }
 
-                      foreach ($selectedQuant as $itemQuant) {
-                        if(!in_array($itemQuant, $quantremovearray)){
-                          $tempQuant =+ $itemQuant;
-                          array_push($quantarray,$itemQuant);
-                        }
-                        else{
-                        }
-                      } 
-                      foreach ($selectedPrice as $itemPrice) {
-                        if(!in_array($itemPrice, $priceremovearray)){
-                          $tempPrice =+ $itemPrice;
-                          array_push($pricearray,$itemPrice);
-                        }
-                        else{
-                        }
+                    foreach ($selectedQuant as $itemQuant) {
+                      if(!in_array($itemQuant, $quantremovearray)){
+                        $tempQuant =+ $itemQuant;
+                        array_push($quantarray,$itemQuant);
                       }
-                      foreach ($selected as $items) {
-                        if(!in_array($items, $removearray)){
-                          $sql = "SELECT * FROM tblproduct where productID = '$items';";
-                          $result = mysqli_query($conn, $sql);
-                          if($result){
-                            while ($row = mysqli_fetch_assoc($result)) {
-                              $ctr++; 
-                              $pCtr++;                            
-                              echo ('
-                                <tr>
-                                <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
-                                <td>'.$row['productDescription'].'</td>
-                                <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
-                                <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
-                                <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
-                              echo'</tr>';   
-                            }
+                      else{
+                      }
+                    } 
+                    foreach ($selectedPrice as $itemPrice) {
+                      if(!in_array($itemPrice, $priceremovearray)){
+                        $tempPrice =+ $itemPrice;
+                        array_push($pricearray,$itemPrice);
+                      }
+                      else{
+                      }
+                    }
+                    foreach ($selected as $items) {
+                      if(!in_array($items, $removearray)){
+                        $sql = "SELECT * FROM tblproduct where productID = '$items';";
+                        $result = mysqli_query($conn, $sql);
+                        if($result){
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            $ctr++; 
+                            $pCtr++;                            
+                            echo ('
+                              <tr>
+                              <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
+                              <td>'.$row['productDescription'].'</td>
+                              <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
+                              <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
+                            echo'</tr>';   
                           }
                         }
                       }
                     }
-                    ?>
-
-                    <tfoot>
-                      <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                      <td style="text-align: right;"><b><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></b></td>
-                      <td style="text-align: right;"><b>&#8369; <?php echo number_format($totPrice,2); ?></b></td>
-                      <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
-                    </tfoot>
-                  </tbody>
-
-                  <script type="text/javascript">
-                  var tempPrice = parseInt($('#totalPrice').html());
-                  var tempTQuant = parseInt($('#totalQuant').val());
-                  var realPrice = 0;
-                  var totalPrice =0;
-                  var price = 0;
-                  var quant = 0;
-                  var flag = 0;
-                  function sendData(ctr){
-                    realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
-                    price = parseInt($('#prices'+ctr).val());
                   }
+                  ?>
 
-                  function passValue(ctr){
+                  <tfoot>
+                    <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                    <td style="text-align: right;"><b><?php echo ('<input id="totalQuant" name="totalQuant" value ="'.$totQuant.'" type="hidden"/>'.$totQuant.''); ?></b></td>
+                    <td style="text-align: right;"><b>&#8369; <?php echo number_format($totPrice,2); ?></b></td>
+                    <input type="hidden" name="totalPrice" id="totalPrice" value="<?php echo $totPrice; ?>">
+                  </tfoot>
+                </tbody>
 
-                    quant = parseInt($('#quant'+ctr).val());
-                    var temRice = quant * price;
-                    alert(temRice);
-                    $('#price'+ctr).html(0);
-                    $('#price'+ctr).html(String(quant * realPrice));
+                <script type="text/javascript">
+                var tempPrice = parseInt($('#totalPrice').html());
+                var tempTQuant = parseInt($('#totalQuant').val());
+                var realPrice = 0;
+                var totalPrice =0;
+                var price = 0;
+                var quant = 0;
+                var flag = 0;
+                function sendData(ctr){
+                  realPrice = parseInt($('#prices'+ctr).val())/ parseInt($('#quant'+ctr).val()) ;
+                  price = parseInt($('#prices'+ctr).val());
+                }
+
+                function passValue(ctr){
+
+                  quant = parseInt($('#quant'+ctr).val());
+                  var temRice = quant * price;
+                  alert(temRice);
+                  $('#price'+ctr).html(0);
+                  $('#price'+ctr).html(String(quant * realPrice));
 
 //total Score
 
@@ -799,7 +865,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label">Delivery Rate</label><span id="x" style="color:red"> *</span>
-                    <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0' readonly/>
+                    <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0'/>
                   </div>
                 </div>
               </div>
@@ -840,6 +906,7 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                     $('#delloc').val('');
                     $('#dRate').val(0);
                     $('#paydRate').val(0);
+                    $('#paydRate').prop('disabled',true);
 
                     var x = parseFloat($('#totalPrice').val());
                     $('#amountDue').val(parseFloat(x));
@@ -848,7 +915,6 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                 });
                 $('#rateDel').click(function(){
                   if($('#rateDel').is(':checked')){ 
-
                     $('#displayAddress').show('blind');
                     $('#dRate').val(0);
                     $('#da').prop('disabled',false);
@@ -859,6 +925,9 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                     $('#city').val('');
                     $('#zip').val('');
                     $('#delloc').val('');
+                    $('#dRate').val(0);
+                    $('#paydRate').val(0);
+                    $('#paydRate').prop('disabled',false);
                   }
                 });
 
@@ -906,7 +975,48 @@ $(document).ready(function(){
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Order Price</label>
-                <input style="text-align:right;" id="oPrice" class="form-control" value="Php <?php echo number_format($totPrice,2)?>" disabled/>
+                <div class="input-group">
+                  <div class="input-group-addon"><small>Php</small></div>
+                  <input style="text-align:right;" id="oPrice" class="form-control" value="<?php echo number_format($totPrice,2)?>" disabled/>
+                  <input type="hidden" id="orPrice" value="<?php echo $totPrice?>"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Discounts</label>
+                <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="discounts" id="discounts">
+                  <option value="0">None</option>
+                  <?php
+                  $delsql = "SELECT * FROM tbldiscounts WHERE discountStatus = 'Active'";
+                  $delresult = mysqli_query($conn,$delsql);
+                  while($delrow = mysqli_fetch_assoc($delresult)){
+                    echo('<option value="'.$delrow['discountPercentage'].'">'.$delrow['discountName'].'</option>');
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label" style="color:white">Percentage</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><small> % </small></div>
+                  <input style="text-align:right;" id="discountPer" name="discountPercent" class="form-control" value="0" readonly/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Amount Due</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><small>Php</small></div>
+                  <input style="text-align:right;" id="newAmountDue" class="form-control" value="<?php echo $totPrice?>" disabled/>
+                </div>
               </div>
             </div>
           </div>
@@ -914,19 +1024,48 @@ $(document).ready(function(){
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Delivery Rate</label>
-                <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate"/>
+                <div class="input-group">
+                  <div class="input-group-addon"><small>Php</small></div>
+                  <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate" disabled/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Total Amount Due</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><small>Php</small></div>
+                  <input style="text-align:right;" id="tADue" class="form-control" value="<?php echo $totPrice?>" readonly/>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12">
-
+              <?php
+              include "dbconnect.php";
+              $dp = "SELECT * FROM tbldownpayment";
+              $res = mysqli_query($conn,$dp);
+              $row = mysqli_fetch_assoc($res);
+              $down = $row['downpaymentPercentage'];
+              $downpayment = $down / 100;
+              ?>
+              <input type="hidden" id="downPercent" value="<?php echo $downpayment;?>"/>
+              <?php
+              $dp = $totPrice * $downpayment;
+              $dp = $totPrice - $dp;
+              ?>
               <div class="form-group">
                 <label class="control-label">Downpayment
-                  <h6><em> Downpayment must be 50% of the total order price</em></h6></label>
-                  <input type="text" style="text-align:right;" class="form-control" value="<?php echo "Php " . number_format($totPrice * .5,2); ?>" readonly/>
-                  <input type="hidden" id="dp" value="<?php $dp = $totPrice * .5; echo $dp;?>" readonly/>
+                  <h6><mark id="downState">Downpayment must be <?php echo $down?>% of the total order price</mark></h6></label>
+                  <div class="input-group">
+                    <div class="input-group-addon"><small>Php</small></div>
+                    <input style="text-align:right;" id="downPay" class="form-control" value="<?php echo $dp?>" readonly/>
+                    <input type="hidden" id="dp" value="<?php echo $dp;?>" readonly/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -954,8 +1093,11 @@ $(document).ready(function(){
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Amount Paid</label><span id="x" style="color:red"> *</span>
-                          <input type="number" style="text-align:right;" id="aTendered" class="form-control" name="aTendered" value="<?php echo $totPrice * .5; ?>" required/>
-                          <p id="error"></p>
+                          <div class="input-group">
+                            <div class="input-group-addon"><small>Php</small></div>
+                            <input style="text-align:right;" id="aTendered" class="form-control" name="aTendered" value="<?php echo $dp;?>" required/>
+                            <p id="error"></p>
+                          </div>
                         </div>
                       </div>
                     </div>

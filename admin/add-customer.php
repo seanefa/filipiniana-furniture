@@ -11,8 +11,6 @@ if(isset($_POST['customerIds'])){
 
 $isBool = $_POST['isBool'];
 
-//echo "<br>isBool " . $isBool;
-
 $ln = $_POST['lastn'];
 $fn = $_POST['firstn'];
 $mn = $_POST['midn'];
@@ -20,7 +18,12 @@ $addrss = $_POST['custadd'];
 $cont = $_POST['custocont'];
 $emailadd = $_POST['custoemail'];
 
-$delRate = $_POST['paydRate'];
+$discount = $_POST['discountPercent'];
+
+$delRate = 0;
+if(isset($_POST['paydRate'])){
+  $delRate = $_POST['paydRate'];
+}
 
 $ordershipadd  = "N/A";
 
@@ -42,6 +45,9 @@ $orderdaterec = $date->format('Y-m-d H:i:s');
 $orderdatepick = $_POST['pidate'];
 $orderstat = "Pending";
 $ordertype = "Pre-Order";
+
+
+$forUN = $date->format('m-d');
 
 $selected = $_POST['cart'];
 $selectedQuant = $_POST['quant'];
@@ -82,10 +88,15 @@ $ordershipadd = mysqli_real_escape_string($conn,$ordershipadd);
 
 if($isBool == "new"){
   $sql = "INSERT INTO `tblcustomer` (`customerLastName`, `customerFirstName`, `customerMiddleName`, `customerAddress`, `customerContactNum`, `customerEmail`) VALUES ('$ln', '$fn', '$mn', '$addrss', '$cont', '$emailadd')";
-  //echo "<br>sql1: " . $sql;
 
   if (mysqli_query($conn, $sql)){
     $custid = mysqli_insert_id($conn); //last id ng na-input na data
+
+    $un = $ln . $forUN;
+    $pw = $ln;
+
+    $sqlUser = "INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated, confirmedUser) VALUES('$un', '$pw', 'active', 'customer', '$custid', '$orderdaterec','1')";
+    mysqli_query($sqlUser);
 
     $pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
     //echo "<br>orderr: " . $pssql;
@@ -127,7 +138,7 @@ if($isBool == "new"){
 
 
 
-   $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";//waley pa yung delrate and penalty. :()
+   $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`, `invDiscount`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '0','$discount');";
 
    //echo "<br>inv: " . $inv;
    mysqli_query($conn,$inv);
@@ -234,8 +245,7 @@ else if($isBool=="existing"){ //EXISTING
      }
     }
 
-
-    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '1');";
+    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`, `invDiscount`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '$delRate', '0','$discount');";
    //echo "<br>inv: " . $inv;
     mysqli_query($conn,$inv);
     $invID = mysqli_insert_id($conn);

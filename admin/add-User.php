@@ -13,7 +13,7 @@ $row=$result->fetch_assoc();
 
 if($password == $confirm) 
 {
-	$sql = "INSERT INTO tbluser(userName, userPassword, userStatus, userType, userEmpID, dateCreated) VALUES('$username', '$password', 'Active', 'Admin', '$employee', '" . date("Y-m-d") . "')";
+	$sql = "INSERT INTO tbluser(userName, userPassword, userStatus, userType, userEmpID, dateCreated) VALUES('$username', '$password', 'Active', 'admin', '$employee', '" . date("Y-m-d") . "')";
 	
 	if($conn->query($sql) === true) 
 	{

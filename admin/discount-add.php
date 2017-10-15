@@ -9,11 +9,13 @@ $adddiscount = "INSERT into tbldiscounts(discountName, discountPercentage, disco
 
 if($conn->query($adddiscount) === true)
 {
-	header("Location: discounts.php");
+  	$_SESSION['createSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 }
 else
 {
-	echo "error, " . $conn->error . "lagyan mo to ng toaster";
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 }
 $conn->close();
 ?>
