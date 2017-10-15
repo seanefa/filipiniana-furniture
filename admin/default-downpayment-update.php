@@ -5,8 +5,9 @@ session_start();
 
 $id = $_SESSION['varname'];
 $editDownpayment = $_POST['name'];
+$new = $editDownpayment/100;
 
-$updateSql = "UPDATE tbldownpayment SET downpaymentPercentage='$editDownpayment' WHERE downpaymentID=$id";
+$updateSql = "UPDATE tbldownpayment SET downpaymentPercentage='$new' WHERE downpaymentID='1'";
 
 if(mysqli_query($conn,$updateSql)){
 	$_SESSION['updateSuccess'] = 'Success';

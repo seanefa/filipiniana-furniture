@@ -142,7 +142,7 @@ $(document).ready(function(){
 									<td><?php echo "" . $row["dateCreated"];?></td>
                                   <td>
                                     <!-- UPDATE -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" href="users-form.php" data-remote="users-form.php?id=<?php echo $row['userID'];?> #update" data-target="#myModal" ><i class="ti-pencil-alt"></i>  Update</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" href="users-form.php" data-remote="users-form.php?id=<?php echo $row['userEmpID'];?> #update" data-target="#myModal" ><i class="ti-pencil-alt"></i>  Update </button>
                                     <!-- DELETE -->
                                     <button type="button" class="btn btn-danger" data-toggle="modal" href="users-form.php" data-remote="users-form.php?id=<?php echo $row['userID'];?> #delete" data-target="#myModal" ><i class="ti-close"></i>  Deactivate</button>
                                   </td>

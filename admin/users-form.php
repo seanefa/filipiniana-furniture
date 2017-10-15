@@ -104,19 +104,19 @@ if (!$conn) {
                 <div class="modal-body">
                   <div class="descriptions">
                     <?php
-                    $tsql = "SELECT * FROM tblemployee WHERE empID = $jsID";
+                    /*$tsql = "SELECT * FROM tblemployee WHERE empID = $jsID";
                     $tresult = mysqli_query($conn,$tsql);
                     $trow = mysqli_fetch_assoc($tresult);
-                    ?>
+                    */?>
                     <div class="form-body">
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label">Employee Name</label><span id="x" style="color:red"> *</span>
-                                <select id="select" class="form-control" tabindex="1" name="job">
+                                <select id="select" class="form-control" tabindex="1" name="job"  disabled>
                                   <?php
                                   include "dbconnect.php";
-                                  $sql = "SELECT * FROM tblemployee order by empID;";
+                                  $sql = "SELECT * FROM tblemployee WHERE empID = $jsID;";
                                   $result = mysqli_query($conn, $sql);
                                   while ($row = mysqli_fetch_assoc($result))
                                   {
@@ -137,11 +137,24 @@ if (!$conn) {
                               </div>
                             </div>
                           </div>
+                        <?php 
+                        $tsql = "SELECT * FROM tblemployee WHERE empID = $jsID;";
+                        $tresult = mysqli_query($conn, $tsql);
+                        $trow = mysqli_fetch_assoc($tresult);
+                        ?>
                             <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Username</label><span id="x" style="color:red"> *</span>
-                              <input type="text" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                            <?php 
+                            $csql = "SELECT * FROM tbluser WHERE userEmpID = $jsID;";
+                            $cresult = mysqli_query($conn, $csql);
+                            while ($crow = mysqli_fetch_assoc($cresult))
+                            {
+                                echo ('<input type="text" id="first" value='.$crow['userName'].' class="form-control" name="fn" required/>');
+                            }
+                            ?>
+                              <span id="messagefirst"></span></div>
                             </div>
                           </div>
                             <div class="row">
@@ -152,8 +165,8 @@ if (!$conn) {
                               </div>
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label class="control-label">Confirm Password</label><span id="x" style="color:red"> *</span>
-                                <input type="password" id="first" class="form-control" name="fn" required/><span id="messagefirst"></span></div>
+                                <label class="control-label">New Password</label>
+                                <input type="password" id="first" class="form-control" name="fn"/><span id="messagefirst"></span></div>
                               </div>
                             </div>
                           </div>

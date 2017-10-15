@@ -72,7 +72,7 @@ if (!$conn) {
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="control-label">Description</label>
+                    <label class="control-label">Description</label><span id="x" style="color:red">*</span>
                     <input type="text" id="jobName" class="form-control" placeholder="Remarks" name="desc" value="<?php echo $trow['modeofpaymentDesc'];?>">
                   </div>
                 </div>

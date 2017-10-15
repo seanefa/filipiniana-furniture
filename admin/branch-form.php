@@ -35,7 +35,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Location</label>
+                      <label class="control-label">Location</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="branchName" class="form-control" placeholder="Location" name="location" required>
                     </div>
                   </div>
@@ -43,7 +43,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Address</label>
+                      <label class="control-label">Address</label><span id="x" style="color:red"> *</span>
 						<textarea class="form-control" plaseholder="Address" name="address" required></textarea>
                     </div>
                   </div>
@@ -52,7 +52,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-						<textarea class="form-control" name="remarks" required></textarea>
+						<textarea class="form-control" name="remarks"></textarea>
                     </div>
                   </div>
                 </div>
@@ -89,7 +89,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Location</label>
+                      <label class="control-label">Location</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="branchName" class="form-control" placeholder="Location" name="location" value="<?php echo $trow['branchLocation'];?>" required>
                     </div>
                   </div>
@@ -97,7 +97,7 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Address</label>
+                      <label class="control-label">Address</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="branchName" class="form-control" placeholder="Address" name="address" value="<?php echo $trow['branchAddress'];?>"required>
                     </div>
                   </div>

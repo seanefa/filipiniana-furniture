@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "titleHeader.php";
 include "menu.php";  
 include 'dbconnect.php';
@@ -139,7 +139,7 @@ $(document).ready(function(){
                   <div class="col-md-6">
                     <div class="form-group">
                      <label class="control-label">Number</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="username" class="form-control" name="number" value="<?php echo $row['comp_num'];?>" required><span id="message"></span>
+                      <input type="text" id="username" class="form-control" style="text-align:right" data-mask="+63 (999) 999-9999" name="number" value="<?php echo $row['comp_num'];?>" required><span id="message"></span>
                     </div>
                   </div>
                   <div class="col-md-6">

@@ -67,7 +67,7 @@ if (!$conn) {
               <div class="modal-body">
                 <div class="descriptions">
                   <?php
-                  $tsql = "SELECT * FROM WHERE ID = $jsID";
+                  $tsql = "SELECT * FROM tblphases WHERE phaseID = $jsID";
                   $tresult = mysqli_query($conn,$tsql);
                   $trow = mysqli_fetch_assoc($tresult);
                   ?>
@@ -77,16 +77,9 @@ if (!$conn) {
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
-                          <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['']; $_SESSION['tempname'] = $trow[''];?>" required/><span id="message"></span> </div>
+                          <input type="text" id="editname" class="form-control" name="name" value="<?php echo $trow['phaseName']; $_SESSION['tempname'] = $trow['phaseName'];?>" required/><span id="message"></span> </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label class="control-label">Description</label>
-                            <textarea class="form-control" rows="4" name="desc" id="remText"><?php echo $trow[''];?></textarea></div>
-                          </div>
-                        </div>
                       </div>
 
                     </div>

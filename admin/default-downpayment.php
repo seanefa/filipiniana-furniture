@@ -75,12 +75,13 @@ if (!empty($_SESSION['actionFailed'])) {
                        include "dbconnect.php";
                        $sql = "SELECT * FROM tbldownpayment";
                        $result = mysqli_query($conn,$sql);
-                       $dp = 1;
                        while($row = mysqli_fetch_assoc($result)){
                         $dp = $row['downpaymentPercentage'];
                        }
+                      $dp1 = $dp*100;
                       ?>
-                      <input type="text" id="ln" class="form-control" name="dp" value="<?php echo $dp;?>" required disabled/>
+                        
+                      <input type="text" id="ln" class="form-control" name="dp" style="text-align:right;" value="<?php echo $dp1;?> %" required disabled/>
                     </div>
                   </div>
                   <div class="col-md-6">
