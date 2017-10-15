@@ -16,6 +16,12 @@ if(isset($_POST['id'])){
 if(isset($_GET['id'])){
   $jsID = $_GET['id']; 
 }
+$date = new DateTime();
+$dateToday = date_format($date, "Y-m-d");
+
+$estDate = date('Y-m-d', strtotime("+2 days"));
+
+echo "<input type='hidden' id='dateToday' value='".$dateToday."'>"
 ?>
 <!DOCTYPE html>  
 <html lang="en">
@@ -23,6 +29,26 @@ if(isset($_GET['id'])){
   <title>Check-Out</title>
   <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
   <script>
+//   $(document).ready(function(){
+//   $('#pdate').on('change',function(){
+//     var today = new Date($("#dateToday").val());
+//     var pDate = new Date($("#pdate").val());
+//     alert(pDate);
+//     if(pDate>today){
+//       var e = "Estimated date must not be earlier than the Start Date";
+//       $("#estError").html(e);
+//       $('#dateError').css('border-color','red');
+//       $('#saveBtn').prop('disabled',true);
+//     }
+//     else{
+//       var e = "";
+//       $("#estError").html(e);
+//       $('#ateError').css('border-color','grey');
+//       $('#saveBtn').prop('disabled',false);
+//     }
+//   });
+// });
+
   $(document).ready(function(){
     $('#aTendered').on('change',function(){
       var mat = parseInt($("#aTendered").val());
@@ -800,6 +826,7 @@ else if(flag == 1){
     <div class="form-group">
       <label class="control-label">Pick up/Delivery Date</label><span id="x" style="color:red"> *</span>
       <input type="date" id="pdate" class="form-control" name="pidate" value="<?php echo $estDate?>" required/> 
+      <p id="dateError"></p>
     </div>
   </div>
 </div>
