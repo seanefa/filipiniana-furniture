@@ -71,22 +71,20 @@ $row = mysqli_fetch_assoc($res);
        <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">CUSTOMER INFORMATION</span>
        <br>
        <div class="table-responsive">
-        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+        <table class="table color-bordered-table muted-bordered-table">
           <tr>
-            <td>Name</td>
-            <td><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td><b>Name</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td></td>
+            <td><b>Contact Number</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerContactNum'];?></td>
           </tr>
           <tr>
-            <td>Address</td>
-            <td><?php echo $custRow['customerAddress'];?></td>
-          </tr>
-          <tr>
-            <td>Contact Number</td>
-            <td><?php echo $custRow['customerContactNum'];?></td>
-          </tr>
-          <tr>
-            <td>Email Address</td>
-            <td><?php echo $custRow['customerEmail'];?></td>
+            <td><b>Address</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerAddress'];?></td>
+            <td></td>
+            <td><b>Email Address</b></td>
+            <td style="text-align:right;"><?php echo $custRow['customerEmail'];?></td>
           </tr>
         </table>
       </div>
@@ -170,6 +168,69 @@ $row = mysqli_fetch_assoc($res);
   <br>
 
   <div class="row">
+
+    <?php
+    $down = 0;
+    $bal = 0;
+    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$orderID'";
+    $res = mysqli_query($conn,$sql);
+    $tpay = 0;
+    $delFee = 0;
+    $penFee = 0;
+    $price = 0;
+    $discount = "";
+    while($trow = mysqli_fetch_assoc($res)){
+      $tpay = $tpay + $trow['amountPaid'];
+      $price = $tPrice;
+      $delFee = $trow['invDelrateID'];
+      $penFee = $trow['invPenID'];
+      $discount = $trow['invDiscount'];
+    }
+    if($discount!=""){
+      $disc = $discount;
+      $disc = $discount / 100;
+      $minus = $price * $disc;
+      $price = $price - $minus;
+    }
+    else{
+      $discount = 0;
+    }
+    $down = $tpay;
+    $tPrice1 = $price + $delFee + $penFee;
+    $bal = $tPrice1 - $down;
+    ?>
+    <div class="col-xs-6">
+      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
+      <br>
+      <div class="table-responsive">
+        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
+          <tr>
+            <td>Order Price</td>
+            <td style="text-align:right">Php <?php echo number_format($tPrice,2);?></td>
+          </tr>
+          <tr>
+            <td>Discount</td>
+            <td style="text-align:right"><?php echo $discount;?> %</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td style="text-align:right">Php <?php echo number_format($price,2);?></td>
+          </tr>
+          <tr>
+            <td>Delivery Rate</td>
+            <td style="text-align:right">Php <?php echo number_format($delFee,2)?></td>
+          </tr>
+          <tr>
+            <td>Penalty Fee:</td>
+            <td style="text-align:right">Php <?php echo number_format($penFee,2)?></td>
+          </tr>
+          <tr>
+            <td>Grand Total</td>
+            <td style="text-align:right">Php <?php echo number_format($tPrice1,2)?></td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <div class="col-xs-6">
       <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT HISTORY</span>
       <br>
@@ -178,7 +239,6 @@ $row = mysqli_fetch_assoc($res);
           <thead>
             <tr>
               <th style="text-align:left">Date Paid</th>
-              <th style="text-align:left">Mode of Payment</th>
               <th style="text-align:right">Amount Paid</th>
             </tr>
           </thead>
@@ -195,70 +255,29 @@ $row = mysqli_fetch_assoc($res);
               $tpay = $tpay + $trow['amountPaid'];
               echo '<tr>
               <td>'.$date.'</td>
-              <td>'.$trow['modeofpaymentDesc'].'</td>
               <td style="text-align:right;">Php '.number_format($trow['amountPaid'],2).'</td>
               </tr>';
             }
             $down = $tpay;
-            $bal = $tPrice - $down;
+            $bal = $tPrice1 - $down;
             ?>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="2" style="text-align:right;"><i class="fa fa-caret-right text-info"></i><b> TOTAL AMOUNT PAID</b></td>
+              <td style="text-align:left;"><b> TOTAL AMOUNT PAID</b></td>
               <td style="text-align:right;"><mark><strong><span>Php <?php echo number_format($down,2)?></span></strong></mark></td>
+            </tr>
+            <tr>
+              <td style="text-align:left;"><b> REMAINING BALANCE</b></td>
+              <td style="text-align:right; color:red;"><mark><strong><span>Php <?php echo number_format($bal,2)?></span></strong></mark></td>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
-
-    <?php
-    $down = 0;
-    $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
-    $res = mysqli_query($conn,$sql);
-    $tpay = 0;
-    $delFee = 0;
-    $penFee = 0;
-    while($trow = mysqli_fetch_assoc($res)){
-      $tpay = $tpay + $trow['amountPaid'];
-      $delFee = $trow['invDelrateID'];
-      $penFee = $trow['invPenID'];
-    }
-    $down = $tpay;
-    $tPrice1 = $tPrice + $delFee + $penFee;
-    $bal = $tPrice1 - $down;
-    ?>
-    <div class="col-xs-6">
-      <span style="text-align: center; font-family: inherit; font-weight: 400; font-size: 15px;">PAYMENT INFORMATION</span>
-      <br>
-      <div class="table-responsive">
-        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap">
-          <tr>
-            <td>Total Order Price</td>
-            <td>Php <?php echo number_format($tPrice,2)?></td>
-          </tr>
-          <tr>
-            <td>Delivery Rate</td>
-            <td>Php <?php echo number_format($delFee,2)?></td>
-          </tr>
-          <tr>
-            <td>Penalty Fee:</td>
-            <td>Php <?php echo number_format($penFee,2)?></td>
-          </tr>
-          <tr>
-            <td>Amount Paid</td>
-            <td>Php <?php echo number_format($down,2)?></td>
-          </tr>
-          <tr>
-            <td>Remaining Balance:</td>
-            <td style="color:red">Php <?php echo number_format($bal,2)?></td>
-          </tr>
-        </table>
-      </div>
-    </div>
   </div>
+</body> 
+
   <p>
     <?php 
     include "dbconnect.php"; 
@@ -274,7 +293,6 @@ $row = mysqli_fetch_assoc($res);
     }  
     ?>
   </p>
-</body> 
 </html>
 <?php
 // $html = ob_get_clean();

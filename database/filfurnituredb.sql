@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 02:42 PM
+-- Generation Time: Oct 15, 2017 at 08:07 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -1234,7 +1234,7 @@ CREATE TABLE `tblonhand` (
 --
 
 INSERT INTO `tblonhand` (`onHandID`, `ohProdID`, `ohQuantity`, `ohRemarks`) VALUES
-(3, 17, 12, NULL),
+(3, 17, 10, NULL),
 (4, 18, 10, NULL);
 
 -- --------------------------------------------------------
@@ -1302,7 +1302,8 @@ INSERT INTO `tblorders` (`orderID`, `receivedbyUserID`, `dateOfReceived`, `dateO
 (44, 1, '2017-10-10', '2017-10-10', 34, 35000, 'WFA', 'N/A. This order is for pick-up', 'Pre-Order', ''),
 (45, 1, '2017-10-11', '2017-10-20', 0, 25000, 'Pending', 'For management', 'Management Order', ''),
 (46, 1, '2017-10-12', '2017-11-06', 35, 25000, 'Ongoing', 'N/A', 'Pre-Order', 'An order.'),
-(47, 1, '2017-10-15', '2017-11-15', 41, 25000, 'Pending', 'N/A', 'Pre-Order', 'An order.');
+(47, 1, '2017-10-15', '2017-11-15', 41, 25000, 'Pending', 'N/A', 'Pre-Order', 'An order.'),
+(48, 1, '2017-10-15', '0000-00-00', 0, 0, 'Pending', 'N/A', 'Management Order', 'Nasira e');
 
 -- --------------------------------------------------------
 
@@ -1446,7 +1447,8 @@ INSERT INTO `tblorder_request` (`order_requestID`, `tblOrdersID`, `orderProductI
 (46, 44, 17, 35000, 0, NULL, 1, 'Finished'),
 (47, 45, 18, 25000, 0, NULL, 1, 'Finished'),
 (48, 46, 18, 25000, 0, NULL, 1, 'Finished'),
-(49, 47, 18, 25000, 0, NULL, 1, 'Active');
+(49, 47, 18, 25000, 0, NULL, 1, 'Active'),
+(50, 48, 17, 35000, 0, NULL, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -1475,7 +1477,8 @@ INSERT INTO `tblorder_requestcnt` (`orreq_cntID`, `orreq_ID`, `orreq_quantity`, 
 (5, 5, 1, 0, 0, 1),
 (6, 26, 1, 0, 0, 1),
 (7, 27, 1, 0, 0, 1),
-(8, 17, 2, 0, 0, 0);
+(8, 17, 2, 0, 0, 0),
+(9, 50, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1956,59 +1959,13 @@ INSERT INTO `tblprod_materials` (`p_matID`, `p_prodInfoID`, `p_matDescID`, `p_ma
 CREATE TABLE `tblpromos` (
   `promoID` int(11) NOT NULL,
   `promoName` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `tblproductID` int(11) DEFAULT NULL,
   `promoDescription` varchar(450) CHARACTER SET utf8 NOT NULL,
   `promoStartDate` date NOT NULL,
   `promoEnd` varchar(450) CHARACTER SET utf8 DEFAULT NULL,
   `promoImage` varchar(450) CHARACTER SET utf8 DEFAULT NULL,
   `promoStatus` varchar(45) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tblpromos`
---
-
-INSERT INTO `tblpromos` (`promoID`, `promoName`, `promoDescription`, `promoStartDate`, `promoEnd`, `promoImage`, `promoStatus`) VALUES
-(6, 'Grand Opening Promo', 'Promo for the grand opening', '2017-08-24', '2017-08-25', '2017-08-241503589175.png', 'Active');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblpromo_condition`
---
-
-CREATE TABLE `tblpromo_condition` (
-  `conditionID` int(11) NOT NULL,
-  `conPromoID` int(11) NOT NULL,
-  `conCategory` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `conData` varchar(450) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tblpromo_condition`
---
-
-INSERT INTO `tblpromo_condition` (`conditionID`, `conPromoID`, `conCategory`, `conData`) VALUES
-(6, 6, 'Amount', '50,000');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblpromo_promotion`
---
-
-CREATE TABLE `tblpromo_promotion` (
-  `promotionID` int(11) NOT NULL,
-  `proPromoID` int(11) NOT NULL,
-  `proCategory` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `proData` varchar(450) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tblpromo_promotion`
---
-
-INSERT INTO `tblpromo_promotion` (`promotionID`, `proPromoID`, `proCategory`, `proData`) VALUES
-(6, 6, 'Others', ' 1 table');
 
 -- --------------------------------------------------------
 
@@ -2030,7 +1987,9 @@ CREATE TABLE `tblpull_out` (
 --
 
 INSERT INTO `tblpull_out` (`pulloutID`, `pullout_fID`, `pullout_Date`, `pullout_quantity`, `pullout_reason`, `pullout_Remarks`) VALUES
-(1, 18, '2017-10-05', 1, '3', '');
+(1, 18, '2017-10-05', 1, 'Repair', ''),
+(2, 17, '2017-10-15', 1, 'Repair', ''),
+(3, 17, '2017-10-15', 1, 'Repair', 'Nasira e');
 
 -- --------------------------------------------------------
 
@@ -2693,21 +2652,9 @@ ALTER TABLE `tblprod_materials`
 -- Indexes for table `tblpromos`
 --
 ALTER TABLE `tblpromos`
-  ADD PRIMARY KEY (`promoID`);
-
---
--- Indexes for table `tblpromo_condition`
---
-ALTER TABLE `tblpromo_condition`
-  ADD PRIMARY KEY (`conditionID`),
-  ADD KEY `promo_idx` (`conPromoID`);
-
---
--- Indexes for table `tblpromo_promotion`
---
-ALTER TABLE `tblpromo_promotion`
-  ADD PRIMARY KEY (`promotionID`),
-  ADD KEY `promo_idx` (`proPromoID`);
+  ADD PRIMARY KEY (`promoID`),
+  ADD KEY `prodID_idx` (`tblproductID`),
+  ADD KEY `promo_prod_ID_idx` (`tblproductID`);
 
 --
 -- Indexes for table `tblpull_out`
@@ -2990,7 +2937,7 @@ ALTER TABLE `tblonhand`
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
@@ -3005,12 +2952,12 @@ ALTER TABLE `tblorder_customization`
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
-  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `tblorder_requestcnt`
 --
 ALTER TABLE `tblorder_requestcnt`
-  MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tblorder_return`
 --
@@ -3085,22 +3032,12 @@ ALTER TABLE `tblprod_materials`
 -- AUTO_INCREMENT for table `tblpromos`
 --
 ALTER TABLE `tblpromos`
-  MODIFY `promoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `tblpromo_condition`
---
-ALTER TABLE `tblpromo_condition`
-  MODIFY `conditionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `tblpromo_promotion`
---
-ALTER TABLE `tblpromo_promotion`
-  MODIFY `promotionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `promoID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblpull_out`
 --
 ALTER TABLE `tblpull_out`
-  MODIFY `pulloutID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pulloutID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblrelease`
 --
@@ -3285,6 +3222,12 @@ ALTER TABLE `tblorders`
 ALTER TABLE `tblprodphase_materials`
   ADD CONSTRAINT `mateID` FOREIGN KEY (`pph_matDescID`) REFERENCES `tblmat_var` (`mat_varID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `pphID` FOREIGN KEY (`pphID`) REFERENCES `tblproduction_phase` (`prodHistID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tblpromos`
+--
+ALTER TABLE `tblpromos`
+  ADD CONSTRAINT `promo_prodID_indx` FOREIGN KEY (`tblproductID`) REFERENCES `tblproduct` (`productID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblpull_out`

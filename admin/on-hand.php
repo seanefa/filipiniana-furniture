@@ -1,7 +1,7 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-
+session_start();
 $reason = $_POST['reason'];
 $date = new DateTime();
 $orderdaterec = $date->format('Y-m-d');;
@@ -37,12 +37,13 @@ if($reason==1){
 		$_SESSION['createSuccess'] = 'Success';
 		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 	} 
-	 else {
-	    $_SESSION['actionFailed'] = 'Failed';
+	else {
+		$_SESSION['actionFailed'] = 'Failed';
 		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-	  }
+	}
 }
 else if($reason==2){
+
 	$prodID = $_POST['name'];
 	$quan = $_POST['quan'];
 	$remarks = $_POST['remarks'];
@@ -58,22 +59,43 @@ else if($reason==2){
 	if(mysqli_query($conn,$updateSql)){
 
 		$sql2 = "INSERT INTO `tblpull_out` (`pullout_fID`, `pullout_Date`, `pullout_quantity`, `pullout_reason`, `pullout_Remarks`) VALUES ('$prodID', '$orderdaterec', '$quan', '$reason', '$remarks');";
-		if(!mysqli_query($conn,$sql2)){
-	    	$_SESSION['actionFailed'] = 'Failed';
+		if(mysqli_query($conn,$sql2)){
+			$ordershipadd  = "For management";
+			$date = new DateTime();
+			$orderdaterec = $date->format('Y-m-d H:i:s');
+			$orderstat = "Pending";
+			$ordertype = "Management Order";
+			$employee = $_SESSION['userID'];
+
+			$pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','0','$totalPrice','$orderstat','N/A','$ordertype','$remarks')";
+			if (mysqli_query($conn, $pssql)){
+				$orderid = mysqli_insert_id($conn);
+				$unitPrice = unitPrice($prodID);
+				$sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$remarks','$quan','Active')"; 
+				mysqli_query($conn,$sql1);
+				$orReqID = mysqli_insert_id($conn);
+				$sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','$quan')";
+				mysqli_query($conn,$sql3);
+			}
+			else{
+				$_SESSION['actionFailed'] = 'Failed';
+				header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+			}
+			$_SESSION['createSuccess'] = 'Success';
 			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-			//echo "ERROR!!" . mysqli_error($conn);
+		}
+		else{
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+
 		}
 
-		$_SESSION['createSuccess'] = 'Success';
-		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 	} 
-	 else {
-	    $_SESSION['actionFailed'] = 'Failed';
+	else {
+		$_SESSION['actionFailed'] = 'Failed';
 		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-	  }
-
+	}
 }
-
 else{
 	$prodID = $_POST['name'];
 	$quan = $_POST['quan'];
@@ -91,18 +113,19 @@ else{
 
 		$sql2 = "INSERT INTO `tblpull_out` (`pullout_fID`, `pullout_Date`, `pullout_quantity`, `pullout_reason`, `pullout_Remarks`) VALUES ('$prodID', '$orderdaterec', '$quan', '$reason', '$remarks');";
 		if(!mysqli_query($conn,$sql2)){
-	    	$_SESSION['actionFailed'] = 'Failed';
+			$_SESSION['actionFailed'] = 'Failed';
 			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 			//echo "ERROR!!" . mysqli_error($conn);
 		}
-
-		$_SESSION['createSuccess'] = 'Success';
-		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		else{
+			$_SESSION['createSuccess'] = 'Success';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		}
 	} 
-	 else {
-	    $_SESSION['actionFailed'] = 'Failed';
+	else {
+		$_SESSION['actionFailed'] = 'Failed';
 		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-	  }
+	}
 }
 
 
@@ -132,4 +155,16 @@ function finishOrder($id){
 	}
 	return 0;
 }
+
+function unitPrice($id){
+	include "dbconnect.php";
+	$price = 0;
+	$sql = "SELECT * from tblproduct WHERE productID = '$id'";
+	$res = mysqli_query($conn,$sql);
+	while($row = mysqli_fetch_assoc($res)){
+		$price = $row['productPrice'];
+	}
+	return $price;
+}
+
 ?>

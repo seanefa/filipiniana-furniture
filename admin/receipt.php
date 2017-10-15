@@ -89,12 +89,14 @@ $orderID = $orRoq['orderID'];
           <tr>
             <td><b>Name</b></td>
             <td style="text-align:right;"><?php echo $custRow['customerFirstName'].' '.$custRow['customerMiddleName'].'  '.$custRow['customerLastName'];?></td>
+            <td></td>
             <td><b>Contact Number</b></td>
             <td style="text-align:right;"><?php echo $custRow['customerContactNum'];?></td>
           </tr>
           <tr>
             <td><b>Address</b></td>
             <td style="text-align:right;"><?php echo $custRow['customerAddress'];?></td>
+            <td></td>
             <td><b>Email Address</b></td>
             <td style="text-align:right;"><?php echo $custRow['customerEmail'];?></td>
           </tr>

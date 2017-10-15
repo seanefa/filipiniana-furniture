@@ -56,8 +56,8 @@ $_SESSION['varname'] = $jsID;
                   </div>
                 </div>
                 <div id="tblorders">
-                <div class="row">
-                  <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-12">
                      <table class="table product-overview" id="ordertbl">
                       <thead>
                         <tr>
@@ -94,9 +94,21 @@ $_SESSION['varname'] = $jsID;
                 </div>
               </div>
             </div>
-            <hr>
-            <div id="warning">
-              <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
+            <div id="warning">  
+              <?php
+              $date = new DateTime();
+              $dateToday = date_format($date, "Y-m-d");
+
+              $estDate = date('Y-m-d', strtotime("+25 days"));
+              ?>
+              <input type="hidden" id="dateToday" value="<?php echo $dateToday?>">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Estimated Finish Date</label><span id="x" style="color:red"> *</span>
+                  <input type="date" id="estDate" class="form-control" name="pidate" value="<?php echo $estDate?>" required/> 
+                    <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-6">
@@ -171,41 +183,41 @@ $_SESSION['varname'] = $jsID;
               <hr>
               <div class="row">
                 <div class="col-md-12"">
-                    <div id="checkbox">
-                        <h4 style="text-align: center;">
-                          <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
-                        </h4>
-                    </div>
-                </div>
-                  <div class="row">
-                    <div id="selection">
-                      <h4 style="text-align: center;">Select Products</h4>
-                      <div class="col-md-6 col-md-offset-3">
-                        <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
-                          <?php
-                          $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
-                          $res = mysqli_query($conn,$sql);
-                          while($row = mysqli_fetch_assoc($res)){
-                            if($row['prodStat']!='Archived'){
-                              echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
-                            }
-                          }
-                          ?>
-                        </select>
-                      </div>
+                  <div id="checkbox">
+                    <h4 style="text-align: center;">
+                      <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
+                    </h4>
                   </div>
                 </div>
+                <div class="row">
+                  <div id="selection">
+                    <h4 style="text-align: center;">Select Products</h4>
+                    <div class="col-md-6 col-md-offset-3">
+                      <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
+                        <?php
+                        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                        $res = mysqli_query($conn,$sql);
+                        while($row = mysqli_fetch_assoc($res)){
+                          if($row['prodStat']!='Archived'){
+                            echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-<div class="modal-footer">
-  <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
-  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-</div>
-</form>
-</div>
-</div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- Add On-Promo Modal -->
@@ -361,199 +373,199 @@ $_SESSION['varname'] = $jsID;
                   </div>
                 </div>
 
-               <!--<div class="row">
-              <div class="col-md-12 ">
-                <div class="form-group">
-                  <div id="type">
+                <!--<div class="row">
+                <div class="col-md-12 ">
+                  <div class="form-group">
+                    <div id="type">
 
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>-->
+              </div>-->
 
-            <div class="col-md-5">
-              <div class="form-group">
-                <label class="control-label">Furniture Name</label><span id="x" style="color:red"> *</span>
-                <select class="form-control" tabindex="1" name="prod" id="products">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label class="control-label">Furniture Name</label><span id="x" style="color:red"> *</span>
+                  <select class="form-control" tabindex="1" name="prod" id="products">
+                    <?php
+                    $sql = "SELECT * FROM tblproduct;";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                      if($row['prodStat']!='Archived'){
+                        if ($srow["productID"]==$row['productID'])
+                        {
+                          echo('<option value="'.$row['productID'].'" selected="selected">'.$row['productName'].'</option>');
+                        }
+                        else
+                        {
+                          echo('<option value='.$row['productID'].'>'.$row['productName'] .'</option>');
+                        }
+
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Phase</label><span id="x" style="color:red"> *</span>
+                  <select class="form-control" tabindex="1" name="phase">
+                    <?php
+                    include "dbconnect.php";
+                    $sql = "SELECT * FROM tblphases;";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                      if($row['phaseStatus']!='Archived'){
+                        if ($srow["prodInfoPhase"] == $row['phaseID'])
+                        {
+                          echo('<option value="'.$row['phaseID']. '" selected="selected">'.$row['phaseName'].'</option>');
+                        }
+                        else
+                        {
+                          echo('<option value="'.$row['phaseID'].'">'.$row['phaseName'].'</option>');
+                        }
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <h4><label class="control-label">Materials Needed</label></h4>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
+                  <select class="form-control" tabindex="1" name="material" id="mat">
+                    <?php
+                    include "dbconnect.php";
+                    $sql = "SELECT * FROM tblmat_type;";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                      if($row['matTypeStatus']=='Listed'){
+                        echo('<option value='.$row['matTypeID'].' data-name="'.$row['matTypeName'].'">'.$row['matTypeName'].'</option>');
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
+                  <select class="form-control" tabindex="1" name="var" id="var" disabled>
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
+                  <input type="text" class="form-control" name="quan" id="quan" placeholder="500" style="text-align: right" />
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <label class="control-label">Unit</label><span id="x" style="color:red">
+                <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
                   <?php
-                  $sql = "SELECT * FROM tblproduct;";
+                  $sql = "SELECT * FROM tblunitofmeasure;";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result))
                   {
-                    if($row['prodStat']!='Archived'){
-                      if ($srow["productID"]==$row['productID'])
-                      {
-                        echo('<option value="'.$row['productID'].'" selected="selected">'.$row['productName'].'</option>');
-                      }
-                      else
-                      {
-                        echo('<option value='.$row['productID'].'>'.$row['productName'] .'</option>');
-                      }
-
+                    if($row['unStatus']!='Archived'){
+                      echo('<option value='.$row['unID'].'>'.$row['unUnit'].'</option>');
                     }
                   }
                   ?>
-                </select>
+                </select> 
               </div>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="control-label">Phase</label><span id="x" style="color:red"> *</span>
-                <select class="form-control" tabindex="1" name="phase">
-                  <?php
-                  include "dbconnect.php";
-                  $sql = "SELECT * FROM tblphases;";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result))
-                  {
-                    if($row['phaseStatus']!='Archived'){
-                      if ($srow["prodInfoPhase"] == $row['phaseID'])
-                      {
-                        echo('<option value="'.$row['phaseID']. '" selected="selected">'.$row['phaseName'].'</option>');
-                      }
-                      else
-                      {
-                        echo('<option value="'.$row['phaseID'].'">'.$row['phaseName'].'</option>');
-                      }
-                    }
-                  }
-                  ?>
-                </select>
+              <div class="col-md-1">
+                <div class="form-group pull-right">
+                  <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
+                </div>
               </div>
-            </div>
-          </div>
-          <h4><label class="control-label">Materials Needed</label></h4>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label class="control-label">Type</label><span id="x" style="color:red"> *</span>
-                <select class="form-control" tabindex="1" name="material" id="mat">
-                  <?php
-                  include "dbconnect.php";
-                  $sql = "SELECT * FROM tblmat_type;";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result))
-                  {
-                    if($row['matTypeStatus']=='Listed'){
-                      echo('<option value='.$row['matTypeID'].' data-name="'.$row['matTypeName'].'">'.$row['matTypeName'].'</option>');
-                    }
-                  }
-                  ?>
-                </select>
-              </div>
+
             </div>
 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label class="control-label">Material</label><span id="x" style="color:red"> *</span>
-                <select class="form-control" tabindex="1" name="var" id="var" disabled>
 
-                </select>
-              </div>
-            </div>
+            <div class="row">
+              <div role="tabpanel" class="tab-pane fade active in" id="job">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="table-responsive">
+                        <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="selectedMaterials">
+                          <thead>
+                            <tr>
+                              <th style="text-align: left;">Type</th>
+                              <th style="text-align: left;">Material</th>
+                              <th style="text-align: left;">Quantity</th>
+                              <th style="text-align: left;">Unit</th>
+                              <th style="text-align: left;">Action</th>                          
+                            </thead>
+                            <tbody  id="tblMat" style="text-align: left;">
+                              <?php
+                              $sql = "SELECT * FROM tblprod_materials a, tblmaterials b, tblmat_var c, tblmat_type d, tblunitofmeasure e WHERE a.p_matMaterialID = b.materialID and a.p_matUnit = e.unID and d.matTypeID = b.materialType and a.p_matDescID = c.variantID and p_prodInfoID = '$jsID'";
+                              $res = mysqli_query($conn,$sql);
+                              while($row = mysqli_fetch_assoc($res)){
+                                if($row['p_matStatus']!="Archived"){
+                                  $descName = desc($row['variantID']);
 
-            <div class="col-md-2">
-              <div class="form-group">
-                <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
-                <input type="text" class="form-control" name="quan" id="quan" placeholder="500" style="text-align: right" />
-              </div>
-            </div>
-
-            <div class="col-md-2">
-              <label class="control-label">Unit</label><span id="x" style="color:red">
-              <select class="form-control"  data-placeholder="Select Material Category" tabindex="1" id="unit">';
-                <?php
-                $sql = "SELECT * FROM tblunitofmeasure;";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result))
-                {
-                  if($row['unStatus']!='Archived'){
-                    echo('<option value='.$row['unID'].'>'.$row['unUnit'].'</option>');
-                  }
-                }
-                ?>
-              </select> 
-            </div>
-
-            <div class="col-md-1">
-              <div class="form-group pull-right">
-                <button id="addBtn" type="button" class="btn btn-success" style="margin-top: 27px;"><i class="ti-plus"></i></button>
-              </div>
-            </div>
-
-          </div>
-
-
-          <div class="row">
-            <div role="tabpanel" class="tab-pane fade active in" id="job">
-              <div class="panel-wrapper collapse in" aria-expanded="true">
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="table-responsive">
-                      <table class="table color-bordered-table muted-bordered-table dataTable display nowrap" id="selectedMaterials">
-                        <thead>
-                          <tr>
-                            <th style="text-align: left;">Type</th>
-                            <th style="text-align: left;">Material</th>
-                            <th style="text-align: left;">Quantity</th>
-                            <th style="text-align: left;">Unit</th>
-                            <th style="text-align: left;">Action</th>                          
-                          </thead>
-                          <tbody  id="tblMat" style="text-align: left;">
-                            <?php
-                            $sql = "SELECT * FROM tblprod_materials a, tblmaterials b, tblmat_var c, tblmat_type d, tblunitofmeasure e WHERE a.p_matMaterialID = b.materialID and a.p_matUnit = e.unID and d.matTypeID = b.materialType and a.p_matDescID = c.variantID and p_prodInfoID = '$jsID'";
-                            $res = mysqli_query($conn,$sql);
-                            while($row = mysqli_fetch_assoc($res)){
-                              if($row['p_matStatus']!="Archived"){
-                                $descName = desc($row['variantID']);
-
-                                echo "<tr id='trowID".$row['p_matID']."'>
-                                <td>".$row['matTypeName']."</td>
-                                <td><input type='hidden' class='form-control' id='exist".$row['p_matID']."' name='existRec[]' value='". $row['materialID'] ."'/>". $descName.'-'.$row['materialName']."</td>"."
-                                <input type='hidden' class='form-control' name='mat_var[]' value='". $row['variantID'] ."' />
-                                </td>
-                                <td><input type='text' class='col-lg-4' name='quan[]' value='". $row['p_matQuantity'] ."'/>
-                                </td>
-                                <td>".$row['unUnit']."<input type='hidden' class='form-control' id='quan' style='text-align:right;' name='unit[]' value='". $row['unID'] ."'/></td>";
-                                echo '<td><input id="remove" type="button" onclick="deleteExisting('.$row['p_matID'].')" class="btn btn-danger" value="X"/></td></tr>';
+                                  echo "<tr id='trowID".$row['p_matID']."'>
+                                  <td>".$row['matTypeName']."</td>
+                                  <td><input type='hidden' class='form-control' id='exist".$row['p_matID']."' name='existRec[]' value='". $row['materialID'] ."'/>". $descName.'-'.$row['materialName']."</td>"."
+                                  <input type='hidden' class='form-control' name='mat_var[]' value='". $row['variantID'] ."' />
+                                  </td>
+                                  <td><input type='text' class='col-lg-4' name='quan[]' value='". $row['p_matQuantity'] ."'/>
+                                  </td>
+                                  <td>".$row['unUnit']."<input type='hidden' class='form-control' id='quan' style='text-align:right;' name='unit[]' value='". $row['unID'] ."'/></td>";
+                                  echo '<td><input id="remove" type="button" onclick="deleteExisting('.$row['p_matID'].')" class="btn btn-danger" value="X"/></td></tr>';
 
                               //<input type='hidden' class='form-control' name='quan[]' value='". $row['p_matQuantity']  ."'/>
-                              }}
+                                }}
 
-                              function desc($iid){
-                                include "dbconnect.php";
-                                $sql = "SELECT * FROM tblvariant_desc a, tblmat_var b WHERE b.variantID = a.varMatvarID AND a.varMatvarID = '$iid'";
-                                $result = mysqli_query($conn,$sql);
-                                $desc = "";
-                                while($row = mysqli_fetch_assoc($result)){
-                                  $desc = $desc . $row['varVariantDesc'] . "-";
+                                function desc($iid){
+                                  include "dbconnect.php";
+                                  $sql = "SELECT * FROM tblvariant_desc a, tblmat_var b WHERE b.variantID = a.varMatvarID AND a.varMatvarID = '$iid'";
+                                  $result = mysqli_query($conn,$sql);
+                                  $desc = "";
+                                  while($row = mysqli_fetch_assoc($result)){
+                                    $desc = $desc . $row['varVariantDesc'] . "-";
+                                  }
+                                  $temp = substr(trim($desc), 0, -1);
+                                  return $temp;
                                 }
-                                $temp = substr(trim($desc), 0, -1);
-                                return $temp;
-                              }
-                              ?>
-                            </tbody>
-                          </table>
+                                ?>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
-
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-        </div>                
-      </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success waves-effect text-left"><i class="fa fa-check"></i> Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+          </div>                
+        </form>
+      </div>
     </div>
-  </div>
 
-</body>
-</html>
+  </body>
+  </html>

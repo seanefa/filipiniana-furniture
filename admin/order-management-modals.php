@@ -445,12 +445,50 @@ $_SESSION['varname'] = $jsID;
                             }
 
                             ?>
+                            <?php
+                            $down = 0;
+                            $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$jsID'";
+                            $res = mysqli_query($conn,$sql);
+                            $tpay = 0;
+                            $delFee = 0;
+                            $penFee = 0;
+                            $price = 0;
+                            $discount = "";
+                            while($trow = mysqli_fetch_assoc($res)){
+                              $tpay = $tpay + $trow['amountPaid'];
+                              $price = $tPrice;
+                              $delFee = $trow['invDelrateID'];
+                              $penFee = $trow['invPenID'];
+                              $discount = $trow['invDiscount'];
+                            }
+                            if($discount!=""){
+                              $disc = $discount;
+                              $disc = $discount / 100;
+                              $minus = $price * $disc;
+                              $price = $price - $minus;
+                            }
+                            else{
+                              $discount = 0;
+                            }
+                            $down = $tpay;
+                            $tPrice1 = $price + $delFee + $penFee;
+                            ?>
                           </tbody>
                           <tfoot style="text-align:right;">
                             <tr>
                               <td colspan="3" style="text-align:right;"><b> GRAND TOTAL</b></td>
                               <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
                               <td id="totalPrice" style="text-align:right;"><mark><strong><span>&#8369;&nbsp;<?php echo number_format($tPrice,2)?></span></strong></mark></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align:right;"><b> DISCOUNT</b></td>
+                              <td></td>
+                              <td style="text-align:right;">&nbsp;<?php echo $discount?> %</td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" style="text-align:right;"><b> AMOUNT DUE</b></td>
+                              <td></td>
+                              <td style="text-align:right;">&#8369;&nbsp;<?php echo number_format($price,2)?></td>
                             </tr>
                             <tr>
                               <td colspan="3" style="text-align:right;"><b> TOTAL AMOUNT PAID</b></td>

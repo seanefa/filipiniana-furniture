@@ -3,16 +3,23 @@ $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "JO". $or;
 
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title><?php echo $orID?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php 
 $id = $_GET['id'];
@@ -212,9 +219,9 @@ $row = mysqli_fetch_assoc($res);
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
 <?php
-$html = ob_get_clean();
-$dompdf = new DOMPDF();
-$dompdf->load_html($html);
-$dompdf->render();
-$dompdf->stream($orID, array("Attachment" => 0));
+// $html = ob_get_clean();
+// $dompdf = new DOMPDF();
+// $dompdf->load_html($html);
+// $dompdf->render();
+// $dompdf->stream($orID, array("Attachment" => 0));
 ?>
