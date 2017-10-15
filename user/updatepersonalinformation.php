@@ -30,10 +30,14 @@ if($pic=="")
 {
 	$pic = $exist_image;
 }
+
 $customersql="UPDATE tblcustomer a join tbluser b SET a.customerFirstName='$fn', a.customerMiddleName='$mn', a.customerLastName='$ln', a.customerContactNum='$cn', a.customerDP = '$pic' where b.userCustID = a.customerID AND b.userID = " . $_SESSION["userID"] . "";
+
+$logs = "INSERT into tbllogs(category, action, date, description, userID) values('Customer', 'Update', '" . date("Y-m-d") . "', '$customerID', " . $_SESSION["userID"] . ")";
 
 if($conn->query($customersql)==true)
 {
+	$conn->query($logs);
 	header("Location: account.php");
 }
 $conn->close();

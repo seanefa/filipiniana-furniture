@@ -65,7 +65,7 @@ $em= mysqli_real_escape_string($conn, $em);
 
 if($cf==$pw)
 {
-	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', '$newstat', '$status')";
+	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
 	
 	if($sql2)
 	{
