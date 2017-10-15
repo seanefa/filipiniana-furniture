@@ -6,22 +6,8 @@
       <div class="row"> <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify"></i></span>
         <div class="pull-left flip left-top">
           <div class="links">
-            <script type="text/javascript">
-              while(var x != 4){
-                if(x < 2){
-                location.reload(true);
-                }
-                else{
-
-              location.reload(false);
-                }
-                x++;
-              }
-            </script>
             <?php
             include "userconnect.php";
-            
-
             session_start();
 
             $sql="SELECT * from tblcompany_info";
