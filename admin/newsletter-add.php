@@ -6,6 +6,9 @@ use PHPMailer\PHPMailer\Exception;
 session_start();
 include "dbconnect.php";
 
+$user = $_SESSION["userID"];
+$date = date("Y-m-d");
+$content = $_POST["news_content"];
 $insertnews = "INSERT into tblnewsletter(newsletterDate, newsletterAuthor, newsletterContent) values('$date', '$user', '$content')";
 
 if(mysqli_query($conn,$insertnews)){
@@ -13,7 +16,7 @@ if(mysqli_query($conn,$insertnews)){
 	$res = mysqli_query($conn,$selectemail);
 	while($row = mysqli_fetch_assoc($res)){
 		$name = $row["customerFirstName"] . " " . $row["customerMiddleName"] . " " . $row["customerLastName"];
-		$emails = $row["customerEmail"];
+		$email = $row["customerEmail"];
 		// Include and initialize phpmailer class
 		require 'PHPMailer/src/Exception.php';
 		require 'PHPMailer/src/PHPMailer.php';
@@ -76,7 +79,7 @@ if(mysqli_query($conn,$insertnews)){
 		$mail->addReplyTo('filfurnitures@gmail.com', 'Filipiniana Furniture');
 		
 	 // Add a recipient
-		$mail->addAddress($em);
+		$mail->addAddress($email);
 
 		        // Set email format to HTML
 		$mail->isHTML(true);
@@ -86,13 +89,22 @@ if(mysqli_query($conn,$insertnews)){
 
 	// Email body content
 		$mail->Body = $message;
-		$_SESSION['updateSuccess'] = 'Success';
-		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		if(!$mail->send()){
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+			// $_SESSION['updateSuccess'] = 'Success';
+			// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		}
+		else{
+			echo 'Message has been sent';
+			// $_SESSION['actionFailed'] = 'Failed';
+			// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		}
 	}
 }
 
 else{
-	$_SESSION['actionFailed'] = 'Failed';
-	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+	// $_SESSION['actionFailed'] = 'Failed';
+	// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 }
 ?>
