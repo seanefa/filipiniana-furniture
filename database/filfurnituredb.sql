@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 08:07 PM
+-- Generation Time: Oct 15, 2017 at 09:10 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -220,6 +220,13 @@ CREATE TABLE `tblcustomize_request` (
   `dateRequest` varchar(45) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tblcustomize_request`
+--
+
+INSERT INTO `tblcustomize_request` (`customizedID`, `tblcustomerID`, `customizedDescription`, `customStatus`, `dateRequest`) VALUES
+(1, 5, 'A blue furniture', 'WFA', '2017-10-15');
+
 -- --------------------------------------------------------
 
 --
@@ -231,6 +238,15 @@ CREATE TABLE `tblcust_req_images` (
   `cust_req_ID` int(11) NOT NULL,
   `cust_req_images` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tblcust_req_images`
+--
+
+INSERT INTO `tblcust_req_images` (`cust_req_imagesID`, `cust_req_ID`, `cust_req_images`) VALUES
+(1, 1, 'DKH8owjU8AEy4Rm.jpg'),
+(2, 1, 'DL-dTV4WsAAcCba.jpg'),
+(3, 1, 'DMAKG-IVoAA8Q-e.jpg');
 
 -- --------------------------------------------------------
 
@@ -1191,6 +1207,30 @@ INSERT INTO `tblmodeofpayment` (`modeofpaymentID`, `modeofpaymentDesc`, `modeofp
 (1, 'Cash', 'Active'),
 (2, 'Check', 'Active'),
 (3, 'Deposit Slip', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblnewsletter`
+--
+
+CREATE TABLE `tblnewsletter` (
+  `newsID` int(11) NOT NULL,
+  `newsletterDate` date NOT NULL,
+  `newsletterAuthor` int(11) NOT NULL,
+  `newsletterContent` varchar(450) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblnewsletter`
+--
+
+INSERT INTO `tblnewsletter` (`newsID`, `newsletterDate`, `newsletterAuthor`, `newsletterContent`) VALUES
+(1, '0000-00-00', 0, ''),
+(2, '0000-00-00', 0, ''),
+(3, '2017-10-15', 1, 'Hello'),
+(4, '2017-10-15', 1, 'Hello'),
+(5, '2017-10-15', 1, 'Hello');
 
 -- --------------------------------------------------------
 
@@ -2483,6 +2523,12 @@ ALTER TABLE `tblmodeofpayment`
   ADD PRIMARY KEY (`modeofpaymentID`);
 
 --
+-- Indexes for table `tblnewsletter`
+--
+ALTER TABLE `tblnewsletter`
+  ADD PRIMARY KEY (`newsID`);
+
+--
 -- Indexes for table `tblnotification`
 --
 ALTER TABLE `tblnotification`
@@ -2762,12 +2808,12 @@ ALTER TABLE `tblcustomer`
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
-  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblcust_req_images`
 --
 ALTER TABLE `tblcust_req_images`
-  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbldelivery`
 --
@@ -2923,6 +2969,11 @@ ALTER TABLE `tblmat_var`
 --
 ALTER TABLE `tblmodeofpayment`
   MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tblnewsletter`
+--
+ALTER TABLE `tblnewsletter`
+  MODIFY `newsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tblnotification`
 --
