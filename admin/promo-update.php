@@ -5,6 +5,7 @@ include 'dbconnect.php';
 $id = $_POST['recID'];
 
 $name = $_POST['name'];
+$prod = $_POST['editproduct'];
 $desc = $_POST['desc'];
 $pic = "";
 $start = $_POST['start'];
@@ -36,8 +37,9 @@ $desc = mysqli_real_escape_string($conn,$desc);
 
 
 
-$sql = "UPDATE `tblpromos` SET `promoName`='$name', `promoDescription`='$desc', `promoStartDate`='$start', `promoEnd`='$end', `promoImage`='$pic' WHERE `promoID`='$id';";
+$sql = "UPDATE `tblpromos` SET `promoName`='$name',`tblproductID`='$prod', `promoDescription`='$desc', `promoStartDate`='$start', `promoEnd`='$end', `promoImage`='$pic' WHERE `promoID`='$id';";
 mysqli_query($conn,$sql);
+/*
 echo $sql . "<br>";
 
 $promoID = mysqli_insert_id($conn);
@@ -84,7 +86,7 @@ else if($promo=="Others"){
 	$pro_sql = "UPDATE `tblpromo_promotion` SET `proCategory`='$promo', `proData`='$data' WHERE `proPromoID`='$id';";
 	mysqli_query($conn,$pro_sql);
 	echo $pro_sql . "<br>";
-}
+}*/
 
 // Logs start here
 $sID = $id; // ID of last input;

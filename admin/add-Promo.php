@@ -3,6 +3,8 @@ include "session-check.php";
 include 'dbconnect.php';
 
 $name = $_POST['name'];
+
+$prod = $_POST['product'];
 $desc = $_POST['desc'];
 $pic = "";
 $start = $_POST['start'];
@@ -27,10 +29,10 @@ else
  $pic = $date . $time . ".png";
 }
 
-$sql = "INSERT INTO `tblpromos` (`promoName`, `promoDescription`, `promoStartDate`, `promoImage`, `promoEnd`, `promoStatus`) VALUES('$name','$desc','$start','$pic','$end','$status')";
+$sql = "INSERT INTO `tblpromos` (`promoName`,`tblproductID`, `promoDescription`, `promoStartDate`, `promoImage`, `promoEnd`, `promoStatus`) VALUES('$name','$prod','$desc','$start','$pic','$end','$status')";
 mysqli_query($conn,$sql);
 //echo $sql . "<br>";
-
+/*
 $promoID = mysqli_insert_id($conn);
 
 $condition = $_POST['cat'];
@@ -74,7 +76,7 @@ else if($promo=="Others"){
 	$pro_sql = "INSERT INTO tblpromo_promotion(proPromoID,proCategory,proData) VALUES ('$promoID','$promo','$data')";
 	mysqli_query($conn,$pro_sql);
 	echo $pro_sql . "<br>";
-}
+}*/
 
 // Logs start here
 $sID = mysqli_insert_id($conn); // ID of last input;
