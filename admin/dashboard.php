@@ -2,6 +2,49 @@
 include "titleHeader.php";
 include "menu.php";
 include 'dbconnect.php';
+include 'toastr-buttons.php';
+
+if (!empty($_SESSION['createSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastNewSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['createSuccess']);
+}
+if (!empty($_SESSION['updateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastUpdateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['updateSuccess']);
+}
+if (!empty($_SESSION['deactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastDeactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['deactivateSuccess']);
+}
+if (!empty($_SESSION['reactivateSuccess'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastReactivateSuccess").click();
+          });
+        </script>';
+  unset($_SESSION['reactivateSuccess']);
+}
+if (!empty($_SESSION['actionFailed'])) {
+  echo  '<script>
+          $(document).ready(function () {
+            $("#toastFailed").click();
+          });
+        </script>';
+  unset($_SESSION['actionFailed']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +72,10 @@ function hideNonVisibleDivs() {
     }
   }
 }
+
+   function redirectBill(id){
+    window.open("bill.php?id="+id, "_blank");
+  }
 </script>
 </head>
 <body>
@@ -540,7 +587,7 @@ function getuserID($id){
         </ul>
       </h3><h3>
       <ul class="nav customtab2 nav-tabs" role="tablist">
-        <button id="tempbtn" class="btn btn-lg btn-warning pull-right" data-toggle="modal"  href="newsletter-form.php" data-remote="newsletter-form.php #new" data-target="#myModal1" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
+        <button id="tempbtn" class="btn btn-lg btn-warning pull-right" data-toggle="modal"  href="newsletter-form.php" data-remote="newsletter-form.php #new" data-target="#myModal1" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span> Create Newsletter</button>
       </ul>
     </h3>
     <div class="tab-content">
