@@ -54,7 +54,7 @@ if($type==0){
 			$row = mysqli_fetch_assoc($res1);
 
 			$origCount = $row['matVarQuantity'];
-
+			$matInvID = $row['mat_inventoryID'];
 			$newCount = $origCount - $quan[$x];
 
 			if($newCount<0){
@@ -65,6 +65,8 @@ if($type==0){
 				$sql1 = "UPDATE tblmat_inventory SET matVarQuantity = '$newCount' WHERE matVariantID = '" . $desc[$x]."'";
 				echo $sql1 . "<br>";
 				if(mysqli_query($conn,$sql1)){
+					$sjsql = "INSERT INTO `tblmat_deductdetails` ( `mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`) VALUES ('$matInvID', '".$quan[$x]."', 'For production');";
+					mysqli_query($conn,$sjsql);
 					$flag++;
 				}
 				else{
@@ -78,7 +80,6 @@ if($type==0){
 
 	for($x=0;$x<$ctr;$x++){
 		$sql1 = "INSERT INTO `tblprodphase_materials` (`pphID`, `pph_matDescID`, `pph_matQuan`, `pph_matStatus`) VALUES ('$phaseID','".$desc[$x]."','".$quan[$x]."','Active')";
-		//echo $sql1 . "<br>";
 		if(mysqli_query($conn,$sql1)){
 			$flag++;
 		}

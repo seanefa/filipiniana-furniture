@@ -379,6 +379,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                 <th style="text-align: left;">Handler</th>
                                 <th style="text-align: left;">Date Start</th>
                                 <th style="text-align: left;">Date End</th>
+                                <th style="text-align: left;">Materials Used</th>
                                 <th style="text-align: left;">Status</th>
                                 <th style="text-align: left;">Remarks</th>
                               </thead>
@@ -413,11 +414,13 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                   if($temp!=""){
                                     $remarks = $pRow['prodRemarks'];
                                   }
+                                  $mat = getMat($pRow['prodHistID']);
                                   echo "<tr>
                                   <td>".$pRow['phaseName']."</td>
                                   <td>".$empName."</td>
                                   <td>".$dateStart."</td>
                                   <td>".$dateEnd."</td>
+                                  <td>".$mat."</td>
                                   <td>".$pRow['prodStatus']."</td>
                                   <td>".$remarks."</td>
                                   </tr>";
@@ -430,6 +433,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                 while($pRow = mysqli_fetch_assoc($pRes)){
                                   $dateStart = "N/A";
                                   $temp = $pRow['prodDateStart'];
+                                  $mat = getMat($pRow['prodHistID']);
                                   if($temp!=""){
                                     $dateStart = date_create($pRow['prodDateStart']);
                                     $dateStart = date_format($dateStart,"F d, Y");
@@ -454,6 +458,7 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                   <td>".$empName."</td>
                                   <td>".$dateStart."</td>
                                   <td>".$dateEnd."</td>
+                                  <td>".$mat."</td>
                                   <td>".$pRow['prodStatus']."</td>
                                   <td>".$remarks."</td>
                                   </tr>";
@@ -469,6 +474,23 @@ $estDate = date('Y-m-d', strtotime("+2 days"));
                                   $name = $row['empFirstName'].' '.$row['empMidName'].' '.$row['empLastName'];
                                 }
                                 return $name;
+                              }
+                              function getMat($id){
+                                include "dbconnect.php";
+                                $tQuan = 0;
+                                $tPrice = 0;
+                                $ctr = 0;
+                                $sql1 = "SELECT * FROM tblprodphase_materials a, tblmat_var b, tblmat_type c, tblmaterials d WHERE a.pph_matDescID = b.mat_varID and b.materialID = d.materialID and d.materialType = c.matTypeID and a.pphID = '$id'";
+                                $res = mysqli_query($conn,$sql1);
+                                $mat = "";
+                                while($row = mysqli_fetch_assoc($res)){
+                                  $mat = $mat . $row['pph_matQuan'] . " - " . $row['mat_varDescription']."/ ".$row['materialName']. "<br>";
+                                  $ctr++;
+                                }
+                                if($ctr==0){
+                                  return "N/A";
+                                }
+                                return $mat;
                               }
                               ?>
                             </table>
