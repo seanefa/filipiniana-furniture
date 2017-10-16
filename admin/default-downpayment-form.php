@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "menu.php";
 include 'dbconnect.php';
 session_start();
@@ -38,7 +38,7 @@ if (!$conn) {
                         $tsql = "SELECT * FROM tbldownpayment;";
                         $tresult = mysqli_query($conn, $tsql);
                         $trow = mysqli_fetch_assoc($tresult);
-                        $udp = $trow['downpaymentPercentage']*100;
+                        $udp = $trow['downpaymentPercentage'];
                         ?>
                         <label class="control-label">Downpayment</label><span id="x" style="color:red"> *</span>
                         <input type="number" style="text-align:right;" id="editname" class="form-control" placeholder="50" name="name" value="<?php echo $udp; ?>"><span id="message"></span>
