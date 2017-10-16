@@ -33,13 +33,15 @@ if (!$conn) {
                   <div class="form-group">
                     <label class="control-label">Name</label><span id="x" style="color:red"> *</span>
                     <input type="text" id="discountName" class="form-control" name="discount_name" required><span id="discountNameValidate"></span> 
-                  </div>
+                  <p style="color:red" id="nameError"></p>
+                </div>
                 </div>
 				  <div class="col-md-6">
 					 <div class="form-group">
                 <label class="control-label">Percentage</label><span id="x" style="color:red"> *</span>
-                <input type="number" id="discountName" class="form-control" name="discount_percentage" required><span id="discountPercentageValidate"></span> 
-				  </div>
+                <input type="number" id="percent" style="text-align:right" class="form-control" name="discount_percentage" required><span id="discountPercentageValidate"></span> 
+				        <p style="color:red" id="pError"></p>
+          </div>
 					  </div>
               </div>
 
@@ -87,8 +89,9 @@ if (!$conn) {
 				  <div class="col-md-6">
 					 <div class="form-group">
                 <label class="control-label">Percentage</label><span id="x" style="color:red"> *</span>
-                <input type="number" id="discountName" class="form-control" name="discount_percentage" value="<?php echo "" . $trow["discountPercentage"];?>" required><span id="discountPercentageValidate"></span> 
-				  </div>
+                <input type="number" id="percent" style="text-align:right" class="form-control" name="discount_percentage" value="<?php echo "" . $trow["discountPercentage"];?>" required><span id="discountPercentageValidate"></span> 
+				        <p style="color:red" id="pError"></p>
+          </div>
 					  </div>
               </div>
 
@@ -99,7 +102,7 @@ if (!$conn) {
                   </div>
                 </div>
                 <div class="modal-footer"><span id="notif" style="color:red"></span>
-                  <button type="submit" class="btn btn-success waves-effect text-left" id="updateBtn"><i class="fa fa-check"></i> Save</button>
+                  <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn"><i class="fa fa-check"></i> Save</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>
 

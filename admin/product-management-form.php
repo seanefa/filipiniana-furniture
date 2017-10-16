@@ -114,7 +114,7 @@ $_SESSION['varname'] = $jsID;
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
-                  <input type="text" id="quan" class="form-control" name="quan" style="text-align:right" value="<?php echo $count;?>">
+                  <input type="number" id="quan" class="form-control" name="quan" style="text-align:right" value="<?php echo $count;?>">
                   <input type="hidden" id="quanOrig" style="text-align:right" value="<?php echo $count;?>">
                   <p id="quanError" style="color:red"></p>
                 </div>
@@ -130,7 +130,7 @@ $_SESSION['varname'] = $jsID;
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
+        <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn"><i class="fa fa-check"></i> Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
       </div>
     </div>

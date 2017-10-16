@@ -16,7 +16,12 @@ if($reason==1){
 	$res = mysqli_query($conn,$query);
 	$row = mysqli_fetch_assoc($res);
 	$orderID = str_pad($row['tblOrdersID'], 6, '0', STR_PAD_LEFT);
+	$orderQuan = $row['orderQuantity'];
 	$reason = "For Order ID ". $orderID;
+
+	if($quan>$orderQuan){
+		$quan = $orderQuan;
+	}
 
 	$sql = "SELECT * FROM tblonhand WHERE ohProdID ='$prodID'";
 	$res = mysqli_query($conn,$sql);

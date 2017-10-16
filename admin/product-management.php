@@ -105,33 +105,45 @@ unset($_SESSION['actionFailed']);
         }
       });
 
-      $('#quan').on('keyup',function() {
+      $('#quan').on('change',function() {
         var origValue = $("#quanOrig").val();
         var  intValue = $("#quan").val();
-        if(intValue<0){
-          var e = "Please input a valid number.";
-          $("#quanError").html(e);
-          $('#quan').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        if(intValue==""){
-          var e = "Please input a valid number.";
-          $("#quanError").html(e);
-          $('#quan').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        if(intValue>origValue){
-          var e = "Input must not be greater than " + origValue + ".";
-          $("#quanError").html(e);
-          $('#quan').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
+        if((intValue>0) && (intValue<=origValue)){
           var e = ""
           $("#quanError").html(e);
           $('#quan').css('border-color','grey');
           $('#saveBtn').prop('disabled',false);
         }
+        else{
+          var e = "Please input a valid number.";
+          $("#quanError").html(e);
+          $('#quan').css('border-color','red');
+          $('#saveBtn').prop('disabled',true);
+        }
+        // if(intValue<0){
+        //   var e = "Please input a valid number.";
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','red');
+        //   $('#saveBtn').prop('disabled',true);
+        // }
+        // if(intValue==""){
+        //   var e = "Please input a valid number.";
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','red');
+        //   $('#saveBtn').prop('disabled',true);
+        // }
+        // if(intValue>origValue){
+        //   var e = "Input must not be greater than " + origValue + ".";
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','red');
+        //   $('#saveBtn').prop('disabled',true);
+        // }
+        // else{
+        //   var e = ""
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','grey');
+        //   $('#saveBtn').prop('disabled',false);
+        // }
 
         // if(isNaN(intValue)){
         //   var e = "Please input a valid number.";
