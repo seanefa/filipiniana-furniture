@@ -9,8 +9,7 @@ include "dbconnect.php";
 $user = $_SESSION["userID"];
 $date = date("Y-m-d");
 $content = $_POST["news_content"];
-$insertnews = "INSERT into tblnewsletter(newsletterDate, newsletterAuthor, newsletterContent) values('$date', '$user', '$content')";
-
+$insertnews = "INSERT into tblnewsletter(newsletterDate, newsletterAuthor, newsletterContent,newsletterStatus) values('$date', '$user', '$content','Pending')";
 if(mysqli_query($conn,$insertnews)){
 	$selectemail = "SELECT * from tblcustomer a, tbluser b WHERE b.userCustID = a.customerID and b.confirmedUser = 1 and a.customerNewsletter = 1";
 	$res = mysqli_query($conn,$selectemail);
@@ -92,6 +91,9 @@ if(mysqli_query($conn,$insertnews)){
 		if($mail->send()){
 			// echo 'Message could not be sent.';
 			// echo 'Mailer Error: ' . $mail->ErrorInfo;
+			$newsletterID = mysqli_insert_id($conn);
+			$sql1 = "UPDATE tblnewsletter SET newsletterStatus = 'Sent' WHERE newsID = '$newsletterID'";
+			mysqli_query($conn,$sql1);
 			$_SESSION['createSuccess'] = 'Success';
 			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 		}
