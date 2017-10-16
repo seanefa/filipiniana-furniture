@@ -61,7 +61,7 @@ if (!empty($_SESSION['actionFailed'])) {
   }
 
   $(document).ready(function(){
-  $("#manual").hide();
+  $("#automatic").hide();
   $('#aut').change(function(){
     if($(this).prop("checked")) {
       $('#automatic').show();
@@ -86,7 +86,7 @@ if (!empty($_SESSION['actionFailed'])) {
             <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                  <a role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="ti-info"></i>&nbsp;<?php echo $titlePage?></a>
+                  <a role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"></span><i class="ti-wand"></i>&nbsp;<?php echo $titlePage?></a>
                 </li>
               </ul>
             </h3>
@@ -100,8 +100,8 @@ if (!empty($_SESSION['actionFailed'])) {
                     <div class="form-group" style="text-align:center;">
                      <label class="control-label">Select Database Backup & Recovery Option</label>
                       <br>
-                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Automatic" id="aut" checked/>Automatic&nbsp;&nbsp;&nbsp;
-                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Manual" id="man" />Manual&nbsp;&nbsp;&nbsp;
+                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Manual" id="man" checked/>Manual&nbsp;&nbsp;&nbsp;
+                      <input class="daychecks" onclick="checkOnlyOne(this.value);" type="radio" name="reoccur_weekday" value="Automatic" id="aut" />Automatic&nbsp;&nbsp;&nbsp;
                   </div>
                 </div>
 
@@ -121,7 +121,7 @@ if (!empty($_SESSION['actionFailed'])) {
                 </div>
                 <div class="row">
                   <div class="pull-right">
-                    <button type="submit" class="btn btn-success"><i class="ti-check"></i> Save</button>
+                    <button type="submit" class="btn btn-success" onclick="setTimeout(function() { alert('Backup Settings Successfully Saved!'); }, 800);" href="javascript:void(0)"><i class="ti-check"></i> Save</button>
                   </div>
                 </div>
               </div>
@@ -129,11 +129,11 @@ if (!empty($_SESSION['actionFailed'])) {
                   <div class="row">
                     <div class="col-md-7 pull-right" style="margin-right:30px;">
                       <form action="../database/myphp-backup.php" target="_blank" method="get">
-                        <button type="submit" class="btn btn-success"><i class="ti-check"></i> Backup Now</button>
+                        <button type="submit" class="btn btn-success"><i class="ti-back-right"></i> Backup Now</button>
                       </form>
                       <br>
                       <form action="../database/myphp-restore.php" target="_blank" method="get">
-                        <button type="submit" class="btn btn-success"><i class="ti-check"></i> Restore Now</button>
+                        <button type="submit" class="btn btn-success"><i class="ti-back-left"></i> Restore Now</button>
                       </form>
                     </div>
                   </div>
