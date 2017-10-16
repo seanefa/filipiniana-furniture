@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div id="facebook" class="fb-left sort-order-1" style="left: -241px;">
+      <!--div id="facebook" class="fb-left sort-order-1" style="left: -241px;">
           <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
           <div class="fb-page" data-href="https://www.facebook.com/BaraquielsFilipinianaFurniture/?rf=394433167420532" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/BaraquielsFilipinianaFurniture/?rf=394433167420532" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/BaraquielsFilipinianaFurniture/?rf=394433167420532">Filipiniana Furniture</a></blockquote></div>
           <div id="fb-root"></div>
@@ -75,7 +75,7 @@
           <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
         <a href="https://twitter.com/intent/tweet?button_hashtag=FilipinianaFurniture" class="twitter-hashtag-button" data-show-count="false">Tweet #FilipinianaFurniture</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        </div>
+        </div-->
 
     </div>
     <!--div class="fpart-second">

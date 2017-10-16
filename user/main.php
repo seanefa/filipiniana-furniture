@@ -44,8 +44,6 @@
                 <?php
                 include "userconnect.php";
 
-                
-
                 $ctr = 0;
                 $sql="SELECT * from tblproduct order by productID desc;";
                 $result = mysqli_query($conn, $sql);
@@ -60,21 +58,21 @@
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span>
                        <span class="price-old"> </span></p>
-                      '); ?>
-            
-                    </div>
+                   </div>
+                      
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                     </div>
-                  </div> <?php
+                </div>
+
+                    ');
+                  }
                 }
-                $ctr++;
-              }
-              ?>
+            ?>
+                    </div>
+                  </div> 
             </div>
         </div>
-        </div>
-    </div>
       <!--Middle Part End-->
        <div class="row">
         <!--Middle Part Start-->
@@ -100,22 +98,18 @@
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
-                    ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                     </div>
-                  </div><?php echo '';
+                    </div>
+                    ';
                 }
-                $ctr++;
               }
-              /*
-<button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
-              */
               ?>
+                  </div>
             </div>
         </div>
         </div>
-    </div>
       <!--Middle Part End-->
     <div class="row">
         <!--Middle Part Start-->
@@ -140,18 +134,18 @@
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
-                    ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id='.$row['packageID'].' #viewP"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
+                      </div>
+                  </div>
+                    ';
+                  }
+                }
+                      ?>
                     </div>
                   </div>
-                  </div><?php echo'';
-                }
-                $ctr++;
-              }
-              ?>
+                  </div>
             </div>
-        </div>
       <!--Middle Part End-->
       <div class="row">
         <!--Middle Part Start-->
@@ -180,7 +174,6 @@
                   </div>
                   ';
                 }
-                $ctr++;
               }
               ?>
             </div>
