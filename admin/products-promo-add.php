@@ -2,7 +2,7 @@
 include "session-check.php";
 include 'dbconnect.php';
 
-$promo = $_POST['promo'];
+$promo = $_POST['promoedit'];
 $status = "Active";
 $flag = 0;
 

@@ -157,16 +157,27 @@ $orderID = $orRoq['orderID'];
             $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$orderID'";
             $res = mysqli_query($conn,$sql1);
             while($row = mysqli_fetch_assoc($res)){
+              if($row['prodUnitPrice']==0){
+              echo '<tr>
+              <td>'.$row['productName'].' (Free Item)</td>
+              <td>'.$row['productDescription'].'</td>
+              <td style="text-align:right;">Php  '.number_format($row['prodUnitPrice'],2).'</td>
+              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+              echo '<td style="text-align:right;">Php 0.00</td></tr>';
+              $tQuan = $tQuan + $row['orderQuantity'];
+              }
+              else{
               echo '<tr>
               <td>'.$row['productName'].'</td>
               <td>'.$row['productDescription'].'</td>
-              <td style="text-align:right;">Php  '.number_format($row['productPrice'],2).'</td>
+              <td style="text-align:right;">Php  '.number_format($row['prodUnitPrice'],2).'</td>
               <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
               $tPrice = $row['orderQuantity'] * $row['productPrice'];
               $tPrice =  number_format($tPrice,2);
               echo '<td style="text-align:right;">Php  '.$tPrice.'</td></tr>';
               $tPrice = $row['orderPrice'];
               $tQuan = $tQuan + $row['orderQuantity'];
+              }
             }
             ?>
             <tr style="text-align:right;">

@@ -213,7 +213,12 @@ else if($isBool=="existing"){ //EXISTING
     echo "<br>orderID: " . $orderid;
     foreach($selected as $str) {
       $unitPrice = unitPrice($str);
-      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
+      $prodID = $str;
+      if(substr($str, 0,5)=='Promo'){
+        $prodID = str_replace('Promo', '', $str);
+      }
+
+      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
       mysqli_query($conn,$sql1);
 
       $orReqID = mysqli_insert_id($conn);
@@ -307,7 +312,8 @@ function unitPrice($id){
   if(substr($id, 0,4)=='Promo'){
     $price = 0;
     return $price;
-  }else{
+  }
+  else{
   $price = 0;
   $sql = "SELECT * from tblproduct WHERE productID = '$id'";
   $res = mysqli_query($conn,$sql);

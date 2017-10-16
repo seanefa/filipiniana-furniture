@@ -182,7 +182,7 @@ $_SESSION['varname'] = $jsID;
               </div>
               <hr>
               <div class="row">
-                <div class="col-md-12"">
+                <div class="col-md-12">
                   <div id="checkbox">
                     <h4 style="text-align: center;">
                       <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
