@@ -1,6 +1,7 @@
 <?php 
+include "dbconnect.php";
 
-$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
+//$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 
 

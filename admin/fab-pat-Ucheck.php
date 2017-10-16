@@ -1,7 +1,8 @@
 <?php 
 session_start();
 $temp = $_SESSION['tempname'];
-$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
+include "dbconnect.php";
+//$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $texture = strip_tags($_POST['username']);
 

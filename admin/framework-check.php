@@ -1,6 +1,8 @@
 <?php 
 
-$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
+include "dbconnect.php";
+
+//$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $frameName = "";
 $unitMeasure = "";

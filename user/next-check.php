@@ -1,6 +1,7 @@
 <?php 
 
-$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
+include "userconnect.php";
+//$conn = new MySQLI('localhost', 'root', '', 'filfurnituredb');
 
 $matTypeName = "";
 
