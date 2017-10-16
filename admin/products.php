@@ -540,8 +540,8 @@ $(document).ready(function(){
     $("#_fabric").attr('disabled','disabled');  
   }
   
-  $("input[name='_design']").on('change',function(){
-    var val = $("input[name='_design']:checked").val();
+  $("input[name='design']").change(function(){
+    var val = $("input[name='design']:checked").val();
     if(val=="3"){
       $("#_fabric").removeAttr('disabled');
       var al = $("#_fabric").val();
@@ -550,8 +550,6 @@ $(document).ready(function(){
       $("#_fabric").attr('disabled','disabled');  
     }
   });
-
-
 });
 });
 

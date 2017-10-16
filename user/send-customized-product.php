@@ -7,9 +7,11 @@ $blueprint = "";
 
 $description = mysqli_real_escape_string($conn, $description);
 
-$data = "SELECT * from tbluser a join tblcustomer b where a.userCustID = b.customerID AND a.userID = " . $_SESSION["userID"] . "";
-$result = $conn->query($data);
-$row = $result->num_rows;
+$uID = $_SESSION["userID"];
+
+$data = "SELECT * from tbluser a, tblcustomer b where a.userCustID = b.customerID AND a.userID = '$uID'";
+$result = nysqli_query($conn,$data);
+$row = mysqli_fetch_assoc($result);
 $customerID = $row["customerID"];
 
 if($_FILES["blueprint"]["error"]>0){

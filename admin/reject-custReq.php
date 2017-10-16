@@ -10,11 +10,11 @@ if($_POST['reason']!=""){
 
 $flag = 0;
 
-$updateSql = "UPDATE tblorders SET orderStatus = 'Rejected', orderRemarks =  '$reason' WHERE orderID = $id";
+$updateSql = "UPDATE tblcustomize_request SET customStatus = 'Rejected' WHERE customizedID = $id";
 if(mysqli_query($conn,$updateSql)){
 	$flag++;
 }
-$action = "INSERT INTO `tblorder_actions` (`orOrderID`, `orAction`, `orReason`) VALUES ($id, 'Rejected', '$reason');";
+$action = "INSERT INTO `tblorder_actions` (`orOrderID`, `orAction`, `orReason`) VALUES ($id, 'Rejected Customization', '$reason');";
 if(mysqli_query($conn,$action)){
 	$flag++;
 }

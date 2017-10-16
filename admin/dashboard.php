@@ -6,43 +6,43 @@ include 'toastr-buttons.php';
 
 if (!empty($_SESSION['createSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastNewSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['createSuccess']);
+  $(document).ready(function () {
+    $("#toastNewSuccess").click();
+  });
+</script>';
+unset($_SESSION['createSuccess']);
 }
 if (!empty($_SESSION['updateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastUpdateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['updateSuccess']);
+  $(document).ready(function () {
+    $("#toastUpdateSuccess").click();
+  });
+</script>';
+unset($_SESSION['updateSuccess']);
 }
 if (!empty($_SESSION['deactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastDeactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['deactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastDeactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['deactivateSuccess']);
 }
 if (!empty($_SESSION['reactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastReactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['reactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastReactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['reactivateSuccess']);
 }
 if (!empty($_SESSION['actionFailed'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastFailed").click();
-          });
-        </script>';
-  unset($_SESSION['actionFailed']);
+  $(document).ready(function () {
+    $("#toastFailed").click();
+  });
+</script>';
+unset($_SESSION['actionFailed']);
 }
 
 ?>
@@ -73,9 +73,9 @@ function hideNonVisibleDivs() {
   }
 }
 
-   function redirectBill(id){
-    window.open("bill.php?id="+id, "_blank");
-  }
+function redirectBill(id){
+  window.open("bill.php?id="+id, "_blank");
+}
 </script>
 </head>
 <body>
@@ -325,16 +325,17 @@ function getuserID($id){
                   if($result){
                     while ($row = mysqli_fetch_assoc($result))
                     {
-
-                      
+                      $orderID = str_pad($row['customizedID'], 6, '0', STR_PAD_LEFT); //format ng display ID
+                      $date = date_create($row['dateRequest']);
+                      $date = date_format($date,"F d, Y");
                       ?>
                       <tr>
-                        <td><?php echo $row['customizedID'];?></td>
-                        <td><?php echo getName(getuserID($row['tblcustomerID']));?></td>
-                        <td><?php echo $row['dateRequest'];?></td>
+                        <td><?php echo $orderID;?></td>
+                        <td><?php echo getName($row['tblcustomerID']);?></td>
+                        <td><?php echo $date;?></td>
                         <td>
-                          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewCustRequest"><i class="fa fa-info-circle"></i> View</button>
-                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #acceptCustRequest"><i class="ti-check"></i> Accept</button>
+
+                          <a type="button" class="btn btn-info" style="color:white" href="accept-customization.php?id=<?php echo $row['customizedID']?>"><i class="fa fa-info-circle"></i> View Details</a>
                         </td>
                       </tr>
                       <?php 

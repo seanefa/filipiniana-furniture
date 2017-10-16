@@ -234,6 +234,34 @@ $_SESSION['varname'] = $jsID;
     </div>
   </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="deleteFrameworkMaterialModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content" id="orderCustreject">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title">Reject Customized Request</h3>
+        </div>
+        <form action="reject-custReq.php" method="post">
+          <input type="hidden" name="id" value="<?php echo $jsID?>">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Any reason?</h4>
+                <textarea class="form-control" name="reason"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <button type="submit" role="button" class="btn btn-danger waves-effect text-left">Reject</button>
+              <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" tabindex="-1" role="dialog" id="updateCategoryModal" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" id="custReqAccept">

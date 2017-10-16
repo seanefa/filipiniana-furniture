@@ -56,7 +56,7 @@ $sqlcust = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.cust
             $datepr = date("Y-m-d");
         $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID=1";
           $result5 = mysqli_query($conn, $sql5);
-$updateSql = "UPDATE tblorders SET orderStatus = 'Pending', orderRemarks =  '$remarks',dateOfRelease = '$date' WHERE orderID = $id";
+$updateSql = "UPDATE tblorders SET orderStatus = 'WFP', orderRemarks =  '$remarks',dateOfRelease = '$date' WHERE orderID = $id";
 if(mysqli_query($conn,$updateSql)){
 
 	// Include and initialize phpmailer class

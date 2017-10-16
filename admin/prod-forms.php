@@ -483,10 +483,10 @@ include "dbconnect.php";
                         {
                           if($row['designStatus']!='Archived'){
                             if($trow['prodDesign']==$row['designID']){
-                              echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
+                              echo '<label class="radio-inline"><input id="select" type="radio" name="design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
                             }
                             else{
-                            echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
+                            echo '<label class="radio-inline"><input id="select" type="radio" name="design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
                           }
                           }
                         }
