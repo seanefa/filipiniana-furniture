@@ -321,6 +321,19 @@ if(mysqli_query($conn,$updateSql)){
   }
 }
 
+if($rName=="Discounts"){
+
+$updateSql = "UPDATE tbldiscounts SET discountStatus = 'Active' WHERE discountID = '$jsID'";
+if(mysqli_query($conn,$updateSql)){
+	$_SESSION['reactivateSuccess'] = 'Success';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+} 
+ else {
+    $_SESSION['actionFailed'] = 'Failed';
+	header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+  }
+}
+
 /* UTILITIES */
 if($rName=="Branches"){
 $updateSql = "UPDATE tblbranches SET branchStatus = 'Listed' WHERE branchID = '$jsID'";

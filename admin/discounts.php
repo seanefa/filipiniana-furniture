@@ -459,7 +459,7 @@ $(document).ready(function(){
               <ul class="nav customtab2 nav-tabs" role="tablist">
                 <button id="tempbtn" class="btn btn-lg btn-info pull-right" data-toggle="modal" href="discount-forms.php" data-remote="discount-forms.php #new" data-target="#myModal" aria-expanded="false" style="margin-right: 20px;"><span class="btn-label"><i class="ti-plus"></i></span>New</button>
                 <li role="presentation" class="active" >
-                <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-hummer"></i>&nbsp;<span id="archiveTitle" style="display: none;">Archived</span>&nbsp;<?php echo $titlePage?></a>
+                <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-cut"></i>&nbsp;<span id="archiveTitle" style="display: none;">Archived</span>&nbsp;<?php echo $titlePage?></a>
               </li>
             </ul>
           </h3>
@@ -520,7 +520,7 @@ $(document).ready(function(){
                               <thead>
                                 <tr>
                               <th>Name</th>
-                              <th>Category</th>
+                              <th>Percentage</th>
                               <th class="removeSort">Actions</th>
                                 </tr>
                               </thead>
@@ -534,7 +534,7 @@ $(document).ready(function(){
                                 echo('<tr><td>'.$row['discountName'].'</td>
                                 <td>'.$row['discountPercentage'].'</td>'); ?>
                                 <td>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Materials&amp;id=<?php echo $row['materialID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
+                                <button type="button" class="btn btn-danger" data-toggle="modal" href="reactivate-form.php" data-remote="reactivate-form.php?rName=Discounts&amp;id=<?php echo $row['discountID']?> #reactivate" data-target="#myModal"><i class="ti-reload"></i> Reactivate</button> 
                                 </td>
                                 <?php echo('</tr>');} }
                                 ?>
