@@ -1,71 +1,185 @@
 <?php
-include "menu.php";  
 include "titleHeader.php";
+include "menu.php";  
 include 'dbconnect.php';
 include 'toastr-buttons.php';
 
 if (!empty($_SESSION['createSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastNewSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['createSuccess']);
+  $(document).ready(function () {
+    $("#toastNewSuccess").click();
+  });
+</script>';
+unset($_SESSION['createSuccess']);
 }
 if (!empty($_SESSION['updateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastUpdateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['updateSuccess']);
+  $(document).ready(function () {
+    $("#toastUpdateSuccess").click();
+  });
+</script>';
+unset($_SESSION['updateSuccess']);
 }
 if (!empty($_SESSION['deactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastDeactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['deactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastDeactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['deactivateSuccess']);
 }
 if (!empty($_SESSION['reactivateSuccess'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastReactivateSuccess").click();
-          });
-        </script>';
-  unset($_SESSION['reactivateSuccess']);
+  $(document).ready(function () {
+    $("#toastReactivateSuccess").click();
+  });
+</script>';
+unset($_SESSION['reactivateSuccess']);
 }
 if (!empty($_SESSION['actionFailed'])) {
   echo  '<script>
-          $(document).ready(function () {
-            $("#toastFailed").click();
-          });
-        </script>';
-  unset($_SESSION['actionFailed']);
+  $(document).ready(function () {
+    $("#toastFailed").click();
+  });
+</script>';
+unset($_SESSION['actionFailed']);
 }
 
 ?>
 <!DOCTYPE html>  
 <html lang="en">
 <head>
-  <script>
+  <script>    
+
+
+  $(document).ready(function(){
+    $('#myModal').on('shown.bs.modal',function(){
+      $("#selection").hide();
+      $("#allProd").on('change',function(){
+        if($(this).prop("checked")){
+          $("#selection").hide();
+        }
+        else{
+          $("#selection").show();
+        }
+      });
+    });
+  });
+
+  $(document).ready(function(){
+    $('#myModal').on('shown.bs.modal',function(){
+      $("#onPromoProd").select2({
+      });
+    });
+  });
+
+
+  $(document).ready(function(){
+    $('#myModal1').on('shown.bs.modal',function(){
+      var value = $("#reason").val();
+        if(value==1){
+          $("#tblorders").show();
+          $("#warning").hide();
+        }
+        else if(value==2){
+          $("#tblorders").hide();
+          $("#warning").show();
+        }
+        else{
+          $("#tblorders").hide();
+          $("#warning").hide();
+        }
+      $('#reason').change(function() {
+        var value = $("#reason").val();
+        if(value==1){
+          $("#tblorders").show();
+          $("#warning").hide();
+        }
+        else if(value==2){
+          $("#tblorders").hide();
+          $("#warning").show();
+        }
+        else{
+          $("#tblorders").hide();
+          $("#warning").hide();
+        }
+      });
+
+      $('#quan').on('keyup',function() {
+        var origValue = $("#quanOrig").val();
+        var  intValue = $("#quan").val();
+        if(intValue<0){
+          var e = "Please input a valid number.";
+          $("#quanError").html(e);
+          $('#quan').css('border-color','red');
+          $('#saveBtn').prop('disabled',true);
+        }
+        if(intValue==""){
+          var e = "Please input a valid number.";
+          $("#quanError").html(e);
+          $('#quan').css('border-color','red');
+          $('#saveBtn').prop('disabled',true);
+        }
+        if(intValue>origValue){
+          var e = "Input must not be greater than " + origValue + ".";
+          $("#quanError").html(e);
+          $('#quan').css('border-color','red');
+          $('#saveBtn').prop('disabled',true);
+        }
+        else{
+          var e = ""
+          $("#quanError").html(e);
+          $('#quan').css('border-color','grey');
+          $('#saveBtn').prop('disabled',false);
+        }
+
+        // if(isNaN(intValue)){
+        //   var e = "Please input a valid number.";
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','red');
+        //   $('#saveBtn').prop('disabled',true);
+        // }
+        // else{
+        //   var e = ""
+        //   $("#quanError").html(e);
+        //   $('#quan').css('border-color','grey');
+        //   $('#saveBtn').prop('disabled',false);
+        // }
+        
+      });
+
+    });
+  });
   </script>
 </head>
 <body>
-  <div id="page-wrapper">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-          <div class="panel panel-info">
-            <h3>
+  <!-- Preloader -->
+<!--div class="preloader">
+<div class="cssload-speeding-wheel"></div>
+</div-->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="panel panel-info">
+          <h3>
               <ul class="nav customtab2 nav-tabs" role="tablist">
-                <a id="tempbtn" class="btn btn-lg btn-info pull-right" href="receive-deliveries.php" aria-expanded="false" style="margin-right: 20px; color:white"><span class="btn-label"><i class="ti-plus"></i></span>Receive Deliveries</a>
-                <li role="presentation" class="active">
-                  <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-dropbox"></i></i>&nbsp;<?php echo $titlePage?></a>
-                </li>
+               <li role="presentation" class="active" >
+                <a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="ti-view-list-alt"></i>&nbsp;<span id="archiveTitle" style="display: none;">Pull-Outs</span><span id="titleee">&nbsp;<?php echo $titlePage?></span></a>
+              </li>
+            </ul>
+          </h3>
+          <div class="sttabs tabs-style-flip">
+            <nav id="hideTabs">
+              <ul>
+                <li><a href="#receivedeliveries" class="sticon ti-package"><span>Receive Deliveries</span></a></li>
+                <li><a href="#deductlogs" class="sticon ti-book"><span>Deduct Logs</span></a></li>
+                <li><a href="#deliverylogs" class="sticon ti-map-alt"><span>Delivery Logs</span></a></li>
               </ul>
-            </h3>
+            </nav>
+            <div class="content-wrap text-center">
+              <section id="receivedeliveries">
+                <a id="tempbtn" class="btn btn-lg btn-info pull-right" href="receive-deliveries.php" aria-expanded="false" style="margin-right: 25px; margin-top: -10px; color:white"><span class="btn-label"><i class="ti-plus"></i></span>Receive Deliveries</a>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="type">
                 <div class="panel-wrapper collapse in" aria-expanded="true">
@@ -106,41 +220,138 @@ if (!empty($_SESSION['actionFailed'])) {
                 </div>
               </div>
             </div>
-          </div>  
-        </div>
-      </div>
-    </div>
-  </div>
+          </section>
 
+                    <section id="deductlogs">
+                      <div class="tab-content">
+                        <!-- CATEGORY -->
+                        <div role="tabpanel" class="tab-pane fade active in">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                              <div class="row">
+                                <div class="table-responsive">
+                                  <table class="table color-bordered-table muted-bordered-table dataTable display" id="myTable">
+                                    <thead>
+                                      <tr>
+                                        <th>Material</th>
+                                        <th>Variant</th>
+                                        <th>Pulled-Out</th>
+                                        <th>Remarks</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php
+                                      $sql = "SELECT * FROM tblmat_deductdetails a, tblmat_inventory b, tblmat_var c, tblmaterials d WHERE a.mat_inventoryID = b.mat_inventoryID and b.matVariantID = c.mat_varID and c.materialID = d.materialID";
+                                      $result = mysqli_query($conn, $sql);
+                                      while ($row = mysqli_fetch_assoc($result))
+                                      {
+                                          echo('<tr><td style="text-align: left;">'. $row['materialName'] .'</td>
+                                            <td style="text-align: left;">'.$row['mat_varDescription'].'</td>
+                                            <td style="text-align: left;">'.$row['mat_deductQuantity'].'</td>
+                                            <td style="text-align: left;">'. $row['mat_deductRemarks'].'</td>
+                                            ');
+                                            ?>
+                                            
+                                            <?php echo('</tr>'); }
+                                            ?>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- New Framework Modal -->
+                              <!-- /.modal -->
+                            </div>
+                          </section>
 
-  <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- Modal content-->
-        <div class="modal-content clearable-content">
-          <div class="modal-body">
+                          <section id="deliverylogs">
+                      <div class="tab-content">
+                        <!-- CATEGORY -->
+                        <div role="tabpanel" class="tab-pane fade active in">
+                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                              <div class="row">
+                                <div class="table-responsive">
+                                  <table class="table color-bordered-table muted-bordered-table dataTable display" id="myTable">
+                                    <thead>
+                                      <tr>
+                                        <th>Supplier</th>
+                                        <th>Date</th>
+                                        <th>Total Quantity</th>
+                                        <th>Remarks</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php
+                                      $sql = "SELECT * FROM tblmat_deliveries a, tblsupplier b, tblmat_deliverydetails c WHERE a.supplierID = b.supplierID and a.mat_deliveriesID = c.del_matDelID";
+                                      $result = mysqli_query($conn, $sql);
+                                      while ($row = mysqli_fetch_assoc($result))
+                                      {
+                                          echo('<tr><td style="text-align: left;">'. $row['supCompName'] .'</td>
+                                            <td style="text-align: left;">'.$row['dateSupplied'].'</td>
+                                            <td style="text-align: left;">'.$row['del_quantity'].'</td>
+                                            <td style="text-align: left;">'. $row['del_remarks'].'</td>
+                                            ');
+                                            ?>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                                            <?php echo('</tr>'); }
+                                            ?>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- New Framework Modal -->
+                              <!-- /.modal -->
+                            </div>
+                          </section>
+                        </div><!-- /content -->
+                      </div><!-- /tabs -->
+                    </div>  
+                  </div>
+                </div>
+                <!-- /.container-fluid -->
+                <!--footer class="footer text-center"> 2017 &copy; Filipiniana Furniture </footer-->
+              </div>
+              <!-- /#page-wrapper -->
+            </div>
 
-  <script>
-  $(document).on('hidden.bs.modal', function (e) {
-    var target = $(e.target);
-    target.removeData('bs.modal')
-    .find(".clearable-content").html('');
-  });
-  </script>
+            <div id="myModal" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+              <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                  <!-- Modal content-->
+                  <div class="modal-content clearable-content">
+                    <div class="modal-body">
 
-  <script type="text/javascript">
-  $('#ViewPOButton').click(function(e) {
-    e.preventDefault(); e.stopPropagation();
-    window.location.href = $(e.currentTarget).data().href;
-  });
-  </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-</script>
-</body>
-</html>
+            <div id="myModal1" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+              <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                  <!-- Modal content-->
+                  <div class="modal-content clearable-content">
+                    <div class="modal-body">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+            $(document).on('hidden.bs.modal', function (e) {
+              var target = $(e.target);
+              target.removeData('bs.modal')
+              .find(".clearable-content").html('');
+            });
+            </script>
+          </body>
+          </html>
