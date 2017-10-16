@@ -4,9 +4,6 @@
 
   <div class="modal-dialog modal-lg" >
     <div class="modal-content" id="view">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" onclick="location.reload();" aria-hidden="true">×</button>
-      </div>
       <?php
       include "userconnect.php";
       $jsID=$_GET['id'];
@@ -44,7 +41,7 @@
                 	<hr>
                     <div class="row">
                       <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="white-box text-center"> <img style="height:280px; width:200;" src="../admin/plugins/images/<?php echo $trow['prodMainPic']; ?>" alt="<?php echo $trow['prodMainPic']; ?>" class="img-responsive"/> </div>
+                            <div class="white-box text-center"> <img style="height:350px; width:270;" src="../admin/plugins/images/<?php echo $trow['prodMainPic']; ?>" alt="<?php echo $trow['prodMainPic']; ?>" class="img-responsive"/> </div>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2">
 							<h4 class="box-title m-t-40">Description</h4>
@@ -141,9 +138,9 @@
 
       </div>
       <div class="modal-footer">
-        <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><span>Add to Cart</span></button>
+        <button id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" class="btn btn-primary waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><i class="glyphicon glyphicon-shopping-cart"></i><span> Add to Cart</span></button>
 
-        <button type="button" class="btn btn-danger waves-effect text-left" onclick="location.reload();" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger waves-effect text-left" onclick="location.reload();" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
       </div>
     </div>
   </div>
@@ -155,8 +152,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content" id="viewP">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="location.reload();">×</button>
-            <h3>Package Information</h3>
+            <h3 style="text-align: center;">Package Information</h3>
           </div>
           <?php
           $sql = "SELECT * FROM tblpackages WHERE packageID = $jsID";
@@ -206,7 +202,7 @@
                             {
                               if($row['package_incStatus'] == 'Listed'){
                               echo ('
-                                <td><img src="../admin/plugins/images/'.$row['prodMainPic'].'" style="height: 100px; width: 105px;" alt="Product" title="'.$row['productName'].'" class="img-thumbnail"></td>
+                                <td><img src="../admin/plugins/images/'.$row['prodMainPic'].'" style="height: 120px; width: 110px;" alt="Product" title="'.$row['productName'].'" class="img-thumbnail"></td>
                                 <td>'.$row['typeName'].'</td>
                                 <td>'.$row['productName'].'</td>
                                 <td><small>&#8369;</small>'.$row['productPrice'].'</td>
@@ -230,9 +226,9 @@
             </div>
           </div>
             <div class="modal-footer">
-              <button id="paddBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-success waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><span>Add to Cart</span></button>
+              <button id="paddBtn" href="#myModal1" data-toggle="modal" data-id="P<?php echo $row1['packageID']; ?>" data-name="<?php echo $row1['packageDescription']; ?>" data-summary="<?php echo $row1['packageDescription']; ?>" data-price="<?php echo $row1['packagePrice']; ?>" data-image="../admin/plugins/images/2017-08-241503568724.png" class="btn btn-primary waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><i class="glyphicon glyphicon-shopping-cart"></i><span> Add to Cart</span></button>
 
-              <button type="button" onclick="location.reload();" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+              <button type="button" onclick="location.reload();" class="btn btn-danger waves-effect text-left" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
             </div>
         </div>
       </div>

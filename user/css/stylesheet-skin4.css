@@ -225,3 +225,7 @@ background-image: linear-gradient(to top right, #EFDA7D 0%, #E9D4B3 100%);
   background-color: #FF9E50;
   color: #ffffff;
 }
+
+.modal-dialog {
+    margin: 15vh auto 0px auto
+}
