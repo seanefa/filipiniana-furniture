@@ -246,15 +246,15 @@ Default</label>
 
 </script>
 <div class="form-group required">
-  <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
+  <label for="input-email" class="col-sm-2 control-label">E-Mail Address</label>
   <div class="col-sm-10">
-    <input type="email" class="form-control" id="input-email" placeholder="E-Mail" value="" name="email" required><span id="messageemail" style=""></span>
+    <input type="email" class="form-control" id="input-email" placeholder="E-Mail Address" value="" name="email" required><span id="messageemail" style=""></span>
   </div>
 </div>
 <div class="form-group required">
   <label for="input-telephone" class="col-sm-2 control-label">Contact Number</label>
   <div class="col-sm-10">
-    <input type="number" class="form-control no-spinners" name="number" id='telNumber' required/>
+    <input type="number" class="form-control no-spinners" name="number" id='telNumber' placeholder="Enter your contact number" required/>
   </div>
 </div>
 <div class="form-group required">
