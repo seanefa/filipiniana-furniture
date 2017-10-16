@@ -12,7 +12,7 @@ $content = $_POST["news_content"];
 $insertnews = "INSERT into tblnewsletter(newsletterDate, newsletterAuthor, newsletterContent) values('$date', '$user', '$content')";
 
 if(mysqli_query($conn,$insertnews)){
-	$selectemail = "SELECT * from tblcustomer WHERE customerNewsletter = 1";
+	$selectemail = "SELECT * from tblcustomer a, tbluser b WHERE b.userCustID = a.customerID and b.confirmedUser = 1 and a.customerNewsletter = 1";
 	$res = mysqli_query($conn,$selectemail);
 	while($row = mysqli_fetch_assoc($res)){
 		$name = $row["customerFirstName"] . " " . $row["customerMiddleName"] . " " . $row["customerLastName"];
