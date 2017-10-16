@@ -89,16 +89,16 @@ if(mysqli_query($conn,$insertnews)){
 
 	// Email body content
 		$mail->Body = $message;
-		if(!$mail->send()){
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-			// $_SESSION['updateSuccess'] = 'Success';
-			// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		if($mail->send()){
+			// echo 'Message could not be sent.';
+			// echo 'Mailer Error: ' . $mail->ErrorInfo;
+			$_SESSION['createSuccess'] = 'Success';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 		else{
-			echo 'Message has been sent';
-			// $_SESSION['actionFailed'] = 'Failed';
-			// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+			// echo 'Message has been sent';
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	}
 }
