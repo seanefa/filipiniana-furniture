@@ -66,27 +66,7 @@ $(document).ready(function(){
       $('#aTendered').css('border-color','red');
       $('#saveBtn').prop('disabled',true);
     }
-      // else{
-      //   if(isNaN(mat)){
-      //     var e = "Please input a valid number.";
-      //     $("#error").html(e);
-      //     $('#aTendered').css('border-color','red');
-      //     $('#saveBtn').prop('disabled',true);
-      //   }
-      //   else if(mat<0){
-      //     var e = "Numbers less than 0 are not allowed";
-      //     $("#error").html(e);
-      //     $('#aTendered').css('border-color','red');
-      //     $('#saveBtn').prop('disabled',true);
-      //   }
-      //   else if(mat==""){
-      //     var e = "";
-      //     $("#error").html(e);
-      //     $('#aTendered').css('border-color','red');
-      //     $('#saveBtn').prop('disabled',true);
-      //   }
-      // }
-    });
+  });
 });
 
 
@@ -164,7 +144,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $("#paydRate").on('keyup',function(){
+  $("#paydRate").on('change',function(){
     var val = parseFloat($("#paydRate").val());
     var oPrice = parseFloat($("#newAmountDue").val());
     var newPrice = oPrice + val;
@@ -174,7 +154,7 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-  $('#paydRate').on('keyup',function(){
+  $('#paydRate').on('change',function(){
     var mat = parseFloat($("#paydRate").val());
     if(isNaN(mat)){
       var e = "Please input a valid number.";
@@ -207,7 +187,23 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('#dRate').on('change',function(){
     var mat = parseInt($("#dRate").val());
-    $("#paydRate").val(mat);
+    if((mat>0)){
+      $("#paydRate").val(mat);
+      var val = parseFloat($("#paydRate").val());
+      var oPrice = parseFloat($("#newAmountDue").val());
+      var newPrice = oPrice + val;
+      $("#tADue").val(newPrice);
+      var e = "";
+      $("#dRateError").html(e);
+      $('#dRate').css('border-color','grey');
+      $('#saveBtn').prop('disabled',false);
+    }
+    else{
+      var e = "Invalid input";
+      $("#dRateError").html(e);
+      $('#dRate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+    }
   });
 });
 
@@ -655,7 +651,6 @@ function validateEmail(email) {
                   if(!$P_selected[0] != 0){
                     echo ('
                       <tr style="display: none;">
-                      <td><input id="cart" name="P_cart[]" value="0" type="hidden"/></td>
 
                       <td>PACKAGE ');
                     echo '<button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-target="#myModal"><i class="fa fa-info-circle"></i> View</button>';
@@ -747,6 +742,7 @@ function validateEmail(email) {
                     }
                     foreach ($selected as $items) {
                       if(!in_array($items, $removearray)){
+                        $freeitemcnt = 0;
                         $sql = "SELECT * FROM tblproduct where productID = '$items';";
                         $result = mysqli_query($conn, $sql);
                         if($result){
@@ -769,7 +765,7 @@ function validateEmail(email) {
                               $sql3 = "SELECT * FROM tblproduct where productID = '$prodOnPromo';";
                               $result3 = mysqli_query($conn, $sql3);
                               $row3 = mysqli_fetch_assoc($result3);
-
+                              $freeitemcnt++;
                               echo ('
                                 <tr>
                                 <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
@@ -784,7 +780,7 @@ function validateEmail(email) {
                                 <td><input id="cart'.$ctr.'" name="cart[]" value="'.$row3['productID'].'Promo" type="hidden"/>'.$row3['productName'].'</td>
                                 <td>'.$row3['productDescription'].'<span style="color: green;">(Free Item)</span></td>
                                 <td style="text-align: right;"><span style="color: green;">&#8369; '.number_format($row3['productPrice'],2).'(Free)</span></td>
-                                <td style="text-align: right;">1<input id="quant'.$ctr.'" name="quant[]" value="1" type="hidden"/></td>
+                                <td style="text-align: right;">'.$freeitemcnt.'<input id="quant'.$ctr.'" name="quant[]" value="1" type="hidden"/></td>
                                 <td id="price'.$ctr.'"style="text-align: right;"><span style="color: green;">&#8369; 0.00</span><input id="price'.$ctr.'" name="prices[]" value="0" type="hidden"/></td>');
                               echo'</tr>';  
 
@@ -852,6 +848,28 @@ else if(flag == 1){
   $('#totalPrice').html(tPrice+(quant * parseInt($('#prices').val())));
 }
 }
+
+$(document).ready(function(){
+  $("#pdate").on('change',function(){
+    var est = new Date($("#pdate").val());
+    var start = new Date($("#dateStart").val());
+    var ctr = 0;
+    if(start>est){
+      var e = "Estimated date must not be earlier than the date today";
+      $("#dateError").html(e);
+      $('#pdate').css('border-color','red');
+      $('#saveBtn').prop('disabled',true);
+      ctr = 0;
+    }
+    else{
+      var e = "";
+      $("#dateError").html(e);
+      $('#pdate').css('border-color','grey');
+      $('#saveBtn').prop('disabled',false);
+      ctr++;
+    }
+  });
+});
 </script>
 
 </table>
@@ -861,7 +879,7 @@ else if(flag == 1){
   <div class="col-md-8">
     <div class="form-group">
       <label class="control-label">Order Remarks</label>
-      <textarea name="orderremarks" id="orderremarks" class="form-control">An order.</textarea>
+      <textarea name="orderremarks" id="orderremarks" class="form-control"></textarea>
     </div>
   </div>
   <?php
@@ -874,6 +892,7 @@ else if(flag == 1){
     <div class="form-group">
       <label class="control-label">Pick up/Delivery Date</label><span id="x" style="color:red"> *</span>
       <input type="date" id="pdate" class="form-control" name="pidate" value="<?php echo $estDate?>" required/> 
+      <input type="hidden" id="dateStart" value="<?php echo $dateToday?>" required/> 
       <p id="dateError"></p>
     </div>
   </div>
@@ -940,83 +959,93 @@ echo('<option value="'.$delrow['empID'].'">'.$delrow['empLastName'].','.$delrow[
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label">Delivery Rate</label><span id="x" style="color:red"> *</span>
-                    <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0'/>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
-                      </div>
-                      <div class="col-md-4">
-                        <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
-                      </div>
-                      <div class="col-md-3">
-                        <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
-                      </div>
-                    </div>
-                    <br>
+                    <div class="input-group">
+                      <div class="input-group-addon"><small>Php</small></div>
+                      <input type="number" style="text-align:right;" id="dRate" class="form-control" value='0'/>
+                      <p id="dRateError" style="color:red"></p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
-              <script type="text/javascript">
-              $(document).ready(function(){
-                $('#ratePick').click(function(){
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Delivery Address</label><span id="x" style="color:red"> *</span>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input type="text" id="da" class="form-control" name="deladd[]" placeholder="#1528 Kagawad Street" disabled required/>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="city" class="form-control" name="deladd[]" placeholder="Brgy.Batasan Hills" disabled required/>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="zip" class="form-control" name="deladd[]" placeholder="Quezon City" disabled required/>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <script type="text/javascript">
+            $(document).ready(function(){
+              $('#ratePick').click(function(){
 
-                  if($('#ratePick').is(':checked')){ 
-                    $('#displayAddress').hide('blind');
-                    $('#da').prop('disabled',true);
-                    $('#city').prop('disabled',true);
-                    $('#zip').prop('disabled',true);
-                    $('#delloc').prop('disabled',true);
-                    $('#da').val('');
-                    $('#city').val('');
-                    $('#zip').val('');
-                    $('#delloc').val('');
-                    $('#dRate').val(0);
-                    $('#paydRate').val(0);
-                    $('#paydRate').prop('disabled',true);
+                if($('#ratePick').is(':checked')){ 
+                  $('#displayAddress').hide('blind');
+                  $('#da').prop('disabled',true);
+                  $('#city').prop('disabled',true);
+                  $('#zip').prop('disabled',true);
+                  $('#delloc').prop('disabled',true);
+                  $('#da').prop('required',false);
+                  $('#city').prop('required',false);
+                  $('#zip').prop('required',false);
+                  $('#delloc').prop('required',false);
+                  $('#da').val('');
+                  $('#city').val('');
+                  $('#zip').val('');
+                  $('#delloc').val('');
+                  $('#dRate').val(0);
+                  $('#paydRate').val(0);
 
-                    var x = parseFloat($('#totalPrice').val());
-                    $('#amountDue').val(parseFloat(x));
-                  }
-
-                });
-                $('#rateDel').click(function(){
-                  if($('#rateDel').is(':checked')){ 
-                    $('#displayAddress').show('blind');
-                    $('#dRate').val(0);
-                    $('#da').prop('disabled',false);
-                    $('#city').prop('disabled',false);
-                    $('#zip').prop('disabled',false);
-                    $('#delloc').prop('disabled',false);
-                    $('#da').val('');
-                    $('#city').val('');
-                    $('#zip').val('');
-                    $('#delloc').val('');
-                    $('#dRate').val(0);
-                    $('#paydRate').val(0);
-                    $('#paydRate').prop('disabled',false);
-                  }
-                });
-
-
-
-                $('#delloc').change(function(){
                   var x = parseFloat($('#totalPrice').val());
-                  $('#dRate').val(parseFloat($('#delloc').val()));
-                  $('#paydRate').val(parseFloat($('#delloc').val()));
-                  var d = parseFloat($('#delloc').val());
-                  var due = x + d;
-                  $('#amountDue').val(parseFloat(due));
-                });
+                  $('#amountDue').val(parseFloat(x));
+                }
+
               });
+              $('#rateDel').click(function(){
+                if($('#rateDel').is(':checked')){ 
+                  $('#displayAddress').show('blind');
+                  $('#dRate').val(0);
+                  $('#da').prop('disabled',false);
+                  $('#city').prop('disabled',false);
+                  $('#zip').prop('disabled',false);
+                  $('#delloc').prop('disabled',false);
+                  $('#da').prop('required',true);
+                  $('#city').prop('required',true);
+                  $('#zip').prop('required',true);
+                  $('#delloc').prop('required',true);
+                  $('#da').val('');
+                  $('#city').val('');
+                  $('#zip').val('');
+                  $('#delloc').val('');
+                  $('#dRate').val(0);
+                  $('#paydRate').val(0);
+                }
+              });
+
+
+
+              $('#delloc').change(function(){
+                var x = parseFloat($('#totalPrice').val());
+                $('#dRate').val(parseFloat($('#delloc').val()));
+                $('#paydRate').val(parseFloat($('#delloc').val()));
+                var d = parseFloat($('#delloc').val());
+                var due = x + d;
+                $('#amountDue').val(parseFloat(due));
+              });
+            });
 
 $(document).ready(function(){
   var x = parseFloat($('#totalPrice').html());
@@ -1101,7 +1130,7 @@ $(document).ready(function(){
                 <label class="control-label">Delivery Rate</label>
                 <div class="input-group">
                   <div class="input-group-addon"><small>Php</small></div>
-                  <input type="number" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate" disabled/>
+                  <input type="text" style="text-align:right;" id="paydRate" class="form-control" value='0' name="paydRate" readonly/>
                 </div>
               </div>
             </div>

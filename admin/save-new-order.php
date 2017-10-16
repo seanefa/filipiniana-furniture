@@ -51,6 +51,9 @@ if (mysqli_query($conn, $pssql)) {
     $unitPrice = unitPrice($str);
     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
     mysqli_query($conn,$sql1);
+      $orReqID = mysqli_insert_id($conn);
+      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$selectedQuant[$ctr]."');";
+      mysqli_query($conn,$sql3);
     echo "<br>sql1: " . $sql1;
     $ctr++;
   }
@@ -59,7 +62,19 @@ if (mysqli_query($conn, $pssql)) {
     $unitPrice = packPrice($P_str);
     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
     mysqli_query($conn,$sql1);
-    $P_ctr++;
+    $orReqID = mysqli_insert_id($conn);
+      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$P_selectedQuant[$P_ctr]."');";
+      mysqli_query($conn,$sql3);
+      $P_ctr++;
+
+      $orderReqID = mysqli_insert_id($conn);
+      $sql1 = "SELECT * FROM tblpackages a, tblpackage_inclusions b, tblproduct c WHERE c.productID = b.product_incID and b.package_incID = a.packageID and a.packageID = '$P_str'";
+      $res1 = mysqli_query($conn,$sql1);
+      while($row1 = mysqli_fetch_assoc($res1)){
+        $str = $row1['productID'];
+        $sql2 = "INSERT INTO `tblpackage_orderreq` (`por_orReqID`, `por_prID`) VALUES ('$orderReqID', '$str');";
+        mysqli_query($conn,$sql2);
+      }
   }
 }
 else{

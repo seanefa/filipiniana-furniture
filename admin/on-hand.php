@@ -1,7 +1,6 @@
 <?php
 include "session-check.php";
 include 'dbconnect.php';
-session_start();
 $reason = $_POST['reason'];
 $date = new DateTime();
 $orderdaterec = $date->format('Y-m-d');;
@@ -13,38 +12,51 @@ if($reason==1){
 	$remarks = $_POST['remarks'];
 
 	$sqlo = "SELECT * FROM tblorder_request WHERE order_requestID = '$orderReq'";
-	$res = mysqli_query($conn,$query);
+	$res = mysqli_query($conn,$sqlo);
 	$row = mysqli_fetch_assoc($res);
 	$orderID = str_pad($row['tblOrdersID'], 6, '0', STR_PAD_LEFT);
-	$orderQuan = $row['orderQuantity'];
+	$orderQuan = getFin($orderReq);
 	$reason = "For Order ID ". $orderID;
 
 	if($quan>$orderQuan){
 		$quan = $orderQuan;
 	}
 
-	$sql = "SELECT * FROM tblonhand WHERE ohProdID ='$prodID'";
-	$res = mysqli_query($conn,$sql);
-	$row = mysqli_fetch_assoc($res);
-	$eQuan = $row['ohQuantity'] - $quan;
 
-	$updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
-
-	if(mysqli_query($conn,$updateSql)){
-		$sql1 = "UPDATE `tblorder_request` SET `orderRequestStatus`='Ready for Release' WHERE `order_requestID`='$orderReq';";
+	$checkProd = "SELECT * FROM tblproduction WHERE productionOrderReq = '$orderReq'";
+	$cRes = mysqli_query($conn,$checkProd);
+	$cRows = mysqli_num_rows($cRes);
+	if($cRows==0){
+		$sql1 = "UPDATE `tblorder_request` SET `orderRequestStatus`='Ready for release' WHERE `order_requestID`='$orderReq';";
 		mysqli_query($conn,$sql1);
-
+		$sql1 = "UPDATE `tblorder_requestcnt` SET `orreq_prodFinish`='$quan' WHERE `orreq_ID`='$orderReq';";
+		mysqli_query($conn,$sql1);
 		finishOrder($orderReq);
+		$sql = "SELECT * FROM tblonhand WHERE ohProdID ='$prodID'";
+		$res = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_assoc($res);
+		$eQuan = $row['ohQuantity'] - $quan;
 
-		$sql2 = "INSERT INTO `tblpull_out` (`pullout_fID`, `pullout_Date`, `pullout_quantity`, `pullout_reason`, `pullout_Remarks`) VALUES ('$prodID', '$orderdaterec', '$quan', '$reason', '$remarks');";
-		mysqli_query($conn,$sql2);
+		$updateSql = "UPDATE tblonhand SET ohQuantity='$eQuan' WHERE ohProdID='$prodID'";
+		if(mysqli_query($conn,$updateSql)){
 
-		$_SESSION['createSuccess'] = 'Success';
-		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
-	} 
-	else {
-		$_SESSION['actionFailed'] = 'Failed';
-		header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+			$sql2 = "INSERT INTO `tblpull_out` (`pullout_fID`, `pullout_Date`, `pullout_quantity`, `pullout_reason`, `pullout_Remarks`) VALUES ('$prodID', '$orderdaterec', '$quan', '$reason', '$remarks');";
+
+
+			$_SESSION['createSuccess'] = 'Success';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+		} 
+		else {
+			$_SESSION['actionFailed'] = 'Failed';
+			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+
+		}
+	}
+	else{
+		echo "<script>
+      window.location.href='product-management.php';
+      alert('Failed. This order is already undergoing production.');
+      </script>";
 	}
 }
 else if($reason==2){
@@ -148,15 +160,14 @@ function finishOrder($id){
 		$ordReqCtr++;
 		if($row2['orderRequestStatus']=='Ready for release'){
 			$finCtr++;
+			$oSQL = "UPDATE tblorders SET orderStatus ='Ready for release' WHERE orderID = $orderID";
+			mysqli_query($conn,$oSQL);
 		}
 	}
 
 	if(($finCtr==$ordReqCtr) and ($finCtr!=0) and ($ordReqCtr!=0)){
 		$oSQL = "UPDATE tblorders SET orderStatus ='Ready for release' WHERE orderID = $orderID";
 		mysqli_query($conn,$oSQL);
-		// echo "YAS!". "<br>";
-		// echo $ordReqCtr . "<br>";
-		// echo $finCtr . "<br>";
 	}
 	return 0;
 }
@@ -170,6 +181,22 @@ function unitPrice($id){
 		$price = $row['productPrice'];
 	}
 	return $price;
+}
+
+function getFin($id){
+	include "dbconnect.php";
+	$sql1 = "SELECT * FROM tblorder_requestcnt WHERE orreq_ID = $id";
+	$res = mysqli_query($conn,$sql1);
+	$row = mysqli_fetch_assoc($res);
+	$orid = $row['orreq_quantity'];
+
+	$prfin = $row['orreq_prodFinish'];
+	$ret = $row['orreq_returned'];
+	$rel = $row['orreq_released'];
+
+	$total = $prfin + $ret + $rel;
+	$quan = $orid - $total;
+	return $quan;
 }
 
 ?>

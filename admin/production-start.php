@@ -13,10 +13,10 @@ $orderID = $_GET['id'];
 $sql1 = "SELECT * from tblorder_request a, tblorders b, tblproduct c WHERE a.tblOrdersID = b.orderID and c.productID = a.orderProductID and b.orderID = '$orderID'";
 $res = mysqli_query($conn,$sql1);
 while($row1 = mysqli_fetch_assoc($res)){
-	$quan = $row1['orderQuantity'];
+	$orderReqID = $row1['order_requestID'];
+	$quan = getFin($orderReqID);
 	while($quan!=0){
 		echo $quan . "<br>";
-		$orderReqID = $row1['order_requestID'];
 		$d = $row1['prodDesign'];
 		$prodSQL = "INSERT INTO tblproduction(productionOrderReq,productionStatus) VALUES ('$orderReqID','Ongoing')";
 		echo "<br>" . $prodSQL;
@@ -59,6 +59,22 @@ while($row = mysqli_fetch_assoc($res)){
 		}
 
 	}
+}
+
+function getFin($id){
+	include "dbconnect.php";
+	$sql1 = "SELECT * FROM tblorder_requestcnt WHERE orreq_ID = $id";
+	$res = mysqli_query($conn,$sql1);
+	$row = mysqli_fetch_assoc($res);
+	$orid = $row['orreq_quantity'];
+
+	$prfin = $row['orreq_prodFinish'];
+	$ret = $row['orreq_returned'];
+	$rel = $row['orreq_released'];
+
+	$total = $prfin + $ret + $rel;
+	$quan = $orid - $total;
+	return $quan;
 }
 
 $sql = "UPDATE tblorders SET orderStatus = 'Ongoing' WHERE orderID = '$orderID'";

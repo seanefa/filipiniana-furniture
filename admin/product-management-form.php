@@ -75,18 +75,34 @@ $_SESSION['varname'] = $jsID;
                         while ($row = mysqli_fetch_assoc($result))
                         {
                           if($row['orderStatus']!="Finished"){
+                          $quan = getFin($row['order_requestID']);
                           $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT); //format ng display ID
                           echo('<tr>
                             <td style="text-align: center"><input class="chBox" type="radio"  value='.$row['order_requestID'].' name="check" /></td>
                             <td style="text-align: left;">'. $orderID .'</td>
                             <td style="text-align: left;">'.$row['customerLastName'].', '.$row['customerFirstName'].' '.$row['customerMiddleName'].'</td>
-                            <td style="text-align: right;">'.$row['orderQuantity'].'</td>
+                            <td style="text-align: right;">'.$quan.'</td>
                             </tr>');
                           $ctr++;
                         } 
                       }
                       if($ctr==0){
                         echo "<tr><td colspan='4' style='text-align:center'>Nothing to show.</td></tr>";
+                      }
+                      function getFin($id){
+                        include "dbconnect.php";
+                        $sql1 = "SELECT * FROM tblorder_requestcnt WHERE orreq_ID = $id";
+                        $res = mysqli_query($conn,$sql1);
+                        $row = mysqli_fetch_assoc($res);
+                        $orid = $row['orreq_quantity'];
+
+                        $prfin = $row['orreq_prodFinish'];
+                        $ret = $row['orreq_returned'];
+                        $rel = $row['orreq_released'];
+
+                        $total = $prfin + $ret + $rel;
+                        $quan = $orid - $total;
+                        return $quan;
                       }
                       ?>
                     </tbody>

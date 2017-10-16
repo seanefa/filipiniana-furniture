@@ -9,7 +9,7 @@ if($id=="All"){
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct order by productID desc;";
+	$sql = "SELECT * FROM tblproduct WHERE prodStat != 'For customization' and prodStat!= 'Archived' order by productID desc;";
 	$result = mysqli_query($conn, $sql);
 
 	while ($row = mysqli_fetch_assoc($result)){
@@ -71,7 +71,7 @@ else if($id=="On-Promo"){
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct a inner join tblprodsonpromo b on a.productID = b.prodPromoID order by a.productID desc;";
+	$sql = "SELECT * FROM tblproduct a inner join tblprodsonpromo b on a.productID = b.prodPromoID WHERE prodStat != 'For customization' and prodStat!= 'Archived' order by a.productID desc;";
 	$result = mysqli_query($conn, $sql);
 
 
@@ -141,7 +141,7 @@ else if($id=="On-Hand"){
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct order by productID desc;";
+	$sql = "SELECT * FROM tblproduct WHERE prodStat != 'For customization' and prodStat!= 'Archived' order by productID desc;";
 	$result = mysqli_query($conn, $sql);
 
 	while ($row = mysqli_fetch_assoc($result)){
@@ -259,7 +259,7 @@ else{ //category
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct WHERE prodCatID = '$id'";
+	$sql = "SELECT * FROM tblproduct WHERE prodCatID = '$id' and prodStat != 'For customization' and prodStat!= 'Archived'";
 	$result = mysqli_query($conn, $sql);
 	while ($row = mysqli_fetch_assoc($result)){
 		$oQuan = quan($row['productID']);
@@ -320,7 +320,7 @@ if(isset($_POST['type'])){
 	$tempSQL = '';
 	$tempID = "";
 	$ctr = 0;
-	$sql = "SELECT * FROM tblproduct WHERE prodTypeID = '$id'";
+	$sql = "SELECT * FROM tblproduct WHERE prodStat != 'For customization' and prodStat!= 'Archived' and prodTypeID = '$id'";
 	$result = mysqli_query($conn, $sql);
 	while ($row = mysqli_fetch_assoc($result)){
 		$oQuan = quan($row['productID']);

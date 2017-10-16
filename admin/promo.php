@@ -659,7 +659,7 @@ $(document).ready(function(){
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                              if($row['promoStatus']=="Archived"){
+                              if($row['promoStatus']!="Active"){
                                 ?>
                                   <?php
                                   $date = date_create($row['promoStartDate']);

@@ -218,9 +218,10 @@ function orderRequestCnt($id){
 	$sql4 = "SELECT * FROM tblorder_requestcnt WHERE orreq_ID = '$prodID'";
 	$res4 = mysqli_query($conn,$sql4);
 	$row4 = mysqli_fetch_assoc($res4);
-	$released = $row4['orreq_released'];
-
-	$newProd = $finCtr - $released;
+	$rel = $row4['orreq_released'];
+	$ret = $row4['orreq_returned'];
+	$tots = $rel + $ret;
+	$newProd = $finCtr - $tots;
 
 	$sql3 = "UPDATE tblorder_requestcnt SET orreq_prodFinish = '$newProd' WHERE orreq_ID = '$prodID'";
 	mysqli_query($conn,$sql3);
@@ -397,7 +398,15 @@ function p_orderRequestCnt($id){
 		}
 	}
 
-	$sql3 = "UPDATE tblorder_requestcnt SET orreq_prodFinish = '$finCtr' WHERE orreq_ID = '$prodID'";
+	$sql4 = "SELECT * FROM tblorder_requestcnt WHERE orreq_ID = '$prodID'";
+	$res4 = mysqli_query($conn,$sql4);
+	$row4 = mysqli_fetch_assoc($res4);
+	$rel = $row4['orreq_released'];
+	$ret = $row4['orreq_returned'];
+	$tots = $rel + $ret;
+	$newProd = $finCtr - $tots;
+
+	$sql3 = "UPDATE tblorder_requestcnt SET orreq_prodFinish = '$newProd' WHERE orreq_ID = '$prodID'";
 	mysqli_query($conn,$sql3);
 
 	return 0;

@@ -143,9 +143,10 @@ function finishOrder($id){
 	if(($finCtr==$ordReqCtr) and ($finCtr!=0) and ($ordReqCtr!=0)){
 		$oSQL = "UPDATE tblorders SET orderStatus ='Finished' WHERE orderID = $orderID";
 		mysqli_query($conn,$oSQL);
-		// echo "YAS!". "<br>";
-		// echo $ordReqCtr . "<br>";
-		// echo $finCtr . "<br>";
+	}
+	else{	
+		$oSQL = "UPDATE tblorders SET orderStatus ='Ongoing' WHERE orderID = $orderID";
+		mysqli_query($conn,$oSQL);
 	}
 	return 0;
 }
