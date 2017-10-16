@@ -56,6 +56,8 @@
             </ul>
           </div>
         </div>
+
+        <div class="social pull-right flip"><a href="https://www.facebook.com/BaraquielsFilipinianaFurniture/" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a> <a href="http://www.google.com/filipinianafurniture" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/rss.png" alt="RSS" title="RSS"> </a> </div>
       </div>
 
       <!--div id="facebook" class="fb-left sort-order-1" style="left: -241px;">
