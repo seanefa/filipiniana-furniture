@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2017 at 09:10 PM
+-- Generation Time: Oct 16, 2017 at 05:59 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -986,6 +986,13 @@ CREATE TABLE `tblmat_deductdetails` (
   `mat_deductRemarks` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tblmat_deductdetails`
+--
+
+INSERT INTO `tblmat_deductdetails` (`mat_deductID`, `mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`) VALUES
+(1, 1, 16, 'Hanu');
+
 -- --------------------------------------------------------
 
 --
@@ -1218,19 +1225,23 @@ CREATE TABLE `tblnewsletter` (
   `newsID` int(11) NOT NULL,
   `newsletterDate` date NOT NULL,
   `newsletterAuthor` int(11) NOT NULL,
-  `newsletterContent` varchar(450) NOT NULL
+  `newsletterContent` varchar(450) NOT NULL,
+  `newsletterStatus` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblnewsletter`
 --
 
-INSERT INTO `tblnewsletter` (`newsID`, `newsletterDate`, `newsletterAuthor`, `newsletterContent`) VALUES
-(1, '0000-00-00', 0, ''),
-(2, '0000-00-00', 0, ''),
-(3, '2017-10-15', 1, 'Hello'),
-(4, '2017-10-15', 1, 'Hello'),
-(5, '2017-10-15', 1, 'Hello');
+INSERT INTO `tblnewsletter` (`newsID`, `newsletterDate`, `newsletterAuthor`, `newsletterContent`, `newsletterStatus`) VALUES
+(1, '0000-00-00', 0, '', ''),
+(2, '0000-00-00', 0, '', ''),
+(3, '2017-10-15', 1, 'Hello', ''),
+(4, '2017-10-15', 1, 'Hello', ''),
+(5, '2017-10-15', 1, 'Hello', ''),
+(6, '2017-10-16', 1, 'Kyah', ''),
+(7, '2017-10-16', 1, 'Kyah', ''),
+(8, '2017-10-16', 1, 'Ewan ko haaaaaaaa', '');
 
 -- --------------------------------------------------------
 
@@ -2938,7 +2949,7 @@ ALTER TABLE `tblmat_actions`
 -- AUTO_INCREMENT for table `tblmat_deductdetails`
 --
 ALTER TABLE `tblmat_deductdetails`
-  MODIFY `mat_deductID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mat_deductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblmat_deliveries`
 --
@@ -2973,7 +2984,7 @@ ALTER TABLE `tblmodeofpayment`
 -- AUTO_INCREMENT for table `tblnewsletter`
 --
 ALTER TABLE `tblnewsletter`
-  MODIFY `newsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `newsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tblnotification`
 --
