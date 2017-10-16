@@ -5,7 +5,7 @@ session_start();
 
 $id = $_SESSION['varname'];
 $editDownpayment = $_POST['name'];
-$new = $editDownpayment/100;
+$new = $editDownpayment;
 
 $updateSql = "UPDATE tbldownpayment SET downpaymentPercentage='$new' WHERE downpaymentID='1'";
 

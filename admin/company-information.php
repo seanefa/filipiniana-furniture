@@ -116,7 +116,7 @@ $(document).ready(function(){
                       <label class="control-label">Company Logo</label>
                       <div class="product-img">
                       <input type="file" name="image" class="dropify" data-default-file="plugins/logo/<?php echo $row['comp_logo']?>">
-                      <input type="hidden" name="exist_image" value="<?php echo $trow['comp_logo']?>">
+                      <input type="hidden" id="select" name="exist_image" value="<?php echo $row['comp_logo']?>">
                       </div>
                       </div>
                     </div>

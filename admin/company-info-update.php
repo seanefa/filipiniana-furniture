@@ -9,6 +9,8 @@ $abt=$_POST['about'];
 $email=$_POST['email'];
 $pic = "";
 
+$exist_image = $_POST["exist_image"];
+
 $sql = "SELECT * from tblcompany_info;";
 $result = $conn->query($sql);
 $row = $result->num_rows;
@@ -25,6 +27,16 @@ else
  echo "SAVED" ;
  $pic = date('Y-m-d') . time() . ".png";
 }
+
+
+
+if($pic=="")
+{
+  $pic = $exist_image;
+}
+
+// echo $pic;
+// echo $exist_image;
 
 if($row == 0)
 {

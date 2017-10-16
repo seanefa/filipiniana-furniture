@@ -37,13 +37,7 @@ if (!$conn) {
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="control-label">Rate Type</label>&nbsp;
-                      <h2><input type="radio" id="rate" name="type" value="Percentage"/> Percentage
-                        <input type="radio" id="rate" name="type" value="Amount"/> Amount</h2>
-                      </div>
-                    </div>
+                    <input type="hidden" id="rate" name="type" value="Amount"/>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="control-label">Rate</label><br><span id="x" style="color:red">*</span>
@@ -97,13 +91,7 @@ if (!$conn) {
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label class="control-label">Rate Type</label>&nbsp;
-                            <h2><input id="rem" type="radio" name="type" value="Percentage"/> Percentage
-                              <input id="rem" type="radio" name="type" value="Amount"/> Amount</h2>
-                            </div>
-                          </div>
+                          <input id="rem" type="hidden" name="type" value="Amount"/>
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Rate</label><span id="x" style="color:red">*</span><br>

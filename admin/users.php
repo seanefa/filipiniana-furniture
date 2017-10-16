@@ -126,11 +126,11 @@ $(document).ready(function(){
                           <tbody>
 
                               <?php
-                              $sql = "SELECT * FROM tblemployee a join tbluser b on a.empID = b.userEmpID order by empLastName";
+                              $sql = "SELECT * FROM tblemployee a, tbluser b WHERE a.empID = b.userEmpID order by empLastName";
                               $result = mysqli_query($conn, $sql);
                               while ($row = mysqli_fetch_assoc($result))
                               {
-                                if($row['userStatus']=="Active" && $row['userType']=="Admin")
+                                if($row['userStatus']=="Active" && $row['userType']=="admin")
 								{
 							  ?>
 							  	<tr>
