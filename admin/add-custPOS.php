@@ -41,7 +41,7 @@ $employee = $_SESSION['userID'];
 $remarks = "An order.";
 
 $pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
-echo "<br>pssql" . $pssql;
+// echo "<br>pssql" . $pssql;
 
 if (mysqli_query($conn, $pssql)) {
   $ctr = 0;
@@ -54,10 +54,11 @@ if (mysqli_query($conn, $pssql)) {
     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Ready for release')"; 
     mysqli_query($conn,$sql1);
     $orReqID = mysqli_insert_id($conn);
-    $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID',".$selectedQuant[$ctr].";";
-      mysqli_query($conn,$sql3);
+    $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`, `orreq_prodFinish`) VALUES ('$orReqID','".$selectedQuant[$ctr]."','".$selectedQuant[$ctr]."');";
+      mysqli_query($conn,$sql3)
       onHandUpdate($str,$selectedQuant[$ctr]);
-      echo "<br>sql1: " . $sql1;
+      // echo "<br>sql1: " . $sql1;
+      // echo $sql3;
       $ctr++;
     }
 
