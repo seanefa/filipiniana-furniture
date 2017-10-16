@@ -286,7 +286,7 @@ Default</label>
   </div>
 </fieldset>
 <fieldset>
-  <legend>Newsletter</legend>
+  <legend>Subscribe to Our Newsletter</legend>
   <div class="form-group required">
     <div id="captc" class="g-recaptcha pull-right" data-callback="capcha_filled"
     data-expired-callback="capcha_expired" data-sitekey="6Ld4ijMUAAAAAL1AtLFjYMZPzteuwd4l6VUDvfGz"></div>
@@ -346,12 +346,12 @@ Default</label>
     var pass = $('#input-password').val();
     var conf = $('#input-confirm').val();
     if(pass != conf && pass != '' && conf != ''){
-      alert('Incorrect Password');
+      alert('Incorrect Password!');
     }else{
       if(allowSubmit == false){
 
         $('#_btnRegister').prop('type','');
-        alert('Fill Captcha');
+        alert('Please Check the Captcha.');
 
       }
     }
@@ -379,7 +379,7 @@ Default</label>
   function check_if_capcha_is_filled (e) {
     if(allowSubmit) return true;
     e.preventDefault();
-    alert('Fill in the capcha!');
+    alert('Please Check the Captcha.');
   }
 </script>
 </body>
