@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "menu.php";
 include 'dbconnect.php';
 session_start(); 
@@ -110,7 +110,7 @@ if (!$conn) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="quan1" class="form-control" name="quan1">
+                      <input style="text-align:right;" type="number" id="quan1" class="form-control" name="quan1">
                     </div>
                   </div>
                 </div>
@@ -118,8 +118,8 @@ if (!$conn) {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Remarks</label><span id="x" style="color:red"> *</span>
-                      <input type="text" id="remarks" class="form-control" placeholder="Pull-Out" name="remarks">
+                      <label class="control-label">Reason</label><span id="x" style="color:red"> *</span>
+                      <input type="text" id="remarks" class="form-control" placeholder="Pull-Out" name="remarks" required>
                     </div>
                   </div>
                 </div>

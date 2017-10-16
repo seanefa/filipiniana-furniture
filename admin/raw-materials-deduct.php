@@ -19,7 +19,8 @@ $sql4 = "UPDATE `tblmat_inventory` SET `matVarQuantity`='$added' WHERE `matVaria
 mysqli_query($conn, $sql4);
 $flag++;
 
-$sql5 = "INSERT INTO `tblmat_deductdetails` (`mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`) VALUES ('$id','$quan','$remarks')";
+$dt = date("Y-m-d");
+$sql5 = "INSERT INTO `tblmat_deductdetails` (`mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`, `mat_deductDate`) VALUES ('$id','$quan','$remarks','$dt')";
 mysqli_query($conn, $sql5);
 
 if ($flag>0) {

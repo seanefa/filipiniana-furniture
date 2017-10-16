@@ -203,12 +203,12 @@ unset($_SESSION['actionFailed']);
                             while ($row1 = mysqli_fetch_assoc($result1))
                             {
                               if($row1['mat_varStatus']=="Active"){
-                                echo('<tr><td>'.$row1['materialName'].'</td><td>'.$row1['mat_varDescription'].'</td>  <td>'.$row1['matVarQuantity'].'</td>');
+                                echo('<tr><td style="text-align:left;">'.$row1['materialName'].'</td><td style="text-align:left;">'.$row1['mat_varDescription'].'</td>  <td style="text-align:left;">'.$row1['matVarQuantity'].'</td>');
                               
                             ?>
-                            <td><!-- <button type="button" class="btn btn-warning" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #restock" data-target="#myModal">Restock</button> -->
+                            <td style="text-align:left;"><!-- <button type="button" class="btn btn-warning" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #restock" data-target="#myModal">Restock</button> -->
 
-                              <button type="button" class="btn btn-danger" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #deduct" data-target="#myModal">Deduct</button>
+                              <button  style="text-align:left;"type="button" class="btn btn-danger" data-toggle="modal" href="raw-materials-management-form.php" data-remote="raw-materials-management-form.php?id=<?php echo $row1['mat_varID']?> #deduct" data-target="#myModal">Deduct</button>
                             </td>
                               <?php echo('</tr>'); }}
                               ?>
@@ -235,8 +235,9 @@ unset($_SESSION['actionFailed']);
                                       <tr>
                                         <th>Material</th>
                                         <th>Variant</th>
-                                        <th>Pulled-Out</th>
-                                        <th>Remarks</th>
+                                        <th>Quantity Deducted</th>
+                                        <th>Date</th>
+                                        <th>Reason</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -248,6 +249,7 @@ unset($_SESSION['actionFailed']);
                                           echo('<tr><td style="text-align: left;">'. $row['materialName'] .'</td>
                                             <td style="text-align: left;">'.$row['mat_varDescription'].'</td>
                                             <td style="text-align: left;">'.$row['mat_deductQuantity'].'</td>
+                                            <td style="text-align: left;">'. $row['mat_deductDate'].'</td>
                                             <td style="text-align: left;">'. $row['mat_deductRemarks'].'</td>
                                             ');
                                             ?>
