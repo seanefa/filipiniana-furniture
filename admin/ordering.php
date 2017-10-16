@@ -934,7 +934,6 @@ else if(quant == 0){
 
 
 function checkout(){
-
   if(qCtr== 0){
     alert("Cart is empty.");
   }

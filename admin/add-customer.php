@@ -304,6 +304,10 @@ echo $logSQL;
 
 function unitPrice($id){
   include "dbconnect.php";
+  if(substr($id, 0,4)=='Promo'){
+    $price = 0;
+    return $price;
+  }else{
   $price = 0;
   $sql = "SELECT * from tblproduct WHERE productID = '$id'";
   $res = mysqli_query($conn,$sql);
@@ -311,6 +315,8 @@ function unitPrice($id){
     $price = $row['productPrice'];
   }
   return $price;
+  }
+  
 }
 
 function packPrice($id){

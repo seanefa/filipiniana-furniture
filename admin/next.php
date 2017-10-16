@@ -653,7 +653,17 @@ function validateEmail(email) {
 
                   ///DISPLAY PACKGAGEGE
                   if(!$P_selected[0] != 0){
+                    echo ('
+                              <tr style="display: none;">
+                              <td><input id="cart" name="P_cart[]" value="0" type="hidden"/></td>
 
+                              <td>PACKAGE ');
+                            echo '<button type="button" class="btn btn-warning" data-toggle="modal" href="packages-form.php" data-target="#myModal"><i class="fa fa-info-circle"></i> View</button>';
+                            echo('</td>
+                              <td style="text-align: right;">&#8369;</td>
+                              <td style="text-align: right;"><input id="quant" name="P_quant[]" value="0" type="hidden"/></td>
+                              <td id="price"style="text-align: right;">&#8369;<input id="price" name="P_prices[]" value="0" type="hidden"/></td>');
+                            echo'</tr>'; 
                   }
                   else{
                     foreach ($P_removed as $P_removedItem) {
@@ -741,8 +751,45 @@ function validateEmail(email) {
                         $result = mysqli_query($conn, $sql);
                         if($result){
                           while ($row = mysqli_fetch_assoc($result)) {
+
+                            $sql1 = "SELECT * FROM tblprodsonpromo where prodPromoID = '$items';";
+                        $result1 = mysqli_query($conn, $sql1);
+                        $row1 = mysqli_fetch_assoc($result1);
+                        $promoID = $row1['promoDescID'];
+
                             $ctr++; 
-                            $pCtr++;                            
+                            $pCtr++;
+                            if($row1['prodPromoID'] == $items){
+                               $sql2 = "SELECT * FROM tblpromos where promoID = '$promoID';";
+                                $result2 = mysqli_query($conn, $sql2);
+                                $row2 = mysqli_fetch_assoc($result2);
+
+                                $prodOnPromo = $row2['tblproductID'];
+
+                                $sql3 = "SELECT * FROM tblproduct where productID = '$prodOnPromo';";
+                                $result3 = mysqli_query($conn, $sql3);
+                                $row3 = mysqli_fetch_assoc($result3);
+
+
+                              echo ('
+                              <tr>
+                              <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
+                              <td>'.$row['productDescription'].'</td>
+                              <td style="text-align: right;">&#8369; '.number_format($row['productPrice'],2).'</td>
+                              <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
+                              <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
+                            echo'</tr>';
+                            echo ('
+                              <tr>
+                              <td><input id="cart'.$ctr.'" name="cart[]" value="Promo'.$row3['productID'].'" type="hidden"/>'.$row3['productName'].'</td>
+                              <td><span style="color: green;">This Product is On Promo</span>,  '.$row3['productDescription'].'</td>
+                              <td style="text-align: right;"><span style="color: green;">(Free)</span></td>
+                              <td style="text-align: right;">1<input id="quant'.$ctr.'" name="quant[]" value="1" type="hidden"/></td>
+                              <td id="price'.$ctr.'"style="text-align: right;"><span style="color: green;">(Free)</span><input id="price'.$ctr.'" name="prices[]" value="0" type="hidden"/></td>');
+                            echo'</tr>';  
+
+
+                            } else{                           
                             echo ('
                               <tr>
                               <td><input id="cart'.$ctr.'" name="cart[]" value="'.$items.'" type="hidden"/>'.$row['productName'].'</td>
@@ -751,6 +798,7 @@ function validateEmail(email) {
                               <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
                               <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
                             echo'</tr>';   
+                            }
                           }
                         }
                       }
