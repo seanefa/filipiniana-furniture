@@ -76,7 +76,7 @@
                     echo '
             <div class="product-layout product-list col-xs-12">
             <div class="product-thumb hovereffect">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/promos/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                       <h4 style="text-transform:uppercase;"><a href="view-product.php">'.$row['promoName'].'</a></h4>
                     <div class="overlay"> 
                     <div class="caption">                      

@@ -164,11 +164,11 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['promoStatus'] == "Active"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
-                      <h4 style="text-transform:uppercase;"><a href="view-product.php">'.$row['promoName'].'</a></h4>
+                    <div class="image"><a href="view-promo.php?id='.$row['promoID'].'"><img style="height:280px; width:200;" src="../admin/plugins/promos/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                      <h4 style="text-transform:uppercase;"><a href="view-promo.php">'.$row['promoName'].'</a></h4>
                     <div class="overlay"> 
                     <div class="caption">                      
-                      <h2><a href="view-product.php" style="color:white;">'.$row['promoDescription'].'</a></h2>
+                      <h2><a href="view-promo.php?id='.$row['promoID'].'" style="color:white;">'.$row['promoDescription'].'</a></h2>
                       </div>
                     </div>
                   </div>

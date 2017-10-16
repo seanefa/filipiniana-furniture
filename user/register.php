@@ -260,8 +260,7 @@ Default</label>
 <div class="form-group required">
   <label for="input-block" class="col-sm-2 control-label">Address</label>
   <div class="col-sm-10">
-      <input class="form-control" id="autocomplete" placeholder="Enter your address"
-      onFocus="geolocate()" type="text"></input>
+      <input class="form-control" id="autocomplete" placeholder="Enter your address" name="adr" type="text"></input>
     </div>
   </div>
 <fieldset>
