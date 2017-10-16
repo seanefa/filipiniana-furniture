@@ -82,6 +82,8 @@ if($isBool=="existing"){ //EXISTING
   echo "<br>EXISTING ";
 
   $pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
+	
+	$insertlog = "INSERT into tbllogs(category, action, date, description, userID) values('Orders', 'New', '" . date("Y-m-d") . "', 'New order from $custid', '$custid' )";
 
   echo " ".mysqli_error($conn);
   echo "<br>pssql" . $pssql;
@@ -123,8 +125,6 @@ if($isBool=="existing"){ //EXISTING
       }
      }
     }
-
-
 
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
    
