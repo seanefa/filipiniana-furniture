@@ -176,6 +176,54 @@ $( '#promoDesc' ).html(response);
       });
     });
   });
+  $(document).ready(function(){
+    $('#myModal').on('shown.bs.modal',function(){
+      $('#promoedit').change(function() {
+        var value = $("#promoedit").val();
+        if(isNaN(value)){
+          var res = '<h3 style="text-align:center">[Select a Promo]</h3>';
+          $( '#promoDescedit' ).html(res);
+        }
+        else{
+          $.ajax({
+            type: 'post',
+            url: 'promo-display.php',
+            data: {
+              id: value, 
+            },
+            success: function (response) {
+// We get the element having id of display_info and put the response inside it
+$( '#promoDescedit' ).html(response);
+}
+});
+        }
+      });
+    });
+  });
+
+  $(document).ready(function(){
+    $('#myModal').on('shown.bs.modal',function(){
+
+        var value = $("#promoedit").val();
+        if(isNaN(value)){
+          var res = '<h3 style="text-align:center">[Select a Promo]</h3>';
+          $( '#promoDescedit' ).html(res);
+        }
+        else{
+          $.ajax({
+            type: 'post',
+            url: 'promo-display.php',
+            data: {
+              id: value, 
+            },
+            success: function (response) {
+// We get the element having id of display_info and put the response inside it
+$( '#promoDescedit' ).html(response);
+}
+});
+        }
+    });
+  });
 
   $(document).ready(function(){
   $("#archiveTable").hide();
@@ -366,7 +414,7 @@ $( '#promoDesc' ).html(response);
                                             <td style="text-align: center;">'. $row['bilang'].'</td>
                                             ');
                                             ?>
-                                            <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #updatePromo" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                            <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['promoID'];?> #updateOnPromo" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
 
                                               <!--<button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnPromo" data-target="#myModal">Deduct</button>-->
                                             </td>

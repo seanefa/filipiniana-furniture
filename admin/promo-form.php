@@ -147,6 +147,12 @@ if (!$conn) {
                       echo '<option id="'.$row['productID'].'" value="'.$row['productID'].'">'.$row['productName'].'</option>';
                     }
 
+                    $rsql = "SELECT * FROM tblpromos where promoID = $jsID";
+              $rresult = mysqli_query($conn,$rsql);
+              if($rresult){ }
+              
+              $row = mysqli_fetch_assoc($rresult);
+
                     ?></select>
                   </div>
                 </div>

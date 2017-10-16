@@ -156,7 +156,7 @@ $_SESSION['varname'] = $jsID;
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="promo" id="promo">
+                    <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="promoedit" id="promo">
                       <option value="a">Select a Promo</option>
                       <?php
                       include "dbconnect.php";
@@ -297,6 +297,104 @@ $_SESSION['varname'] = $jsID;
   </div>
 </div>
 </div>
+
+
+<!-- Update Promo modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="updateOnPromoModal" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="updateOnPromo">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="modalProduct">Update Products on Promo</h3>
+      </div>
+      <form action="products-promo-update.php" method="post">
+        <div class="modal-body">
+          <div class="descriptions">
+            <div class="form-body">
+              <?php
+
+               include "dbconnect.php";
+                      $sql = "SELECT * FROM tblpromos where promoID = '$jsID';";
+                      $result = mysqli_query($conn, $sql);
+                      $row = mysqli_fetch_assoc($result);
+
+              ?>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
+                    <select class="form-control" data-placeholder="Choose a Category" value='<?php echo $row['promoID'];?>' tabindex="1" name="promo" id="promoedit">
+                      <option value="a" disabled>Select a Promo</option>
+                      <?php
+                      include "dbconnect.php";
+                      $sql = "SELECT * FROM tblpromos ORDER BY promoName ASC;";
+                      $result = mysqli_query($conn, $sql);
+                      while ($row = mysqli_fetch_assoc($result))
+                      {
+                        if($row['promoStatus']!='Archived'){
+                          if($row['promoID'] == $jsID){
+                          echo('<option value='.$row['promoID'].' selected="selected">'.$row['promoName'].'</option>');
+                          }else{
+                            echo('<option value='.$row['promoID'].'>'.$row['promoName'].'</option>');
+                          }
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" id="promoDescedit">
+                    <h3 style="text-align:center">[Select a Promo]</h3>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12"">
+                  <div id="checkbox">
+                    <h4 style="text-align: center;">
+                      <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
+                    </h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div id="selection">
+                    <h4 style="text-align: center;">Select Products</h4>
+                    <div class="col-md-6 col-md-offset-3">
+                      <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
+                        <?php
+                        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                        $res = mysqli_query($conn,$sql);
+                        while($row = mysqli_fetch_assoc($res)){
+                          if($row['prodStat']!='Archived'){
+                            echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Update Promo end -->
+
+
+
 
 
 
