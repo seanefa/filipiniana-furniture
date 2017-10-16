@@ -64,7 +64,7 @@
             
                     </div>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
                     </div>
                   </div> <?php
                 }
@@ -102,7 +102,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
                     </div>
                   </div><?php echo '';
                 }
@@ -142,7 +142,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id=<?php echo $row['packageID'];?> #viewP"><i class='glyphicon glyphicon-shopping-cart'></i> Add to Cart</button>
                     </div>
                   </div>
                   </div><?php echo'';
