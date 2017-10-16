@@ -76,7 +76,9 @@ $.ajax({
                          <option value="4">Customer with Balances</option>
                          <option value="5">List of Cancelled Orders</option>
                          <option value="6">List of Rejected Order Request</option>
-                         <option value="7">Logs</option>
+                         <option value="8">List of Archived Orders</option>
+                         <option value="9">Newsletters</option>
+                         <option value="7">System Logs</option>
                        </select>
                      </div>
                       <!--<div class="col-md-2">

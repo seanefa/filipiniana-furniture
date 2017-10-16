@@ -228,6 +228,8 @@ else if($id=="4"){ // loyal customer
 	}
 	} 
 
+
+
 else if($id=="5"){ // loyal customer
 	$ctr = 0;
 	$sql = "SELECT * FROM tblorders a, tblcustomer b WHERE a.custOrderID = b.customerID and a.orderStatus = 'Cancelled'";
@@ -284,9 +286,122 @@ else if($id=="5"){ // loyal customer
 
 } 
 
-else if($id=="7"){ // loyal customer
+
+else if($id=="6"){ // loyal customer
 	$ctr = 0;
-	$sql = "SELECT * FROM tbllogs a join tbluser b where a.userID = b.userID";
+	$sql = "SELECT * FROM tblorders a, tblcustomer b WHERE a.custOrderID = b.customerID and a.orderStatus = 'Rejected'";
+	$result = mysqli_query($conn, $sql);
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
+	<thead>
+	<tr>
+	<th>Order ID</th>
+	<th>Customer Name</th>
+	<th>Contact Number</th>
+	<th>Order Price</th>
+	<th>Reason</th>
+	</tr>
+	</thead>
+	<tbody>";
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$ctr++;
+		$bal = getBal($row['orderID']);
+		$prodID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+		echo ('<tr><td>'.$prodID.'</td>
+			<td>'.$row['customerFirstName']." ".$row['customerMiddleName']." ".$row['customerLastName'].'</td>
+			<td>'.$row['customerContactNum'].'</td>
+			<td>&#8369;'.number_format($row['orderPrice'],2).'</td>
+			<td style="text-align:center;">'.$row['orderRemarks'].'</td>
+			</tr>'); 
+	}
+	if($ctr==0){
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
+		echo "</tbody>";
+	}
+	else{
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
+	}
+
+} 
+
+else if($id=="8"){ // loyal customer
+	$ctr = 0;
+	$sql = "SELECT * FROM tblorders a, tblcustomer b WHERE a.custOrderID = b.customerID and a.orderStatus = 'Archived'";
+	$result = mysqli_query($conn, $sql);
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
+	<thead>
+	<tr>
+	<th>Order ID</th>
+	<th>Customer Name</th>
+	<th>Contact Number</th>
+	<th>Order Price</th>
+	<th>Reason</th>
+	</tr>
+	</thead>
+	<tbody>";
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$ctr++;
+		$bal = getBal($row['orderID']);
+		$prodID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+		echo ('<tr><td>'.$prodID.'</td>
+			<td>'.$row['customerFirstName']." ".$row['customerMiddleName']." ".$row['customerLastName'].'</td>
+			<td>'.$row['customerContactNum'].'</td>
+			<td>&#8369;'.number_format($row['orderPrice'],2).'</td>
+			<td style="text-align:center;">'.$row['orderRemarks'].'</td>
+			</tr>'); 
+	}
+	if($ctr==0){
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
+		echo "</tbody>";
+	}
+	else{
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
+	}
+
+} 
+
+else if($id=="7"){ // LOGS PU
+	$ctr = 0;
+	$sql = "SELECT * FROM tbllogs a, tbluser b, tblemployee c where a.userID = b.userID and c.empID = b.userEmpID";
 	$result = mysqli_query($conn, $sql);
 	echo "
 	<div class='table-responsive'>
@@ -304,13 +419,75 @@ else if($id=="7"){ // loyal customer
 
 	while ($row = mysqli_fetch_assoc($result)){
 		$ctr++;
+
+		$date = date_create($row['date']);
+		$date = date_format($date,"F d, Y");
 		echo ('
 			<tr>
-				<td>' . $row['userName'] . '</td>
-				<td>' . $row['date'] . '</td>
+				<td>' . $date. '</td>
 				<td>'. $row['action'] . '</td>
 				<td>' . $row['category'] . '</td>
 				<td>' . $row['description'] . '</td>
+				<td>' . $row['empFirstName'] . ' '. $row['empMidName']  .' '. $row['empLastName'].'</td>
+			</tr>'); 
+	}
+	if($ctr==0){
+		echo "<td colspan='6' style='text-align:center'><p style='text-align:center; font-family:inherit; font-size:25px;'>NOTHING TO SHOW</p></td>";
+		echo "</tbody>";
+	}
+	else{
+		echo "
+	</tbody>
+	</table>
+	</div>
+	<script>
+	$(document).ready(function () {
+	  var table = $('.queriesDataTable').DataTable({
+	    'order': [],
+	    'pageLength': 5,
+	    'lengthMenu': [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']],
+	    'aoColumnDefs' : [
+	    {
+	     'bSortable' : false,
+	     'aTargets' : [ 'removeSort' ]
+	   }]
+	 });
+	});
+	</script>";
+	}
+
+} 
+
+
+
+else if($id=="9"){ // LOGS PU
+	$ctr = 0;
+	$sql = "SELECT * FROM tblnewsletter a, tbluser b, tblemployee c where a.newsletterAuthor = b.userID and c.empID = b.userEmpID";
+	$result = mysqli_query($conn, $sql);
+	echo "
+	<div class='table-responsive'>
+    <table class='table color-bordered-table muted-bordered-table queriesDataTable display' id='tblQuery'>
+	<thead>
+	<tr>
+	<th>Date</th>
+	<th>Content</th>
+	<th>Author</th>
+	<th>Status</th>
+	</tr>
+	</thead>
+	<tbody>";
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$ctr++;
+
+		$date = date_create($row['newsletterDate']);
+		$date = date_format($date,"F d, Y");
+		echo ('
+			<tr>
+				<td>' . $date. '</td>
+				<td>'. $row['newsletterContent'] . '</td>
+				<td>' . $row['empFirstName'] . ' '. $row['empMidName']  .' '. $row['empLastName'].'</td>
+				<td>'. $row['newsletterStatus'] . '</td>
 			</tr>'); 
 	}
 	if($ctr==0){
