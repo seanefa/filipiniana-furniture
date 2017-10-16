@@ -81,7 +81,8 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM tblproduct where productID = '$id'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
-
+                  
+                  $prodID = $row['productID'];
                   $frameID = $row['prodFrameworkID'];
                   $fabricID = $row['prodFabricID'];
                   $catID = $row['prodCatID'];
@@ -103,9 +104,11 @@ $typeSql = "SELECT * from tblfurn_type where typeID = '$typeID'";
 $typeresult = mysqli_query($conn,$typeSql);
 $typerow = mysqli_fetch_assoc($typeresult);
 
+$promoSql = "SELECT * from tblprodsonpromo where prodPromoID = '$prodID'";
+$promoresult = mysqli_query($conn,$promoSql);
+$promorow = mysqli_fetch_assoc($promoresult);
 
-
-                  
+             
 
 
 ?>
@@ -121,8 +124,28 @@ $typerow = mysqli_fetch_assoc($typeresult);
               </div>
               <div class="col-sm-8">
                 <ul class="list-unstyled description">
+                  <?php
+
+                  $prsID = 0;
+                    if(isset($promorow['promoDescID'])){
+                    $prsID = $promorow['promoDescID'];
+                    }
+
+                    $promosSql = "SELECT * from tblpromos where promoID = '$prsID'";
+                    $promosresult = mysqli_query($conn,$promosSql);
+                    $promosrow;
+                     
+
+                  ?>
                   <li><b>Product Code:</b> <span itemprop="mpn">Product <?php echo $row['productID']; ?></span></li>
                   <li><b>Availability:</b> <span class="instock">In Stock</span></li>
+                  <?php
+                   if($promosresult){
+                    $promosrow = mysqli_fetch_assoc($promosresult);
+                    echo '<li><b>Promo:</b> <span class="instock"><a href="view-promo.php?id='.$promosrow['promoID'].'">'.$promosrow['promoName'].'</a></span></li>';
+                    }   
+
+                  ?>
                 </ul>
                 <ul class="price-box">
                   <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">&#8369 <?php echo $row['productPrice']; ?><span itemprop="availability" content="In Stock"></span></span></li>
