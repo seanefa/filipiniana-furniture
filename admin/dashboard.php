@@ -45,11 +45,40 @@ if (!empty($_SESSION['actionFailed'])) {
 unset($_SESSION['actionFailed']);
 }
 
+$sql = "SELECT * FROM tblorders WHERE orderStatus='WFP' order by orderID";
+$ctr = 0;
+$AR = 0;
+$res = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_assoc($res)){
+  $dateRel = $row['dateOfReceived'];
+  $over = date('Y-m-d',strtotime($dateRel."+ 8 days"));
+  $date = new DateTime();
+  $dateToday = date_format($date, "Y-m-d");
+  if($dateToday > $over){
+    //echo "<input type='hidden' id='archived' value=1/>";
+    $AR = 1;
+    $ctr++;
+  }
+  if($ctr==0){
+    //echo "<input type='hidden' id='archived' value=0/>";
+    $AR = 0;
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <script>
+
+  $(document).ready(function(){
+      //$('#archivedOrders').modal('show');
+    var val = $("#archived").val();
+    if(val!=0){
+      $('#archivedOrders').modal('show');
+    }
+  });
+
   var divs = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6", "Menu7"];
   var visibleDivId = null;
   function toggleVisibility(divId) {
@@ -86,6 +115,7 @@ function redirectBill(id){
         <div class="row">
           <div class="panel panel-info">
             <div id="Menu1">
+              <input type="hidden" id="archived" value="<?php echo $AR?>">
               <h3>
                 <ul class="nav customtab2 nav-tabs" role="tablist">
                   <li role="presentation" class="active" >
@@ -318,143 +348,143 @@ function getuserID($id){
           <div class="row">
             <div class="table-responsive">
               <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblCategories">
-                          <thead>
-                            <tr>
-                              <th>Order ID</th>
-                              <th>Customer Name</th>
-                              <th style="text-align:right">Order Price</th>
-                              <th style="text-align:right">Delivery Fee</th>
-                              <th style="text-align:right">Penalty Fee</th>
-                              <th style="text-align:right">Remaining Balance</th>
-                              <th class="removeSort" style="text-align:left">Actions</th>
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th style="text-align:right">Order Price</th>
+                    <th style="text-align:right">Delivery Fee</th>
+                    <th style="text-align:right">Penalty Fee</th>
+                    <th style="text-align:right">Remaining Balance</th>
+                    <th class="removeSort" style="text-align:left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  include "dbconnect.php";
+                  $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' AND a.orderStatus != 'Cancelled' AND a.orderType!='Management Order' order by orderID ;";
+
+                  $result = mysqli_query($conn, $sql);
+                  if($result){
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                      $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                      $count_prod = pCount($row['custOrderID']);
+                      $get_date = getDates($row['orderID']);
+                      $get_name = orderCon($row['orderID']);
+                      $bal = getBal($row['orderID'], $row['orderPrice']);
+                      $paymentStat = getStat($row['orderID'], $row['orderPrice']);
+                      $overDue = isOverDue($row['orderID'],$row['invPenID']);
+                      if($bal!=0){
+                        echo ('
+                          <tr>
+                          <td>'.$orderID.'</td>
+                          <td>'.$get_name.'</td>
+                          <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
+                          <td style="text-align:right">&#8369; '.number_format($row['invDelrateID'],2).'</td>
+                          <td style="text-align:right">&#8369; '.number_format($row['invPenID'],2).'</td>
+                          <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>');
+                        if($overDue){
+                          echo ('<td><a class="btn btn-info" style="color:white;" href="order-penalty.php?id='. $row['orderID'].'">&#8369; Add Penalty </a>
+                            </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            <?php
-                            include "dbconnect.php";
-                            $sql = "SELECT * FROM tblorders a, tblinvoicedetails b WHERE b.invorderID = a.orderID AND a.orderStatus != 'Archived' AND a.orderStatus != 'WFA' AND a.orderStatus != 'Finished' AND a.orderStatus != 'Cancelled' AND a.orderType!='Management Order' order by orderID ;";
+                            ');
 
-                            $result = mysqli_query($conn, $sql);
-                            if($result){
-                              while ($row = mysqli_fetch_assoc($result))
-                              {
-                                $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
-                                $count_prod = pCount($row['custOrderID']);
-                                $get_date = getDates($row['orderID']);
-                                $get_name = orderCon($row['orderID']);
-                                $bal = getBal($row['orderID'], $row['orderPrice']);
-                                $paymentStat = getStat($row['orderID'], $row['orderPrice']);
-                                $overDue = isOverDue($row['orderID'],$row['invPenID']);
-                                if($bal!=0){
-                                echo ('
-                                  <tr>
-                                  <td>'.$orderID.'</td>
-                                  <td>'.$get_name.'</td>
-                                  <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
-                                  <td style="text-align:right">&#8369; '.number_format($row['invDelrateID'],2).'</td>
-                                  <td style="text-align:right">&#8369; '.number_format($row['invPenID'],2).'</td>
-                                  <td style="text-align:right; color: red;">&#8369; '.number_format($bal,2).'</td>');
-                                  if($overDue){
-                                    echo ('<td><a class="btn btn-info" style="color:white;" href="order-penalty.php?id='. $row['orderID'].'">&#8369; Add Penalty </a>
-                                  </td>
-                                  </tr>
-                                  ');
+                        }
+                        else{
+                          echo ('<td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
+                           <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>');
+                          if($row['orderStatus']=="Cancelled"){
+                           echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'" >&#8369; Payment </a>
+                            </td>
+                            </tr>
+                            ');
+                         }
+                         else{
+                          echo ('<a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
+                            </td>
+                            </tr>
+                            ');
+                        }
 
-                                  }
-                                  else{
-                                  echo ('<td style="text-align:left"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='. $row['orderID'].' #viewInfo"><span class="fa fa-info-circle"></span> View</button>  
-                                     <button type="button" class="btn btn-success" onclick="redirectBill('.$row['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> Bill </button>');
-                                  if($row['orderStatus']=="Cancelled"){
-                                   echo ('<a class="btn btn-info" style="color:white;" href="cancelled-payment.php?id='. $row['orderID'].'" >&#8369; Payment </a>
-                                  </td>
-                                  </tr>
-                                  ');
-                                 }
-                                 else{
-                                  echo ('<a class="btn btn-info" style="color:white;" href="order-payment.php?id='. $row['orderID'].'">&#8369; Payment </a>
-                                  </td>
-                                  </tr>
-                                  ');
-                                 }
+                      }
+                    }
+                  }     
+                }  
+                function getBal($id,$price){
+                  include "dbconnect.php";
+                  $down = 0;
+                  $bal = 0;
+                  $delFee = 0;
+                  $status = 0;
+                  $penFee = 0;
+                  $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+                  $res = mysqli_query($conn,$sql);
+                  $tpay = 0;
+                  while($trow = mysqli_fetch_assoc($res)){
+                    $tpay = $tpay + $trow['amountPaid'];
+                    $price = $trow['balance'];
+                    $delFee = $trow['invDelrateID'];
+                    $penFee = $trow['invPenID'];
+                    $status = $trow['orderStatus'];
+                  }
+                  if($status=="Cancelled"){
+                    $bal = 0;
+                  }
+                  else{
+                    $p = $price + $delFee + $penFee;
+                    $down = $tpay;
+                    $bal = $p - $down;
+                  }
+                  return $bal;
+                }    
+                function getStat($id,$price){
+                  include "dbconnect.php";
+                  $down = 0;
+                  $bal = 0;
+                  $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
+                  $res = mysqli_query($conn,$sql);
+                  $tpay = 0;
+                  while($trow = mysqli_fetch_assoc($res)){
+                    $tpay = $tpay + $trow['amountPaid'];
+                  }
+                  $down = $tpay;
+                  $bal = $price - $down;
+                  if($bal==$price){
+                    return "No downpayment";
+                  }
+                  else if($bal==0){
+                    return "Paid";
+                  }
+                  else{
+                    return "Not fully paid";
+                  }
+                }
 
-                                  }
-                                  }
-                              }     
-                            }  
-                            function getBal($id,$price){
-                              include "dbconnect.php";
-                              $down = 0;
-                              $bal = 0;
-                              $delFee = 0;
-                              $status = 0;
-                              $penFee = 0;
-                              $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
-                              $res = mysqli_query($conn,$sql);
-                              $tpay = 0;
-                              while($trow = mysqli_fetch_assoc($res)){
-                                $tpay = $tpay + $trow['amountPaid'];
-                                $price = $trow['balance'];
-                                $delFee = $trow['invDelrateID'];
-                                $penFee = $trow['invPenID'];
-                                $status = $trow['orderStatus'];
-                              }
-                              if($status=="Cancelled"){
-                                $bal = 0;
-                              }
-                              else{
-                              $p = $price + $delFee + $penFee;
-                              $down = $tpay;
-                              $bal = $p - $down;
-                            }
-                            return $bal;
-                            }    
-                            function getStat($id,$price){
-                              include "dbconnect.php";
-                              $down = 0;
-                              $bal = 0;
-                              $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$id'";
-                              $res = mysqli_query($conn,$sql);
-                              $tpay = 0;
-                              while($trow = mysqli_fetch_assoc($res)){
-                                $tpay = $tpay + $trow['amountPaid'];
-                              }
-                              $down = $tpay;
-                              $bal = $price - $down;
-                              if($bal==$price){
-                                return "No downpayment";
-                              }
-                              else if($bal==0){
-                                return "Paid";
-                              }
-                              else{
-                                return "Not fully paid";
-                              }
-                            }
-
-                            function isOverDue($id,$pen){
-                              include "dbconnect.php";
-                              $dateRel = 0;
-                              $sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
-                              $res = mysqli_query($conn,$sql);
-                              while($row = mysqli_fetch_assoc($res)){
-                                $dateRel = $row['dateOfRelease'];
-                              }
+                function isOverDue($id,$pen){
+                  include "dbconnect.php";
+                  $dateRel = 0;
+                  $sql = "SELECT * FROM tblorders WHERE orderID = '$id'";
+                  $res = mysqli_query($conn,$sql);
+                  while($row = mysqli_fetch_assoc($res)){
+                    $dateRel = $row['dateOfRelease'];
+                  }
                               // echo $dateRel . '<br>';
-                              $over = date('Y-m-d',strtotime($dateRel."+ 7 days"));
-                              $date = new DateTime();
-                              $dateToday = date_format($date, "Y-m-d");
-                              if(($dateToday > $over) && ($pen==0)){
+                  $over = date('Y-m-d',strtotime($dateRel."+ 7 days"));
+                  $date = new DateTime();
+                  $dateToday = date_format($date, "Y-m-d");
+                  if(($dateToday > $over) && ($pen==0)){
                                 // echo $dateToday . '<br>';
                                 // echo $over. '<br>';
-                                return true;
-                              }
-                              else{
-                                return false;
-                              }
-                            }
-                            ?> 
-                          </tbody>
-                        </table>
+                    return true;
+                  }
+                  else{
+                    return false;
+                  }
+                }
+                ?> 
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -683,54 +713,6 @@ echo ('
 
 </div>
 </div>
-
-<!-- <div class="row">
-<div class="panel panel-info">
-<h3>
-<ul class="nav customtab2 nav-tabs" role="tablist">
-<li role="presentation" class="active" >
-<a id="temptitle" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"></span><span class="hidden-xs"></span><i class="fa fa-clock-o"></i>&nbsp;Order History</a>
-</li>
-</ul>
-</h3>
-
-<div class="tab-content">
-<div role="tabpanel" class="tab-pane fade active in" id="fabrics">
-<div class="panel-wrapper collapse in" aria-expanded="true">
-<div class="panel-body">
-<ul class="nav customtab2">
-<li class style="border-top:1px solid darkgray;">
-<p class="text-success">
-<span class="badge" style="background-color:forestgreen;">4</span> Mr. Publico, Doc ordered 2 pieces of Yellow Seat. Mar. 11, 2017
-<br>
-</p>
-</li>
-<li class style="border-top:1px solid darkgray;">
-<p class="text-warning">
-<span class="badge" style="background-color:red;">3</span> Mr. Dela Cruz, John cancelled his order request. Mar. 6, 2017
-<br>
-</p>
-</li>
-<li class style="border-top:1px solid darkgray;">
-<p class="text-success">
-<span class="badge" style="background-color:forestgreen;">2</span> Ms. Garcia, Jocelyn ordered 3 Brown Couch. Feb. 25, 2017
-<br>
-</p>
-</li>
-<li class style="border-top:1px solid darkgray;">
-<p class="text-muted">
-<span class="badge" style="background-color:darkgray;">1</span> Mr. Cruz, Juan order is still pending. Feb. 23, 2017
-<br>
-</p>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div> -->
 </div>
 
 <div class="col-lg-3 col-sm-3 col-xs-12" style="margin-top: -20px;">
@@ -870,6 +852,79 @@ echo ('
       <div class="modal-content clearable-content">
         <div class="modal-body">
 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="archivedOrders" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-content clearable-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="modalProduct" style="text-align:center;">Unclaimed Orders</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <h4>Note: The following order records are automatically archived for failure to pay for their order(s) within seven (7) days.</h4>
+                    <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
+                    <table class="table product-overview" id="cartTbl">
+                      <thead>
+                        <th style="text-align:left">ORDER ID</th>
+                        <th style="text-align:left">Customer Name</th>
+                        <th>Order Status</th>
+                        <th style="text-align:right;">Date Received</th>
+                        <th style="text-align:right;">Status</th>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include "dbconnect.php";
+                        $sql = "SELECT * FROM tblorders WHERE orderStatus='WFP' order by orderID";
+                        $ctr = 0;
+                        $res = mysqli_query($conn,$sql);
+                        while($row = mysqli_fetch_assoc($res)){
+                          $dateRel = $row['dateOfRelease'];
+                          $over = date('Y-m-d',strtotime($dateRel."+ 8 days"));
+                          $date = new DateTime();
+                          $dateToday = date_format($date, "Y-m-d");
+                          if($dateToday > $over){
+                            $oID = $row['orderID'];
+                            $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT);
+                            $get_name = getName($row['custOrderID']);
+                            $date = date_create($row['dateOfReceived']);
+                            $dates = date_format($date,"F d, Y");
+                            echo '<tr>
+                            <td>'.$orderID.'</td>
+                            <td>'.$get_name.'</td>
+                            <td>Waiting for Payment</td>
+                            <td style="text-align:right">'.$dates.'</td>
+                            <td style="color:red">Archived</td>
+                            </tr>';
+                            $ctr++;
+                            $uSQL = "UPDATE tblorders SET orderStatus = 'Archived' WHERE orderID = ".$oID.";";
+                            mysqli_query($conn,$uSQL);
+                          }
+                        }
+                        if($ctr==0){
+                          echo "<tr><td colspan='5' style='text-align:right'>Nothing to show.</td></tr>";
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+          ?>
         </div>
       </div>
     </div>
