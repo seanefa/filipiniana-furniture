@@ -24,13 +24,13 @@ else{
 
 $sendnukes = "INSERT into tblcustomize_request(tblcustomerID, customizedPic, customizedDescription, customStatus) values('$customerID', '$blueprint', '$description', 'active')";
 
-if($conn->query($sendnukes) === true){
-	header("Location: customize.php");
-}
-else{
-	echo "query:" . $sendnukes . "<br>error:" . $conn->error;
-	echo "<br><br> CustomerID value: ";
-	echo $customerID;
-}
+// if($conn->query($sendnukes) === true){
+// 	header("Location: customize.php");
+// }
+// else{
+// 	echo "query:" . $sendnukes . "<br>error:" . $conn->error;
+// 	echo "<br><br> CustomerID value: ";
+// 	echo $customerID;
+// }
 $conn->close();
 ?>

@@ -5,6 +5,12 @@ $array = json_decode(stripslashes($_POST['arr']));
 
 $arraycount = count($array);
 $customerid = $_SESSION['userID'];
+
+$data = "SELECT * from tbluser a, tblcustomer b where a.userCustID = b.customerID AND a.userID = '$customerid'";
+$result = mysqli_query($conn,$data);
+$row = mysqli_fetch_assoc($result);
+$customerid = $row["customerID"];
+
 $desc = $_POST['descr'];
 
 $date = date("Y-m-d");
@@ -14,7 +20,6 @@ $desc = mysqli_real_escape_string($conn,$desc);
 
 
 $sql = "INSERT INTO `tblcustomize_request` (`tblcustomerID`,`customizedDescription`, `customStatus`,`dateRequest`) VALUES ('$customerid','$desc', 'WFA','$date')";
-
 $logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('Customization', 'New', '$date', 'New customization', '$customerid')";
 
 if(mysqli_query($conn,$sql))
@@ -31,5 +36,4 @@ if(mysqli_query($conn,$sql))
 	}
 	echo 'okay na';
 }
-
 ?>

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     $uresult = mysqli_query($conn,$usql);
                     $urow = mysqli_fetch_assoc($uresult);
 
-                    $uid = $urow['userID'];
+                    $uid = $urow["userCustID"];
 
                     $sqls = "SELECT * FROM tblcustomize_request where tblcustomerID = '$uid';";
                     $sresult = mysqli_query($conn,$sqls);
