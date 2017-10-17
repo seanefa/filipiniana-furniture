@@ -1,8 +1,8 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 
 $day = $_GET['day'];
 $month = $_GET['month'];
@@ -183,9 +183,9 @@ $row = mysqli_fetch_assoc($res);
     <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
-    <th>Order ID</th>
-    <th>Date Received</th>
-    <th>Customer Name</th>
+    <th style='text-align:right'>Order ID</th>
+    <th style='text-align:right'>Date Received</th>
+    <th style='text-align:right'>Customer Name</th>
     <th style='text-align:right'>Amount Due</th>
     <th style='text-align:right'>Quantity Ordered</th>
     <th style='text-align:right'>Remaining Balance</th>
@@ -204,12 +204,12 @@ $row = mysqli_fetch_assoc($res);
     $date = date_format($date,"F  d, Y");
     echo ('
       <tr>
-      <td>'.$orderID.'</td>
-      <td>'.$date.'</td>
-      <td>'.$get_name.'</td>
-      <td style="text-align:right">Php '.number_format($row['orderPrice'],2).'</td>
+      <td style="text-align:left">'.$orderID.'</td>
+      <td style="text-align:left">'.$date.'</td>
+      <td style="text-align:left">'.$get_name.'</td>
+      <td style="text-align:right">&#8369; '.number_format($row['orderPrice'],2).'</td>
       <td style="text-align:right">'.$qnts.'</td>
-      <td style="text-align:right">Php '.number_format($bal,2).'</td>
+      <td style="text-align:right">&#8369; '.number_format($bal,2).'</td>
       </tr>
       ');
   $ctr++;

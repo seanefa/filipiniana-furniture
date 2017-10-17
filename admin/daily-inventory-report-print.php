@@ -1,9 +1,10 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 
+        session_start();
 $day = $_GET['day'];
 $month = $_GET['month'];
 $year = $_GET['year'];
@@ -59,13 +60,21 @@ if($month == 12){
   $month = 'December';
 }
 
-$dates =  $day . $dayWithSuffix . $month . $year;
+$dates =  $month." ".$day . $dayWithSuffix." ". $year;
 
 ?>
 <!DOCTYPE html>
 <head>
   <title><?php echo $orderID = $dates?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php
 
@@ -248,7 +257,6 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6">
         <p><?php 
-        session_start();
         include "dbconnect.php"; 
         $datepr = date("Y-m-d");
         $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
@@ -267,9 +275,9 @@ $row = mysqli_fetch_assoc($res);
   </html>
 
   <?php
-  $html = ob_get_clean();
-  $dompdf = new DOMPDF();
-  $dompdf->load_html($html);
-  $dompdf->render();
-  $dompdf->stream($inventoryReportID, array("Attachment" => 0));
+  // $html = ob_get_clean();
+  // $dompdf = new DOMPDF();
+  // $dompdf->load_html($html);
+  // $dompdf->render();
+  // $dompdf->stream($inventoryReportID, array("Attachment" => 0));
   ?>

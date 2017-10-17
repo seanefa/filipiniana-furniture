@@ -1,14 +1,21 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 $year = $_GET['year'];
 ?>
 <!DOCTYPE html>
 <head>
   <title><?php echo $orderID = $year?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php 
 $year = $_GET['year'];
@@ -203,9 +210,9 @@ $row = mysqli_fetch_assoc($res);
   </html>
 
   <?php
-  $html = ob_get_clean();
-  $dompdf = new DOMPDF();
-  $dompdf->load_html($html);
-  $dompdf->render();
-  $dompdf->stream($salesReportID, array("Attachment" => 0));
+  // $html = ob_get_clean();
+  // $dompdf = new DOMPDF();
+  // $dompdf->load_html($html);
+  // $dompdf->render();
+  // $dompdf->stream($salesReportID, array("Attachment" => 0));
   ?>
