@@ -22,7 +22,7 @@
             <h5 class="subtitle">Information</h5>
             <ul>
               <li><a href="about-us.php">About Us</a></li>
-              <li><a href="delivery-information.php">Delivery Information</a></li>
+              <li><a href="delivery-information.php">Delivery Rates</a></li>
               <li><a href="privacy-policy.php">Privacy Policy</a></li>
               <li><a href="terms-condition.php">Terms &amp; Conditions</a></li>
             </ul>

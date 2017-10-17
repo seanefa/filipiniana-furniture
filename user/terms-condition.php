@@ -25,16 +25,28 @@
           <h1 class="title">Terms & Condition</h1>
           <div class="row">
             <div class="col-sm-12">
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat.</p>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat. Suspendisse fermentum posuere lectus. Fusce vulputate nibh egestas orci. Aliquam lectus. Morbi eget dolor ullamcorper massa pellentesque sagittis. Morbi sit amet quam sed felis. Quisque vest ibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. </p>
-              <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu. </p>
-                <footer>Ipsum dolor sit</footer>
-              </blockquote>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Morbi sit amet quam sed felis. Quisque vest ibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem.</p>
+				<h4>Business Policies</h4>
+              	<ul>
+					<li>The customer must pay at least 50% of the total price of the furniture ordered for the production of furniture to begin.</li>
+					<li>On-hand furniture must be fully paid upon acquisition.</li>
+					<li>Furniture must be claimed, paid or delivered on or before the end of the contract.</li>
+					<li>A customer must pay a cancellation fee if he/she cancels his order that is already undergoing production. Cancellation fee varies.</li>
+					<li>If ordered furniture is not claimed and fully paid within 1 month (30 days) and 1 week after the contract’s expiration the management has the right to resell the furniture.</li>
+					<li>The price of a customized furniture will be decided by the management</li>
+					<li>The furniture will be replaced or repaired if found broken upon delivery.</li>
+					<li>Six months warranty is given to all furniture.</li>
+				</ul>
+				<h4>Business Requirements</h4>
+				<ul>
+					<li>The production of furniture will begin once the customer paid a down payment of at least 50% of the total amount of the ordered furniture.</li>
+					<li>A minimum storage fee of PHP 500 pesos will be added to the total balance if furniture is not claimed or is fully paid on or before the day the contract will end.</li>
+					<li>A detailed description and specification is needed for customized furniture.</li>
+					<li>Damage on furniture caused by natural disaster and by improper use or maintenance is not covered on the warranty.</li>
+					<li>Official receipt must be presented to acquire warranty.</li>
+					<li>A minimum fee of PHP 500 is needed to cancel an order that is already undergoing production.</li>
+				</ul>
             </div>
           </div>
-          <h3 class="text-center">Lorem ipsum dolor sit amet, con sectetuer adipiscing elit.</h3>
         </div>
         <!--Middle Part End -->
       </div>

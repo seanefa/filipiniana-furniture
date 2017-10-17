@@ -25,16 +25,53 @@
           <h1 class="title">Privacy Policy</h1>
           <div class="row">
             <div class="col-sm-12">
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat.</p>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Ut non erat. Suspendisse fermentum posuere lectus. Fusce vulputate nibh egestas orci. Aliquam lectus. Morbi eget dolor ullamcorper massa pellentesque sagittis. Morbi sit amet quam sed felis. Quisque vest ibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem. </p>
-              <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu. </p>
-                <footer>Ipsum dolor sit</footer>
-              </blockquote>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet, nunc. Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis, tempor vitae, est. Praesent vitae dui. Morbi id tellus. Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Maecenas eu enim in lorem scelerisque auctor. Morbi sit amet quam sed felis. Quisque vest ibulum massa. Nulla ornare. Nulla libero. Donec et mi eu massa ultrices scelerisque. Nullam ac nisi non eros gravida venenatis. Ut euismod, turpis sollicitudin lobortis pellentesque, libero massa dapibus dui, eu dictum justo urna et mi. Integer dictum est vitae sem.</p>
+				<h4 style="font-weight:bold;">What information do we collect?</h4>
+              <p >We collect information from you when you register on our site of fill out a form.<br><br>
+				When ordering or registering on our site, as appropriate, youmay be asked to enter your: name or e-mail address. You may, however, visit our site anonymously.</p>
+				<h4 style="font-weight:bold;">What do we use your information for?</h4>
+              <p >Any of the information we collect from you may be used in one or more of the following ways:</p>
+				<ul>
+					<li><b>To personalize your experience</b> (your information helps us to be better respond to your individual needs).</li>
+					<li><b>To improve our website</b> (we continually strive to improve our website offerings based on the information and feedback we receive from you).</li>
+					<li><b>To improve customer service</b> (your information helps us to more effectively respond to your customer service requests and support needs).</li>
+					<li><b>To process transactions</b> <br>
+						Your information, whether public or private, will not be sold, exchanged, transferred, or given to any other company for any reason whatsoever, without your consent, other than for the express purpose of delivering the purchased product or service requested by the customer.</li>
+					<li><b>To send periodic emails</b> <br> 
+						The email address you provide for order processing, may be used to send you information and updates pertaining to your order, in addition to receiving occasional company news, updates, related products or service information etc.<br>Note: if at anytime you would like to unsubscribe from receiving future emails, we include unsubscribe instructions at the bottom of each email.</li>
+					<li><b>To administer a promotion, survey, or other site feature.</b></li>
+				</ul>
+				<h4 style="font-weight:bold;">How do we protect your information?</h4>
+				<p>We implement a variety of security measures to maintain the safety of your personal information when you access your personal information.</p>
+				<h4 style="font-weight:bold;">Do we use cookies?</h4>
+				<p>We do not use cookies.</p>
+				<h4 style="font-weight:bold;">Online Privacy Policy</h4>
+				<p>This online privacy policy applies only to information collected through our website and not to information collected offline.</p>
+				<h4 style="font-weight:bold;">Your Consent</h4>
+				<p>By using our site, you consent to our privacy policy.</p>
+				<h4 style="font-weight:bold;">Changes to our Privacy Policy</h4>
+				<p>If we decide to change our privacy policy, we will send you an e-mail those changes to your provided e-mail address.</p>
+				<h4 style="font-weight:bold;">Contacting Us</h4>
+				<?php 
+				include "userconnect.php";
+				$companyinfo = "SELECT * from tblcompany_info";
+				if($datapool=$conn->query($companyinfo))
+				{
+					while($row=$datapool->fetch_assoc())
+					{
+				?>
+				<p>if there are any questions regarding this policy you may contact us using the information below</p>
+					<ul>
+						<li><b><?php echo "" . $row["comp_address"];?></b></li>
+						<li><b><?php echo "" . $row["comp_email"];?></b></li>
+						<li><b><?php echo "" . $row["comp_num"];?></b></li>
+					</ul>
+				<?php
+					}
+				}
+				$conn->close();
+				?>
             </div>
           </div>
-          <h3 class="text-center">Lorem ipsum dolor sit amet, con sectetuer adipiscing elit.</h3>
         </div>
         <!--Middle Part End -->
       </div>
