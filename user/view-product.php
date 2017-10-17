@@ -329,7 +329,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
               <?php
                 include "userconnect.php"; 
                 $ctr = 0;
-                $sql="SELECT * from tblproduct where productID != '$id' order by productID desc;";
+                $sql="SELECT * from tblproduct where productID != '$id' AND prodStat!='For customization' order by productID desc;";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){

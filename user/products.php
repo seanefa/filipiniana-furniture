@@ -73,7 +73,7 @@
 
 
                 $ctr = 0;
-                $sql="SELECT * from tblproduct order by productID desc;";
+                $sql="SELECT * from tblproduct WHERE prodStat!='For customization' order by productID desc;";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){

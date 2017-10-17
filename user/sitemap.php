@@ -38,7 +38,7 @@
 						  if($result->num_rows>0){
 							  while($row=$result->fetch_assoc()){
 							?>
-                        <li><a href=""><?php echo "" . $row["categoryName"];?></a></li>
+                        <li><a href="category.php?id=C<?php echo $row['categoryID']?>"><?php echo "" . $row["categoryName"];?></a></li>
 						  <?php
 							  }
 						  }
@@ -54,7 +54,7 @@
 							  if($result->num_rows>0){
 								  while($row=$result->fetch_assoc()){
 								?>
-							  <li><a href=""><?php echo "" . $row["typeName"];?></a></li>
+							  <li><a href="category.php?id=T<?php echo $row['typeID']?>"><?php echo "" . $row["typeName"];?></a></li>
 							  <?php
 								  }
 							  }
@@ -73,13 +73,7 @@
 					  if($result->num_rows>0){
 						  while($row=$result->fetch_assoc()){
 						?>
-                    <li><a href="category.php"><?php echo "" . $row[""];?></a>
-                      <ul>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                        <li><a href="category.php">New Sub Categories</a></li>
-                        <li><a href="category.php">Sub Categories New</a></li>
-                      </ul>
-                    </li>
+                    
 					  <?php
 						  }
 					  }
@@ -107,7 +101,7 @@
                     <li><a href="reviews.php">Reviews</a></li>
                   </ul>
                 </li>
-                <li><a href="cart.php">Shopping Cart</a></li>
+                <li><a href="">Shopping Cart</a></li>
                 <li><a href="checkout.php">Checkout</a></li>
                 <li><a href="search.php">Search</a></li>
                 <li><a href="#">Information</a>
