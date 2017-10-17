@@ -174,8 +174,10 @@
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="search" class="input-group">
             <div class="ui search">
+              <div class="form-group has-feedback">
   <form action="search.php" method="post">
-  <input class="prompt" type="text" name="search" placeholder="Search.." />
+  <input class="prompt form-control input-lg" type="text" name="search" placeholder="Search.." />
+  <i class="fa fa-search form-control-feedback" style="margin-top: -5px; font-size: 20px;"></i>
   <div class="results"></div>
 </div>
 </form>
