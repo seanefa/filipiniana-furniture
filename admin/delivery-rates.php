@@ -281,7 +281,6 @@ $(document).ready(function(){
                             <tr>
                               <th>Branch(From:)</th>
                               <th>Location(To:)</th>
-                              <!-- <th>Rate Type</th> -->
                               <th style="text-align: right;">Rate</th>
                               <th class="removeSort">Actions</th>
                             </tr>
@@ -296,7 +295,7 @@ $(document).ready(function(){
                                 if($row['delRateStatus']=="Listed"){
                                   $branch = bName($row['delBranchID']);
                                   echo('<tr><td>'.$branch.'</td>
-                                    <td>'.$row['delLocation'].'</td>]
+                                    <td>'.$row['delLocation'].'</td>
                                     <td style="text-align: right;"><small>&#8369;</small> '.$row['delRate'].' </td>'); 
                                     ?>
                                     <td>
