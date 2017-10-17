@@ -1,10 +1,20 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-session_start();
-include "dbconnect.php";
+// Include and initialize phpmailer class
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+include "session-check.php";
+include 'dbconnect.php';
+
+$sql = "SELECT * FROM tblcompany_info";
+$res = mysqli_query($conn,$sql);
+$rowcom = mysqli_fetch_assoc($res);
+$comemail = $rowcom["comp_email"];
+$comname = $rowcom["comp_name"];
 
 $user = $_SESSION["userID"];
 $date = date("Y-m-d");
@@ -16,21 +26,17 @@ if(mysqli_query($conn,$insertnews)){
 	while($row = mysqli_fetch_assoc($res)){
 		$name = $row["customerFirstName"] . " " . $row["customerMiddleName"] . " " . $row["customerLastName"];
 		$email = $row["customerEmail"];
-		// Include and initialize phpmailer class
-		require 'PHPMailer/src/Exception.php';
-		require 'PHPMailer/src/PHPMailer.php';
-		require 'PHPMailer/src/SMTP.php';
-
-		            // Create an instance of PHPMailer
+// Create an instance of PHPMailer
 		$mail = new PHPMailer();
 
-		            // Debugger
-		            //$mail->SMTPDebug = 2;
+// Debugger
+//$mail->SMTPDebug = 2;
 
-		  			// HTML email starts here
-		$subject    = "Announcement from Filipiniana Furnitures!";
-		$text_message    = "Hello " . $row['customerFirstName'] . $row['customerLastName'] . ", <br /><br /> $content";
-		$mail->AddEmbeddedImage('image/logo.png', 'logoimg');      
+// HTML email starts here
+		$subject    = "Announcement from $comname!";
+		$text_message = "Dear " . $row["customerFirstName"] . " " . $row["customerLastName"] . ",";
+
+		$mail->AddEmbeddedImage('plugins/images/'.$rowcom['comp_logo'].'', 'logoimg');    
 
 		$message  = "<html><body>";
 		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";
@@ -39,23 +45,32 @@ if(mysqli_query($conn,$insertnews)){
 		$message .= "<thead>
 		<tr height='80'>
 		<th colspan='4' style='background-color:#f5f5f5; border-bottom:dashed #DDBF5F 2px; font-family:Verdana, Geneva, sans-serif; color:#333; font-size:34px;' >
-		<img src='cid:logoimg' title='Filipiniana Furniture'/></th>
+		<img src='cid:logoimg' title='$comname'/></th>
 		</tr>
 		</thead>";
 		$message .= "<tbody>
 		<tr>
 		<td colspan='4' style='padding:15px;'>
-		<p style='font-size:25px; text-align:center;'>Newsletter from Filipiniana Furnitures!</p>
-		<p style='font-size:15px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . "</p>
+		<p style='font-size:16px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . "</p>
+		<p style='font-size:18px; text-align:center;'> Newsletter from $comname!</p>
+		<p style='font-size:17px; font-family:Verdana, Geneva, sans-serif;'>$content</p>
+		<p style='font-size:12px; font-family:Verdana, Geneva, sans-serif;'>Note: If you wish to unsubscribe to our newsletter, please change its settings in your account.</p>
 		</td>
 		</tr>
 
 		<tr height='80'>
-		<td colspan='4' align='center' style='background-color:#f5f5f5; border-top:dashed #DDBF5F 2px; font-size:24px; '>
-		<label>
-		<a href='https://www.facebook.com/BaraquielsFilipinianaFurniture/' target='_blank'><img style='vertical-align:middle' src='https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-facebook-m.png' /></a>
-		<a href='https://twitter.com/' target='_blank'><img style='vertical-align:middle' src='https://cdnjs.cloudflare.com/ajax/libs/webicons/2.0.0/webicons/webicon-twitter-m.png' /></a>
-		</label>
+		<td colspan='4' align='center' style='background-color:#f5f5f5; border-top:dashed #DDBF5F 2px; font-size:24px;''>
+		<div class='row'>
+		<div class='col-md-3'>
+		<p style='font-size:15px;'>".$rowcom['comp_name']."</p>
+		</div>
+		<div class='col-md-3'>
+		<p style='font-size:15px;'>".$rowcom['comp_address']."</p>
+		</div>
+		<div class='col-md-3'>
+		<p style='font-size:15px;'>Phone:&nbsp;".$rowcom['comp_num']."</p>
+		</div>
+		</div>
 		</td>
 		</tr>
 		</tbody>";
@@ -63,50 +78,49 @@ if(mysqli_query($conn,$insertnews)){
 		$message .= "</td></tr>";
 		$message .= "</table>";
 		$message .= "</body></html>";
-					// HTML email ends here
+// HTML email ends here
 
-		            // SMTP configuration
+// SMTP configuration
 		$mail->isSMTP();
 		$mail->Host = 'smtp.gmail.com';
 		$mail->SMTPAuth = true;
-		$mail->Username = 'filfurnitures@gmail.com';
+		$mail->Username = $comemail;
 		$mail->Password = 'filfurnitures01';
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
 
-		$mail->setFrom('filfurnitures@gmail.com', 'Filipiniana Furniture');
-		$mail->addReplyTo('filfurnitures@gmail.com', 'Filipiniana Furniture');
-		
-	 // Add a recipient
+		$mail->setFrom($comemail, $comname);
+		$mail->addReplyTo($comemail, $comname);
+
+// Add a recipient
 		$mail->addAddress($email);
 
-		        // Set email format to HTML
+// Set email format to HTML
 		$mail->isHTML(true);
 
-		        // Email subject
+// Email subject
 		$mail->Subject = $subject;
 
-	// Email body content
+// Email body content
 		$mail->Body = $message;
-		if($mail->send()){
-			// echo 'Message could not be sent.';
-			// echo 'Mailer Error: ' . $mail->ErrorInfo;
-			$newsletterID = mysqli_insert_id($conn);
-			$sql1 = "UPDATE tblnewsletter SET newsletterStatus = 'Sent' WHERE newsID = '$newsletterID'";
-			mysqli_query($conn,$sql1);
-			$_SESSION['createSuccess'] = 'Success';
-			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+// Send email
+		if(!$mail->send()){
+//echo 'Message could not be sent.';
+//echo 'Mailer Error: ' . $mail->ErrorInfo;
+			echo '<script>
+			alert("Oops, something went wrong!");
+			window.location.href = "dashboard.php";
+			</script>';
 		}
 		else{
-			// echo 'Message has been sent';
-			$_SESSION['actionFailed'] = 'Failed';
-			header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+			echo '<script>
+			alert("Newsletter succefully sent!");
+			window.location.href = "dashboard.php";
+			</script>';
 		}
 	}
 }
-
-else{
-	// $_SESSION['actionFailed'] = 'Failed';
-	// header( 'Location: ' . $_SERVER['HTTP_REFERER']);
+else {
+	header( "Location: dashboard.php" );
 }
 ?>
