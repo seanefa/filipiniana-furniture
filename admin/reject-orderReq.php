@@ -23,6 +23,7 @@ $res = mysqli_query($conn,$sql);
 $rowcom = mysqli_fetch_assoc($res);
 $comemail = $rowcom["comp_email"];
 $comname = $rowcom["comp_name"];
+$compassword = $rowcom["comp_emailPassword"];
 
 $updateSql = "UPDATE tblorders SET orderStatus = 'Rejected', orderRemarks =  '$reason' WHERE orderID = $id";
 if(mysqli_query($conn,$updateSql)){
@@ -102,7 +103,7 @@ if($flag>0){
 			$mail->Host = 'smtp.gmail.com';
 			$mail->SMTPAuth = true;
 			$mail->Username = $comemail;
-			$mail->Password = 'filfurnitures01';
+			$mail->Password = $compassword;
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = 587;
 

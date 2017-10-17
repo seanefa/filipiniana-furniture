@@ -15,6 +15,7 @@ $res = mysqli_query($conn,$sql);
 $rowcom = mysqli_fetch_assoc($res);
 $comemail = $rowcom["comp_email"];
 $comname = $rowcom["comp_name"];
+$compassword = $rowcom["comp_emailPassword"];
 
 $user = $_SESSION["userID"];
 $date = date("Y-m-d");
@@ -84,8 +85,8 @@ if(mysqli_query($conn,$insertnews)){
 		$mail->isSMTP();
 		$mail->Host = 'smtp.gmail.com';
 		$mail->SMTPAuth = true;
-		$mail->Username = $comemail;
-		$mail->Password = 'filfurnitures01';
+	    $mail->Username = $comemail;
+	    $mail->Password = $compassword;
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
 
