@@ -33,6 +33,34 @@
       $cresult = mysqli_query($conn,$csql);
       $crow = mysqli_fetch_assoc($cresult);
 
+
+      $sql1 = "SELECT * FROM tblprodsonpromo where prodPromoID = '$jsID';";
+                            $results = mysqli_query($conn, $sql1);
+
+                            if($results){
+                            $rows = mysqli_fetch_assoc($results);
+                            
+                              if($rows['onPromoStatus'] == 'Active'){
+                                $ids = $rows['prodPromoID'];
+                                
+                                $sql2 = "SELECT * FROM tblproduct where productID = '$ids';";
+                                $result2 = mysqli_query($conn,$sql2);
+                                $row2 = mysqli_fetch_assoc($result2);
+
+
+                                $typeID = $row2['prodTypeID'];
+
+                                $typeSql = "SELECT * from tblfurn_type where typeID = '$typeID'";
+                              $typeresult = mysqli_query($conn,$typeSql);
+                              $typerow = mysqli_fetch_assoc($typeresult);
+                              echo ('<input value="1" id="promoChecker" type="hidden"/>');
+                            
+                            }
+                          }else{
+                            echo ('<input value="0" id="promoChecker" type="hidden"/>');
+                          }
+
+
       ?>
       <div class="modal-body">
         <div class="descriptions">
@@ -133,6 +161,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
         </div>
 

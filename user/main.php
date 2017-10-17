@@ -52,7 +52,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo ('<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><div class="ribbon left"><span style="font-weight:bolder; font-family:inherit;">ON-PROMO</span></div><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -164,6 +164,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['promoStatus'] == "Active"){
                     echo '<div class="product-thumb clearfix hovereffect card">
+                    
                     <div class="image"><a href="view-promo.php?id='.$row['promoID'].'"><img style="height:280px; width:200;" src="../admin/plugins/promos/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                       <h4 style="text-transform:uppercase;"><a href="view-promo.php">'.$row['promoName'].'</a></h4>
                     <div class="overlay"> 

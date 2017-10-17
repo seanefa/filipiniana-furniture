@@ -247,6 +247,7 @@ if(logcheck != 'yes'){
 
     },
     clickOnAddToCart: function($addTocart){
+      
       goToCartIcon($addTocart);
     },
     getDiscountPrice: function(products) {
