@@ -170,12 +170,13 @@
         <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div id="logo"><a href="home.php"><img class="img-responsive" src="image/logo.png" title="Furniture Shop" alt="Furniture Shop" /></a></div>
         </div>
-        <!-- Logo End -->
-        <!-- Search Start-->
+        
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="search" class="input-group">
-            <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-            <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+            <div class="ui search">
+  <input class="prompt" type="text" placeholder="Search GitHub...">
+  <div class="results"></div>
+</div>
           </div>
         </div>
         <!-- Search End-->
