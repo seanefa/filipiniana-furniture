@@ -351,7 +351,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
                 $ctr++;
               }
               /*
-<button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
+                <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
               */
               ?>
             </div>

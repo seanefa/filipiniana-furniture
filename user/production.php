@@ -72,13 +72,14 @@
 															include "userconnect.php";
 															$down = 0;
 															$bal = 0;
-															$sql = "SELECT * FROM tblorders a, tblcustomer b, tbluser c WHERE c.userCustID = b.customerID and b.customerID = a.custOrderID and c.userID = '$cID' and orderStatus != 'Finished' and orderStatus!='Archived'";
+															$sql = "SELECT * FROM tblorders a, tblcustomer b, tbluser c WHERE c.userCustID = b.customerID and b.customerID = a.custOrderID and c.userID = '$cID' and orderStatus = 'Ongoing'";
 															$res = mysqli_query($conn,$sql);
 															while($trow = mysqli_fetch_assoc($res)){
+																$rid = str_pad($trow['orderID'], 6, '0', STR_PAD_LEFT);
 																$date = date_create($trow['dateOfReceived']);
 																$date = date_format($date,"F d, Y");
 																echo '<tr>
-																<td>'.$date.'</td>
+																<td>'.$rid.'</td>
 																<td>'.$date.'</td>
 																<td style="text-align:right">'.$trow['orderStatus'].'</td>
 																<td style="text-align:right"><button type="button" class="btn btn-primary" onclick="loadProdInfo('.$trow['orderID'].')" style="text-align:center;color:white;"><span class=" ti-receipt"></span> View </button></td>
@@ -92,6 +93,9 @@
 											<div class="row">
 												<div class="col-md-12">
 													<h2 style="margin-left:2%;">Production Information</h2>
+													<br>
+													<br>
+													<br>
 													<div id="displayProd">
 
 													</div>

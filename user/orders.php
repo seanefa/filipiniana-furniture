@@ -45,6 +45,7 @@
 											<th>Placed On</th>
 											<th>Total</th>
 											<th>Status</th>
+											<th>View Order Details</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -65,20 +66,35 @@
 										
 
 										while($srow = mysqli_fetch_assoc($sresult)){
-
+											$rid = str_pad($srow['orderID'], 6, '0', STR_PAD_LEFT);
+											$oid = $srow['orderID'];
+											$stat = $srow['orderStatus']; 
+											if($stat == 'WFA'){ 
+												$stat = "Waiting for Approval";
+											}
+											else if($stat == 'WFP')
+											{ 
+												$stat = "Waiting for Payment";
+											}
 
 										?>
 
 										<tr>
-											<td style="color:#1A9CB7;"><?php echo $srow['orderID'];?></td>
+											<td style="color:#1A9CB7;"><?php echo $rid;?></td>
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
-											<td><?php $stat = $srow['orderStatus']; if($stat == 'WFA'){ $stat = "Waiting for Approval"; echo $stat; }else{ echo $stat; };?></td>
+											<td><?php echo $stat;;?></td>
 											<td>
 												<?php echo '<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #viewInfo">View</a>';
 												?>
 											</td>
-											<td><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a> <a href="" class="pull-right" style="color:#1A9CB7;">RETURN</a></td>
+
+											<td></td>
+											<?php
+											if($stat=='Waiting for Approval'){
+												echo '<td><a href="cancel-ordReq.php?id='.$oid.'" style="color:#1A9CB7;">CANCEL REQUEST</a></td>';
+											}
+											?>
 										</tr>
 
 										<?php
