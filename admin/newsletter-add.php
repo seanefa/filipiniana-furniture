@@ -29,7 +29,7 @@ if(mysqli_query($conn,$insertnews)){
 
 		  			// HTML email starts here
 		$subject    = "Announcement from Filipiniana Furnitures!";
-		$text_message    = "Hello" . $row['customerFirstName'] . $row['customerLastName'] . ", <br /><br /> $content";
+		$text_message    = "Hello " . $row['customerFirstName'] . $row['customerLastName'] . ", <br /><br /> $content";
 		$mail->AddEmbeddedImage('image/logo.png', 'logoimg');      
 
 		$message  = "<html><body>";
@@ -45,7 +45,7 @@ if(mysqli_query($conn,$insertnews)){
 		$message .= "<tbody>
 		<tr>
 		<td colspan='4' style='padding:15px;'>
-		<p style='font-size:25px; text-align:center;'>Thank you for registering on our site!</p>
+		<p style='font-size:25px; text-align:center;'>Newsletter from Filipiniana Furnitures!</p>
 		<p style='font-size:15px; font-family:Verdana, Geneva, sans-serif;'>" . $text_message . "</p>
 		</td>
 		</tr>
