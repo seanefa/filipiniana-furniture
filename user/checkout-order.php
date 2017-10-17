@@ -153,7 +153,7 @@ $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `
 }
 
 function unitPrice($id){
-  include "dbconnect.php";
+  include "userconnect.php";
   if(strpos($id,"Promo")){
     return 0;
   }

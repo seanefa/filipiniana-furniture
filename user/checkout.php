@@ -595,7 +595,7 @@ $(document).ready(function(){
                                     type: 'post',
                                     url: 'display-promo.php',
                                     data: {
-                                      id: promoid,
+                                      id: promoid, 
                                     },
                                     success: function (response) {
                                       if(response != 'oke'){
@@ -836,10 +836,10 @@ $(document).ready(function(){
                                 <td class="text-right" colspan="4"><strong>Total Quantity:</strong></td>
                                 <td class="text-right" id="ttq"></td>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                 <td class="text-right" colspan="4"><strong>Value Added Tax:</strong></td>
                                 <td class="text-right" id="vat">&#8369;</td>
-                              </tr>
+                              </tr> -->
                               <tr>
                                 <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
                                 <td class="text-right" id="stt">&#8369;</td>
