@@ -30,7 +30,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <img height="55px" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
+          <img height="55px" src="plugins/logo/<?php echo $row['comp_logo'];?>"/>
         </div>
       </div>
     </div>

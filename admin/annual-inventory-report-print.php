@@ -1,14 +1,21 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 $year = $_GET['year'];
 ?>
 <!DOCTYPE html>
 <head>
   <title><?php echo $orderID = $year?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php 
 $year = $_GET['year'];
@@ -22,7 +29,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <img height="55px" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
+          <img height="55px" src="plugins/logo/<?php echo $row['comp_logo'];?>"/>
         </div>
       </div>
     </div>
@@ -69,38 +76,32 @@ $row = mysqli_fetch_assoc($res);
   $tpriceArray = array();
   $tpriceArray = getAllYeardata();
 
-  $sql = "SELECT *,SUM(b.orderQuantity) as quan FROM tblproduct a, tblorder_request b, tblorders c WHERE a.productID = b.orderProductID and c.orderID = b.tblOrdersID and year(c.dateOfReceived) = '$y' GROUP BY b.orderProductID";
+    $sql = "SELECT *,SUM(b.pph_matQuan) as quan FROM tblmat_var d, tblmat_inventory a, tblprodphase_materials b, 
+tblproduction_phase c, tblmaterials e WHERE a.matVariantID = d.mat_varID and d.mat_varID = 
+b.pph_matDescID and b.pphID = c.prodHistID and year(c.prodDateStart) = '$y' and e.materialID = d.materialID;";
   $result = mysqli_query($conn, $sql);
   echo "<div class='table-responsive'>
     <table class='table color-bordered-table muted-bordered-table reportsDataTable display' id='reportsOut'>
     <thead>
   <tr>
-  <th>Product ID</th>
-  <th>Date</th>
-  <th>Product Name</th>
   <th>Material ID</th>
-  <th>Starting Quantity</th>
-  <th>Used(Till Now)</th>
-  <th>Available</th>
-  <th>Status</th>
+  <th>Material Description</th>
+  <th style='text-align:right'>Starting Quantity</th>
+  <th style='text-align:right'>Used (Till Now)</th>
+  <th style='text-align:right;'>Available</th>
   </tr>
   </thead>
   <tbody>";
   while ($row = mysqli_fetch_assoc($result)){
-    $date = date_create($row['dateOfReceived']);
-    $date = date_format($date,"F d,Y");
-    $prodID = str_pad($row['productID'], 6, '0', STR_PAD_LEFT);
-    $total = $row['quan'] * $row['productPrice'];
-    $tQuan += $row['quan'];
-    $tPrice += $total;
-    echo ('<tr><td>'.$prodID.'</td>
-      <td>'.$date.'</td>
-      <td>'.$row['productName'].'</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    $mID = str_pad($row['mat_varID'], 6, '0', STR_PAD_LEFT);
+    $start = $row['matVarQuantity'] + $row['quan'];
+    $matName = $row['mat_varDescription'] . "/ " . $row['materialName'];
+    echo ('<tr>
+      <td style="text-align:left;">'.$mID.'</td>
+      <td style="text-align:left;">'.$matName.'</td>
+      <td style="text-align:right;">'.$start.'</td>
+      <td style="text-align:right;">'.$row['quan'].'</td>
+      <td style="text-align:right;">'.$row['matVarQuantity'].'</td>
       </tr>'); 
   $ctr++;
   }
@@ -178,20 +179,6 @@ $ctr = 0;
     ?>
 
     <br>
-
-    <?php
-    $down = 0;
-    $bal = 0;
-    $sql = "SELECT * FROM tblinvoicedetails a, tblpayment_details b, tblorders c WHERE c.orderID = a.invorderID and a.invoiceID = b.invID and c.orderID = '$year'";
-    $res = mysqli_query($conn,$sql);
-    $tpay = 0;
-    while($trow = mysqli_fetch_assoc($res)){
-      $tpay = $tpay + $trow['amountPaid'];
-    }
-    $down = $tpay;
-    $bal = $tPrice - $down;
-    ?>
-
     <div class="row">
       <div class="col-md-6">
         <p><?php 
@@ -214,9 +201,9 @@ $ctr = 0;
   </html>
 
   <?php
-  $html = ob_get_clean();
-  $dompdf = new DOMPDF();
-  $dompdf->load_html($html);
-  $dompdf->render();
-  $dompdf->stream($inventoryReportID, array("Attachment" => 0));
+  // $html = ob_get_clean();
+  // $dompdf = new DOMPDF();
+  // $dompdf->load_html($html);
+  // $dompdf->render();
+  // $dompdf->stream($inventoryReportID, array("Attachment" => 0));
   ?>

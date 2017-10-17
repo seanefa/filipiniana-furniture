@@ -202,7 +202,6 @@ $(document).ready(function(){
                     <nav>
                       <ul>
                         <li><h3><a href="#myChart" class="ti-layout"><span> Table View</span></a></h3></li>
-                        <li><h3><a href="#myTable" class="ti-bar-chart"><span> Chart View</span></a></h3></li>
                       </ul>
                     </nav>
                     <div class="content-wrap text-center" style="margin-top: -10px;">

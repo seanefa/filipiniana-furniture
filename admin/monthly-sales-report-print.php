@@ -1,8 +1,8 @@
 <?php
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-ob_start();
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
+// require_once "dompdf/autoload.inc.php";
+// use Dompdf\Dompdf;
+// ob_start();
 
 $month = $_GET['month'];
 $year = $_GET['year'];
@@ -51,6 +51,13 @@ $monthYear = $month . $year;
 <head>
   <title><?php echo $orderID = $monthYear?></title>
   <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    window.print();
+    setTimeout(window.close, 0);
+  });
+  </script>
 </head>
 <?php
 
@@ -104,7 +111,7 @@ $row = mysqli_fetch_assoc($res);
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div style="text-align: center;">
-          <img height="55px" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
+          <img height="55px" src="plugins/logo/<?php echo $row['comp_logo'];?>"/>
         </div>
       </div>
     </div>
@@ -247,9 +254,9 @@ $row = mysqli_fetch_assoc($res);
   </html>
 
   <?php
-  $html = ob_get_clean();
-  $dompdf = new DOMPDF();
-  $dompdf->load_html($html);
-  $dompdf->render();
-  $dompdf->stream($salesReportID, array("Attachment" => 0));
+  // $html = ob_get_clean();
+  // $dompdf = new DOMPDF();
+  // $dompdf->load_html($html);
+  // $dompdf->render();
+  // $dompdf->stream($salesReportID, array("Attachment" => 0));
   ?>
