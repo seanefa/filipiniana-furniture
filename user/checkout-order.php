@@ -91,7 +91,8 @@ if($isBool=="existing"){ //EXISTING
     $P_ctr = 0;
     $orderid = mysqli_insert_id($conn);
     echo "<br>orderID: " . $orderid;
-      foreach($selected as $str) {
+    
+     foreach($selected as $str) {
       $unitPrice = unitPrice($str);
       $prodID = $str;
       if(substr($str, 0,5)=='Promo'){
@@ -108,7 +109,6 @@ if($isBool=="existing"){ //EXISTING
       $ctr++;
     }
     
-
    foreach($P_selected as $P_str) {
       $unitPrice = packPrice($P_str);
 
@@ -149,7 +149,8 @@ $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `
     $_SESSION['actionFailed'] = 'Failed';
   header( 'Location: home.php');
   }
-
+}
+}
 
 function unitPrice($id){
   include "dbconnect.php";
@@ -167,6 +168,7 @@ function unitPrice($id){
 }
   
 }
+
 function packPrice($id){
   include "userconnect.php";
   $price = 0;
