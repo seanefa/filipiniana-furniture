@@ -112,7 +112,7 @@ if($isBool == "new"){
         $prodID = str_replace('Promo', '', $str);
       }
 
-      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample','".$selectedQuant[$ctr]."','Active')"; 
+      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample','".$selectedQuant[$ctr]."','Active')";
       mysqli_query($conn,$sql1);
 
       $orReqID = mysqli_insert_id($conn);
@@ -121,18 +121,18 @@ if($isBool == "new"){
       //echo "<br>sql1: " . $sql1;
       $ctr++;
     }
-    
+
     foreach($P_selected as $P_str) {
       $unitPrice = packPrice($P_str);
 
-     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
+     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')";
      if(mysqli_query($conn,$sql1)){
 
       $orReqID = mysqli_insert_id($conn);
       $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$P_selectedQuant[$P_ctr]."');";
       mysqli_query($conn,$sql3);
       $P_ctr++;
-      
+
       $orderReqID = mysqli_insert_id($conn);
       $sql1 = "SELECT * FROM tblpackages a, tblpackage_inclusions b, tblproduct c WHERE c.productID = b.product_incID and b.package_incID = a.packageID and a.packageID = '$P_str'";
       $res1 = mysqli_query($conn,$sql1);
@@ -227,7 +227,7 @@ else if($isBool=="existing"){ //EXISTING
         $prodID = str_replace('Promo', '', $str);
       }
 
-      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
+      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')";
       mysqli_query($conn,$sql1);
 
       $orReqID = mysqli_insert_id($conn);
@@ -240,7 +240,7 @@ else if($isBool=="existing"){ //EXISTING
     foreach($P_selected as $P_str) {
       $unitPrice = packPrice($P_str);
 
-     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
+     $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')";
      if(mysqli_query($conn,$sql1)){
 
       $orReqID = mysqli_insert_id($conn);
@@ -329,7 +329,7 @@ function unitPrice($id){
     return $price;
   }
 }
-  
+
 }
 
 function packPrice($id){
