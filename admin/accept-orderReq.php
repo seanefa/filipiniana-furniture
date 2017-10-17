@@ -17,6 +17,7 @@ $date = $_POST['pidate'];
 
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "OR". $or;
+
 $sql = "SELECT * FROM tblcompany_info";
 $res = mysqli_query($conn,$sql);
 $rowcom = mysqli_fetch_assoc($res);
@@ -280,7 +281,7 @@ if(mysqli_query($conn,$updateSql)){
       }
       else{
         echo '<script>
-        alert("Customization request successfully rejected!");
+        alert("Order Request successfully accepted!");
         window.location.href = "dashboard.php";
         </script>';
       }

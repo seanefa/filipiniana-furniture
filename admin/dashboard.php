@@ -300,7 +300,7 @@ function getuserID($id){
                   </tr>
                 </thead>
                 <tbody>
-                  <?php  $sql = "SELECT * FROM tblcustomize_request WHERE customStatus='WFA' order by customizedID;";
+                  <?php  $sql = "SELECT * from tbluser a, tblcustomize_request b, tblcustomer c WHERE b.tblcustomerID = a.userID and a.userCustID = c.customerID and customStatus = 'WFA' order by customizedID";
 
                   $result = mysqli_query($conn, $sql);
                   if($result){
@@ -309,10 +309,11 @@ function getuserID($id){
                       $orderID = str_pad($row['customizedID'], 6, '0', STR_PAD_LEFT); //format ng display ID
                       $date = date_create($row['dateRequest']);
                       $date = date_format($date,"F d, Y");
+                      $name = $row["customerFirstName"] . " " . $row["customerMiddleName"] . " " . $row["customerLastName"];
                       ?>
                       <tr>
                         <td><?php echo $orderID;?></td>
-                        <td><?php echo getName($row['tblcustomerID']);?></td>
+                        <td><?php echo $name;?></td>
                         <td><?php echo $date;?></td>
                         <td>
 
