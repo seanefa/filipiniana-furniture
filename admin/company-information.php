@@ -136,16 +136,22 @@ $(document).ready(function(){
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <div class="form-group">
                      <label class="control-label">Number</label><span id="x" style="color:red"> *</span>
                       <input type="text" id="username" class="form-control" style="text-align:right" data-mask="+63 (999) 999-9999" name="number" value="<?php echo $row['comp_num'];?>" required><span id="message"></span>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <div class="form-group">
                 <label class="control-label">E-Mail</label><span id="x" style="color:red"> *</span>
                       <input type="email" id="jobName" class="form-control" name="email" value="<?php echo $row['comp_email'];?>">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                <label class="control-label">E-Mail Password</label><span id="x" style="color:red"> *</span>
+                      <input type="password" id="epass" class="form-control" name="epass" value="<?php echo $row['comp_emailPassword'];?>">
                     </div>
                   </div>
                 </div>

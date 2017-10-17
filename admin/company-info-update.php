@@ -7,6 +7,7 @@ $address = $_POST['address'];
 $num = $_POST['number'];
 $abt=$_POST['about'];
 $email=$_POST['email'];
+$emailpass=$_POST['epass'];
 $pic = "";
 
 $exist_image = $_POST["exist_image"];
@@ -40,7 +41,7 @@ if($pic=="")
 
 if($row == 0)
 {
-	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES ('1', '$pic', '$name', '$num', '$address', '$email', '$abt')";
+	$exec = "INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`, 'comp_emailPassword') VALUES ('1', '$pic', '$name', '$num', '$address', '$email', '$abt', '$emailpass')";
 }
 else
 {
@@ -48,7 +49,7 @@ else
   {
   	$pic = $exist_image;
   }
-  $exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_email`='$email', `comp_address`='$address', `comp_about`='$abt' WHERE `comp_recID`=1";
+  $exec = "UPDATE `tblcompany_info` SET `comp_logo`='$pic', `comp_name`='$name', `comp_num`='$num', `comp_email`='$email', `comp_address`='$address', `comp_about`='$abt', `comp_emailPassword`='$emailpass' WHERE `comp_recID`=1";
 }
 
 if(mysqli_query($conn,$exec))
