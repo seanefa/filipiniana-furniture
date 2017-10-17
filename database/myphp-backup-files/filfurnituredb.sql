@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 04:54 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Generation Time: Oct 16, 2017 at 05:59 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -148,16 +146,15 @@ CREATE TABLE `tblcompany_info` (
   `comp_num` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `comp_email` varchar(45) CHARACTER SET latin1 NOT NULL,
   `comp_address` varchar(150) CHARACTER SET latin1 NOT NULL,
-  `comp_about` varchar(450) CHARACTER SET latin1 DEFAULT NULL,
-  `comp_emailPassword` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+  `comp_about` varchar(450) CHARACTER SET latin1 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tblcompany_info`
 --
 
-INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`, `comp_emailPassword`) VALUES
-(1, 'filipiniana-furniture-logo.png', 'Filipiniana Furnitures', '(046) 417 8418', 'filfurnitures@gmail.com', 'Aguinaldo Hi-way, Talaba II, Bacoor, Cavite', 'A furniture shop', 'filfurnitures01');
+INSERT INTO `tblcompany_info` (`comp_recID`, `comp_logo`, `comp_name`, `comp_num`, `comp_email`, `comp_address`, `comp_about`) VALUES
+(1, 'filipiniana-furniture-logo.png', 'Filipiniana Furnitures', '63', 'filipiniana_furn@gmail.com', 'Aguinaldo Hi-way, Talaba II, Bacoor, Cavite', 'A furniture shop');
 
 -- --------------------------------------------------------
 
@@ -986,16 +983,15 @@ CREATE TABLE `tblmat_deductdetails` (
   `mat_deductID` int(11) NOT NULL,
   `mat_inventoryID` int(11) NOT NULL,
   `mat_deductQuantity` int(11) NOT NULL,
-  `mat_deductRemarks` varchar(45) NOT NULL,
-  `mat_deductDate` date NOT NULL
+  `mat_deductRemarks` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblmat_deductdetails`
 --
 
-INSERT INTO `tblmat_deductdetails` (`mat_deductID`, `mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`, `mat_deductDate`) VALUES
-(1, 1, 16, 'Hanu', '0000-00-00');
+INSERT INTO `tblmat_deductdetails` (`mat_deductID`, `mat_inventoryID`, `mat_deductQuantity`, `mat_deductRemarks`) VALUES
+(1, 1, 16, 'Hanu');
 
 -- --------------------------------------------------------
 
@@ -2789,433 +2785,361 @@ ALTER TABLE `tbluser`
 --
 ALTER TABLE `tblattributes`
   MODIFY `attributeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `tblattribute_measure`
 --
 ALTER TABLE `tblattribute_measure`
   MODIFY `amID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `tblbank_accounts`
 --
 ALTER TABLE `tblbank_accounts`
   MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblbranches`
 --
 ALTER TABLE `tblbranches`
   MODIFY `branchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblcheck_details`
 --
 ALTER TABLE `tblcheck_details`
   MODIFY `check_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblcompany_info`
 --
 ALTER TABLE `tblcompany_info`
   MODIFY `comp_recID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
   MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
   MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblcust_req_images`
 --
 ALTER TABLE `tblcust_req_images`
   MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tbldelivery`
 --
 ALTER TABLE `tbldelivery`
   MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tbldelivery_history`
 --
 ALTER TABLE `tbldelivery_history`
   MODIFY `delHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tbldelivery_rates`
 --
 ALTER TABLE `tbldelivery_rates`
   MODIFY `delivery_rateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `tbldelivery_status`
 --
 ALTER TABLE `tbldelivery_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tbldesign_phase`
 --
 ALTER TABLE `tbldesign_phase`
   MODIFY `d_phaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- AUTO_INCREMENT for table `tbldiscounts`
 --
 ALTER TABLE `tbldiscounts`
   MODIFY `discountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tbldownpayment`
 --
 ALTER TABLE `tbldownpayment`
   MODIFY `downpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblemployee`
 --
 ALTER TABLE `tblemployee`
   MODIFY `empID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblemp_job`
 --
 ALTER TABLE `tblemp_job`
   MODIFY `emp_jobID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblfabrics`
 --
 ALTER TABLE `tblfabrics`
   MODIFY `fabricID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tblfabric_pattern`
 --
 ALTER TABLE `tblfabric_pattern`
   MODIFY `f_patternID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `tblfabric_texture`
 --
 ALTER TABLE `tblfabric_texture`
   MODIFY `textureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
 --
 -- AUTO_INCREMENT for table `tblfabric_type`
 --
 ALTER TABLE `tblfabric_type`
   MODIFY `f_typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `tblframeworks`
 --
 ALTER TABLE `tblframeworks`
   MODIFY `frameworkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `tblframe_design`
 --
 ALTER TABLE `tblframe_design`
   MODIFY `designID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `tblframe_material`
 --
 ALTER TABLE `tblframe_material`
   MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblfurn_category`
 --
 ALTER TABLE `tblfurn_category`
   MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `tblfurn_design`
 --
 ALTER TABLE `tblfurn_design`
   MODIFY `designID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tblfurn_type`
 --
 ALTER TABLE `tblfurn_type`
   MODIFY `typeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
 --
 -- AUTO_INCREMENT for table `tblinvoicedetails`
 --
 ALTER TABLE `tblinvoicedetails`
   MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
 --
 -- AUTO_INCREMENT for table `tbljobs`
 --
 ALTER TABLE `tbljobs`
   MODIFY `jobID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
   MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
-
 --
 -- AUTO_INCREMENT for table `tblmaterials`
 --
 ALTER TABLE `tblmaterials`
   MODIFY `materialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT for table `tblmat_actions`
 --
 ALTER TABLE `tblmat_actions`
   MODIFY `mat_actionsID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblmat_deductdetails`
 --
 ALTER TABLE `tblmat_deductdetails`
   MODIFY `mat_deductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblmat_deliveries`
 --
 ALTER TABLE `tblmat_deliveries`
   MODIFY `mat_deliveriesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `tblmat_deliverydetails`
 --
 ALTER TABLE `tblmat_deliverydetails`
   MODIFY `del_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- AUTO_INCREMENT for table `tblmat_inventory`
 --
 ALTER TABLE `tblmat_inventory`
   MODIFY `mat_inventoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `tblmat_type`
 --
 ALTER TABLE `tblmat_type`
   MODIFY `matTypeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `tblmat_var`
 --
 ALTER TABLE `tblmat_var`
   MODIFY `mat_varID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
-
 --
 -- AUTO_INCREMENT for table `tblmodeofpayment`
 --
 ALTER TABLE `tblmodeofpayment`
   MODIFY `modeofpaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tblnewsletter`
 --
 ALTER TABLE `tblnewsletter`
   MODIFY `newsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `tblnotification`
 --
 ALTER TABLE `tblnotification`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblonhand`
 --
 ALTER TABLE `tblonhand`
   MODIFY `onHandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
   MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
 --
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
 ALTER TABLE `tblorder_actions`
   MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
 --
 ALTER TABLE `tblorder_customization`
   MODIFY `orCustID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblorder_request`
 --
 ALTER TABLE `tblorder_request`
   MODIFY `order_requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
 --
 -- AUTO_INCREMENT for table `tblorder_requestcnt`
 --
 ALTER TABLE `tblorder_requestcnt`
   MODIFY `orreq_cntID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tblorder_return`
 --
 ALTER TABLE `tblorder_return`
   MODIFY `returnID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tblpackage_inclusions`
 --
 ALTER TABLE `tblpackage_inclusions`
   MODIFY `package_inclusionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblpackage_orderreq`
 --
 ALTER TABLE `tblpackage_orderreq`
   MODIFY `por_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblpayment_details`
 --
 ALTER TABLE `tblpayment_details`
   MODIFY `payment_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
 --
 -- AUTO_INCREMENT for table `tblpenalty`
 --
 ALTER TABLE `tblpenalty`
   MODIFY `penaltyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tblphases`
 --
 ALTER TABLE `tblphases`
   MODIFY `phaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `tblprodphase_materials`
 --
 ALTER TABLE `tblprodphase_materials`
   MODIFY `pph_matID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- AUTO_INCREMENT for table `tblprodsonpromo`
 --
 ALTER TABLE `tblprodsonpromo`
   MODIFY `onpromoID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblproduct`
 --
 ALTER TABLE `tblproduct`
   MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT for table `tblproduction`
 --
 ALTER TABLE `tblproduction`
   MODIFY `productionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
 --
 -- AUTO_INCREMENT for table `tblproduction_phase`
 --
 ALTER TABLE `tblproduction_phase`
   MODIFY `prodHistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
-
 --
 -- AUTO_INCREMENT for table `tblprod_images`
 --
 ALTER TABLE `tblprod_images`
   MODIFY `prodImageID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblprod_info`
 --
 ALTER TABLE `tblprod_info`
   MODIFY `prodInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `tblprod_materials`
 --
 ALTER TABLE `tblprod_materials`
   MODIFY `p_matID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT for table `tblpromos`
 --
 ALTER TABLE `tblpromos`
   MODIFY `promoID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblpull_out`
 --
 ALTER TABLE `tblpull_out`
   MODIFY `pulloutID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tblrelease`
 --
 ALTER TABLE `tblrelease`
   MODIFY `releaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `tblrelease_details`
 --
 ALTER TABLE `tblrelease_details`
   MODIFY `rel_detailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tblreview`
 --
 ALTER TABLE `tblreview`
   MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
   MODIFY `supplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT for table `tblunitofmeasure`
 --
 ALTER TABLE `tblunitofmeasure`
   MODIFY `unID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
 --
 -- AUTO_INCREMENT for table `tblunitofmeasurement_category`
 --
 ALTER TABLE `tblunitofmeasurement_category`
   MODIFY `uncategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
 --
 -- AUTO_INCREMENT for table `tblunit_cat`
 --
 ALTER TABLE `tblunit_cat`
   MODIFY `unitcatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- Constraints for dumped tables
 --
@@ -3380,7 +3304,6 @@ ALTER TABLE `tblreview`
   ADD CONSTRAINT `tblreview_ibfk_1` FOREIGN KEY (`tblcustomerID`) REFERENCES `tblcustomer` (`customerID`),
   ADD CONSTRAINT `tblreview_ibfk_2` FOREIGN KEY (`tblproductID`) REFERENCES `tblproduct` (`productID`),
   ADD CONSTRAINT `tblreview_ibfk_3` FOREIGN KEY (`tblpackageID`) REFERENCES `tblpackages` (`packageID`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
