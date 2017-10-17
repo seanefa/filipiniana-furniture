@@ -305,7 +305,7 @@ Default</label>
   <div class="pull-right">
     <span id="messageall" style="color: red;"></span>
     <input type="checkbox" value="1" name="agree" id="_cbxPolicy" required>
-    &nbsp;I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a> &nbsp;
+    &nbsp;I have read and agree to the <a class="agree" href="privacy-policy.php" target="_blank"><b>Privacy Policy</b></a> &nbsp;
     <input onclick="validate()" class="btn btn-primary" value="Register" name="register" id="_btnRegister">
   </div>
 </div>

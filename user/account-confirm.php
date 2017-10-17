@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>404 - Filipiniana Furniture Shop</title>
+<title>Account Confirmation - Filipiniana Furniture Shop</title>
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>
@@ -17,8 +17,8 @@
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
           <p class="text-center lead">Your account is not yet Confirmed!<br>
-            Confirm your email first then log in! </p>
-          <div class="buttons text-center"> <a class="btn btn-primary btn-lg" href="home.php">Continue</a> </div>
+            Confirm your email first then log in. </p>
+          <div class="buttons text-center"> <a class="btn btn-primary btn-lg" href="login.php">Continue</a> </div>
         </div>
         <!--Middle Part End -->
       </div>
