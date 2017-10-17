@@ -23,6 +23,7 @@ $data = "SELECT * from tbluser where userID = '$id';";
 $result = mysqli_query($conn,$data);
 $row = mysqli_fetch_assoc($result);
 $customerID = $row['userCustID'];
+$orderID = str_pad($oi, 6, '0', STR_PAD_LEFT);
 
 if($_FILES["receiptphoto"]["error"] > 0){
 	
@@ -32,9 +33,12 @@ else{
 	$photo = date("Y-m-d") . time() . ".png";
 }
 
+$logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('Payment Proof', 'New', '" . date("Y-m-d") . "', 'New proof of payment for #OR$orderID', '$id')";
+
 $sendproofofpayment = "INSERT into `tblnotification`(`tblcustomerID`,`tblorderID`, `amountPaid`, `datePaid`, `bankBranch`, `proofPicture`, `notifStatus`) values('$customerID','$oi', '$ap', '$dp', '$bc', '$photo','Pending')";
 
 if($conn->query($sendproofofpayment) === true){
+	$conn->query($logSQL);
 	header("Location: account.php");
 }
 else{
