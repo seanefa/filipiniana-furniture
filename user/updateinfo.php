@@ -10,17 +10,17 @@
   <script type="text/javascript" src="js/myScript.js"></script>
   <?php include"css.php";?>
 </head>
-<?php 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (isset($_POST['register'])) { //user registering
-        
+
         require 'process-registration.php';
     }
 }
 ?>
 <body style="background: #ffffff;">
-  <?php 
+  <?php
   include "header.php";
   if(!isset($_SESSION["userID"]))
   {

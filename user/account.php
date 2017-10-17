@@ -11,7 +11,7 @@
 	<?php include"css.php";?>
 </head>
 <body style="background: #ffffff;">
-	<?php 
+	<?php
 	include "header.php";
 	if(!isset($_SESSION["userID"]))
 	{
@@ -85,7 +85,7 @@ unset($_SESSION['actionFailed']);
 								</div>
 							</h5>
 							<hr>
-							<?php 
+							<?php
 							include "userconnect.php";
 							$sql = "SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 							$result = $conn->query($sql);
@@ -98,7 +98,7 @@ unset($_SESSION['actionFailed']);
 									<br>
 									<span><?php echo "" . $row["customerEmail"];?></span>
 									<br><br>
-									<span>Newsletter Subscription:</span>
+									<span>Newsletter Subscription</span>
 									<br><br>
 									<a href="changemail.php" style="color:#1A9CB7;">CHANGE EMAIL</a><br>
 									<a href="changeaccountinformation.php" style="color:#1A9CB7;">CHANGE USERNAME & PASSWORD</a>
@@ -118,7 +118,7 @@ unset($_SESSION['actionFailed']);
 								</div>
 							</h5>
 							<hr>
-							<?php 
+							<?php
 							include "userconnect.php";
 							$sql = "SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 							$result = $conn->query($sql);
@@ -148,7 +148,7 @@ unset($_SESSION['actionFailed']);
 								</div>
 							</h5>
 							<hr>
-							<?php 
+							<?php
 							include "userconnect.php";
 							$sql = "SELECT * from tbluser a join tblcustomer b WHERE a.userCustID = b.customerID and  a.userID = " . $_SESSION["userID"] . "";
 							$result = $conn->query($sql);
@@ -176,7 +176,7 @@ unset($_SESSION['actionFailed']);
 				<h6><a href="production.php" style="color:#1A9CB7;">VIEW PRODUCTION DETAILS</a></h6>
 				<div class="col-md-12">
 					<div class="row">
-						<div class="table-responsive">          
+						<div class="table-responsive">
 							<table class="table table-hover table-striped">
 								<thead>
 									<tr>
@@ -213,14 +213,14 @@ unset($_SESSION['actionFailed']);
 											<td style="color:#1A9CB7;"><?php echo $rid;?></td>
 											<td><?php echo $srow['dateOfReceived'];?></td>
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
-											<td><?php 
-											$stat = $srow['orderStatus']; 
-											if($stat == 'WFA'){ 
+											<td><?php
+											$stat = $srow['orderStatus'];
+											if($stat == 'WFA'){
 												$stat = "Waiting for Approval";
-												echo $stat; 
+												echo $stat;
 											}
 											else if($stat == 'WFP')
-											{ 
+											{
 												$stat = "Waiting for Payment";
 											}
 											echo $stat;?></td>
@@ -249,7 +249,7 @@ unset($_SESSION['actionFailed']);
 				<div class="col-md-12">
 
 					<div class="row">
-						<div class="table-responsive">          
+						<div class="table-responsive">
 							<table class="table table-hover table-striped">
 								<thead>
 									<tr>
@@ -283,20 +283,20 @@ unset($_SESSION['actionFailed']);
 										<tr>
 											<td style="color:#1A9CB7;"><?php echo $rid;?></td>
 											<td><?php echo $srow['dateRequest'];?></td>
-											<td><?php 
-											$stat = $srow['customStatus']; 
+											<td><?php
+											$stat = $srow['customStatus'];
 
 											if($stat == 'WFA')
-											{ 
+											{
 												$stat = "Waiting for Approval";
 											}
 											else if($stat == 'WFP')
-											{ 
+											{
 												$stat = "Waiting for Payment";
 											}
 											echo $stat;?></td>
-											<?php 
-											if($srow['customStatus'] != 'WFA'){ 
+											<?php
+											if($srow['customStatus'] != 'WFA'){
 												?>
 												<!-- <td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Order</a></td> -->
 											</tr>
