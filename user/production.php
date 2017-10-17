@@ -38,7 +38,6 @@
 		</script>";
 	}
 	$cID = $_SESSION["userID"];
-	echo $cID;
 	?>
 	<div id="container">
 		<div class="container">

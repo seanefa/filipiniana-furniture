@@ -87,11 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     </tr>
 
                     <?php
-                    }else{
-                      echo '<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
                     }
+						else
+						{
+                      		echo '<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
+                    	}
                     }
-
                     ?>
 
                   </tbody>
