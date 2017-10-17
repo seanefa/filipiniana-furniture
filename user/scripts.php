@@ -163,6 +163,11 @@ $('#paddBtn').attr('data-quantity',q);
     checkPromo(id);
   });
 
+  $('body').on('click','#addPBtn',function(){
+    var id = $(this).val();
+    checkPromo(id);
+  });
+
 
 });
 
@@ -263,14 +268,11 @@ var prodID = [];
       if(value != null){
             prodwithpromo = value.split(',');
            }
-        alert('promo product: '+prodwithpromo);
 
         
         if(!in_array(prodwithpromo,this.id)){
           prod.push(this.id);
         }
-
-        alert(prod);
 
         array.push(keys);
 
