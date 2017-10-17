@@ -61,7 +61,7 @@
                    </div>
                       
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['productPrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id='.$row['productID'].' #view"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                     </div>
                     </div>
                     ';
@@ -135,7 +135,7 @@
                       <p class="price"><span class="price-new">&#8369;'.number_format($row['packagePrice'],2).'</span> <span class="price-old"> </span></p>
                     </div>
                     <div class="button-group">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id='.$row['packageID'].' #viewP"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
+                      <button type="button" class="btn btn-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" href="#viewPackageModal" data-remote="product-form.php?id='.$row['packageID'].' #viewP"><i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</button>
                       </div>
                   </div>
                     ';

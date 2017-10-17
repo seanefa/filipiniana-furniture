@@ -158,29 +158,6 @@
                                       </div>
                                     </div>
 
-
-
-                                    <div id="myModal2" class="modal fade" role="dialog " aria-hidden="true" style="display: none;" tabindex="-1">
-                                      <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                          <!-- Modal content -->
-                                          <div class="modal-content">
-                                            <div class="modal-body">
-                                              <h2 style="text-align:center;">Order Saved!<br>
-                                              </h2>
-                                              <div class="orderconfirm">
-                                                <div class="descriptions">
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button input="theCloseBtn" type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">Close</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
                                     <div style="display: none"><button type="button" id="logthis"></button></div>
                                     
 
