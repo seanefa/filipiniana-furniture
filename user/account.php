@@ -222,8 +222,9 @@ unset($_SESSION['actionFailed']);
 											else if($stat == 'WFP')
 											{
 												$stat = "Waiting for Payment";
+												echo $stat;
 											}
-											echo $stat;?></td>
+											?></td>
 											<?php if($srow['orderStatus'] != 'WFA'){
 												?>
 												<td></td>
