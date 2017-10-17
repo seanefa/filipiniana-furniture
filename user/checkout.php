@@ -571,6 +571,7 @@ $(document).ready(function(){
                                 var ttq = sessionStorage.getItem('totalQuant');
                                   var pvalue = sessionStorage.getItem('pitem');
                                   var promoID = sessionStorage.getItem('prodpromo');
+
                                   var promoid = new Array();
                                 var pitem = new Array();
 
@@ -597,7 +598,9 @@ $(document).ready(function(){
                                       id: promoid,
                                     },
                                     success: function (response) {
+                                      if(response != 'oke'){
                                       $('#checkOut').append(response);
+                                      }
                                 //$("#selectType").attr('disabled','disabled');  
                                 }
                                 });

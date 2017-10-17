@@ -19,10 +19,18 @@ if(mysqli_query($conn,$uSQL)){
 	$tendered = $_POST['aTendered'];
 	$paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$tendered', '$mop', 'Paid');";
 	if(mysqli_query($conn,$paysql)){
+		$oSQL = "UPDATE tblorders SET orderStatus = 'Pending' WHERE orderID='$orderID'";
+		if(mysqli_query($conn,$oSQL)){
 		echo "<script>
 		window.location.href='dashboard.php';
 		alert('Record Saved.');
 		</script>";
+	}else{
+		echo "<script>
+		window.location.href='dashboard.php';
+		alert('Failed to save record.');
+		</script>";
+	}
 	}
 	else{
 		echo "<script>

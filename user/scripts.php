@@ -184,7 +184,7 @@ function in_array(array, id) {
 
 function checkPromo(id){
   var checker = $('#promoChecker'+id).val();
-  if(checker != 0){
+  if(checker != 0 && !isNaN(checker)){
     var value = sessionStorage.getItem('promoid');
     
       if(value != null){
@@ -198,6 +198,8 @@ function checkPromo(id){
 })
     sessionStorage.setItem('promoid',prodwithpromo);
     }
+  }
+  else{
   }
 }
 
@@ -269,20 +271,21 @@ var prodID = [];
 
         var value = sessionStorage.getItem('promoid');
     
-      if(value != null){
+      if(value != null && !isNaN(value)){
             prodwithpromo = value.split(',');
+             if(!in_array(prodwithpromo,this.id)){
+          prod.push(this.id);
+        sessionStorage.setItem('prodpromo',prod);
+        }
            }
 
         
-        if(!in_array(prodwithpromo,this.id)){
-          prod.push(this.id);
-        }
+
 
         array.push(keys);
 
 
         sessionStorage.removeItem('promoid');
-        sessionStorage.setItem('prodpromo',prod);
         sessionStorage.setItem('item',array);
         location.href = "checkout.php";
           

@@ -91,16 +91,23 @@ if($isBool=="existing"){ //EXISTING
     $P_ctr = 0;
     $orderid = mysqli_insert_id($conn);
     echo "<br>orderID: " . $orderid;
-    foreach($selected as $str) {
-    $unitPrice = unitPrice($str);
-     $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
-     mysqli_query($conn,$sql1);
-     echo "<br>sql1: " . $sql1;
+      foreach($selected as $str) {
+      $unitPrice = unitPrice($str);
+      $prodID = $str;
+      if(substr($str, 0,5)=='Promo'){
+        $prodID = str_replace('Promo', '', $str);
+      }
+
+      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample','".$selectedQuant[$ctr]."','Active')"; 
+      mysqli_query($conn,$sql1);
+
       $orReqID = mysqli_insert_id($conn);
-      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID',".$selectedQuant[$ctr].";";
+      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$selectedQuant[$ctr]."');";
       mysqli_query($conn,$sql3);
-     $ctr++;
-   }
+      //echo "<br>sql1: " . $sql1;
+      $ctr++;
+    }
+    
 
    foreach($P_selected as $P_str) {
       $unitPrice = packPrice($P_str);
@@ -109,7 +116,7 @@ if($isBool=="existing"){ //EXISTING
      if(mysqli_query($conn,$sql1)){
 
       $orReqID = mysqli_insert_id($conn);
-      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID',".$P_selectedQuant[$P_ctr].";";
+      $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$P_selectedQuant[$P_ctr]."');";
       mysqli_query($conn,$sql3);
       $P_ctr++;
       
@@ -143,46 +150,23 @@ $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `
   header( 'Location: home.php');
   }
 
-/*
-   if($mop==1){
-    $tendered = $_POST['aTendered'];
-    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$payment', '$mop', 'Paid');";
-    echo $paysql . "<br>";
-    mysqli_query($conn,$paysql);
-    $receiptID = mysqli_insert_id($conn);
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    header( "Location: receipt.php?id=".$receiptID);
-
-  }
-  else if($mop==2){
-    $number = $_POST['cNumber'];
-    $amount = $_POST['cAmount'];
-    $remarks = $_POST['remarks'];
-    $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$amount', '$mop', 'Paid');";
-    echo $paysql . "<br>";
-    mysqli_query($conn,$paysql);
-    $pdID = mysqli_insert_id($conn);
-    $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
-    echo $ch . "<br>";
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    mysqli_query($conn,$ch);
-    header( "Location: receipt.php?id=".$pdID);
-  }
-  */
-}
-}
 
 function unitPrice($id){
-  include "userconnect.php";
+  include "dbconnect.php";
+  if(strpos($id,"Promo")){
+    return 0;
+  }
+  else{
   $price = 0;
   $sql = "SELECT * from tblproduct WHERE productID = '$id'";
   $res = mysqli_query($conn,$sql);
   while($row = mysqli_fetch_assoc($res)){
     $price = $row['productPrice'];
+    return $price;
   }
-  return $price;
 }
-
+  
+}
 function packPrice($id){
   include "userconnect.php";
   $price = 0;
