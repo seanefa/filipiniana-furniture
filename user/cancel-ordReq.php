@@ -6,7 +6,7 @@ $id = $_GET['id'];
 $customerid = $_SESSION["userID"];
 
 $sql = "UPDATE tblorders SET orderStatus = 'Cancelled' WHERE orderID = '$id'";
-$logSQL = "INSERT into tbllogs (category, action, date, description, userID) values ('Order', 'Cancelled', '" . date("Y-m-d") . "', 'Order request #0000$id cancelled', '$customerid')";
+$logSQL = "INSERT into tbllogs (category, action, date, description, userID) values ('Order', 'Cancelled', '" . date("Y-m-d") . "', 'Order request $id cancelled', '$customerid')";
 if(mysqli_query($conn,$sql)){
 	$conn->query($logSQL);
 	echo "<script>
