@@ -55,7 +55,7 @@ if (!$conn) {
                     <input type="text" id="username" class="form-control" name="location" required/><span id="message"></span> </div>
                   </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="control-label">Rate Type</label><span id="x" style="color:red"> *</span>
@@ -63,7 +63,7 @@ if (!$conn) {
                         <input type="radio" id="rate" name="type" value="Amount" required/> Amount</h2>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="row">
                     <div class="col-md-12">
@@ -129,7 +129,7 @@ if (!$conn) {
                         <input type="text" id="editname" class="form-control" name="location" value="<?php echo $trow['delLocation']; $_SESSION['tempname'] = $trow['delLocation'];?>" required/><span id="message"></span></div>
                       </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="control-label">Rate Type</label><span id="x" style="color:red"> *</span>
@@ -137,7 +137,7 @@ if (!$conn) {
                             <input type="radio" id="rate" name="type" value="Amount" required/> Amount</h2>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">

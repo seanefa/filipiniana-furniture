@@ -5,7 +5,7 @@ include 'dbconnect.php';
 $id = $_SESSION['varname'];
 $editBranch = $_POST['branch'];
 $editLocation = $_POST['location'];
-$editRateType = $_POST['type'];
+$editRateType = "Amount";
 $editRate = $_POST['rate'];
 
 $updateSql = "UPDATE tbldelivery_rates SET delBranchID='$editBranch', delLocation='$editLocation', delRateType='$editRateType', delRate='$editRate' WHERE delivery_rateID=$id";

@@ -4,7 +4,7 @@ include 'dbconnect.php';
 
 $branch = $_POST['branch'];
 $location = $_POST['location'];
-$type = $_POST['type'];
+$type = "Amount";
 $rate = $_POST['rate'];
 $status = "Listed";
 
