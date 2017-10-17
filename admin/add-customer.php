@@ -104,13 +104,21 @@ if($isBool == "new"){
     $P_ctr = 0;
     if (mysqli_query($conn, $pssql)) {
     $orderid = mysqli_insert_id($conn); //last id ng na-input na data
+
     foreach($selected as $str) {
       $unitPrice = unitPrice($str);
-      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$str','$unitPrice', '$orderid','$sample',".$selectedQuant[$ctr].",'Active')"; 
+      $prodID = $str;
+      if(substr($str, 0,5)=='Promo'){
+        $prodID = str_replace('Promo', '', $str);
+      }
+
+      $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','$unitPrice', '$orderid','$sample','".$selectedQuant[$ctr]."','Active')"; 
       mysqli_query($conn,$sql1);
+
       $orReqID = mysqli_insert_id($conn);
       $sql3 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`) VALUES ('$orReqID','".$selectedQuant[$ctr]."');";
       mysqli_query($conn,$sql3);
+      //echo "<br>sql1: " . $sql1;
       $ctr++;
     }
     
@@ -211,6 +219,7 @@ else if($isBool=="existing"){ //EXISTING
     $P_ctr = 0;
     $orderid = mysqli_insert_id($conn);
     //echo "<br>orderID: " . $orderid;
+
     foreach($selected as $str) {
       $unitPrice = unitPrice($str);
       $prodID = $str;

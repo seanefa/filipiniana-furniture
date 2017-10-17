@@ -10,16 +10,18 @@ include 'dbconnect.php';
     <script>
 
     $(document).ready(function(){
-      $('#aTendered').on('change',function(){
-        var mat = parseInt($("#aTendered").val());
-        var bal = $("#sideAmountDue").html();
+      $('#aTendered').on('keyup',function(){
+        var mat = $("#aTendered").val();
+        var bal = parseFloat($("#grandTotal").val());
         if(mat==bal){
+          //var e = bal + "  " + mat;
           var e = "";
           $("#error").html(e);
           $('#aTendered').css('border-color','gray');
           $('#submitBtn').prop('disabled',false);
         }
         else{
+          //var e = bal + "  " + mat;
           var e = "Please input a valid number.";
           $("#error").html(e);
           $('#aTendered').css('border-color','red');
@@ -33,7 +35,6 @@ include 'dbconnect.php';
         var val = parseFloat($("#discounts").val());
         $("#discountPer").val(val);
         var oPrice = parseFloat($("#grandTotal").val());
-        alert(oPrice);
         var p = val / 100;
         var minus = oPrice * p;
         var nPrice = oPrice - minus;
@@ -217,57 +218,7 @@ function addnewCust(){
   else if(error != 0){
     alert('Fill up the required fields');
   }
-
-
-
-
 }
-
-
-$(document).ready(function(){
-  $('#aTendered').on('keyup',function(){
-    var mat = $("#aTendered").val();
-    var bal = $("#dp").val();
-    if(isNaN(mat)){
-      var e = "Please input a valid number.";
-      $("#error").html(e);
-      $('#aTendered').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
-    }
-    else if(mat<0){
-      var e = "Numbers less than 0 are not allowed";
-      $("#error").html(e);
-      $('#aTendered').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
-    }
-    else if(mat==""){
-      var e = "";
-      var change = 0.00;
-      $("#dChange").val(change);
-      $("#error").html(e);
-      $('#aTendered').css('border-color','gray');
-      $('#saveBtn').prop('disabled',true);
-    }
-        else if(mat<bal){ //if may malaki diba? hahaha
-          var change = mat - bal;
-          var e = "The payment has exceeded the amount due";
-          $("#error").html(e);
-          $('#aTendered').css('border-color','red');
-          $('#saveBtn').prop('disabled',true);
-        }
-        else{
-          var e = "";
-          var change = mat - bal;
-          var change = change + ".00";
-          $("#dChange").val(change);
-          $("#error").html(e);
-          $('#aTendered').css('border-color','gray');
-          $('#saveBtn').prop('disabled',false);
-
-        }
-
-      });
-});
 
 
 $(document).ready(function(){
@@ -277,19 +228,19 @@ $(document).ready(function(){
       var e = "Please input a valid number.";
       $("#cNumError").html(e);
       $('#cNum').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      $('#submitBtn').prop('disabled',true);
     }
     else if(mat<0){
       var e = "Numbers less than 0 are not allowed";
       $("#cNumError").html(e);
       $('#cNum').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      $('#submitBtn').prop('disabled',true);
     }
     else{
       var e = "";
       $("#cNumError").html(e);
       $('#cNum').css('border-color','gray');
-      $('#saveBtn').prop('disabled',false);
+      $('#submitBtn').prop('disabled',false);
     }
 
   });
@@ -302,19 +253,19 @@ $(document).ready(function(){
       var e = "Please input a valid number.";
       $("#cAmountError").html(e);
       $('#cAmount').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      $('#submitBtn').prop('disabled',true);
     }
     else if(mat<0){
       var e = "Numbers less than 0 are not allowed";
       $("#cAmountError").html(e);
       $('#cAmount').css('border-color','red');
-      $('#saveBtn').prop('disabled',true);
+      $('#submitBtn').prop('disabled',true);
     }
     else{
       var e = "";
       $("#cAmountError").html(e);
       $('#cAmount').css('border-color','gray');
-      $('#saveBtn').prop('disabled',false);
+      $('#submitBtn').prop('disabled',false);
     }
 
   });
@@ -992,7 +943,7 @@ function addQuant(id,quant){
                 <div class="row">
                   <div class="row">
                     <div class="col-md-5 pull-right">
-                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()" disabled><i class="ti-check"></i> Save & Print</button>
+                      <button class="btn btn-success waves-effect pull-right" id="submitBtn" onclick="checkout()"><i class="ti-check"></i> Save & Print</button>
                     </div>
                   </div>
                 </div>
@@ -1507,13 +1458,13 @@ function checkout(){
   }
   else if(qCtr > 0){
     if(cust.options[cust.selectedIndex].value !=""){
-     $('#submitBtn').attr('type','submit');
-     $('#myForm').attr('action','add-custPOS.php');
-   }
-   else{
-    alert('Please select a customer');
+      $('#submitBtn').attr('type','submit');
+      $('#myForm').attr('action','add-custPOS.php');
+    }
+    else{
+      alert('Please select a customer');
+    }
   }
-}
 }
 
 

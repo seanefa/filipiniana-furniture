@@ -373,7 +373,7 @@ function validate(){
     $('#messageEmail').html(''); 
     $('#saveBtn').prop('disabled',false);
   }else{
-   $('#custoemail').css('border-color','red');
+   $('#custemail').css('border-color','red');
    $('#messageEmail').html('Email not valid'); 
    $('#saveBtn').prop('disabled',true);
  }
@@ -774,13 +774,13 @@ function validateEmail(email) {
                                 <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
                                 <td id="price'.$ctr.'"style="text-align: right;">&#8369; '.number_format($pricearray[$pCtr-1],2).'<input id="price'.$ctr.'" name="prices[]" value="'.$pricearray[$pCtr-1].'" type="hidden"/></td>');
                               echo'</tr>';
-                              $totQuant += 1;
+                              $totQuant += $quantarray[$ctr-1];
                               echo ('
                                 <tr style="color:green">
                                 <td><input id="cart'.$ctr.'" name="cart[]" value="'.$row3['productID'].'Promo" type="hidden"/>'.$row3['productName'].'</td>
                                 <td>'.$row3['productDescription'].'<span style="color: green;">(Free Item)</span></td>
                                 <td style="text-align: right;"><span style="color: green;">&#8369; '.number_format($row3['productPrice'],2).'(Free)</span></td>
-                                <td style="text-align: right;">'.$freeitemcnt.'<input id="quant'.$ctr.'" name="quant[]" value="1" type="hidden"/></td>
+                                <td style="text-align: right;">'.$quantarray[$ctr-1].'<input id="quant'.$ctr.'" name="quant[]" value="'.$quantarray[$ctr-1].'" type="hidden"/></td>
                                 <td id="price'.$ctr.'"style="text-align: right;"><span style="color: green;">&#8369; 0.00</span><input id="price'.$ctr.'" name="prices[]" value="0" type="hidden"/></td>');
                               echo'</tr>';  
 
