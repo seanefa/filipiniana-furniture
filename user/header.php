@@ -174,9 +174,11 @@
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">
           <div id="search" class="input-group">
             <div class="ui search">
-  <input class="prompt" type="text" placeholder="Search GitHub...">
+  <form>
+  <input class="prompt" type="text" placeholder="Search.." />
   <div class="results"></div>
 </div>
+</form>
           </div>
         </div>
         <!-- Search End-->

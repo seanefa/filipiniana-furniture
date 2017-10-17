@@ -79,6 +79,7 @@
     }
     var addProduct = function(id, name, summary, price, quantity, image) {
       var products = getAllProducts();
+
       products.push({
         id: id,
         name: name,
@@ -102,13 +103,15 @@
       }
     }
     var updatePoduct = function(id, quantity) {
-	
+     //quantity = quantity -1;
       var productIndex = getIndexOfProduct(id);
       if(productIndex < 0){
         return false;
       }
       var products = getAllProducts();
+
       products[productIndex].quantity = typeof quantity === "undefined" ? products[productIndex].quantity * 1 + 1 : quantity;
+      
       setAllProducts(products);
       return true;
     }
@@ -200,6 +203,7 @@
       ProductManager.clearProduct();
       $.each(options.cartItems, function() {
         ProductManager.setProduct(this.id, this.name, this.summary, this.price, this.quantity, this.image);
+
       });
     }
 

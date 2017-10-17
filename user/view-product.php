@@ -160,7 +160,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
                         
                         <div class="clear"></div>
                       </div>
-                      <button value="<?php echo $trow['productID'] ?>" id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
+                      <button value="<?php echo $trow['productID'] ?>" id="addPBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
               <?php
                 include "userconnect.php"; 
                 $ctr = 0;
-                $sql="SELECT * from tblproduct where productID != '$id' AND prodStat!='For customization' order by productID desc;";
+                $sql="SELECT * from tblproduct where productID != '$id' order by productID desc;";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)){
@@ -351,7 +351,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
                 $ctr++;
               }
               /*
-                <button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
+<button href="#myModal1" data-toggle="modal" data-id="<?php echo $row['productID'] ?>" data-name="<?php echo $row['productName'] ?>" data-summary="<?php echo $row['productDescription'] ?>" data-price="<?php echo $row['productPrice'] ?>" data-quantity="1" data-image="../admin/plugins/images/<?php echo $row['prodMainPic'] ?>" class="btn-primary my-cart-btn"><span>Add to Cart</span></button>
               */
               ?>
             </div>
