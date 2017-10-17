@@ -250,7 +250,7 @@ if(mysqli_query($conn,$updateSql)){
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $comemail;
+    $mail->Username = 'filfurnitures@gmail.com';
     $mail->Password = 'filfurnitures01';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;

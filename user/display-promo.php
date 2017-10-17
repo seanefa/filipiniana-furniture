@@ -18,7 +18,7 @@ $prrow = mysqli_fetch_assoc($prres);
 
 $prodID = $prrow['tblproductID'];
 
-if($res){
+if(mysqli_num_rows($res) != 0){
 	$sql1 = "SELECT * FROM tblproduct where productID = '$prodID'";
 $res1 = mysqli_query($conn,$sql1);
 $row1 = mysqli_fetch_assoc($res1);
@@ -27,6 +27,8 @@ $row1 = mysqli_fetch_assoc($res1);
 
 		';
 	
+	}else{
+		echo 'oke';
 	}
 }
 

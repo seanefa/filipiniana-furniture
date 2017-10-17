@@ -9,28 +9,7 @@
 	<meta name="description" content="Furniture shop">
 	<script type="text/javascript" src="js/myScript.js"></script>
 	<?php include"css.php";?>
-	<script>
-	$(document).ready(function(){
-		$("#orderid").change(function(){
-			var val = $("#orderid").val();
-			alert(val);
-			if(val!=0){
-				$("#input-firstname").("disabled",false);
-				$("#input-email").("disabled",false);
-				$("#input-telephone").("disabled",false);
-				$("#input-firstname").("required",true);
-				$("#input-email").("required",true);
-				$("#input-telephone").("required",true);
-				$("#saveBtn").("disabled",false);
-			}
-			else{
-				$("#input-firstname").("disabled",true);
-				$("#input-email").("disabled",true);
-				$("#input-telephone").("disabled",true);
-			}
-		});
-	});
-	</script>
+	
 </head>
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -140,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 													<label for="input-firstname" class="col-sm-2 control-label">Order #</label>
 													<div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
 														<select class="form-control" id="orderid" name="orderid">
-															<option value="0">Choose an Order</option>
+															<option value="0" disabled>Choose an Order</option>
 															<?php
 															$id = $_SESSION["userID"];
 
@@ -158,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 															while($srow = mysqli_fetch_assoc($sresult)){
 																?>
-																<option value="<?php $srow['orderID']?>"><?php echo "" . $srow["orderID"];?></option>
+																<option value="<?php echo $srow['orderID']?>"><?php echo $srow["orderID"];?></option>
 																<?php
 															}
 
@@ -213,5 +192,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 <!--img src="pics/userpictures/<?php echo "" . $row["customerDP"];?>" style="height:150px; width:150px;" alt="Product" class="img-responsive profilepic"/-->
 <?php include "scripts.php";?>
+<script>
+	$(document).ready(function(){
+		$("#orderid").change(function(){
+			var val = $("#orderid").val();
+			if(val!=0){
+				$("#input-firstname").prop("disabled",false);
+				$("#input-email").prop("disabled",false);
+				$("#input-telephone").prop("disabled",false);
+				$("#input-firstname").prop("required",true);
+				$("#input-email").prop("required",true);
+				$("#input-telephone").prop("required",true);
+				$("#saveBtn").prop("disabled",false);
+			}
+			else{
+				$("#input-firstname").prop("disabled",true);
+				$("#input-email").prop("disabled",true);
+				$("#input-telephone").prop("disabled",true);
+			}
+		});
+	});
+	</script>
 </body>
 </html>
