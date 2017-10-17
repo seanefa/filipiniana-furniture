@@ -1,6 +1,6 @@
 <?php
 include "session-check.php";
-include 'dbconnect.php';
+include 'userconnect.php';
 
 $height = $_POST['cust_height'];
 $width = $_POST['cust_width'];

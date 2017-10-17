@@ -173,7 +173,7 @@
 					<hr>
 					<h2>Recent Orders</h2>
 					<br>
-					<h6><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a></h>
+					<h6><a href="production.php" style="color:#1A9CB7;">TRACK MY SHIPMENT</a></h6>
 					<div class="col-md-12">
 						<div class="row">
 							<div class="table-responsive">          
@@ -219,7 +219,9 @@
 										</tr>
 
 										<?php
-										}else{
+										}
+											else
+										{
 											echo '<td><a href="" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
 										}
 										}

@@ -89,7 +89,7 @@
                     </div>
                     ';?>
                     <div class="button-group">
-                     <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view"><i class='fa fa-info-circle'></i>Add to Cart</button>
+                     <button type="button" class="btn btn-primary" data-toggle="modal" href="#viewProductModal" data-remote="product-form.php?id=<?php echo $row['productID'];?> #view" data-backdrop="static" data-keyboard="false"><i class='fa fa-info-circle'></i>Add to Cart</button>
                     </div>
                   </div>
                 </div><?php echo'';

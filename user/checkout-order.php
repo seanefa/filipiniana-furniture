@@ -82,8 +82,6 @@ if($isBool=="existing"){ //EXISTING
   echo "<br>EXISTING ";
 
   $pssql = "INSERT INTO `tblorders` (`receivedbyUserID`,`dateOfReceived`,`dateOfRelease`,`custOrderID`,`orderPrice`,`orderStatus`,`shippingAddress`,`orderType`,`orderRemarks`) VALUES ('$employee','$orderdaterec', '$orderdatepick','$custid','$totalPrice','$orderstat','$ordershipadd','$ordertype','$remarks')";
-	
-	$insertlog = "INSERT into tbllogs(category, action, date, description, userID) values('Orders', 'New', '" . date("Y-m-d") . "', 'New order from $custid', '$custid' )";
 
   echo " ".mysqli_error($conn);
   echo "<br>pssql" . $pssql;
@@ -125,14 +123,20 @@ if($isBool=="existing"){ //EXISTING
       }
      }
     }
+	  
+
+$orderID = str_pad($orderid, 6, '0', STR_PAD_LEFT);
+$logDesc = "New order #OR" . $orderID;
+$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Order', 'New', '$orderdaterec', '$logDesc', '$employee')";
 
    $inv = "INSERT INTO `tblinvoicedetails` (`invorderID`, `balance`, `dateIssued`, `invoiceStatus`, `invoiceRemarks`, `invDelrateID`, `invPenID`) VALUES ('$orderid', '$totalPrice', '$orderdaterec', 'Pending', 'Initial Invoice', '1', '1');";
    
-
    if (mysqli_query($conn,$inv)){
+	   if(mysqli_query($conn, $logSQL)){
    $invID = mysqli_insert_id($conn);
   $_SESSION['createSuccess'] = 'Success';
   header( 'Location: account.php');
+	   }
 } 
  else {
     $_SESSION['actionFailed'] = 'Failed';
@@ -167,11 +171,6 @@ if($isBool=="existing"){ //EXISTING
   */
 }
 }
-$orderID = str_pad($orderid, 6, '0', STR_PAD_LEFT);
-$logDesc = "New order #OR" . $orderID;
-$logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Order', 'New', '$orderdaterec', '$logDesc', '$employee')";
-mysqli_query($conn,$logSQL);
-echo $logSQL;
 
 function unitPrice($id){
   include "userconnect.php";
