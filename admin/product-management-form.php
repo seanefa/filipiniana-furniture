@@ -75,7 +75,7 @@ $_SESSION['varname'] = $jsID;
                         while ($row = mysqli_fetch_assoc($result))
                         {
                           if($row['orderStatus']!="Finished"){
-                          $quan = getFin($row['order_requestID']);
+                            $quan = getFin($row['order_requestID']);
                           $orderID = str_pad($row['orderID'], 6, '0', STR_PAD_LEFT); //format ng display ID
                           echo('<tr>
                             <td style="text-align: center"><input class="chBox" type="radio"  value='.$row['order_requestID'].' name="check" /></td>
@@ -122,7 +122,7 @@ $_SESSION['varname'] = $jsID;
                 <div class="form-group">
                   <label class="control-label">Estimated Finish Date</label><span id="x" style="color:red"> *</span>
                   <input type="date" id="estDate" class="form-control" name="pidate" value="<?php echo $estDate?>" required/> 
-                    <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
+                  <h5 style="color:green">The system will take pulled-out furniture for repair as a new management order.</h5>
                 </div>
               </div>
             </div>
@@ -180,7 +180,7 @@ $_SESSION['varname'] = $jsID;
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
-                        if($row['promoStatus']!='Archived'){
+                        if($row['promoStatus']=='Active'){
                           echo('<option value='.$row['promoID'].'>'.$row['promoName'].'</option>');
                         }
                       }
@@ -211,13 +211,27 @@ $_SESSION['varname'] = $jsID;
                     <div class="col-md-6 col-md-offset-3">
                       <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
                         <?php
-                        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                        //$sql = "SELECT * FROM tblproduct a, tblprodsonpromo b WHERE a.prodStat !='For customization' and b.onPromoStatus != 'Active' and a.productID != b.prodPromoID ORDER BY productName ASC;";
+                        $sql = "SELECT * from tblproduct where prodStat != 'Archived' and prodStat !='For customization' and productID NOT IN (SELECT productID from tblproduct a, tblprodsonpromo b WHERE a.productID = b.prodPromoID and b.onPromoStatus = 'Active') ORDER BY productName ASC;";
                         $res = mysqli_query($conn,$sql);
                         while($row = mysqli_fetch_assoc($res)){
-                          if($row['prodStat']!='Archived'){
-                            echo('<option value='.$row['productID'].'>'.$row['productName'].'</option>');
-                          }
+                            if($row['prodStat']!='Archived'){
+                              echo('<option value='.$row['productID'].'>'.$row['productName'].''.$exist.'</option>');
+                            }
                         }
+                        // function ifExist($id){
+                        //   include "dbconnect.php";
+                        //   $sql = "SELECT * FROM tblprodsonpromo WHERE prodPromoID = $id and onPromoStatus = Active";
+                        //   // $res = mysqli_query($conn,$sql);
+                        //   // $row = mysqli_num_rows($res);
+                        //   if(mysqli_query($conn,$sql)){
+                        //     return 0l
+                        //   }
+                        //   else{
+                        //     return 1;
+                            
+                        //   }
+                        // }
                         ?>
                       </select>
                     </div>
@@ -228,92 +242,13 @@ $_SESSION['varname'] = $jsID;
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left" id="addFab"><i class="fa fa-check"></i> Save</button>
+          <button type="submit" class="btn btn-success waves-effect text-left" id="saveBtn"><i class="fa fa-check"></i> Save</button>
           <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-
-<!-- Add On-Promo Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="addOnPromoModal" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="update">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct">Update Products on Promo</h3>
-      </div>
-      <form action="" method="post">
-        <div class="modal-body">
-          <div class="descriptions">
-            <div class="form-body">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Quantity</label><span id="x" style="color:red"> *</span>
-                    <input type="number" id="" class="form-control" name="box">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left" id="addBtn"><i class="fa fa-check"></i> Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-</div>
-
-<!-- Deduct On-Promo Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="deductOnPromoModal" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="deductOnPromo">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 class="modal-title" id="modalProduct">Deduct On-Promo Quantity</h3>
-      </div>
-      <form action="" method="post">
-        <div class="modal-body">
-          <div class="descriptions">
-            <div class="form-body">
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Quantity(in pcs)</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="remText" class="form-control" name="quantity">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Remarks</label><span id="x" style="color:red"> *</span>
-                    <input type="text" id="remText" class="form-control" placeholder="Pull-Out" name="remarks">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success waves-effect text-left" id="deductBtn"><i class="fa fa-check"></i> Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-</div>
-
 
 <!-- Update Promo modal-->
 <div class="modal fade" tabindex="-1" role="dialog" id="updateOnPromoModal" aria-hidden="true" style="display: none;">
@@ -329,17 +264,17 @@ $_SESSION['varname'] = $jsID;
             <div class="form-body">
               <?php
 
-               include "dbconnect.php";
-                      $sql = "SELECT * FROM tblpromos where promoID = '$jsID';";
-                      $result = mysqli_query($conn, $sql);
-                      $row = mysqli_fetch_assoc($result);
+              include "dbconnect.php";
+              $sql = "SELECT * FROM tblpromos where promoID = '$jsID';";
+              $result = mysqli_query($conn, $sql);
+              $row = mysqli_fetch_assoc($result);
 
               ?>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Available Promos</label><span id="x" style="color:red"> *</span>
-                    <select class="form-control" data-placeholder="Choose a Category" value='<?php echo $row['promoID'];?>' tabindex="1" name="promo" id="promoedit">
+                    <select class="form-control" data-placeholder="Choose a Category" value='<?php echo $row['promoID'];?>' tabindex="1" name="promo" id="promoedit" disabled>
                       <option value="a" disabled>Select a Promo</option>
                       <?php
                       include "dbconnect.php";
@@ -349,7 +284,7 @@ $_SESSION['varname'] = $jsID;
                       {
                         if($row['promoStatus']!='Archived'){
                           if($row['promoID'] == $jsID){
-                          echo('<option value='.$row['promoID'].' selected="selected">'.$row['promoName'].'</option>');
+                            echo('<option value='.$row['promoID'].' selected="selected">'.$row['promoName'].'</option>');
                           }else{
                             echo('<option value='.$row['promoID'].'>'.$row['promoName'].'</option>');
                           }
@@ -369,20 +304,13 @@ $_SESSION['varname'] = $jsID;
               </div>
               <hr>
               <div class="row">
-                <div class="col-md-12"">
-                  <div id="checkbox">
-                    <h4 style="text-align: center;">
-                      <input type="checkbox" id="allProd" name="allProd" value="all" checked/> Apply to all Products?
-                    </h4>
-                  </div>
-                </div>
                 <div class="row">
                   <div id="selection">
-                    <h4 style="text-align: center;">Select Products</h4>
+                    <h4 style="text-align: center;">On promo</h4>
                     <div class="col-md-6 col-md-offset-3">
                       <select class="form-control" multiple="multiple" data-placeholder="Choose a Category" tabindex="1" name="onPromoProd[]" id="onPromoProd" style="width: 100%;">
                         <?php
-                        $sql = "SELECT * FROM tblproduct ORDER BY productName ASC;";
+                        $sql = "SELECT * from tblproduct where prodStat != 'Archived' and prodStat !='For customization' and productID NOT IN (SELECT productID from tblproduct a, tblprodsonpromo b WHERE a.productID = b.prodPromoID and b.onPromoStatus = 'Active') ORDER BY productName ASC;";
                         $res = mysqli_query($conn,$sql);
                         while($row = mysqli_fetch_assoc($res)){
                           if($row['prodStat']!='Archived'){
@@ -392,7 +320,6 @@ $_SESSION['varname'] = $jsID;
                         ?>
                       </select>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>

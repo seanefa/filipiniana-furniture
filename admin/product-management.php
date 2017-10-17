@@ -426,9 +426,9 @@ $( '#promoDescedit' ).html(response);
                                             <td style="text-align: center;">'. $row['bilang'].'</td>
                                             ');
                                             ?>
-                                            <td><button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['promoID'];?> #updateOnPromo" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button>
+                                            <td><!-- <button type="button" class="btn btn-success" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php?id=<?php echo $row['promoID'];?> #updateOnPromo" data-target="#myModal"><i class="ti-pencil-alt"></i> Update</button> -->
 
-                                              <!--<button type="button" class="btn btn-danger" data-toggle="modal" href="product-management-form.php" data-remote="product-management-form.php #deductOnPromo" data-target="#myModal">Deduct</button>-->
+                                              <a type="button" class="btn btn-danger" href="promo-stop.php?id=<?php echo $row['promoID']?>" style="color:white"><i class="ti-close"></i> Stop </a>
                                             </td>
 
                                             <?php echo('</tr>');} }
