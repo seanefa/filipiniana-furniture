@@ -314,7 +314,6 @@ $orderID = str_pad($orderid, 6, '0', STR_PAD_LEFT);
 $logDesc = "New order #OR" . $orderID;
 $logSQL = "INSERT INTO `tbllogs` (`category`, `action`, `date`, `description`, `userID`) VALUES ('Order', 'New', '$orderdaterec', '$logDesc', '$employee')";
 mysqli_query($conn,$logSQL);
-//echo $logSQL;
 
 function unitPrice($id){
   include "dbconnect.php";

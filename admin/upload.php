@@ -16,7 +16,9 @@ else
 
  if (!mysqli_query($conn,$sql))
  {
-  die('Error: ' . mysqli_error($conn));
+  echo '<script type="text/javascript">';
+	echo 'alert("Oops, something went wrong!")';
+	echo '</script>';
 }
 echo "<font size = '5'><font color=\"#0CF44A\">SAVED TO DATABASE";
 

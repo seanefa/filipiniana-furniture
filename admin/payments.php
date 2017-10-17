@@ -79,7 +79,10 @@ function paidInvoice($id){
 			echo "jksdhkjsa" . $invSQL;
 		}
 		else{
-			echo "Error" . mysqli_error($conn) ;
+			echo "<script>
+			window.location.href='collections.php';
+			alert('Oops, something went wrong!');
+			</script>"; 
 		}
 	}
 

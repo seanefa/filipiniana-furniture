@@ -17,7 +17,10 @@ if(mysqli_query($conn,$sql1)){
 	echo '</script>';
 }
 else {
-	echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+	echo '<script type="text/javascript">';
+	echo 'alert("Oops, something went wrong!")';
+	header( "Location: production.php" );
+	echo '</script>';
 }
 
 
@@ -31,6 +34,9 @@ if(mysqli_query($conn,$sql)){
 	echo '</script>';
 }
 else {
-	header( "Location: production.php?actionFailed" );
+	echo '<script type="text/javascript">';
+	echo 'alert("Oops, something went wrong!")';
+	header( "Location: production.php" );
+	echo '</script>';
 }
 ?>

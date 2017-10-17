@@ -68,7 +68,7 @@ if (mysqli_query($conn, $pssql)) {
   echo "<br>inv: " . $inv;
   mysqli_query($conn,$inv);
   $invID = mysqli_insert_id($conn);
-  echo "Error: " . $inv . "<br>" . mysqli_error($conn);
+  //echo "Error: " . $inv . "<br>" . mysqli_error($conn);
 
   if($mop==1){
     $tendered = $_POST['aTendered'];
@@ -96,7 +96,7 @@ if (mysqli_query($conn, $pssql)) {
     $pdID = mysqli_insert_id($conn);
     $ch = "INSERT INTO `tblcheck_details` (`p_detailsID`, `checkNumber`, `checkAmount`, `checkRemarks`) VALUES ('$pdID', '$number', '$amount', '$remarks')";
     echo $ch . "<br>";
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   // echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     mysqli_query($conn,$ch);
     // header( "Location: receipt.php?id=".$pdID);
 
@@ -174,12 +174,18 @@ function onPromo($id,$orderID,$cnt){
       if($cnt<=$ohQuan){
         $sql1 = "INSERT INTO `tblorder_request` (`orderProductID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$prodID','0', '$orderID','Free','$cnt','Ready for release')"; 
         if(!mysqli_query($conn,$sql1)){
-          echo mysqli_error($conn);
+          echo '<script>
+        alert("Oops, something went wrong!");
+        window.location.href = "point-of-sales.php";
+        </script>';
         }
         $orReqID = mysqli_insert_id($conn);
         $sql4 = "INSERT INTO `tblorder_requestcnt` (`orreq_ID`, `orreq_quantity`, `orreq_prodFinish`) VALUES ('$orReqID','$cnt','$cnt');";
         if(!mysqli_query($conn,$sql4)){
-          mysqli_error($conn);
+          echo '<script>
+        alert("Oops, something went wrong!");
+        window.location.href = "point-of-sales.php";
+        </script>';
         }
         onHandUpdate($prodID,$cnt);
       }

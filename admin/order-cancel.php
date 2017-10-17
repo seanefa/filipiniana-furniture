@@ -42,9 +42,9 @@ if($status=="Ongoing"){
 		else{
 			echo '<script type="text/javascript">';
 			header( "Location: orders.php" );
-			echo 'alert("Action Failed")';
+			echo 'alert("Oops, something went wrong!")';
 			echo '</script>'; 
-			echo mysqli_error($conn) . "<br>";
+			// echo mysqli_error($conn) . "<br>";
 		}
 		echo '<script type="text/javascript">';
 		header( "Location: orders.php" );
@@ -54,9 +54,9 @@ if($status=="Ongoing"){
 	else{
 		echo '<script type="text/javascript">';
 		header( "Location: orders.php" );
-		echo 'alert("Action Failed")';
+		echo 'alert("Oops, something went wrong!")';
 		echo '</script>';
-		echo mysqli_error($conn) . "<br>";
+		// echo mysqli_error($conn) . "<br>";
 	}
 }
 else{
@@ -72,10 +72,8 @@ else{
 				//echo '3';
 				$invSQL = "UPDATE tblinvoicedetails SET invPenID = '0', balance = '0', invDelrateID = '0', invoiceStatus = 'Paid' WHERE invorderID = $id";
 				if(!mysqli_query($conn,$invSQL)){
-					echo mysqli_error($conn) . "<br>";
 					echo '<script type="text/javascript">';
-					//header( "Location: orders.php" );
-					echo 'alert("Action Failed")';
+					echo 'alert("Oops, something went wrong!")';
 					echo '</script>'; 
 				}
 			}

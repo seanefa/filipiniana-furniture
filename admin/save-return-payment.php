@@ -22,7 +22,10 @@ $orderdaterec = $date->format('Y-m-d H:i:s');
 
 $sqlU = "UPDATE tblpayment_details SET paymentStatus = 'Returned' WHERE invID = '$invID'";
 if(!mysqli_query($conn,$sqlU)){
-	echo "Error" . mysqli_error($conn);
+	echo '<script type="text/javascript">';
+	echo 'alert("Oops, something went wrong!")';
+	header( "Location: orders.php" );
+	echo '</script>';
 }
 
 $paysql = "INSERT INTO `tblpayment_details` (`invID`, `dateCreated`, `amountPaid`, `mopID`, `paymentStatus`) VALUES ('$invID', '$orderdaterec', '$paid', '$mop', 'Paid');";
