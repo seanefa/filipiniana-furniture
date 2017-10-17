@@ -13,8 +13,9 @@ mysqli_query($conn,$sql);
 $flag++;
 $last_id = mysqli_insert_id($conn);
 
-$ctr = 0;
+
 foreach($str as $a){
+    $ctr = 0;
 	$sql = "SELECT * FROM tblunitofmeasurement_category";
 	$res = mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_assoc($res)){

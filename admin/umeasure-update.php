@@ -5,8 +5,16 @@ include 'dbconnect.php';
 $id = $_SESSION['varname'];
 $editType = $_POST['uType'];
 $editUnit = $_POST['uUnit'];
+$cats = $_POST['attribs'];
 
 $updateSql = "UPDATE tblunitofmeasure SET unType='$editType', unUnit='$editUnit' WHERE unID=$id;";
+
+$deleteSql = "DELETE FROM tblunit_cat WHERE unitID=$id;";
+mysqli_query($conn,$deleteSql);
+
+foreach($cats as $a)
+{$sql = "INSERT INTO `tblunit_cat` (`unitID`, `uncategoryName`, `unitcatStatus`) VALUES ('$id', '$a','Active')";
+mysqli_query($conn,$sql);}
 
 if(mysqli_query($conn,$updateSql)){
 	// Logs start here

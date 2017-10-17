@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start();
 if(isset($GET['id'])){
@@ -127,7 +127,7 @@ if (!$conn) {
                       $result = mysqli_query($conn, $sql);
                       while ($row = mysqli_fetch_assoc($result))
                       {
-                        if($trow['materialType']==$row['matTypeName']){
+                        if($trow['materialType']==$row['matTypeID']){
                           echo('<option value='.$row['matTypeID'].' selected="selected">'.$row['matTypeName'].'</option>');
                         }
                         else{
@@ -168,7 +168,7 @@ if (!$conn) {
                       }*/
                       ?>
 
-                      <div class="row">
+                      <div class="row" hidden="true">
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="control-label">Variant Attributes</label><span id="x" style="color:red"> *</span>

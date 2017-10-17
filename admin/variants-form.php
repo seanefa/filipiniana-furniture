@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 if(isset($GET['id'])){
   $jsID = $_GET['id'];
@@ -220,7 +220,7 @@ if (!$conn)
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="control-label">Material Variant</label>
+                      <label class="control-label">Material Variant</label><span id="x" style="color:red"> *</span>
                       <textarea class="form-control" rows="2" name="description" id="description" required><?php echo $trow['mat_varDescription']?></textarea><span id='descValid'></span>
                     </div>
                   </div>

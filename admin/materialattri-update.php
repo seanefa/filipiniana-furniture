@@ -15,6 +15,14 @@ $sql = "UPDATE `tblattributes` SET `attributeName`='$name' WHERE `attributeID`='
 mysqli_query($conn,$sql);
 echo $sql . "<br>";
 
+$deleteSql = "DELETE FROM tblattribute_measure WHERE attributeID=$id;";
+mysqli_query($conn,$deleteSql);
+
+foreach($str as $a){
+    $newSql = "INSERT INTO `tblattribute_measure` (`attributeID`, `uncategoryID`, `amStatus`) VALUES ('$id', '$a','Active')";
+    mysqli_query($conn,$newSql);
+    $flag++;
+}
 /*
 echo $exist . "<br>";
 
@@ -36,28 +44,6 @@ while($row = mysqli_fetch_assoc($existing)){
 	}
 }*/
 
-$attribArr = "";
-$attribs = "SELECT * from tblunitofmeasurement_category where uncategoryID NOT IN (SELECT uncategoryID from tblattributes a, tblattribute_measure b WHERE a.attributeID = b.attributeID AND a.attributeID = '$id');";
-$attributes = mysqli_query($conn,$attribs);
-while($row = mysqli_fetch_assoc($attributes)){
-	$attribArr = $attribArr . $row["uncategoryID"] . ",";
-	echo $attribArr . "<br>";
-}
-$flag++;
-$temp = substr(trim($attribArr), 0, -1);
-$att = explode(',',$temp);
-
-foreach($att as $a){
-		foreach($str as $r){
-		if($a==$r){
-			echo $a . "=" . $r . "<br>";
-			$newSql = "INSERT INTO `tblattribute_measure` (`attributeID`, `uncategoryID`, `amStatus`) VALUES ('$id', '$r','Active')";
-			mysqli_query($conn,$newSql);
-			echo $newSql . "<br>";
-			$flag++;
-		}
-		}
-		}
 
 if ($flag>0) {
 	// Logs start here

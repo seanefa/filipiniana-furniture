@@ -117,12 +117,12 @@ if (!$conn) {
                     <label class="control-label">Unit Category</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" multiple="multiple" data-placeholder="Select Category" tabindex="1" name="attribs[]" id="attribs" required>
                       <?php
-                      $sql = "SELECT * FROM tblunit_cat a, tblunitofmeasurement_category b WHERE a.unitID = '$jsID' AND a.uncategoryID = b.uncategoryID;";
+                      $sql = "SELECT * FROM tblunit_cat a, tblunitofmeasurement_category b WHERE a.unitID = '$jsID' AND a.uncategoryName = b.uncategoryName;";
                       $result = mysqli_query($conn, $sql);
                       $attribs = "";
                       while ($row = mysqli_fetch_assoc($result))
                       {
-                          $attribs = $attribs . $trow['uncategoryID'] . ",";
+                          $attribs = $attribs . $row['uncategoryID'] . ",";
                           
                         /*if($row['uncategoryStatus']=='Active'){
                           echo('<option value='.$row['uncategoryID'].'>'.$row['uncategoryName'].'</option>');
@@ -139,13 +139,14 @@ if (!$conn) {
                       $cnt = 0;
                       while ($row1 = mysqli_fetch_assoc($result1))
                       {
-                        if($attribs[$cnt]==$row1['uncategoryID']){
-                          echo('<option value='.$row1['uncategoryID'].' selected="selected">'.$row1['uncategoryName'].'</option>');
+                          if($row1['uncategoryStatus']=='Active')
+                        {if($attribs[$cnt]==$row1['uncategoryID']){
+                          echo('<option value='.$row1['uncategoryName'].' selected="selected">'.$row1['uncategoryName'].'</option>');
                           $cnt++;
                         }
                         else{
-                          echo('<option value='.$row1['uncategoryID'].'>'.$row1['uncategoryName'].'</option>');
-                        }
+                          echo('<option value='.$row1['uncategoryName'].'>'.$row1['uncategoryName'].'</option>');
+                        }}
                         //$cnt++;
                       }
                       ?>

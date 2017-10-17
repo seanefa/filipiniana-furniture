@@ -342,9 +342,9 @@ $(document).ready(function(){
                         <table class="table color-bordered-table muted-bordered-table dataTable display" id="tblFabricTexture">
                           <thead>
                             <tr>
-                              <th>Category</th>
                               <th>Name</th>
                               <th>Unit</th>
+                              <th>Category</th>
                               <th class="removeSort">Actions</th>
                             </tr>
                           </thead>
@@ -358,9 +358,16 @@ $(document).ready(function(){
                                 if($row['unStatus']=="Active"){
                                   echo('<tr>
                                     <td>'.$row['unType'].'</td>
-                                    <td>'.$row['unType'].'</td>
                                     <td>'.$row['unUnit'].'</td>
-                                    '); ?>
+                                    <td>'); 
+                                 $sql2 = "SELECT * FROM tblunit_cat WHERE unitID= ".$row['unID']." ;";
+                                $result2 = mysqli_query($conn, $sql2);
+                                while ($row2 = mysqli_fetch_assoc($result2))
+                                {
+                                    echo (''.$row2['uncategoryName'].' ');
+                                }
+                                echo ('</td>');
+                              ?>
                                     <td>
                                       <!-- UPDATE -->
                                       <button type="button" class="btn btn-success" data-toggle="modal" href="umeasure-form.php" data-remote="umeasure-form.php?id=<?php echo $row['unID'];?> #update" data-target="#myModal"><i class='ti-pencil-alt'></i> Update</button>
