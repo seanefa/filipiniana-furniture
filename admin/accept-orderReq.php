@@ -75,7 +75,7 @@ if(mysqli_query($conn,$updateSql)){
 // HTML email starts here
   $subject    = "Your order has been accepted";
   $text_message = "Dear " . $custRow["customerFirstName"] . " " . $custRow["customerLastName"] . ",";
-  $mail->AddEmbeddedImage('plugins/images/'.$rowcom['comp_logo'].'', 'logoimg');      
+  $mail->AddEmbeddedImage('plugins/logo/'.$rowcom['comp_logo'].'', 'logoimg');      
 
   $message  = "<html><body>";
 
@@ -275,6 +275,8 @@ if(mysqli_query($conn,$updateSql)){
   if(!$mail->send()){
 //echo 'Message could not be sent.';
 //echo 'Mailer Error: ' . $mail->ErrorInfo;
+      $updateSql = "UPDATE tblorders SET orderStatus = 'WFA', orderRemarks =  '$remarks', dateOfRelease = '$date' WHERE orderID = $id";
+    mysqli_query($conn,$updateSql);
         echo '<script>
         alert("Oops, something went wrong!");
         window.location.href = "dashboard.php";

@@ -127,42 +127,42 @@ $_SESSION['varname'] = $jsID;
                       <div class="table-responsive">
                         <h3><label class="control-label" style="text-align:left;">Orders</label></h3>
                         <table class="table product-overview" id="cartTbl">
-                          <thead>
-                            <th style="text-align:center">Furniture Name</th>
-                            <th style="text-align:center">Furniture Description</th>
-                            <th style="text-align:right;">Unit Price</th>
-                            <th style="text-align:right;">Quantity</th>
-                            <th style="text-align:right;">Total Price</th>
-                          </thead>
-                          <tbody>
-                            <?php
-                            include "dbconnect.php";
-                            $tQuan = 0;
-                            $tPrice = 0;
+                        <thead>
+                          <th style="text-align:left">Furniture Name</th>
+                          <th style="text-align:left">Furniture Description</th>
+                          <th style="text-align:right;">Unit Price</th>
+                          <th style="text-align:right;">Quantity</th>
+                          <th style="text-align:right;">Total Price</th>
+                        </thead>
+                        <tbody>
+                          <?php
+                          include "dbconnect.php";
+                          $tQuan = 0;
+                          $tPrice = 0;
 
-                            $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
-                            $res = mysqli_query($conn,$sql1);
-                            while($row = mysqli_fetch_assoc($res)){
-                              echo '<tr>
-                              <td>'.$row['productName'].'</td>
-                              <td>'.$row['productDescription'].'</td>
-                              <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
-                              <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
-                              $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
-                              $tPrice =  number_format($tPrice,2);
-                              echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
-                              $tPrice = $row['orderPrice'];
-                              $tQuan = $tQuan + $row['orderQuantity'];
-                            }
-                            ?>
-                          </tbody>
-                          <tfoot style="text-align:right;">
-                            <td></td>
-                            <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
-                            <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
-                            <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
-                          </tfoot>
-                        </table>
+                          $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblproduct c WHERE c.productID = a.orderProductID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
+                          $res = mysqli_query($conn,$sql1);
+                          while($row = mysqli_fetch_assoc($res)){
+                            echo '<tr>
+                            <td>'.$row['productName'].'</td>
+                            <td>'.$row['productDescription'].'</td>
+                            <td style="text-align:right;">&#8369; '.number_format($row['prodUnitPrice'],2).'</td>
+                            <td style="text-align:right;">'.$row['orderQuantity'].'</td>';
+                            $tPrice = $row['orderQuantity'] * $row['prodUnitPrice'];
+                            $tPrice =  number_format($tPrice,2);
+                            echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
+                            $tPrice = $row['orderPrice'];
+                            $tQuan = $tQuan + $row['orderQuantity'];
+                          }
+                          ?>
+                        </tbody>
+                        <tfoot style="text-align:right;">
+                          <td></td>
+                          <td colspan="2" style="text-align:right;"><b> GRAND TOTAL</b></td>
+                          <td id="totalQ" style="text-align:right;"><?php echo $tQuan?></td>
+                          <td id="totalPrice" style="text-align:right;"><?php echo "&#8369; ". number_format($tPrice,2)?></td>
+                        </tfoot>
+                      </table>
                       </div>
                     </div>
                   </div>
