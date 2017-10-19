@@ -46,7 +46,7 @@ $cn= mysqli_real_escape_string($conn, $cn);
 $em= mysqli_real_escape_string($conn, $em);
 
 $logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('User', 'New', '$datecreated', 'New customer named $fn $mn $ln', '$last_id')";
-
+	mysqli_query($conn, $logSQL);
 if($cf==$pw)
 {
 	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
@@ -55,7 +55,6 @@ if($cf==$pw)
 	{
 		if ($conn->query($sql2)==true)
 		{
-			mysqli_query($conn, $logSQL);
 			$last_id=$conn->insert_id;
 			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated')";
 			if($conn->query($sql)==true)
@@ -179,7 +178,10 @@ if($cf==$pw)
 }
 else
 {
-	echo "Passwords does not match.";
+	echo '<script>
+					alert("Oops, something went wrong! Password does not match");
+					window.location.href = "register.php";
+					</script>';
 }
 ?>
 $conn-close();

@@ -110,6 +110,7 @@ $_SESSION['varname'] = $jsID;
                           </thead>
                           <tbody>
                             <?php
+                            $otype = "";
                             include "dbconnect.php";
                             $tQuan = 0;
                             $tPrice = 0;
@@ -126,6 +127,7 @@ $_SESSION['varname'] = $jsID;
                               echo '<td style="text-align:right;">&#8369; '.$tPrice.'</td></tr>';
                               $tPrice = $row['orderPrice'];
                               $tQuan = $tQuan + $row['orderQuantity'];
+                              $otype = $row['orderType'];
                             }
 
                             // $sql1 = "SELECT * FROM tblorder_request a, tblorders b, tblpackages c WHERE c.packageID = a.orderPackageID and b.orderID = a.tblOrdersID and b.orderID = '$jsID'";
@@ -201,14 +203,23 @@ $_SESSION['varname'] = $jsID;
           </div>
         </div>
         <?php 
-          if($down >= ($tPrice * .5)){
+        if($otype=="Management Order"){
         echo '
         <div class="modal-footer">
           <a class="btn btn-success" href="production-start.php?id='.$jsID.'">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         ';
-        }else{
+        }
+        else if($down >= ($tPrice * .5)){
+        echo '
+        <div class="modal-footer">
+          <a class="btn btn-success" href="production-start.php?id='.$jsID.'">Start Production</a><input type="hidden" id="idBtn" value="'.$row['orderID'].'"/>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        ';
+        }
+        else{
           echo '
         <div class="modal-footer">
           <span style="color: red; text-align: right;">This production cannot be started because it is not yet paid</span>

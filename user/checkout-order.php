@@ -111,7 +111,6 @@ if($isBool=="existing"){ //EXISTING
     
    foreach($P_selected as $P_str) {
       $unitPrice = packPrice($P_str);
-
      $sql1 = "INSERT INTO `tblorder_request` (`orderPackageID`,`prodUnitPrice`,`tblOrdersID`,`orderRemarks`,`orderQuantity`,`orderRequestStatus`) VALUES ('$P_str','$unitPrice', '$orderid','$sample',".$P_selectedQuant[$P_ctr].",'Active')"; 
      if(mysqli_query($conn,$sql1)){
 

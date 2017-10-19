@@ -83,10 +83,10 @@ Default</label>
 </div>
 <script type="text/javascript">
 
-  $(document).ready(function(){
-    $('#telNumber').mask('(000) 000-0000');
+  // $(document).ready(function(){
+  //   $('#telNumber').mask('(000) 000-0000');
 
-  });
+  // });
 
   var c1 = 0;
   var c2 = 0;
