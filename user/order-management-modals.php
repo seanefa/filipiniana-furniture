@@ -2,7 +2,7 @@
 session_start();
 include 'userconnect.php';
 if(isset($_GET['id'])){
-  $jsID = $_GET['id']; 
+  $jsID = $_GET['id'];
 }
 $jsID=$_GET['id'];
 
@@ -180,7 +180,7 @@ $_SESSION['varname'] = $jsID;
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="control-label">Pick up/Delivery Date</label>
-                    <input type="date" id="pdate" class="form-control" name="pidate" required/> 
+                    <input type="date" id="pdate" class="form-control" name="pidate" required/>
                   </div>
                 </div>
 
@@ -541,7 +541,7 @@ $_SESSION['varname'] = $jsID;
               $bal = $tPrice - $down;
               ?>
 
-              
+
               <div class="row">
                 <div class="col-md-6">
                   <div class="row">
@@ -559,7 +559,7 @@ $_SESSION['varname'] = $jsID;
                       </table>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div class="col-md-6">
                   <div class="row">
                     <h3 style="text-align:center;"><label class="form-control" style="border:0px;">Payment</label></h3>
