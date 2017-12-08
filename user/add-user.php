@@ -15,7 +15,7 @@ $res = mysqli_query($conn,$sql);
 $rowcom = mysqli_fetch_assoc($res);
 $comemail = $rowcom["comp_email"];
 $comname = $rowcom["comp_name"];
-$compassword = $rowcom["comp_emailPassword"];
+$compassword = $rowcom["comp_emailPass"];
 
 $fn=$_POST['fname'];
 $mn=$_POST['mname'];
@@ -45,21 +45,8 @@ $ar= mysqli_real_escape_string($conn, $ar);
 $cn= mysqli_real_escape_string($conn, $cn);
 $em= mysqli_real_escape_string($conn, $em);
 
-$logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('User', 'New', '$datecreated', 'New customer named $fn $mn $ln', '$last_id')";
-	mysqli_query($conn, $logSQL);
-if($cf==$pw)
-{
-	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
-	
-	if($sql2)
-	{
-		if ($conn->query($sql2)==true)
-		{
-			$last_id=$conn->insert_id;
-			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated')";
-			if($conn->query($sql)==true)
-			{
-	            $name = $fn . " " . $mn . " " . $ln;
+
+$name = $fn . " " . $mn . " " . $ln;
 // Create an instance of PHPMailer
 			$mail = new PHPMailer();
 
@@ -148,22 +135,38 @@ if($cf==$pw)
 
 		        if(!$mail->send()){
 		            echo '<script>
-					alert("Oops, something went wrong!");
-					window.location.href = "register.php";
+					alert("Oops, something went wrong on email!");
 					</script>';
-		        }
-		        else{
-		            echo '<script>
+		        }else{
+
+
+
+
+
+
+$logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('User', 'New', '$datecreated', 'New customer named $fn $mn $ln', '$last_id')";
+	mysqli_query($conn, $logSQL);
+if($cf==$pw)
+{
+	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
+	
+	if($sql2)
+	{
+		if ($conn->query($sql2)==true)
+		{
+			$last_id=$conn->insert_id;
+			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated')";
+			if($conn->query($sql)==true)
+			{
+	            echo '<script>
 					alert("Account successfully created!");
 					window.location.href = "login.php";
 					</script>';
-		        }
 			}
 			else
 			{
 				 echo '<script>
 					alert("Oops, something went wrong!");
-					window.location.href = "register.php";
 					</script>';
 			}
 		}
@@ -171,7 +174,6 @@ if($cf==$pw)
 		{
 			 echo '<script>
 					alert("Oops, something went wrong!");
-					window.location.href = "register.php";
 					</script>';
 		}
 	}
@@ -180,8 +182,9 @@ else
 {
 	echo '<script>
 					alert("Oops, something went wrong! Password does not match");
-					window.location.href = "register.php";
 					</script>';
 }
+}
+
+$conn->close();
 ?>
-$conn-close();

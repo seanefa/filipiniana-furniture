@@ -182,34 +182,6 @@ Default</label>
       });
     });
 
-    $('#input-password').on('keyup', function(){
-      var passw= this.value;
-      var confi = $('#input-conf').val();
-      $.ajax({
-        type: 'post',
-        url: 'check-password.php',
-        data: {
-          pass: passw, conf: confi,
-        },
-        success: function (response) {
-          if(response ==''){
-            $('#messagepass').html('');
-            $('#messagepass').prop('class','glyphicon glyphicon-ok');
-            $('#messagepass').prop('style','color: green;');
-            $('#input-password').css('border-color','green');
-            $('#input-conf').css('border-color','green');
-          }else{
-            $('#messagepass').prop('class','');
-            $('#messagepass').prop('style','color: red;');
-            $('#input-password').css('border-color','red');
-            $('#input-conf').css('border-color','red');
-            $('#messagepass').html(response);
-
-          }
-        }
-      });
-    });
-
     $('#input-confirm').on('keyup', function(){
       var confr = this.value;
       var passw = $('#input-password').val();
@@ -225,12 +197,12 @@ Default</label>
             $('#messagepass').prop('class','glyphicon glyphicon-ok');
             $('#messagepass').prop('style','color: green;');
             $('#input-password').css('border-color','green');
-            $('#input-conf').css('border-color','green');
+            $('#input-confirm').css('border-color','green');
           }else{
             $('#messagepass').prop('class','');
             $('#messagepass').prop('style','color: red;');
             $('#input-password').css('border-color','red');
-            $('#input-conf').css('border-color','red');
+            $('#input-confirm').css('border-color','red');
             $('#messagepass').html(response);
 
           }
@@ -274,13 +246,13 @@ Default</label>
   <div class="form-group required">
     <label for="input-password" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" min="4" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required><span id="messagepass"></span>
+      <input type="password" min="4" class="form-control" id="input-password" placeholder="Password" value="" name="upass" required>
     </div>
   </div>
   <div class="form-group required">
     <label for="input-confirm" class="col-sm-2 control-label">Confirm Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass" required>
+      <input type="password" class="form-control" id="input-confirm" placeholder="Confirm Password" value="" name="cpass" required><span id="messagepass"></span>
     </div>
   </div>
 </fieldset>
@@ -303,7 +275,6 @@ Default</label>
 
 <div class="buttons">
   <div class="pull-right">
-    <span id="messageall" style="color: red;"></span>
     <input type="checkbox" value="1" name="agree" id="_cbxPolicy" required>
     &nbsp;I have read and agree to the <a class="agree" href="privacy-policy.php" target="_blank"><b>Privacy Policy</b></a> &nbsp;
     <input onclick="validate()" class="btn btn-primary" value="Register" name="register" id="_btnRegister">
