@@ -19,20 +19,39 @@
 
       $asql = "SELECT * FROM tblframeworks WHERE frameworkID = $framework;";
       $aresult = mysqli_query($conn,$asql);
+      $arow;
+      if($aresult){
       $arow = mysqli_fetch_assoc($aresult);
+    }else{
+      $arow = 'Unavailable';
+    }
 
       $bsql = "SELECT * FROM tblfabrics WHERE fabricID = $fabric;";
       $bresult = mysqli_query($conn,$bsql);
+      $brow;
+      if($bresult){
       $brow = mysqli_fetch_assoc($bresult);
+      }else{
+      $brow = 'Unavailable';
+    }
 
       $leesql = "SELECT * FROM tblfurn_category WHERE categoryID = $category;";
       $leeresult = mysqli_query($conn,$leesql);
+      $leerow;
+      if($leeresult){
       $leerow = mysqli_fetch_assoc($leeresult);
+    }else{
+      $leerow = 'Unavailable';
+    }
 
       $csql = "SELECT * FROM tblfurn_type WHERE typeID = $type;";
       $cresult = mysqli_query($conn,$csql);
+      $crow;
+      if($cresult){
       $crow = mysqli_fetch_assoc($cresult);
-
+    }else{
+      $crow = 'Unavailable';
+    }
 
       $sql1 = "SELECT * FROM tblprodsonpromo where prodPromoID = '$jsID';";
                             $results = mysqli_query($conn, $sql1);
@@ -101,7 +120,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="text-align:left">Fabric</td>
-                                                        <td style="text-align:left"> <?php echo $brow['fabricName'];?> </td>
+                                                        <td style="text-align:left"> <?php if(isset($brow['fabricName'])){echo $brow['fabricName'];}else{ echo 'Unavailable';} ?> </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="text-align:left">Dimension Specification</td>

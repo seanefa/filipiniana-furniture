@@ -17,6 +17,8 @@ $comemail = $rowcom["comp_email"];
 $comname = $rowcom["comp_name"];
 $compassword = $rowcom["comp_emailPass"];
 
+
+
 $fn=$_POST['fname'];
 $mn=$_POST['mname'];
 $ln=$_POST['lname'];
@@ -45,6 +47,21 @@ $ar= mysqli_real_escape_string($conn, $ar);
 $cn= mysqli_real_escape_string($conn, $cn);
 $em= mysqli_real_escape_string($conn, $em);
 
+
+$logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('User', 'New', '$datecreated', 'New customer named $fn $mn $ln', '$last_id')";
+	mysqli_query($conn, $logSQL);
+if($cf==$pw)
+{
+	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
+	
+	if($sql2)
+	{
+		if ($conn->query($sql2)==true)
+		{
+			$last_id=$conn->insert_id;
+			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated, confirmedUser) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated',0)";
+			if($conn->query($sql)==true)
+			{
 
 $name = $fn . " " . $mn . " " . $ln;
 // Create an instance of PHPMailer
@@ -99,13 +116,23 @@ $name = $fn . " " . $mn . " " . $ln;
 				// HTML email ends here
 
 	            // SMTP configuration
+
 				$mail->isSMTP();
-				$mail->Host = 'smtp.gmail.com';
+
+	            $mail->SMTPOptions = array(
+				    'ssl' => array(
+				        'verify_peer' => false,
+				        'verify_peer_name' => false,
+				        'allow_self_signed' => true
+				    )
+				);
+
 				$mail->SMTPAuth = true;
-			    $mail->Username = $comemail;
-			    $mail->Password = $compassword;
-				$mail->SMTPSecure = 'tls';
+				$mail->Host = 'smtp.gmail.com';
 				$mail->Port = 587;
+				$mail->SMTPSecure = 'tls';
+			    $mail->Username = 'filfurnitures@gmail.com';
+			    $mail->Password = 'filfurnitures01';
 
 				$mail->setFrom($comemail, $comname);
 				$mail->addReplyTo($comemail, $comname);
@@ -136,37 +163,21 @@ $name = $fn . " " . $mn . " " . $ln;
 		        if(!$mail->send()){
 		            echo '<script>
 					alert("Oops, something went wrong on email!");
+					window.location.href = "register.php";
 					</script>';
 		        }else{
-
-
-
-
-
-
-$logSQL = "INSERT into tbllogs(category, action, date, description, userID) values('User', 'New', '$datecreated', 'New customer named $fn $mn $ln', '$last_id')";
-	mysqli_query($conn, $logSQL);
-if($cf==$pw)
-{
-	$sql2="INSERT into tblcustomer(customerFirstName, customerMiddleName, customerLastName, customerAddress, customerContactNum, customerEmail, customerDP, customerNewsletter, customerStatus) values('$fn', '$mn', '$ln', '$ar', '$cn', '$em', 'defaultdp.jpg', '$newstat', '$status')";
-	
-	if($sql2)
-	{
-		if ($conn->query($sql2)==true)
-		{
-			$last_id=$conn->insert_id;
-			$sql="INSERT INTO tbluser(userName, userPassword, userStatus, userType, userCustID, dateCreated) VALUES ('$un', '$pw', '$status', '$type', '$last_id', '$datecreated')";
-			if($conn->query($sql)==true)
-			{
 	            echo '<script>
 					alert("Account successfully created!");
 					window.location.href = "login.php";
 					</script>';
+					}
 			}
 			else
 			{
 				 echo '<script>
 					alert("Oops, something went wrong!");
+
+					window.location.href = "register.php";
 					</script>';
 			}
 		}
@@ -174,6 +185,7 @@ if($cf==$pw)
 		{
 			 echo '<script>
 					alert("Oops, something went wrong!");
+					window.location.href = "register.php";
 					</script>';
 		}
 	}
@@ -182,9 +194,10 @@ else
 {
 	echo '<script>
 					alert("Oops, something went wrong! Password does not match");
+					window.location.href = "register.php";
 					</script>';
 }
-}
+
 
 $conn->close();
 ?>
