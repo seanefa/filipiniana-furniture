@@ -126,50 +126,6 @@
                                                         <td style="text-align:left">Dimension Specification</td>
                                                         <td style="text-align:left"> <?php echo $trow['prodSizeSpecs']?> </td>
                                                     </tr>
-                                                    <!--tr>
-                                                        <td>Style</td>
-                                                        <td> Contemporary &amp; Modern </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Wheels Included</td>
-                                                        <td> Yes </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Upholstery Included</td>
-                                                        <td> Yes </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Upholstery Type</td>
-                                                        <td> Cushion </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Head Support</td>
-                                                        <td> No </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Suitable For</td>
-                                                        <td> Study &amp; Home Office </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Adjustable Height</td>
-                                                        <td> Yes </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Model Number</td>
-                                                        <td> F01020701-00HT744A06 </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Armrest Included</td>
-                                                        <td> Yes </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Care Instructions</td>
-                                                        <td> Handle With Care, Keep In Dry Place, Do Not Apply Any Chemical For Cleaning. </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Finish Type</td>
-                                                        <td> Matte </td>
-                                                    </tr-->
                                                 </tbody>
                                                 <td>
                                                   <h4><span>Quantity</span></h4><input id="quan" type="number" min="0" step="1" class="form-control" value="1" required/>

@@ -19,11 +19,7 @@ include "product-form.php";
 <script type="text/javascript" src="js/toast-master/js/jquery.toast.js"></script>
 <script type="text/javascript" src="js/toastr.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
- 
-
- 
-
-<script src="js/jquery.mycart.js"></script>
+<script type="text/javascript" src="js/jquery.mycart.js"></script>
 
 <!-- JS Part End-->
 <script>
@@ -81,7 +77,9 @@ $(document).ready(function(){
   
 var q = 0;
 $('#addBtn').attr('data-quantity',q);
-  $('body').on('change','#quan',function(){
+  $('body').on('change','#quan',function(e){
+    e.stopImmediatePropagation();
+    e.preventDefault();
     q = $('#quan').val();
      if(q <= 0){
 
