@@ -300,10 +300,11 @@ function getuserID($id){
                   </tr>
                 </thead>
                 <tbody>
-                  <?php  $sql = "SELECT * from tbluser a, tblcustomize_request b, tblcustomer c WHERE b.tblcustomerID = a.userID and a.userCustID = c.customerID and customStatus = 'WFA' order by customizedID";
+                  <?php  $sql = "SELECT * from tbluser a, tblcustomize_request b, tblcustomer c WHERE b.tblcustomerID = a.userID and a.userCustID = c.customerID and customStatus = 'WFA' order by customizedID;";
 
                   $result = mysqli_query($conn, $sql);
                   if($result){
+                    
                     while ($row = mysqli_fetch_assoc($result))
                     {
                       $orderID = str_pad($row['customizedID'], 6, '0', STR_PAD_LEFT); //format ng display ID
@@ -326,6 +327,7 @@ function getuserID($id){
                   ?>
                 </tbody>
               </table>
+
             </div>
           </div>
         </div>

@@ -67,12 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                       $uresult = mysqli_query($conn,$usql);
                       $urow = mysqli_fetch_assoc($uresult);
 
-                      $uid = $urow["userCustID"];
+                      $uid = $urow["userID"];
+
+
 
                       $sqls = "SELECT * FROM tblcustomize_request where tblcustomerID = '$uid';";
                       $sresult = mysqli_query($conn,$sqls);
 
-
+                      if($sresult){
                       while($srow = mysqli_fetch_assoc($sresult)){
                         $rid = str_pad($srow['customizedID'], 6, '0', STR_PAD_LEFT);
                         $cid = $srow['customizedID'];
@@ -105,6 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                           echo '<td><a href="cancel-custom.php?id='.$cid.'" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
                         }
                       }
+                    }else{
+                      echo 'not oke'.mysqli_error($conn);
+                    }
                       ?>
 
                     </tbody>
@@ -169,11 +174,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                               
                             }
                           });
-                          /*
                           $('#my-awesome-dropzone').hide('blind');
                           $('#hidethistoo').hide('blind');
                           $('#savedDiv').show('blind');
-                          */
+                          
                         }
 
 

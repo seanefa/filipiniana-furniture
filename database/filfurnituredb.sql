@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2017 at 04:54 PM
+-- Generation Time: Dec 15, 2017 at 04:48 PM
 -- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -207,7 +207,8 @@ INSERT INTO `tblcustomer` (`customerID`, `customerFirstName`, `customerMiddleNam
 (39, 'A', 'A', 'A', '#26735 jahdakjdh', '092382897', 'hongkaira@gmail.com', '', 1, 'active'),
 (40, 'Kyungsoo', '', 'DO', '#12234 Seoul SOUKOR', '091291873', 'hongkaira@gmail.com', '', 1, 'active'),
 (41, 'Jose', '', 'Rizal', '#1235lalastreet', '+63 (903) 920-3892', 'joserizal@gmail.com', '', 0, ''),
-(42, 'Pepe', 'Rizal', 'Jose', '123 Tralala', '+63 (912) 893-8199', 'bessymoto@gmail.com', '', 0, 'Active');
+(42, 'Pepe', 'Rizal', 'Jose', '123 Tralala', '+63 (912) 893-8199', 'bessymoto@gmail.com', '', 0, 'Active'),
+(43, 'Mariano', 'Sapico', 'Lozano', 'caloocan', '1231231', 'znotsukaima@gmail.com', 'defaultdp.jpg', 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,10 @@ CREATE TABLE `tblcustomize_request` (
 --
 
 INSERT INTO `tblcustomize_request` (`customizedID`, `tblcustomerID`, `customizedDescription`, `customStatus`, `dateRequest`) VALUES
-(1, 5, 'A blue furniture', 'WFA', '2017-10-15');
+(1, 5, 'A blue furniture', 'WFA', '2017-10-15'),
+(3, 15, 'yey', 'Cancelled', '2017-12-15'),
+(4, 15, 'asd', 'Cancelled', '2017-12-15'),
+(5, 15, 'adfdaf', 'Cancelled', '2017-12-15');
 
 -- --------------------------------------------------------
 
@@ -249,7 +253,16 @@ CREATE TABLE `tblcust_req_images` (
 INSERT INTO `tblcust_req_images` (`cust_req_imagesID`, `cust_req_ID`, `cust_req_images`) VALUES
 (1, 1, 'DKH8owjU8AEy4Rm.jpg'),
 (2, 1, 'DL-dTV4WsAAcCba.jpg'),
-(3, 1, 'DMAKG-IVoAA8Q-e.jpg');
+(3, 1, 'DMAKG-IVoAA8Q-e.jpg'),
+(4, 3, 'black and white dining set.jpg'),
+(5, 3, 'Blue.jpg'),
+(6, 3, 'BrownCouch.jpg'),
+(7, 4, 'black and white dining set.jpg'),
+(8, 4, 'Blue.jpg'),
+(9, 4, 'BrownCouch.jpg'),
+(10, 5, 'black and white dining set.jpg'),
+(11, 5, 'Blue.jpg'),
+(12, 5, 'BrownCouch.jpg');
 
 -- --------------------------------------------------------
 
@@ -931,7 +944,13 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (151, 'Order', 'New', '2017-10-10', 'New order #OR000044', 1),
 (152, 'Order', 'New', '2017-10-11', 'New management order #OR000045', 1),
 (153, 'Order', 'New', '2017-10-12', 'New order #OR000046', 1),
-(154, 'Order', 'New', '2017-10-15', 'New order #OR000047', 1);
+(154, 'Order', 'New', '2017-10-15', 'New order #OR000047', 1),
+(156, 'Customization', 'New', '2017-12-15', 'New customization', 15),
+(157, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 3 cancelled', 15),
+(158, 'Customization', 'New', '2017-12-15', 'New customization', 15),
+(159, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 4 cancelled', 15),
+(160, 'Customization', 'New', '2017-12-15', 'New customization', 15),
+(161, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 5 cancelled', 15);
 
 -- --------------------------------------------------------
 
@@ -2260,7 +2279,8 @@ INSERT INTO `tbluser` (`userID`, `userName`, `userPassword`, `userStatus`, `user
 (11, 'kuyakyung', 'kuyakyung', 'active', 'customer', 37, NULL, '2017-10-11', NULL),
 (12, 'harpa', 'harpa', 'active', 'customer', 38, NULL, '2017-10-11', NULL),
 (13, 'aa', 'aa', 'active', 'customer', 39, NULL, '2017-10-11', NULL),
-(14, 'ksoo', 'ksoo', 'active', 'customer', 40, NULL, '2017-10-11', 1);
+(14, 'ksoo', 'ksoo', 'active', 'customer', 40, NULL, '2017-10-11', 1),
+(15, 'trayner', 'admin', 'active', 'customer', 43, NULL, '2017-12-15', 1);
 
 --
 -- Indexes for dumped tables
@@ -2824,19 +2844,19 @@ ALTER TABLE `tblcompany_info`
 -- AUTO_INCREMENT for table `tblcustomer`
 --
 ALTER TABLE `tblcustomer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
-  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblcust_req_images`
 --
 ALTER TABLE `tblcust_req_images`
-  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbldelivery`
@@ -2968,7 +2988,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `tblmaterials`
@@ -3214,7 +3234,7 @@ ALTER TABLE `tblunit_cat`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

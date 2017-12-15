@@ -9,7 +9,7 @@ $customerid = $_SESSION['userID'];
 $data = "SELECT * from tbluser a, tblcustomer b where a.userCustID = b.customerID AND a.userID = '$customerid'";
 $result = mysqli_query($conn,$data);
 $row = mysqli_fetch_assoc($result);
-$customerid = $row["customerID"];
+$customerid = $row["userID"];
 
 $desc = $_POST['descr'];
 

@@ -11,13 +11,13 @@ $logSQL = "INSERT into tbllogs (`category`, `action`, `date`, `description`, `us
 if(mysqli_query($conn,$sql)){
 	mysqli_query($conn, $logSQL);
 	echo "<script>
-	window.location.href='customization.php';
+	window.location.href='account.php';
 	alert('Successfully cancelled customized request.');
 	</script>";
 }
 else{
 	echo "<script>
-	window.location.href='customization.php';
+	window.location.href='account.php';
 	alert('Failed to cancel customized request.');
 	</script>";
 }

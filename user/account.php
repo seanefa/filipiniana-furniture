@@ -270,7 +270,7 @@ unset($_SESSION['actionFailed']);
 									$uresult = mysqli_query($conn,$usql);
 									$urow = mysqli_fetch_assoc($uresult);
 
-									$uid = $urow["userCustID"];
+									$uid = $urow["userID"];
 
 									$sqls = "SELECT * FROM tblcustomize_request where tblcustomerID = '$uid';";
 									$sresult = mysqli_query($conn,$sqls);
@@ -305,11 +305,12 @@ unset($_SESSION['actionFailed']);
 										}
 										else
 										{
-											echo '<td><a href="cancel-custom.php?id='.$cid.'" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
+											echo '<td><a id="c'.$cid.'" onclick="cancelthis('.$cid.')" class="pull-right" style="color:#1A9CB7;">Cancel Request</a></td>';
 										}
 									}
 
 									?>
+
 
 								</tbody>
 							</table>
@@ -336,5 +337,16 @@ unset($_SESSION['actionFailed']);
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function cancelthis(id){
+		$('#c'+id).click(function(){
+		var res = confirm("Are You sure?");
+		if(res){	
+		$('#c'+id).attr('href',"cancel-custom.php?id="+id+"");
+		$(this).clicked();
+		}
+	});
+	}
+</script>
 </body>
 </html>
