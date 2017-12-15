@@ -31,7 +31,7 @@ if(mysqli_query($conn,$insertnews)){
 		$mail = new PHPMailer();
 
 // Debugger
-//$mail->SMTPDebug = 2;
+// $mail->SMTPDebug = 2;
 
 // HTML email starts here
 		$subject    = "Announcement from $comname!";
@@ -89,6 +89,15 @@ if(mysqli_query($conn,$insertnews)){
 	    $mail->Password = $compassword;
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
+		$mail->Timeout = 1200;
+
+		$mail->SMTPOptions = array(
+			'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+			)
+		);
 
 		$mail->setFrom($comemail, $comname);
 		$mail->addReplyTo($comemail, $comname);
@@ -109,15 +118,15 @@ if(mysqli_query($conn,$insertnews)){
 //echo 'Message could not be sent.';
 //echo 'Mailer Error: ' . $mail->ErrorInfo;
 			echo '<script>
-			alert("Oops, something went wrong!");
-			window.location.href = "dashboard.php";
-			</script>';
+				alert("Oops, something went wrong!");
+				window.location.href = "dashboard.php";
+				</script>';
 		}
 		else{
 			echo '<script>
-			alert("Newsletter succefully sent!");
-			window.location.href = "dashboard.php";
-			</script>';
+				alert("Newsletter successfully sent!");
+				window.location.href = "dashboard.php";
+				</script>';
 		}
 	}
 }

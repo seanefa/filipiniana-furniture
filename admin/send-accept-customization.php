@@ -45,7 +45,7 @@ if($flag>0){
 			$mail = new PHPMailer();
 
 // Debugger
-//$mail->SMTPDebug = 2;
+// $mail->SMTPDebug = 2;
 
 // HTML email starts here
 // HTML email starts here
@@ -112,6 +112,15 @@ if($flag>0){
 			$mail->Password = $compassword;
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = 587;
+			$mail->Timeout = 600;
+
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+			);
 
 			$mail->setFrom($comemail, $comname);
 			$mail->addReplyTo($comemail, $comname);

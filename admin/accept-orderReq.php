@@ -70,7 +70,7 @@ if(mysqli_query($conn,$updateSql)){
   $mail = new PHPMailer();
 
 // Debugger
-//$mail->SMTPDebug = 2;
+// $mail->SMTPDebug = 2;
 
 // HTML email starts here
   $subject    = "Your order has been accepted";
@@ -248,45 +248,54 @@ if(mysqli_query($conn,$updateSql)){
 // HTML email ends here
 
 // SMTP configuration
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = $comemail;
-    $mail->Password = $compassword;
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+  $mail->isSMTP();
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = $comemail;
+  $mail->Password = $compassword;
+  $mail->SMTPSecure = 'tls';
+  $mail->Port = 587;
+  $mail->Timeout = 600;
 
-    $mail->setFrom($comemail, $comname);
-    $mail->addReplyTo($comemail, $comname);
+  $mail->SMTPOptions = array(
+    'ssl' => array(
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+      'allow_self_signed' => true
+    )
+  );
+
+  $mail->setFrom($comemail, $comname);
+  $mail->addReplyTo($comemail, $comname);
 
 // Add a recipient
-    $mail->addAddress($em);
+  $mail->addAddress($em);
 
 // Set email format to HTML
-    $mail->isHTML(true);
+  $mail->isHTML(true);
 
 // Email subject
-    $mail->Subject = $subject;
+  $mail->Subject = $subject;
 
 // Email body content
-    $mail->Body = $message;
+  $mail->Body = $message;
 
 // Send email
   if(!$mail->send()){
 //echo 'Message could not be sent.';
 //echo 'Mailer Error: ' . $mail->ErrorInfo;
-      $updateSql = "UPDATE tblorders SET orderStatus = 'WFA', orderRemarks =  '$remarks', dateOfRelease = '$date' WHERE orderID = $id";
+    $updateSql = "UPDATE tblorders SET orderStatus = 'WFA', orderRemarks =  '$remarks', dateOfRelease = '$date' WHERE orderID = $id";
     mysqli_query($conn,$updateSql);
-        echo '<script>
-        alert("Oops, something went wrong!");
-        window.location.href = "dashboard.php";
-        </script>';
-      }
-      else{
-        echo '<script>
-        alert("Order Request successfully accepted!");
-        window.location.href = "dashboard.php";
-        </script>';
-      }
+    echo '<script>
+    alert("Oops, something went wrong!");
+    window.location.href = "dashboard.php";
+    </script>';
+  }
+  else{
+    echo '<script>
+    alert("Order Request successfully accepted!");
+    window.location.href = "dashboard.php";
+    </script>';
+  }
 }
 ?>

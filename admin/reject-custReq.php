@@ -41,7 +41,7 @@ if($flag>0){
 		while($row = mysqli_fetch_assoc($res)){
 			$name = $row["customerFirstName"] . " " . $row["customerMiddleName"] . " " . $row["customerLastName"];
 			$email = $row["customerEmail"];
-			
+
 			$orderNumber = str_pad($row['customizedID'], 6, '0', STR_PAD_LEFT);
 
 // Create an instance of PHPMailer
@@ -51,7 +51,7 @@ if($flag>0){
 
 // HTML email starts here
 			$subject    = "Your customization request has been rejected";
-  			$text_message = "Dear " . $row["customerFirstName"] . " " . $row["customerLastName"] . ",";
+			$text_message = "Dear " . $row["customerFirstName"] . " " . $row["customerLastName"] . ",";
 
 			$mail->AddEmbeddedImage('plugins/images/'.$rowcom['comp_logo'].'', 'logoimg');    
 
@@ -78,18 +78,18 @@ if($flag>0){
 
 			<tr height='80'>
 			<td colspan='4' align='center' style='background-color:#f5f5f5; border-top:dashed #DDBF5F 2px; font-size:24px;''>
-			  <div class='row'>
-			  <div class='col-md-3'>
-			  <p style='font-size:15px;'>".$rowcom['comp_name']."</p>
-			  </div>
-			  <div class='col-md-3'>
-			  <p style='font-size:15px;'>".$rowcom['comp_address']."</p>
-			  </div>
-			  <div class='col-md-3'>
-			  <p style='font-size:15px;'>Phone:&nbsp;".$rowcom['comp_num']."</p>
-			  </div>
-			  </div>
-			  </td>
+			<div class='row'>
+			<div class='col-md-3'>
+			<p style='font-size:15px;'>".$rowcom['comp_name']."</p>
+			</div>
+			<div class='col-md-3'>
+			<p style='font-size:15px;'>".$rowcom['comp_address']."</p>
+			</div>
+			<div class='col-md-3'>
+			<p style='font-size:15px;'>Phone:&nbsp;".$rowcom['comp_num']."</p>
+			</div>
+			</div>
+			</td>
 			</tr>
 			</tbody>";
 			$message .= "</table>";
@@ -106,6 +106,15 @@ if($flag>0){
 			$mail->Password = $compassword;
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = 587;
+  			$mail->Timeout = 600;
+
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+			);
 
 			$mail->setFrom($comemail, $comname);
 			$mail->addReplyTo($comemail, $comname);
@@ -122,7 +131,7 @@ if($flag>0){
 // Email body content
 			$mail->Body = $message;
 // Send email
-			 if(!$mail->send()){
+			if(!$mail->send()){
 //echo 'Message could not be sent.';
 //echo 'Mailer Error: ' . $mail->ErrorInfo;
 				echo '<script>
