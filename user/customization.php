@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                               arr: JSON.stringify(arrays), descr: desc,
                             },
                             success: function (response) {
-                              alert(response);
+                              
                             }
                           });
                           /*
