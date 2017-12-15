@@ -35,5 +35,7 @@ if(mysqli_query($conn,$sql))
 		}
 	}
 	echo 'okay na';
+}else{
+	echo "Error" . mysqli_error($conn);
 }
 ?>

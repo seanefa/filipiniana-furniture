@@ -140,42 +140,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                   });
 
                   Dropzone.options.myAwesomeDropzone = {
-  paramName: "file", // The name that will be used to transfer the file
-  maxFilesize: 2, //mb
-  maxFiles: 4, // number of files
-  addRemoveLinks: true,
-  accept: function(file, done) {
+                        paramName: "file", // The name that will be used to transfer the file
+                        maxFilesize: 2, //mb
+                        maxFiles: 4, // number of files
+                        addRemoveLinks: true,
+                        accept: function(file, done) {
 
 
-    $('#saveBtn').on('click',function(){
+                          $('#saveBtn').on('click',function(){
 
-      if(check){
-        arrays.push(file.name);
-        done();
-      }
+                            if(check){
+                              arrays.push(file.name);
+                              done();
+                            }
 
-    });
-  },
-  queuecomplete: function (file) {
-    var desc = $('#custdesc').val();
+                          });
+                        },
+                        queuecomplete: function (file) {
+                          var desc = $('#custdesc').val();
 
-    $.ajax({
-      type: 'post',
-      url: 'add-cust-req.php',
-      data: {
-        arr: JSON.stringify(arrays), descr: desc,
-      },
-      success: function (response) {
+                          $.ajax({
+                            type: 'post',
+                            url: 'add-cust-req.php',
+                            data: {
+                              arr: JSON.stringify(arrays), descr: desc,
+                            },
+                            success: function (response) {
+                              alert(response);
+                            }
+                          });
+                          /*
+                          $('#my-awesome-dropzone').hide('blind');
+                          $('#hidethistoo').hide('blind');
+                          $('#savedDiv').show('blind');
+                          */
+                        }
 
-      }
-    });
-    $('#my-awesome-dropzone').hide('blind');
-    $('#hidethistoo').hide('blind');
-    $('#savedDiv').show('blind');
-  }
 
-
-};
+                      };
 
 
 </script>
