@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.6
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2017 at 10:50 AM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Generation Time: Dec 15, 2017 at 04:48 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -230,7 +230,9 @@ CREATE TABLE `tblcustomize_request` (
 
 INSERT INTO `tblcustomize_request` (`customizedID`, `tblcustomerID`, `customizedDescription`, `customStatus`, `dateRequest`) VALUES
 (1, 5, 'A blue furniture', 'WFA', '2017-10-15'),
-(6, 15, 'Batiste', 'Rejected', '2017-12-16');
+(3, 15, 'yey', 'Cancelled', '2017-12-15'),
+(4, 15, 'asd', 'Cancelled', '2017-12-15'),
+(5, 15, 'adfdaf', 'Cancelled', '2017-12-15');
 
 -- --------------------------------------------------------
 
@@ -252,7 +254,15 @@ INSERT INTO `tblcust_req_images` (`cust_req_imagesID`, `cust_req_ID`, `cust_req_
 (1, 1, 'DKH8owjU8AEy4Rm.jpg'),
 (2, 1, 'DL-dTV4WsAAcCba.jpg'),
 (3, 1, 'DMAKG-IVoAA8Q-e.jpg'),
-(13, 6, 'batiste.jpg');
+(4, 3, 'black and white dining set.jpg'),
+(5, 3, 'Blue.jpg'),
+(6, 3, 'BrownCouch.jpg'),
+(7, 4, 'black and white dining set.jpg'),
+(8, 4, 'Blue.jpg'),
+(9, 4, 'BrownCouch.jpg'),
+(10, 5, 'black and white dining set.jpg'),
+(11, 5, 'Blue.jpg'),
+(12, 5, 'BrownCouch.jpg');
 
 -- --------------------------------------------------------
 
@@ -290,9 +300,9 @@ CREATE TABLE `tbldelivery_history` (
   `delHist_recID` int(11) NOT NULL,
   `delHistDate` date NOT NULL,
   `delHistDeliveryMan` int(11) NOT NULL,
-  `delHistRemarks` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
-  `delHistStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `delHistRemarks` varchar(45) DEFAULT NULL,
+  `delHistStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbldelivery_history`
@@ -337,8 +347,8 @@ INSERT INTO `tbldelivery_rates` (`delivery_rateID`, `delBranchID`, `delLocation`
 
 CREATE TABLE `tbldelivery_status` (
   `id` int(11) NOT NULL,
-  `statusName` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `statusName` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbldelivery_status`
@@ -387,10 +397,10 @@ INSERT INTO `tbldesign_phase` (`d_phaseID`, `p_design`, `d_phase`, `d_phaseStatu
 
 CREATE TABLE `tbldiscounts` (
   `discountID` int(11) NOT NULL,
-  `discountName` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `discountName` varchar(45) NOT NULL,
   `discountPercentage` int(11) NOT NULL,
-  `discountStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `discountStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbldiscounts`
@@ -475,7 +485,7 @@ CREATE TABLE `tblfabrics` (
 --
 
 INSERT INTO `tblfabrics` (`fabricID`, `fabricName`, `fabricTypeID`, `fabricPatternID`, `fabricColor`, `fabricRemarks`, `fabricPic`, `fabricStatus`) VALUES
-(9, 'Gold Rani', 4, 7, 'Yellow and White', 'A soft weaved cotton fabric in yellow and white sunflowers pattern', '2017-12-161513410909.png', 'Listed');
+(9, 'Gold Rani', 4, 8, 'Yellow and White', 'A soft weaved cotton fabric in yellow and white sunflowers pattern', '2017-08-241503587847.png', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -519,7 +529,7 @@ CREATE TABLE `tblfabric_texture` (
 INSERT INTO `tblfabric_texture` (`textureID`, `textureName`, `textureDescription`, `textureRating`, `textureStatus`) VALUES
 (13, 'Smooth', 'Smooth', 1, 'Listed'),
 (14, 'Very Smooth', 'Very smooth', 4, 'Listed'),
-(15, 'Silk', 'Silky', 3, 'Listed');
+(15, 'Smooth 3', 'Very very smooth', 3, 'Listed');
 
 -- --------------------------------------------------------
 
@@ -564,8 +574,8 @@ CREATE TABLE `tblframeworks` (
 --
 
 INSERT INTO `tblframeworks` (`frameworkID`, `frameworkFurnType`, `frameworkName`, `frameworkPic`, `framedesignID`, `materialUsedID`, `frameworkRemarks`, `frameworkStatus`) VALUES
-(9, 15, 'Side Victorian Floral', '2017-12-161513411442.png', 5, 2, ' Victorian Floral Design on the sides', 'Listed'),
-(10, 17, 'Basic Frame', '2017-12-161513411620.png', 6, 2, ' Checkered basic design ', 'Listed');
+(9, 15, 'Side Victorian Floral', '2017-08-241503588358.png', 5, 1, ' Victorian Floral Design on the sides', 'Listed'),
+(10, 17, 'Basic Frame', '2017-08-241503588427.png', 6, 1, ' Checkered basic design ', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -606,7 +616,7 @@ CREATE TABLE `tblframe_material` (
 --
 
 INSERT INTO `tblframe_material` (`materialID`, `materialName`, `materialRemarks`, `materialStatus`) VALUES
-(1, 'Narra Wood', 'Narra Woods are very sturdy kind of wood', 'Listed'),
+(1, 'Narra Wood', 'Narra wood is a very sturdy kind of wood', 'Listed'),
 (2, 'Mahogany Wood', ' Mahogany Woods are amazing type of wood', 'Listed');
 
 -- --------------------------------------------------------
@@ -940,17 +950,7 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (158, 'Customization', 'New', '2017-12-15', 'New customization', 15),
 (159, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 4 cancelled', 15),
 (160, 'Customization', 'New', '2017-12-15', 'New customization', 15),
-(161, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 5 cancelled', 15),
-(162, 'Fabrics Formed', 'Update', '2017-12-16', 'Updated fabric Gold Rani, ID = 9', 1),
-(163, 'Frameworks', 'Update', '2017-12-16', 'Updated framework Side Victorian Floral, ID = 9', 1),
-(164, 'Frameworks', 'Update', '2017-12-16', 'Updated framework Basic Frame, ID = 10', 1),
-(165, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1),
-(166, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1),
-(167, 'Products', 'Update', '2017-12-16', 'Updated product Queen, ID = 16', 1),
-(168, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1),
-(169, 'Products', 'Update', '2017-12-16', 'Updated product Manilenia, ID = 18', 1),
-(170, 'Customization', 'New', '2017-12-16', 'New customization', 15),
-(171, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1);
+(161, 'Customization', 'Cancelled', '2017-12-15', 'Customization request 5 cancelled', 15);
 
 -- --------------------------------------------------------
 
@@ -992,8 +992,8 @@ CREATE TABLE `tblmat_actions` (
   `mat_actionsID` int(11) NOT NULL,
   `mat_intID` int(11) NOT NULL,
   `mat_quantity` int(11) NOT NULL,
-  `mat_actionRemarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `mat_actionRemarks` varchar(450) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1005,9 +1005,9 @@ CREATE TABLE `tblmat_deductdetails` (
   `mat_deductID` int(11) NOT NULL,
   `mat_inventoryID` int(11) NOT NULL,
   `mat_deductQuantity` int(11) NOT NULL,
-  `mat_deductRemarks` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `mat_deductRemarks` varchar(45) NOT NULL,
   `mat_deductDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblmat_deductdetails`
@@ -1027,9 +1027,9 @@ CREATE TABLE `tblmat_deliveries` (
   `supplierID` int(11) NOT NULL,
   `totalQuantity` int(11) NOT NULL,
   `dateSupplied` date NOT NULL,
-  `mat_deliveryRemarks` varchar(450) CHARACTER SET latin1 NOT NULL,
-  `mat_deliveryStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `mat_deliveryRemarks` varchar(450) NOT NULL,
+  `mat_deliveryStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblmat_deliveries`
@@ -1053,8 +1053,8 @@ CREATE TABLE `tblmat_deliverydetails` (
   `del_matDelID` int(11) NOT NULL,
   `del_matVarID` int(11) NOT NULL,
   `del_quantity` int(11) NOT NULL,
-  `del_remarks` varchar(450) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `del_remarks` varchar(450) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblmat_deliverydetails`
@@ -1083,7 +1083,7 @@ CREATE TABLE `tblmat_inventory` (
   `mat_inventoryID` int(11) NOT NULL,
   `matVariantID` int(11) NOT NULL,
   `matVarQuantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblmat_inventory`
@@ -1248,9 +1248,9 @@ CREATE TABLE `tblnewsletter` (
   `newsID` int(11) NOT NULL,
   `newsletterDate` date NOT NULL,
   `newsletterAuthor` int(11) NOT NULL,
-  `newsletterContent` varchar(450) CHARACTER SET latin1 NOT NULL,
-  `newsletterStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `newsletterContent` varchar(450) NOT NULL,
+  `newsletterStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblnewsletter`
@@ -1263,7 +1263,8 @@ INSERT INTO `tblnewsletter` (`newsID`, `newsletterDate`, `newsletterAuthor`, `ne
 (4, '2017-10-15', 1, 'Hello', ''),
 (5, '2017-10-15', 1, 'Hello', ''),
 (6, '2017-10-16', 1, 'Kyah', ''),
-(7, '2017-10-16', 1, 'Kyah', '');
+(7, '2017-10-16', 1, 'Kyah', ''),
+(8, '2017-10-16', 1, 'Ewan ko haaaaaaaa', '');
 
 -- --------------------------------------------------------
 
@@ -1277,10 +1278,10 @@ CREATE TABLE `tblnotification` (
   `tblorderID` int(11) NOT NULL,
   `amountPaid` double NOT NULL,
   `datePaid` date NOT NULL,
-  `bankBranch` varchar(450) CHARACTER SET latin1 NOT NULL,
-  `proofPicture` varchar(450) CHARACTER SET latin1 NOT NULL,
-  `notifStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `bankBranch` varchar(450) NOT NULL,
+  `proofPicture` varchar(450) NOT NULL,
+  `notifStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblnotification`
@@ -1434,9 +1435,7 @@ INSERT INTO `tblorder_actions` (`orActionID`, `orOrderID`, `orAction`, `orReason
 (38, 1, 'Cancelled', 'No reason.'),
 (39, 1, 'Cancelled', 'No reason.'),
 (40, 1, 'Cancelled', 'No reason.'),
-(41, 1, 'Cancelled', 'No reason.'),
-(42, 6, 'Rejected Customization', 'Wala lang hehe'),
-(43, 6, 'Rejected Customization', 'Wala lang hehe');
+(41, 1, 'Cancelled', 'No reason.');
 
 -- --------------------------------------------------------
 
@@ -1538,7 +1537,7 @@ CREATE TABLE `tblorder_requestcnt` (
   `orreq_prodFinish` int(11) DEFAULT NULL,
   `orreq_returned` int(11) DEFAULT NULL,
   `orreq_released` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblorder_requestcnt`
@@ -1565,12 +1564,12 @@ CREATE TABLE `tblorder_return` (
   `returnID` int(11) NOT NULL,
   `tblorderReqID` int(11) NOT NULL,
   `dateReturned` date NOT NULL,
-  `returnReason` varchar(450) CHARACTER SET latin1 NOT NULL,
-  `returnAssessment` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `returnRemarks` varchar(450) CHARACTER SET latin1 NOT NULL,
+  `returnReason` varchar(450) NOT NULL,
+  `returnAssessment` varchar(45) NOT NULL,
+  `returnRemarks` varchar(450) NOT NULL,
   `estDateReleased` date NOT NULL,
-  `returnStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `returnStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblorder_return`
@@ -1630,7 +1629,7 @@ CREATE TABLE `tblpackage_orderreq` (
   `por_ID` int(11) NOT NULL,
   `por_orReqID` int(11) NOT NULL,
   `por_prID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblpackage_orderreq`
@@ -1767,8 +1766,8 @@ CREATE TABLE `tblprodphase_materials` (
   `pphID` int(11) NOT NULL,
   `pph_matDescID` int(11) NOT NULL,
   `pph_matQuan` int(11) NOT NULL,
-  `pph_matStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `pph_matStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblprodphase_materials`
@@ -1824,9 +1823,9 @@ CREATE TABLE `tblproduct` (
 --
 
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
-(16, 7, 13, 9, '1', 0, 'Queen', 'A queen sized bed', 50000, '2017-12-161513412227.png', '20x32x443', 'Pre-Order'),
-(17, 6, 17, 9, '1', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-12-161513417609.png', '', 'Pre-Order'),
-(18, 7, 13, 10, '1', 0, 'Manilenia', 'An amazing furn', 25000, '2017-12-161513412373.png', '30x32x35', 'Pre-Order');
+(16, 7, 13, 9, '1', 0, 'Queen', 'A queen sized bed', 50000, '2017-08-241503588669.png', '', 'Pre-Order'),
+(17, 6, 17, 9, '3', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-08-281503930441.png', ' L16.3â€³ x W16.3â€³ x H36.9â€³', 'Pre-Order'),
+(18, 7, 13, 10, '1', 0, 'Manilenia', 'An amazing furn', 25000, '2017-08-301504075842.png', '', 'Pre-Order');
 
 -- --------------------------------------------------------
 
@@ -2053,9 +2052,9 @@ CREATE TABLE `tblpull_out` (
   `pullout_fID` int(11) NOT NULL,
   `pullout_Date` date NOT NULL,
   `pullout_quantity` int(11) NOT NULL,
-  `pullout_reason` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `pullout_Remarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `pullout_reason` varchar(45) NOT NULL,
+  `pullout_Remarks` varchar(450) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblpull_out`
@@ -2075,10 +2074,10 @@ INSERT INTO `tblpull_out` (`pulloutID`, `pullout_fID`, `pullout_Date`, `pullout_
 CREATE TABLE `tblrelease` (
   `releaseID` int(11) NOT NULL,
   `releaseDate` datetime NOT NULL,
-  `releaseType` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `releaseRemarks` varchar(450) CHARACTER SET latin1 DEFAULT NULL,
-  `releaseStatus` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `releaseType` varchar(50) NOT NULL,
+  `releaseRemarks` varchar(450) DEFAULT NULL,
+  `releaseStatus` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblrelease`
@@ -2117,7 +2116,7 @@ CREATE TABLE `tblrelease_details` (
   `tblreleaseID` int(11) NOT NULL,
   `rel_orderReqID` int(11) NOT NULL,
   `rel_quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblrelease_details`
@@ -2144,11 +2143,11 @@ CREATE TABLE `tblreview` (
   `tblproductID` int(11) DEFAULT NULL,
   `tblpackageID` int(11) DEFAULT NULL,
   `tblcustomerID` int(11) NOT NULL,
-  `reviewDescription` varchar(1000) CHARACTER SET latin1 DEFAULT NULL,
-  `reviewStatus` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `reviewDescription` varchar(1000) DEFAULT NULL,
+  `reviewStatus` varchar(45) NOT NULL,
   `reviewRating` int(3) NOT NULL,
-  `reviewDate` varchar(45) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `reviewDate` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2173,7 +2172,8 @@ CREATE TABLE `tblsupplier` (
 INSERT INTO `tblsupplier` (`supplierID`, `supCompName`, `supCompAdd`, `supCompNum`, `supContactPerson`, `supPosition`, `supStatus`) VALUES
 (15, 'FNCENT Trees and Woods Inc.', '1234 Bill Street Batasan Hills Quezon City', '+63 (124) 534-3414', 'Mr. Jung', 'Manager', 'Listed'),
 (16, 'SMENT Fabrics and Prints', '111 Gangnamgu Seoul South Korea', '+63 (999) 414-5004', 'Lee Soo Man', 'Manager', 'Listed'),
-(17, 'AA', '111 Resolution Rd. Batasan Hills Quezon City', '+63 (237) 642-9312', 'Mr. Lee', 'Manager', 'Listed');
+(17, 'AA', '111 Resolution Rd. Batasan Hills Quezon City', '+63 (237) 642-9312', 'Mr. Lee', 'Manager', 'Listed'),
+(18, 'l;efjdor2093729ueij', 'skdjksaljdklwjde1913982938209`o!!22jkeljd', '+63 (922) 938-7812', 'idaskhdkjahsoi', 'u398139817872egwajhzgwHJSW', 'Listed');
 
 -- --------------------------------------------------------
 
@@ -2850,13 +2850,13 @@ ALTER TABLE `tblcustomer`
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
-  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblcust_req_images`
 --
 ALTER TABLE `tblcust_req_images`
-  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbldelivery`
@@ -2988,7 +2988,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `tblmaterials`
@@ -3072,7 +3072,7 @@ ALTER TABLE `tblorders`
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
 ALTER TABLE `tblorder_actions`
-  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
