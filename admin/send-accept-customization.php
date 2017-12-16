@@ -6,9 +6,9 @@ include "session-check.php";
 include 'dbconnect.php';
 
 // Include and initialize phpmailer class
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'plugins/bower_components/PHPMailer/src/Exception.php';
+require 'plugins/bower_components/PHPMailer/src/PHPMailer.php';
+require 'plugins/bower_components/PHPMailer/src/SMTP.php';
 
 $custid = $_GET['custid'];
 $price = $_GET['price'];
@@ -51,7 +51,7 @@ if($flag>0){
 // HTML email starts here
 			$subject    = "Your customization request has been accepted";
 			$text_message = "Dear " . $row["customerFirstName"] . " " . $row["customerLastName"] . ",";
-			$mail->AddEmbeddedImage('plugins/images/'.$rowcom['comp_logo'].'', 'logoimg');      
+			$mail->AddEmbeddedImage('plugins/logo/'.$rowcom['comp_logo'].'', 'logoimg');      
 
 			$message  = "<html><body>";
 

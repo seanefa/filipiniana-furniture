@@ -531,7 +531,7 @@ function addQuant(id,quant){
                                         <select id="selectCat" style="height:40px;" class="form-control" data-placeholder="Choose Category" tabindex="1" name="selectCat">
                                           <option value="On-Hand">All On-Hand Furnitures</option>
                                           <?php
-                                          include 'ew.php';
+                                          include 'dropdown-category.php';
                                           $delsql = "SELECT * FROM tblfurn_category ORDER BY categoryName ASC;";
                                           $delresult = mysqli_query($conn,$delsql);
                                           while($delrow = mysqli_fetch_assoc($delresult)){

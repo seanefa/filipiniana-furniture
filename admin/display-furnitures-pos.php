@@ -23,7 +23,7 @@ if($id=="On-Hand"){
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
 			<div class="thumbnail instafilta-target">
 			<div class="product-img">
-			<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
+			<img height="112px" width="120px" src="plugins/products/'.$row['prodMainPic'].'"/>
 			<div class="pro-img-overlay">
 			<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
 			</div>
@@ -91,7 +91,7 @@ else if($id=="Packages"){
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
 				<div class="thumbnail instafilta-target">
 				<div class="product-img">
-				<img height="112px" width="120px" src="plugins/images/package"/>
+				<img height="112px" width="120px" src="plugins/package/defaultpackage.png"/>
 				<div class="pro-img-overlay">
 				<button type="button" class="btn btn-info" data-toggle="modal" href="packages-form.php" data-remote="packages-form.php?id='.$row['packageID'].' #viewOMPackage" data-target="#myProduct" value="'.$row['packageID'].'" style="margin-top:20px;">View Package<br>Details<input type="hidden" id="idBtn" value="'.$row['packageID'].'"/></button>
 				</div>
@@ -150,7 +150,7 @@ else{ //category
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
 					<div class="thumbnail instafilta-target">
 					<div class="product-img">
-					<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
+					<img height="112px" width="120px" src="plugins/products/'.$row['prodMainPic'].'"/>
 					<div class="pro-img-overlay">
 					<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
 					</div>
@@ -211,7 +211,7 @@ if(isset($_POST['type'])){
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;">
 				<div class="thumbnail instafilta-target">
 				<div class="product-img">
-				<img height="112px" width="120px" src="plugins/images/'.$row['prodMainPic'].'"/>
+				<img height="112px" width="120px" src="plugins/products/'.$row['prodMainPic'].'"/>
 				<div class="pro-img-overlay">
 				<button type="button" class="btn btn-info" data-toggle="modal" href="prod-forms.php" data-remote="prod-forms.php?id='.$row['productID'].' #view" data-target="#myProduct" value="'.$row['productID'].'" style="margin-top:20px;">View Product<br>Details<input type="hidden" id="idBtn" value="'.$row['productID'].'"/></button>
 				</div>

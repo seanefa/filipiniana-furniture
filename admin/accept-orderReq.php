@@ -3,9 +3,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Include and initialize phpmailer class
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'plugins/bower_components/PHPMailer/src/Exception.php';
+require 'plugins/bower_components/PHPMailer/src/PHPMailer.php';
+require 'plugins/bower_components/PHPMailer/src/SMTP.php';
 
 include "session-check.php";
 include 'dbconnect.php';

@@ -27,7 +27,7 @@ echo "<input type='hidden' id='dateToday' value='".$dateToday."'>"
 <html lang="en">
 <head>
   <title>Check-Out</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/logo/favicon.ico">
   <script>
 //   $(document).ready(function(){
 //   $('#pdate').on('change',function(){

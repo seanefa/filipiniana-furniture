@@ -145,7 +145,7 @@ if (!$conn) {
               <hr>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="white-box text-center"> <img src="plugins/frameworks/<?php echo $trow['frameworkPic']?>" alt="Unavailable" class="img-responsive"> </div>
+                  <div class="white-box text-center"> <img src="plugins/frameworks/<?php echo $trow['frameworkPic']?>" alt="Unavailable" width="280px"; height="300px"; class="img-responsive"> </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
 

@@ -51,11 +51,6 @@ if (!empty($_SESSION['actionFailed'])) {
 <head>
 <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
-
-    <!-- Literally Canvas -->
-    <script src="js/literallycanvas.js"></script>
-  <script type="text/javascript"></script>
-  <link href="css/literallycanvas.css" rel="stylesheet">
    <link href="plugins/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet">
   <script src="plugins/bower_components/dropify/dist/js/dropify.min.js"></script>
   <script>

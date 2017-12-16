@@ -18,7 +18,7 @@ if(isset($_GET['customerId'])){
 <html lang="en">
 <head>
   <title>Order Management</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/logo/favicon.ico">
 </head>
 <body class ="fix-header fix-sidebar">
   <!-- Preloader -->

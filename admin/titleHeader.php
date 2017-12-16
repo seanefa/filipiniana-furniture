@@ -8,6 +8,6 @@
 <html>
 	<head>
  		 <title><?php echo $titlePage?></title>
-  		 <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  		 <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/logo/favicon.ico">
 	</head>
 </html>

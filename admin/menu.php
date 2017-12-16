@@ -83,15 +83,13 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
   <link href="css/style.css" rel="stylesheet">
   <!-- Color CSS -->
   <link href="css/colors/default.css" id="theme"  rel="stylesheet">
-  <link href="css/select2.min.css" rel="stylesheet">
+  <link href="plugins/bower_components/select2/select2.min.css" rel="stylesheet">
   <!-- Wizard CSS -->
   <link href="plugins/bower_components/jquery-wizard-master/css/wizard.css" rel="stylesheet">
   <!-- FormValidation -->
   <link rel="stylesheet" href="plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.css">
   <!-- SweetAlerts CSS -->
   <link href="plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
-  <!-- LiterallyCanvas CSS -->
-  <link href="css/literallycanvas.css" rel="stylesheet">
   <!-- CornerRibbons CSS -->
   <link href="css/cornerribbons.css" rel="stylesheet">
   <!-- Switchery CSS -->  
@@ -148,7 +146,7 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
             while($row=$result->fetch_assoc())
             {
           ?>
-          <span class="light-logo" style="font-weight: bolder; letter-spacing: 3px; float:right; color: #4A4A4A; margin-left: 75px; margin-top: -55px; font-family: Helvetica;"><?php echo "" . $row['comp_name'];?></span>
+          <span class="light-logo" style="font-weight: 300; letter-spacing: 3px; float:right; color: #4A4A4A; margin-left: 75px; margin-top: -55px; font-family: inherit; text-transform: uppercase;"><?php echo "" . $row['comp_name'];?></span>
           <?php
             }
           }
@@ -430,7 +428,7 @@ if(!isset($_SESSION["userID"]) || $_SESSION['userType']!='admin')
   <script src="plugins/bower_components/pdfmake/build/vfs_fonts.js"></script>
   <script src="plugins/bower_components/datatables/buttons.html5.min.js"></script>
   <script src="plugins/bower_components/datatables/buttons.print.min.js"></script>
-  <script src="js/select2.min.js"></script>
+  <script src="plugins/bower_components/select2/select2.min.js"></script>
   <!-- end - This is for export functionality only -->
   <!-- Horizontal-timeline JavaScript -->
   <!--script src="../plugins/bower_components/horizontal-timeline/js/horizontal-timeline.js"></script-->

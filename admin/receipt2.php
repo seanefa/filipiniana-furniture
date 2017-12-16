@@ -4,8 +4,8 @@ $id = $_GET['id'];
 $or = str_pad($id, 6, '0', STR_PAD_LEFT);
 $orID = "OR". $or;
 /*
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-require_once "dompdf/autoload.inc.php";
+set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/plugins/bower_components/dompdf-master");
+require_once "plugins/bower_components/dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 ob_start();*/
 ?>
@@ -30,7 +30,7 @@ $orderID = $orRoq['orderID'];
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div style="text-align: center;">
-        <img height="55px" src="plugins/images/<?php echo $row['comp_logo'];?>"/>
+        <img height="55px" src="plugins/logo/<?php echo $row['comp_logo'];?>"/>
       </div>
     </div>
   </div>

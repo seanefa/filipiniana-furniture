@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Filipiniana Furniture</title>
-    <link rel="icon" type="image/x-icon" sizes="16x16" href="../admin/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="../admin/plugins/logo/favicon.ico">
 
     <!-- Styles -->
     <link href="css/login.css" rel="stylesheet">
@@ -32,8 +32,38 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                        <img src="../admin/plugins/images/filipiniana-furniture-logo.png">
-                    <img src="../admin/plugins/images/filipiniana-furniture-v2-text-dark.png">
+                        <div class="top-left-part"><a class="logo" href="dashboard.php"><b><!--This is light logo icon--><?php
+        include "dbconnect.php";
+        $sql="SELECT * from tblcompany_info";
+        $result=$conn->query($sql);
+        if($result->num_rows>0)
+        {
+          while($row=$result->fetch_assoc())
+          {
+        ?>
+          <img width="60" height="62" class="mx-auto d-block img-fluid animated bounce" src="plugins/logo/<?php echo "" .$row['comp_logo'];?>">
+        
+        <?php
+          }
+        }
+        ?>
+        </b>
+        <span class="hidden-xs"><!--This is light logo text--><?php
+          include "dbconnect.php";
+          $sql="SELECT * from tblcompany_info";
+          $result=$conn->query($sql);
+          if($result->num_rows>0)
+          {
+            while($row=$result->fetch_assoc())
+            {
+          ?>
+          <span class="light-logo" style="font-weight: 400; letter-spacing: 3px; float:right; color: #4A4A4A; margin-left: 5px; margin-top: 15px; font-family: inherit; text-transform: uppercase; font-size: 18px;"><?php echo "" . $row['comp_name'];?></span>
+          <?php
+            }
+          }
+          $conn->close();
+          ?></span></a></div>
+
                 </div>
 				
 				 <div class="collapse navbar-collapse" id="app-navbar-collapse">

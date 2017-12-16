@@ -13,7 +13,7 @@ include 'dbconnect.php';
 <html lang="en">
 <head>
   <title>Confirm Order</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/logo/favicon.ico">
   <script type="text/javascript">
   var tempPrice = parseInt($('#totalPrice').html());
   var tempTQuant = parseInt($('#totalQuant').val());

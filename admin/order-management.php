@@ -178,7 +178,7 @@ include "menu.php";
                                               <option value="On-Hand">All On-hand Furnitures</option>
                                               <option value="Packages">All Packages</option>
                                               <?php
-                                              include 'ew.php';
+                                              include 'dropdown-category.php';
                                               $delsql = "SELECT * FROM tblfurn_category;";
                                               $delresult = mysqli_query($conn,$delsql);
                                               while($delrow = mysqli_fetch_assoc($delresult)){

@@ -3,9 +3,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Include and initialize phpmailer class
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'plugins/bower_components/PHPMailer/src/Exception.php';
+require 'plugins/bower_components/PHPMailer/src/PHPMailer.php';
+require 'plugins/bower_components/PHPMailer/src/SMTP.php';
 
 include "session-check.php";
 include 'dbconnect.php';
@@ -37,7 +37,7 @@ if(mysqli_query($conn,$insertnews)){
 		$subject    = "Announcement from $comname!";
 		$text_message = "Dear " . $row["customerFirstName"] . " " . $row["customerLastName"] . ",";
 
-		$mail->AddEmbeddedImage('plugins/images/'.$rowcom['comp_logo'].'', 'logoimg');    
+		$mail->AddEmbeddedImage('plugins/logo/'.$rowcom['comp_logo'].'', 'logoimg');    
 
 		$message  = "<html><body>";
 		$message .= "<table width='100%' bgcolor='#e0e0e0' cellpadding='0' cellspacing='0' border='0'>";

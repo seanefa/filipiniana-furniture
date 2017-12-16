@@ -1,7 +1,7 @@
 <?php
 session_start();
-// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/dompdf-master");
-// require_once "dompdf/autoload.inc.php";
+// set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/plugins/bower_components/dompdf-master");
+// require_once "plugins/bower_components/dompdf/autoload.inc.php";
 // use Dompdf\Dompdf;
 // ob_start();
 $id = $_GET['id'];

@@ -52,7 +52,7 @@ unset($_SESSION['actionFailed']);
 <html lang="en">
 <head>
   <title>Production Details</title>
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="plugins/logo/favicon.ico">
   <script>
 
   function redirectJob(id){

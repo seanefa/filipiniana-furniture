@@ -1,6 +1,6 @@
 <?php
 // include autoloader
-require_once 'dompdf/autoload.inc.php';
+require_once 'plugins/bower_components/dompdf/autoload.inc.php';
 
 // reference the Dompdf namespace
 use Dompdf\Dompdf;

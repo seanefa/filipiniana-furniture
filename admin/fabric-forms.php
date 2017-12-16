@@ -295,7 +295,7 @@ if (!$conn) {
               <hr>
               <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-6">
-                  <div class="white-box text-center"> <img src="plugins/fabrics/<?php echo $trow['fabricPic']?>" alt="Unavailable"> </div>
+                  <div class="white-box text-center"> <img src="plugins/fabrics/<?php echo $trow['fabricPic']?>" alt="Unavailable" width="280px"; height="300px";> </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
 
