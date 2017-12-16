@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2017 at 10:50 AM
+-- Generation Time: Dec 16, 2017 at 11:11 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -229,8 +229,7 @@ CREATE TABLE `tblcustomize_request` (
 --
 
 INSERT INTO `tblcustomize_request` (`customizedID`, `tblcustomerID`, `customizedDescription`, `customStatus`, `dateRequest`) VALUES
-(1, 5, 'A blue furniture', 'WFA', '2017-10-15'),
-(6, 15, 'Batiste', 'Rejected', '2017-12-16');
+(1, 5, 'A blue furniture', 'WFA', '2017-10-15');
 
 -- --------------------------------------------------------
 
@@ -251,8 +250,7 @@ CREATE TABLE `tblcust_req_images` (
 INSERT INTO `tblcust_req_images` (`cust_req_imagesID`, `cust_req_ID`, `cust_req_images`) VALUES
 (1, 1, 'DKH8owjU8AEy4Rm.jpg'),
 (2, 1, 'DL-dTV4WsAAcCba.jpg'),
-(3, 1, 'DMAKG-IVoAA8Q-e.jpg'),
-(13, 6, 'batiste.jpg');
+(3, 1, 'DMAKG-IVoAA8Q-e.jpg');
 
 -- --------------------------------------------------------
 
@@ -948,9 +946,7 @@ INSERT INTO `tbllogs` (`logID`, `category`, `action`, `date`, `description`, `us
 (166, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1),
 (167, 'Products', 'Update', '2017-12-16', 'Updated product Queen, ID = 16', 1),
 (168, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1),
-(169, 'Products', 'Update', '2017-12-16', 'Updated product Manilenia, ID = 18', 1),
-(170, 'Customization', 'New', '2017-12-16', 'New customization', 15),
-(171, 'Products', 'Update', '2017-12-16', 'Updated product Elizabeth, ID = 17', 1);
+(169, 'Products', 'Update', '2017-12-16', 'Updated product Manilenia, ID = 18', 1);
 
 -- --------------------------------------------------------
 
@@ -1434,9 +1430,7 @@ INSERT INTO `tblorder_actions` (`orActionID`, `orOrderID`, `orAction`, `orReason
 (38, 1, 'Cancelled', 'No reason.'),
 (39, 1, 'Cancelled', 'No reason.'),
 (40, 1, 'Cancelled', 'No reason.'),
-(41, 1, 'Cancelled', 'No reason.'),
-(42, 6, 'Rejected Customization', 'Wala lang hehe'),
-(43, 6, 'Rejected Customization', 'Wala lang hehe');
+(41, 1, 'Cancelled', 'No reason.');
 
 -- --------------------------------------------------------
 
@@ -1825,7 +1819,7 @@ CREATE TABLE `tblproduct` (
 
 INSERT INTO `tblproduct` (`productID`, `prodCatID`, `prodTypeID`, `prodFrameworkID`, `prodDesign`, `prodFabricID`, `productName`, `productDescription`, `productPrice`, `prodMainPic`, `prodSizeSpecs`, `prodStat`) VALUES
 (16, 7, 13, 9, '1', 0, 'Queen', 'A queen sized bed', 50000, '2017-12-161513412227.png', '20x32x443', 'Pre-Order'),
-(17, 6, 17, 9, '1', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-12-161513417609.png', '', 'Pre-Order'),
+(17, 6, 17, 10, '1', 9, 'Elizabeth', 'A marvelous sofa', 35000, '2017-12-161513417609.png', '20x21x31', 'Pre-Order'),
 (18, 7, 13, 10, '1', 0, 'Manilenia', 'An amazing furn', 25000, '2017-12-161513412373.png', '30x32x35', 'Pre-Order');
 
 -- --------------------------------------------------------
@@ -2850,13 +2844,13 @@ ALTER TABLE `tblcustomer`
 -- AUTO_INCREMENT for table `tblcustomize_request`
 --
 ALTER TABLE `tblcustomize_request`
-  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `customizedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblcust_req_images`
 --
 ALTER TABLE `tblcust_req_images`
-  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `cust_req_imagesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbldelivery`
@@ -2988,7 +2982,7 @@ ALTER TABLE `tbljobs`
 -- AUTO_INCREMENT for table `tbllogs`
 --
 ALTER TABLE `tbllogs`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `tblmaterials`
@@ -3072,7 +3066,7 @@ ALTER TABLE `tblorders`
 -- AUTO_INCREMENT for table `tblorder_actions`
 --
 ALTER TABLE `tblorder_actions`
-  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `orActionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tblorder_customization`
