@@ -52,7 +52,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo ('<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><div class="ribbon left"></div><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><div class="ribbon left"></div><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/products/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <br>
                     <div class="caption">
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -92,7 +92,7 @@
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/products/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>
@@ -128,7 +128,7 @@
                 while ($row = mysqli_fetch_assoc($result)){
                   if($row['packageStatus'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-package.php?id='.$row['packageID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/2017-08-241503568724.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-package.php?id='.$row['packageID'].'"><img style="height:280px; width:200;" src="../admin/plugins/package/defaultpackage.png" alt="Package" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['packageDescription'], 0,20).'</a></h4>
@@ -178,7 +178,7 @@
                 }
               }
               if($ctr==0){
-                echo "<h1 style='text-align:center'>NO AVAILABLE PROMO</h1>";
+                echo "<h1 style='text-align:center';>NO AVAILABLE PROMOS</h1>";
               }
               ?>
             </div>
