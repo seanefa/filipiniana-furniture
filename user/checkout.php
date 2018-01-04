@@ -571,10 +571,10 @@ $(document).ready(function(){
                                 var ttq = sessionStorage.getItem('totalQuant');
                                   var pvalue = sessionStorage.getItem('pitem');
                                   var promoID = sessionStorage.getItem('prodpromo');
-
+                                  
                                   var promoid = new Array();
                                 var pitem = new Array();
-
+                                  
 
                                 $('#stt').html('&#8369;'+ttp)
                                 $('#ttp').html('&#8369;'+ttp);

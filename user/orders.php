@@ -85,7 +85,7 @@
 											<td>₱ <?php echo $srow['orderPrice'];?></td>
 											<td><?php echo $stat;;?></td>
 											<td>
-												<?php echo '<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #viewInfo">View</a>';
+												<?php echo $row['orderID']; echo '<a class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="order-management-modals.php" data-remote="order-management-modals.php?id='.$row['orderID'].' #viewInfo">View</a>';
 												?>
 											</td>
 

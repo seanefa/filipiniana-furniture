@@ -1,5 +1,5 @@
 /*
-* jQuery myCart - v1.4 - 2017-09-06
+* jQuery myCart - v1.5 - 2017-10-23
 * http://asraf-uddin-ahmed.github.io/
 * Copyright (c) 2017 Asraf Uddin Ahmed; Licensed None
 */
@@ -13,7 +13,7 @@
 
     var _options = null;
     var DEFAULT_OPTIONS = {
-      currencySymbol: '₱ ',
+      currencySymbol: '₱',
       classCartIcon: 'my-cart-icon',
       classCartBadge: 'my-cart-badge',
       classProductQuantity: 'my-product-quantity',
@@ -49,6 +49,10 @@
   var MathHelper = (function() {
     var objToReturn = {};
     var getRoundedNumber = function(number){
+      if(isNaN(number)) {
+        throw new Error('Parameter is not a Number');
+      }
+      number = number * 1;
       var options = OptionManager.getOptions();
       return number.toFixed(options.numberOfDecimals);
     }
@@ -79,7 +83,6 @@
     }
     var addProduct = function(id, name, summary, price, quantity, image) {
       var products = getAllProducts();
-
       products.push({
         id: id,
         name: name,
@@ -103,13 +106,23 @@
       }
     }
     var updatePoduct = function(id, quantity) {
-     //quantity = quantity -1;
       var productIndex = getIndexOfProduct(id);
       if(productIndex < 0){
         return false;
       }
       var products = getAllProducts();
-      products[productIndex].quantity = products[productIndex].quantity + quantity;
+      products[productIndex].quantity = typeof quantity === "undefined" ? products[productIndex].quantity * 1 + 1 : quantity;
+      setAllProducts(products);
+      return true;
+    }
+    var updateProduct = function(id,quantity) {
+      var productIndex = getIndexOfProduct(id);
+      if(productIndex < 0){
+        return false;
+      }
+
+      var products = getAllProducts();
+      products[productIndex].quantity = products[productIndex].quantity  + quantity;
       setAllProducts(products);
       return true;
     }
@@ -136,7 +149,7 @@
       }
       summary = typeof summary === "undefined" ? "" : summary;
 
-      if(!updatePoduct(id,quantity)){
+      if(!updateProduct(id,quantity)){
         addProduct(id, name, summary, price, quantity, image);
       }
     }
@@ -201,7 +214,6 @@
       ProductManager.clearProduct();
       $.each(options.cartItems, function() {
         ProductManager.setProduct(this.id, this.name, this.summary, this.price, this.quantity, this.image);
-
       });
     }
 
@@ -217,24 +229,24 @@
         '<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</h4>' +
         '</div>' +
         '<div class="modal-body">' +
-		'<table class="table table-hover table-responsive">'+
-		'<tr>'+
-		'<td></td>'+
-		'<td class="text-center"><strong>Product</strong></td>'+
-		'<td class="text-left"><strong>Unit Price</strong></td>'+
-		'<td><strong>Quantity</strong></td>'+
-		'<td><strong>Total Price</strong></td>'+
-		'</tr>'+
-		'</table>' +
+    '<table class="table table-hover table-responsive">'+
+    '<tr>'+
+    '<td></td>'+
+    '<td class="text-center"><strong>Product</strong></td>'+
+    '<td class="text-left"><strong>Unit Price</strong></td>'+
+    '<td><strong>Quantity</strong></td>'+
+    '<td><strong>Total Price</strong></td>'+
+    '</tr>'+
+    '</table>' +
         '<table class="table table-hover table-responsive" id="' + idCartTable + '">'+
-		'<tr>'+
-		'<td class="text-center"><strong>Product</strong></td>'+
-		'<td></td>'+
-		'<td>Unit Price</td>'+
-		'<td>Quantity</td>'+
-		'<td>Total Price</td>'+
-		'</tr>'+
-		'</table>' +
+    '<tr>'+
+    '<td class="text-center"><strong>Product</strong></td>'+
+    '<td></td>'+
+    '<td>Unit Price</td>'+
+    '<td>Quantity</td>'+
+    '<td>Total Price</td>'+
+    '</tr>'+
+    '</table>' +
         '</div>' +
         '<div class="modal-footer">' +
         '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
@@ -279,7 +291,7 @@
 
       var discountPrice = options.getDiscountPrice(products, ProductManager.getTotalPrice(), ProductManager.getTotalQuantity());
       if(products.length && discountPrice !== null) {
-		  idDiscountPrice = " ";
+      idDiscountPrice = " ";
         $cartTable.append(idDiscountPrice);
       }
 
@@ -297,10 +309,10 @@
       });
     }
     var showGrandTotal = function(){
-      $("#" + idGrandTotal).text( '₱ ' + MathHelper.getRoundedNumber(ProductManager.getTotalPrice()));
-	  $("#totalGrand").val(ProductManager.getTotalPrice());
-	  $("#totalQuant").val(ProductManager.getTotalQuantity());
-	  $("#ttq").html(ProductManager.getTotalQuantity());
+      $("#" + idGrandTotal).text(options.currencySymbol + MathHelper.getRoundedNumber(ProductManager.getTotalPrice()));
+       $("#totalGrand").val(ProductManager.getTotalPrice());
+    $("#totalQuant").val(ProductManager.getTotalQuantity());
+    $("#ttq").html(ProductManager.getTotalQuantity());
     }
     var showDiscountPrice = function(){
       $("#" + idDiscountPrice).text(options.currencySymbol + MathHelper.getRoundedNumber(options.getDiscountPrice(ProductManager.getAllProducts(), ProductManager.getTotalPrice(), ProductManager.getTotalQuantity())));
@@ -331,7 +343,7 @@
 
       $cartBadge.text(ProductManager.getTotalQuantity());
       showGrandTotal();
-      //showDiscountPrice();
+      showDiscountPrice();
     });
 
     $(document).on('keypress', "." + classProductQuantity, function(evt){
@@ -364,10 +376,10 @@
       $("#" + idCartModal).modal("hide");
     });
 
-    var idarr = [];
-
     $(document).on('click', targetSelector, function(e){
-      e.stopImmediatePropagation();
+     
+     e.stopImmediatePropagation();
+
 
       var $target = $(this);
       options.clickOnAddToCart($target);
@@ -380,9 +392,10 @@
       var image = $target.data('image');
 
 
+
       ProductManager.setProduct(id, name, summary, price, quantity, image);
       $cartBadge.text(ProductManager.getTotalQuantity());
-     
+
       options.afterAddOnCart(ProductManager.getAllProducts(), ProductManager.getTotalPrice(), ProductManager.getTotalQuantity());
     });
 
