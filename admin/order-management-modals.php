@@ -720,7 +720,7 @@ $_SESSION['varname'] = $jsID;
           }
           $overDue = isOverDue($jsID);
           if($overDue){
-            $status = "";
+            $status = "overdue";
           }
           ?>
           <input type="hidden" name="id" value="<?php echo $jsID?>">
@@ -734,6 +734,13 @@ $_SESSION['varname'] = $jsID;
                 </div>
                  <h5 style="color: red">
                   ** This order record is already undergoing production and cancelling an order requires a fee.
+                </h5>
+            </div>
+          </div>
+          <div class="row" id="overdueNotice">
+              <div class="col-md-12">
+                 <h5 style="color: red">
+                  ** This is an ongoing order and is long overdue. Cancelling this order will allow the management to acquire said orders.
                 </h5>
             </div>
           </div>

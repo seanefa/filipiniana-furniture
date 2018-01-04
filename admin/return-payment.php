@@ -192,7 +192,6 @@ $(document).ready(function(){
 
                                 ?>
 
-                      <input type="text" name="paid" value="<?php echo $grandTotal?>">
                               </tbody>
                               <tfoot style="text-align:right;">
                               <tr>
@@ -299,7 +298,7 @@ $(document).ready(function(){
                               // $down = $tpay;
                               // $bal = $tPrice - $down;
                               ?>
-                              <h4 style="font-weight: bolder;">Amount Due <span class="pull-right" id="sideAmountDue" style="color: #e50000"> &#8369; <?php echo number_format($bal,2)?></span></h4>
+                              <h4 style="font-weight: bolder;">Amount Return Due <span class="pull-right" id="sideAmountDue" style="color: #e50000"> &#8369; <?php echo number_format($bal,2)?></span></h4>
                               <hr>
                               <label class="control-label" style="font-weight: bolder;">Mode of Payment:</label>
                               <select class="form-control" data-placeholder="Add Payment" tabindex="1" name="mop" id="mop">

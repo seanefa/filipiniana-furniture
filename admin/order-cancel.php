@@ -125,11 +125,9 @@ function isOverDue($id){
 			$timeDiff = abs($endTimeStamp - $startTimeStamp);
 			$numberDays = $timeDiff/86400; 
 			$numberDays = intval($numberDays);
-				//echo '5';
 			return true;
 		}
 		else{
-				//echo '6';
 			return false;
 		}
 	}
@@ -161,7 +159,6 @@ function getBal($id){
 		$down = $tpay;
 		$bal = $p - $down;
 	}
-	////echo $bal . "BAL <br>";
 	return $bal;
 }  
 
@@ -250,13 +247,16 @@ function changeStat($id){
 } 
 
 
-// if($flag){
-// 	////echo '<script type="text/javascript">';
-// 	header( "Location: orders.php" );
-// 	////echo 'alert("SUCCESSFULLY CANCELLED ORDER!")';
-// 	////echo '</script>';
-// }
-// else {
-// 	header( "Location: orders.php?actionFailed" );
-// }
+if($flag>0){
+	echo '<script type="text/javascript">';
+	header( "Location: orders.php" );
+	echo 'alert("SUCCESSFULLY CANCELLED ORDER!")';
+	echo '</script>';
+}
+else {
+	echo '<script type="text/javascript">';
+	header( "Location: orders.php" );
+	echo 'alert("CANCELLATION OF ORDER FAILED!")';
+	echo '</script>';
+}
 ?>

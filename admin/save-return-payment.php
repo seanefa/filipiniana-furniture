@@ -9,11 +9,6 @@ $res = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($res);
 $invID = $row['invoiceID'];
 
-$uOrSQL = "UPDATE tblorders SET orderStatus = 'Pending', orderType = 'Management Order' WHERE orderID = '$orderID'";
-mysqli_query($conn,$uOrSQL);
-finishOrder($orderID);
-addOnHand($orderID);
-
 echo $invID;
 echo $paid;
 $mop = $_POST['mop'];
@@ -44,7 +39,7 @@ alert('Record Saved.');
 
 function finishOrder($id){
 	include "dbconnect.php";
-	$orderID = $id
+	$orderID = $id;
 	$ordReqCtr = 0;
 	$finCtr = 0;
 	$orType = "";

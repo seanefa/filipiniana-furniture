@@ -269,7 +269,12 @@ $orderID = $orRoq['orderID'];
 </body>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </html>
+
 <?php
+$uOrSQL = "UPDATE tblorders SET orderStatus = 'Pending', orderType = 'Management Order', custOrderID = '0' WHERE orderID = '$orderID'";
+mysqli_query($conn,$uOrSQL);
+finishOrder($orderID);
+addOnHand($orderID);
 // $html = ob_get_clean();
 // $dompdf = new DOMPDF();
 // $dompdf->load_html($html);

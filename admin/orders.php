@@ -122,7 +122,12 @@ $(document).ready(function(){
   $("#penaltyForm").hide();
   var val = $("#status").val();
   if(val=="Ongoing"){
+    $("#overdueNotice").hide();
     $("#penaltyForm").show();
+  }
+  if(val=="overdue"){
+    $("#penaltyForm").hide();
+    $("#overdueNotice").show();
   }
 });
 });
