@@ -88,7 +88,7 @@
                 	<hr>
                     <div class="row">
                       <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="white-box text-center"> <img style="height:350px; width:270;" src="../admin/plugins/images/<?php echo $trow['prodMainPic']; ?>" alt="<?php echo $trow['prodMainPic']; ?>" class="img-responsive"/> </div>
+                            <div class="white-box text-center"> <img style="height:350px; width:270;" src="../admin/plugins/products/<?php echo $trow['prodMainPic']; ?>" alt="<?php echo $trow['prodMainPic']; ?>" class="img-responsive"/> </div>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2">
 							<h4 class="box-title m-t-40">Description</h4>

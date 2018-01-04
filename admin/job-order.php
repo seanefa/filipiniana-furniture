@@ -60,7 +60,7 @@ $row = mysqli_fetch_assoc($res);
       $res = mysqli_query($conn,$sql);
       $rrow = mysqli_fetch_assoc($res);
       $orderID = $rrow['orderID'];
-      $order_requestID = $rrow['order_requestID'];
+      $prodID = $rrow['orderProductID'];
       $phaseName = $rrow['phaseName'];
       $handler = $rrow['prodEmp'];
 
@@ -69,13 +69,7 @@ $row = mysqli_fetch_assoc($res);
 
       $edate = date_create($rrow['prodEstDate']);
       $estDate = date_format($edate,"F d, Y");
-
-
-      //$sql1 = "SELECT * FROM tblproduct a, tblorder_request b, tblfabric c, tblframework d WHERE a.productID = b.orderProductID and b.order_requestID = '$order_requestID' and ";
-      $sql1 = "SELECT * FROM tblproduct a, tblfabrics b, tblframeworks c, tblfurn_type d, tblfurn_category e, tblorder_request f, tblfurn_design g WHERE a.prodDesign = g.designID and a.prodFabricID = b.fabricID and a.prodFrameworkID = c.frameworkID and a.prodTypeID = d.typeID and a. prodCatID = e.categoryID and a.productID = f.orderProductID and f.order_requestID = '$order_requestID'";
-      $sql1res = mysqli_query($conn,$sql1);
-      $prow = mysqli_fetch_assoc($sql1res);
-
+      
       $sql2 = "SELECT * FROM tblcustomer a, tblorders b WHERE a.customerID = b.custOrderID and b.orderID = '$orderID'";
       $sql2 = mysqli_query($conn,$sql2);
       $custRow = mysqli_fetch_assoc($sql2);
@@ -136,6 +130,12 @@ $row = mysqli_fetch_assoc($res);
      <br>
      <div class="table-responsive">
       <table class="table color-bordered-table muted-bordered-table">
+        <?php
+        include "dbconnect.php";
+        $sql1 = "SELECT * FROM tblproduct a, tblframeworks c, tblfurn_type d, tblfurn_category e, tblfurn_design g WHERE a.prodDesign = g.designID  and a.prodFrameworkID = c.frameworkID and a.prodTypeID = d.typeID and a. prodCatID = e.categoryID and a.productID = '$prodID'";
+          $sql1res = mysqli_query($conn,$sql1);
+          $prow = mysqli_fetch_array($sql1res);
+        ?>
         <tr>
           <td>Name</td>
           <td><?php echo $prow['productName']?></td>
@@ -153,7 +153,15 @@ $row = mysqli_fetch_assoc($res);
           </tr>
           <tr>
             <td>Fabric</td>
-            <td><?php echo $prow['fabricName'];?></td>
+            <td><?php if($prow['designName']!='Pure'){
+                        $fabSQL = "SELECT * FROM tblfabrics a, tblproduct b WHERE b.prodFabricID = a.fabricID and b.productID = '$prodID'";
+                        $res = mysqli_query($conn,$fabSQL);
+                        $fabrow = mysqli_fetch_assoc($res);
+                        echo $fabrow['fabricName'];
+                      }
+                      else{
+                        echo "N/A";
+                      }?></td>
           </tr>
           <tr>
             <td>Framework</td>
@@ -201,8 +209,8 @@ $row = mysqli_fetch_assoc($res);
       </div>
     </div> 
   </div><p><?php 
-        session_start();
         include "dbconnect.php"; 
+        session_start();
         $datepr = date("Y-m-d");
         $sql5 = "SELECT * FROM tblemployee a inner join tbluser b where a.empID = b.userEmpID and userID='" . $_SESSION["userID"] . "'";
           $result5 = mysqli_query($conn, $sql5);

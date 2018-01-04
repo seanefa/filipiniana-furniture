@@ -37,7 +37,7 @@ function deleteRow(row){
                   <div class="form-group">
                     <label class="control-label">Category</label><span id="x" style="color:red"> *</span>
                     <select class="form-control" data-placeholder="Choose a Category" tabindex="1" name="cat" id="cat">
-                      <option value="0" disabled>Choose Category</option>
+                      <option value="0">Choose Category</option>
                       <?php
                       $sql = "SELECT * FROM tblfurn_category order by categoryName;";
                       $result = mysqli_query($conn, $sql);

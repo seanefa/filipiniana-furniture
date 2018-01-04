@@ -1194,7 +1194,7 @@ function addQuant(id,quant){
                       if(ribs != 0){
                         alert('There are only '+ribs+'.');
                       }else{
-                        alert('There no more available product.');
+                        alert('No available stock.');
                       }
                     }
                   }

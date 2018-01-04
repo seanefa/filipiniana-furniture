@@ -60,7 +60,7 @@ if(mysqli_query($conn,$sql)){
 		}
 	}
 
-	if($flag>1){
+	if($flag>0){
 	// Logs start here
 	$sID = mysqli_insert_id($conn); // ID of last input;
 	$date = date("Y-m-d");

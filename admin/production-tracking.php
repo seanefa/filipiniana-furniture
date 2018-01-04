@@ -131,13 +131,13 @@ include "menu.php";
                                       include "dbconnect.php";
                                       $name = "";
                                       if($id==0){
-                                        $name = "M A N A G E M E N T";
+                                        $name = "MANAGEMENT";
                                       }
                                       else{
                                         $sql = "SELECT * FROM tblcustomer WHERE customerID='$id'";
                                         $result = mysqli_query($conn,$sql);
                                         $row = mysqli_fetch_assoc($result);
-                                        $name = $row['customerLastName'].','.$row['customerFirstName'].'  '.$row['customerMiddleName'];
+                                        $name = $row['customerLastName'].','.$row['customerFirstName'];
                                       }
                                       return $name;
                                     }   

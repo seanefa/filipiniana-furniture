@@ -17,7 +17,7 @@ while ($row = mysqli_fetch_assoc($result))
 {
   $temp++;
 }
-$fID = $temp;
+$fID = $temp+1;
 
 $sql = "INSERT INTO tblpackages(packageID, packageDescription, packagePrice,packageStatus) VALUES('$fID','$pName','$pPrice','$status')";
 

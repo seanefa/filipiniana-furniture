@@ -483,10 +483,10 @@ include "dbconnect.php";
                         {
                           if($row['designStatus']!='Archived'){
                             if($trow['prodDesign']==$row['designID']){
-                              echo '<label class="radio-inline"><input id="select" type="radio" name="design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
+                              echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'" checked>'.$row['designName'].'</label>';
                             }
                             else{
-                            echo '<label class="radio-inline"><input id="select" type="radio" name="design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
+                            echo '<label class="radio-inline"><input id="select" type="radio" name="_design" value="'.$row['designID'].'">'.$row['designName'].'</label>';
                           }
                           }
                         }
@@ -556,7 +556,7 @@ include "dbconnect.php";
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="control-label">Dimension Specification</label><span id="x" style="color:red"> *</span>
-                      <textarea type="text" name ="dimensions" rows="4" class="form-control" style="text-align:right" value="<?php echo $trow['prodSizeSpecs'];?>" required></textarea>
+                      <textarea type="text" name ="_dimensions" rows="4" class="form-control" style="text-align:right" required><?php echo $trow['prodSizeSpecs'];?></textarea>
                     </div>
                   </div>
                 <!--/span-->

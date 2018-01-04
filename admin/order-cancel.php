@@ -84,7 +84,7 @@ else{
 				addOnHand($id);
 				//echo '4';
 				echo '<script type="text/javascript">';
-				//header( "Location: orders.php" );
+				header( "Location: orders.php" );
 				echo 'alert("Success!")';
 				echo '</script>'; 
 			}
@@ -92,7 +92,7 @@ else{
 		else{
 			echo mysqli_error($conn) . "<br>";
 			echo '<script type="text/javascript">';
-			//header( "Location: orders.php" );
+			header( "Location: orders.php" );
 			echo 'alert("Action Failed")';
 			echo '</script>'; 
 		}
@@ -100,7 +100,7 @@ else{
 	else{
 		echo mysqli_error($conn) . "<br>";
 		echo '<script type="text/javascript">';
-		//header( "Location: orders.php" );
+		header( "Location: orders.php" );
 		echo 'alert("Action Failed")';
 		echo '</script>';	
 	}
