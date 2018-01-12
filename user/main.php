@@ -166,7 +166,7 @@
                     echo '<div class="product-thumb clearfix hovereffect card">
                     
                     <div class="image"><a href="view-promo.php?id='.$row['promoID'].'"><img style="height:280px; width:200;" src="../admin/plugins/promos/'.$row['promoImage'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
-                      <h4 style="text-transform:uppercase;"><a href="view-promo.php">'.$row['promoName'].'</a></h4>
+                      <h4 style="text-transform:uppercase;"><a href="view-promo.php?id='.$row['promoID'].'">'.$row['promoName'].'</a></h4>
                     <div class="overlay"> 
                     <div class="caption">                      
                       <h2><a href="view-promo.php?id='.$row['promoID'].'" style="color:white;">'.$row['promoDescription'].'</a></h2>

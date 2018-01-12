@@ -142,8 +142,13 @@ $promorow = mysqli_fetch_assoc($promoresult);
                   <?php
                    if($promosresult){
                     $promosrow = mysqli_fetch_assoc($promosresult);
+                    if($promorow != 0){
                     echo '<li><b>Promo:</b> <span class="instock"><a href="view-promo.php?id='.$promosrow['promoID'].'">'.$promosrow['promoName'].'</a></span></li>';
+                  }else{
+
+
                     }   
+                  }
 
                   ?>
                 </ul>
@@ -156,11 +161,11 @@ $promorow = mysqli_fetch_assoc($promoresult);
                     <div>
                       <div class="qty">
                         <label class="control-label" for="input-quantity">Qty</label>
-                        <input type="number" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
+                        <input type="number" name="quantity" value="0" size="2" id="input-quantity" class="form-control" />
                         
                         <div class="clear"></div>
                       </div>
-                      <button value="<?php echo $trow['productID'] ?>" id="addPBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
+                      <button value="<?php echo $trow['productID'] ?>" id="addPBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/products/<?php echo $trow['prodMainPic'] ?>" data-quantity="1" class="btn btn-cart btn-success waves-effect text-left my-cart-btn" data-dismiss="modal">Add to Cart</button>
                     </div>
                   </div>
                 </div>
@@ -336,7 +341,7 @@ $promorow = mysqli_fetch_assoc($promoresult);
                   if($row['prodTypeID']==""){$row['productDescription']="________________";}
                   if($row['prodStat'] != "Archived"){
                     echo '<div class="product-thumb clearfix hovereffect card">
-                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/images/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
+                    <div class="image"><a href="view-product.php?id='.$row['productID'].'"><img style="height:280px; width:200;" src="../admin/plugins/products/'.$row['prodMainPic'].'" alt="Product" class="img-responsive" onerror="productImgError(this);"/></a></div>
                     <div class="caption">
                       <br>
                       <h4><a href="view-product.php">'.substr($row['productName'], 0,20).'</a></h4>

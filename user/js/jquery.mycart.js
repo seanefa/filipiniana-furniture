@@ -267,8 +267,8 @@
         var total = this.quantity * this.price;
         $cartTable.append(
           '<tr title="' + this.summary + '" data-id="' + this.id + '" data-price="' + this.price + '">' +
-          '<td class="text-center" style="width: 30px;"><img width="80px" height="100px" src="' + this.image + '"/></td>' +
-          '<td>' + this.name + '</td>' +
+          '<td class="text-center" style="width: 30px;"><a href="view-product.php?id='+this.id+'"><img width="80px" height="100px" src="' + this.image + '"/></a></td>' +
+          '<td><a href="view-product.php?id='+this.id+'">' + this.name + '</a></td>' +
           '<td title="Unit Price">' + options.currencySymbol + MathHelper.getRoundedNumber(this.price) + '</td>' +
           '<td title="Quantity"><input type="number" min="1" style="width: 70px;" class="' + classProductQuantity + '" value="' + this.quantity + '"/></td>' +
           '<td title="Total" class="' + classProductTotal + '">' + options.currencySymbol  + MathHelper.getRoundedNumber(total) + '</td>' +

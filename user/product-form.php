@@ -142,7 +142,7 @@
 
       </div>
       <div class="modal-footer">
-        <button value="<?php echo $trow['productID'] ?>" id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/images/<?php echo $trow['prodMainPic'] ?>" class="btn btn-primary waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><i class="glyphicon glyphicon-shopping-cart"></i><span> Add to Cart</span></button>
+        <button value="<?php echo $trow['productID'] ?>" id="addBtn" href="#myModal1" data-toggle="modal" data-id="<?php echo $trow['productID'] ?>" data-name="<?php echo $trow['productName'] ?>" data-summary="<?php echo $trow['productDescription'] ?>" data-price="<?php echo $trow['productPrice'] ?>" data-image="../admin/plugins/products/<?php echo $trow['prodMainPic'] ?>" class="btn btn-primary waves-effect text-left my-cart-btn" data-quantity="1" data-dismiss="modal"><i class="glyphicon glyphicon-shopping-cart"></i><span> Add to Cart</span></button>
 
         <button type="button" class="btn btn-danger waves-effect text-left" onclick="location.href = 'home.php'; location.reload();" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
       </div>

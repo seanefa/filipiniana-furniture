@@ -115,7 +115,7 @@ $('#addPBtn').attr('data-quantity',q);
             <h1 class="title" itemprop="name"><?php echo $row['promoDescription']; ?></h1>
             <div class="row product-info">
               <div class="col-sm-4">
-                <div class="image"><img class="img-responsive" style="height: 520px;width: 320px;" itemprop="image" id="zoom_01" src="../admin/plugins/images/2017-08-241503568724.png" title="Product" alt="image/product/macbook_air_1-350x525.jpg" data-zoom-image="../admin/plugins/images/2017-08-241503568724.png" /> </div>
+                <div class="image"><img class="img-responsive" style="height: 520px;width: 320px;" itemprop="image" id="zoom_01" src="../admin/plugins/promos/<?php echo $row['promoImage'];?>" title="Product" alt="Unavailable" data-zoom-image="../admin/plugins/images/2017-08-241503568724.png" /> </div>
                 <!--
                 <div class="center-block text-center"><span class="zoom-gallery"><i class="fa fa-search"></i> Click image for Gallery</span></div>
                 <div class="image-additional" id="gallery_01"> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_1-600x900.jpg" data-image="image/product/macbook_air_1-350x525.jpg" title="Product"> <img src="image/product/macbook_air_1-66x99.jpg" title="Product" alt = "Product"/></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_4-600x900.jpg" data-image="image/product/macbook_air_4-350x525.jpg" title="Product"><img src="image/product/macbook_air_4-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_2-600x900.jpg" data-image="image/product/macbook_air_2-350x525.jpg" title="Product"><img src="image/product/macbook_air_2-66x99.jpg" title="Product" alt="Product" /></a> <a class="thumbnail" href="#" data-zoom-image="image/product/macbook_air_3-600x900.jpg" data-image="image/product/macbook_air_3-350x525.jpg" title="Product"><img src="image/product/macbook_air_3-66x99.jpg" title="Product" alt="Product" /></a> </div>
@@ -173,7 +173,7 @@ $('#addPBtn').attr('data-quantity',q);
                               $typeresult = mysqli_query($conn,$typeSql);
                               $typerow = mysqli_fetch_assoc($typeresult);
                               echo ('
-                                <td><a href="view-product.php?id='.$row2['productID'].'"><img src="../admin/plugins/images/'.$row2['prodMainPic'].'" style="height: 100px; width: 105px;" alt="Product" title="'.$row2['productName'].'" class="img-thumbnail"></a></td>
+                                <td><a href="view-product.php?id='.$row2['productID'].'"><img src="../admin/plugins/products/'.$row2['prodMainPic'].'" style="height: 100px; width: 105px;" alt="Product" title="'.$row2['productName'].'" class="img-thumbnail"></a></td>
                                 <td>'.$typerow['typeName'].'</td>
                                 <td>'.$row2['productName'].'</td>
                                 <td><small>&#8369;</small>'.$row2['productPrice'].'</td>
