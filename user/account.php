@@ -13,8 +13,14 @@
 <body style="background: #ffffff;">
 	<?php
 	include "header.php";
-	if(!isset($_SESSION["userID"]))
+	if($_SESSION['userType'] == "admin")
 	{
+		echo "<script>
+		window.location.href='login.php';
+		alert('You have no access here. You must logged in first.');
+		</script>";
+	}
+	else if(!isset($_SESSION["userID"])){
 		echo "<script>
 		window.location.href='login.php';
 		alert('You have no access here. You must logged in first.');

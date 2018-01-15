@@ -13,7 +13,9 @@
       <div class="container">
         <div class="row">
           <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <h5 class="subtitle">About Us</h5><img alt="" src="image/logo-small.png" style="display:block;margin:auto;"><br>
+            <h5 class="subtitle">About Us</h5>
+            <!-- <img alt="" src="image/logo-small.png" style="display:block;margin:auto;"><br> -->
+            <h1 style="margin:auto; color:white"><?php echo "" . $row['comp_name'];?></h1>
             <p><i class="fa fa-map-pin"></i>&nbsp;&nbsp;Address : <?php echo "" . $row['comp_address'];?></p>
             <p><i class="fa fa-phone"></i>&nbsp;&nbsp;Phone : <?php echo "" . $row['comp_num'];?></p>
             <p><i class="fa fa-envelope"></i>&nbsp;&nbsp;E-mail : <?php echo "" . $row['comp_email'];?></p>
