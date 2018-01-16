@@ -173,7 +173,7 @@
               $row = mysqli_fetch_assoc($result);
               ?>
         <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div id="logo"><a href="home.php"><img class="img-responsive" src="<?php echo "plugins/logo/". $row['comp_logo']?>?>" title="Furniture Shop" alt="Furniture Shop" /></a></div>
+          <div id="logo"><a href="home.php"><img class="img-responsive" src="<?php echo "/admin/plugins/logo/" . $row['comp_logo']?>" title="Furniture Shop" alt="Furniture Shop"/></a></div>
         </div>
         
         <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner">

@@ -1,3 +1,9 @@
+<?php
+include "userconnect.php";
+$sql = "SELECT * FROM tblcompany_info";
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link href="image/favicon.ico" rel="icon" />
 	<link rel="stylesheet" href="css/myStyle.css">
-	<title>My Account - Filipiniana Furniture Shop</title>
+	<title>My Account - <?php echo $row['comp_name']?></title>
 	<meta name="description" content="Furniture shop">
 	<script type="text/javascript" src="js/myScript.js"></script>
 	<?php include"css.php";?>

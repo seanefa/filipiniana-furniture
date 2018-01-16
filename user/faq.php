@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<?php
+include "userconnect.php";
+$sql = "SELECT * FROM tblcompany_info";
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+?><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="image/favicon.ico" rel="icon" />
-<title>FAQ - Filipiniana Furniture Shop</title>
+<title>FAQ - <?php echo $row['comp_name']?></title>
 <meta name="description" content="Furniture shop">
 <?php include"css.php";?>
 </head>

@@ -1,3 +1,9 @@
+<?php
+include "userconnect.php";
+$sql = "SELECT * FROM tblcompany_info";
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +13,7 @@
   <link rel="stylesheet" href="css/myStyle.css">
   <link rel="stylesheet" href="dist/dropzone.css">
   <script src="dist/dropzone.js"></script>
-  <title>Customization - Filipiniana Furniture Shop</title>
+  <title>Customization - <?php echo $row['comp_name']?></title>
   <meta name="description" content="Furniture shop">
   <?php include"css.php";?>
 </head>
