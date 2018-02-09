@@ -18,7 +18,6 @@ $row = mysqli_fetch_assoc($result);
 <body>
 <?php
 include 'toastr-buttons.php';
-
 if (!empty($_SESSION['createSuccess'])) {
   echo  '<script>
           $(document).ready(function () {
